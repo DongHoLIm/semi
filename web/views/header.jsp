@@ -123,7 +123,7 @@ font-family: 'Nanum Gothic', sans-serif;
     </ul>     
      </li> <li><a href="#"> 상품등록 </a>  
      <li><a href="#"> 장바구니 </a></li> 
-     <li><a href="#"> 게시판</a></li>
+     <li><a href="/sp/views/board.jsp"> 게시판</a></li>
      <li><a href="#"> 마이페이지</a></li>
     <li><a href="#"> 고객센터</a></li>    
  </ul>
