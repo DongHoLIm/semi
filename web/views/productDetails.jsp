@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <style>
 body {
 	text-align: center;
@@ -103,5 +104,6 @@ body {
 	</div>
 
 	<footer><%@ include file="footer.jsp"%></footer>
+
 </body>
 </html>
