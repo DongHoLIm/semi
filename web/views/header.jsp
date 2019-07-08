@@ -12,6 +12,10 @@
 
 <style>
 
+#headerAll{
+	padding-right: 15%;
+	padding-left:15%;
+}
 .headerb{
 font-family: 'Nanum Gothic', sans-serif;
    text-align:right;
@@ -99,7 +103,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 </head>
 <body>
-
+<div id="headerAll">
    <div class = "headerb">
    <button class="btn btn-info" >login</button>
    <button class="btn btn-info">회원가입</button>   
@@ -107,26 +111,26 @@ font-family: 'Nanum Gothic', sans-serif;
    <div class = "header">
       <h1>중고의 민족</h1>
    </div>
-<div class="box">
-  <div class="container-1">
-      <input type="search" id="search" placeholder="검색" />
-      <button type="button" class="btn btn-info">검색</button>
-  </div>
- </div>
-<ul class="navi">
+	<div class="box">
+  		<div class="container-1">
+     		<input type="search" id="search" placeholder="검색" />
+      		<button type="button" class="btn btn-info">검색</button>
+  		</div>
+ 	</div>
+	<ul class="navi">
 
  <li><a href="#"> 카테고리</a> 
  
  <ul>
-  <li><a href="#"> 구매 </a></li> 
+  <li><a href="/sp/views/payment.jsp"> 구매 </a></li> 
   <li><a href="#"> 렌탈</a></li>
     </ul>     
      </li> <li><a href="#"> 상품등록 </a>  
-     <li><a href="#"> 장바구니 </a></li> 
+     <li><a href="/sp/views/basket.jsp"> 장바구니 </a></li> 
      <li><a href="/sp/views/board.jsp"> 게시판</a></li>
      <li><a href="#"> 마이페이지</a></li>
     <li><a href="#"> 고객센터</a></li>    
  </ul>
- 
+ </div>
 </body>
 </html>
