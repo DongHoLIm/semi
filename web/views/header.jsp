@@ -106,7 +106,7 @@ font-family: 'Nanum Gothic', sans-serif;
 <div id="headerAll">
    <div class = "headerb">
    <button class="btn btn-info" >login</button>
-   <button class="btn btn-info">회원가입</button>   
+    <a href="/sp/views/termsPage.jsp"><button class="btn btn-info">회원가입</button></a>   
    </div>
    <div class = "header">
       <h1>중고의 민족</h1>
