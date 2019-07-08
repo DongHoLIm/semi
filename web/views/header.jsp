@@ -33,10 +33,10 @@ font-family: 'Nanum Gothic', sans-serif;
 
 .menu{
    padding :10px;
-   text-align: 
+   text-align:
 }
 
-.navi {   
+.navi {
 	list-style-type:none;
 	height:40px;
 	margin:center;
@@ -45,7 +45,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	color:#ff8d9;
 }
 
-.navi li { 
+.navi li {
 	float:left;
 	position: relative;
 	padding: 0;
@@ -58,27 +58,27 @@ font-family: 'Nanum Gothic', sans-serif;
 	opacity:0;
 	position:absolute;
 	left:0;
-	width:100%; 
+	width:100%;
 	background:#ff99b3;
 	list-style-type:none;
 	padding:0;
 	margin:0;
 	font-size:15px;
-} 
+}
 
-.navi li a { 
+.navi li a {
 	display:block;
 	font-family:'Nanum Gothic', sans-serif;
 	font-weight:600;
 	font-size:14px;
 	padding:5px 25px;
 	color:black;
-	text-decoration:none; 
+	text-decoration:none;
 }
 
 .navi li a:hover {color:white;} /* 마우스 클릭시 글자 색 */
 
-.navi li:hover ul {opacity:1;} 
+.navi li:hover ul {opacity:1;}
 
 .navi li ul li {
 	float:none;
@@ -89,9 +89,9 @@ font-family: 'Nanum Gothic', sans-serif;
 	width:100%
 }
 
-.navi li:hover  ul li { 
-	height:30px; 
-	line-height:20px; 
+.navi li:hover  ul li {
+	height:30px;
+	line-height:20px;
 	padding:5px0;
 }
 
@@ -102,7 +102,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
    <div class = "headerb">
    <button class="btn btn-info" >login</button>
-   <button class="btn btn-info">회원가입</button>   
+   <button class="btn btn-info">회원가입</button>
    </div>
    <div class = "header">
       <h1>중고의 민족</h1>
@@ -115,18 +115,18 @@ font-family: 'Nanum Gothic', sans-serif;
  </div>
 <ul class="navi">
 
- <li><a href="#"> 카테고리</a> 
- 
+ <li><a href="#"> 카테고리</a>
+
  <ul>
-  <li><a href="#"> 구매 </a></li> 
+  <li><a href="#"> 구매 </a></li>
   <li><a href="#"> 렌탈</a></li>
-    </ul>     
-     </li> <li><a href="#"> 상품등록 </a>  
-     <li><a href="#"> 장바구니 </a></li> 
+    </ul>
+     </li> <li><a href="#"> 상품등록 </a>
+     <li><a href="#"> 장바구니 </a></li>
      <li><a href="#"> 게시판</a></li>
      <li><a href="#"> 마이페이지</a></li>
-    <li><a href="#"> 고객센터</a></li>    
+    <li><a href="#"> 고객센터</a></li>
  </ul>
- 
+
 </body>
 </html>
