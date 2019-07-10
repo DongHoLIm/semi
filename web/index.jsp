@@ -34,7 +34,7 @@
 </head>
 <body>
 	<!-- header 영역 -->
-	<header><%@ include file="views/header.jsp" %></header>
+	<header><%@ include file="views/user/hfl/header.jsp" %></header>
 	
 	
  <div class="container">
@@ -127,6 +127,6 @@
 	
 	
 	<!-- footer 영역 -->
-	<footer><%@ include file="views/footer.jsp" %></footer>
+	<footer><%@ include file="views/user/hfl/footer.jsp" %></footer>
 </body>
 </html>

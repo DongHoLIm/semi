@@ -99,6 +99,19 @@ font-family: 'Nanum Gothic', sans-serif;
 	padding:5px0;
 }
 
+.btn-info {
+	background:#ffd8d9;
+	border: 1px solid #ffd8d9;
+}
+
+.btn-info:hover {
+	background:#fdb5b7;
+	border: 1px solid #fdb5b7;
+}
+#search{
+	border-radius: 5px;
+}
+
 </style>
 
 </head>
@@ -106,7 +119,7 @@ font-family: 'Nanum Gothic', sans-serif;
 <div id="headerAll">
    <div class = "headerb">
    <button class="btn btn-info" >login</button>
-    <a href="/sp/views/termsPage.jsp"><button class="btn btn-info">회원가입</button></a>   
+    <a href="views/user/join/termsPage.jsp"><button class="btn btn-info">회원가입</button></a>   
    </div>
    <div class = "header">
       <h1>중고의 민족</h1>
