@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,6 +93,5 @@
 		</form>
 		<br><br>
 		<footer><%@ include file="../hfl/footer.jsp" %></footer>
-
 </body>
 </html>

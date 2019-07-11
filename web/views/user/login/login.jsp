@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +11,17 @@
 a{text-decoration:none; color:black; font-weight:bold;}
 </style>
 </head>
+    <header><%@ include file="../hfl/header.jsp" %></header>
 <body>
 	<div class = "header" align="center">
-		<h1><a href="/web/index.html">중고 愛 민족</a></h1><br><br>
+		<h1><a href="../index.jsp">중고 愛 민족</a></h1><br><br>
 	</div>
 	<form action="" method="post" action="loginResult.jsp">
 		<div align="center">
 			<div class="box_login">
 				<div class="inp_text">
 					<input type="text" id="loginId" name="loginId" placeholder="Id" style="height:40px; width:380px; box-sizing: border-box; padding: 0 30px;"><br><br>
-				</div>			
+				</div>
 				<div class="inp_text">
 					<input type="password" id="loginPw" name="password" placeholder="Password" style="height:40px; width:380px; box-sizing: border-box; padding: 0 30px;"><br><br>
 				</div>
@@ -30,7 +32,7 @@ a{text-decoration:none; color:black; font-weight:bold;}
 					<input type="checkbox" id="keepLogin" class="inp_radio" name="KeepLogin">
 					<label for="keepLogin" class="lab_g">
 						<span class="img_top ico_check"></span>	
-						<span class="txt_lab">로그인 상태 유지</span><br><br>
+						<span class="txt_lab">로그인 상태 유지</span>
 					</label>
 				</div>
 				<span class="txt_find">
@@ -40,8 +42,19 @@ a{text-decoration:none; color:black; font-weight:bold;}
 					/
 					<a href="" class="link_join">회원가입</a>
 					</span>
+					
+					       <h4 class="tit">소셜 간편 구입</h4>
+            <ul class="login_sns_list">
+                <li>
+                	<!-- 카카오api연결 -->
+                   <a href="#" onclick="oAuthLogin('kakao', null)"><img src="../images/kakaoicon.PNG" id="kakao"></a>
+                </li>
+            </ul>
+					
 			</div>
 		</div>
 	</form>
+	<footer><%@ include file="../hfl/footer.jsp" %></footer>
+	
 </body>
 </html>
