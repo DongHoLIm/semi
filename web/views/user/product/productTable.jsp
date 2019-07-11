@@ -21,26 +21,26 @@
 	}
 	
 	#title{
-		font-size:200%;
+		font-size:2vw;
 		padding:1%;
 	}
 	
 	#Detail{
-		font-size:100%;
+		font-size:1vw;
 		vertical-align: top;
 		padding:1%;
 	}
 	
 	#price{
-	font-size:200%;
+		font-size:2vw;
 	}
 	
 	#quantity{
-		font-size:200%
+		font-size:2vw;
 	}
 	
 	#priceAll{
-		font-size:200%;
+		font-size:2vw;
 	}
 	
 </style>
@@ -62,7 +62,9 @@
 		</tr>
 		<tr >
 			<td id="Detail" colspan="2">
-				상세설명
+				상세설명상세설명상세설명상세설명상세설명상세설명상세설명
+				상세설명상세설명상세설명상세설명상세설명상세설명상세설명
+				상세설명상세설명상세설명상세설명상세설명상세설명상세설명
 			</td>
 		</tr>
 		<tr>
