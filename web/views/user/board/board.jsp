@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-<head><%@include file ="header.jsp" %></head>
+<head><%@include file ="../hfl/header.jsp" %></head>
 <div class="container">
 	<br>
 	<br>
@@ -115,5 +115,5 @@
 	
 </center>
 </body>
-<footer><%@ include file="footer.jsp" %></footer>
+<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </html>

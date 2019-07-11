@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,18 +7,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-/* aside{
-		width:10%; 
-		text-align: center;
-		border-style: solid;
-  		border-width: 2px;
-  		border-color: pink;
-	} */
+
 nav {
 	margin-top: 15%;
 	margin-right: 5%;
-	/* padding-right:5%;
-		padding-left:5%; */
+	position: absolute;
+}
+
+#pc {
+	background: none;
+
 }
 </style>
 <title>Insert title here</title>
@@ -85,12 +83,12 @@ nav {
 
 	</aside>
 
+
 </body>
 <!-- footer 영역 -->
 <footer><%@ include file="./footer.jsp"%></footer>
 
 </html>
-
 
 
 

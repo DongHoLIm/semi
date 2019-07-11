@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<header><%@ include file="./header.jsp" %></header>
 
 <!DOCTYPE html>
 <html>
@@ -43,6 +42,7 @@
 	background-color: #ffd8d9;
 	color: black;
 	}
+	btn_searchId.active-color { color:#000; }
 	
 	.btn_id {
 	margin:0 auto;
@@ -60,14 +60,15 @@
 	
 </style>
 </head>
+<header><%@ include file="../hfl/header.jsp" %></header>
 <body>
 	<div align="center">
 
 		<br><br><br><br><br><br><br>
 		<form action="" method="post">
 			<div align="center" class="btn1">
-  			<a href="#"> <button type="button" class="btn_search" float="left">아이디 찾기</button></a>
-  			<a href="searchPwdPage.jsp"> <button type="button" class="btn_search" float="left">비밀번호 찾기</button></a>
+  			<a href="#"> <button type="button" class="btn_search" float="left" id="btn_searchId">아이디 찾기</button></a>
+  			<a href="searchPwdPage.jsp"> <button type="button" class="btn_search" float="left" id="btn_searchPwd">비밀번호 찾기</button></a>
 			</div>
 			<br><br>
 			<input type="checkbox" name="searchPhone" id="searchPhone" value="휴대폰으로 찾기">
@@ -104,6 +105,9 @@
 		</form>
 	</div>
 	<br><br><br><br><br><br><br>
-	 <footer><%@ include file="./footer.jsp" %></footer>
+	<footer><%@ include file="../hfl/footer.jsp" %></footer>
+
+     
+	
 </body>
 </html>
