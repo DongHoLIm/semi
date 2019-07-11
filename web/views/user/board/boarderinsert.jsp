@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<head><%@include file ="header.jsp" %></head>
+<head><%@include file ="../hfl/header.jsp" %></head>
 <body>
 	<br>
 	<br>
@@ -37,5 +37,5 @@
 	<br>
 	<br>
 </body>
-<footer><%@ include file="footer.jsp" %></footer>
+<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </html>

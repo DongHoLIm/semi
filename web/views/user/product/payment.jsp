@@ -28,7 +28,7 @@
 	}
 	#payForm{
 		align:center;
-		font-size: 150%;
+		font-size: 1.7vw;
 	}
 	
 	#paymentPrice{
@@ -50,7 +50,7 @@
 </head>
 <body>
 	<!-- header 영역 -->
-	<header><%@ include file="header.jsp" %></header>
+	<header><%@ include file="../hfl/header.jsp" %></header>
 	
 	
 	<section id="sec1">
@@ -70,7 +70,7 @@
 			<input type="text" name="paymentPrice" id="paymentPrice" value="<%int i = 0; %><%=i %>원" readonly>
 		</td></tr>
 		<tr><td>
-			<label>택배 수령자 명 : </label>
+			<label>택배 수령자 : </label>
 		</td><td>
 			<input type="text" placeholder="수령자 이름을 입력하세요" name="name" id="name">
 		</td></tr>
@@ -100,12 +100,13 @@
 			
 			
 			<input type="submit" id="buy" value="구매" style="width:50%;">
+			
 		</td></tr>
 		
 		</table>
 		
 	</form>
-	
+	<br />
 	</div>
 	</section>
 	
@@ -113,7 +114,7 @@
 	
 	
 	<!-- footer 영역 -->
-	<footer><%@ include file="footer.jsp" %></footer>
+	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 	
 </body>
 </html>

@@ -31,7 +31,7 @@
 </head>
 <body>
 	<!-- header 영역 -->
-	<header><%@ include file="header.jsp" %></header>
+	<header><%@ include file="../hfl/header.jsp" %></header>
 	
 	
 	
@@ -50,7 +50,7 @@
 	<% 	
 		for(int i = 0; i < 3; i++){
 	%>
-	 		<%@ include file="productTable.jsp" %>
+	 		<%@ include file="../product/productTable.jsp" %>
 	<%		
 		}
 	%>
@@ -81,7 +81,7 @@
 	
 	
 	<!-- footer 영역 -->
-	<footer><%@ include file="footer.jsp" %></footer>
+	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>
 </html>
 
