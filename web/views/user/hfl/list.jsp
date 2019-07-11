@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,63 +7,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-	aside{
-		width:10%; 
-		text-align: center;
-		border-style: solid;
-  		border-width: 2px;
-  		border-color: pink;
-	}
-	
+
+nav {
+	margin-top: 15%;
+	margin-right: 5%;
+	position: absolute;
+}
+
+#pc {
+	background: none;
+
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-<!-- header 영역 -->
-	<header><%@ include file="./header.jsp" %></header>
-	<body>
-	<aside> 
+	<!-- header 영역 -->
+	<header><%@ include file="header.jsp"%></header>
+<body>
 
-	<br><br><br><br>
-	<div class="w3-dropdown-hover" id = "pc">
-    &nbsp;&nbsp;&nbsp;&nbsp;<a>PC</a>
-    <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a href="#" class="w3-button">본체</a><br>
-      <a href="#" class="w3-button">모니터</a><br>
-      <a href="#" class="w3-button">주변기기</a>
-    </div>
-    <br><br><br><br><br><br><br>
-    <div class="w3-dropdown-hover" id = "nettop">
-    &nbsp;&nbsp;&nbsp;&nbsp;<a>노트북</a>
-    <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a href="#" class="w3-button">노트북</a><br>
-      <a href="#" class="w3-button">노트북 가방</a><br>
-      <a href="#" class="w3-button">주변기기</a>
-    </div>
-      <br><br><br><br><br><br><br>
-    <div class="w3-dropdown-hover" id = "ect">
-    &nbsp;&nbsp;&nbsp;&nbsp;<a>가전제품</a>
-    <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a href="#" class="w3-button">주방용품</a><br>
-      <a href="#" class="w3-button">생활가전</a><br>
-      <a href="#" class="w3-button">카메라</a>
-    </div>
-  </div>
+	<nav
+		class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
+		style="width:15%; font-weight: bold" id="mySidebar">
 
-<a style="display:scroll; position:fixed; bottom:10px; right:20px;" href="#" title="Top" >
-    <p style="padding:20px; background:#F66; color:#fff;">맨위로</p>
-</a>
 
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		</aside>
-		
-	</body>
-<!-- footer 영역 -->
-	<footer><%@ include file="./footer.jsp" %></footer>
+		<div class="w3-dropdown-hover" id="pc">
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>PC</a>
+			<div class="w3-dropdown-content w3-border">
+				<a href="#" class="w3-button">본체</a><br> 
+				<a href="#" class="w3-button">모니터</a><br> <a href="#" class="w3-button">주변기기</a>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="w3-dropdown-hover" id="nettop">
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>노트북</a>
+			<div class="w3-dropdown-content w3-bar-block w3-border">
+				<a href="#" class="w3-button">노트북</a><br> <a href="#"
+					class="w3-button">노트북 가방</a><br> <a href="#" class="w3-button">주변기기</a>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="w3-dropdown-hover" id="ect">
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>가전제품</a>
+			<div class="w3-dropdown-content w3-bar-block w3-border">
+				<a href="#" class="w3-button">주방용품</a><br> <a href="#"
+					class="w3-button">생활가전</a><br> <a href="#" class="w3-button">카메라</a>
+			</div>
+		</div>
+
+	</nav>
+
+
+	
+
+
+	<a style="display: scroll; position: fixed; bottom: 10px; right: 20px;"
+		href="#" title="Top">
+		<p style="padding: 20px; background: #F66; color: #fff;">맨위로</p>
+	</a>
+
+
+	</aside>
+
+
 </body>
+<!-- footer 영역 -->
+<footer><%@ include file="./footer.jsp"%></footer>
 
 </html>
-
 
 
 

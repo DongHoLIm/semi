@@ -12,13 +12,17 @@
 
 <style>
 
+
 #headerAll{
 	padding-right: 15%;
 	padding-left:15%;
+	
 }
+
 .headerb{
 font-family: 'Nanum Gothic', sans-serif;
    text-align:right;
+	padding-right: 15%;
 }
 
 .header {
@@ -28,7 +32,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 .box{
    text-align: right;
-   padding-right:20px;
+	padding-right: 15%;
 }
 
 .container-fluid{
@@ -99,6 +103,19 @@ font-family: 'Nanum Gothic', sans-serif;
 	padding:5px0;
 }
 
+.btn-info {
+	background:#ffd8d9;
+	border: 1px solid #ffd8d9;
+}
+
+.btn-info:hover {
+	background:#fdb5b7;
+	border: 1px solid #fdb5b7;
+}
+#search{
+	border-radius: 5px;
+}
+
 </style>
 
 </head>
@@ -108,14 +125,15 @@ font-family: 'Nanum Gothic', sans-serif;
    <div class = "headerb">
     <a href="../login/login.jsp"><button class="btn btn-info" >login</button></a>
     <a href="../join/selectjoin.jsp"><button class="btn btn-info">회원가입</button></a>   
+
    </div>
    <div class = "header">
-      <h1>중고의 민족</h1>
+      <h1>중고 愛 민족</h1>
    </div>
 	<div class="box">
   		<div class="container-1">
      		<input type="search" id="search" placeholder="검색" />
-      		<button type="button" class="btn btn-info">검색</button>
+      		<button type="button" class="btn btn-danger">검색</button>
   		</div>
  	</div>
 	<ul class="navi">
@@ -123,11 +141,12 @@ font-family: 'Nanum Gothic', sans-serif;
  <li><a href="#"> 카테고리</a> 
  
  <ul>
+
   <li><a href="/sp/views/payment.jsp"> 구매 </a></li> 
-  <li><a href="#"> 렌탈</a></li>
+
     </ul>     
      </li> <li><a href="#"> 상품등록 </a>  
-     <li><a href="/sp/views/basket.jsp"> 장바구니 </a></li> 
+     <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li> 
      <li><a href="/sp/views/board.jsp"> 게시판</a></li>
      <li><a href="#"> 마이페이지</a></li>
     <li><a href="#"> 고객센터</a></li>    
