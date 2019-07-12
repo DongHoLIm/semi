@@ -128,7 +128,8 @@ font-family: 'Nanum Gothic', sans-serif;
 
    </div>
    <div class = "header">
-      <h1>중고 愛 민족</h1>
+      <!-- <h1>중고 愛 민족</h1> -->
+      <a href="/sp/index.jsp"><img src="/sp/images/logo3.png" alt="" width="20%"/></a>
    </div>
 	<div class="box">
   		<div class="container-1">
