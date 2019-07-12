@@ -6,8 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 .t1 {
 	width:60%;
+	margin-top:5%;
+	margin-bottom:3%;
+}
+.d1 {
+	margin-bottom:10%;
 }
 .btn_so {
 	margin:0 auto;
@@ -64,17 +70,13 @@
 	</table>
 	<br>
 	<br>
-	<div align="center">
+	<div align="center" class="d1">
 		<a href="join.jsp">
 			<button type="button" class="btn_so">회원탈퇴</button>
 		</a> <a href="#">
 			<button type="button" class="btn_so">취소</button>
 		</a>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 
 
