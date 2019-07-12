@@ -23,7 +23,6 @@ nav {
 </head>
 <body>
 	<!-- header 영역 -->
-	<header><%@ include file="header.jsp"%></header>
 <body>
 
 	<nav
@@ -81,12 +80,10 @@ nav {
 	</a>
 
 
-	</aside>
+
 
 
 </body>
-<!-- footer 영역 -->
-<footer><%@ include file="./footer.jsp"%></footer>
 
 </html>
 
