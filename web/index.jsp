@@ -32,9 +32,9 @@
 </style>
 
 </head>
+	<!-- header 영역 -->
 	<header><%@ include file="views/user/hfl/header.jsp" %></header>
 <body>
-	<!-- header 영역 -->
  <div class="container">
  	<br><br><h3 align="center">광고배너</h3><br><br><br>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">

@@ -16,19 +16,20 @@
 		height:100%;
 		padding-right:20%;
 		padding-left:20%;
-		
-		margin:auto;
+		margin-top: 10px;
 	}
 	#area {
 		align:center;
 		width:100%;
 		height:100%;
 		background-color:#ddf;
-		padding:2%, 20%, 2%, 20%;
+		margin-top: 30px;
+		padding-top: 2%;
+		
 	}
 	#payForm{
 		align:center;
-		font-size: 1.7vw;
+		font-size: 1.5vw;
 	}
 	
 	#paymentPrice{
@@ -40,9 +41,48 @@
 		resize:none; 
 	}
 	
-	#buy{
+	
+	#pt{
+		font-family: 'Nanum Gothic', sans-serif;
+		font-weight:bord;
+		margin:0 auto;
+		width:80%;
+		max-height:200px;
+		padding-top: 5%;
+	}
+	
+	#payForm table td{
+		padding:4px;
+	}
+		
+	#productImg{
+		border:2px solid black;
 		
 	}
+	
+	#title{
+		font-size:2vw;
+		padding:1%;
+	}
+	
+	#Detail{
+		font-size:1vw;
+		vertical-align: top;
+		padding:1%;
+	}
+	
+	#price{
+		font-size:1.5vw;
+	}
+	
+	#quantity{
+		font-size:1.5vw;
+	}
+	
+	#priceAll{
+		font-size:1.5vw;
+	}
+	
 	
 </style>
 
@@ -53,15 +93,45 @@
 	<header><%@ include file="../hfl/header.jsp" %></header>
 	
 	
+	<div><%@ include file="../hfl/list.jsp" %></div>
 	<section id="sec1">
+	
+	
 	<div id="area">
 	
 	<!-- 장바구니 목록(상품테이블) -->
-	<%@ include file="productTable.jsp" %>
+	<table id="pt">
+							<tr>
+								<!-- 장바구니에 등록한 상품 사진, 품명, 상세설명 -->
+								<td id="productImg" rowspan="2"><img
+									src="/sp/images/flower2.PNG" width=100% hright=100%></td>
+								<!--  -->
+								<td id="title" colspan="2" width="70%" height="30%">상품명</td>
+							</tr>
+							<tr>
+								<td id="Detail" colspan="2">상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명
+									상세설명상세설명상세설명상세설명상세설명상세설명상세설명 상세설명상세설명상세설명상세설명상세설명상세설명상세설명</td>
+							</tr>
+							<tr>
+								<td id="price" width="30%">금액 :<%
+									
+								%>
+								</td>
+								<td id="quantity" width="20%">수량 : <%
+									
+								%>
+								</td>
+								<td id="priceAll" width="50%">상품 총 금액 : <%
+									
+								%>
+								</td>
+							</tr>
+						</table>
+	
 	
 	<br><br>
 	
-	
+	<!-- 정보 입력창 -->
 	<form id="payForm" action="" method="post">
 		<table align="center">
 		<tr><td>
