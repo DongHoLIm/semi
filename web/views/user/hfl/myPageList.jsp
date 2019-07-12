@@ -1,70 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-	
-   #fullScreen{
-		height: 50%;
-		margin:10px;
-   }
-   
-   #menubar{
-      width:16.6%;
-      height: 20%;
-      border: 3px solid #ffd8d9;
-      text-align: center;   
-      padding:1%;
-   }
-   
-   #menuUl{
-   		margin-right:20%;
-		padding-left:0px;
-      margin:0px auto;
-   		
-   }
-   
-   #menubar ul li{
-      list-style-type: none; 
-      
-      
-   }
-	a{
-		text-decoration:none;
-		color:black;
-	}
-	
-	a:hover {
-		text-decoration:none;
-	}
 
-	
+nav {
+	margin-top: 12.7%;
+	margin-right: 5%;
+	position: absolute;
+}
+
+#pc {
+	background: none;
+
+}
 </style>
-
+<title>Insert title here</title>
 </head>
 <body>
- <div id="fullScreen">
-      <div id="menubar">
-         <ul id="menuUl">
-            <li><h3>쇼핑내역</h3></li>
-            <li><a href="">주문내역</a></li>
-            <li><a href="">판매내역</a></li>
-            <li><a href="">주문배송조회</a></li>
-            <li><hr></li>
-            <li><h3>활동</h3></li>
-            <li><a href="">장바구니</a></li>
-            <li><a href="">내가쓴게시판</a></li>
-            <li><hr></li>
-            <li><h3>회원정보변경/수정</h3></li>
-            <li><a href="">회원정보 변경</a></li>
-            <li><a href="">회원정보 수정</a></li>
-            <li><a href="">회원 탈퇴</a></li>         
-         </ul>
-      </div>
-   </div>
+	<!-- header 영역 -->
+<body>
+
+	<nav
+		class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
+		style="width:15%; font-weight: bold; background-color:#ffe6e6 /* border-style: dotted; border-width: 2px; border-color:pink */">
+
+
+		<div class="w3-dropdown-hover" id="pc">
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>쇼핑내역</a>
+			<div class="w3-dropdown-content w3-border">
+				<ul href="#" class="w3-button">주문내역</ul><br>
+				<a href="#">주문/배송조회</a><br>
+				<a href="#">취소/반품조회</a><br>
+				<a href="#">환불/정산내역</a>
+				<br> 
+				<a href="#" class="w3-button">판매내역</a><br>
+				<a href="#" class="w3-button">주문배송조회</a>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="w3-dropdown-hover" id="nettop">
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>활동</a>
+			<div class="w3-dropdown-content w3-bar-block w3-border">
+				<a href="#" class="w3-button">장바구니</a><br> 
+				<a href="#" class="w3-button">내가 쓴 게시판</a><br> 
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="w3-dropdown-hover" id="ect">
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>회원정보변경/수정</a>
+			<div class="w3-dropdown-content w3-bar-block w3-border">
+				<a href="#" class="w3-button">회원정보 변경</a><br> 
+				<a href="#" class="w3-button">회원정보 수정</a><br> 
+				<a href="#" class="w3-button">회원 탈퇴</a>
+			</div>
+		</div>
+
+	</nav>
+
+
+	
+
+
+	<a style="display: scroll; position: fixed; bottom: 10px; right: 20px;"
+		href="#" title="Top">
+		<p style="padding: 20px; background: #F66; color: #fff;">맨위로</p>
+	</a>
+
+
+	</aside>
+
+
 </body>
+<!-- footer 영역 -->
+
 </html>
+
+
+
+
+
+
+
+
+
