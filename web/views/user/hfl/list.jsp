@@ -20,9 +20,14 @@ nav {
 <title>Insert title here</title>
 </head>
 <body>
-	<nav
-		class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
-		style="width: 15%; font-weight: bold" id="mySidebar">
+
+	<!-- header 영역 -->
+	<header><%@ include file="header.jsp"%></header>
+<body>
+
+	<nav class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
+		style="width:15%; font-weight: bold" id="mySidebar">
+
 
 
 		<div class="w3-dropdown-hover" id="pc">

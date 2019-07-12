@@ -12,8 +12,14 @@
 
 <style>
 
+#headerAll{
+	padding-right: 0%;
+	padding-left:10%;
+	
+}
+
 .headerb{
-font-family: 'Nanum Gothic', sans-serif;
+   font-family: 'Nanum Gothic', sans-serif;
    text-align:right;
    margin-top:10px;
    margin-right: 10%;
@@ -27,19 +33,20 @@ font-family: 'Nanum Gothic', sans-serif;
 .navi {   
 	list-style-type:none;
 	height:40px;
-	margin:center;
+	margin:0px auto;
 	padding:10px;
 	margin:0;
 	color:#ff8d9;
+	text-align: center;	
 }
 
 .navi li { 
 	float:left;
 	position: relative;
-	padding: 0;
+	padding: 0px;
 	line-height:40px;
 	background:#ffd8d9;
-	width:20%;
+	width:15%;
 }
 
 .navi li ul {
@@ -87,7 +94,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 </head>
 <body>
-	<div id="headerAll">
+	<div id="headerAll" >
 		<div class = "headerb">
 			<label for=""><% %>님 환영합니다.</label>
 			<button class="btn btn-info" >logout</button>  
@@ -131,6 +138,13 @@ font-family: 'Nanum Gothic', sans-serif;
 				<ul>
 					<li><a href="#">게시판 관리</a></li> 
 					<li><a href="#">고객센터 관리</a></li>
+				</ul>
+			</li>
+			<li><a href="../depot/depotmain.jsp">창고 관리</a>
+				<ul>
+					<li><a href="#">창고 현황</a></li> 
+					<li><a href="#">창고 상품 등록</a></li>
+					<li><a href="#">창고위치별현황</a></li>
 				</ul>
 			</li>    
 		</ul>
