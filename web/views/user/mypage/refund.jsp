@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<header><%@ include file="../hfl/header.jsp" %></header>
+	<br>
+	<header><%@ include file="../hfl/myPageList.jsp" %></header>
 
+
+	<br>
+	<footer><%@ include file="../hfl/footer.jsp" %></footer>
+	
 </body>
 </html>
