@@ -11,7 +11,9 @@ body {
 	font-family:'Nanum Gothic', sans-serif;
 }
 .checkInfo {
-	margin:0 auto;
+	margin-top:10%;
+	margin-bottom:10%;
+	margin-left:20%;
 	width:35%;
 	border-radius:5px;
 	background-color:#E7E7E7;
@@ -30,16 +32,14 @@ body {
 </head>
 <header><%@ include file="../hfl/header.jsp" %></header>
 <body>
-<br><br>
 <div align="center" class="checkInfo">
+<br><br>
 	<form action="" method="">
-		<br><br><br>
 		<h4 align="center">아이디 <%--  <%= loginUser.getUserId() %> --%>님</h4><br>
 		<input type="text" placeholder=" 비밀번호를 입력해주세요." name="password" size=20 style="border-radius:5px; height:32px;"><br><br>
 		<input type="submit" value="확인" class="btn_info"><br><br><br><br>
 	</form>
 </div>
-<br><br>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>
 </html>

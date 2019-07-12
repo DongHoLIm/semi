@@ -33,7 +33,7 @@ nav {
 table{
 	width:100%;
 	height:100%;
-	border:1px solid hotpink;
+	border:1px solid pink;
 	text-align:center;
 }
 #menubar {
@@ -72,26 +72,6 @@ a:hover {
 </head>
 <header><%@ include file="../hfl/header.jsp"%></header>
 <body>
-	<!-- <div id="fullScreen">
-		<div id="menubar"> -->
-	<!-- <nav id="menubar">
-		<ul id="menuUl">
-			<li><h3>쇼핑내역</h3></li>
-			<li><a href="">주문내역</a></li>
-			<li><a href="">판매내역</a></li>
-			<li><a href="">주문배송조회</a></li>
-			<li><hr></li>
-			<li><h3>활동</h3></li>
-			<li><a href="">장바구니</a></li>
-			<li><a href="">내가쓴게시판</a></li>
-			<li><hr></li>
-			<li><h3>회원정보변경/수정</h3></li>
-			<li><a href="">회원정보 변경</a></li>
-			<li><a href="">회원정보 수정</a></li>
-			<li><a href="">회원 탈퇴</a></li>
-			<li><hr></li>
-		</ul>
-	</nav> -->
 	<nav
       class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
       style="width:15%; font-weight: bold" id="mySidebar">
@@ -106,8 +86,13 @@ a:hover {
          </div>
       </div>
 
-      <br><br><br><br><br><br><br>
-      
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <div class="w3-dropdown-hover" id="nettop">
          <a align="center">활동</a>
          <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -141,7 +126,7 @@ a:hover {
    
 	<!-- </div> -->
 	<div id="subScreen">
-		<h3 style="font-weight: bold">주문 / 배송조회</h3>
+		<h3 style="font-weight: bold">취소 / 반품조회</h3>
 
 		<div class="date-select" align="center">
 			<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;<input
@@ -158,6 +143,18 @@ a:hover {
 					<th class="cancel">상품정보  </th>
 					<th class="cancel">주문상태  </th>
 					<th class="cancel">확인/신청</th>
+				</tr>
+				<tr>
+					<td>주문일자내용</td>
+					<td><input type="button" onclick="" value="주문상세"></td>
+					<td>주문상태내용</td>
+					<td>확인/신청내용</td>
+				</tr>
+				<tr>
+					<td>주문일자내용</td>
+					<td><input type="button" onclick="" value="주문상세"></td>
+					<td>주문상태내용</td>
+					<td>확인/신청내용</td>
 				</tr>
 				<tr>
 					<td>주문일자내용</td>
