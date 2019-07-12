@@ -11,13 +11,14 @@ table {
 	width: 50%;
 }
 
-table, th, td {
+table, td {
 	border: 1px solid #bcbcbc;
 	margin:0 auto;
 }
 
 th {
-	text-align:left;
+	border: 1px solid #bcbcbc;
+	text-align:center;!important;
 }
 .th3 {
 	width:20%;

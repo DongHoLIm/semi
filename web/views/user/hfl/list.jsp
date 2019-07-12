@@ -20,7 +20,6 @@ nav {
 <title>Insert title here</title>
 </head>
 <body>
-
 	<nav
 		class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
 		style="width: 15%; font-weight: bold" id="mySidebar">
@@ -62,7 +61,6 @@ nav {
 		href="#" title="Top">
 		<p style="padding: 20px; background: #F66; color: #fff;">맨위로</p>
 	</a>
-
 
 </body>
 
