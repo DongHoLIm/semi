@@ -9,7 +9,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <style>
 
 .headerb{
@@ -51,8 +50,19 @@ font-family: 'Nanum Gothic', sans-serif;
 		
 		<div class = "header">
 			<h1>중고애 민족</h1>
-		</div>
-
+		</div>	
 	</div>
+	<nav class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
+		style="width:15%; font-weight: bold" id="mySidebar">
+
+
+		<div class="w3-dropdown-hover" id="pc">
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>PC</a>
+			<div class="w3-dropdown-content w3-border">
+				<a href="#" class="w3-button">본체</a><br> 
+				<a href="#" class="w3-button">모니터</a><br> <a href="#" class="w3-button">주변기기</a>
+			</div>
+		</div>
+	</nav>
 </body>
 </html>
