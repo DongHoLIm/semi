@@ -12,30 +12,34 @@
 	height: 50%;
 	margin: 10px;
 }
+
 nav {
-   margin-top: 15%;
-   margin-right: 5%;
-   /* padding-right:5%;
+	margin-top: 15%;
+	margin-right: 5%;
+	/* padding-right:5%;
       padding-left:5%; */
 }
+
 .cancel {
-	text-align:center;
+	text-align: center;
 }
 
 #subScreen {
-	margin-top:5%;
-	margin-bottom:3%;
+	margin-top: 5%;
+	margin-bottom: 3%;
 	width: 67%;
 	margin-left: 16.6%;
 	height: 100%;
 	text-align: left;
 }
-table{
-	width:100%;
-	height:100%;
-	border:1px solid hotpink;
-	text-align:center;
+
+table {
+	width: 100%;
+	height: 100%;
+	border: 1px solid hotpink;
+	text-align: center;
 }
+
 #menubar {
 	width: 15.6%;
 	height: 100%;
@@ -67,11 +71,12 @@ a {
 a:hover {
 	text-decoration: none;
 }
-
 </style>
 </head>
 <header><%@ include file="../hfl/header.jsp"%></header>
 <body>
+
+	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 	<!-- <div id="fullScreen">
 		<div id="menubar"> -->
 	<!-- <nav id="menubar">
@@ -92,71 +97,71 @@ a:hover {
 			<li><hr></li>
 		</ul>
 	</nav> -->
-	<nav
-      class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
-      style="width:15%; font-weight: bold" id="mySidebar">
+	<!-- <nav
+		class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
+		style="width: 15%; font-weight: bold" id="mySidebar">
 
 
-      <div class="w3-dropdown-hover" id="pc">
-         <a align="center">쇼핑내역</a>
-         <div class="w3-dropdown-content w3-border">
-            <a href="#" class="w3-button">주문/배송조회</a><br> 
-            <a href="#" class="w3-button">취소/반품조회</a><br> 
-            <a href="#" class="w3-button">환불/정산내역</a>
-         </div>
-      </div>
+		<div class="w3-dropdown-hover" id="pc">
+			<a align="center">쇼핑내역</a>
+			<div class="w3-dropdown-content w3-border">
+				<a href="#" class="w3-button">주문/배송조회</a><br> <a href="#"
+					class="w3-button">취소/반품조회</a><br> <a href="#"
+					class="w3-button">환불/정산내역</a>
+			</div>
+		</div>
 
-      <br><br><br><br><br><br><br>
-      
-      <div class="w3-dropdown-hover" id="nettop">
-         <a align="center">활동</a>
-         <div class="w3-dropdown-content w3-bar-block w3-border">
-            <a href="#" class="w3-button">장바구니</a><br> <a href="#"
-               class="w3-button">내가쓴게시판</a><br>
-         </div>
-      </div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <div class="w3-dropdown-hover" id="ect">
-         <a align="center">회원정보변경/수정</a>
-         <div class="w3-dropdown-content w3-bar-block w3-border">
-            <a href="#" class="w3-button">회원정보 변경</a><br> 
-            <a href="#" class="w3-button">회원정보 수정</a><br> 
-            <a href="#" class="w3-button">회원 탈퇴</a>
-         </div>
-      </div>
+		<div class="w3-dropdown-hover" id="nettop">
+			<a align="center">활동</a>
+			<div class="w3-dropdown-content w3-bar-block w3-border">
+				<a href="#" class="w3-button">장바구니</a><br> <a href="#"
+					class="w3-button">내가쓴게시판</a><br>
+			</div>
+		</div>
 
-   </nav>
-   <a style="display: scroll; position: fixed; bottom: 10px; right: 20px;"
-      href="#" title="Top">
-      <p style="padding: 20px; background: #F66; color: #fff;">맨위로</p>
-   </a>
-    </aside>
-   
+		<br> <br> <br> <br> <br> <br> <br>
+		<div class="w3-dropdown-hover" id="ect">
+			<a align="center">회원정보변경/수정</a>
+			<div class="w3-dropdown-content w3-bar-block w3-border">
+				<a href="#" class="w3-button">회원정보 변경</a><br> <a href="#"
+					class="w3-button">회원정보 수정</a><br> <a href="#"
+					class="w3-button">회원 탈퇴</a>
+			</div>
+		</div>
+
+	</nav> -->
+	<a style="display: scroll; position: fixed; bottom: 10px; right: 20px;"
+		href="#" title="Top">
+		<p style="padding: 20px; background: #F66; color: #fff;">맨위로</p>
+	</a>
+	</aside>
+
 	<!-- </div> -->
 	<div id="subScreen">
 		<h3 style="font-weight: bold">주문 / 배송조회</h3>
 
 		<div class="date-select" align="center">
 			<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;<input
-				type="button" value="1주일">&nbsp;</span> &nbsp;<input type="button" value="15일">&nbsp;
-			&nbsp;<input type="button" value="1개월">&nbsp; <input type="date">
-			- <input type="date"><br>
-			<br>
+				type="button" value="1주일">&nbsp;
+			</span> &nbsp;<input type="button" value="15일">&nbsp; &nbsp;<input
+				type="button" value="1개월">&nbsp; <input type="date">
+			- <input type="date"><br> <br>
 		</div>
 		<br>
 		<div align=center>
 			<table border="1">
 				<tr>
-					<th class="cancel">주문일자  </th>
-					<th class="cancel">상품정보  </th>
-					<th class="cancel">주문상태  </th>
+					<th class="cancel">주문일자</th>
+					<th class="cancel">상품정보</th>
+					<th class="cancel">주문상태</th>
 					<th class="cancel">확인/신청</th>
 				</tr>
 				<tr>
@@ -170,5 +175,5 @@ a:hover {
 	</div>
 	<br>
 </body>
-	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+<footer><%@ include file="../hfl/footer.jsp"%></footer>
 </html>

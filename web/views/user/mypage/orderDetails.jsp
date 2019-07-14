@@ -26,6 +26,8 @@ table, td {
 </head>
 <header><%@ include file="../hfl/header.jsp"%></header>
 <body>
+
+	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 	<br>
 	<br>
 	<br>

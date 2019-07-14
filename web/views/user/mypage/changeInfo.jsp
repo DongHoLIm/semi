@@ -31,6 +31,8 @@ input {
 </head>
 <header><%@ include file="../hfl/header.jsp" %></header>
 <body>
+
+	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <br><br><br><br>
 	<h4 align="center"><%-- <%=loginUser.getUserName() %> --%>님의 회원 정보 수정</h4>
 	<br><br>
