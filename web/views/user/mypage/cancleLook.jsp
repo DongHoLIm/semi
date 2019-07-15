@@ -72,7 +72,9 @@ a:hover {
 </head>
 <header><%@ include file="../hfl/header.jsp"%></header>
 <body>
-	<nav
+
+	<header><%@ include file="../hfl/myPageList.jsp"%></header>
+	<!-- <nav
       class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
       style="width:15%; font-weight: bold" id="mySidebar">
 
@@ -117,7 +119,7 @@ a:hover {
          </div>
       </div>
 
-   </nav>
+   </nav> -->
    <a style="display: scroll; position: fixed; bottom: 10px; right: 20px;"
       href="#" title="Top">
       <p style="padding: 20px; background: #F66; color: #fff;">맨위로</p>

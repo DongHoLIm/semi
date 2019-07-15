@@ -108,15 +108,17 @@
 		
 			<li><a href="#"> 상품관리</a> 
 				<ul>
+
 					<li><a href="../manager/product/productmanagement.jsp">상품조회/수정/등록</a></li> 
 					<li><a href="../manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
 					<li><a href="../manager/product/calculate.jsp">정산 내역</a></li>
+
 				</ul>     
 			</li>
 			<li><a href="#">회원관리</a>
 				<ul>
-					<li><a href="#">주문조회</a></li>
 					<li><a href="#">배송현황 관리</a></li> 
+
 					<li><a href="#">구매 확정 내역</a></li>
 					<li><a href="#">창고 조회</a></li>
 				</ul>     
@@ -142,8 +144,7 @@
 			</li>
 			<li><a href="../depot/depotmain.jsp">창고 관리</a>
 				<ul>
-					<li><a href="#">창고 현황</a></li> 
-					<li><a href="#">창고 상품 등록</a></li>
+					<li><a href="../depot/depotBarcode.jsp">바코드 출력</a></li>
 					<li><a href="#">창고위치별현황</a></li>
 				</ul>
 			</li>    
