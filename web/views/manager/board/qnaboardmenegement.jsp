@@ -41,7 +41,7 @@ border:1px solid black;
 			<option value="findLevel">등급으로 조회</option>
 		</select>
 		<input type="search" name="searchValue">
-		<button type="submit">조회</button>
+		<button type="submit" style="border-radius: 5px; background-color: #ffd8d9;">조회</button>
 	</span>
 	</div>
 	<br><br>
@@ -56,6 +56,7 @@ border:1px solid black;
 		<th>수정</th>
 	</tr>
 	</table><br><br>
+	<%@ include file="../hfl/pagination.jsp" %>
 </div>
 </body>
 </html>

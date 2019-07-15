@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head><!-- 여기서 표에 답변하기 버튼에 answerwirter.jsp로 연결하면 되삼. -->
+<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -17,8 +17,15 @@ width:100%;
 border-radius:1px;
 }
 table{
-width:80%;
+width:90%;
 border:1px solid black;
+}
+table > th{
+align:center;
+}
+#set-status{
+text-align:left;
+width:90%;
 }
 </style>
 </head>
@@ -26,37 +33,36 @@ border:1px solid black;
 <body>
 <br><br><br>
 <div align="center" id="select-area">
-<h1>게시물 관리</h1>
+<h1>블랙리스트 관리</h1>
 <form>
 	<div id="select">
-		<select name="select" style="width:10%">
-			<option value="notebook">노트북</option>
-			<option value="">가전제품</option>
-			<option value=""></option>
-		</select>
-	<span>
-		<select name="select" style="width:20%;">
+		<select name="select" style="width:30%;">
 			<option value="findId">아이디로 조회</option>
 			<option value="findName">이름으로 조회</option>
 			<option value="findLevel">등급으로 조회</option>
 		</select>
 		<input type="search" name="searchValue">
 		<button type="submit" style="border-radius: 5px; background-color: #ffd8d9;">조회</button>
-	</span>
 	</div>
-	<br><br>
+	<br>
+</form>
 	<table align="center">
 	<tr>
-		<th>No.</th>
-		<th>ID</th>
-		<th>게시글 제목</th>
-		<th>판매여부</th>
-		<th>분류</th>
-		<th>수정</th>
+		<th>아이디</th>
+		<th>이름</th>
+		<th>전화번호</th>
+		<th>등급</th>
+		<th>주민등록번호</th>
+		<th>방문수</th>
+		<th>게시글 수</th>
+		<th>최종방문일</th>
+		<th>주소</th>
+		<th>가입일</th>
+		<th>판매횟수</th>
+		<th>블랙리스트 사유</th><!-- 해당 게시물로 연결 -->
 	</tr>
 	</table><br><br>
-	<%@ include file="../hfl/pagination.jsp" %>
-</form>
+				<%@ include file="../hfl/pagination.jsp" %>
 </div>
 </body>
 </html>

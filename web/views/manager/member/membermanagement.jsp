@@ -43,14 +43,14 @@ width:90%;
 			<option value="findLevel">등급으로 조회</option>
 		</select>
 		<input type="search" name="searchValue">
-		<button type="submit">조회</button>
+		<button type="submit" style="border-radius: 5px; background-color: #ffd8d9;">조회</button>
 	</div>
 	<br>
 </form>
 	<div id="set-status">
 	선택 회원을
-	<button value="블랙리스트" style="align:center;">블랙리스트</button>
-	<button value="활동정지">활동정지</button><br><br>
+	<button value="블랙리스트" style="align:center; border-radius: 5px; background-color: #ffd8d9;">블랙리스트</button>
+	<button value="활동정지" style="border-radius: 5px; background-color: #ffd8d9;">활동정지</button><br><br>
 	</div>
 	<table align="center">
 	<tr>
@@ -68,6 +68,7 @@ width:90%;
 		<th>판매횟수</th>
 	</tr>
 	</table><br><br>
+				<%@ include file="../hfl/pagination.jsp" %>
 </div>
 </body>
 </html>
