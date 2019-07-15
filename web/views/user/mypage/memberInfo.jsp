@@ -11,9 +11,9 @@ body {
 	font-family:'Nanum Gothic', sans-serif;
 }
 .checkInfo {
+	margin: 0 auto;
 	margin-top:10%;
 	margin-bottom:10%;
-	margin-left:20%;
 	width:35%;
 	border-radius:5px;
 	background-color:#E7E7E7;
@@ -32,6 +32,8 @@ body {
 </head>
 <header><%@ include file="../hfl/header.jsp" %></header>
 <body>
+
+	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <div align="center" class="checkInfo">
 <br><br>
 	<form action="" method="">
