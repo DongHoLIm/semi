@@ -42,9 +42,9 @@ nav {
 		<div class="w3-dropdown-hover" id="pc">
 			&nbsp;&nbsp;&nbsp;&nbsp;<a>상품관리</a>
 			<div class="w3-dropdown-content w3-border">
-				<a href="#" class="w3-button">상품조회</a><br> 
-				<a href="#" class="w3-button">파워상품 관리</a><br> 
-				<a href="#" class="w3-button">정산 내역</a>
+				<a href="../manager/product/productmanagement.jsp" class="w3-button">상품조회</a><br> 
+				<a href="../manager/product/powerProductPage.jsp" class="w3-button">파워상품 관리</a><br> 
+				<a href="../manager/product/calculate.jsp" class="w3-button">정산 내역</a>
 			</div>
 		</div>
 
@@ -75,9 +75,9 @@ nav {
 		<div class="w3-dropdown-hover" id="ect">
 			&nbsp;&nbsp;&nbsp;&nbsp;<a>회원관리</a>
 			<div class="w3-dropdown-content w3-bar-block w3-border">
-				<a href="#" class="w3-button">고객정보</a><br> 
+				<a href="../manager/member/membermanagement.jsp" class="w3-button">고객정보</a><br> 
 				<a href="#" class="w3-button">고객등급</a><br>
-				<a href="#" class="w3-button">블랙리스트관리</a>
+				<a href="../manager/member/blackList.jsp" class="w3-button">블랙리스트관리</a>
 			</div>
 		</div>
 
@@ -106,8 +106,8 @@ nav {
 		<div class="w3-dropdown-hover" id="ect">
 			&nbsp;&nbsp;&nbsp;&nbsp;<a>게시글 관리</a>
 			<div class="w3-dropdown-content w3-bar-block w3-border">
-				<a href="#" class="w3-button">게시판</a><br> 
-				<a href="#" class="w3-button">고객센터 관리</a><br>
+				<a href="../manager/board/boardmenegement.jsp" class="w3-button">게시판</a><br> 
+				<a href="../manager/board/qnaboardmenegement.jsp" class="w3-button">고객센터 관리</a><br>
 			</div>
 		</div>
 	</nav>

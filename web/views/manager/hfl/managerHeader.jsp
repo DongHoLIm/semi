@@ -108,9 +108,9 @@
 		
 			<li><a href="#"> 상품관리</a> 
 				<ul>
-					<li><a href="#">상품조회/수정/등록</a></li> 
-					<li><a href="#">파워 상품 관리</a></li>
-					<li><a href="#">정산 내역</a></li>
+					<li><a href="../manager/product/productmanagement.jsp">상품조회/수정/등록</a></li> 
+					<li><a href="../manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
+					<li><a href="../manager/product/calculate.jsp">정산 내역</a></li>
 				</ul>     
 			</li>
 			<li><a href="#">회원관리</a>
@@ -123,9 +123,9 @@
 			</li>  
 			<li><a href="#">회원관리</a>
 				<ul>
-					<li><a href="#">고객정보</a></li>
+					<li><a href="../manager/member/membermanagement.jsp">고객정보</a></li>
 					<li><a href="#">고객등급</a></li> 
-					<li><a href="#">블랙리스트 관리</a></li>
+					<li><a href="../manager/member/blackList.jsp">블랙리스트 관리</a></li>
 				</ul>     
 			</li> 
 			<li><a href="#">통계</a>
@@ -136,8 +136,8 @@
 			</li>
 			<li><a href="#">게시글 관리</a>
 				<ul>
-					<li><a href="#">게시판 관리</a></li> 
-					<li><a href="#">고객센터 관리</a></li>
+					<li><a href="../manager/board/boardmenegement.jsp">게시판 관리</a></li> 
+					<li><a href="../manager/board/qnaboardmenegement.jsp">고객센터 관리</a></li>
 				</ul>
 			</li>
 			<li><a href="../depot/depotmain.jsp">창고 관리</a>
