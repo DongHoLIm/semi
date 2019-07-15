@@ -5,13 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
-<%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
+
 <style>
+	#depotMainDiv{
+		width:80%;
+		height: 80%;
+		border: 1px solid black;
+		margin:0 auto;
+				
+	}
 	#depotMain{
 		width:80%;
 		height: 80%;
-		border: 1px solid black;		
+		border:2px solid black;
 	}
 	tr{
 		border:1px solid black;		
@@ -31,19 +39,49 @@
 </style>
 <body>
 	<div id="depotMainDiv">
+	<%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
 	<br>
-	<h2 align="center">창고 현황</h2>
+	<h2 align="center">창고현황</h2>
+	<br />
+	<div id="selectSearch">
 	<form action="">
-		<select name="searchDepot" id="">
-			<option value="위치관리번호"></option>
-			<option value=""></option>
-			<option value=""></option>
-			<option value=""></option>
+		<select name="" id="selectBox" onchange="changeSearchBox();">
+			<option class="A" value="locationNum">위치관리번호</option>
+			<option class="A" value="barCode">바코드넘버</option>
+			<option class="A" value="searchDate">적치 일자</option>
 		</select>
+				
+		<div id="location">
 		<input type="text" />
 		<button type="submit">검색</button>
-	</form>
+		</div>
+		<div id="date">
+		<input type="date" />
+		<button type="submit">검색</button>
+		</div>
+	</form> 
+	<script>
+	$(function (){
+		$("#date").hide();
+	});	
+	function changeSearchBox(){
+			    var langSelect = document.getElementById("selectBox");
+		     
+			    // select element에서 선택된 option의 value가 저장된다.
+			    var selectValue = langSelect.options[langSelect.selectedIndex].value;
+			 	
+			  if(selectValue=="searchDate"){
+				  $("#location").hide();
+				  $("#date").show();
+			  }else{
+				  $("#location").show();
+				  $("#date").hide();
+			  }
+		}
+	</script>
+	</div>
 	<br>
+	<br><br>
 		<table id="depotMain" align="center">
 			<tr>
 				<th id=""></th>
@@ -55,13 +93,13 @@
 				<th>출고 일자</th>
 			</tr>
 			<tr>
-				<td>1</td>
-				<td>1</td>
-				<td>p-1</td>
-				<td>c-3</td>
-				<td>p-123213</td>
-				<td>2017/05/06</td>
-				<td>null</td>
+				<td></td>
+				<td><a href="">1</a></td>
+				<td><a href="">p-1</a></td>
+				<td><a href="">c-3</a></td>
+				<td><a href="">p-123213</a></td>
+				<td><a href="">2017/05/06</a></td>
+				<td><a href="">null</a></td>
 			</tr>
 		</table>
 	
