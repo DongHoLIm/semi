@@ -11,13 +11,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
-
-#headerAll{
-	padding-right: 0%;
-	padding-left:10%;
-	
-}
-
 .headerb{
    font-family: 'Nanum Gothic', sans-serif;
    text-align:right;
@@ -33,11 +26,10 @@
 .navi {   
 	list-style-type:none;
 	height:40px;
-	margin:0px auto;
+	margin:center;
 	padding:10px;
 	margin:0;
 	color:#ff8d9;
-	text-align: center;	
 }
 
 .navi li { 
@@ -46,7 +38,7 @@
 	padding: 0px;
 	line-height:40px;
 	background:#ffd8d9;
-	width:15%;
+	width:20%;
 }
 
 .navi li ul {
@@ -101,33 +93,24 @@
 		</div>
 		
 		<div class = "header">
-			<h1>중고애 민족</h1>
+			  <a href="/sp/views/manager/main/managerPage.jsp"><img src="/sp/images/logo3.png" alt="" width="20%"/></a>
 		</div>
-		
-		<ul class="navi">
-		
+
+		<ul class="navi" align="center">		
 			<li><a href="#"> 상품관리</a> 
 				<ul>
 
-					<li><a href="../manager/product/productmanagement.jsp">상품조회/수정/등록</a></li> 
-					<li><a href="../manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
-					<li><a href="../manager/product/calculate.jsp">정산 내역</a></li>
+					<li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li> 
+					<li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
+					<li><a href="/sp/views/manager/product/calculate.jsp">정산 내역</a></li>
+					<li><a href="#">구매 확정 내역</a></li>
 
 				</ul>     
 			</li>
 			<li><a href="#">회원관리</a>
 				<ul>
-					<li><a href="#">배송현황 관리</a></li> 
-
-					<li><a href="#">구매 확정 내역</a></li>
-					<li><a href="#">창고 조회</a></li>
-				</ul>     
-			</li>  
-			<li><a href="#">회원관리</a>
-				<ul>
-					<li><a href="../manager/member/membermanagement.jsp">고객정보</a></li>
-					<li><a href="#">고객등급</a></li> 
-					<li><a href="../manager/member/blackList.jsp">블랙리스트 관리</a></li>
+					<li><a href="/sp/views/manager/member/membermanagement.jsp">고객정보</a></li> 
+					<li><a href="/sp/views/manager/member/blackList.jsp">블랙리스트 관리</a></li>
 				</ul>     
 			</li> 
 			<li><a href="#">통계</a>
@@ -138,17 +121,19 @@
 			</li>
 			<li><a href="#">게시글 관리</a>
 				<ul>
-					<li><a href="../manager/board/boardmenegement.jsp">게시판 관리</a></li> 
-					<li><a href="../manager/board/qnaboardmenegement.jsp">고객센터 관리</a></li>
+					<li><a href="/sp/views/manager/board/boardmenegement.jsp">게시판 관리</a></li> 
+					<li><a href="/sp/views/manager/board/qnaboardmenegement.jsp">고객센터 관리</a></li>
 				</ul>
 			</li>
-			<li><a href="../depot/depotmain.jsp">창고 관리</a>
+			<li><a href="/sp/views/manager/depot/depotmain.jsp">창고 관리</a>
 				<ul>
-					<li><a href="../depot/depotBarcode.jsp">바코드 출력</a></li>
+					<li><a href="/sp/views/manager/depot/depotBarcode.jsp">바코드 출력</a></li>
+					<li><a href="/sp/views/manager/depot/depotInOut.jsp">입출고 관리</a></li>
 					<li><a href="#">창고위치별현황</a></li>
 				</ul>
 			</li>    
 		</ul>
-	</div>
+		</div>
+
 </body>
 </html>
