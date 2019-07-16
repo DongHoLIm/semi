@@ -125,9 +125,9 @@
 			</li>  
 			<li><a href="#">회원관리</a>
 				<ul>
-					<li><a href="../manager/member/membermanagement.jsp">고객정보</a></li>
+					<li><a href="../member/membermanagement.jsp">고객정보</a></li>
 					<li><a href="#">고객등급</a></li> 
-					<li><a href="../manager/member/blackList.jsp">블랙리스트 관리</a></li>
+					<li><a href="../member/blackList.jsp">블랙리스트 관리</a></li>
 				</ul>     
 			</li> 
 			<li><a href="#">통계</a>
