@@ -5,9 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 <title>아이디 찾기</title>
 <style>
 	form {
