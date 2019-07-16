@@ -9,13 +9,6 @@
 </head>
 
 <style>
-	#depotMainDiv{
-		width:80%;
-		height: 80%;
-		border: 1px solid black;
-		margin:0 auto;
-				
-	}
 	#depotMain{
 		width:80%;
 		height: 80%;
@@ -36,9 +29,14 @@
 	form{
 		float:right;
 	}
+	#location{
+		padding-right: 190px;	
+	}
+	#date{
+		padding-right: 190px;
+	}
 </style>
 <body>
-	<div id="depotMainDiv">
 	<%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
 	<br>
 	<h2 align="center">창고현황</h2>
@@ -102,8 +100,6 @@
 				<td><a href="">null</a></td>
 			</tr>
 		</table>
-	
-	</div>
 	
 </body>
 </html>

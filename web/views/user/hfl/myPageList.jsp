@@ -29,35 +29,16 @@ nav {
 		class="w3-sidebar w3-bar-block w3-animate-left w3-collapse w3-top w3-center"
 		style="width:15%; font-weight: bold; background-color:#ffe6e6 /* border-style: dotted; border-width: 2px; border-color:pink */">
 
-
+		<br><br><br><br>
 		<div class="w3-dropdown-hover" id="pc">
 			&nbsp;&nbsp;&nbsp;&nbsp;<a>쇼핑내역</a>
 			<div class="w3-dropdown-content w3-border">
 				<ul href="#" class="w3-button">주문내역</ul><br>
-				<a href="#">주문/배송조회</a><br>
-				<a href="#">취소/반품조회</a><br>
-				<a href="#">환불/정산내역</a>
-				<br> 
-				<a href="#" class="w3-button">판매내역</a><br>
-				<a href="#" class="w3-button">주문배송조회</a>
+				<a href="../mypage/orderLook.jsp">주문/배송조회</a><br>
+				<a href="../mypage/cancleLook.jsp">취소/반품조회</a><br>
+				<a href="../mypage/refund.jsp">환불/정산내역</a>
 			</div>
 		</div>
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<div class="w3-dropdown-hover" id="nettop">
-			&nbsp;&nbsp;&nbsp;&nbsp;<a>활동</a>
-			<div class="w3-dropdown-content w3-bar-block w3-border">
-				<a href="#" class="w3-button">장바구니</a><br> 
-				<a href="#" class="w3-button">내가 쓴 게시판</a><br> 
-			</div>
-		</div>
-
 		<br>
 		<br>
 		<br>
@@ -66,11 +47,10 @@ nav {
 		<br>
 		<br>
 		<div class="w3-dropdown-hover" id="ect">
-			&nbsp;&nbsp;&nbsp;&nbsp;<a>회원정보변경/수정</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;<a>회원정보변경/탈퇴</a>
 			<div class="w3-dropdown-content w3-bar-block w3-border">
-				<a href="#" class="w3-button">회원정보 변경</a><br> 
-				<a href="#" class="w3-button">회원정보 수정</a><br> 
-				<a href="#" class="w3-button">회원 탈퇴</a>
+				<a href="../mypage/changeInfo.jsp" class="w3-button">회원정보 변경</a><br> 
+				<a href="../mypage/memberSignOut.jsp" class="w3-button">회원 탈퇴</a>
 			</div>
 		</div>
 

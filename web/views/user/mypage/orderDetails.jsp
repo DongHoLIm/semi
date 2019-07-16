@@ -5,7 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 <style>
+button {
+	width:75px;
+	height: 25px;
+	border: 1px solid #ffd8d9;
+	font-size: 12px;
+	font-family: 'Sunflower', sans-serif;
+	border-radius: 5px;
+	background-color: #ffd8d9;
+	color: black;
+
+}
 table {
 	text-align:center;
 	width: 50%;
@@ -15,7 +27,9 @@ table, td {
 	border: 1px solid #bcbcbc;
 	margin:0 auto;
 }
+
 .th3 {
+	border:1px solid #bcbcbc;
 	text-align: center;
 }
 .th4{
@@ -62,6 +76,7 @@ table, td {
 				<th class="th3">상품금액</th>
 				<th class="th3">배송비</th>
 				<th class="th3">주문/배송상태</th>
+				<th class="th3">환불신청</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -72,6 +87,7 @@ table, td {
 				<td>28,000원</td>
 				<td>2,500원</td>
 				<td><button>구매확정</button></td>
+				<td><button onclick="location.href = '/sp/views/user/mypage/return.jsp'">환불신청</button></td>
 			</tr>
 			<tr>
 				<th class="th3">2</th>
@@ -80,6 +96,7 @@ table, td {
 				<td>390,000원</td>
 				<td>2,500원</td>
 				<td><button>구매확정</button></td>
+				<td><button>환불신청</button></td>
 			</tr>
 			<tr>
 				<th class="th3">3</th>
@@ -88,8 +105,10 @@ table, td {
 				<td>60,000원</td>
 				<td>2,500원</td>
 				<td><button>구매확정</button></td>
+				<td><button>환불신청</button></td>
 			</tr>
 		</tbody>
+		<p></p>
 	</table>
 	<br>
 	<br>

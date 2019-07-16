@@ -6,8 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
+#sec1 {
+		width:100%;
+		height:100%;
+		padding-right:20%;
+		padding-left:20%;
+		margin-top: 10px;
+	}
 .productDiv {
-	margin-left: 18%;
+	margin:0 auto;
 	height: 500px;
 	width: 100%;
 	float: center;
@@ -15,6 +22,9 @@
 	position: relative;
 	margin-top: 5%;
 	margin-bottom : 5%;
+}
+#productList{
+	display:inline;
 }
 
 #title {
@@ -26,49 +36,33 @@
 <%@ include file="../hfl/header.jsp"%>
 <body>
 	<%@ include file="../hfl/list.jsp"%>
-	<div class="productDiv">
-
-		<table id="productList">
-			<tr>
-				<td colspan=4 id=title><label><h1>판매게시판</h1></label></td>
-			</tr>
-			<tr>
-				<td><a href="<%=request.getContextPath()%>/views/user/product/productDetails.jsp"><img src="<%=request.getContextPath()%>/images/face.png"
-					class="img-rounded" alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</a></td>
-				<td><img src="<%=request.getContextPath()%>/images/flower4.PNG"
-					class="img-rounded" alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-				<td><img src="<%=request.getContextPath()%>/images/flower5.PNG"
-					class="img-rounded" alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-				<td><img src="<%=request.getContextPath()%>/images/galxy.PNG"
-					class="img-rounded" alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-			</tr>
-			<tr>
-				<td><h3>
-						<a href="" name="title">진수의 분홍분홍 쿨러</a>
-					</h3> <br>
-					<p>
-						가격: 5000000 <br> 내용: 노트북쿨러
-					</p></td>
-				<td><h3>
-						<a href="" name="title">진수의 분홍분홍 쿨러</a>
-					</h3> <br>
-					<p>
-						가격: 5000000 <br> 내용: 노트북쿨러
-					</p></td>
-				<td><h3>
-						<a href="" name="title">진수의 분홍분홍 쿨러</a>
-					</h3> <br>
-					<p>
-						가격: 5000000 <br> 내용: 노트북쿨러
-					</p></td>
-				<td><h3>
-						<a href="" name="title">진수의 분홍분홍 쿨러</a>
-					</h3> <br>
-					<p>
-						가격: 5000000 <br> 내용: 노트북쿨러
-					</p></td>
-			</tr>
-		</table>
-	</div>
+	
+	<section id="sec1">
+		<div class="productDiv">
+			<h1 align="center">판매게시판</h1>
+			
+			<%
+				for(int i = 0; i < 5; i++){
+				
+			%>
+			
+			<table id="productList">
+				<tr>
+					<td><a href="/sp/views/user/product/productDetails.jsp" id=""><img src="/sp/images/face.png"
+						class="img-rounded" alt="Cinque Terre" width="255" height="236">&nbsp;&nbsp;</a></td>
+				</tr>
+				<tr>
+					<td>
+						<h3><a href="" name="title">진수의 분홍분홍 쿨러</a></h3>
+						<br>
+						<p>가격: 5000000 <br> 내용: 노트북쿨러</p>
+					</td>
+				</tr>
+			</table>
+			
+			<%} %>
+			
+		</div>
+	</section>
 </body>
 </html>

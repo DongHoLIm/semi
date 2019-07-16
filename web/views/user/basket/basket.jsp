@@ -64,7 +64,8 @@
 	<!-- header 영역 -->
 	<header><%@ include file="../hfl/header.jsp"%></header>
 
-
+	
+	<div><%@ include file="../hfl/list.jsp" %></div>
 
 	<section id="sec1">
 		<div id="area">
