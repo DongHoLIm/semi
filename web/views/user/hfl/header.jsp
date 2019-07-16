@@ -41,7 +41,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 .menu{
    padding :10px;
-   text-align: 
+   
 }
 
 .navi {   
@@ -106,6 +106,7 @@ font-family: 'Nanum Gothic', sans-serif;
 .btn-info {
 	background:#ffd8d9;
 	border: 1px solid #ffd8d9;
+	text-align:right;
 }
 
 .btn-info:hover {
@@ -132,9 +133,9 @@ font-family: 'Nanum Gothic', sans-serif;
       <a href="/sp/index.jsp"><img src="/sp/images/logo3.png" alt="" width="20%"/></a>
    </div>
 	<div class="box">
-  		<div class="container-1">
+  		<div class="container-1" align="right">
      		<input type="search" id="search" placeholder="검색" />
-      		<button type="button" class="btn btn-danger">검색</button>
+      		<button type="button" class="btn btn-info">검색</button>
   		</div>
  	</div>
 	<ul class="navi">
@@ -146,10 +147,10 @@ font-family: 'Nanum Gothic', sans-serif;
   <li><a href="/sp/views/payment.jsp"> 구매 </a></li> 
 
     </ul>     
-     </li> <li><a href="#"> 상품등록 </a>  
+     </li> <li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록 </a>  
      <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li> 
      <li><a href="/sp/views/board.jsp"> 게시판</a></li>
-     <li><a href="#"> 마이페이지</a></li>
+     <li><a href="/sp/views/user/mypage/myPage.jsp"> 마이페이지</a></li>
     <li><a href="#"> 고객센터</a></li>    
  </ul>
  </div>

@@ -33,11 +33,11 @@ nav {
 	text-align: left;
 }
 
-table {
-	width: 100%;
-	height: 100%;
-	border: 1px solid hotpink;
-	text-align: center;
+table{
+	width:100%;
+	height:100%;
+	border:1px solid pink;
+	text-align:center;
 }
 
 #menubar {
@@ -166,7 +166,19 @@ a:hover {
 				</tr>
 				<tr>
 					<td>주문일자내용</td>
-					<td><input type="button" onclick="" value="주문상세"></td>
+					<td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
+					<td>주문상태내용</td>
+					<td>확인/신청내용</td>
+				</tr>
+				<tr>
+					<td>주문일자내용</td>
+					<td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
+					<td>주문상태내용</td>
+					<td>확인/신청내용</td>
+				</tr>
+				<tr>
+					<td>주문일자내용</td>
+					<td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
 					<td>주문상태내용</td>
 					<td>확인/신청내용</td>
 				</tr>
