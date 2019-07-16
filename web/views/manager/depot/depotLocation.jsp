@@ -8,10 +8,5 @@
 </head>
 <body>
 <%@ include file = "../hfl/managerHeader.jsp" %>
-<div id="">
-	
-</div>
-
-
 </body>
 </html>

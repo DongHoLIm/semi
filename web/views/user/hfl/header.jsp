@@ -154,7 +154,7 @@
     </ul>     
      </li> <li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록 </a>  
      <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li> 
-     <li><a href="/sp/views/board.jsp"> 게시판</a></li>
+     <li><a href="/sp/views/user/board/board.jsp"> 게시판</a></li>
      <li><a href="/sp/views/user/mypage/myPage.jsp"> 마이페이지</a></li>
     <li><a href="#"> 고객센터</a></li>    
  </ul>
