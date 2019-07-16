@@ -35,8 +35,10 @@
 
 </style>
 </head>
-<header><%@ include file="../hfl/header.jsp" %></header>
 <body>
+
+	<header><%@ include file="../hfl/header.jsp" %></header>
+	<div><%@ include file="../hfl/list.jsp" %></div>
 <br><br><br><br>
 <div class="container">
 <table class="table table-bordered" align="center" style="width:60%;">
