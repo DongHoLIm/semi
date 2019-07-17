@@ -1,136 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#sec1 {
-	width: 100%;
-	height: 100%;
-	padding-right: 20%;
-	padding-left: 20%;
-	margin: auto;
+#select-area{
+	width:80%;
+	border:2px solid #ffd8d9;
+	margin:0 auto;
+	border-radius: 5px;
 }
-
-#area {
-	width: 100%;
-	padding: 2%;
-	margin: 0 auto;
-	text-align: center;
+#select{
+width:100%;
+border-radius:1px;
 }
-
-#deliTable {
-	align: center;
-}
-
-#deliTable tr {
-	align: center;
-}
-
-#deliTable tr td {
-	align: center;
-}
-
-#deliTable tr td img {
-	width: 30%;
-	align: center;
-}
-
-.board {
-	width: 80%;
-	margin: auto;
-	align: center;
-	border-spacing: 10px;
-}
-
-.row0 {
-	background: #eee;
-	margin: auto;
-}
-
-.row1 {
-	border-top: 2px solid #555;
-}
-
-.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
-.pageNo {
-	margin: auto;
+table{
+width:80%;
+border:1px solid black;
 }
 </style>
 </head>
 <header><%@ include file="../hfl/managerHeader.jsp" %></header>
 <body>
-<form align="center">
-	<section id="sec1">
-		<div id="area">
-			<h3 align="center">배송상태</h3>
-			<table id="deliTable">
-				<tr>
-				   <td class="deliReady"><img src="/sp/images/gumsu.png" alt="" />
-						<br />
-						<p>
-							검수중(<%
-							int gumsu = 0;
-						%><%=gumsu%>)
-						</p></td>
-					<td class="deliReady"><img src="/sp/images/box.png" alt="" />
-						<br />
-						<p>
-							배송 준비중(<%
-							int ready = 0;
-						%><%=ready%>)
-						</p></td>
-					<td class="deliStart"><img src="/sp/images/delivery-truck.png"
-						alt="" /> <br />
-						<p>
-							배송 시작(<%
-							int start = 0;
-						%><%=start%>)
-						</p></td>
-					<td class="deliSuccess"><img src="/sp/images/order.png" alt="" />
-						<br />
-						<p>
-							배송 완료(<%
-							int success = 0;
-						%><%=success%>)
-						</p></td>
-				</tr>
-			</table>
-		</div>
-
-		<div>
-			<br />
-			
-			<h3 align="center">ㅇㄹㅇㄹ</h3>
-			<table class="board">
-				<tr class="row0">
-				<thead>
-					<th>번호</th>
-					<th>판매자 아이디</th>
-					<th>판매 상품</th>
-					<th>구매자 아이디</th>
-					<th>검수 유무</th><!-- 체크박스로 넣으면 되삼. -->
-					<th>주문날짜</th>
-					<th>진행 상태</th>
-				</thead>
-				</tr>
-				
-			</table>
-		</div>
-		
-	</section>
-				<div align="center"><%@ include file="../hfl/pagination.jsp" %></div>
-		
+<br><br><br>
+<div align="center" id="select-area">
+<h1>주문조회 관리</h1>
+<form>
+	<div id="select">
+		<select name="select" style="width:10%">
+			<option value="">주문상태</option>
+			<option value="">배송전</option>
+			<option value="">환불신청</option>
+		</select>
+	<span>
+		<select name="select" style="width:20%;">
+			<option value="findId">아이디로 조회</option>
+			<option value="findName">이름으로 조회</option>
+			<option value="findLevel">등급으로 조회</option>
+		</select>
+		<input type="search" name="searchValue">
+		<button type="submit" style="border-radius: 5px; background-color: #ffd8d9;">조회</button>
+	</span>
+	</div>
+	<br><br>
 </form>
-
-	<br>
-	<footer><%@ include file="../hfl/footer.jsp" %></footer>
-
+	<table align="center">
+	<tr>
+		<th>주문번호</th>
+		<th>구매자아이디</th>
+		<th>상품게시물</th>
+		<th>답변여부</th>
+		<th>진행 상태</th>
+		<th>환불신청여부</th>
+	</tr>
+	</table><br><br>
+	<%@ include file="../hfl/pagination.jsp" %>
+</div>
 </body>
 </html>
