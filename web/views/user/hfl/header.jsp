@@ -19,6 +19,7 @@
 #headerAll {
 	padding-right: 15%;
 	padding-left: 15%;
+	margin-bottom:10%;
 }
 
 .headerb {
@@ -36,11 +37,6 @@
 	text-align: right;
 	padding-right: 15%;
 }
-
-.container-fluid {
-	text-align: center;
-}
-
 
 .menu{
    padding :10px;
@@ -111,7 +107,6 @@
 .btn-info {
 	background: #ffd8d9;
 	border: 1px solid #ffd8d9;
-	text-align:right;
 }
 
 .btn-info:hover {
@@ -138,7 +133,7 @@
       <a href="/sp/index.jsp"><img src="/sp/images/logo3.png" alt="" width="20%"/></a>
    </div>
 	<div class="box">
-  		<div class="container-1" align="right">
+  		<div class="container-1">
      		<input type="search" id="search" placeholder="검색" />
       		<button type="button" class="btn btn-info">검색</button>
   		</div>

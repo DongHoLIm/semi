@@ -40,12 +40,7 @@ table, td {
 </head>
 <header><%@ include file="../hfl/header.jsp"%></header>
 <body>
-
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
-	<br>
-	<br>
-	<br>
-	<br>
 	<table>
 		<caption>결제 정보</caption>
 		<tbody>
@@ -87,7 +82,8 @@ table, td {
 				<td>28,000원</td>
 				<td>2,500원</td>
 				<td><button>구매확정</button></td>
-				<td><button onclick="location.href = '/sp/views/user/mypage/return.jsp'">환불신청</button></td>
+				<!-- <td><button onclick="location.href = '/sp/views/user/mypage/return.jsp'">환불신청</button></td> -->
+				<td><button onclick="window.open('refundPopUp.jsp','window_name','width=600,height=400,location=yes,status=no,scrollbars=yes');" class="returnPopUp">환불신청</button></td>
 			</tr>
 			<tr>
 				<th class="th3">2</th>
@@ -108,7 +104,6 @@ table, td {
 				<td><button>환불신청</button></td>
 			</tr>
 		</tbody>
-		<p></p>
 	</table>
 	<br>
 	<br>
@@ -125,9 +120,6 @@ table, td {
 			</tr>
 		</tbody>
 	</table>
-	<br>
-	<br>
-	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>
 </html>
