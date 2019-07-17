@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
@@ -25,6 +22,9 @@
 	font-family: 'Nanum Gothic', sans-serif;
 	text-align: right;
 	padding-right: 15%;
+	position : absolute;
+	top : 0px;
+	right : 0px;
 }
 
 .header {
@@ -124,13 +124,11 @@
 }
 </style>
 
-</head>
-<body>
 
 <div id="headerAll">
    <div class = "headerb">
     <a href="../login/login.jsp"><button class="btn btn-info" >login</button></a>
-    <a href="../join/selectjoin.jsp"><button class="btn btn-info">회원가입</button></a>   
+    <a href="../join/selectjoin.jsp"><button class="btn btn-info">회원가입</button></a>
 
    </div>
    <div class = "header">
@@ -145,20 +143,18 @@
  	</div>
 	<ul class="navi">
 
- <li><a href="#"> 카테고리</a> 
- 
+ <li><a href="#"> 카테고리</a>
+
  <ul>
 
-  <li><a href="/sp/views/payment.jsp"> 구매 </a></li> 
+  <li><a href="/sp/views/payment.jsp"> 구매 </a></li>
 
-    </ul>     
-     </li> <li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록 </a>  
-     <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li> 
+    </ul>
+     </li> <li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록 </a>
+     <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li>
      <li><a href="/sp/views/board.jsp"> 게시판</a></li>
      <li><a href="/sp/views/user/mypage/myPage.jsp"> 마이페이지</a></li>
-    <li><a href="#"> 고객센터</a></li>    
+    <li><a href="#"> 고객센터</a></li>
  </ul>
  </div>
 
-</body>
-</html>
