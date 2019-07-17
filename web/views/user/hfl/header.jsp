@@ -38,8 +38,14 @@
 	padding-right: 15%;
 }
 
-.menu{
-   padding :10px;
+
+.container-fluid {
+	text-align: center;
+}
+
+.menu {
+	padding: 10px;
+
 }
 
 .navi {
@@ -76,7 +82,7 @@
 	display: block;
 	font-family: 'Nanum Gothic', sans-serif;
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 1.2vw;
 	padding: 5px 25px;
 	color: black;
 	text-decoration: none;
@@ -107,6 +113,8 @@
 .btn-info {
 	background: #ffd8d9;
 	border: 1px solid #ffd8d9;
+	text-align: right;	
+	font-size:1.2vw;
 }
 
 .btn-info:hover {
@@ -121,7 +129,6 @@
 
 </head>
 <body>
-
 <div id="headerAll">
    <div class = "headerb">
     <a href="../login/login.jsp"><button class="btn btn-info" >login</button></a>
@@ -154,6 +161,5 @@
     <li><a href="#"> 고객센터</a></li>    
  </ul>
  </div>
-
 </body>
 </html>

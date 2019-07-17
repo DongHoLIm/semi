@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
+
 #sec1 {
 		width:100%;
 		height:100%;
@@ -15,20 +16,29 @@
 	}
 .productDiv {
 	margin:0 auto;
-	height: 500px;
 	width: 100%;
 	float: center;
-	text-align: center;
+	align: left;
 	position: relative;
 	margin-top: 5%;
 	margin-bottom : 5%;
+	
 }
+
 #productList{
-	display:inline;
+	text-align:center;
 }
 
 #title {
 	text-align: left;
+}
+
+#sampleProduct:hover{
+	cursor: pointer;
+}
+
+a{
+	text-decoration: none;
 }
 </style>
 
@@ -40,29 +50,39 @@
 	<section id="sec1">
 		<div class="productDiv">
 			<h1 align="center">판매게시판</h1>
-			
+			<br />
+			<table>
 			<%
-				for(int i = 0; i < 5; i++){
-				
+				int product = 5;
+				for(int i = 0; i < product; i++){
 			%>
-			
-			<table id="productList">
-				<tr>
-					<td><a href="/sp/views/user/product/productDetails.jsp" id=""><img src="/sp/images/face.png"
-						class="img-rounded" alt="Cinque Terre" width="255" height="236">&nbsp;&nbsp;</a></td>
+			<%if(i%4 == 0){%>
+				<tr id="sampleProduct" onclick="location.href='/sp/views/user/product/productDetails.jsp'">
+			<% }%>
+					<td width="25%">
+				<table id="productList">
+					<tr>
+						<td><img src="/sp/images/face.png"
+							class="img-rounded" alt="Cinque Terre" width="100%">&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td>
+							<h3><a name="title">진수의 분홍분홍 쿨러</a></h3>
+							<br>
+							<p>가격: 5000000 <br> 내용: 노트북쿨러</p>
+						</td>
+					</tr>
+				</table>
+				</td>
+			<%if((i%4 == 0 && i != 0) || i == product){%>
 				</tr>
-				<tr>
-					<td>
-						<h3><a href="" name="title">진수의 분홍분홍 쿨러</a></h3>
-						<br>
-						<p>가격: 5000000 <br> 내용: 노트북쿨러</p>
-					</td>
-				</tr>
-			</table>
-			
+			<% }%>
+				
 			<%} %>
-			
+			</table>
 		</div>
 	</section>
+	<br />
+	<footer class="footer"><%@ include file="../hfl/footer.jsp"%></footer>
 </body>
 </html>
