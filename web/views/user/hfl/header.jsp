@@ -19,6 +19,7 @@
 #headerAll {
 	padding-right: 15%;
 	padding-left: 15%;
+	margin-bottom:10%;
 }
 
 .headerb {
@@ -37,12 +38,14 @@
 	padding-right: 15%;
 }
 
+
 .container-fluid {
 	text-align: center;
 }
 
 .menu {
 	padding: 10px;
+
 }
 
 .navi {
@@ -110,8 +113,7 @@
 .btn-info {
 	background: #ffd8d9;
 	border: 1px solid #ffd8d9;
-	text-align: right;
-	
+	text-align: right;	
 	font-size:1.2vw;
 }
 
@@ -127,35 +129,37 @@
 
 </head>
 <body>
+<div id="headerAll">
+   <div class = "headerb">
+    <a href="../login/login.jsp"><button class="btn btn-info" >login</button></a>
+    <a href="../join/selectjoin.jsp"><button class="btn btn-info">회원가입</button></a>   
 
-	<div id="headerAll">
-		<div class="headerb">
-			<a href="../login/login.jsp"><button class="btn btn-info">login</button></a>
-			<a href="../join/selectjoin.jsp"><button class="btn btn-info">회원가입</button></a>
+   </div>
+   <div class = "header">
+      <!-- <h1>중고 愛 민족</h1> -->
+      <a href="/sp/index.jsp"><img src="/sp/images/logo3.png" alt="" width="20%"/></a>
+   </div>
+	<div class="box">
+  		<div class="container-1">
+     		<input type="search" id="search" placeholder="검색" />
+      		<button type="button" class="btn btn-info">검색</button>
+  		</div>
+ 	</div>
+	<ul class="navi">
 
-		</div>
-		<div class="header">
-			<!-- <h1>중고 愛 민족</h1> -->
-			<a href="/sp/index.jsp"><img src="/sp/images/logo3.png" alt=""
-				width="20%" /></a>
-		</div>
-		<div class="box">
-			<div class="container-1" align="right">
-				<input type="search" id="search" placeholder="검색" />
-				<button type="button" class="btn btn-info">검색</button>
-			</div>
-		</div>
-		<ul class="navi">
+ <li><a href="#"> 카테고리</a> 
+ 
+ <ul>
 
-			<li><a href="/sp/views/user/product/productList.jsp"> 카테고리</a></li>
-			<li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록</li>
-			</a>
-			<li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li>
-			<li><a href="/sp/views/board.jsp"> 게시판</a></li>
-			<li><a href="/sp/views/user/mypage/myPage.jsp"> 마이페이지</a></li>
-			<li><a href="#"> 고객센터</a></li>
-		</ul>
-	</div>
+  <li><a href="/sp/views/payment.jsp"> 구매 </a></li> 
 
+    </ul>     
+     </li> <li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록 </a>  
+     <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li> 
+     <li><a href="/sp/views/user/board/board.jsp"> 게시판</a></li>
+     <li><a href="/sp/views/user/mypage/myPage.jsp"> 마이페이지</a></li>
+    <li><a href="#"> 고객센터</a></li>    
+ </ul>
+ </div>
 </body>
 </html>
