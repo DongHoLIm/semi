@@ -21,7 +21,7 @@
 		text-align:center;
 		
 	}
-	th{
+	#th1{
 		border:1px solid black;
 		text-align:center;
 	}
@@ -38,62 +38,49 @@
 <body>
 	<%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
 	<br>
-	<h2 align="center">창고현황</h2>
+	<h2 align="center">창고위치현황</h2>
 	<br />
 	<div id="selectSearch">		
 		<form action="">
-			<select name="" id="selectBox" onchange="changeSearchBox();">
-				<option class="A" value="locationNum">위치관리번호</option>
-				<option class="A" value="barCode">상품코드</option>
-				<option class="A" value="searchDate">적치 일자</option>
-			</select>				
+			<select name="" id="selectBox">
+				<option class="A" value="A">A</option>
+				<option class="A" value="B">B</option>
+				<option class="A" value="C">C</option>
+			</select>
+			섹션
+			<select name="" id="">
+				<option value="1">1</option>
+				<option value="1">2</option>
+				<option value="1">3</option>
+			</select>
+			층
 			<div id="location">
 			<input type="text" />
-			<button type="submit">검색</button>
-			</div>
-			<div id="date">
-			<input type="date" />
 			<button type="submit">검색</button>
 			</div>
 		</form> 
 	</div>
 	<script>
-	$(function (){
-		$("#date").hide();
-	});	
-	function changeSearchBox(){
-			    var langSelect = document.getElementById("selectBox");
-		     
-			    // select element에서 선택된 option의 value가 저장된다.
-			    var selectValue = langSelect.options[langSelect.selectedIndex].value;
-			 	
-			  if(selectValue=="searchDate"){
-				  $("#location").hide();
-				  $("#date").show();
-			  }else{
-				  $("#location").show();
-				  $("#date").hide();
-			  }
-		}
+	
 	</script>	
 	<br>
 	<br><br>
 		<table id="depotMain" align="center">
 			<tr>
-				<th id=""></th>
-				<th>번호</th>
-				<th>상품코드</th>
-				<th>위치관리번호</th>
-				<th>적치 일자</th>
-				<th>출고 일자</th>
+				<th id="th1">번호</th>
+				<th id="th1">상품코드</th>
+				<th id="th1">위치관리번호</th>
+				<th id="th1">적치 일자</th>
+				<th id="th1">출고 일자</th>
+			
 			</tr>
 			<tr>
-				<td></td>
 				<td><a href="">1</a></td>
 				<td><a href="">p-1</a></td>
 				<td><a href="">c-3</a></td>
 				<td><a href="">2017/05/06</a></td>
 				<td><a href="">null</a></td>
+			
 			</tr>
 		</table>
 	

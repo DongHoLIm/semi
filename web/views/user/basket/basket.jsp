@@ -64,8 +64,8 @@
 	<!-- header 영역 -->
 	<header><%@ include file="../hfl/header.jsp"%></header>
 
-	
-	<div><%@ include file="../hfl/list.jsp" %></div>
+
+	<div><%@ include file="../hfl/list.jsp"%></div>
 
 	<section id="sec1">
 		<div id="area">
@@ -80,64 +80,59 @@
 			%><%=count%>) 건
 			</h3>
 
-			<table>
-				<tr>
-					<td width="70%">
-						<%
-							for (int i = 0; i < 3; i++) {
-						%>
-						<table id="pt" width="100%" max-height="200px">
-							<tr>
-								<!-- 장바구니에 등록한 상품 사진, 품명, 상세설명 -->
-								<td id="productImg" rowspan="2"><img
-									src="/sp/images/flower2.PNG" width=100% hright=100%></td>
-								<!--  -->
-								<td id="title" colspan="2" width="70%" height="30%">상품명</td>
-							</tr>
-							<tr>
-								<td id="Detail" colspan="2">상세설명상세설명상세설명상세설명상세설명상세설명상세설명
-									상세설명상세설명상세설명상세설명상세설명상세설명상세설명 상세설명상세설명상세설명상세설명상세설명상세설명상세설명</td>
-							</tr>
-							<tr>
-								<td id="price" width="30%">금액 :<%
-									
-								%>
-								</td>
-								<td id="quantity" width="20%">수량 : <%
-									
-								%>
-								</td>
-								<td id="priceAll" width="50%">상품 총 금액 : <%
-									
-								%>
-								</td>
-							</tr>
-						</table>
-<%
+			<form action="/sp/views/user/product/payment.jsp">
+				<table>
+					<tr>
+						<td width="70%">
+							<%
+								for (int i = 0; i < 3; i++) {
+							%>
+							<table id="pt" width="100%" max-height="200px">
+								<tr>
+									<!-- 장바구니에 등록한 상품 사진, 품명, 상세설명 -->
+									<td id="productImg" rowspan="2"><img
+										src="/sp/images/flower2.PNG" width=100% hright=100%></td>
+									<!--  -->
+									<td id="title" colspan="2" width="70%" height="30%">상품명</td>
+								</tr>
+								<tr>
+									<td id="Detail" colspan="2">상세설명상세설명상세설명상세설명상세설명상세설명상세설명
+										상세설명상세설명상세설명상세설명상세설명상세설명상세설명 상세설명상세설명상세설명상세설명상세설명상세설명상세설명</td>
+								</tr>
+								<tr>
+									<td id="price" width="30%">금액 :<%
+										
+									%>
+									</td>
+									<td id="quantity" width="20%">수량 : <%
+										
+									%>
+									</td>
+									<td id="priceAll" width="50%">상품 총 금액 : <%
+										
+									%>
+									</td>
+								</tr>
+							</table> <%
  	}
  %>
 
-					</td>
+						</td>
 
-					<td id="total" width="30%">
-						<p>전체 합계</p>
-						<form action="">
-							<!-- 상품테이블 갯수 -->
-							<%
-								int countTable = 0;
-							%><%=countTable%>개 상품
+						<td id="total" width="30%">
+							<p>전체 합계</p> <!-- 상품테이블 갯수 --> <%
+ 	int countTable = 0;
+ %><%=countTable%>개 상품
 							<hr>
-							<p>전체 주문금액</p>
-							<!-- 상품테이블들의 상품 총금액의 합 -->
-							<input type="text" value="<%int priceAll = 0;%><%=priceAll%>"
-								readonly />원 <br>
-							<br> <input type="submit" id="buy" value="주문하기"
-								style="width: 100%;">
-						</form>
-					</td>
-				</tr>
-			</table>
+							<p>전체 주문금액</p> <!-- 상품테이블들의 상품 총금액의 합 --> <input type="text"
+							value="<%int priceAll = 0;%><%=priceAll%>" readonly />원 <br>
+							<br>
+							<button type="submit" id="buy" style="width: 100%;">주문하기</button>
 
+						</td>
+					</tr>
+				</table>
+			</form>
 		</div>
 	</section>
 

@@ -104,7 +104,7 @@
 					<li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li>
 					<li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
 					<li><a href="/sp/views/manager/product/calculate.jsp">정산 내역</a></li>
-					<li><a href="#">구매 확정 내역</a></li>
+					<li><a href="/sp/views/manager/product/">구매 확정 내역</a></li>
 
 				</ul>
 			</li>
@@ -128,9 +128,11 @@
 			</li>
 			<li><a href="/sp/views/manager/depot/depotmain.jsp">창고 관리</a>
 				<ul>
+					<li><a href="/sp/views/manager/depot/depotCheckList.jsp">검수요청관리</a></li>
 					<li><a href="/sp/views/manager/depot/depotBarcode.jsp">바코드 출력</a></li>
-					<li><a href="/sp/views/manager/depot/depotInOut.jsp">입출고 관리</a></li>
-					<li><a href="#">창고위치별현황</a></li>
+					<li><a href="/sp/views/manager/depot/depotIn.jsp">입고 관리</a></li>
+					<li><a href="/sp/views/manager/depot/depotOut.jsp">출고 관리</a></li>					
+					<li><a href="/sp/views/manager/depot/depotLocation.jsp">창고위치별현황</a></li>
 				</ul>
 			</li>
 		</ul>
