@@ -13,13 +13,14 @@ body {
 	text-align: center;
 }
 
-#div1 {
-	position: relative;
-	margin: 0 auto;
-	width: 50%;
-	display: inline-block;
-	height: 400px;
-	top : 15px;
+#sec1 {
+		width:100%;
+		height:100%;
+		padding-top:2%;
+		padding-right:20%;
+		padding-bottom:2%;
+		padding-left:20%;
+		margin:0 auto;
 }
 
 #sell {
@@ -72,12 +73,13 @@ body {
 
 #detail {
 	line-height: 50px;
+	font-size: 1vw;
 }
 </style>
 <%@ include file="../hfl/header.jsp"%>
 <body>
 <%@ include file="../hfl/list.jsp"%>
-	<div id=div1>
+	<section id=sec1>
 		<div id="sell">
 			<img src="<%= request.getContextPath()%>/images/thumb.png" alt="썸네일" id="thumbnail" name="thumbnail" />
 		</div>
@@ -100,13 +102,27 @@ body {
 					<br />
 					<input type="number" class=input name=price id="price" name="price" placeholder="가격 : " disabled />
 					<br />
-					<input type="button" value="장바구니" onclick="location.href='/sp/views/user/basket/basket.jsp'"/>
+					<input type="button" value="장바구니" id="contain"/>
 					<input type="button" value="구매" onclick="location.href='/sp/views/user/product/payment.jsp'"/>
 				</form>
 			</div>
 		</div>
-
-
+		<script>
+			$(function(){
+				$("#contain").click(function(){
+					var msg = confirm("장바구니에 상품을 담았습니다. 장바구니로 이동하시겠습니까?");
+					if(msg){
+						location.href="/sp/views/user/basket/basket.jsp";
+					}else{
+						location.href="/sp/views/user/product/productList.jsp";
+					}
+				});
+				
+				
+			});
+		</script>
+		
+		
 
 		<div id="main">
 			<label id="imglabel">
@@ -126,7 +142,7 @@ body {
 것은 실현에 위하여, 이것을 발휘하기 더운지라 그들의 뿐이다. 같은 우리의 생생하며, 무엇을 천고에 없는 사막이다.
 			</label>
 		</div>
-	</div>
+	</section>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 
 </body>
