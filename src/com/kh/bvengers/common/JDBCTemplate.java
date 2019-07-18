@@ -13,19 +13,19 @@ public class JDBCTemplate {
 	public static Connection getConnection() {
 		Properties prop = new Properties();
 		Connection con = null;
-		String fileName = JDBCTemplate.class.getResource("sql/Driver.properties").getPath();
-		
+		String fileName = JDBCTemplate.class.getResource("/sql/Driver.properties").getPath();
+
 		try {
 			prop.load(new FileReader(fileName));
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
 			String user= prop.getProperty("user");
 			String password=prop .getProperty("password");
-			
+
 			Class.forName(driver);
-			
+
 			con=DriverManager.getConnection(url, user, password);
-					
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,7 +36,7 @@ public class JDBCTemplate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return con;
 	}
 	public static void close(Connection con) {
@@ -47,7 +47,7 @@ public class JDBCTemplate {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 	public static void close(Statement stmt) {
 		try {
@@ -77,7 +77,7 @@ public class JDBCTemplate {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 	public static void rollback(Connection con){
 		try {

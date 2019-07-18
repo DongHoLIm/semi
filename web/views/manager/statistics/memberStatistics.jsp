@@ -1,65 +1,110 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="../src/jquery.jqplot.js"></script>
-<script type="text/javascript" src="../src/plugins/jqplot.barRenderer.js"></script>
-<script type="text/javascript" src="../src/plugins/jqplot.pieRenderer.js"></script>
-<script type="text/javascript" src="../src/plugins/jqplot.categoryAxisRenderer.js"></script>
-<script type="text/javascript" src="../src/plugins/jqplot.pointLabels.js"></script>
-<link rel="stylesheet" type="text/css" href="../src/jquery.jqplot.css" />
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style>
+#graphs {
+	border: 1px dashed red;
+	width: 43%;
+	height: 600px;
+}
 
-<script type="text/javascript" src="plugins/jqplot.logAxisRenderer.min.js"></script>
-<script type="text/javascript" src="plugins/jqplot.canvasTextRenderer.min.js"></script>
-<script type="text/javascript" src="plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-<script type="text/javascript" src="plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-<script type="text/javascript" src="plugins/jqplot.categoryAxisRenderer.min.js"></script>
-<script type="text/javascript" src="plugins/jqplot.barRenderer.min.js"></script>
+#staticBtns {
+	margin-top: 10%;
+	margin-left: 3%;
+}
 
+.btns {
+	margin-top: 2%;
+	background: #ffd8d9;
+	border: none;
+	margin-bottom: 5%;
+	font-size : 1.15em;
+	font-weight: bold;
+}
 
+.menuBtn {
+	margin-left: 5%;
+}
+
+.statics {
+	display: inline-block;
+	height: 600px;
+}
+
+table th, table td {
+	border: 1px solid black;
+	text-align: center;
+}
+
+table th {
+	background: #ffd8d9;
+}
+
+.red {
+	color : red;
+}
+.blue {
+	color : blue;
+}
+.green {
+	color : green;
+}
+.data {
+	width: 180px;
+}
+.tHeader {
+	width: 100px;
+	height: 50px;
+}
+#outer{
+	margin-top: 8%;
+}
+</style>
 </head>
-<header><%@ include file="../hfl/managerHeader.jsp" %></header>
+<header><%@ include file="../hfl/managerHeader.jsp"%></header>
 <body>
-	<form>
-		<table border="1">
-			
-		</table>
-	</form>
-<script>
-$(document).ready(function(){
-        var s1 = [2, 6, 7, 10];
-        var s2 = [7, 5, 3, 2];
-        var ticks = ['a', 'b', 'c', 'd'];
-         
-        plot2 = $.jqplot('chart2', [s1, s2], {
-            seriesDefaults: {
-                renderer:$.jqplot.BarRenderer,
-                pointLabels: { show: true }
-            },
-            axes: {
-                xaxis: {
-                    renderer: $.jqplot.CategoryAxisRenderer,
-                    ticks: ticks
-                }
-            }
-        });
-     
-        $('#chart2').bind('jqplotDataHighlight', 
-            function (ev, seriesIndex, pointIndex, data) {
-                $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-            }
-        );
-             
-        $('#chart2').bind('jqplotDataUnhighlight', 
-            function (ev) {
-                $('#info2').html('Nothing');
-            }
-        );
-    });
-</script>
+	<div id="outer" align="center">
+		<div id="graphs" class="statics">
+			<input type="button" value="결제건수" class="menuBtn btns red" disabled />
+			<input type="button" value="결제자수" class="menuBtn btns blue" disabled />
+			<input type="button" value="결제금액" class="menuBtn btns green" disabled /><br />
+			<form action="">
+
+			</form>
+		</div>
+		<div id=stat class="statics">
+			<input type="button" value="연도별 고객현황" disabled class="btns" />
+			<table>
+				<tr>
+					<th class="tHeader">연도</th>
+					<th class="data">2018</th>
+					<th class="data">2019</th>
+				</tr>
+				<tr>
+					<th class="tHeader">결제건수</th>
+					<td class="data"></td>
+					<td class="data"></td>
+				</tr>
+				<tr>
+					<th class="tHeader">결제자수</th>
+					<td class="data"></td>
+					<td class="data"></td>
+				</tr>
+				<tr>
+					<th class="tHeader">결제금액</th>
+					<td class="data"></td>
+					<td class="data"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<%@ include file="../hfl/footer.jsp"%>
 </body>
 </html>

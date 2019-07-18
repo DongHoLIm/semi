@@ -15,7 +15,7 @@
 	font-size:20px;
 	margin:0 auto;
 }
-	
+
 	tr {
 	width:40%;
 }
@@ -91,7 +91,6 @@
         </form>
 </table>
 </div>
-<br><br><br><br>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>
 </html>
