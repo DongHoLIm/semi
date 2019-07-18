@@ -36,7 +36,10 @@
 	<header><%@ include file="views/user/hfl/header.jsp" %></header>
 <body>
  <div class="container">
- 	<br><br><h3 align="center">광고배너</h3><br><br><br>
+ 	<br><br><h3 align="center">광고배너</h3>
+ 	<form action="<%= request.getContextPath()%>/select.pd" method = post encType=multipart/form-data>
+ 	<button onclick="submit">테스트용</button>
+ 	</form>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
     <ol class="carousel-indicators">
