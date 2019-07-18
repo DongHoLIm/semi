@@ -105,15 +105,15 @@ body {
 				</form>
 			</div>
 		</div>
-			
-		
-		
+
+
+
 		<div id="main">
 			<label id="imglabel">
 				<img src="<%= request.getContextPath()%>/images/main.jpg" alt="메인 이미지" id="mainimg" />
 				<br />
 			</label>
-			<br /> 
+			<br />
 			<label id="maintext">
 이것이야말로 귀는 열락의 별과 인생의 우리 하여도 풀이 것이다. 굳세게 찾아 들어 모래뿐일 뭇 몸이 심장은 힘있다.
 유소년에게서 두기 이것이야말로 원대하고, 그들은 인생에 돋고, 아름답고 가는 힘있다. 가치를 놀이 없으면 가치를 웅대한 말이다.
@@ -128,7 +128,7 @@ body {
 		</div>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
-	
+
 </body>
 </html>
 
