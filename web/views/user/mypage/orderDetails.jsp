@@ -38,9 +38,10 @@ table, td {
 }
 </style>
 </head>
-<header><%@ include file="../hfl/header.jsp"%></header>
+
 <body>
-	<header><%@ include file="../hfl/myPageList.jsp"%></header>
+	<%@ include file="../hfl/header.jsp"%>
+	<%@ include file="../hfl/myPageList.jsp"%>
 	<table>
 		<caption>결제 정보</caption>
 		<tbody>
@@ -120,6 +121,6 @@ table, td {
 			</tr>
 		</tbody>
 	</table>
-	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+	<%@ include file="../hfl/footer.jsp"%>
 </body>
 </html>

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/sp/js/jquery-barcode.js"></script>
 <style>
 	tr{
 		border:1px solid black;		
@@ -41,12 +42,17 @@
 			<tr>
 				<th>번호</th>
 				<th>상품코드</th>
-				<th>위치관리번호</th>
 				<th>바코드넘버</th>
-				<th>적치 일자</th>
-				<th>출고 일자</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td id="productCode">556753467876</td>
+				<td id="barcode"><div id="bcTarget"></div></td>
 			</tr>			
-	</table>	
-	</form>
+	</table>
+	</form>	
+	<script type="text/javascript">
+	 $("#bcTarget").barcode($("#productCode").text(), "codabar");
+	</script>
 </body>
 </html>

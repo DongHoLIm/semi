@@ -36,7 +36,7 @@ a{text-decoration:none; color:black; font-weight:bold;}
 					</label>
 				</div>
 				<span class="txt_find">
-					<a href="" class="link_find">아이디</a>
+					<a href="../join/" class="link_find">아이디</a>
 					/
 					<a href="" class="link_find">비밀번호 찾기</a>
 					/
