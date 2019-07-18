@@ -83,6 +83,6 @@ a{
 		</div>
 	</section>
 	<br />
-	<footer class="footer"><%@ include file="../hfl/footer.jsp"%></footer>
+	<%@ include file="../hfl/footer.jsp"%>
 </body>
 </html>

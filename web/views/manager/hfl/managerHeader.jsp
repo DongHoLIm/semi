@@ -103,7 +103,7 @@
 					<li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li> 
 					<li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
 					<li><a href="/sp/views/manager/product/calculate.jsp">정산 내역</a></li>
-					<li><a href="#">구매 확정 내역</a></li>
+					<li><a href="/sp/views/manager/product/">구매 확정 내역</a></li>
 
 				</ul>     
 			</li>
