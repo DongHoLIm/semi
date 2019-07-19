@@ -78,7 +78,7 @@ tr > th, tr>td{
 </head>
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
-	<br><br>
+	<br>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 
 	<section id="sec1">

@@ -13,6 +13,59 @@
 	position: absolute;
 	right: 30px;
 }
+
+.spot {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+ 
+}
+
+
+.svg-wrapper {
+  margin-top: 0;
+  position: relative;
+  width: 150px;
+  /*make sure to use same height/width as in the html*/
+  height: 40px;
+  display: inline-block;
+  border-radius: 3px;
+  margin-left: 5px;
+  margin-right: 5px
+}
+
+
+#shape {
+  stroke-width: 6px;
+  fill: transparent;
+  stroke: #009FFD;
+  stroke-dasharray: 85 400;
+  stroke-dashoffset: -220;
+  transition: 1s all ease;
+}
+
+
+#text {
+  margin-top: -35px;
+  text-align: center;
+}
+
+#text a {
+  color: white;
+  text-decoration: none;
+  font-weight: 100;
+  font-size: 1.1em;
+}
+
+.svg-wrapper:hover #shape {
+  stroke-dasharray: 50 0;
+  stroke-width: 3px;
+  stroke-dashoffset: 0;
+  stroke: #06D6A0;
+}
+
 </style>
 </head>
 <body>
@@ -110,10 +163,23 @@
 	  <li class="page-item"><a class="page-link" href="#">2</a></li>
 	  <li class="page-item"><a class="page-link" href="#">3</a></li>
 	  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-	  <li><input type="button" id="wirte" value="글작성" onclick="location.href='boarderwriter.jsp'"></li>
+	<!--   <li><input type="button" id="wirte" value="글작성" onclick="location.href='boarderwriter.jsp'"></li> -->
 	</ul>
+	<div id="workarea">
+  <div class="position">
 	
+    <div class="svg-wrapper">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" />
+        <div id="text" >
+          <a href="../board/boarderwriter.jsp" style="color:black"><span class="spot"></span>글작성</a>
+        </div>
+      </svg>
+    </div>
+    </div>
 </center>
 </body>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </html>
+
+
