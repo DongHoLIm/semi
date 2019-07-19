@@ -31,7 +31,7 @@ public class BoardDao {
 		HashMap< String, Object> hmap = null;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("selectProduct");
+		String query = prop.getProperty("selectThumbnail");
 
 		try {
 			stmt = con.createStatement();
@@ -50,7 +50,10 @@ public class BoardDao {
 				hmap.put("fileDiv", rset.getString("FILE_DIV"));
 				hmap.put("postsId", rset.getString("POSTS_ID"));
 				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
-
+				hmap.put("title", rset.getString("PRODUCT_NAME"));
+				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
+				hmap.put("writer", rset.getString("MEMBER_NO"));
+				hmap.put("contents", rset.getString("CONTENTS"));
 				list.add(hmap);
 			}
 		} catch (SQLException e) {
