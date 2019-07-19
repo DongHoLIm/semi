@@ -135,11 +135,10 @@
 				}
 			%>
 
-			<br>
-			<br>
+			<br> <br>
 
 			<!-- 정보 입력창 -->
-			<form id="payForm" action="" method="post">
+			<form id="payForm" action="">
 				<table align="center">
 					<tr>
 						<td><label>총 결제금액 : </label></td>
@@ -175,16 +174,22 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit" id="buy"
-							value="구매" style="width: 50%;"></td>
+							value="구매" style="width: 50%;" onclick="paymentApi();"></td>
 					</tr>
-
 				</table>
-
 			</form>
 			<br />
 		</div>
 	</section>
+	<script type="text/javascript">
+		function paymentApi(){
+			var popUrl = "paymentApi.jsp";	//팝업창에 출력될 페이지 URL
 
+			var popOption = "width=700px, resizable=no, scrollbars=no, status=no";    //팝업창 옵션(optoin)
+
+			window.open(popUrl,"",popOption);
+		}
+	</script>
 
 
 
