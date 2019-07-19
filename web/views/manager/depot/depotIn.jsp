@@ -14,8 +14,11 @@
 	tr{
 		border:1px solid black;
 	}
-	th{
-		border:1px solid black;
+	#th{
+		border:1px solid white;
+		background:black;
+		align:center;
+		color:white;
 	}
 	#inOutButton{
 		padding-left:73%;
@@ -32,17 +35,17 @@
 				<option value="location">위치관리번호</option>
 			</select>
 			<input type="text" />
-			<input type="submit" value="검색"/>
+			<input type="submit" style="color:white;background:black;" value="검색"/>
 		</div>
 		<div id="table Area">
 			<table id="depotMain" align="center">
 			<tr>
-				<th>번호</th>
-				<th>상품코드</th>
-				<th>회원아이디</th>
-				<th>위치관리번호</th>
-				<th>바코드넘버</th>
-				<th>적치 일자</th>
+				<th id="th">번호</th>
+				<th id="th">상품코드</th>
+				<th id="th">회원아이디</th>
+				<th id="th">위치관리번호</th>
+				<th id="th">바코드넘버</th>
+				<th id="th">적치 일자</th>
 			</tr>
 			</table>
 		</div>
