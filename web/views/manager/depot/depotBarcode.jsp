@@ -14,9 +14,11 @@
 		text-align:center;
 		
 	}
-	th{
-		border:1px solid black;
+	#th{
+		border:1px solid white;
 		text-align:center;
+		background:black;
+		color:white;
 	}
 	#depotMain{
 		width:80%;
@@ -36,7 +38,8 @@
 	<form action="">
 	<div id ="barcodeMain">
 		<div id="barCreate">
-		<button onclick="window.open('barcodePrint.jsp','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');" id="createBarcode">
+		<button onclick="window.open('barcodePrint.jsp','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');" id="createBarcode"
+		style="color:white;background:black;">
 		바코드생성</button>
 		</div>
 		<br />
@@ -44,13 +47,13 @@
 		<div>
 		<table id="depotMain" align="center">
 			<tr>
-				<th id=""></th>
-				<th>번호</th>
-				<th>상품코드</th>
-				<th>위치관리번호</th>
-				<th>바코드넘버</th>
-				<th>적치 일자</th>
-				<th>출고 일자</th>
+				<th id="th"></th>
+				<th id="th">번호</th>
+				<th id="th">상품코드</th>
+				<th id="th">위치관리번호</th>
+				<th id="th">바코드넘버</th>
+				<th id="th">적치 일자</th>
+				<th id="th">출고 일자</th>
 			</tr>
 			<tr>
 				<td><input type="checkBox" /></td>

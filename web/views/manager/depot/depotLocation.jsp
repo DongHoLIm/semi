@@ -22,8 +22,10 @@
 		
 	}
 	#th1{
-		border:1px solid black;
+		border:1px solid white;
 		text-align:center;
+		color:white;
+		background:black;
 	}
 	form{
 		float:right;
@@ -56,7 +58,7 @@
 			층
 			<div id="location">
 			<input type="text" />
-			<button type="submit">검색</button>
+			<button type="submit" style="color:white;background:black;">검색</button>
 			</div>
 		</form> 
 	</div>

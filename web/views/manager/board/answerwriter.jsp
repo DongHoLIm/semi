@@ -8,7 +8,9 @@
 <style>
 btn{
 border-radius: 5px;
-background-color: #ffd8d9;
+background-color: black;
+border:1px solid white;
+
 }
 </style>
 </head>
@@ -33,10 +35,10 @@ background-color: #ffd8d9;
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="답변등록" style="border-radius: 5px; background-color: #ffd8d9;">
-					<input type="reset" value="초기화" style="border-radius: 5px; background-color: #ffd8d9;">
-					<input type="button" value="글 리스트로" style="border-radius: 5px; background-color: #ffd8d9;" onclick="location.href='board.jsp'">
-					<button onclick="" style="border-radius: 5px; background-color: #ffd8d9;">회원 정보 확인</button>
+					<input type="submit" value="답변등록" style="border-radius: 5px; background-color: black; color:white;">
+					<input type="reset" value="초기화" style="border-radius: 5px; background-color: black; color:white;">
+					<input type="button" value="글 리스트로" style="border-radius: 5px; background-color: black; color:white;" onclick="location.href='board.jsp'">
+					<button onclick="" style="border-radius: 5px; background-color: black;color:white;">회원 정보 확인</button>
 			</tr>
 		</form>
 	</table>	

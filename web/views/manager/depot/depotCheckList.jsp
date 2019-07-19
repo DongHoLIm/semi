@@ -18,7 +18,7 @@
 		border:1px solid black;
 	}
 	#th3{
-		border:1px solid black;
+		border:1px solid white;
 		text-align:center;
 		background: black;
 		color:white;
@@ -29,6 +29,9 @@
 	}
 	#searchButton{
 		padding-left:73%;
+	}
+	button{
+	background:black;
 	}
 </style>
 <body>
@@ -45,11 +48,11 @@
 				</select>
 				<div id="locationNum">
 					<input type="text" name="searchCheck" id="searchCheck"/>
-					<button type="submit">검색</button>
+					<button type="submit" style="color:white;" >검색</button>
 				</div>
 				<div id="checkDate">
 					<input type="date" />
-					<button type="submit">검색</button>
+					<button type="submit" style="color:white;">검색</button>
 				</div>
 				<div id="checkStatus">
 					<select name="" id="">
@@ -57,7 +60,7 @@
 						<option value="">검수중</option>
 						<option value="">검수완료</option>
 					</select>
-					<button type="submit">검색</button>
+					<button type="submit" style="color:white;">검색</button>
 				</div>
 			</form>	
 			<script>
@@ -107,7 +110,7 @@
 				<td>매직스테이션</td>
 				<td>1</td>
 				<td>2019-07-17</td>
-				<td><button onclick="location.href='depotCheck.jsp'">검수요청</button></td>
+				<td><button onclick="location.href='depotCheck.jsp'" style="color:white;">검수요청</button></td>
 			</tr>
 			</table>
 		</div>
