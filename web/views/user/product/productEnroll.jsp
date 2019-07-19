@@ -51,11 +51,13 @@
                 <td><input type="text" size=30 name="subject" class="form-control"/></td>
             </tr>
             <tr><th>카테고리</th>
-            <td><select class="op_enroll" name="카테고리" style="width:40%;">
-				<option id="pc" value="PC">PC
-				<option id="laptop" value="노트북">노트북
-				<option id="digital" value="가전제품">가전제품
-			</select></td>
+            <td>
+	            <select class="op_enroll" name="카테고리" style="width:40%;">
+					<option id="pc" value="PC">PC
+					<option id="laptop" value="노트북">노트북
+					<option id="digital" value="가전제품">가전제품
+				</select>
+			</td>
             </tr>
             <tr>
                 <th>비밀번호 </th>
@@ -63,7 +65,7 @@
             </tr>
             <tr>
                 <th>상품명 </th>
-                <td><textarea cols="10" size=30 name="content" class="form-control"></textarea></td>
+                <td><textarea cols="10" size=30 name="content" class="form-control" style="resize:none"></textarea></td>
             </tr>
             <tr>
                 <th>가격 </th>
@@ -75,7 +77,7 @@
             </tr>
             <tr>
                 <th>상품 설명 </th>
-                <td><textarea cols="10" size=500 name="content" class="form-control"></textarea></td>
+                <td><textarea cols="10" size=500 name="content" class="form-control" style="resize:none"></textarea></td>
             </tr>
             <tr>
                 <th>상품 보관일자 </th>
