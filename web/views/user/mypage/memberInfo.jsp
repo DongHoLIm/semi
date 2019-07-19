@@ -16,16 +16,17 @@ body {
 	margin-bottom:10%;
 	width:35%;
 	border-radius:5px;
-	background-color:#E7E7E7;
+	border:2px solid black;
+	background-color:#FFF;
 }
 .btn_info	{
-	border: 1px solid #ffd8d9;
+	border: 1px solid black;
 	font-size: 14px;
 	width:30%;
 	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
-	background-color: #ffd8d9;
+	background-color:#FFF;
 	color: black;
 }
 </style>

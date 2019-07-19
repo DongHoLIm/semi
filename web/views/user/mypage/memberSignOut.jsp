@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 
 .t1 {
@@ -15,17 +16,16 @@
 .d1 {
 	margin-bottom:10%;
 }
-.btn_so {
+.btn_so1, .btn_so2 {
 	margin:0 auto;
 	width: 80px;
 	height: 30px;
-	border: 1px solid pink;
+	border: 1px solid black;
 	font-size: 13px;
 	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
-	background-color: pink;
-	color: black;
+	background-color:#FFF;
 	}
 	.btn_so:hover {color:white;}
 
@@ -64,21 +64,30 @@
 			</tr>
 
 			<tr>
-				<td><input type="checkbox">안내 사항을 모두 확인하였으며, 이에 동의합니다.<br>
+				<td><input type="checkbox" class="so_check">안내 사항을 모두 확인하였으며, 이에 동의합니다.<br>
 			
 		</table>
 	</table>
 	<br>
 	<br>
 	<div align="center" class="d1">
-		<a href="join.jsp">
-			<button type="button" class="btn_so">회원탈퇴</button>
-		</a> <a href="#">
-			<button type="button" class="btn_so">취소</button>
-		</a>
+			<button type="button" class="btn_so1" onclick="<%=request.getContextPath()%>/views/login/login.jsp" disabled>회원탈퇴</button>
+			<button type="button" class="btn_so2">취소</button>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
-
+<script>
+			$(function(){
+				$(".so_check").change(function(){
+					if($(".so_check").is(":checked")){
+						
+					$(".btn_so1").prop("disabled", false);
+				}else{
+					$(".btn_so1").attr("disabled", "disabled");
+				}
+				})
+			});
+			
+		</script>
 
 </body>
 </html>
