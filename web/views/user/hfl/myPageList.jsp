@@ -10,19 +10,20 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
   @media screen and (max-width: 767px) {
-      .sidenav {
+     /*  .sidenav {
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;} 
+      .row.content {height:auto;}  */
     }
-    li{
+    .myPage{
     	list-style: none;
+    
     }
-    a{
+    /* a{
     	color:black;
     	text-decoration: none;
-    }
+    } */
      a:link { 
      color: white; 
      }
@@ -47,8 +48,8 @@
       <div id="collapse3" class="panel-collapse collapse in">
         <div class="w3-dropdown-content w3-bar-block w3-border">
         	<div class="panel-body">
-	        	<ul>
-	        		<li><a href="">주문내역</a></li>
+	        	<ul class = "myPage">
+	        		<li><a href="/sp/views/user/mypage/myPage.jsp">주문내역</a></li>
 	        		<li><a href="/sp/views/user/mypage/orderLook.jsp">주문/배송조회</a></li>
 	        		<li><a href="/sp/views/user/mypage/cancleLook.jsp">취소/반품조회</a></li>
 	        		<li><a href="/sp/views/user/mypage/refund.jsp">환불/정산내역</a></li>

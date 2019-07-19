@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% System.out.println(request.getContextPath()); %>
+
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -30,7 +30,7 @@
            <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li>
            <li><a href="/sp/views/user/board/board.jsp"> 게시판</a></li>
               <li><a href="/sp/views/user/mypage/myPage.jsp"> 마이페이지</a></li>
-       <li><a href="/sp/views/user/board/qna.jsp"> 고객센터</a></li>
+       <li><a href="/sp/views/user/serviceCenter/qna.jsp"> 고객센터</a></li>
          </ul>
 
       <form class="navbar-form navbar-right" role="search">

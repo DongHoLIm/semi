@@ -5,59 +5,71 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-.refund {
-	text-align: center;
-}
-
-#subScreen {
-	margin-top: 5%;
-	margin-bottom: 3%;
-	width: 67%;
-	margin-left: 16.6%;
-	height: 100%;
-	text-align: left;
-}
-
-table {
+#sec1 {
 	width: 100%;
 	height: 100%;
-	border: 1px solid pink;
+	padding-right: 20%;
+	padding-left: 20%;
+	margin: auto;
+}
+
+#area {
+	width: 80%;
+	height:70%
+	padding: 2%;
+	margin: 0 auto;
 	text-align: center;
+	background-color:lightgrey;
 }
 
-#menubar {
-	width: 15.6%;
-	height: 100%;
-	border: 3px solid #ffd8d9;
-	text-align: center;
-	padding: 1%;
-	float: left;
+#deliTable {
+	align: center;
 }
 
-#menuUl {
-	margin-right: 20%;
-	padding-left: 0px;
-	margin: 0px auto;
+#deliTable tr {
+	align: center;
 }
 
-#menubar ul li {
-	list-style-type: none;
+#deliTable tr td {
+	align: center;
 }
 
-.date-select {
-	background: pink;
+#deliTable tr td img {
+	width: 30%;
+	align: center;
 }
 
-a {
-	text-decoration: none;
-	color: black;
+.board {
+	width: 80%;
+	margin: auto;
+	align: center;
+	border-spacing: 10px;
 }
 
-a:hover {
-	text-decoration: none;
+.board2 {
+	width: 80%;
+	margin: auto;
+	align: center;
+	border-spacing: 10px;
+}
+
+.row0 {
+	background: #eee;
+	margin: auto;
+}
+
+.row1 {
+	border-top: 2px solid #555;
+}
+
+.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.pageNo {
+	margin: auto;
 }
 </style>
 </head>
@@ -65,8 +77,10 @@ a:hover {
 	<header><%@ include file="../hfl/header.jsp"%></header>
 	<br>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
-	<div id="subScreen">
-		<h3 style="font-weight: bold">환불 내역</h3>
+
+	<section id="sec1">
+		<div id="area">
+			<h3 style="font-weight: bold">환불 내역</h3>
 
 		<div class="date-select" align="center">
 			<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;<input
@@ -75,9 +89,10 @@ a:hover {
 				type="button" value="1개월">&nbsp; <input type="date">
 			- <input type="date"><br> <br>
 		</div>
-		<br>
+		</div>
+	<br>
 		<div align=center>
-			<table border="1">
+			<table border="1" class = "board">
 				<tr>
 					<th class="refund">주문정보</th>
 					<th class="refund">주문 상품 정보</th>
@@ -112,19 +127,21 @@ a:hover {
 			</tr>
 			</table>
 		</div>
-	<br>
-	<h3 style="font-weight: bold">정산내역</h3>
+		<br>
+		<div id="area">
+			<h3 style="font-weight: bold">정산 내역</h3>
 
-	<div class="date-select" align="center">
+		<div class="date-select" align="center">
 		<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;<input
 			type="button" value="1주일">&nbsp;
 		</span> &nbsp;<input type="button" value="15일">&nbsp; &nbsp;<input
 			type="button" value="1개월">&nbsp; <input type="date">
 		- <input type="date"><br> <br>
 	</div>
-	<br>
-	<div align=center>
-		<table border="1">
+		</div>
+		
+		<div align=center>
+				<table border="1" class = "board2"> 
 			<tr>
 				<th class="refund">정산완료일</th>
 				<th class="refund">정산금액</th>
@@ -154,13 +171,10 @@ a:hover {
 				<td>가</td>
 			</tr>
 		</table>
-	</div>
-	</div>
-	<br>
-
+		</div>
+	</section>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
-
 </body>
 </html>
