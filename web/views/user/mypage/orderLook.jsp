@@ -5,7 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
+input[type=button]{
+	border:1px solid black;
+	background:#FFF;
+}
+#ip_status {
+	border:none;
+	text-align:center;
+}
+
+.th_orderLook {
+	text-align:center;
+}
+
 #sec1 {
 	width: 100%;
 	height: 100%;
@@ -16,11 +30,11 @@
 
 #area {
 	width: 80%;
-	height:70%
+	height:70%;
 	padding: 2%;
 	margin: 0 auto;
 	text-align: center;
-	background-color:lightgrey;
+	border:1px solid black;
 }
 
 #deliTable {
@@ -28,11 +42,11 @@
 }
 
 #deliTable tr {
-	align: center;
+	text-align:center;
 }
 
 #deliTable tr td {
-	align: center;
+	text-align:center;
 }
 
 #deliTable tr td img {
@@ -69,8 +83,11 @@
 tr > th, tr>td{	
 	width: 25%;
 	margin: auto;
-	align: center;
+	text-align:center;
 	border-spacing: 10px;
+}
+.page-control {
+	margin-top:10%;
 }
 
 
@@ -83,7 +100,7 @@ tr > th, tr>td{
 
 	<section id="sec1">
 		<div id="area">
-			<h3 style="font-weight: bold">주문 / 배송조회</h3>
+			<h3 style="font-weight: bold">주문조회</h3>
 
 		<div class="date-select" align="center">
 			<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;<input
@@ -99,41 +116,29 @@ tr > th, tr>td{
 	
 			<table border="1" align = "center" class = "board">
 				<tr>
-					<th class="cancel">주문일자</th>
-					<th class="cancel">상품정보</th>
-					<th class="cancel">주문상태</th>
-					<th class="cancel">확인/신청</th>
+					<th class="th_orderLook">주문일자</th>
+					<th class="th_orderLook">상품정보</th>
+					<th class="th_orderLook">주문상태</th>
 				</tr>
 				<tr>
-					<td>주문일자내용</td>
-					<td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
-					<td>주문상태내용</td>
-					<td>확인/신청내용</td>
-				</tr>
-				<tr>
-					<td>주문일자내용</td>
-					<td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
-					<td>주문상태내용</td>
-					<td>확인/신청내용</td>
-				</tr>
-				<tr>
-					<td>주문일자내용</td>
-					<td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
-					<td>주문상태내용</td>
-					<td>확인/신청내용</td>
+					<td>주문일자<br>주문번호<br><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
+					<td>상품명</td>
+					<td><input type="text" value="주문상태" id="ip_status"readonly></td>
 				</tr>
 			</table>
 		</div>
 		
-		<footer align="center">	
+		<div class="page-control">
+		<footer align="center">
 			<ul class="pagination" align="center">
-			  <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-			  <li class="page-item"><a class="page-link" href="#">1</a></li>
-			  <li class="page-item"><a class="page-link" href="#">2</a></li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
-			  <li class="page-item"><a class="page-link" href="#">다음</a></li>
+				<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">다음</a></li>
 			</ul>
 		</footer>
+		</div>
 
 	</section>
 

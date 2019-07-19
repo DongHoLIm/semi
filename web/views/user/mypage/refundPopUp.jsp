@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>환불 신청</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 <style>
@@ -24,12 +24,10 @@
 	margin-right:auto;
 	margin-top:50px;
 	margin-bottom:50px;
-	border: 1px solid #ffd8d9;
 	font-size: 14px;
-	font-family: 'Sunflower', sans-serif;
 	border-radius: 5px;
-	background-color: #ffd8d9;
-	color: black;
+	border:1px solid black;
+	background:#FFF;
 }
 .btn_refund2 {
 	text-align:center;

@@ -19,13 +19,12 @@ input {
 	height:30px; 
 	width:100%;
 	margin:0 auto;
-	border: 1px solid #ffd8d9;
+	border: 1px solid black;
 	font-size: 15px;
 	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
-	background-color: #ffd8d9;
-	color: black;
+	background-color: #FFF;
 }
 </style>
 </head>
@@ -46,7 +45,8 @@ input {
 			<tr>
 				<td><label>비밀번호&nbsp;</label></td>
 				<td><input type="password" name="password">&nbsp;</td>
-				<td><button type="button" class="btn_update">수정</button><br></td>
+				<td><button type="button" class="btn_update"
+				 onclick="window.open('changePwdPopUp.jsp','window_name','width=600,height=400,location=yes,status=no,scrollbars=no');" class="pwdPopUp">수정</button><br></td>
 			</tr>
 				<td><br><td>
 			<tr>
@@ -71,7 +71,7 @@ input {
 			<td><br><td>
 			<tr align="center">
 				<td colspan="2">
-					<input type="submit" value="수정" class="btn_update">
+					<button type="button" class="btn_update">수정</button>
 				</td>
 			</tr>
 		</table>

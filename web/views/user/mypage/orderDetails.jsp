@@ -7,20 +7,17 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 <style>
-button {
-	width:75px;
-	height: 25px;
-	border: 1px solid #ffd8d9;
-	font-size: 12px;
-	font-family: 'Sunflower', sans-serif;
-	border-radius: 5px;
-	background-color: #ffd8d9;
-	color: black;
-
+button{
+	border:1px solid black;
+	background:#FFF;
 }
+
 table {
 	text-align:center;
 	width: 50%;
+}
+.t1 {
+	margin-left:30%;
 }
 
 table, td {
@@ -42,7 +39,7 @@ table, td {
 <body>
 	<%@ include file="../hfl/header.jsp"%>
 	<%@ include file="../hfl/myPageList.jsp"%>
-	<table>
+	<table class="t1">
 		<caption>결제 정보</caption>
 		<tbody>
 			<tr>
@@ -62,7 +59,7 @@ table, td {
 	<br>
 	<br>
 
-	<table>
+	<table class="t1">
 		<caption>주문 상품 정보</caption>
 		<thead>
 			<tr>
@@ -70,8 +67,8 @@ table, td {
 				<th class="th3">상품정보</th>
 				<th class="th3">수량</th>
 				<th class="th3">상품금액</th>
-				<th class="th3">배송비</th>
-				<th class="th3">주문/배송상태</th>
+				<th class="th3">주문상태</th>
+				<th class="th3">운송장번호</th>
 				<th class="th3">환불신청</th>
 			</tr>
 		</thead>
@@ -81,9 +78,8 @@ table, td {
 				<td>진수의 핑크핑크한 쿨러</td>
 				<td>1</td>
 				<td>28,000원</td>
-				<td>2,500원</td>
-				<td><button>구매확정</button></td>
-				<!-- <td><button onclick="location.href = '/sp/views/user/mypage/return.jsp'">환불신청</button></td> -->
+				<td><button id="btn_confirm">구매확정</button></td>
+				<td>123456789&nbsp;<button onclick="window.open('deliveryAPI.jsp','window_name','width=800,height=500,location=yes,status=no,scrollbars=yes');">배송조회</button></td>
 				<td><button onclick="window.open('refundPopUp.jsp','window_name','width=600,height=400,location=yes,status=no,scrollbars=yes');" class="returnPopUp">환불신청</button></td>
 			</tr>
 			<tr>
@@ -91,8 +87,8 @@ table, td {
 				<td>진수의 핑크핑크한 노트북</td>
 				<td>1</td>
 				<td>390,000원</td>
-				<td>2,500원</td>
 				<td><button>구매확정</button></td>
+				<td>123456789&nbsp;<button>배송조회</button></td>
 				<td><button>환불신청</button></td>
 			</tr>
 			<tr>
@@ -100,8 +96,8 @@ table, td {
 				<td>진수의 핑크핑크한 안경</td>
 				<td>1</td>
 				<td>60,000원</td>
-				<td>2,500원</td>
 				<td><button>구매확정</button></td>
+				<td>123456789&nbsp;<button>배송조회</button></td>
 				<td><button>환불신청</button></td>
 			</tr>
 		</tbody>
@@ -110,7 +106,7 @@ table, td {
 	<br>
 	<br>
 
-	<table>
+	<table class="t1">
 		<caption>배송지 정보</caption>
 		<tbody>
 			<tr>
@@ -122,5 +118,18 @@ table, td {
 		</tbody>
 	</table>
 	<%@ include file="../hfl/footer.jsp"%>
+	<script>
+
+	$(function(){
+  	$('#btn_confirm').click(function(){
+   		 if($(this).html() == '구매확정' ) {
+   	   		$(this).html('구매확정 완료');
+   		 }
+  	})
+});
+  	
+</script>
+	
+	
 </body>
 </html>
