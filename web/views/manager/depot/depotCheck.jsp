@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.depot.model.vo.*"%>
+  <%
+  	String value = request.getParameter("value");
+  %>
 <!DOCTYPE html>
 <html>
 <head>

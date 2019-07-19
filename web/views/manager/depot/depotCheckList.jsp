@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.depot.model.vo.*"%>
+  <%
+  	ArrayList<Depot> list = (ArrayList<Depot>) request.getAttribute("list");
+  %>  
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +36,7 @@
 	}
 	button{
 	background:black;
+	
 	}
 </style>
 <body>
@@ -98,20 +103,28 @@
 				<th id="th3">번호</th>
 				<th id="th3">상품코드</th>
 				<th id="th3">카테고리</th>
-				<th id="th3">상품명</th>
-				<th id="th3">수량</th>				 
+				<th id="th3">상품명</th>			 
 				<th id="th3">검수 요청일자</th>
 				<th id="th3">검수진행상태</th>
 			</tr>
+			<%for(Depot d :list) {%>
 			<tr>
-				<td>1</td>
-				<td>PC0120</td>
-				<td>PC-본체</td>
-				<td>매직스테이션</td>
-				<td>1</td>
-				<td>2019-07-17</td>
-				<td><button onclick="location.href='depotCheck.jsp'" style="color:white;">검수요청</button></td>
-			</tr>
+				<td><%=d.getProductNumber() %></td>
+				<td><%=d.getProductCode() %></td>
+				<td><%=d.getProductCate() %></td>
+				<td><%=d.getProductName() %></td>
+				<td><%=d.getCheckDate() %></td>
+				<td><%if(d.getCheckStatus().equals("1")){ %>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>'" style="color:white">검수요청</button>
+					<%}else if(d.getCheckStatus().equals("2")) {%>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>'" style="color:white">검수중</button>
+					<%}else{ %>
+						<label>검수완료</label>
+					<%} %>
+				</td>
+			</tr>	
+			<%} %>
+			
 			</table>
 		</div>
 	</div>

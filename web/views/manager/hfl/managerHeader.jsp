@@ -50,7 +50,7 @@
            </li>
               <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 창고관리 <span class="caret"></span></a>
                <ul class="dropdown-menu">
-               <li><a href="/sp/views/manager/depot/depotCheckList.jsp">검수요청관리</a></li>
+               <li><a href="<%=request.getContextPath() %>/list.dp">검수요청관리</a></li>
                <li><a href="/sp/views/manager/depot/depotBarcode.jsp">바코드 출력</a></li>
                <li><a href="/sp/views/manager/depot/depotIn.jsp">입고 관리</a></li>
                <li><a href="/sp/views/manager/depot/depotOut.jsp">출고 관리</a></li>               

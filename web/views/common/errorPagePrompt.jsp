@@ -12,9 +12,10 @@ String msg = (String)request.getAttribute("msg");
 </head>
 <body>
 	<script>
-	function(){
+	$(function(){
 		alert(msg);
-	}
+	});
 	</script>
+
 </body>
 </html>
