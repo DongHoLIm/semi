@@ -9,7 +9,7 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <style>
 #graphs {
-	border: 1px dashed red;
+	border: 1px dashed black;
 	width: 43%;
 	height: 600px;
 }
@@ -21,8 +21,9 @@
 
 .btns {
 	margin-top: 2%;
-	background: #ffd8d9;
+	background: white;
 	border: none;
+	color:black;
 	margin-bottom: 5%;
 	font-size : 1.15em;
 	font-weight: bold;
@@ -43,7 +44,9 @@ table th, table td {
 }
 
 table th {
-	background: #ffd8d9;
+	background: black;
+	color:white;
+	border:1px solid white;
 }
 
 .red {

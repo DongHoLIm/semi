@@ -9,8 +9,8 @@
 	#sec1 {
 		width:100%;
 		height:100%;
-		padding-right:20%;
-		padding-left:20%;
+		padding-right:10%;
+		padding-left:10%;
 		
 		margin:auto;
 	}
@@ -27,8 +27,13 @@
 	}
 	
 	.row0{
-		background:#eee;
+		background:black;
+		color:white;
 		margin:auto;
+	}
+	th{
+		background:black;
+		color:white;
 	}
 	.row1{
 		border-top: 2px solid #555;
@@ -55,7 +60,7 @@
 	<br />
 	
 	<section id="sec1">
-		<p align="center">공지사항</p>
+		<h2 align="center">공지사항</h2>
 		<table class="board">
 			<tr class="row0">
 			<thead>

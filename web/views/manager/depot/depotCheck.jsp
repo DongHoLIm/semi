@@ -22,6 +22,10 @@
 	td{
 		border:1px solid black;
 	}
+	button{
+		background:black;
+		color:white;
+	}
 </style>
 </head>
 <body>
@@ -74,9 +78,9 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-					<button>검수요청</button>&nbsp;&nbsp;&nbsp;
-					<button>검수중</button>&nbsp;&nbsp;&nbsp;
-					<button>검수 완료</button>&nbsp;&nbsp;&nbsp;
+					<button style="color:white;">검수요청</button>&nbsp;&nbsp;&nbsp;
+					<button style="color:white;">검수중</button>&nbsp;&nbsp;&nbsp;
+					<button style="color:white;">검수 완료</button>&nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -99,8 +103,8 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-				<button type="submit" id="Btn" onclick="">검수상태변경</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="reset" id="Btn">취소</button>
+				<button type="submit" id="Btn" style="color:white;" onclick="">검수상태변경</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="reset" id="Btn" style="color:white;">취소</button>
 				</td>				
 			</tr>
 		</table>		
