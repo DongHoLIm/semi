@@ -52,16 +52,12 @@
             </tr>
             <tr><th>카테고리</th>
             <td>
-	            <select class="op_enroll" name="카테고리" style="width:40%;">
+	            <select class="cate_enroll" name="카테고리" style="width:40%;">
 					<option id="pc" value="PC">PC
 					<option id="laptop" value="노트북">노트북
 					<option id="digital" value="가전제품">가전제품
 				</select>
 			</td>
-            </tr>
-            <tr>
-                <th>비밀번호 </th>
-                <td><input type="password" size=30 class="form-control"/></td>
             </tr>
             <tr>
                 <th>상품명 </th>
@@ -73,15 +69,20 @@
             </tr>
             <tr>
                 <th>상품 이미지</th>
-                <td><input type="file" name="filename" class="pull-right" id="file1" style="width:50%;"/></td>
+                <td>
+                	<input type="file" name="file1" class="pull-right" id="file1" style="width:50%;"/>
+                	<input type="file" name="file2" class="pull-right" id="file2" style="width:50%;"/>
+                	<input type="file" name="file3" class="pull-right" id="file3" style="width:50%;"/>
+                	<input type="file" name="file4" class="pull-right" id="file4" style="width:50%;"/>
+                </td>
             </tr>
             <tr>
                 <th>상품 설명 </th>
-                <td><textarea cols="10" size=500 name="content" class="form-control" style="resize:none"></textarea></td>
+                <td><textarea cols="10" rows="10" name="content" class="form-control" style="resize:none"></textarea></td>
             </tr>
             <tr>
                 <th>상품 보관일자 </th>
-                <td><input type="date" name="date" style="width:40%;" class="form-control"/></td>
+                <td><input type="date" name="date" style="width:40%;" class="form-control" name="keepDate" id="keepDate"/></td>
             </tr>
             <tr>
                 <td colspan="2">
