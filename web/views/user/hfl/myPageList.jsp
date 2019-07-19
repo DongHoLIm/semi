@@ -49,8 +49,7 @@
         <div class="w3-dropdown-content w3-bar-block w3-border">
         	<div class="panel-body">
 	        	<ul class = "myPage">
-	        		<li><a href="/sp/views/user/mypage/myPage.jsp">주문내역</a></li>
-	        		<li><a href="/sp/views/user/mypage/orderLook.jsp">주문/배송조회</a></li>
+	        		<li><a href="/sp/views/user/mypage/orderLook.jsp">주문조회</a></li>
 	        		<li><a href="/sp/views/user/mypage/cancleLook.jsp">취소/반품조회</a></li>
 	        		<li><a href="/sp/views/user/mypage/refund.jsp">환불/정산내역</a></li>
 	        	</ul>
@@ -67,7 +66,7 @@
       <div id="collapse2" class="panel-collapse collapse">
         <div class="panel-body">
         	<ul>
-        		<li><a href="/sp/views/user/mypage/changeInfo.jsp">회원정보 변경</a></li>
+        		<li><a href="/sp/views/user/mypage/memberInfo.jsp">회원정보 변경</a></li>
         		<li><a href="/sp/views/user/mypage/memberSignOut.jsp" class="w3-button">회원 탈퇴</a></li>
         	</ul>
         </div>

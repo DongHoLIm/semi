@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*"%>
+<%
+	ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>)request.getAttribute("list");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -73,6 +76,32 @@
 <div class="container">
 	<br>
 	<br>
+  <h2 id="board">공지사항</h2>
+  <table class="table">
+      <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성날짜</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+   
+        <td>1</td>
+        <td><a href="boarderinsert.jsp">title</a></td>
+        <td>writer</td>
+        <td>2019-07-06</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="container">
+	<br>
+	<br>
+	<hr>
   <h2 id="board">게시판</h2>
   <form action="" align="right">
   <select>

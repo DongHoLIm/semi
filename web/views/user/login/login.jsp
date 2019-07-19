@@ -16,7 +16,7 @@ a{text-decoration:none; color:black; font-weight:bold;}
 	<div class = "header" align="center">
 		<h1><a href="../index.jsp">중고 愛 민족</a></h1><br><br>
 	</div>
-	<form action="" method="post" action="loginResult.jsp">
+	<form action="<%= request.getContextPath() %>/login.me" method="post" id="loginForm">
 		<div align="center">
 			<div class="box_login">
 				<div class="inp_text">
@@ -26,21 +26,16 @@ a{text-decoration:none; color:black; font-weight:bold;}
 					<input type="password" id="loginPw" name="password" placeholder="Password" style="height:40px; width:380px; box-sizing: border-box; padding: 0 30px;"><br><br>
 				</div>
 			</div>
-			<input type="submit" class="btn_login" value="로그인">
-			<div class="login_append">
-				<div class="inp_chk">
-					<input type="checkbox" id="keepLogin" class="inp_radio" name="KeepLogin">
-					<label for="keepLogin" class="lab_g">
-						<span class="img_top ico_check"></span>	
-						<span class="txt_lab">로그인 상태 유지</span>
-					</label>
-				</div>
+			<button id="loginBtn" class="btn_login" onclick="login();" value="로그인">로그인</button>
+			</div>
+	</form>
+			<div class="login_append" align="center">
 				<span class="txt_find">
-					<a href="../join/" class="link_find">아이디</a>
+					<a href="/sp/views/user/join/searchIdPage.jsp" class="link_find">아이디</a>
 					/
-					<a href="" class="link_find">비밀번호 찾기</a>
+					<a href="/sp/views/user/join/searchPwdPage.jsp" class="link_find">비밀번호 찾기</a>
 					/
-					<a href="" class="link_join">회원가입</a>
+					<a href="/sp/views/user/join/join.jsp" class="link_join">회원가입</a>
 					</span>
 					
 					       <h4 class="tit">소셜 간편 구입</h4>
@@ -52,8 +47,11 @@ a{text-decoration:none; color:black; font-weight:bold;}
             </ul>
 					
 			</div>
-		</div>
-	</form>
+	<script>
+	function login(){
+		$("#loginForm").submit();
+	}
+	</script>
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 	
 </body>

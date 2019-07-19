@@ -6,6 +6,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+input[type=button]{
+	border:1px solid black;
+	background:#FFF;
+}
+
+
+.th_refund {
+	text-align:center;
+}
+tr {
+	text-align:center;
+}
+
 #sec1 {
 	width: 100%;
 	height: 100%;
@@ -15,13 +28,18 @@
 }
 
 #area {
+	margin-top:5%;
+	margin-left:auto;
+	margin-right:auto;
 	width: 80%;
-	height:70%
+	height:70%;
 	padding: 2%;
 	margin: 0 auto;
 	text-align: center;
-	background-color:lightgrey;
+	background-color:#FFF;
+	border:1px solid black;
 }
+
 
 #deliTable {
 	align: center;
@@ -71,6 +89,10 @@
 .pageNo {
 	margin: auto;
 }
+
+.page-control {
+	margin-top:5%;
+}
 </style>
 </head>
 <body>
@@ -94,12 +116,12 @@
 		<div align=center>
 			<table border="1" class = "board">
 				<tr>
-					<th class="refund">주문정보</th>
-					<th class="refund">주문 상품 정보</th>
-					<th class="refund">환불정보</th>
-					<th class="refund">환불금액</th>
-					<th class="refund">입금일</th>
-					<th class="refund">상태</th>
+					<th class="th_refund">주문정보</th>
+					<th class="th_refund">주문 상품 정보</th>
+					<th class="th_refund">환불정보</th>
+					<th class="th_refund">환불금액</th>
+					<th class="th_refund">입금일</th>
+					<th class="th_refund">상태</th>
 				</tr>
 				<tr>
 				<td>안</td>
@@ -127,7 +149,7 @@
 			</tr>
 			</table>
 		</div>
-		<br>
+		<br><br><br><br>
 		<div id="area">
 			<h3 style="font-weight: bold">정산 내역</h3>
 
@@ -139,15 +161,15 @@
 		- <input type="date"><br> <br>
 	</div>
 		</div>
-		
+		<br>
 		<div align=center>
 				<table border="1" class = "board2"> 
 			<tr>
-				<th class="refund">정산완료일</th>
-				<th class="refund">정산금액</th>
-				<th class="refund">입금은행</th>
-				<th class="refund">계좌번호</th>
-				<th class="refund">예금주</th>
+				<th class="th_refund">정산완료일</th>
+				<th class="th_refund">정산금액</th>
+				<th class="th_refund">입금은행</th>
+				<th class="th_refund">계좌번호</th>
+				<th class="th_refund">예금주</th>
 			</tr>
 			<tr>
 				<td>안</td>
@@ -173,6 +195,18 @@
 		</table>
 		</div>
 	</section>
+
+		<div class="page-control">
+		<footer align="center">
+			<ul class="pagination" align="center">
+				<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">다음</a></li>
+			</ul>
+		</footer>
+		</div>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>

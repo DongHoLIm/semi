@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 .box_join {
 	width:55%;
-	border:2px solid #ffd8d9;
+	border:2px solid black;
 	margin:0 auto;
 	border-radius: 5px;
 }
@@ -34,23 +35,23 @@
 	height:40px; 
 	width:40%;
 	margin:0 auto;
-	border: 1px solid #ffd8d9;
+	border: 1px solid black;
 	font-size: 15px;
 	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
-	background-color: #ffd8d9;
-	color: black;
+	background-color: black;
+	color: white;
 	}
 .btn_overlap {
 	margin:0 auto;
-	border: 1px solid #ffd8d9;
+	border: 1px solid black;
 	font-size: 14px;
 	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
-	background-color: #ffd8d9;
-	color: black;
+	background-color: black;
+	color: white;
 	}
 	
 .btn_join:hover {color:white;}
@@ -58,7 +59,7 @@
 </head>
 <header><%@ include file="../hfl/header.jsp" %></header>
 <body>
-		<form action="02_memberJoinResult.jsp" method="post">
+		<form action="<%=request.getContextPath() %>/insertMember.me" method="post">
 		<div class = "header" align="center">
 		<br><br>
 		
@@ -69,29 +70,83 @@
 		<h2>중고愛민족 회원가입</h2>
 	<div class="box_login" align="center">
 			<br><br>
-			<input type="text" id="loginId" name="loginId" placeholder="  ID" style="width:30%;">
-			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
-			<input type="password" id="loginPw" name="password" placeholder="  Password" style="width:40%;"><br><br>
-			<input type="password" id="loginPw" name="password" placeholder="  Password 확인" style="width:40%;"><br><br>
-			<input type="text" id="userName" name="userName" placeholder="  이름" style="width:40%;"><br><br>
-			<input type="text" id="age" name="age" placeholder="  나이" style="width:40%;"><br><br>
+			<input type="text" id="memberId" name="memberId" placeholder="  ID" style="width:30%;">
+			<button type="button" class="btn_overlap" style="width:10%;" onclick="idCheck();">중복확인</button><br><br>
+			<input type="password" id="memberPassword" name="memberPassword" placeholder="  Password" style="width:40%;"><br><br>
+			<input type="password" id="memberPassword2" name="memberPassword2" placeholder="  Password 확인" style="width:40%;"><br><br>
+			<input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
 			<input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
 			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
 			<input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
-			<input type="text" id="address" name="address" placeholder="  주소" style="width:30%;">
-			<button type="button" class="btn_overlap" style="width:10%;">우편번호</button><br><br>
-		<select class="input_join">
-			<option id="female" value="여자">여자
-			<option id="male" value="남자">남자
-		</select>
+			<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:30%;">
+			<input type="button" name="zipCode"class="btn_overlap" onclick="sample6_execDaumPostcode()" style="width:10%;" value="우편번호 찾기"><br><br>
+			<input type="text"  id="sample6_address" name="adress2" placeholder="  주소" style="width:40%;"><br><br>
+			<input type="text"  id="sample6_detailAddress" name="adress3" placeholder="  상세주소" style="width:40%;"><br><br>
+			<input type="text"  id ="sample6_extraAddress" name="adress4" placeholder="  참고항목" style="width:40%;"><br><br>
 		<br><br>
-		<input type="submit" value="가입" class="btn_join"><br><br>
-		<input type="reset" value="취소" class="btn_join">
+		<input type="submit" value="가입" class="btn_join" onclick="insertMember();"><br><br>
+		<input type="reset" value="취소" class="btn_join" onclick="goMain();">
 		<br><br>
 	</div>
 	</div>
 		</form>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+		<script>
+		function sample6_execDaumPostcode(){
+			new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	            }
+	        }).open();
+		}
+		function goMain(){
+			location.href="<%=request.getContextPath()%>/index.jsp";
+		}
+		function insertMember(){
+			$("form").submit();
+		}
+		</script>
 		<br><br>
-		<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>
+		<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </html>

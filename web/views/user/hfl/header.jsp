@@ -8,6 +8,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>메인메뉴</title>
+<style>
+.container-fluid {
+	margin-bottom:5%;
+}
 </style>
 </head>
 <body>
@@ -43,7 +47,7 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> login</a></li>
+        <li><a href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
       </ul>
     </div>
   </div>

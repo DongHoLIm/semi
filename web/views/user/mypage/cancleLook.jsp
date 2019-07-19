@@ -6,6 +6,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+input[type=button]{
+	border:1px solid black;
+	background:#FFF;
+}
+
+.th_cancel {
+	text-align:center;
+}
+tr {
+	text-align:center;
+}
+
 #sec1 {
 	width: 100%;
 	height: 100%;
@@ -15,12 +27,14 @@
 }
 
 #area {
+
+	border:1px solid black;
+	background:#FFF;
 	width: 80%;
-	height:70%
+	height:70%;'
 	padding: 2%;
 	margin: 0 auto;
 	text-align: center;
-	background-color:lightgrey;
 }
 
 #deliTable {
@@ -28,16 +42,16 @@
 }
 
 #deliTable tr {
-	align: center;
+	text-align:center;
 }
 
 #deliTable tr td {
-	align: center;
+	text-align:center;
 }
 
 #deliTable tr td img {
 	width: 30%;
-	align: center;
+	text-align:center;
 }
 
 .board {
@@ -64,6 +78,10 @@
 .pageNo {
 	margin: auto;
 }
+
+.page-control {
+	margin-top:10%;
+}
 </style>
 </head>
 <body>
@@ -89,30 +107,32 @@
 
 			<table border="1" class = "board">
             <tr>
-               <th class="cancel">주문일자  </th>
-               <th class="cancel">상품정보  </th>
-               <th class="cancel">주문상태  </th>
-               <th class="cancel">확인/신청</th>
+               <th class="th_cancel">주문일자  </th>
+               <th class="th_cancel">상품정보  </th>
+               <th class="th_cancel">주문상태  </th>
+               <th class="th_cancel">확인/신청</th>
             </tr>
             <tr>
                <td>주문일자내용</td>
-               <td><input type="button" onclick="" value="주문상세"></td>
+               <td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
                <td>주문상태내용</td>
                <td>확인/신청내용</td>
             </tr>
             <tr>
                <td>주문일자내용</td>
-               <td><input type="button" onclick="" value="주문상세"></td>
+               <td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
                <td>주문상태내용</td>
                <td>확인/신청내용</td>
             </tr>
             <tr>
                <td>주문일자내용</td>
+               <td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
                <td>주문상태내용</td>
                <td>확인/신청내용</td>
             </tr>
          </table>
 		</div>
+		<div class="page-control">
 		<footer align="center">
 			<ul class="pagination" align="center">
 				<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
@@ -122,7 +142,7 @@
 				<li class="page-item"><a class="page-link" href="#">다음</a></li>
 			</ul>
 		</footer>
-
+		</div>
 	</section>
 
 	<br>

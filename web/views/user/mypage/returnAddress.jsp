@@ -10,11 +10,11 @@
 <style>
 
 .return1 {
-	margin-top:50px;
-	margin-left: 3%;
+	margin-top:10%;
+	margin-left:auto;
+	margin-right:auto;
 	width:55%;
-	border:2px solid #ffd8d9;
-	margin:0 auto;
+	border:2px solid black;
 	border-radius: 5px;
 	margin-bottom:50px;
 	padding-top:5%;
@@ -32,17 +32,14 @@
 	margin-left:10px;
 	height:30px; 
 	width:30%;
-	border: 1px solid #ffd8d9;
 	font-size: 15px;
 	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
-	background-color: #ffd8d9;
-	color: black;
+	border:1px solid black;
+	background:#FFF;
 	}
 	
-.btn_return:hover {color:white;}
-
 </style>
 </head>
 <body>
