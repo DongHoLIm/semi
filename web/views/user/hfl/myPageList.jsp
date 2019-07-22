@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8" import = "com.kh.bvengers.user.member.model.vo.*"
    %>
- <% 	
-	 Member loginUser = (Member)session.getAttribute("loginUser");
- %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,17 +20,17 @@
     li { list-style: none; }
     .myPage{
     	list-style: none;
-    
+
     }
     /* a{
     	color:black;
     	text-decoration: none;
     } */
-     a:link { 
-     color: white; 
+     a:link {
+     color: white;
      }
 	 a:visited {
-	  color: black; 
+	  color: black;
 	  text-decoration: none;
 	  }
 </style>
@@ -42,7 +39,7 @@
 <body>
 	<!-- header 영역 -->
 <body>
- <div class="container" style="float: left; width: 20%; padding-top: 10%; "> 
+ <div class="container" style="float: left; width: 20%; padding-top: 10%; ">
   <div class="panel-group" id="accordion" >
     <div class="panel panel-default">
       <div class="panel-heading" style="background: black; color:white">
@@ -76,7 +73,7 @@
         	</ul>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
 </div>
 </body>
@@ -84,13 +81,13 @@
 <script>
 		function deleteMember(){
 			location.href="/sp/views/user/mypage/memberSignOut.jsp";
-			
+
 		}
 		function changeInfo(){
 			location.href="/sp/views/user/mypage/memberInfo.jsp";
-			
+
 		}
-		
+
 	</script>
 
 </html>

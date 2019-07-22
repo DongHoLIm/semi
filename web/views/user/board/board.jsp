@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*,com.kh.bvengers.user.member.model.vo.*"%>
-<%
-Member loginUser = (Member) session.getAttribute("loginUser");
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,7 +20,7 @@ Member loginUser = (Member) session.getAttribute("loginUser");
   height: 100%;
   top: 0;
   left: 0;
- 
+
 }
 
 
@@ -86,10 +83,10 @@ Member loginUser = (Member) session.getAttribute("loginUser");
         <th>작성날짜</th>
       </tr>
     </thead>
-   
+
     <tbody>
       <tr>
-   
+
         <td>1</td>
         <td><a href="boarderinsert.jsp">title</a></td>
         <td>writer</td>
@@ -117,7 +114,7 @@ Member loginUser = (Member) session.getAttribute("loginUser");
   </select>
   <input type="text">
   <input type="submit" value="검색">
-  </form>             
+  </form>
   <table class="table">
       <thead>
       <tr>
@@ -187,7 +184,7 @@ Member loginUser = (Member) session.getAttribute("loginUser");
         <td>title</td>
         <td>writer</td>
         <td>2019-07-06</td>
-      </tr>      
+      </tr>
     </tbody>
   </table>
 </div>
@@ -202,7 +199,7 @@ Member loginUser = (Member) session.getAttribute("loginUser");
    </ul>
    <div id="workarea">
   <div class="position">
-   
+
     <div class="svg-wrapper">
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />

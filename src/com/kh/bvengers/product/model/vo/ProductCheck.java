@@ -9,7 +9,7 @@ public class ProductCheck implements java.io.Serializable {
 	private int completeStatus;
 	private int productCode;
 	private String reason;
-	
+
 	public ProductCheck() {}
 
 	public ProductCheck(int checkNo, int checkStatus, Date checkDate, int completeStatus, int productCode,
@@ -76,7 +76,7 @@ public class ProductCheck implements java.io.Serializable {
 		return "ProductCheck [checkNo=" + checkNo + ", checkStatus=" + checkStatus + ", checkDate=" + checkDate
 				+ ", completeStatus=" + completeStatus + ", productCode=" + productCode + ", reason=" + reason + "]";
 	};
-	
+
 }
 
 

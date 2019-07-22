@@ -1,6 +1,8 @@
 package com.kh.bvengers.product.model.vo;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product  implements Serializable{
 	private String productCode;
 	private String productName;
 	private int productMoney;
@@ -8,7 +10,7 @@ public class Product {
 	private String memberNo;
 	private String keepDate;
 	private String postId;
-	
+
 	public Product() {}
 
 	public Product(String productCode, String productName, int productMoney, String productCate, String memberNo,
@@ -86,5 +88,5 @@ public class Product {
 				+ postId + "]";
 	}
 
-	
+
 }

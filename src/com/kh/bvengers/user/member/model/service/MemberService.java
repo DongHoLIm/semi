@@ -30,21 +30,22 @@ public class MemberService {
 
 	public int changeMember(Member m) {
 		Connection con = getConnection();
-		
+
 		int result = new MemberDao().changeMember(con, m);
-		
+
 		if(result > 0) {
 			commit(con);
 		}else {
 			rollback(con);
 		}
-		
+
 		return result;
+	}
 
 	public ArrayList<Member> selectAll() {
 		Connection con = getConnection();
 		ArrayList<Member> list = new MemberDao().selectAll(con);
-		
+
 		close(con);
 		return list;
 	}
@@ -59,7 +60,7 @@ public class MemberService {
 		}else {
 			list = new MemberDao().searchLevel(con,searchValue);
 		}
-		
+
 		close(con);
 		return list;
 	}
