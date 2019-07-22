@@ -50,10 +50,11 @@
                <li><a href="/sp/views/manager/board/qnaboardmenegement.jsp">고객센터 관리</a></li>
                </ul>
            </li>
-              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 창고관리 <span class="caret"></span></a>
+              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" > 창고관리 <span class="caret"></span></a>
                <ul class="dropdown-menu">
+               <li><a href="<%=request.getContextPath() %>/listall.dp">창고 전체 현황</a></li>
                <li><a href="<%=request.getContextPath() %>/list.dp">검수요청관리</a></li>
-               <li><a href="/sp/views/manager/depot/depotBarcode.jsp">바코드 출력</a></li>
+               <li><a href="<%=request.getContextPath()%>/barcode.dp">바코드 출력</a></li>
                <li><a href="/sp/views/manager/depot/depotIn.jsp">입고 관리</a></li>
                <li><a href="/sp/views/manager/depot/depotOut.jsp">출고 관리</a></li>               
                <li><a href="/sp/views/manager/depot/depotLocation.jsp">창고위치별현황</a></li>

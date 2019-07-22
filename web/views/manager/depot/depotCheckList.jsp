@@ -115,9 +115,9 @@
 				<td><%=d.getProductName() %></td>
 				<td><%=d.getCheckDate() %></td>
 				<td><%if(d.getCheckStatus().equals("1")){ %>
-						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>'" style="color:white">검수요청</button>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>'" style="color:white">검수요청</button>
 					<%}else if(d.getCheckStatus().equals("2")) {%>
-						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>'" style="color:white">검수중</button>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>'" style="color:white">검수중</button>
 					<%}else{ %>
 						<label>검수완료</label>
 					<%} %>
