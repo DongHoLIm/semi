@@ -20,15 +20,17 @@ public class ChangeInfoServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		String memberId = request.getParameter("memberId");
-		String memberPassword = request.getParameter("memberPassword");
+		String memberPassword = request.getParameter("memberpassword");
 		String memberName = request.getParameter("memberName");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		String zip = request.getParameter("zipCode");
 		String add1 = request.getParameter("address1");
 		String add2 = request.getParameter("address2");
-		String address = zip + add1 + add2;
+		String add3 = request.getParameter("address3");
+		String address = add1 + " " + add2 + add3;
 		
 		Member m = new Member();
 		m.setMemberId(memberId);
@@ -37,14 +39,13 @@ public class ChangeInfoServlet extends HttpServlet {
 		m.setEmail(email);
 		m.setAddress(address);
 		m.setPhone(phone);
-		
 		int result = new MemberService().changeMember(m);
-		
 		if(result > 0) {
-			response.sendRedirect("/sp/index.jsp");
+				
+			response.sendRedirect("/sp/views/user/mypage/myPage.jsp");
 		}else {
 			request.setAttribute("msg","회원정보변경 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);
 		}
 		
 	}
