@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.depot.model.vo.*"%>
+<%
+  	ArrayList<Depot> list = (ArrayList<Depot>) request.getAttribute("list");
+	
+  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +42,7 @@
 	<form action="">
 	<div id ="barcodeMain">
 		<div id="barCreate">
-		<button onclick="window.open('barcodePrint.jsp','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');" id="createBarcode"
+		<button onclick="barcodePrint();" id="createBarcode"
 		style="color:white;background:black;">
 		바코드생성</button>
 		</div>
@@ -50,21 +54,33 @@
 				<th id="th"></th>
 				<th id="th">번호</th>
 				<th id="th">상품코드</th>
+				<th id="th">상품명</th>
 				<th id="th">위치관리번호</th>
-				<th id="th">바코드넘버</th>
 				<th id="th">적치 일자</th>
 				<th id="th">출고 일자</th>
 			</tr>
+			<%for(Depot d :list) {%>
 			<tr>
-				<td><input type="checkBox" /></td>
-				<td><a href="">1</a></td>
-				<td><a href="">p-1</a></td>
-				<td><a href="">c-3</a></td>
-				<td><a href="">p-123213</a></td>
-				<td><a href="">2017/05/06</a></td>
-				<td><a href="">null</a></td>
+				<td><input type="checkBox" id="check"/></td>
+				<td><label for=""><%=d.getProductNumber() %></label></td>
+				<td><a href="" id="productCode"><%=d.getProductCode() %></a></td>
+				<td><a href=""><%=d.getProductName() %></a></td>
+				<td><a href=""><%=d.getLocationCode() %></a></td>
+				<td><a href=""><%=d.getCheckDate() %></a></td>
+				<td><a href=""><%=d.getReleaseDate() %></a></td>
 			</tr>
+			<%} %>
 		</table>
+		<script>
+		var code =$("a[id=productCode]");
+		console.log(code[0]);
+			function barcodePrint(){
+				if($("input:checkBox[id=check]").is("checked")==true){
+					
+				}
+				window.open('/sp/views/manager/depot/barcodePrint.jsp','바코드생성','width=430,height=500,location=no,status=no,scrollbars=yes');
+			}
+		</script>
 		</div>
 		</div>
 	</form>

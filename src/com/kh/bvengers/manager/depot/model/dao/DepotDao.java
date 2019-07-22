@@ -3,6 +3,7 @@ package com.kh.bvengers.manager.depot.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +12,7 @@ import java.util.Properties;
 
 import com.kh.bvengers.manager.depot.model.vo.Depot;
 
+import static com.kh.bvengers.common.JDBCTemplate.*;
 public class DepotDao {
 	private Properties prop = new Properties();
 	public DepotDao() {
@@ -49,7 +51,134 @@ public class DepotDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
 		}
+		return list;
+	}
+	public int insertLocation(Connection con, Depot d) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		String query = prop.getProperty("insertLocation");
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1,d.getLocationCode());
+			pstmt.setString(2,d.getProductCode());
+			result =pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+				
+		
+		return result;
+	}
+	public int updateStatus(Connection con, Depot d) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query =prop.getProperty("updateStatus");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, d.getCheckStatus());
+			pstmt.setString(2, d.getCompletStatus());
+			pstmt.setString(3, d.getCheckPassContent());
+			pstmt.setString(4, d.getProductCode());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	public int updateLocation(Connection con, Depot d) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateLocation");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, d.getLocationCode());
+			pstmt.setString(2, d.getProductCode());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public ArrayList<Depot> selectAllList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList <Depot> list = null;
+		Depot d = null;
+		String query = prop.getProperty("selectAll");
+		int i = 1;
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			list= new ArrayList<Depot>();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				list.add(d);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return list;
+	}
+	public ArrayList<Depot> selectBarcodeAllList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList <Depot> list = null;
+		Depot d = null;
+		String query = prop.getProperty("createBarcode");
+		int i = 1;
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			list= new ArrayList<Depot>();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				list.add(d);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
 		return list;
 	}
 

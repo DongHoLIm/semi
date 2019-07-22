@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.depot.model.vo.*"%>
   <%
   	String value = request.getParameter("value");
+  	String [] str =value.split(","); 
+  			
   %>
 <!DOCTYPE html>
 <html>
@@ -11,6 +13,7 @@
 <style>
 	#checkInsert{
 		margin: 0 auto;
+		width: 60%;
 	}
 	#productImage{
 		width:45%;
@@ -21,9 +24,12 @@
 	}
 	tr{
 		border:1px solid black;
+		
 	}
 	td{
 		border:1px solid black;
+		width:724px; 
+		height:40px;
 	}
 	button{
 		background:black;
@@ -32,7 +38,7 @@
 </style>
 </head>
 <body>
-<%@ include file = "../hfl/managerHeader.jsp" %>
+<%@ include file = "/views/manager/hfl/managerHeader.jsp" %>
 	<br />
 	<br />
 	<h3 align="center">검수 상태변경</h3>
@@ -40,7 +46,7 @@
 	<hr />
 	<br />
 	<div id="checkInsert">
-		<form action="">
+		<form action="<%=request.getContextPath()%>/requestCheck.dp" method="post">
 		<table>
 			<tr>
 				<td rowspan="4" width="200px" height="300px">
@@ -48,30 +54,33 @@
 				</td>
 			
 				<td><label for="">상품명</label></td>
-				<td><input type="text" style="float:left" readonly /></td>
+				<td><label for=""><%=str[1] %></label></td>
+				<td hidden><input type="text" value="<%=str[1] %>" name="productName" /></td>
 			</tr>
 			<tr>
 				<td><label for="">상품코드</label></td>
-				<td><input type="text" style="float:left" readonly/></td>
+				<td><label for=""><%=str[0] %></label></td>
+				<td hidden><input type="text" value="<%=str[0] %>" name="productCode" /></td>
 			</tr>
 			<tr>
 				<td><label for="">카테고리</label></td>
-				<td><input type="text" style="float:left" readonly/></td>
+				<td><label for=""><%=str[2]%></label></td>
+				<td hidden><input type="text" value="<%=str[2] %>" name="productCate" /></td>
 			</tr>
 			<tr>
 				<td>창고 위치</td>
 				<td align="left">
-					<select name="" id="">
-						<option value="">A</option>
-						<option value="">B</option>
-						<option value="">C</option>
-						<option value="">D</option>
+					<select name="location" id="">
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+						<option value="D">D</option>
 					</select>
 					섹션
-					<select name="" id="" >
-						<option value="">1</option>
-						<option value="">2</option>
-						<option value="">3</option>
+					<select name="session" id="" >
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
 					</select>
 					층
 				</td>
@@ -81,37 +90,69 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-					<button style="color:white;">검수요청</button>&nbsp;&nbsp;&nbsp;
-					<button style="color:white;">검수중</button>&nbsp;&nbsp;&nbsp;
-					<button style="color:white;">검수 완료</button>&nbsp;&nbsp;&nbsp;
+					<input type="radio" value="requestCheck" name="request" id="request" checked/>검수 요청&nbsp;&nbsp;&nbsp;
+					<input type="radio" value="checking" name="request" id="checking"/>검수중 &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="complete" name="request" id="complete"/>검수완료 &nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3"><h4>검수완료상태</h4></td>
+				<td colspan="3" id="complteStatusTitle"><h4>검수완료상태</h4></td>
 			</tr>
 			<tr>
-				<td colspan="3">
-					<input type="radio" value="pass" name="status"/>통과 &nbsp;&nbsp;&nbsp;
-					<input type="radio" value="fail" name="status"/>미통과 &nbsp;&nbsp;&nbsp;
-					<input type="radio" value="checkPass" name="status"/>조건부통과 &nbsp;&nbsp;&nbsp;			 		
+				<td colspan="3" id="complteStatus">
+					<input type="radio" value="pass" name="status" id="pass"/>통과 &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="fail" name="status" id="notpass"/>미통과 &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="checkPass" name="status" id="reasonPass"/>조건부통과 &nbsp;&nbsp;&nbsp;			 		
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3"><h4>조건부 통과 사유</h4></td>
+				<td colspan="3" id="reasonTitle"><h4>조건부 통과 사유</h4></td>
 			</tr>
 			<tr>
-				<td colspan="3">
-					<textarea name="" id="" cols="100" rows="10"></textarea>
+				<td colspan="3" id="reason">
+					<textarea name="checkPassContent"  cols="83" rows="10"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3">
-				<button type="submit" id="Btn" style="color:white;" onclick="">검수상태변경</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="Btn" style="color:white;">검수상태변경</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="reset" id="Btn" style="color:white;">취소</button>
 				</td>				
 			</tr>
 		</table>		
-		</form>		
+		</form>	
+		<script>
+			$(function (){
+				$("#reasonTitle").hide();
+				$("#reason").hide();
+				$("#complteStatusTitle").hide();
+				$("#complteStatus").hide()
+				$("input[id='request']").click(function(){
+					$("#complteStatusTitle").hide();
+					$("#complteStatus").hide()
+				});
+				$("input[id='checking']").click(function(){
+					$("#complteStatusTitle").hide();
+					$("#complteStatus").hide()
+				});
+				$("input[id='complete']").click(function(){
+					$("#complteStatusTitle").show();
+					$("#complteStatus").show()
+				});
+				$("input[id='reasonPass']").click(function(){
+					$("#reasonTitle").show();
+					$("#reason").show();	
+				});
+				$("input[id='pass']").click(function(){
+					$("#reasonTitle").hide();
+					$("#reason").hide();
+				});
+				$("input[id='notpass']").click(function(){
+					$("#reasonTitle").hide();
+					$("#reason").hide();
+				});
+			});		
+		</script>	
 	</div>
 </body>
 </html>
