@@ -6,14 +6,14 @@ public class Member {
 	private String memberNo;
 	private String memberId;
 	private String memberPassword;
-	private String membeName;
+	private String memberName;
 	private String email;
 	private String address;
 	private String phone;
 	private Date enrollDate;
 	private Date retireDate;
-	private char retire;
-	private char memberDiv;
+	private String retire;
+	private String memberDiv;
 	private String accountHolder;
 	private String bankCode;
 	private String accountNo;
@@ -22,14 +22,14 @@ public class Member {
 	
 	public Member() {}
 
-	public Member(String memberNo, String memberId, String memberPassword, String membeName, String email,
-			String address, String phone, Date enrollDate, Date retireDate, char retire, char memberDiv,
+	public Member(String memberNo, String memberId, String memberPassword, String memberName, String email,
+			String address, String phone, Date enrollDate, Date retireDate, String retire, String memberDiv,
 			String accountHolder, String bankCode, String accountNo, String gradeCode, int sellCount) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
-		this.membeName = membeName;
+		this.memberName = memberName;
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
@@ -68,12 +68,12 @@ public class Member {
 		this.memberPassword = memberPassword;
 	}
 
-	public String getMembeName() {
-		return membeName;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setMembeName(String membeName) {
-		this.membeName = membeName;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public String getEmail() {
@@ -116,19 +116,19 @@ public class Member {
 		this.retireDate = retireDate;
 	}
 
-	public char getRetire() {
+	public String getRetire() {
 		return retire;
 	}
 
-	public void setRetire(char retire) {
+	public void setRetire(String retire) {
 		this.retire = retire;
 	}
 
-	public char getMemberDiv() {
+	public String getMemberDiv() {
 		return memberDiv;
 	}
 
-	public void setMemberDiv(char memberDiv) {
+	public void setMemberDiv(String memberDiv) {
 		this.memberDiv = memberDiv;
 	}
 
@@ -175,7 +175,7 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
-				+ ", membeName=" + membeName + ", email=" + email + ", address=" + address + ", phone=" + phone
+				+ ", membeName=" + memberName + ", email=" + email + ", address=" + address + ", phone=" + phone
 				+ ", enrollDate=" + enrollDate + ", retireDate=" + retireDate + ", retire=" + retire + ", memberDiv="
 				+ memberDiv + ", accountHolder=" + accountHolder + ", bankCode=" + bankCode + ", accountNo=" + accountNo
 				+ ", gradeCode=" + gradeCode + ", sellCount=" + sellCount + "]";

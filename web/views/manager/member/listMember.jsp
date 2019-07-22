@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+	pageEncoding="UTF-8" import="java.util.* , com.kh.bvengers.user.member.model.vo.*"%>
+	<%
+	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
+    Member loginUser = (Member) session.getAttribute("loginUser");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,24 +51,27 @@ tr {
 table th{
 text-align:center;
 }
+table td{
+text-align:center;
+}
 .btns{
 margin-left:13%;
 font-weight:bold;
 font-size:3;
+}
+#chk{
+input-align:center;
 }
 </style>
 <body>
 	<%@ include file="../hfl/managerHeader.jsp"%>
 	<br />
 	<h2 align="center">회원 관리</h2>
-	<%-- <%if(loginUser == null || !loginUser.getMemberId().equals("admin")){ 
-		request.setAttribute("msg", "잘못된 경로로 접근했어요");
-		request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);
-	}else{%> --%>
+	
 	<div id="inOutMain">
 		<br>
 		<br>
-		<form action="<%=request.getContextPath()%>/memberList.me" method="post">
+		<form action="<%=request.getContextPath()%>/searchMember.me" method="post">
 		<div id="inOutButton" align="center">
 			<select name="selecthowsearch" style="width: 30%;">
 				<option value="findId">아이디로 조회</option>
@@ -90,7 +96,7 @@ font-size:3;
 		<div id="table Area">
 			<table id="depotMain" align="center">
 				<tr>
-					<th class="th"><input type="checkbox"></th>
+					<th class="th"><input type="checkbox" id="chkAll"></th>
 					<th class="th">아이디</th>
 					<th class="th">이름</th>
 					<th class="th">전화번호</th>
@@ -99,15 +105,14 @@ font-size:3;
 					<th class="th">가입일</th>
 					<th class="th">판매횟수</th>
 				</tr>
-							<%-- <%@ include file="rearchMemberResult.jsp" %> --%>
+				
 			</table>
 			<br>
 			<br>
 		</div>
 	</div>
 
-<%-- <%} %> --%>
-<%-- <script>
+<script>
 	$(function(){
 		<% for(Member m : list){%>
 		
@@ -122,6 +127,8 @@ font-size:3;
 		 var $enrollDateTd = $("<td>").text('<%=m.getEnrollDate()%>');
 		 var $sellCountTd = $("<td>").text('<%=m.getSellCount()%>');
 		 
+
+		 $tr.append("<input type='checkbox' id=chk>");
 		 $tr.append($idTd);
 		 $tr.append($nameTd);
 		 $tr.append($phoneTd);
@@ -133,6 +140,13 @@ font-size:3;
 		 $tableBody.append($tr);
 		<%}%>
 	});
-</script> --%>
+	$("#chkAll").on("click", function() {
+	      var chkAll = $(this).is(":checked");
+	      if (chkAll)
+	        $("#depotMain input:checkbox").prop("checked", true);
+	      else
+	        $("#depotMain input:checkbox").prop("checked", false);
+	    });
+</script>
 </body>
 </html>

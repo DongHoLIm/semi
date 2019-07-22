@@ -25,14 +25,17 @@ public class LoginMemberServlet extends HttpServlet {
 		String memberId = request.getParameter("loginId");
 		String memberPwd = request.getParameter("password");
 		Member loginUser = new MemberService().loginCheck(memberId,memberPwd);
-		
-		if(loginUser!=null) {
+		if(loginUser!=null && !loginUser.getMemberId().equals("admin")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect("index.jsp");
+		}else if(loginUser!= null && loginUser.getMemberId().equals("admin")){
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
+			response.sendRedirect("views/manager/main/managerPage.jsp");
 		}else {
 			request.setAttribute("msg", "로그인실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/hfl/errorPage.jsp").forward(request, response);
 		}
 	}
 

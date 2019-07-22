@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +35,7 @@ tr {
 #table Area{
 align:center;
 width:90%;
+
 }
 .th{
 background:black;
@@ -46,10 +48,11 @@ border:1px solid white;
 	<%@ include file="../hfl/managerHeader.jsp"%>
 	<br />
 	<h2 align="center">블랙리스트 관리</h2>
+	<form action="<%=request.getContextPath()%>/searchMember.me" method="post">
 	<div id="inOutMain"><br><br>
 		<div id="inOutButton" align="center">
 			
-		<select name="select" style="width:20%;">
+		<select name="selecthowsearch" style="width:20%;">
 			<option value="findId">아이디로 조회</option>
 			<option value="findName">이름으로 조회</option>
 			<option value="findLevel">등급으로 조회</option>
@@ -64,18 +67,17 @@ border:1px solid white;
 		<th class="th">이름</th>
 		<th class="th">전화번호</th>
 		<th class="th">등급</th>
-		<th class="th">주민등록번호</th>
-		<th class="th">방문수</th>
-		<th class="th">게시글 수</th>
-		<th class="th">최종방문일</th>
 		<th class="th">주소</th>
 		<th class="th">가입일</th>
 		<th class="th">판매횟수</th>
 		<th class="th">블랙리스트 사유</th>
 	</tr>
-			</table><br><br>
-		</div>
-	</div>
+ 	
+<%-- 			<%@ include file="rearchMemberResult.jsp" %>
+ --%>			</table><br>
+		</div><br>
+	</div><br><br>
+		</form>
 
 
 </body>
