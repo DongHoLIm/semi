@@ -73,7 +73,7 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<input type="number" readonly name="price"/><%= b.get %> %>원</td>
+					<input type="number" readonly name="price"/>원</td>
 				</tr>
 			<tr>
 				<td width="300px">

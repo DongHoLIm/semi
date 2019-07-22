@@ -16,9 +16,9 @@ import com.kh.bvengers.user.member.model.vo.Member;
 
 public class MemberDao {
 	Properties prop = new Properties();
-	
+
 	public MemberDao(){
-	
+
 		String fileName = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
@@ -30,18 +30,18 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		Member loginUser = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("loginSelect");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, memberPwd);
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				loginUser = new Member();
-				
+
 				loginUser.setMemberNo(rset.getString("MEMBER_NO"));
 				loginUser.setMemberId(rset.getString("MEMBER_ID"));
 				loginUser.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
@@ -59,7 +59,7 @@ public class MemberDao {
 				loginUser.setGradeCode(rset.getString("GRADE_CODE"));
 				loginUser.setSellCount(rset.getInt("SELL_COUNT"));
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -71,13 +71,13 @@ public class MemberDao {
 	public int insertMember(Connection con, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertMember");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			
+
+
 			pstmt.setString(1,m.getMemberId());
 			pstmt.setString(2, m.getMemberPassword());
 			pstmt.setString(3, m.getMemberName());
@@ -90,16 +90,16 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int changeMember(Connection con, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
+
 		String query = prop.getProperty("changeMember");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m.getMemberPassword());
@@ -107,35 +107,36 @@ public class MemberDao {
 			pstmt.setString(3, m.getAddress());
 			pstmt.setString(4, m.getPhone());
 			pstmt.setString(5, m.getMemberId());
-			
+
 			result = pstmt.executeUpdate();
-			
-			
-			
+
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
-		
-		
+
+
+
 		return result;
+	}
 
 	public ArrayList<Member> selectAll(Connection con) {
 		ArrayList<Member> list = null;
 		Statement stmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("selectAll");
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
 			list = new ArrayList<Member>();
-			
+
 			while(rset.next()) {
 				Member m = new Member();
-				
+
 				m.setMemberNo(rset.getString("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
@@ -152,7 +153,7 @@ public class MemberDao {
 				m.setAccountNo(rset.getString("ACCOUNT_NO"));
 				m.setGradeCode(rset.getString("GRADE_CODE"));
 				m.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 				list.add(m);
 			}
 		} catch (SQLException e) {
@@ -161,25 +162,25 @@ public class MemberDao {
 			close(rset);
 			close(stmt);
 		}
-		
+
 		return list;
 	}
 	public ArrayList<Member> searchId(Connection con, String searchValue) {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("searchId");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, searchValue);
-			
+
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
 				Member m = new Member();
-				
+
 				m.setMemberNo(rset.getString("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
@@ -196,7 +197,7 @@ public class MemberDao {
 				m.setAccountNo(rset.getString("ACCOUNT_NO"));
 				m.setGradeCode(rset.getString("GRADE_CODE"));
 				m.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 				list.add(m);
 			}
 		} catch (SQLException e) {
@@ -205,26 +206,26 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
+
 		return list;
 	}
 	public ArrayList<Member> searchName(Connection con, String searchValue) {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("searchName");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, searchValue);
-			
+
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
 				Member m = new Member();
-				
+
 				m.setMemberNo(rset.getString("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
@@ -241,7 +242,7 @@ public class MemberDao {
 				m.setAccountNo(rset.getString("ACCOUNT_NO"));
 				m.setGradeCode(rset.getString("GRADE_CODE"));
 				m.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 				list.add(m);
 			}
 		} catch (SQLException e) {
@@ -250,26 +251,26 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
+
 		return list;
 	}
 	public ArrayList<Member> searchLevel(Connection con, String searchValue) {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("searchLevel");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, searchValue);
-			
+
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
 				Member m = new Member();
-				
+
 				m.setMemberNo(rset.getString("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
@@ -286,7 +287,7 @@ public class MemberDao {
 				m.setAccountNo(rset.getString("ACCOUNT_NO"));
 				m.setGradeCode(rset.getString("GRADE_CODE"));
 				m.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 				list.add(m);
 			}
 		} catch (SQLException e) {
@@ -295,23 +296,23 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return list;
 	}
 	public ArrayList<Member> selectList(Connection con) {
 		ArrayList<Member> mlist = null;
 		Statement stmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("selectList");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
 			mlist = new ArrayList<Member>();
 			while(rset.next()) {
 			Member m = new Member();
-			
+
 			m.setMemberNo(rset.getString("MEMBER_NO"));
 			m.setMemberId(rset.getString("MEMBER_ID"));
 			m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
@@ -328,7 +329,7 @@ public class MemberDao {
 			m.setAccountNo(rset.getString("ACCOUNT_NO"));
 			m.setGradeCode(rset.getString("GRADE_CODE"));
 			m.setSellCount(rset.getInt("SELL_COUNT"));
-			
+
 			mlist.add(m);
 			}
 		} catch (SQLException e) {
@@ -343,15 +344,15 @@ public class MemberDao {
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("findUserId");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberName);
 			pstmt.setString(2, phone);
 			pstmt.setString(3, email);
-			
+
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				m=new Member();
@@ -371,17 +372,17 @@ public class MemberDao {
 				m.setAccountNo(rset.getString("ACCOUNT_NO"));
 				m.setGradeCode(rset.getString("GRADE_CODE"));
 				m.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
+
 		return m;
 	}
 

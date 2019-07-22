@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.bvengers.user.member.model.vo.Member"%>
     <%
     Member loginUser = (Member) session.getAttribute("loginUser");
+    System.out.println(loginUser);
     %>
 <!DOCTYPE html>
 <html>

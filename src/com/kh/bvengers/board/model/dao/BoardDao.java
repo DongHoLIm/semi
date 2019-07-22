@@ -172,10 +172,11 @@ public class BoardDao {
 				at.setFileSrc(rset.getString("FILE_SRC"));
 
 				p = new Product();
-				p.setpMoney(rset.getInt("PRODUCT_MONEY"));
+				p.setProductMoney(rset.getInt("PRODUCT_MONEY"));
 				list.add(at);
 			}
 			hmap = new HashMap<String, Object>();
+			hmap.put("product", p);
 			hmap.put("board", b);
 			hmap.put("attachment", list);
 		} catch (SQLException e) {
