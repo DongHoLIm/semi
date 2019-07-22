@@ -9,9 +9,6 @@
 <meta charset="UTF-8">
 <title>메인메뉴</title>
 <style>
-.container-fluid {
-	margin-bottom:5%;
-}
 </style>
 </head>
 <body>

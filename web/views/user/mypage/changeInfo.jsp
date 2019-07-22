@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.bvengers.user.member.model.vo.Member"%>
+<% 
+	Member loginUser = (Member) session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 h4 {
@@ -28,45 +32,56 @@ input {
 }
 </style>
 </head>
-<header><%@ include file="../hfl/header.jsp" %></header>
 <body>
-
+<header><%@ include file="../hfl/header.jsp" %></header>
+<%  
+	String [] add =(String []) loginUser.getAddress().split(" "); 
+	%>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <br><br><br><br>
-	<h4 align="center"><%-- <%=loginUser.getUserName() %> --%>님의 회원 정보 수정</h4>
+	<h4 align="center"><%=loginUser.getMemberName() %>님의 회원 정보 수정</h4>
 	<br><br>
-	<form action="" method="post">
+	<form action="<%=request.getContextPath()%>changeInfo.mp" method="post">
 		<table align="center" class="change_info">
 			<tr>
 				<td><label>아이디</label></td>
-				<td><input type="text" name="userId" readonly><br></td>
+				<td><input type="text" name="memberId" value="<%=loginUser.getMemberId()%>" readonly><br></td>
 			</tr>
 				<td><br><td>
 			<tr>
 				<td><label>비밀번호&nbsp;</label></td>
-				<td><input type="password" name="password">&nbsp;</td>
-				<td><button type="button" class="btn_update"
-				 onclick="window.open('changePwdPopUp.jsp','window_name','width=600,height=400,location=yes,status=no,scrollbars=no');" class="pwdPopUp">수정</button><br></td>
+				<td><input type="password" name="memberpassword"></td>
 			</tr>
 				<td><br><td>
 			<tr>
 				<td><label>이름</label></td>
-				<td><input type="text" name="userName"></td>
+				<td><input type="text" name="memberName" value="<%=loginUser.getMemberName()%>" readonly></td>
 			</tr>
 				<td><br><td>
 			<tr>
 				<td><label>Email</label></td>
-				<td><input type="email" name="email"></td>
+				<td><input type="email" name="email" value="<%=loginUser.getEmail()%>"></td>
 			</tr>
 				<td><br><td>
 			<tr>
 				<td><label>연락처</label></td>
-				<td><input type="tel" name="phone"></td>
+				<td><input type="tel" name="phone" value="<%=loginUser.getPhone()%>"></td>
 			</tr>
 				<td><br><td>
 			<tr>
-				<td><label>주소</label></td>
-				<td><input type="text" name="address"></td>
+				<td><label>우편번호</label></td>
+				<td><input type="text" name="zipCode" value="<%=add[0]%>"></td>
+				<td><div id="ckZip">검색</div></td>
+			</tr>
+			<tr>
+				<td>주소</td>
+				<td><input type="text" name="address1" value="<%=add[1]%>"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>상세주소</td>
+				<td><input type="text" name="address2" value="<%=add[2]%>"></td>
+				<td></td>
 			</tr>
 			<td><br><td>
 			<tr align="center">

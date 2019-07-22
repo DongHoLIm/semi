@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 body {
@@ -37,12 +39,28 @@ body {
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <div align="center" class="checkInfo">
 <br><br>
-	<form action="" method="">
-		<h4 align="center">아이디 <%--  <%= loginUser.getUserId() %> --%>님</h4><br>
-		<input type="text" placeholder=" 비밀번호를 입력해주세요." name="password" size=20 style="border-radius:5px; height:32px;"><br><br>
-		<input type="submit" value="확인" class="btn_info"><br><br><br><br>
+	<form action="" method="post">
+		<h4 align="center">회원님</h4><br>
+		<input type="text" placeholder=" 비밀번호를 입력해주세요." name="password" id="password" size=20 style="border-radius:5px; height:32px;"><br><br>
+		<button class="btn_info" onclick=checkPwd();>확인</button><br><br><br><br>
 	</form>
 </div>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
+<Script>
+function checkPwd(){
+    var memberPwd = document.getElementById("password");
+	
+	$(".btn_info").click(function(){
+		if($("memberPwd").val() = $("loginUser.MemberPassword").val()){
+			location.href="changeInfo.jsp";
+			
+		}else{
+			alert("비밀번호를 다시 입력해주세요.");
+	};
+	});
+};
+</Script>
+S
+
 </body>
 </html>

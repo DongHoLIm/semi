@@ -43,7 +43,7 @@ public class InsertMemberServlet extends HttpServlet {
 			
 			m.setMemberId(memberId);
 			m.setMemberPassword(memberPassword);
-			m.setMembeName(memberName);
+			m.setMemberName(memberName);
 			m.setEmail(email);
 			m.setAddress(address);
 			m.setPhone(phone);
