@@ -1,15 +1,19 @@
 package com.kh.bvengers.board.model.dao;
 
+import static com.kh.bvengers.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
-import static com.kh.bvengers.common.JDBCTemplate.*;
+
+import com.kh.bvengers.board.model.vo.Board;
 
 public class BoardDao {
 	private Properties prop = new Properties();
@@ -67,5 +71,54 @@ public class BoardDao {
 
 		return list;
 	}
+	//공지사항 작성 삽입
+	public int insertNoticeContent(Connection con, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertNoticeContent");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getPostsTitle());
+			pstmt.setString(2, b.getContents());
+			pstmt.setInt(3, b.getMemberNo());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			
+		return 0;
+	}
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

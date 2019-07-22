@@ -180,6 +180,7 @@ public class Member {
 				+ memberDiv + ", accountHolder=" + accountHolder + ", bankCode=" + bankCode + ", accountNo=" + accountNo
 				+ ", gradeCode=" + gradeCode + ", sellCount=" + sellCount + "]";
 	}
+
 	
 	
 }
