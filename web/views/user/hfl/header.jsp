@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.bvengers.user.member.model.vo.Member"%>
+    <%
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,11 +49,22 @@
           </span>
         </div>
       </form>
+      <% if(loginUser == null) {%>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
       </ul>
+      <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
+       <ul class="nav navbar-nav navbar-right">
+        <li><a onclick="logout();"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
+      </ul>
+      <%}%>
     </div>
   </div>
+  <script>
+  	function logout(){
+		location.href="<%=request.getContextPath()%>/logout.me";
+  	}
+  </script>
 </nav>
 </body>
 </html>

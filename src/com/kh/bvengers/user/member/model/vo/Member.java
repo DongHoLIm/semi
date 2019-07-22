@@ -12,8 +12,8 @@ public class Member {
 	private String phone;
 	private Date enrollDate;
 	private Date retireDate;
-	private char retire;
-	private char memberDiv;
+	private String retire;
+	private String memberDiv;
 	private String accountHolder;
 	private String bankCode;
 	private String accountNo;
@@ -23,7 +23,9 @@ public class Member {
 	public Member() {}
 
 	public Member(String memberNo, String memberId, String memberPassword, String memberName, String email,
-			String address, String phone, Date enrollDate, Date retireDate, char retire, char memberDiv,
+
+			String address, String phone, Date enrollDate, Date retireDate, String retire, String memberDiv,
+
 			String accountHolder, String bankCode, String accountNo, String gradeCode, int sellCount) {
 		super();
 		this.memberNo = memberNo;
@@ -116,19 +118,19 @@ public class Member {
 		this.retireDate = retireDate;
 	}
 
-	public char getRetire() {
+	public String getRetire() {
 		return retire;
 	}
 
-	public void setRetire(char retire) {
+	public void setRetire(String retire) {
 		this.retire = retire;
 	}
 
-	public char getMemberDiv() {
+	public String getMemberDiv() {
 		return memberDiv;
 	}
 
-	public void setMemberDiv(char memberDiv) {
+	public void setMemberDiv(String memberDiv) {
 		this.memberDiv = memberDiv;
 	}
 
@@ -175,7 +177,9 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
-				+ ", memberName=" + memberName + ", email=" + email + ", address=" + address + ", phone=" + phone
+
+				+ ", membeName=" + memberName + ", email=" + email + ", address=" + address + ", phone=" + phone
+
 				+ ", enrollDate=" + enrollDate + ", retireDate=" + retireDate + ", retire=" + retire + ", memberDiv="
 				+ memberDiv + ", accountHolder=" + accountHolder + ", bankCode=" + bankCode + ", accountNo=" + accountNo
 				+ ", gradeCode=" + gradeCode + ", sellCount=" + sellCount + "]";
