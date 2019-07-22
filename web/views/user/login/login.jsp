@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 .btn_login{ height: 40px; width:380px;} 
 a{text-decoration:none; color:black; font-weight:bold;}
@@ -38,13 +39,26 @@ a{text-decoration:none; color:black; font-weight:bold;}
 					<a href="/sp/views/user/join/join.jsp" class="link_join">회원가입</a>
 					</span>
 					
-					       <h4 class="tit">소셜 간편 구입</h4>
-            <ul class="login_sns_list">
-                <li>
-                	<!-- 카카오api연결 -->
-                   <a href="#" onclick="oAuthLogin('kakao', null)"><img src="../images/kakaoicon.PNG" id="kakao"></a>
-                </li>
-            </ul>
+					       <h4 class="tit">소셜 간편 가입</h4>
+            <a id="kakao-login-btn"></a>
+    <a href="http://developers.kakao.com/logout"></a>
+    <script type='text/javascript'>
+        //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('3cf2af07401ef98753fbbec7ae9c35cd');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function (authObj) {
+                alert(JSON.stringify(authObj));
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+      //]]>
+        
+    </script>
 					
 			</div>
 	<script>

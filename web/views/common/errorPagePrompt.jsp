@@ -11,10 +11,9 @@ String msg = (String)request.getAttribute("msg");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<h1><%=msg %></h1>
 	<script>
 	$(function(){
-		alert(msg);
+		alert("<%=msg%>);
 	});
 	</script>
 

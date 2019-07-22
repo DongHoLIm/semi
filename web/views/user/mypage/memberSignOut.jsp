@@ -71,7 +71,7 @@
 	<br>
 	<br>
 	<div align="center" class="d1">
-			<button type="button" class="btn_so1" onclick="<%=request.getContextPath()%>/views/login/login.jsp" disabled>회원탈퇴</button>
+			<button type="button" class="btn_so1" disabled>회원탈퇴</button>
 			<button type="button" class="btn_so2">취소</button>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
@@ -85,6 +85,10 @@
 					$(".btn_so1").attr("disabled", "disabled");
 				}
 				})
+			});
+			
+			$(".btn_so1").click(function(){
+				location.href="<%=request.getContextPath()%>/deleteMember.mp";
 			});
 			
 		</script>
