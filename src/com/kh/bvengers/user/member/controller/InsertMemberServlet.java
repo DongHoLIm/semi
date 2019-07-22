@@ -25,7 +25,6 @@ public class InsertMemberServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("memberPassword");
 		String memberPwd2 = request.getParameter("memberPassword2");
-		
 		String memberName = request.getParameter("memberName");
 		String email = request.getParameter("email");
 		String address1 = request.getParameter("address1");
@@ -37,7 +36,6 @@ public class InsertMemberServlet extends HttpServlet {
 		
 		Member m = new Member();
 		
-		
 		if(memberPwd.equals(memberPwd2)) {
 			String memberPassword = memberPwd2;
 			
@@ -47,7 +45,7 @@ public class InsertMemberServlet extends HttpServlet {
 			m.setEmail(email);
 			m.setAddress(address);
 			m.setPhone(phone);
-			
+			System.out.println(address);
 			int result = new MemberService().insertMember(m);
 			
 			if(result>0) {

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    String id = (String)request.getAttribute("id");
+    %>
 
 <!DOCTYPE html>
 <html>
@@ -76,29 +79,20 @@
 			<br><br>
 			
 			
-			<label for="searchPhone">이메일로 찾기</label>
+			<label for="searchPhone">고객님의 아이디는</label>
 			
 			<br>
 			
-			<input type="text" placeholder="이름" name="userName" id="userName" size=30><br>
-			<input type="text" placeholder="휴대폰" name="phone" id="phone" size=30><br>
-			<input type="tel" placeholder="이메일" name="email" id="email" size=30><br>
-			
+			<h4><%=id %></h4>			
 			
 			<br><br>
 			
-			<input type="submit" value="확인" class="btn_id" onclick="findId();"> &nbsp; &nbsp;
-			<input type="reset" value="취소" class="btn_id">
 			<br><br>
 		</form>
 	</div>
 	<br><br><br><br><br><br><br>
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
-<script>
-function findId(){
-	$("form").submit();
-}
-</script>
+
      
 	
 </body>
