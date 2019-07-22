@@ -23,7 +23,9 @@ public class Member {
 	public Member() {}
 
 	public Member(String memberNo, String memberId, String memberPassword, String memberName, String email,
+
 			String address, String phone, Date enrollDate, Date retireDate, String retire, String memberDiv,
+
 			String accountHolder, String bankCode, String accountNo, String gradeCode, int sellCount) {
 		super();
 		this.memberNo = memberNo;
@@ -175,7 +177,9 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
+
 				+ ", membeName=" + memberName + ", email=" + email + ", address=" + address + ", phone=" + phone
+
 				+ ", enrollDate=" + enrollDate + ", retireDate=" + retireDate + ", retire=" + retire + ", memberDiv="
 				+ memberDiv + ", accountHolder=" + accountHolder + ", bankCode=" + bankCode + ", accountNo=" + accountNo
 				+ ", gradeCode=" + gradeCode + ", sellCount=" + sellCount + "]";
