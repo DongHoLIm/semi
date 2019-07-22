@@ -93,6 +93,35 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int changeMember(Connection con, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("changeMember");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, m.getMemberPassword());
+			pstmt.setString(2, m.getEmail());
+			pstmt.setString(3, m.getAddress());
+			pstmt.setString(4, m.getPhone());
+			pstmt.setString(5, m.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+
 	public ArrayList<Member> selectAll(Connection con) {
 		ArrayList<Member> list = null;
 		Statement stmt = null;

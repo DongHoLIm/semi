@@ -27,6 +27,20 @@ public class MemberService {
 		return result;
 	}
 
+
+	public int changeMember(Member m) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().changeMember(con, m);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		return result;
+
 	public ArrayList<Member> selectAll() {
 		Connection con = getConnection();
 		ArrayList<Member> list = new MemberDao().selectAll(con);
@@ -62,6 +76,7 @@ public class MemberService {
 		Member m = new MemberDao().findUserId(con,memberName,phone,email);
 		close(con);
 		return m;
+
 	}
 
 }
