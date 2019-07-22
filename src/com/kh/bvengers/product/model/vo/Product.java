@@ -1,74 +1,73 @@
 package com.kh.bvengers.product.model.vo;
 
-import java.sql.Date;
-
 public class Product {
-	private String pCode;
-	private String pName;
-	private int pMoney;
-	private String pCate;
-	private String userId;
-	private Date keepDate;
+	private String productCode;
+	private String productName;
+	private int productMoney;
+	private String productCate;
+	private String memberNo;
+	private String keepDate;
 	private String postId;
 	
 	public Product() {}
 
-	public Product(String pCode, String pName, int pMoney, String pCate, String userId, Date keepDate, String postId) {
+	public Product(String productCode, String productName, int productMoney, String productCate, String memberNo,
+			String keepDate, String postId) {
 		super();
-		this.pCode = pCode;
-		this.pName = pName;
-		this.pMoney = pMoney;
-		this.pCate = pCate;
-		this.userId = userId;
+		this.productCode = productCode;
+		this.productName = productName;
+		this.productMoney = productMoney;
+		this.productCate = productCate;
+		this.memberNo = memberNo;
 		this.keepDate = keepDate;
 		this.postId = postId;
 	}
 
-	public String getpCode() {
-		return pCode;
+	public String getProductCode() {
+		return productCode;
 	}
 
-	public void setpCode(String pCode) {
-		this.pCode = pCode;
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
 	}
 
-	public String getpName() {
-		return pName;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setpName(String pName) {
-		this.pName = pName;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public int getpMoney() {
-		return pMoney;
+	public int getProductMoney() {
+		return productMoney;
 	}
 
-	public void setpMoney(int pMoney) {
-		this.pMoney = pMoney;
+	public void setProductMoney(int productMoney) {
+		this.productMoney = productMoney;
 	}
 
-	public String getpCate() {
-		return pCate;
+	public String getProductCate() {
+		return productCate;
 	}
 
-	public void setpCate(String pCate) {
-		this.pCate = pCate;
+	public void setProductCate(String productCate) {
+		this.productCate = productCate;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getMemberNo() {
+		return memberNo;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberNo(String memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public Date getKeepDate() {
+	public String getKeepDate() {
 		return keepDate;
 	}
 
-	public void setKeepDate(Date keepDate) {
+	public void setKeepDate(String keepDate) {
 		this.keepDate = keepDate;
 	}
 
@@ -82,10 +81,10 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [pCode=" + pCode + ", pName=" + pName + ", pMoney=" + pMoney + ", pCate=" + pCate + ", userId="
-				+ userId + ", keepDate=" + keepDate + ", postId=" + postId + "]";
+		return "Product [productCode=" + productCode + ", productName=" + productName + ", productMoney=" + productMoney
+				+ ", productCate=" + productCate + ", memberNo=" + memberNo + ", keepDate=" + keepDate + ", postId="
+				+ postId + "]";
 	}
-	
-	
+
 	
 }

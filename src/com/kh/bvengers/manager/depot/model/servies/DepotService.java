@@ -18,4 +18,47 @@ public class DepotService {
 		return list;
 	}
 
+	public int requsetCheck(Depot d) {
+		Connection con =getConnection();
+		
+		int result = new DepotDao().insertLocation(con,d);
+		int num =0;
+		if(result>0) {
+			result = new DepotDao().updateStatus(con,d);
+			if(result>0) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+		}else {
+			result = new DepotDao().updateLocation(con,d);
+			if(result>0) {
+				result = new DepotDao().updateStatus(con,d);
+				if(result>0) {
+					commit(con);
+				}else {
+					rollback(con);
+				}
+			}
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<Depot> selectAllList() {
+		Connection con = getConnection();
+		ArrayList<Depot> list = new DepotDao().selectAllList(con);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Depot> selectBarcodeAllList() {
+		Connection con = getConnection();
+		ArrayList<Depot> list = new DepotDao().selectBarcodeAllList(con);
+		close(con);
+		return list;
+	}
+
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.depot.model.vo.*"%>
+    <%
+    	ArrayList<Depot> list = (ArrayList<Depot>) request.getAttribute("list");
+    	
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +25,11 @@
 		text-align:center;
 		
 	}
-	th{
+	#th3{
 		border:1px solid black;
-		text-align:center;
+		text-align: center;
+		background: black;
+		color:white;
 	}
 	form{
 		float:right;
@@ -79,22 +85,24 @@
 	<br>
 	<br><br>
 		<table id="depotMain" align="center">
-			<tr>
-				<th id=""></th>
-				<th>번호</th>
-				<th>상품코드</th>
-				<th>위치관리번호</th>
-				<th>적치 일자</th>
-				<th>출고 일자</th>
+			<tr >
+				<th id="th3">번호</th>
+				<th id="th3">상품코드</th>
+				<th id="th3">상품명</th>
+				<th id="th3">위치관리번호</th>
+				<th id="th3">적치 일자</th>
+				<th id="th3">출고 일자</th>
 			</tr>
+			<%for(Depot d :list) {%>
 			<tr>
-				<td></td>
-				<td><a href="">1</a></td>
-				<td><a href="">p-1</a></td>
-				<td><a href="">c-3</a></td>
-				<td><a href="">2017/05/06</a></td>
-				<td><a href="">null</a></td>
+				<td><label for=""><%=d.getProductNumber() %></label></td>
+				<td><a href=""><%=d.getProductCode() %></a></td>
+				<td><a href=""><%=d.getProductName() %></a></td>
+				<td><a href=""><%=d.getLocationCode() %></a></td>
+				<td><a href=""><%=d.getCheckDate() %></a></td>
+				<td><a href=""><%=d.getReleaseDate() %></a></td>
 			</tr>
+			<%} %>
 		</table>
 	
 </body>

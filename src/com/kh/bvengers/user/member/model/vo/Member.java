@@ -6,7 +6,7 @@ public class Member {
 	private String memberNo;
 	private String memberId;
 	private String memberPassword;
-	private String membeName;
+	private String memberName;
 	private String email;
 	private String address;
 	private String phone;
@@ -22,14 +22,14 @@ public class Member {
 	
 	public Member() {}
 
-	public Member(String memberNo, String memberId, String memberPassword, String membeName, String email,
+	public Member(String memberNo, String memberId, String memberPassword, String memberName, String email,
 			String address, String phone, Date enrollDate, Date retireDate, char retire, char memberDiv,
 			String accountHolder, String bankCode, String accountNo, String gradeCode, int sellCount) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
-		this.membeName = membeName;
+		this.memberName = memberName;
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
@@ -68,12 +68,12 @@ public class Member {
 		this.memberPassword = memberPassword;
 	}
 
-	public String getMembeName() {
-		return membeName;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setMembeName(String membeName) {
-		this.membeName = membeName;
+	public void setMemberName(String membeName) {
+		this.memberName = membeName;
 	}
 
 	public String getEmail() {
@@ -175,12 +175,12 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
-				+ ", membeName=" + membeName + ", email=" + email + ", address=" + address + ", phone=" + phone
+				+ ", membeName=" + memberName + ", email=" + email + ", address=" + address + ", phone=" + phone
 				+ ", enrollDate=" + enrollDate + ", retireDate=" + retireDate + ", retire=" + retire + ", memberDiv="
 				+ memberDiv + ", accountHolder=" + accountHolder + ", bankCode=" + bankCode + ", accountNo=" + accountNo
 				+ ", gradeCode=" + gradeCode + ", sellCount=" + sellCount + "]";
 	}
-
 	
 	
 }
+

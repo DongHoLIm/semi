@@ -10,11 +10,11 @@ Member loginUser = (Member) session.getAttribute("loginUser");
 <title>Insert title here</title>
 <style>
 #board{
-	text-align:center;
+   text-align:center;
 }
 #wirte{
-	position: absolute;
-	right: 30px;
+   position: absolute;
+   right: 30px;
 }
 
 .spot {
@@ -74,8 +74,8 @@ Member loginUser = (Member) session.getAttribute("loginUser");
 <body>
 <head><%@include file ="../hfl/header.jsp" %></head>
 <div class="container">
-	<br>
-	<br>
+   <br>
+   <br>
   <h2 id="board">공지사항</h2>
   <table class="table">
       <thead>
@@ -95,7 +95,6 @@ Member loginUser = (Member) session.getAttribute("loginUser");
         <td>writer</td>
         <td>2019-07-06</td>
       </tr>
-
     </tbody>
   </table>
   <%if (loginUser != null && loginUser.getMemberId().equals("admin")){%>
@@ -103,17 +102,18 @@ Member loginUser = (Member) session.getAttribute("loginUser");
   	<button onclick="location.href='boarderwriter.jsp'">작성하기</button>
 	</div>
 	<%}%>
+
 </div>
 <div class="container">
-	<br>
-	<br>
-	<hr>
+   <br>
+   <br>
+   <hr>
   <h2 id="board">게시판</h2>
   <form action="" align="right">
   <select>
-  	<option value="title">제목</option>
-  	<option value="writer">작성자</option>
-  	<option value="wdate">날짜</option>
+     <option value="title">제목</option>
+     <option value="writer">작성자</option>
+     <option value="wdate">날짜</option>
   </select>
   <input type="text">
   <input type="submit" value="검색">
@@ -192,17 +192,17 @@ Member loginUser = (Member) session.getAttribute("loginUser");
   </table>
 </div>
 <center>
-	<ul class="pagination">
-	  <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-	  <li class="page-item"><a class="page-link" href="#">1</a></li>
-	  <li class="page-item"><a class="page-link" href="#">2</a></li>
-	  <li class="page-item"><a class="page-link" href="#">3</a></li>
-	  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-	<!--   <li><input type="button" id="wirte" value="글작성" onclick="location.href='boarderwriter.jsp'"></li> -->
-	</ul>
-	<div id="workarea">
+   <ul class="pagination">
+     <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+     <li class="page-item"><a class="page-link" href="#">1</a></li>
+     <li class="page-item"><a class="page-link" href="#">2</a></li>
+     <li class="page-item"><a class="page-link" href="#">3</a></li>
+     <li class="page-item"><a class="page-link" href="#">다음</a></li>
+   <!--   <li><input type="button" id="wirte" value="글작성" onclick="location.href='boarderwriter.jsp'"></li> -->
+   </ul>
+   <div id="workarea">
   <div class="position">
-	
+   
     <div class="svg-wrapper">
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" />
@@ -216,5 +216,4 @@ Member loginUser = (Member) session.getAttribute("loginUser");
 </body>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </html>
-
 

@@ -13,7 +13,7 @@ String msg = (String)request.getAttribute("msg");
 <body>
 	<script>
 	$(function(){
-		alert(msg);
+		alert("<%=msg%>);
 	});
 	</script>
 
