@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*"%>
-<%-- <%
+    pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*,com.kh.bvengers.user.member.model.vo.*"%>
+<%
 Member loginUser = (Member) session.getAttribute("loginUser");
-%> --%>
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -98,10 +98,11 @@ Member loginUser = (Member) session.getAttribute("loginUser");
     </tbody>
   </table>
   <%if (loginUser != null && loginUser.getMemberId().equals("admin")){%>
-  <!-- <div style="align :center"> -->
-     <button onclick="location.href='boarderwriter.jsp'">작성하기</button>
-   <!-- </div> -->
-   <%}%>
+  <div style="align :center">
+  	<button onclick="location.href='boarderwriter.jsp'">작성하기</button>
+	</div>
+	<%}%>
+
 </div>
 <div class="container">
    <br>
