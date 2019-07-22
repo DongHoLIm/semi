@@ -14,8 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .outer {
-	width: 1200px;
-	height: 700px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
@@ -48,7 +47,7 @@
 	font-size: 1.5em;
 	font-weight: bold;
 	margin-top: 5px;
-	text-align:center;
+	text-align: center;
 }
 
 #priceLabels {
@@ -57,65 +56,66 @@
 }
 
 .productImg {
-  font-family: 'Quattrocento', Arial, sans-serif;
-  position: relative;
-  overflow: hidden;
-  margin: 10px;
-  color: #141414;
-  text-align: left;
+	font-family: 'Quattrocento', Arial, sans-serif;
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
 }
+
 .productImg * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.35s ease;
+	transition: all 0.35s ease;
 }
+
 .productImg figcaption {
-text-align:center;
-  position: absolute;
-  top: calc(77%);
-  width: 100%;
-  background-color: #ffffff;
-  padding: 15px 25px 65px;
-	opacity : 0.8;
-	}
+	text-align: center;
+	position: absolute;
+	top: calc(77%);
+	width: 100%;
+	background-color: #ffffff;
+	padding: 15px 25px 65px;
+	opacity: 0.8;
+}
+
 .productImg figcaption:before {
-  position: absolute;
-  content: '';
-  z-index: 2;
-  bottom: 100%;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  opcity : 1;
-  background-image: -webkit-linear-gradient(top, transparent 0%, #ffffff 100%);
-  background-image: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+	position: absolute;
+	content: '';
+	z-index: 2;
+	bottom: 100%;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	opcity: 1;
+	background-image: -webkit-linear-gradient(top, transparent 0%, #ffffff 100%);
+	background-image: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
 }
+
 .productImg p {
-  margin: 0 0 10px;
+	margin: 0 0 10px;
 }
+
 .productImg p {
 	margin-top: 15px;
-  font-size: 1.1em;
-  letter-spacing: 1px;
-  opacity: 0.9;
+	font-size: 1.1em;
+	letter-spacing: 1px;
+	opacity: 0.9;
 }
+
 .productImg a {
-  position: absolute;
-  z-index: 2;
+	position: absolute;
+	z-index: 2;
 }
-.productImg:hover figcaption,
-.productImg.hover figcaption {
-  top: 230px;
+
+.productImg:hover figcaption, .productImg.hover figcaption {
+	top: 230px;
 }
 </style>
 </head>
-	<!-- header 영역 -->
-
 <body>
 <header><%@ include file="../hfl/header.jsp" %></header>
 <div class="outer">
-
 	<br />
 	<div class="thumbnailArea">
 			<% for(int i = 0; i < list.size(); i++) {
@@ -138,38 +138,44 @@ text-align:center;
 			</figure>
 		</div>
 		<% } %>
-		<script>
-			$(function(){
-				$(".thumb-list").click(function(){
-					var namu = $(this).children().children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/selectOne.tn?num=" + num;
-				});
-			});
-
-			$(function() {
-				$(".productImg").each(function(i){
-					$(this).mouseover(function(){
-						$(this)+$(".figP").hide();
-					});
-					$(this).mouseout(function(){
-						$(this)+$(".figP").show();
-					});
-				});
-			});
-		</script>
+		<form action="<%= request.getContextPath() %>/search.pd" id="searchForm">
 		<div class="searchArea">
 			<select name="search" id="search">
 				<option value="title">제목</option>
 				<option value="category">카테고리</option>
 				<option value="content">내용</option>
 			</select>
-			<input type="search" />
-			<button type="submit">검색하기</button>
+			<input type="search" name="searchProduct" />
+			<button type="submit" onclick="search();">검색하기</button>
 		</div>
+		</form>
 	</div>
 </div>
 
 	<!-- footer 영역 -->
 	<%@ include file="../hfl/footer.jsp" %>
+			<script>
+			$(function(){
+				$(".thumb-list").click(function(){
+					var num = $(this).children().children().eq(0).val();
+					location.href="<%=request.getContextPath()%>/selectOne.pd?num=" + num;
+				});
+			});
+
+				$(function() {
+					$(".figP").hide();
+					$(".productImg").each(function(i) {
+						$(this).mouseover(function() {
+							$(".figP").eq(i).show();
+						});
+						$(this).mouseout(function() {
+							$(".figP").eq(i).hide();
+						});
+					});
+				});
+				function search() {
+					$("form").submit();
+				}
+			</script>
 </body>
 </html>

@@ -12,11 +12,11 @@ public class RequestCheckStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public RequestCheckStatus() {
         super();
-        
+
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String productCode = request.getParameter("")
-	
+		String productCode = request.getParameter("");
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

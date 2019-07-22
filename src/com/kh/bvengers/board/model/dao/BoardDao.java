@@ -1,15 +1,20 @@
 package com.kh.bvengers.board.model.dao;
 
+import static com.kh.bvengers.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
-import static com.kh.bvengers.common.JDBCTemplate.*;
+
+import com.kh.bvengers.board.model.vo.Attachment;
+import com.kh.bvengers.board.model.vo.Board;
 
 public class BoardDao {
 	private Properties prop = new Properties();
@@ -20,7 +25,6 @@ public class BoardDao {
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -57,7 +61,6 @@ public class BoardDao {
 				list.add(hmap);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -66,6 +69,122 @@ public class BoardDao {
 
 
 		return list;
+	}
+
+
+	public ArrayList<HashMap<String, Object>> searchProductByTitle(Connection con, String value) {
+		PreparedStatement pstmt = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap< String, Object> hmap = null;
+		ResultSet rset = null;
+		String find = '%' + value + '%';
+
+		String query = prop.getProperty("searchByTitle");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, find);
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<HashMap<String, Object>>();
+
+			while(rset.next()) {
+				hmap = new HashMap<String, Object>();
+
+				hmap.put("fileNo", rset.getString("FILE_NO"));
+				hmap.put("originFileName", rset.getString("ORIGIN_FILE_NAME"));
+				hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
+				hmap.put("fileSrc", rset.getString("FILE_SRC"));
+				hmap.put("saveDate", rset.getDate("SAVE_DATE"));
+				hmap.put("fileDiv", rset.getString("FILE_DIV"));
+				hmap.put("postsId", rset.getString("POSTS_ID"));
+				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
+				hmap.put("title", rset.getString("PRODUCT_NAME"));
+				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
+				hmap.put("writer", rset.getString("MEMBER_NO"));
+				hmap.put("contents", rset.getString("CONTENTS"));
+
+				list.add(hmap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int updateCount(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("updateCount");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, num);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public HashMap<String, Object> selectOneProduct(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> hmap = null;
+		Board b = null;
+
+		Attachment at = null;
+		ArrayList<Attachment> list = null;
+
+		String query = prop.getProperty("selectOneProduct");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Attachment>();
+
+			while(rset.next()) {
+				b = new Board();
+				b.setWriter(rset.getString("MEMBER_ID"));
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setPostsTitle(rset.getString("PRODUCT_NAME"));
+				b.setContents(rset.getString("CONTENTS"));
+				b.setMemberNo(rset.getInt("MEMBER_NO"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
+
+				at = new Attachment();
+				at.setFileNo(rset.getString("FILE_NO"));
+				at.setOrginFileName(rset.getString("ORIGIN_FILE_NAME"));
+				at.setNewFileName(rset.getString("NEW_FILE_NAME"));
+				at.setFileSrc(rset.getString("FILE_SRC"));
+
+				list.add(at);
+			}
+			hmap = new HashMap<String, Object>();
+			hmap.put("board", b);
+			hmap.put("attachment", list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+
+		return hmap;
 	}
 
 }
