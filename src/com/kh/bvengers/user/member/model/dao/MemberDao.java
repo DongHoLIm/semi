@@ -299,44 +299,49 @@ public class MemberDao {
 
 		return list;
 	}
-	public ArrayList<Member> selectList(Connection con) {
+	public ArrayList<Member> selectList(Connection con, int currentPage, int limit) {
 		ArrayList<Member> mlist = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("selectList");
-
+		String query = prop.getProperty("selectListwithPageing");
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage-1)*limit +1;
+			int endRow = startRow + limit-1;
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			
 			mlist = new ArrayList<Member>();
 			while(rset.next()) {
 			Member m = new Member();
 
-			m.setMemberNo(rset.getString("MEMBER_NO"));
 			m.setMemberId(rset.getString("MEMBER_ID"));
-			m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+			//m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
 			m.setMemberName(rset.getString("MEMBER_NAME"));
-			m.setEmail(rset.getString("EMAIL"));
+			//m.setEmail(rset.getString("EMAIL"));
 			m.setAddress(rset.getString("ADDRESS"));
 			m.setPhone(rset.getString("PHONE"));
 			m.setEnrollDate(rset.getDate("ENROLL_DATE"));
-			m.setRetireDate(rset.getDate("RETIRE_DATE"));
-			m.setRetire(rset.getString("RETIRE"));
-			m.setMemberDiv(rset.getString("MEMBER_DIV"));
-			m.setAccountHolder(rset.getString("ACCOUNT_HOLDER"));
-			m.setBankCode(rset.getString("BANK_CODE"));
-			m.setAccountNo(rset.getString("ACCOUNT_NO"));
+			//m.setRetireDate(rset.getDate("RETIRE_DATE"));
+			//m.setRetire(rset.getString("RETIRE"));
+			//m.setMemberDiv(rset.getString("MEMBER_DIV"));
+			//m.setAccountHolder(rset.getString("ACCOUNT_HOLDER"));
+			//m.setBankCode(rset.getString("BANK_CODE"));
+			//m.setAccountNo(rset.getString("ACCOUNT_NO"));
 			m.setGradeCode(rset.getString("GRADE_CODE"));
 			m.setSellCount(rset.getInt("SELL_COUNT"));
-
+			
+			
 			mlist.add(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
 			close(rset);
-			close(stmt);
 		}
 		return mlist;
 	}
@@ -383,6 +388,70 @@ public class MemberDao {
 		}
 
 
+		return m;
+	}
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		
+		String query = prop.getProperty("selectListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount=rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return listCount;
+	}
+	public Member showDetail(Connection con, String memberId) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("showDetail");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberNo(rset.getString("MEMBER_NO"));
+				m.setMemberId(rset.getString("MEMBER_ID"));
+				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+				m.setMemberName(rset.getString("MEMBER_NAME"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setAddress(rset.getString("ADDRESS"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setRetireDate(rset.getDate("RETIRE_DATE"));
+				m.setRetire(rset.getString("RETIRE"));
+				m.setMemberDiv(rset.getString("MEMBER_DIV"));
+				m.setAccountHolder(rset.getString("ACCOUNT_HOLDER"));
+				m.setBankCode(rset.getString("BANK_CODE"));
+				m.setAccountNo(rset.getString("ACCOUNT_NO"));
+				m.setGradeCode(rset.getString("GRADE_CODE"));
+				m.setSellCount(rset.getInt("SELL_COUNT"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
 		return m;
 	}
 

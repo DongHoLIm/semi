@@ -1,7 +1,9 @@
 package com.kh.bvengers.user.member.model.vo;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.Statement;
 
 public class Member implements Serializable {
 	private String memberNo;
@@ -184,5 +186,7 @@ public class Member implements Serializable {
 				+ memberDiv + ", accountHolder=" + accountHolder + ", bankCode=" + bankCode + ", accountNo=" + accountNo
 				+ ", gradeCode=" + gradeCode + ", sellCount=" + sellCount + "]";
 	}
+
+	
 
 }

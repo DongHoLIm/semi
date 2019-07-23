@@ -45,7 +45,6 @@ public class InsertMemberServlet extends HttpServlet {
 			m.setEmail(email);
 			m.setAddress(address);
 			m.setPhone(phone);
-			System.out.println(address);
 			int result = new MemberService().insertMember(m);
 			
 			if(result>0) {

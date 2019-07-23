@@ -3,6 +3,12 @@
 	<%
 	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
     Member loginUser = (Member) session.getAttribute("loginUser");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 	%>
 <!DOCTYPE html>
 <html>
@@ -86,9 +92,9 @@ input-align:center;
 		</form>
 		<div class="btns">
 		선택회원을
-		<button value="블랙리스트"
+		<button value="블랙리스트" id="blacklist"
 			style="align: center; border-radius: 5px; background-color: black; color: white;">블랙리스트</button>
-		<button value="활동정지"
+		<button value="활동정지" id="stop"
 			style="border-radius: 5px; background-color: black; color: white;">활동정지</button>
 		</div>
 		<br>
@@ -104,6 +110,7 @@ input-align:center;
 					<th class="th">주소</th>
 					<th class="th">가입일</th>
 					<th class="th">판매횟수</th>
+					<th class="th">회원 상세 조회</th>
 				</tr>
 				
 			</table>
@@ -136,10 +143,23 @@ input-align:center;
 		 $tr.append($addressTd);
 		 $tr.append($enrollDateTd);
 		 $tr.append($sellCountTd);
+		 $tr.append("<button id='mbdetail'>상세보기</button>");
 		 
+		
+		 });
+		
+		 
+		 
+		 $("#mbdetail").click(function(){
+			var mi = $(this).parent().children().eq(1).text();
+		 location.href='<%=request.getContextPath()%>/mbdetail.me?mi='+mi;
+		 });
+
 		 $tableBody.append($tr);
 		<%}%>
 	});
+	
+
 	$("#chkAll").on("click", function() {
 	      var chkAll = $(this).is(":checked");
 	      if (chkAll)
@@ -147,6 +167,35 @@ input-align:center;
 	      else
 	        $("#depotMain input:checkbox").prop("checked", false);
 	    });
+	
 </script>
+<div class="pagingArea" align="center">
+	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1){ %>
+			<button disabled><</button>
+			<% }else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+				if(currentPage == p){
+			%>
+					<button disabled><%= p %></button>
+			<% } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=p%>'"><%= p %></button>
+			<% 
+				}
+			   } 
+			%>
+			
+			<% if(currentPage >= maxPage){ %>
+			<button disabled>></button>
+			<% }else{ %>
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=maxPage%>'">>></button>
+</div>
 </body>
 </html>
