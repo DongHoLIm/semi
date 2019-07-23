@@ -57,8 +57,9 @@ public class BoardDao {
 				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
 				hmap.put("title", rset.getString("PRODUCT_NAME"));
 				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
-				hmap.put("writer", rset.getString("MEMBER_NO"));
+				hmap.put("writer", rset.getString("MEMBER_NAME"));
 				hmap.put("contents", rset.getString("CONTENTS"));
+				hmap.put("category", rset.getString("CATEGORY_DIV"));
 				list.add(hmap);
 			}
 		} catch (SQLException e) {
@@ -291,6 +292,92 @@ public class BoardDao {
 		}
 
 
+
+	public ArrayList<HashMap<String, Object>> searchProductByCategory(Connection con, String value) {
+		PreparedStatement pstmt = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap< String, Object> hmap = null;
+		ResultSet rset = null;
+		String find = '%' + value + '%';
+
+		String query = prop.getProperty("searchByCategory");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, find);
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<HashMap<String, Object>>();
+
+			while(rset.next()) {
+				hmap = new HashMap<String, Object>();
+
+				hmap.put("fileNo", rset.getString("FILE_NO"));
+				hmap.put("originFileName", rset.getString("ORIGIN_FILE_NAME"));
+				hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
+				hmap.put("fileSrc", rset.getString("FILE_SRC"));
+				hmap.put("saveDate", rset.getDate("SAVE_DATE"));
+				hmap.put("fileDiv", rset.getString("FILE_DIV"));
+				hmap.put("postsId", rset.getString("POSTS_ID"));
+				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
+				hmap.put("title", rset.getString("PRODUCT_NAME"));
+				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
+				hmap.put("writer", rset.getString("MEMBER_NO"));
+				hmap.put("contents", rset.getString("CONTENTS"));
+
+				list.add(hmap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<HashMap<String, Object>> searchProductByContents(Connection con, String value) {
+		PreparedStatement pstmt = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap< String, Object> hmap = null;
+		ResultSet rset = null;
+		String find = '%' + value + '%';
+
+		String query = prop.getProperty("searchByContents");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, find);
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<HashMap<String, Object>>();
+
+			while(rset.next()) {
+				hmap = new HashMap<String, Object>();
+
+				hmap.put("fileNo", rset.getString("FILE_NO"));
+				hmap.put("originFileName", rset.getString("ORIGIN_FILE_NAME"));
+				hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
+				hmap.put("fileSrc", rset.getString("FILE_SRC"));
+				hmap.put("saveDate", rset.getDate("SAVE_DATE"));
+				hmap.put("fileDiv", rset.getString("FILE_DIV"));
+				hmap.put("postsId", rset.getString("POSTS_ID"));
+				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
+				hmap.put("title", rset.getString("PRODUCT_NAME"));
+				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
+				hmap.put("writer", rset.getString("MEMBER_NO"));
+				hmap.put("contents", rset.getString("CONTENTS"));
+
+				list.add(hmap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 
 }
 

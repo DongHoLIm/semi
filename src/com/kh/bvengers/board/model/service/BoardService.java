@@ -20,14 +20,6 @@ public class BoardService {
 		return list;
 	}
 
-	public ArrayList<HashMap<String, Object>> searchProductByTitle(String value) {
-		// TODO Auto-generated method stub
-		Connection con = getConnection();
-		ArrayList<HashMap<String, Object>> list = new BoardDao().searchProductByTitle(con, value);
-		close(con);
-		return list;
-	}
-
 	public HashMap<String, Object> selectOneProduct(int num) {
 		Connection con = getConnection();
 		HashMap<String, Object> hmap = null;
@@ -71,6 +63,28 @@ public class BoardService {
 			
 			return result;
 		}
+
+	public ArrayList<HashMap<String, Object>> searchProductByTitle(String value) {
+		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		ArrayList<HashMap<String, Object>> list = new BoardDao().searchProductByTitle(con, value);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<HashMap<String, Object>> searchProductByCategory(String value) {
+		Connection con = getConnection();
+		ArrayList<HashMap<String, Object>> list = new BoardDao().searchProductByCategory(con, value);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<HashMap<String, Object>> searchProductByContent(String value) {
+		Connection con = getConnection();
+		ArrayList<HashMap<String, Object>> list = new BoardDao().searchProductByContents(con, value);
+		close(con);
+		return list;
+	}
 
 }
 

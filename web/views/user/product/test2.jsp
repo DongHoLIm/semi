@@ -1,9 +1,11 @@
+<%@page import="com.kh.bvengers.product.model.vo.Product"%>
 <%@page import="com.kh.bvengers.board.model.vo.Attachment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.bvengers.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	Product p = (Product) request.getAttribute("p");
 	Board b = (Board) request.getAttribute("b");
 	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
 	Attachment productImg = fileList.get(0);
@@ -28,6 +30,9 @@
 	font-size: 1.2em;
 	font-weight: bold;
 	width : 100px;
+	background: black;
+	color:white;
+	border: 1px solid white;
 }
 
 #titleImgArea {
@@ -44,6 +49,17 @@
 #titleContent{
 	width: 600px;
 }
+#price{
+	font-size:2em;
+}
+.detailBtn{
+	background: black;
+	color: white;
+	border: none;
+	width: 100px;
+	height: 50px;
+
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -54,7 +70,7 @@
 		<table class="detail" align="center">
 			<tr>
 				<th>판매자</th>
-				<td colspan="6"><label><%= b.getWriter() %></label></td>
+				<th colspan="6"><label><%= b.getWriter() %></label></th>
 			</tr>
 			<tr>
 				<th rowspan="4">상품</th>
@@ -68,30 +84,31 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<p id="contents"><%= b.getContents() %></p>
+
 				</td>
 			</tr>
 			<tr>
 				<td colspan="4">
-					<input type="number" readonly name="price"/>원</td>
+					<label id="price"><%=p.getProductMoney() %>원</label></td>
 				</tr>
 			<tr>
 				<td width="300px">
-					<input type="button" value="장바구니"/>
+					<input type="button" value="장바구니" id="basketBtn" class="detailBtn"/>
 				</td>
 				<td width="300px">
-					<input type="button" value="구매하기" />
+					<input type="button" value="구매하기" id="orderBtn" class="detailBtn"/>
 				</td>
 			</tr>
 			<tr>
 				<th>상품 설명</th>
 				<td colspan="5">
 					<div id="titleContentArea">
+						<p id="contents"><%= b.getContents() %></p>
 					</div>
 				</td>
 			</tr>
 		</table>
 	</div>
-	<%@ include file="../hfl/footer.jsp"%>
+	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>
 </html>
