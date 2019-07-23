@@ -22,8 +22,6 @@ public class SelectProductListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<HashMap<String, Object>> list = new BoardService().selectProductList();
-		System.out.println("여기는 서블릿");
-		System.out.println("이건 리스트" + list);
 		String page = "";
 
 		if(list != null) {

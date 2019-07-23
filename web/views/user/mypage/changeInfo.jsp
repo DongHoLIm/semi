@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.bvengers.user.member.model.vo.Member"%>
-<% 
-	Member loginUser = (Member) session.getAttribute("loginUser");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +17,7 @@ input {
 	height:32px;
 }
 .btn_update {
-	height:30px; 
+	height:30px;
 	width:100%;
 	margin:0 auto;
 	border: 1px solid black;
@@ -34,8 +31,8 @@ input {
 </head>
 <body>
 <header><%@ include file="../hfl/header.jsp" %></header>
-<%  
-	String [] add =(String []) loginUser.getAddress().split(" "); 
+<%
+	String [] add =(String []) loginUser.getAddress().split(" ");
 	%>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <br><br><br><br>
@@ -103,10 +100,10 @@ input {
 				}
 			})
 		});
-		
+
 		function deleteMember(){
 			var answer = window.confirm("정말로 탈퇴하실 건가요?");
-			
+
 			if(answer == true){
 				location.href = '<%=request.getContextPath()%>/deleteMember';
 			}
