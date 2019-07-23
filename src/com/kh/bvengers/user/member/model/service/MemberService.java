@@ -38,7 +38,7 @@ public class MemberService {
 		}else {
 			rollback(con);
 		}
-
+		close(con);
 		return result;
 	}
 
@@ -79,5 +79,20 @@ public class MemberService {
 		return m;
 
 	}
+
+	public Member checkPwd(String memberPwd) {
+		 Connection con = getConnection();
+		 Member checkPwd = new MemberDao().checkPwd(con, memberPwd);
+		 close(con);
+		 
+		 
+		return checkPwd;
+	}
+
+	public int deleteMember(Member m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 
 }
