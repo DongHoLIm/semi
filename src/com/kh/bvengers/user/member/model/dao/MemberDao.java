@@ -95,8 +95,8 @@ public class MemberDao {
 	}
 
 	public int changeMember(Connection con, Member m) {
-		int result = 0;
 		PreparedStatement pstmt = null;
+		int result = 0;
 
 		String query = prop.getProperty("changeMember");
 
@@ -109,8 +109,6 @@ public class MemberDao {
 			pstmt.setString(5, m.getMemberId());
 
 			result = pstmt.executeUpdate();
-
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -384,6 +382,49 @@ public class MemberDao {
 
 
 		return m;
+	}
+	
+	public Member checkPwd(Connection con, String memberPwd) {
+		PreparedStatement pstmt = null;
+		Member checkPwd = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("checkPwd");
+		
+		try {
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1, memberPwd);
+		
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			checkPwd = new Member();
+			
+			checkPwd.setMemberNo(rset.getString("MEMBER_NO"));
+			checkPwd.setMemberId(rset.getString("MEMBER_ID"));
+			checkPwd.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+			checkPwd.setMemberName(rset.getString("MEMBER_NAME"));
+			checkPwd.setEmail(rset.getString("EMAIL"));
+			checkPwd.setAddress(rset.getString("ADDRESS"));
+			checkPwd.setPhone(rset.getString("PHONE"));
+			checkPwd.setEnrollDate(rset.getDate("ENROLL_DATE"));
+			checkPwd.setRetireDate(rset.getDate("RETIRE_DATE"));
+			checkPwd.setRetire(rset.getString("RETIRE"));
+			checkPwd.setMemberDiv(rset.getString("MEMBER_DIV"));
+			checkPwd.setAccountHolder(rset.getString("ACCOUNT_HOLDER"));
+			checkPwd.setBankCode(rset.getString("BANK_CODE"));
+			checkPwd.setAccountNo(rset.getString("ACCOUNT_NO"));
+			checkPwd.setGradeCode(rset.getString("GRADE_CODE"));
+			checkPwd.setSellCount(rset.getInt("SELL_COUNT"));
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return checkPwd;
 	}
 
 }
