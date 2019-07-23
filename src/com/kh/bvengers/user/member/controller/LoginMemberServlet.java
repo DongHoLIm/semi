@@ -30,7 +30,7 @@ public class LoginMemberServlet extends HttpServlet {
 		if(loginUser!=null && !loginUser.getMemberId().equals("admin")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index.jsp");       
 		}else if(loginUser!= null && loginUser.getMemberId().equals("admin")){
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);

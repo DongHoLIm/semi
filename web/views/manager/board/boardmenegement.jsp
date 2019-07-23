@@ -62,15 +62,17 @@ border:1px solid white;
 		<input type="search" name="searchValue">
 		<button type="submit" style="border-radius: 5px; background-color: black; color:white;">조회</button>
 	</span>		</div><br><br>
+	  <div style="align :center">
+  	<button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
+	</div>
 		<div id="table Area">
 			<table id="depotMain" align="center">
 				<tr>
 		<th class="th">No.</th>
 		<th class="th">ID</th>
 		<th class="th">게시글 제목</th>
-		<th class="th">판매여부</th>
-		<th class="th">분류</th>
-		<th class="th">수정</th>
+		<th class="th">답변여부</th>
+		<th class="th">삭제</th>
 	</tr>
 			</table><br><br>
 		</div>

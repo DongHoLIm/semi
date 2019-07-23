@@ -191,6 +191,107 @@ public class BoardDao {
 
 		return hmap;
 	}
+	
+	//공지사항 작성 삽입
+		public int insertNoticeContent(Connection con, Board b) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("insertNoticeContent");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, b.getPostsTitle());
+				pstmt.setInt(2, b.getMemberNo());
+				pstmt.setString(3, b.getPostsCode());
+				pstmt.setString(4, b.getContents());
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+				
+			return result;
+		}
+
+		public int selectCurrval(Connection con) {
+			Statement stmt = null;
+			ResultSet rset = null;
+			
+			int postId = 0;
+			
+			String query = prop.getProperty("selectCurrval");
+			
+			try {
+				stmt = con.createStatement();
+				rset = stmt.executeQuery(query);
+				
+				if(rset.next()) {
+					postId = rset.getInt("currval");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				close(stmt);
+				close(rset);
+			}
+			
+			
+			
+			return postId;
+		}
+
+		public int insertAttachment(Connection con, ArrayList<Attachment> fileList) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("insertAttachment");
+			
+			try {
+				for(int i = 0; i < fileList.size(); i++) {
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, fileList.get(i).getOrginFileName());
+					pstmt.setString(2, fileList.get(i).getNewFileName());
+					pstmt.setString(3, fileList.get(i).getFileSrc());
+					pstmt.setString(4, fileList.get(i).getPostsId());
+					
+					System.out.println( fileList.get(i).getOrginFileName());
+					System.out.println( fileList.get(i).getNewFileName());
+					System.out.println(fileList.get(i).getFileSrc());
+					
+					int level = 0;
+					
+					if(i==0) {
+						level=0;
+					}else {
+						level=1;
+					}
+					
+					String level1 = level + "";
+					
+					pstmt.setString(5, level1);
+					
+					//pstmt.setInt(5, level);
+					
+					System.out.println(level1);
+					result += pstmt.executeUpdate();
+				}
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+		
+			
+			return result;
+		}
+
+
 
 	public ArrayList<HashMap<String, Object>> searchProductByCategory(Connection con, String value) {
 		PreparedStatement pstmt = null;
@@ -279,3 +380,14 @@ public class BoardDao {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
