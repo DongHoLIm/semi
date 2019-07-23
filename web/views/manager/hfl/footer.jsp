@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <head>
-
 <style>
 .footer {
 	font-family: 'Nanum Gothic', sans-serif;
