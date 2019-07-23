@@ -70,6 +70,7 @@
 			 $("#bcTarget2").barcode($("#productCode2").text(), "codabar");
 			 $("#bcTarget3").barcode($("#productCode3").text(), "codabar");
 			 $("#bcTarget4").barcode($("#productCode4").text(), "codabar");
+			 
 		}
 	}
 		

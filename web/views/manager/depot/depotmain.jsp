@@ -103,6 +103,7 @@
 				  $("#location").show();
 				  $("#date").hide();
 				  $("#searchProductCode").hide();
+				  
 			  }
 		}
 	</script>	
