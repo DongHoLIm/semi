@@ -32,11 +32,9 @@ public class SearchProductServlet extends HttpServlet {
 		if (search.equals("title")) {
 			list = new BoardService().searchProductByTitle(value);
 		} else if (search.equals("category")) {
-
+			list = new BoardService().searchProductByCategory(value);
 		} else if (search.equals("content")) {
-
-		} else {
-
+			list = new BoardService().searchProductByContent(value);
 		}
 		String page = "";
 		if (list != null) {
@@ -45,7 +43,7 @@ public class SearchProductServlet extends HttpServlet {
 			request.setAttribute("list", list);
 		} else {
 			page = "/views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "사진 게시판 조회 실패!!");
+			request.setAttribute("msg", "게시판 조회 실패!!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}

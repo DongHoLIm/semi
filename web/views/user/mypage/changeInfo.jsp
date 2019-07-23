@@ -50,9 +50,10 @@ input {
 </head>
 <body>
 <header><%@ include file="../hfl/header.jsp" %></header>
-<%  
-	String [] add =(String []) loginUser.getAddress().split(" "); 
-%>
+
+<%
+	String [] add =(String []) loginUser.getAddress().split(" ");
+	%>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <br><br><br><br>
 <div class="change_div">
@@ -103,6 +104,7 @@ input {
 			</tr>
 		</table>
 	</form></div>
+
 	<br><br><br>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 		<script>

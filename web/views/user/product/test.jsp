@@ -113,68 +113,72 @@
 </style>
 </head>
 <body>
-<header><%@ include file="../hfl/header.jsp" %></header>
-<div class="outer">
-	<br />
-	<div class="thumbnailArea">
+	<header><%@ include file="../hfl/header.jsp"%></header>
+	<div class="outer">
+		<br />
+		<div class="thumbnailArea">
 			<% for(int i = 0; i < list.size(); i++) {
 				HashMap<String, Object> hmap = list.get(i);
 			%>
-		<div class="thumb-list" align="center">
-			<figure class="productImg">
-				<input type="hidden" value="<%= hmap.get("postsId")%>" />
-				<img src="/sp/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>" class="proImg" width="300px" height="300px" alt="추천 상품 사진" />
-				<figcaption>
-				<p class="figP">보러가기</p>
-				</figcaption>
-				<div>
-				<br />
-				<p class="productTitle"><%= hmap.get("title") %></p>
-				<hr />
-				<p class="price"><label id="priceLabels">판매가  : </label> <%= hmap.get("price") %>원</p>
-				<a href="#"></a>
+			<div class="thumb-list" align="center">
+				<figure class="productImg">
+					<input type="hidden" value="<%= hmap.get("postsId")%>" />
+					<img src="/sp/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>"
+						class="proImg" width="300px" height="300px" alt="추천 상품 사진" />
+					<figcaption>
+						<p class="figP">보러가기</p>
+					</figcaption>
+					<div>
+						<br />
+						<p class="productTitle"><%= hmap.get("title") %></p>
+						<p class="productCategory"><%= hmap.get("category") %></p>
+						<p class="price">
+							<label id="priceLabels">판매가 : </label>
+							<%= hmap.get("price") %>원
+						</p>
+						<a href="#"></a>
+					</div>
+				</figure>
+			</div>
+			<% } %>
+			<form action="<%= request.getContextPath() %>/search.pd"
+				id="searchForm">
+				<div class="searchArea">
+					<select name="search" id="search">
+						<option value="title">제목</option>
+						<option value="category">카테고리</option>
+						<option value="content">내용</option>
+					</select> <input type="search" name="searchProduct" />
+					<button type="submit" onclick="search();">검색하기</button>
 				</div>
-			</figure>
+			</form>
 		</div>
-		<% } %>
-		<form action="<%= request.getContextPath() %>/search.pd" id="searchForm">
-		<div class="searchArea">
-			<select name="search" id="search">
-				<option value="title">제목</option>
-				<option value="category">카테고리</option>
-				<option value="content">내용</option>
-			</select>
-			<input type="search" name="searchProduct" />
-			<button type="submit" onclick="search();">검색하기</button>
-		</div>
-		</form>
 	</div>
-</div>
 
 	<!-- footer 영역 -->
-	<%@ include file="../hfl/footer.jsp" %>
-			<script>
+	<script>
 			$(function(){
 				$(".thumb-list").click(function(){
 					var num = $(this).children().children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/selectOne.pd?num=" + num;
+					location.href="<%=request.getContextPath()%>/selectOne.pd?num="+ num;
+				});
+		});
+
+		$(function() {
+			$(".figP").hide();
+			$(".productImg").each(function(i) {
+				$(this).mouseover(function() {
+					$(".figP").eq(i).show();
+				});
+				$(this).mouseout(function() {
+					$(".figP").eq(i).hide();
 				});
 			});
-
-				$(function() {
-					$(".figP").hide();
-					$(".productImg").each(function(i) {
-						$(this).mouseover(function() {
-							$(".figP").eq(i).show();
-						});
-						$(this).mouseout(function() {
-							$(".figP").eq(i).hide();
-						});
-					});
-				});
-				function search() {
-					$("form").submit();
-				}
-			</script>
+		});
+		function search() {
+			$("form").submit();
+		}
+	</script>
+	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>
 </html>
