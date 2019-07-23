@@ -14,14 +14,14 @@ public class Board  implements Serializable{
 	private String boardCode;
 	private String contents;
 	private String writer;
-
+	private String postsCode;
 	public Board() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Board(int postsId, String postsTitle, int memberNo, int postsViews, int recommendCount, String open,
-			String notice, String postsDelete, String boardCode, String contents, String writer) {
+			String notice, String postsDelete, String boardCode, String contents, String writer, String postCode) {
 		super();
 		this.postsId = postsId;
 		this.postsTitle = postsTitle;
@@ -50,6 +50,14 @@ public class Board  implements Serializable{
 
 	public void setPostsTitle(String postsTitle) {
 		this.postsTitle = postsTitle;
+	}
+
+	public String getPostsCode() {
+		return postsCode;
+	}
+
+	public void setPostsCode(String postsCode) {
+		this.postsCode = postsCode;
 	}
 
 	public int getMemberNo() {
@@ -129,8 +137,10 @@ public class Board  implements Serializable{
 		return "Board [postsId=" + postsId + ", postsTitle=" + postsTitle + ", memberNo=" + memberNo + ", postsViews="
 				+ postsViews + ", recommendCount=" + recommendCount + ", open=" + open + ", notice=" + notice
 				+ ", postsDelete=" + postsDelete + ", boardCode=" + boardCode + ", contents=" + contents + ", writer="
-				+ writer + "]";
+				+ writer + ", postsCode=" + postsCode + "]";
 	}
+
+	
 
 
 }

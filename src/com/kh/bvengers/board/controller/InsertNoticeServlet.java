@@ -38,6 +38,7 @@ public class InsertNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
+		System.out.println(title);
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
@@ -59,23 +60,30 @@ public class InsertNoticeServlet extends HttpServlet {
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				
-				System.out.println("name :" + name);
+				//System.out.println("name :" + name);
 				
 				saveFiles.add(multiRequest.getFilesystemName(name));
 				originFiles.add(multiRequest.getOriginalFileName(name));
 				
-				System.out.println("fileSystem name :" + multiRequest.getFilesystemName(name));
-				System.out.println("originFile :" + multiRequest.getOriginalFileName(name));
+				//System.out.println("fileSystem name :" + multiRequest.getFilesystemName(name));
+				//System.out.println("originFile :" + multiRequest.getOriginalFileName(name));
 			}
 			
 			String multiTitle = multiRequest.getParameter("title");
 			String multiContent = multiRequest.getParameter("content");
 			String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
+			String postCode = multiRequest.getParameter("hiddenCode");
 			
 			Board b = new Board();
-			b.setPostsTitle(title);
+			b.setPostsTitle(multiTitle);
 			b.setContents(multiContent);
 			b.setMemberNo(Integer.parseInt(uno));
+			b.setPostsCode(postCode);
+			
+			System.out.println(multiTitle);
+			System.out.println(multiContent);
+			System.out.println(uno);
+			System.out.println(postCode);
 			
 			ArrayList<Attachment>fileList = new ArrayList<Attachment>();
 			
@@ -86,16 +94,19 @@ public class InsertNoticeServlet extends HttpServlet {
 				at.setNewFileName(saveFiles.get(i));
 				
 				fileList.add(at);
+				
 			}
 			
 			System.out.println("controller board : " + b);
 			System.out.println("controller attachment list :" + fileList);
-			
+			System.out.println(saveSrc);
+			System.out.println(originFiles);
+			System.out.println(saveFiles);
 			
 			int result = new com.kh.bvengers.board.model.service.BoardService().insertNotice(b,fileList);
 			
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath()+"/selectList.tn");
+				response.sendRedirect(request.getContextPath()+"/views/user/board/board.jsp");
 			}else {
 				//실패시 저장된 사진 삭제
 				for(int i = 0; i < saveFiles.size(); i++) {

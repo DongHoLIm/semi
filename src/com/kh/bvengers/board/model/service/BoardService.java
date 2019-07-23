@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.bvengers.board.model.dao.BoardDao;
+import com.kh.bvengers.board.model.vo.Attachment;
+import com.kh.bvengers.board.model.vo.Board;
 
 public class BoardService {
 
@@ -41,5 +43,50 @@ public class BoardService {
 		close(con);
 		return hmap;
 	}
+	
+	//공지사항 게시판 작성용
+		public int insertNotice(Board b, ArrayList<Attachment> fileList) {
+			Connection con = getConnection();
+			
+			int result = new BoardDao().insertNoticeContent(con,b);
+			
+			if(result > 0) {
+				String postId = new BoardDao().selectCurrval(con)+"";
+				
+				System.out.println("postId = " + postId);
+
+				for(int i = 0; i < fileList.size(); i++) {
+					fileList.get(i).setPostsId(postId);
+				}
+			}
+			
+			int result1= new BoardDao().insertAttachment(con, fileList);
+			
+			if(result > 0 && result1 >0) {
+				commit(con);
+				result = 1;
+			}else {
+				rollback(con);
+			}
+			
+			return result;
+		}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
