@@ -13,8 +13,8 @@ public class MyFileRenamePolicy implements FileRenamePolicy{
 		long currentTime = System.currentTimeMillis();
 		//System.out.println(currentTime);
 		
-		SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddHHmmss");
-		int randomNumber = (int)(Math.random() * 100000);
+		SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddHHmm");
+		int randomNumber = (int)(Math.random() * 10000);
 		
 		//파일의 파일명과 확장자명 분리
 		String name = oldFile.getName();
