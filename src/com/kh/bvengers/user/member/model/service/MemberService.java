@@ -65,9 +65,9 @@ public class MemberService {
 		return list;
 	}
 
-	public ArrayList<Member> selectList() {
+	public ArrayList<Member> selectList(int currentPage, int limit) {
 		Connection con = getConnection();
-		ArrayList<Member> mlist = new MemberDao().selectList(con);
+		ArrayList<Member> mlist = new MemberDao().selectList(con,currentPage,limit);
 		close(con);
 		return mlist;
 	}
@@ -78,6 +78,20 @@ public class MemberService {
 		close(con);
 		return m;
 
+	}
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = new MemberDao().getListCount(con);
+		
+		close(con);
+		return listCount;
+	}
+
+	public Member showDetail(String memberId) {
+		Connection con = getConnection();
+		Member m = new MemberDao().showDetail(con,memberId);
+		close(con);
+		return m;
 	}
 
 	public Member checkPwd(String memberPwd) {
@@ -93,6 +107,5 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
 
 }

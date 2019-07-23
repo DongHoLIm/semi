@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.collections.SynchronizedStack;
+
 import com.kh.bvengers.user.member.model.service.MemberService;
 import com.kh.bvengers.user.member.model.vo.Member;
 
@@ -38,6 +40,7 @@ public class LoginMemberServlet extends HttpServlet {
 			request.getRequestDispatcher("views/hfl/errorPage.jsp").forward(request, response);
 		}
 	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
