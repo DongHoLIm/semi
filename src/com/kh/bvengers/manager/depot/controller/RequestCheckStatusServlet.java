@@ -29,7 +29,10 @@ public class RequestCheckStatusServlet extends HttpServlet {
 		
 		Depot d = new Depot();
 		String locationCode = location+session;
-		if(checkStatus.equals("requestCheck")) {
+		if(completStatus==null&&checkStatus==null) {
+			completStatus="2";
+			checkStatus="1";
+		}else if(checkStatus.equals("requestCheck")) {
 			checkStatus="1";
 			completStatus="2";
 		}else if(checkStatus.equals("checking")) {
@@ -58,12 +61,12 @@ public class RequestCheckStatusServlet extends HttpServlet {
 		String page = "";
 		
 		if(result>0) {
-			page="views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "뭐하냐 병신아");
-			request.getRequestDispatcher(page).forward(request, response);
-		}else {
 			page=request.getContextPath()+"/list.dp";
 			response.sendRedirect(page);
+		}else {
+			page="views/common/errorPagePrompt.jsp";
+			request.setAttribute("msg", "작성불가");
+			request.getRequestDispatcher(page).forward(request, response);			
 		}
 		
 	
