@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 	tr{
 		border:1px solid black;		
@@ -61,7 +62,7 @@
 			</tr>
 			<%for(Depot d :list) {%>
 			<tr>
-				<td><input type="checkBox" id="check"/></td>
+				<td><input type="checkBox" id="check" value="<%=d.getProductCode() %>"/></td>
 				<td><label for=""><%=d.getProductNumber() %></label></td>
 				<td><a href="" id="productCode"><%=d.getProductCode() %></a></td>
 				<td><a href=""><%=d.getProductName() %></a></td>
@@ -71,14 +72,15 @@
 			</tr>
 			<%} %>
 		</table>
-		<script>
-		var code =$("a[id=productCode]");
-		console.log(code[0]);
+		<script>			
 			function barcodePrint(){
-				if($("input:checkBox[id=check]").is("checked")==true){
-					
-				}
-				window.open('/sp/views/manager/depot/barcodePrint.jsp','바코드생성','width=430,height=500,location=no,status=no,scrollbars=yes');
+				var code = "";
+				var i = 0;
+				$("#check:checked").each(function(index){			 
+					code+=$(this).val()+",";																
+				});				
+				var url = "/sp/views/manager/depot/barcodePrint.jsp?value="+code;
+				window.open(url,'바코드생성','width=430,height=500,location=no,status=no,scrollbars=yes');					
 			}
 		</script>
 		</div>

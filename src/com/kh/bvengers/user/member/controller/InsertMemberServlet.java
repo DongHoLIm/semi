@@ -33,13 +33,9 @@ public class InsertMemberServlet extends HttpServlet {
 		String address = address1 + address2 + address3 + address4;
 		String phone = request.getParameter("phone");
 
-		Member m = new Member();
-		
-		if(memberPwd.equals(memberPwd2)) {
-			String memberPassword = memberPwd2;
-			
+		Member m = new Member();			
 			m.setMemberId(memberId);
-			m.setMemberPassword(memberPassword);
+			m.setMemberPassword(memberPwd);
 			m.setMemberName(memberName);
 			m.setEmail(email);
 			m.setAddress(address);
@@ -52,12 +48,7 @@ public class InsertMemberServlet extends HttpServlet {
 				request.setAttribute("msg","실패하셨습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
-		}else {
-			request.setAttribute("msg", "비밀번호를 확인하세요");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
