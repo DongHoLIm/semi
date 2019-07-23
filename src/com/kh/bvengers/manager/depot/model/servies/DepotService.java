@@ -22,29 +22,25 @@ public class DepotService {
 		Connection con =getConnection();
 		
 		int result = new DepotDao().insertLocation(con,d);
-		int num =0;
+		int result1=0;
 		if(result>0) {
 			result = new DepotDao().updateStatus(con,d);
 			if(result>0) {
-				commit(con);
-			}else {
-				rollback(con);
+				result1=1;
 			}
+			commit(con);
 		}else {
-			result = new DepotDao().updateLocation(con,d);
+			result = new DepotDao().updateStatus(con,d);
 			if(result>0) {
-				result = new DepotDao().updateStatus(con,d);
-				if(result>0) {
-					commit(con);
-				}else {
-					rollback(con);
-				}
+				result1=1;
+				commit(con);
 			}
+			rollback(con);
 		}
 		
 		close(con);
 		
-		return result;
+		return result1;
 	}
 
 	public ArrayList<Depot> selectAllList() {
@@ -58,6 +54,13 @@ public class DepotService {
 		Connection con = getConnection();
 		ArrayList<Depot> list = new DepotDao().selectBarcodeAllList(con);
 		close(con);
+		return list;
+	}
+
+	public ArrayList<Depot> selectInList() {
+		Connection con = getConnection();
+		ArrayList<Depot> list =new DepotDao().selectInList(con);
+		close(con);		
 		return list;
 	}
 

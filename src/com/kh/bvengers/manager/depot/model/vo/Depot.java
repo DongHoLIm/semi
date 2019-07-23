@@ -15,12 +15,16 @@ public class Depot implements java.io.Serializable{
 	private String completStatus;
 	private String checkPassContent;
 	private Date releaseDate;
+	private String selerId;
 	
 	public Depot() {}
 	
+	
+	
+	
 	public Depot(int productNumber, String productCode, String productCate, String productName, Date checkDate,
 			String checkStatus, String locationCode, String session, String location, String completStatus,
-			String checkPassContent, Date releaseDate) {
+			String checkPassContent, Date releaseDate, String selerId) {
 		super();
 		this.productNumber = productNumber;
 		this.productCode = productCode;
@@ -34,10 +38,26 @@ public class Depot implements java.io.Serializable{
 		this.completStatus = completStatus;
 		this.checkPassContent = checkPassContent;
 		this.releaseDate = releaseDate;
+		this.selerId = selerId;
 	}
+
+
 	
-	
-	
+
+	public String getSelerId() {
+		return selerId;
+	}
+
+
+
+
+	public void setSelerId(String selerId) {
+		this.selerId = selerId;
+	}
+
+
+
+
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
@@ -148,14 +168,19 @@ public class Depot implements java.io.Serializable{
 		this.checkStatus = checkStatus;
 	}
 
+
+
+
 	@Override
 	public String toString() {
 		return "Depot [productNumber=" + productNumber + ", productCode=" + productCode + ", productCate=" + productCate
 				+ ", productName=" + productName + ", checkDate=" + checkDate + ", checkStatus=" + checkStatus
 				+ ", locationCode=" + locationCode + ", session=" + session + ", location=" + location
 				+ ", completStatus=" + completStatus + ", checkPassContent=" + checkPassContent + ", releaseDate="
-				+ releaseDate + "]";
+				+ releaseDate + ", selerId=" + selerId + "]";
 	}
+
+	
 
 
 	
