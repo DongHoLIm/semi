@@ -452,6 +452,7 @@ public class MemberDao {
 		}
 		
 		return m;
+	}
 	public Member checkPwd(Connection con, String memberPwd) {
 		PreparedStatement pstmt = null;
 		Member checkPwd = null;
