@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.bvengers.user.member.model.service.MemberService;
 import com.kh.bvengers.user.member.model.vo.Member;
@@ -20,12 +21,25 @@ public class DeleteMemberServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
+		request.setCharacterEncoding("UTF-8");
 		
-		Member m = new Member();
-		m.setMemberId(memberId);
+		HttpSession session = request.getSession();
+
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String memberId = loginUser.getMemberId();
+
 		
-		int result = new MemberService().deleteMember(m);
+		
+		int result = new MemberService().deleteMember(memberId);
+		
+		if(result > 0) {
+			request.getSession().invalidate();
+			response.sendRedirect("index.jsp");
+		}else {
+			request.setAttribute("msg", "회원가입이 불가능합니다.");
+			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
+		}
+		
 		
 		
 	}

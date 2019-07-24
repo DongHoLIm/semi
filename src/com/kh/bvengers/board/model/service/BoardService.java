@@ -45,9 +45,11 @@ public class BoardService {
 
 			if(result > 0) {
 				String postId = new BoardDao().selectCurrval(con)+"";
-
 				for(int i = 0; i < fileList.size(); i++) {
+				
 					fileList.get(i).setPostsId(postId);
+					
+					System.out.println(fileList.size());
 				}
 			}
 
@@ -85,10 +87,51 @@ public class BoardService {
 		return list;
 	}
 
+
 	public ArrayList<PowerLink> powerLink() {
 		Connection con = getConnection();
 		ArrayList<PowerLink> list = new BoardDao().powerLink(con);
 		return list;
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		
+		int listCount = new BoardDao().getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+		
+	}
+	public ArrayList<Board> selectList(int currentPage, int limit){
+		
+		Connection con = getConnection();
+		
+		ArrayList<Board>list = new BoardDao().selectList(con,currentPage,limit);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public HashMap<String, Object> selectOneNotice(int num) {
+		Connection con = getConnection();
+		
+		HashMap<String, Object> hmap = null;
+		
+		int result = new BoardDao().updateCount(con,num);
+		
+		if(result > 0) {
+			commit(con);
+			hmap = new BoardDao().selectOneNotice(con,num);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return hmap;
 	}
 
 }

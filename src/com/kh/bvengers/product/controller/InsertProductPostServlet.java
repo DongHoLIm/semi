@@ -19,6 +19,7 @@ import com.kh.bvengers.board.model.vo.PostsContents;
 import com.kh.bvengers.common.MyFileRenamePolicy;
 import com.kh.bvengers.product.model.service.ProductService;
 import com.kh.bvengers.product.model.vo.Product;
+import com.kh.bvengers.user.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -60,16 +61,15 @@ public class InsertProductPostServlet extends HttpServlet {
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
-				
-				saveFiles.add(multiRequest.getFilesystemName(name));
-				originFiles.add(multiRequest.getOriginalFileName(name));
-				
+				if(multiRequest.getFilesystemName(name) != null) {
+					saveFiles.add(multiRequest.getFilesystemName(name));
+					originFiles.add(multiRequest.getOriginalFileName(name));
+				}
 				System.out.println("fileSystem name : " + multiRequest.getFilesystemName(name));
 				System.out.println("originFile name : " + multiRequest.getOriginalFileName(name));
 			}
 			
-			int memberNo = 3;
-			//((Member) (request.getSession().getAttribute("loginUser"))).getMemberNo();
+			int memberNo =  Integer.parseInt(((Member) (request.getSession().getAttribute("loginUser"))).getMemberNo());
 			//로그인 기능 추가 시 위 주석 해제(현재 로그인한 유저 번호)
 			String postsTitle = multiRequest.getParameter("postsTitle");				//posts 제목
 			String productName = multiRequest.getParameter("productName");				//product 상품명

@@ -33,7 +33,7 @@
 				<td colspan="2">
 					<input type="submit" value="등록">
 					<input type="reset" value="초기화">
-					<input type="button" value="글 리스트로" onclick="location.href='board.jsp'">
+					<input type="button" value="글 리스트로" onclick="location.href='<%= request.getContextPath()%>/selectNotice.no'">
 			</tr>
 	</table>
 		</form>

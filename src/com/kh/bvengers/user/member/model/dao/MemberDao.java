@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class MemberDao {
 	Properties prop = new Properties();
@@ -418,7 +419,6 @@ public class MemberDao {
 		ResultSet rset = null;
 
 		String query = prop.getProperty("showDetail");
-
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberId);
@@ -495,5 +495,70 @@ public class MemberDao {
 
 		return checkPwd;
 	}
+
+	public int deleteMember(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMember");		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);			
+			result = pstmt.executeUpdate();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+  return result;
+}
+  
+  
+  public Member getblackmember(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		
+		String query = prop.getProperty("getblackmember");	
+    try{
+			pstmt= con.prepareStatement(query);
+      pstmt.setString(1,memberId);
+      rset = pstmt.executeQuery();			
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberNo(rset.getString("MEMBER_NO"));
+				m.setMemberId(rset.getString("MEMBER_ID"));
+				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+				m.setMemberName(rset.getString("MEMBER_NAME"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setAddress(rset.getString("ADDRESS"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setRetireDate(rset.getDate("RETIRE_DATE"));
+				m.setRetire(rset.getString("RETIRE"));
+				m.setMemberDiv(rset.getString("MEMBER_DIV"));
+				m.setAccountHolder(rset.getString("ACCOUNT_HOLDER"));
+				m.setBankCode(rset.getString("BANK_CODE"));
+				m.setAccountNo(rset.getString("ACCOUNT_NO"));
+				m.setGradeCode(rset.getString("GRADE_CODE"));
+				m.setSellCount(rset.getInt("SELL_COUNT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	public int upblack(Connection con, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("upblack");
+		return result;
+  }
 
 }

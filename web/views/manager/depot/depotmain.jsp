@@ -40,6 +40,9 @@
 	#date{
 		padding-right: 190px;
 	}
+	#searchProductCode{
+		padding-right: 190px;
+	}
 </style>
 <body>
 	<%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
@@ -52,13 +55,27 @@
 				<option class="A" value="locationNum">위치관리번호</option>
 				<option class="A" value="barCode">상품코드</option>
 				<option class="A" value="searchDate">적치 일자</option>
-			</select>				
+			</select>
 			<div id="location">
-			<input type="text" />
+			<select name="" id="" style="width: 200px;">
+				<option value="">A1</option>
+				<option value="">A2</option>
+				<option value="">A3</option>
+				<option value="">B1</option>
+				<option value="">B2</option>
+				<option value="">B3</option>
+				<option value="">C1</option>
+				<option value="">C2</option>
+				<option value="">C3</option>
+			</select>
+			<button type="submit">검색</button>
+			</div>				
+			<div id="searchProductCode">
+			<input type="text" style="width: 200px;"/>
 			<button type="submit">검색</button>
 			</div>
 			<div id="date">
-			<input type="date" />
+			<input type="date" style="width: 200px;"/>
 			<button type="submit">검색</button>
 			</div>
 		</form> 
@@ -66,6 +83,7 @@
 	<script>
 	$(function (){
 		$("#date").hide();
+		$("#searchProductCode").hide();
 	});	
 	function changeSearchBox(){
 			    var langSelect = document.getElementById("selectBox");
@@ -74,11 +92,17 @@
 			    var selectValue = langSelect.options[langSelect.selectedIndex].value;
 			 	
 			  if(selectValue=="searchDate"){
+				  $("#searchProductCode").hide();
 				  $("#location").hide();
 				  $("#date").show();
+			  }else if(selectValue=="barCode"){
+				  $("#searchProductCode").show();
+				  $("#location").hide();
+				  $("#date").hide();
 			  }else{
 				  $("#location").show();
 				  $("#date").hide();
+				  $("#searchProductCode").hide();				  
 			  }
 		}
 	</script>	

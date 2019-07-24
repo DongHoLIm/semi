@@ -189,8 +189,6 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-
-
 		return hmap;
 	}
 
@@ -213,8 +211,6 @@ public class BoardDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-
 			return result;
 		}
 
@@ -240,9 +236,6 @@ public class BoardDao {
 				close(stmt);
 				close(rset);
 			}
-
-
-
 			return postId;
 		}
 
@@ -255,6 +248,7 @@ public class BoardDao {
 			try {
 				for(int i = 0; i < fileList.size(); i++) {
 					pstmt = con.prepareStatement(query);
+					
 					pstmt.setString(1, fileList.get(i).getOrginFileName());
 					pstmt.setString(2, fileList.get(i).getNewFileName());
 					pstmt.setString(3, fileList.get(i).getFileSrc());
@@ -276,6 +270,7 @@ public class BoardDao {
 					//pstmt.setInt(5, level);
 
 					System.out.println(level1);
+					
 					result += pstmt.executeUpdate();
 				}
 
@@ -285,9 +280,7 @@ public class BoardDao {
 			}finally {
 				close(pstmt);
 			}
-
-
-			return result;
+      return result;
 		}
 
 
@@ -413,9 +406,154 @@ public class BoardDao {
 			close(stmt);
 		}
 		return list;
+  }
+
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectListCount");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}		
+		return listCount;
+	}
+
+	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+		
+		String query = prop.getProperty("selectListWithPaging");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage -1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+				
+				list.add(b);
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String,Object> hmap = null;
+		Board b = null;
+		Attachment at = null;
+		ArrayList<Attachment>list = null;
+		
+		String query = prop.getProperty("selectOneNotice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				b = new Board();
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setPostsTitle(rset.getString("POST_TITLE"));
+				b.setMemberId(rset.getString("Member_ID"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
+				
+				at = new Attachment();
+				at.setFileNo(rset.getString("FILE_NO"));
+				at.setOrginFileName(rset.getString("ORIGIN_FILE_NAME"));
+				at.setFileSrc("FILE_SRC");
+				at.setSaveDate("SAVE_DATE");
+				
+				list.add(at);
+			}
+			
+			hmap = new HashMap<String, Object>();
+			hmap.put("board", b);
+			hmap.put("attachment", list);
+			
+			System.out.println("hmap " + hmap);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return hmap;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
