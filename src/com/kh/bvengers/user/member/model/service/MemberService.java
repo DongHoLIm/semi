@@ -108,4 +108,14 @@ public class MemberService {
 		return 0;
 	}
 
+	public Member getblackmember(String memberId) {
+		Connection con = getConnection();
+		Member m = new MemberDao().getblackmember(con,memberId);
+		if(m!=null) {
+			int result = new MemberDao().upblack(con,m);
+		}
+		close(con);
+		return m;
+	}
+
 }

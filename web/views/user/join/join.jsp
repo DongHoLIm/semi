@@ -6,6 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+function checkjoin(){
+	var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+	var buf = new Array(13);
+	
+	if($("#memberId").val() == ""){
+		alert("아이디를 입력하세요");
+		$("#memberId").focus();
+		$("#memberId").val("");
+		return false;
+	}
+	
+	if(!getCheck.test($("#memberPassword").val())){
+		alert("비밀번호를 다시 설정하세요");
+		$("#memberPassword").val("");
+		$("#memberPassword").focus();
+		return false;
+	}
+	
+	if($("#memberPassword").val() != ($("#memberPassword2").val())){
+		alert("비밀번호를 확인하세요");
+		$("#memberPassword").val("");
+		$("#memberPassword2").val("");
+		$("#memberPassword").focus();
+		return false;
+	}
+	
+/* 	if(($("#peoplejb").val()=="")||($("#peoplejb2").val()=="")){
+		alert("주민등록번호를 입력하세요");
+		$("#peoplejb").focus();
+		return false;
+	} */
+	
+if($("#memberPassword").val() == ($("#memberPassword2").val())){
+	$("form").submit();
+}
+}	
+ 
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
@@ -70,11 +111,13 @@
 		<h2>중고愛민족 회원가입</h2>
 	<div class="box_login" align="center">
 			<br><br>
-			<input type="text" id="memberId" name="memberId" placeholder="  ID" style="width:30%;">
+			<input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
 			<button type="button" class="btn_overlap" style="width:10%;" onclick="idCheck();">중복확인</button><br><br>
-			<input type="password" id="memberPassword" name="memberPassword" placeholder="  Password" style="width:40%;"><br><br>
+			<input type="password" id="memberPassword" name="memberPassword" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
 			<input type="password" id="memberPassword2" name="memberPassword2" placeholder="  Password 확인" style="width:40%;"><br><br>
 			<input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
+			<input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
+			<input type="text" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
 			<input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
 			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
 			<input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
@@ -84,7 +127,7 @@
 			<input type="text"  id="sample6_detailAddress" name="address3" placeholder="  상세주소" style="width:40%;"><br><br>
 			<input type="text"  id ="sample6_extraAddress" name="address4" placeholder="  참고항목" style="width:40%;"><br><br>
 		<br><br>
-		<input type="submit" value="가입" class="btn_join"  onclick="insertMember();"><br><br>
+		<input type="button" value="가입" class="btn_join"  onclick="checkjoin();"><br><br>
 		<input type="reset" value="취소" class="btn_join" onclick="goMain();">
 		<br><br>
 	</div>
@@ -142,10 +185,8 @@
 		function goMain(){
 			location.href="<%=request.getContextPath()%>/index.jsp";
 		}
-		function insertMember(){
-			$("form").submit();
-		}
-	
+		
+		
 		</script>
 		<br><br>
 </body>

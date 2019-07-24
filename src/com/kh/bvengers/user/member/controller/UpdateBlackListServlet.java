@@ -10,23 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.bvengers.user.member.model.service.MemberService;
 import com.kh.bvengers.user.member.model.vo.Member;
 
-@WebServlet("/mbdetail.me")
-public class MemberDetailServlet extends HttpServlet {
+@WebServlet("/updateBL.me")
+public class UpdateBlackListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MemberDetailServlet() {
+    public UpdateBlackListServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("mi");
-		Member m = new MemberService().showDetail(memberId);
-		String page = "";
-		if(m!=null) {
-			page="views/manager/member/memberDetail.jsp";
-			request.setAttribute("m", m);
-		}
-		request.getRequestDispatcher(page).forward(request, response);
+		String memberId = request.getParameter("chkid");
+		Member m = new MemberService().getblackmember(memberId);
+		System.out.println(memberId);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
