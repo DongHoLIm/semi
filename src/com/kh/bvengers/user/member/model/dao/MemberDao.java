@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class MemberDao {
 	Properties prop = new Properties();
@@ -494,18 +495,35 @@ public class MemberDao {
 
 		return checkPwd;
 	}
-	public Member getblackmember(Connection con, String memberId) {
+
+	public int deleteMember(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMember");		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);			
+			result = pstmt.executeUpdate();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+  return result;
+}
+  
+  
+  public Member getblackmember(Connection con, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Member m = null;
 		
-		String query = prop.getProperty("getblackmember");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, memberId);
-			rset = pstmt.executeQuery();
-			
+		String query = prop.getProperty("getblackmember");	
+    try{
+			pstmt= con.prepareStatement(query);
+      pstmt.setString(1,memberId);
+      rset = pstmt.executeQuery();			
 			if(rset.next()) {
 				m = new Member();
 				m.setMemberNo(rset.getString("MEMBER_NO"));
@@ -540,8 +558,7 @@ public class MemberDao {
 		int result = 0;
 		
 		String query = prop.getProperty("upblack");
-		
 		return result;
-	}
+  }
 
 }

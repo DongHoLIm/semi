@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.* , com.kh.bvengers.user.myPage.model.vo.*"%>
+<%
+	ArrayList<myPage> mplist = (ArrayList<myPage>) request.getAttribute("mplist");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,53 +101,33 @@
 				</tr>
 			</table>
 		</div>
-
+		
+		
+		
+	<form action="" method="post">
 		<div>
 			<br />
-			
 			<h3 align="center">주문 현황</h3>
 			<table class="board">
+			<tbody></tbody>
 				<tr class="row0">
-				<thead>
-					<th>번호</th>
+					<th>주문번호</th>
 					<th>상품명</th>
 					<th>배송여부</th>
-					<th>작성날짜</th>
-				</thead>
+					<th>주문날짜</th>
 				</tr>
-				<tr class="row1">
-					<td id="Notd">0005</td>
-					<td>진수의 핑크핑크한 노트북쿨러</td>
-					<td>배송준비중</td>
-					<td>19/07/26</td>
+				<% for(myPage m : mplist){%>
+				<tr>
+					<td><%=m.getOno() %></td>
+					<td><%=m.getPname()%></td>
+					<td><%=m.getDstatus()%></td>
+					<td><%=m.getoDate()%></td>
 				</tr>
-				<tr class="row2">
-					<td id="Notd">0004</td>
-					<td>영지의 오른쪽 에어팟</td>
-					<td>배송준비중</td>
-					<td>19/07/19</td>
-				</tr>
-				<tr class="row3">
-					<td id="Notd">0003</td>
-					<td>찬민이의 C타입 케이블</td>
-					<td>배송중</td>
-					<td>19/07/17</td>
-				</tr>
-				<tr class="row4">
-					<td id="Notd">0002</td>
-					<td>동호의 왼쪽 에어팟</td>
-					<td>배송완료</td>
-					<td>19/07/16</td>
-				</tr>
-				<tr class="row5">
-					<td id="Notd">0001</td>
-					<td>강사님의 모니터 케이블</td>
-					<td>배송완료</td>
-					<td>19/07/13</td>
-				</tr>
+				<%}%>
 			</table>
 		</div>
-		<footer align="center">	
+		</form>
+		<div align="center">	
 			<ul class="pagination" align="center">
 			  <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 			  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -152,11 +135,33 @@
 			  <li class="page-item"><a class="page-link" href="#">3</a></li>
 			  <li class="page-item"><a class="page-link" href="#">다음</a></li>
 			</ul>
-		</footer>
+		</div>
 
 	</section>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+<script>
+<%-- 	$(function(){
+		<% for(myPage m : mplist){%>
+		
+		 var $tableBody = $("table tbody");
+		 
+		 var $tr = $("<tr>");
+		 var $onoTd = $("<td>").text('<%=m.getOno()%>');
+		 var $pnameTd = $("<td>").text('<%=m.getPname()%>');
+		 var $dstatusTd = $("<td>").text('<%=m.getDstatus()%>');
+		 var $ddateTd = $("<td>").text('<%=m.getoDate()%>');
+		 
+
+		 $tr.append($onoTd);
+		 $tr.append($pnameTd);
+		 $tr.append($dstatusTd);
+		 $tr.append($ddateTd);
+		 
+		 $tableBody.append($tr);
+		<%}%>
+	}); --%>
+</script>
 </body>
 </html>

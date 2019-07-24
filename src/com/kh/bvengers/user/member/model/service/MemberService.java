@@ -103,9 +103,17 @@ public class MemberService {
 		return checkPwd;
 	}
 
-	public int deleteMember(Member m) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteMember(String memberId) {
+		Connection con = getConnection();
+		int result = new MemberDao().deleteMember(con, memberId);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return result;
 	}
 
 	public Member getblackmember(String memberId) {
