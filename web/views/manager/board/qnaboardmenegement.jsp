@@ -68,9 +68,9 @@ border:1px solid white;
 		<th class="th">No.</th>
 		<th class="th">ID</th>
 		<th class="th">게시글 제목</th>
-		<th class="th">판매여부</th>
+		<th class="th">판매여부</th>ㄴ
 		<th class="th">분류</th>
-		<th class="th">수정</th>
+		<th class="th">삭제</th>
 	</tr>
 			</table><br><br>
 		</div>

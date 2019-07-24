@@ -3,6 +3,12 @@
 	<%
 	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
     Member loginUser = (Member) session.getAttribute("loginUser");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 	%>
 <!DOCTYPE html>
 <html>
@@ -86,9 +92,9 @@ input-align:center;
 		</form>
 		<div class="btns">
 		선택회원을
-		<button value="블랙리스트"
+		<button value="블랙리스트" id="blacklist"
 			style="align: center; border-radius: 5px; background-color: black; color: white;">블랙리스트</button>
-		<button value="활동정지"
+		<button value="활동정지" id="stop"
 			style="border-radius: 5px; background-color: black; color: white;">활동정지</button>
 		</div>
 		<br>
@@ -104,8 +110,21 @@ input-align:center;
 					<th class="th">주소</th>
 					<th class="th">가입일</th>
 					<th class="th">판매횟수</th>
+					<th class="th">회원 상세 조회</th>
 				</tr>
-				
+				<%for(Member m : list){ %>
+				<tr>
+					<td><input type="checkbox" class="chk"></td>
+					<td><%=m.getMemberId() %></td>
+					<td><%=m.getMemberName() %></td>
+					<td><%=m.getPhone() %></td>
+					<td><%=m.getGradeCode() %></td>
+					<td><%=m.getAddress()%></td>
+					<td><%=m.getEnrollDate() %></td>
+					<td><%=m.getSellCount() %></td>
+					<td><button class="mbdetail">상세보기</button></td>
+				</tr>
+				<%} %>
 			</table>
 			<br>
 			<br>
@@ -113,33 +132,17 @@ input-align:center;
 	</div>
 
 <script>
-	$(function(){
-		<% for(Member m : list){%>
-		
-		 var $tableBody = $("table tbody");
-		 
-		 var $tr = $("<tr>");
-		 var $idTd = $("<td>").text('<%=m.getMemberId()%>');
-		 var $nameTd = $("<td>").text('<%=m.getMemberName()%>');
-		 var $phoneTd = $("<td>").text('<%=m.getPhone()%>');
-		 var $gradeTd = $("<td>").text('<%=m.getGradeCode()%>');
-		 var $addressTd = $("<td>").text('<%=m.getAddress()%>');
-		 var $enrollDateTd = $("<td>").text('<%=m.getEnrollDate()%>');
-		 var $sellCountTd = $("<td>").text('<%=m.getSellCount()%>');
-		 
 
-		 $tr.append("<input type='checkbox' id=chk>");
-		 $tr.append($idTd);
-		 $tr.append($nameTd);
-		 $tr.append($phoneTd);
-		 $tr.append($gradeTd);
-		 $tr.append($addressTd);
-		 $tr.append($enrollDateTd);
-		 $tr.append($sellCountTd);
-		 
-		 $tableBody.append($tr);
-		<%}%>
-	});
+ 	  $(".mbdetail").click(function(){ 
+			var mi = $(this).parent().siblings().eq(1).text();
+			console.log(mi);
+		 location.href='<%=request.getContextPath()%>/mbdetail.me?mi='+mi;
+		 });
+	$(".chk").on("click",function(){
+		var chkid = $(this).parent().siblings().eq(0).text();
+	location.href='<%=request.getContextPath()%>/updateBL.me?chkid='+chkid;		
+	})
+ 	 
 	$("#chkAll").on("click", function() {
 	      var chkAll = $(this).is(":checked");
 	      if (chkAll)
@@ -147,6 +150,35 @@ input-align:center;
 	      else
 	        $("#depotMain input:checkbox").prop("checked", false);
 	    });
+
 </script>
+<div class="pagingArea" align="center">
+	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1){ %>
+			<button disabled><</button>
+			<% }else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+				if(currentPage == p){
+			%>
+					<button disabled><%= p %></button>
+			<% } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=p%>'"><%= p %></button>
+			<% 
+				}
+			   } 
+			%>
+			
+			<% if(currentPage >= maxPage){ %>
+			<button disabled>></button>
+			<% }else{ %>
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=maxPage%>'">>></button>
+</div>
 </body>
 </html>

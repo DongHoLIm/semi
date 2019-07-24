@@ -23,7 +23,7 @@
 	<br>
 	<br>
 	<div class="container">
-	<h2 align="center">리뷰 작성</h2><br>
+	<h2 align="center">공지사항</h2><br>
 	<table class="table-bordered">
 	 	<form class="userForm">
 			<tr>

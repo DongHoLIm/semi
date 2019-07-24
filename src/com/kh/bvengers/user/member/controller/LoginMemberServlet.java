@@ -1,6 +1,8 @@
 package com.kh.bvengers.user.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +27,8 @@ public class LoginMemberServlet extends HttpServlet {
 		String memberId = request.getParameter("loginId");
 		String memberPwd = request.getParameter("password");
 		Member loginUser = new MemberService().loginCheck(memberId,memberPwd);
+		
+		
 		if(loginUser!=null && !loginUser.getMemberId().equals("admin")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
@@ -33,11 +37,12 @@ public class LoginMemberServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect("views/manager/main/managerPage.jsp");
-		}else {
-			request.setAttribute("msg", "로그인에 실패하셨습니다.");
-			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
+		}else if(loginUser == null){
+			request.setAttribute("msg", "로그인실패");
+			request.getRequestDispatcher("views/user/login/login.jsp").forward(request, response);
 		}
 	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

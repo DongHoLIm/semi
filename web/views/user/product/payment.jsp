@@ -1,5 +1,15 @@
+<%@page import="com.kh.bvengers.product.model.vo.Category"%>
+<%@page import="com.kh.bvengers.board.model.vo.Attachment"%>
+<%@page import="com.kh.bvengers.board.model.vo.Posts"%>
+<%@page import="com.kh.bvengers.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	Product product = (Product) request.getAttribute("product");
+	Posts posts = (Posts) request.getAttribute("posts");
+	Attachment attachment = (Attachment) request.getAttribute("attachment");
+	Category category = (Category) request.getAttribute("category");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +36,14 @@
 	align: center;
 	width: 100%;
 	height: 100%;
-	background-color: #ddf;
 	margin-top: 30px;
 	padding-top: 2%;
+	border:3px solid #ddf;
 }
 
 #payForm {
 	align: center;
-	font-size: 1.5vw;
+	font-size: 1.2vw;
 }
 
 #paymentPrice {
@@ -45,13 +55,14 @@
 	resize: none;
 }
 
-#pt {
-	font-family: 'Nanum Gothic', sans-serif;
-	font-weight: bord;
+.pt {
 	margin: 0 auto;
 	width: 80%;
 	max-height: 200px;
 	padding-top: 5%;
+	border:1px solid #aabfde;
+	border-radius:5px;
+	font-family: 'Nanum Gothic', sans-serif;
 }
 
 #payForm table td {
@@ -59,11 +70,14 @@
 }
 
 #productImg {
-	border: 2px solid black;
+	text-align:center;
+	border: 2px solid #aabfde;
 }
 
-#title {
-	font-size: 2vw;
+.postsTitle {
+
+	font-family: 'Nanum Gothic', sans-serif;
+	font-size: 1.8vw;
 	padding: 1%;
 }
 
@@ -71,10 +85,13 @@
 	font-size: 1vw;
 	vertical-align: top;
 	padding: 1%;
+	border:1px solid #aabfde;
 }
 
 #price {
 	font-size: 1.5vw;
+	text-align:right;
+	padding:1%;
 }
 
 #quantity {
@@ -83,6 +100,54 @@
 
 #priceAll {
 	font-size: 1.5vw;
+}
+
+.payInfo{
+	width:80%;
+	border:1px solid #aabfde;
+}
+
+.addressNum{
+	display: inline-block;
+	padding: .5em .75em;
+	color: #fff;
+	font-size: 1vw;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #7799dd;
+	cursor: pointer;
+	border: 1px solid #7090d0;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+.buy{
+	width:50%;
+	display: inline-block;
+	padding: .5em .75em;
+	color: #fff;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #7799dd;
+	cursor: pointer;
+	border: 1px solid #7090d0;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+.buy:hover{
+	width:50%;
+	display: inline-block;
+	padding: .5em .75em;
+	color: #fff;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #ff5500;
+	cursor: pointer;
+	border: 1px solid #7090d0;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
 }
 </style>
 
@@ -99,82 +164,62 @@
 
 		<div id="area">
 
-			<%
-				for (int i = 0; i < 2; i++) {
-			%>
+			
 
 			<!-- 장바구니 목록(상품테이블) -->
-			<table id="pt">
+			<table class="pt">
 				<tr>
-					<!-- 장바구니에 등록한 상품 사진, 품명, 상세설명 -->
-					<td id="productImg" rowspan="2"><img
-						src="/sp/images/flower2.PNG" width=100% hright=100%></td>
+					<!-- 장바구니에 등록한 상품 사진, 제목, 카테고리, 품명, 가격,  -->
+					<td id="productImg" rowspan="3" width="20%"><img src="/sp/images/flower2.PNG" width=95% hright=100%></td>
 					<!--  -->
-					<td id="title" colspan="2" width="70%" height="30%">상품명</td>
+					<td class="postsTitle" colspan="3" width="70%" height="30%"><label>게시글제목<%/* posts.getPostsTitle() */ %></label></td> <!-- 게시글 -제목: 제거 -->
 				</tr>
 				<tr>
-					<td id="Detail" colspan="2">상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명
-						상세설명상세설명상세설명상세설명상세설명상세설명상세설명 상세설명상세설명상세설명상세설명상세설명상세설명상세설명</td>
+					<td id="Detail"><label>제품명 | <%/* product.getProductName() */ %></label></td>	
+					<td id="Detail"><label>카테고리 | <% /* category.getCategoryDiv() */ %></label></td>	
+					<td id="Detail"><label>판매자 | <% /* posts.getMemberNo() */%></label></td>	
 				</tr>
 				<tr>
-					<td id="price" width="30%">금액 :<%
-						
-					%>
-					</td>
-					<td id="quantity" width="20%">수량 : <%
-						
-					%>
-					</td>
-					<td id="priceAll" width="50%">상품 총 금액 : <%
-						
-					%>
-					</td>
+					<td colspan="3" id="price" ><label><% /* product.getProductMoney() */%>원</label></td>
 				</tr>
 			</table>
-			<%
-				}
-			%>
 
-			<br> <br>
-
+			<hr width="80%"/>
 			<!-- 정보 입력창 -->
 			<form id="payForm" action="">
-				<table align="center">
+				<table align="center" class="payInfo">
 					<tr>
-						<td><label>총 결제금액 : </label></td>
+						<td><label>총 결제금액</label></td>
 						<td><input type="text" name="paymentPrice" id="paymentPrice"
-							value="<%int i = 0;%><%=i%>원" readonly></td>
+							value="<% /* product.getProductMoney() */ %>원" readonly></td>
 					</tr>
 					<tr>
-						<td><label>택배 수령자 : </label></td>
+						<td><label>택배 수령자 </label></td>
 						<td><input type="text" placeholder="수령자 이름을 입력하세요"
 							name="name" id="name"></td>
 					</tr>
 					<tr>
-						<td><label>우편번호 : </label></td>
-						<td><input type="text" placeholder="우편번호" name="age" id="age"
-							readonly> &nbsp; &nbsp; <input type="button"
-							name="addressNum" id="addressNum" value="우편번호찾기"></td>
+						<td><label>우편번호 </label></td>
+						<td><input type="text" placeholder="우편번호" name="age" id="age" readonly> &nbsp; &nbsp;
+							<input type="button" name="addressNum" class="addressNum" value="우편번호찾기"></td>
 					</tr>
 					<tr>
-						<td><label>주소 : </label></td>
+						<td><label>주소 </label></td>
 						<td><input type="text" placeholder="주소" name="address"
 							id="address" readonly> &nbsp; &nbsp; <input type="text"
 							name="subAddress" id="subAddress"><br></td>
 					</tr>
 					<tr>
-						<td><label>연락처 : </label></td>
+						<td><label>연락처 </label></td>
 						<td><input type="text" placeholder="연락처" name="phone"
 							id="phone"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><label>배송시 요구사항 : </label> <br> <textarea
-								placeholder="요구사항을 입력해주세요" width=100% name="message"
-								id="message"></textarea></td>
+						<td colspan="2"><label>배송시 요구사항 </label> <br>
+						<textarea placeholder="요구사항을 입력해주세요" width=100% name="message" rows="5" id="message"></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><input type="submit" id="buy"
-							value="구매" style="width: 50%;" onclick="paymentApi();"></td>
+						<td colspan="2" align="center"><input type="submit" class="buy" value="결제하기" onclick="paymentApi();"></td>
 					</tr>
 				</table>
 			</form>

@@ -99,40 +99,11 @@ font-size:3;
 					<th class="th">가입일</th>
 					<th class="th">판매횟수</th>
 				</tr>
-							<%-- <%@ include file="rearchMemberResult.jsp" %> --%>
 			</table>
 			<br>
 			<br>
 		</div>
 	</div>
 
-<%-- <%} %> --%>
-<%-- <script>
-	$(function(){
-		<% for(Member m : list){%>
-		
-		 var $tableBody = $("table tbody");
-		 
-		 var $tr = $("<tr>");
-		 var $idTd = $("<td>").text('<%=m.getMemberId()%>');
-		 var $nameTd = $("<td>").text('<%=m.getMemberName()%>');
-		 var $phoneTd = $("<td>").text('<%=m.getPhone()%>');
-		 var $gradeTd = $("<td>").text('<%=m.getGradeCode()%>');
-		 var $addressTd = $("<td>").text('<%=m.getAddress()%>');
-		 var $enrollDateTd = $("<td>").text('<%=m.getEnrollDate()%>');
-		 var $sellCountTd = $("<td>").text('<%=m.getSellCount()%>');
-		 
-		 $tr.append($idTd);
-		 $tr.append($nameTd);
-		 $tr.append($phoneTd);
-		 $tr.append($gradeTd);
-		 $tr.append($addressTd);
-		 $tr.append($enrollDateTd);
-		 $tr.append($sellCountTd);
-		 
-		 $tableBody.append($tr);
-		<%}%>
-	});
-</script> --%>
 </body>
 </html>

@@ -1,6 +1,9 @@
 package com.kh.bvengers.board.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
+
+
 
 public class Board  implements Serializable{
 	private int postsId;
@@ -14,14 +17,28 @@ public class Board  implements Serializable{
 	private String boardCode;
 	private String contents;
 	private String writer;
-
+	private String postsCode;
+	private String memberName;
+	private Date createDate;
+	private String MemberId;
+	
+	
 	public Board() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
+	
+
+
+
+
+
 	public Board(int postsId, String postsTitle, int memberNo, int postsViews, int recommendCount, String open,
-			String notice, String postsDelete, String boardCode, String contents, String writer) {
+			String notice, String postsDelete, String boardCode, String contents, String writer, String postsCode,
+			String memberName, Date createDate, String memberId) {
 		super();
 		this.postsId = postsId;
 		this.postsTitle = postsTitle;
@@ -34,7 +51,71 @@ public class Board  implements Serializable{
 		this.boardCode = boardCode;
 		this.contents = contents;
 		this.writer = writer;
+		this.postsCode = postsCode;
+		this.memberName = memberName;
+		this.createDate = createDate;
+		this.MemberId = memberId;
 	}
+
+
+
+
+
+
+
+
+
+	public String getMemberId() {
+		return MemberId;
+	}
+
+
+
+
+
+
+
+
+
+	public void setMemberId(String memberId) {
+		MemberId = memberId;
+	}
+
+
+
+
+
+
+
+
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+
+
+
+
+	public void setCreateDate(Date date) {
+		this.createDate = date;
+	}
+
+
+
+
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+
 
 	public int getPostsId() {
 		return postsId;
@@ -50,6 +131,14 @@ public class Board  implements Serializable{
 
 	public void setPostsTitle(String postsTitle) {
 		this.postsTitle = postsTitle;
+	}
+
+	public String getPostsCode() {
+		return postsCode;
+	}
+
+	public void setPostsCode(String postsCode) {
+		this.postsCode = postsCode;
 	}
 
 	public int getMemberNo() {
@@ -124,13 +213,34 @@ public class Board  implements Serializable{
 		this.writer = writer;
 	}
 
+
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "Board [postsId=" + postsId + ", postsTitle=" + postsTitle + ", memberNo=" + memberNo + ", postsViews="
 				+ postsViews + ", recommendCount=" + recommendCount + ", open=" + open + ", notice=" + notice
 				+ ", postsDelete=" + postsDelete + ", boardCode=" + boardCode + ", contents=" + contents + ", writer="
-				+ writer + "]";
+				+ writer + ", postsCode=" + postsCode + ", memberName=" + memberName + ", createDate=" + createDate
+				+ ", MemberId=" + MemberId + "]";
 	}
 
 
+
+
+
+
+
+
+	
+
+	
+
+
 }
+

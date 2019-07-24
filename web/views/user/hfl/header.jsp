@@ -24,14 +24,14 @@
 
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">중고 愛 민족</a>
+      <a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp">중고 愛 민족</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
             <li><a href="/sp/views/user/product/productList.jsp"> 구매 </a></li>
              <li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록 </a></li>
            <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li>
-           <li><a href="/sp/views/user/board/board.jsp"> 게시판</a></li>
+           <li><a href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
            <li><a href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
        <li><a href="/sp/views/user/serviceCenter/qna.jsp"> 고객센터</a></li>
          </ul>

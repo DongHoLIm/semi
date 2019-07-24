@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.Synthesizer;
 
 import com.kh.bvengers.user.member.model.service.MemberService;
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.member.model.vo.PageInfo;
 
 @WebServlet("/memberList.me")
 public class MemberListServlet extends HttpServlet {
@@ -21,13 +23,40 @@ public class MemberListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Member> list = new MemberService().selectList();
 		
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		limit=10;
+		
+		int listCount = new MemberService().getListCount();
+		
+		
+		maxPage = (int)((double)listCount / limit+0.9);
+		
+		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
+		
+		endPage = startPage + 10 -1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+		
+		ArrayList<Member> list = new MemberService().selectList(currentPage,limit);
 		String page ="";
-		
 		if(list!=null) {
 			page = "views/manager/member/listMember.jsp";//회원리스트나올페이지
 			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
 		}else {
 			page="";
 			request.setAttribute("msg", "실패!");
