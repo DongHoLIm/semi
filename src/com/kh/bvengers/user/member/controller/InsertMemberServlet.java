@@ -52,11 +52,11 @@ public class InsertMemberServlet extends HttpServlet {
 				response.sendRedirect("/sp/index.jsp");
 			}else {
 				request.setAttribute("msg","실패하셨습니다.");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
 			}
 		}else {
 			request.setAttribute("msg", "비밀번호를 확인하세요");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
 		}
 		
 	}

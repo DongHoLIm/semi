@@ -34,8 +34,8 @@ public class LoginMemberServlet extends HttpServlet {
 			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect("views/manager/main/managerPage.jsp");
 		}else {
-			request.setAttribute("msg", "로그인실패");
-			request.getRequestDispatcher("views/hfl/errorPage.jsp").forward(request, response);
+			request.setAttribute("msg", "로그인에 실패하셨습니다.");
+			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
 		}
 	}
 

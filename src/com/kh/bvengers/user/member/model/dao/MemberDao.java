@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class MemberDao {
 	Properties prop = new Properties();
@@ -426,5 +427,27 @@ public class MemberDao {
 
 		return checkPwd;
 	}
+	public int deleteMember(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
+	
+	
 }
