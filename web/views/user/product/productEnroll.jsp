@@ -16,13 +16,6 @@
 	font-size:20px;
 	margin:0 auto;
 }
-
-	tr {
-	width:40%;
-}
-	th {
-	width:20%;
-}
 	#sub_cate{
 		
 	}
@@ -36,6 +29,56 @@
 	background-color: #ffd8d9;
 	color: black;
 }
+.danger{
+	color:red;
+	font-size:5px;
+}
+
+#fileLabel{
+	display: inline-block;
+	padding: .5em .75em;
+	color: #fff;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #7799dd;
+	cursor: pointer;
+	border: 1px solid #7090d0;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	width:25%;
+
+}
+
+.pullRight{
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip:rect(0,0,0,0);
+	border: 0;
+}
+
+.fileName{
+	width:70%;
+	display: inline-block;
+	padding: .5em .75em; 
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+}
+
 
 </style>
 </head>
@@ -45,6 +88,7 @@
 	<div><%@ include file="../hfl/list.jsp" %></div>
 <br><br><br><br>
 <div class="container">
+		<button class="testBtn" onclick="<%=request.getContextPath()%>/payment.pa">상품구매 테스트</button>
 		<caption class="title"><b>상품 등록</b></caption>
 		<form action="<%=request.getContextPath()%>/insert.po" method="post" encType="multipart/form-data">
 		<table class="table table-bordered" align="center" style="width:60%;">
@@ -91,10 +135,25 @@
                 <th>상품 이미지</th>
                 <td colspan="3">
                 	<div>
-                	<input type="file" name="file1" class="pull-right" id="file1" style="width:50%;"/>
-                	<input type="file" name="file2" class="pull-right" id="file2" style="width:50%;"/>
-                	<input type="file" name="file3" class="pull-right" id="file3" style="width:50%;"/>
-                	<input type="file" name="file4" class="pull-right" id="file4" style="width:50%;"/>
+	                	<label for="file1" id="fileLabel">이미지 업로드</label>
+	                	<input class="fileName" value="파일선택" disabled="disabled">
+	                	<input type="file" name="file1" class="pullRight" id="file1" style="width:50%;"/><br />
+	                	<p class="danger">*첫번째 업로드 사진이 메인 이미지가 됩니다.</p>
+					</div>
+                	<div>
+	                	<label for="file2" id="fileLabel">이미지 업로드</label>
+	                	<input class="fileName" value="파일선택" disabled="disabled">
+	                	<input type="file" name="file2" class="pullRight" id="file2" style="width:50%;"/><br />
+                	</div>
+                	<div>
+						<label for="file3" id="fileLabel">이미지 업로드</label>
+	                	<input class="fileName" value="파일선택" disabled="disabled">
+	                	<input type="file" name="file3" class="pullRight" id="file3" style="width:50%;"/><br />
+					</div>
+					<div>
+						<label for="file4" id="fileLabel">이미지 업로드</label>
+	                	<input class="fileName" value="파일선택" disabled="disabled">
+						<input type="file" name="file4" class="pullRight" id="file4" style="width:50%;"/><br />
                 	</div>
                 </td>
             </tr>
@@ -112,9 +171,8 @@
             </tr>
             <tr>
                 <td colspan="5">
-                    <input type="submit" value="등록" id="btn_enroll subBtn" class="pull-right"/>
-                    <input type="button" value="취소" id="btn_enroll" class="pull-left"/>
-                    <input type="button" value="목록" id="btn_enroll" class="pull-right" onclick="javascript:location.href='list.jsp'"/>
+                    <input type="submit" value="등록" id="btn_enroll" class="pull-right"/>
+                    <input type="button" value="홈으로" id="btn_enroll" class="pull-left" onclick="javascript:location.href='index.jsp'"/>
                 </td>
             </tr>
 </table>
@@ -145,9 +203,18 @@
         		
         		});
         		
-        		/* $(".subBtn").onclick(function(){
+        		$(".pullRight").change(function(){
         			
-        		}); */
+        			if(window.FileReader){
+        				var fileName = $(this)[0].files[0].name;
+       				} else { 
+       					var fileName = $(this).val().split('/').pop().split('\\').pop(); 
+					}
+					console.log(fileName);
+					$(this).siblings(".fileName").val(fileName);
+
+        			
+        		});
         		
         		
         		

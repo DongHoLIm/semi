@@ -38,12 +38,8 @@ public class ProductService {
 			}
 			
 			result2 = new ProductDao().insertPostContents(con, postsContents);
-			
-			
 			result3 = new ProductDao().insertProduct(con, product);
 			result4 = new ProductDao().insertProductCheck(con, product);
-			
-			
 			
 			result5 = new ProductDao().insertAttachments(con, fileList);
 			
