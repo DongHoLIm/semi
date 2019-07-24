@@ -112,7 +112,19 @@ input-align:center;
 					<th class="th">판매횟수</th>
 					<th class="th">회원 상세 조회</th>
 				</tr>
-				
+				<%for(Member m : list){ %>
+				<tr>
+					<td><input type="checkbox" class="chk"></td>
+					<td><%=m.getMemberId() %></td>
+					<td><%=m.getMemberName() %></td>
+					<td><%=m.getPhone() %></td>
+					<td><%=m.getGradeCode() %></td>
+					<td><%=m.getAddress()%></td>
+					<td><%=m.getEnrollDate() %></td>
+					<td><%=m.getSellCount() %></td>
+					<td><button class="mbdetail">상세보기</button></td>
+				</tr>
+				<%} %>
 			</table>
 			<br>
 			<br>
@@ -120,46 +132,17 @@ input-align:center;
 	</div>
 
 <script>
-	$(function(){
-		<% for(Member m : list){%>
-		
-		 var $tableBody = $("table tbody");
-		 
-		 var $tr = $("<tr>");
-		 var $idTd = $("<td>").text('<%=m.getMemberId()%>');
-		 var $nameTd = $("<td>").text('<%=m.getMemberName()%>');
-		 var $phoneTd = $("<td>").text('<%=m.getPhone()%>');
-		 var $gradeTd = $("<td>").text('<%=m.getGradeCode()%>');
-		 var $addressTd = $("<td>").text('<%=m.getAddress()%>');
-		 var $enrollDateTd = $("<td>").text('<%=m.getEnrollDate()%>');
-		 var $sellCountTd = $("<td>").text('<%=m.getSellCount()%>');
-		 
 
-		 $tr.append("<input type='checkbox' id=chk>");
-		 $tr.append($idTd);
-		 $tr.append($nameTd);
-		 $tr.append($phoneTd);
-		 $tr.append($gradeTd);
-		 $tr.append($addressTd);
-		 $tr.append($enrollDateTd);
-		 $tr.append($sellCountTd);
-		 $tr.append("<button id='mbdetail'>상세보기</button>");
-		 
-		
-		 });
-		
-		 
-		 
-		 $("#mbdetail").click(function(){
-			var mi = $(this).parent().children().eq(1).text();
+ 	  $(".mbdetail").click(function(){ 
+			var mi = $(this).parent().siblings().eq(1).text();
+			console.log(mi);
 		 location.href='<%=request.getContextPath()%>/mbdetail.me?mi='+mi;
 		 });
-
-		 $tableBody.append($tr);
-		<%}%>
-	});
-	
-
+	$(".chk").on("click",function(){
+		var chkid = $(this).parent().siblings().eq(0).text();
+	location.href='<%=request.getContextPath()%>/updateBL.me?chkid='+chkid;		
+	})
+ 	 
 	$("#chkAll").on("click", function() {
 	      var chkAll = $(this).is(":checked");
 	      if (chkAll)
@@ -167,7 +150,7 @@ input-align:center;
 	      else
 	        $("#depotMain input:checkbox").prop("checked", false);
 	    });
-	
+
 </script>
 <div class="pagingArea" align="center">
 	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>

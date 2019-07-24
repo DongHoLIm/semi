@@ -53,7 +53,6 @@ public class MemberListServlet extends HttpServlet {
 		
 		ArrayList<Member> list = new MemberService().selectList(currentPage,limit);
 		String page ="";
-		
 		if(list!=null) {
 			page = "views/manager/member/listMember.jsp";//회원리스트나올페이지
 			request.setAttribute("list", list);
