@@ -33,8 +33,8 @@ public class InsertMemberServlet extends HttpServlet {
 		String address = address1 + address2 + address3 + address4;
 		String phone = request.getParameter("phone");
 
-		
-		Member m = new Member();		
+
+		Member m = new Member();
 			m.setMemberId(memberId);
 			m.setMemberPassword(memberPwd);
 			m.setMemberName(memberName);
@@ -42,7 +42,7 @@ public class InsertMemberServlet extends HttpServlet {
 			m.setAddress(address);
 			m.setPhone(phone);
 			int result = new MemberService().insertMember(m);
-			
+
 			if(result>0) {
 				response.sendRedirect("/sp/index.jsp");
 			}else {

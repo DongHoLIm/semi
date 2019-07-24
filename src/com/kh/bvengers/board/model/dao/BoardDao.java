@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
+import com.kh.bvengers.board.model.vo.PowerLink;
 import com.kh.bvengers.product.model.vo.Product;
 
 public class BoardDao {
@@ -105,6 +106,7 @@ public class BoardDao {
 				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
 				hmap.put("writer", rset.getString("MEMBER_NO"));
 				hmap.put("contents", rset.getString("CONTENTS"));
+				hmap.put("category", rset.getString("CATEGORY_DIV"));
 
 				list.add(hmap);
 			}
@@ -187,47 +189,43 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-
-
 		return hmap;
 	}
-	
+
 	//공지사항 작성 삽입
 		public int insertNoticeContent(Connection con, Board b) {
 			PreparedStatement pstmt = null;
 			int result = 0;
-			
+
 			String query = prop.getProperty("insertNoticeContent");
-			
+
 			try {
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, b.getPostsTitle());
 				pstmt.setInt(2, b.getMemberNo());
 				pstmt.setString(3, b.getPostsCode());
 				pstmt.setString(4, b.getContents());
-				
+
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			System.out.println();
 			return result;
 		}
 
 		public int selectCurrval(Connection con) {
 			Statement stmt = null;
 			ResultSet rset = null;
-			
+
 			int postId = 0;
-			
+
 			String query = prop.getProperty("selectCurrval");
-			
+
 			try {
 				stmt = con.createStatement();
 				rset = stmt.executeQuery(query);
-				
+
 				if(rset.next()) {
 					postId = rset.getInt("currval");
 				}
@@ -238,18 +236,15 @@ public class BoardDao {
 				close(stmt);
 				close(rset);
 			}
-			
-			
-			
 			return postId;
 		}
 
 		public int insertAttachment(Connection con, ArrayList<Attachment> fileList) {
 			PreparedStatement pstmt = null;
 			int result = 0;
-			
+
 			String query = prop.getProperty("insertAttachment");
-			
+
 			try {
 				for(int i = 0; i < fileList.size(); i++) {
 					pstmt = con.prepareStatement(query);
@@ -258,39 +253,34 @@ public class BoardDao {
 					pstmt.setString(2, fileList.get(i).getNewFileName());
 					pstmt.setString(3, fileList.get(i).getFileSrc());
 					pstmt.setString(4, fileList.get(i).getPostsId());
-					
-					System.out.println( fileList.get(i).getOrginFileName());
-					System.out.println( fileList.get(i).getNewFileName());
-					System.out.println(fileList.get(i).getFileSrc());
-					
+
+
 					int level = 0;
-					
+
 					if(i==0) {
 						level=0;
 					}else {
 						level=1;
 					}
-					
+
 					String level1 = level + "";
-					
+
 					pstmt.setString(5, level1);
-					
+
 					//pstmt.setInt(5, level);
-					
+
 					System.out.println(level1);
 					
 					result += pstmt.executeUpdate();
 				}
-				
-				
+
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
 				close(pstmt);
 			}
-		
-			
-			return result;
+      return result;
 		}
 
 
@@ -326,6 +316,7 @@ public class BoardDao {
 				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
 				hmap.put("writer", rset.getString("MEMBER_NO"));
 				hmap.put("contents", rset.getString("CONTENTS"));
+				hmap.put("category", rset.getString("CATEGORY_DIV"));
 
 				list.add(hmap);
 			}
@@ -369,7 +360,7 @@ public class BoardDao {
 				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
 				hmap.put("writer", rset.getString("MEMBER_NO"));
 				hmap.put("contents", rset.getString("CONTENTS"));
-
+				hmap.put("category", rset.getString("CATEGORY_DIV"));
 				list.add(hmap);
 			}
 		} catch (SQLException e) {
@@ -380,6 +371,42 @@ public class BoardDao {
 		}
 		return list;
 	}
+
+	public ArrayList<PowerLink> powerLink(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		ArrayList<PowerLink> list = null;
+		String query = prop.getProperty("powerLink");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			list = new ArrayList<PowerLink>();
+
+			while(rset.next()) {
+				PowerLink p = new PowerLink();
+				p.setFileName(rset.getString("NEW_FILE_NAME"));
+				p.setFileSrc(rset.getString("FILE_SRC"));
+				p.setContents(rset.getString("CONTENTS"));
+				p.setPrice(rset.getInt("PRODUCT_MONEY"));
+				p.setTitle(rset.getString("POSTS_TITLE"));
+				p.setPostsId(rset.getString("POSTS_ID"));
+
+				list.add(p);
+			}
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
+  }
 
 	public int getListCount(Connection con) {
 		Statement stmt = null;
@@ -403,8 +430,7 @@ public class BoardDao {
 		}finally {
 			close(stmt);
 			close(rset);
-		}
-		
+		}		
 		return listCount;
 	}
 
@@ -448,9 +474,6 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-
-		
 		return list;
 	}
 
@@ -501,12 +524,7 @@ public class BoardDao {
 		}finally {
 			close(rset);
 			close(pstmt);
-		}
-		
-		
-		
-		
-		
+		}	
 		return hmap;
 	}
 
