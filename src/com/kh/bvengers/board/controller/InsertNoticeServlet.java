@@ -106,7 +106,7 @@ public class InsertNoticeServlet extends HttpServlet {
 			int result = new com.kh.bvengers.board.model.service.BoardService().insertNotice(b,fileList);
 			
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath()+"/views/user/board/board.jsp");
+				response.sendRedirect(request.getContextPath()+"/selectNotice.no");
 			}else {
 				//실패시 저장된 사진 삭제
 				for(int i = 0; i < saveFiles.size(); i++) {
