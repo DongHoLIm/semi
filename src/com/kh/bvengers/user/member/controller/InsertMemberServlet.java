@@ -34,30 +34,22 @@ public class InsertMemberServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 
 		Member m = new Member();
-		
-		if(memberPwd.equals(memberPwd2)) {
-			String memberPassword = memberPwd2;
-			
+
 			m.setMemberId(memberId);
-			m.setMemberPassword(memberPassword);
+			m.setMemberPassword(memberPwd);
 			m.setMemberName(memberName);
 			m.setEmail(email);
 			m.setAddress(address);
 			m.setPhone(phone);
 			int result = new MemberService().insertMember(m);
-			
+
 			if(result>0) {
 				response.sendRedirect("/sp/index.jsp");
 			}else {
 				request.setAttribute("msg","실패하셨습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
-		}else {
-			request.setAttribute("msg", "비밀번호를 확인하세요");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -67,47 +67,50 @@
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
 	<div class="outer">
-		<table class="detail" align="center">
-			<tr>
-				<th>판매자</th>
-				<th colspan="6"><label><%= b.getWriter() %></label></th>
-			</tr>
-			<tr>
-				<th rowspan="4">상품</th>
-				<td rowspan="4">
-					<div id="titleImgArea" align="center">
-						<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= productImg.getNewFileName() %>" id="titleImg" />
-					</div>
-				</td>
-				<th width="100px" height="50px">상품명</th>
-				<th colspan="3" id="titleContent"><label><%= b.getPostsTitle() %></label></th>
-			</tr>
-			<tr>
-				<td colspan="4">
-
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4">
-					<label id="price"><%=p.getProductMoney() %>원</label></td>
+		<form action="<%=request.getContextPath()%>" method="post" encType="multipart/form-data" id="productDetail">
+			<table class="detail" align="center">
+				<input type="hidden" value="<%= b.getPostsId() %>" />
+				<tr>
+					<th>판매자</th>
+					<th colspan="6"><label><%= b.getWriter() %></label></th>
 				</tr>
-			<tr>
-				<td width="300px">
-					<input type="button" value="장바구니" id="basketBtn" class="detailBtn"/>
-				</td>
-				<td width="300px">
-					<input type="button" value="구매하기" id="orderBtn" class="detailBtn"/>
-				</td>
-			</tr>
-			<tr>
-				<th>상품 설명</th>
-				<td colspan="5">
-					<div id="titleContentArea">
-						<p id="contents"><%= b.getContents() %></p>
-					</div>
-				</td>
-			</tr>
-		</table>
+				<tr>
+					<th rowspan="4">상품</th>
+					<td rowspan="4">
+						<div id="titleImgArea" align="center">
+							<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= productImg.getNewFileName() %>" id="titleImg" />
+						</div>
+					</td>
+					<th width="100px" height="50px">상품명</th>
+					<th colspan="3" id="titleContent"><label><%= b.getPostsTitle() %></label></th>
+				</tr>
+				<tr>
+					<td colspan="4">
+
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<label id="price"><%=p.getProductMoney() %>원</label></td>
+					</tr>
+				<tr>
+					<td width="300px">
+						<input type="button" value="장바구니" id="basketBtn" class="detailBtn"/>
+					</td>
+					<td width="300px">
+						<input type="button" value="구매하기" id="orderBtn" class="detailBtn"/>
+					</td>
+				</tr>
+				<tr>
+					<th>상품 설명</th>
+					<td colspan="5">
+						<div id="titleContentArea">
+							<p id="contents"><%= b.getContents() %></p>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>

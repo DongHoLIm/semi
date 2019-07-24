@@ -305,13 +305,13 @@ public class MemberDao {
 		String query = prop.getProperty("selectListwithPageing");
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage-1)*limit +1;
 			int endRow = startRow + limit-1;
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
-			
+
 			mlist = new ArrayList<Member>();
 			while(rset.next()) {
 			Member m = new Member();
@@ -331,8 +331,8 @@ public class MemberDao {
 			//m.setAccountNo(rset.getString("ACCOUNT_NO"));
 			m.setGradeCode(rset.getString("GRADE_CODE"));
 			m.setSellCount(rset.getInt("SELL_COUNT"));
-			
-			
+
+
 			mlist.add(m);
 			}
 		} catch (SQLException e) {
@@ -393,9 +393,9 @@ public class MemberDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		int listCount = 0;
-		
+
 		String query = prop.getProperty("selectListCount");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
@@ -408,22 +408,22 @@ public class MemberDao {
 			close(rset);
 			close(stmt);
 		}
-		
-		
+
+
 		return listCount;
 	}
 	public Member showDetail(Connection con, String memberId) {
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("showDetail");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				m = new Member();
 				m.setMemberNo(rset.getString("MEMBER_NO"));
@@ -442,7 +442,7 @@ public class MemberDao {
 				m.setAccountNo(rset.getString("ACCOUNT_NO"));
 				m.setGradeCode(rset.getString("GRADE_CODE"));
 				m.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -450,24 +450,25 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return m;
+	}
 	public Member checkPwd(Connection con, String memberPwd) {
 		PreparedStatement pstmt = null;
 		Member checkPwd = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("checkPwd");
-		
+
 		try {
 		pstmt = con.prepareStatement(query);
 		pstmt.setString(1, memberPwd);
-		
+
 		rset = pstmt.executeQuery();
-		
+
 		if(rset.next()) {
 			checkPwd = new Member();
-			
+
 			checkPwd.setMemberNo(rset.getString("MEMBER_NO"));
 			checkPwd.setMemberId(rset.getString("MEMBER_ID"));
 			checkPwd.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
