@@ -102,8 +102,7 @@
 			  }else{
 				  $("#location").show();
 				  $("#date").hide();
-				  $("#searchProductCode").hide();
-				  
+				  $("#searchProductCode").hide();				  
 			  }
 		}
 	</script>	

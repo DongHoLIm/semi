@@ -80,7 +80,7 @@
 					code+=$(this).val()+",";																
 				});				
 				var url = "/sp/views/manager/depot/barcodePrint.jsp?value="+code;
-				window.open(url,'바코드생성','width=430,height=500,location=no,status=no,scrollbars=yes');		
+				window.open(url,'바코드생성','width=430,height=500,location=no,status=no,scrollbars=yes');	
 				
 			}
 		</script>
