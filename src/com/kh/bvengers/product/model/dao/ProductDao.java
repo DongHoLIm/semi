@@ -143,7 +143,6 @@ public class ProductDao {
 				pstmt.setString(3, fileList.get(i).getFileSrc());
 				pstmt.setString(4, fileList.get(i).getPostsId());
 				pstmt.setString(5, fileList.get(i).getProductCode());
-				
 				int level = 0;
 				if(i == 0) {
 					level = 0;

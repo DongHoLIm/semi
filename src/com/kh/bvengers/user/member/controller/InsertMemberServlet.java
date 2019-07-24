@@ -32,11 +32,9 @@ public class InsertMemberServlet extends HttpServlet {
 		String address4 = request.getParameter("address4");
 		String address = address1 + address2 + address3 + address4;
 		String phone = request.getParameter("phone");
+
 		
-		Member m = new Member();
-		
-		
-			
+		Member m = new Member();		
 			m.setMemberId(memberId);
 			m.setMemberPassword(memberPwd);
 			m.setMemberName(memberName);
@@ -52,8 +50,6 @@ public class InsertMemberServlet extends HttpServlet {
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
 		}
-
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
