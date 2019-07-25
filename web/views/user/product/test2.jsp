@@ -58,7 +58,9 @@
 	border: none;
 	width: 100px;
 	height: 50px;
-
+}
+#contents {
+	text-align:left;
 }
 </style>
 <meta charset="UTF-8">
@@ -105,7 +107,7 @@
 					<th>상품 설명</th>
 					<td colspan="5">
 						<div id="titleContentArea">
-							<p id="contents"><%= b.getContents() %></p>
+							<p id="contents"><%= (b.getContents()).replace("\r\n","<br>") %></p>
 						</div>
 					</td>
 				</tr>

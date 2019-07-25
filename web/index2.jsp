@@ -34,9 +34,6 @@
 	min-width: 100%;
 	min-height: 400px;
 }
-#powerLinkForm{
-	border-spacing:50px;
-}
 </style>
 
 </head>
@@ -92,7 +89,6 @@
 	<form action="" id="powerLinkForm">
 	<table align="center" id="powerLink">
 		<tbody>
-			<tr id="productNum"></tr>
 			<tr id="imgTable"></tr>
 			<tr id="titleTable"></tr>
 			<tr id="priceTable"></tr>
@@ -110,28 +106,26 @@
 					var $tableImg = $("#imgTable");
 					var $tableTitle = $("#titleTable");
 					var $tablePrice = $("#priceTable");
-					var $postsId = $("#productNum");
 					$tableImg.html("");
 					$tableTitle.html("");
 					$tablePrice.html("");
-					$postsId.html("");
 					var number = new Array();
 					for(var key in data){
 						var file = data[key].fileName;
 						var src = "<%= request.getContextPath()%>/thumbnail_uploadFiles/";
-						var $num = $("<td>").text(data[key].postsId).addClass("powerProduct"+key).css("visibility","hidden");
+						var $num = $("<td>").text(data[key].postsId);
 						var $imgTd = $("<td>")
 						var $imageLabel = $("<label>");
-						var $image = $("<img>").attr("src",src+file).css({"width":"200px", "height":"300px"}).css({"margin":"0 auto"}).addClass("powerProduct"+key);
-						var $titleTd = $("<td>").text(data[key].title).addClass("powerProduct"+key);;
-						var $priceTd = $("<td>").text(data[key].price+"원").addClass("powerProduct"+key);
+						var $image = $("<img>").attr("src",src+file).css({"width":"250px", "height":"300px"}).css({"margin":"0 auto"}).addClass("powerProduct"+key);
+						var $titleTd = $("<td>").text(data[key].title);
+						var $priceTd = $("<td>").text(data[key].price+"원");
 
-						$postsId.append($num);
 
 						$imageLabel.append($image);
 						$imgTd.append($imageLabel);
 
 						$tableImg.append($imgTd);
+						$tableImg.append($num);
 
 						$tableTitle.append($titleTd);
 						$tableTitle.css({"text-align":"center"})
@@ -141,10 +135,11 @@
 
 						number.push(data[key].postsId);
 
+						$($num).css("display","none");
 						$(".powerProduct"+key).css({"cursor":"pointer"});
-
 						<%-- var link = "<%=request.getContextPath()%>/selectOne.pd?num="+number[i]; --%>
-						$(".powerProduct0").on("click", function(){
+
+						<%-- $(".powerProduct0").on("click", function(){
 							location.href='<%=request.getContextPath()%>/selectOne.pd?num='+number[0];
 						});
 						$(".powerProduct1").on("click", function(){
@@ -158,9 +153,13 @@
 						});
 						$(".powerProduct4").on("click", function(){
 							location.href='<%=request.getContextPath()%>/selectOne.pd?num='+number[4];
-						});
+						}); --%>
+
+						$("#powerLink td").click(function(){
+							var num = $(this).next().html();
+							location.href="<%=request.getContextPath()%>/selectOne.pd?num=" + num;
+						})
 					}
-					$("#powerLinkForm").css("border-spacing","10px");
 				},
 				error:function(){
 					console.log("파워테스트 실패");
