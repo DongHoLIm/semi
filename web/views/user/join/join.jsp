@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,8 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-function checkjoin(){
+function checkjoin(index){
+	if(index == 1){
 	var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	var buf = new Array(13);
@@ -20,18 +20,18 @@ function checkjoin(){
 		return false;
 	}
 	
-	if(!getCheck.test($("#memberPassword").val())){
+	if(!getCheck.test($("#password").val())){
 		alert("비밀번호를 다시 설정하세요");
-		$("#memberPassword").val("");
-		$("#memberPassword").focus();
+		$("#password").val("");
+		$("#password").focus();
 		return false;
 	}
 	
-	if($("#memberPassword").val() != ($("#memberPassword2").val())){
+	if($("#password").val() != ($("#password2").val())){
 		alert("비밀번호를 확인하세요");
-		$("#memberPassword").val("");
-		$("#memberPassword2").val("");
-		$("#memberPassword").focus();
+		$("#password").val("");
+		$("#password2").val("");
+		$("#password").focus();
 		return false;
 	}
 	
@@ -44,6 +44,12 @@ function checkjoin(){
 if($("#memberPassword").val() == ($("#memberPassword2").val())){
 	$("form").submit();
 }
+	}else if(index==2){
+		var email = $("#email").val();
+		console.log(email);
+		window.open('<%=request.getContextPath()%>/send.me?email='+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
+		
+	}
 }	
  
 </script>
@@ -113,13 +119,13 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
 			<br><br>
 			<input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
 			<button type="button" class="btn_overlap" style="width:10%;" onclick="idCheck();">중복확인</button><br><br>
-			<input type="password" id="memberPassword" name="memberPassword" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
-			<input type="password" id="memberPassword2" name="memberPassword2" placeholder="  Password 확인" style="width:40%;"><br><br>
+			<input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
+			<input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
 			<input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
 			<input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
-			<input type="text" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
+			<input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
 			<input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
-			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
+			<button type="button" class="btn_overlap" style="width:10%;" onclick="checkjoin(2);">중복확인</button><br><br>
 			<input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
 			<input type="text" id="sample6_postcode" name = "address1" placeholder="우편번호" style="width:30%;">
 			<input type="button" name="zipCode"class="btn_overlap" onclick="sample6_execDaumPostcode()" style="width:10%;" value="우편번호 찾기"><br><br>
@@ -127,7 +133,7 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
 			<input type="text"  id="sample6_detailAddress" name="address3" placeholder="  상세주소" style="width:40%;"><br><br>
 			<input type="text"  id ="sample6_extraAddress" name="address4" placeholder="  참고항목" style="width:40%;"><br><br>
 		<br><br>
-		<input type="button" value="가입" class="btn_join"  onclick="checkjoin();"><br><br>
+		<input type="button" value="가입" class="btn_join"  onclick="checkjoin(1);"><br><br>
 		<input type="reset" value="취소" class="btn_join" onclick="goMain();">
 		<br><br>
 	</div>

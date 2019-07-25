@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="C:/semi/cos.jar"/>
 	<classpathentry kind="lib" path="C:/semi/mail.jar"/>
 	<classpathentry kind="lib" path="C:/semi/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/semi/javax.mail-1.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/semi/javax.mail-api-1.6.2.jar"/>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>
