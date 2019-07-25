@@ -13,6 +13,7 @@ String msg = (String)request.getAttribute("msg");
 <body>
 <script>
 alert("<%=msg%>");
+history.go(-1);
 </script>
 </body>
 </html>

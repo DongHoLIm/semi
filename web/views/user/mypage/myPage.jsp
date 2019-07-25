@@ -1,14 +1,70 @@
+<%@page import="com.kh.bvengers.user.myPage.model.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.* , com.kh.bvengers.user.myPage.model.vo.*"%>
+	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
 	ArrayList<myPage> mplist = (ArrayList<myPage>) request.getAttribute("mplist");
+	String ready = (String) request.getAttribute("ready");
+	String start = (String) request.getAttribute("start");
+	String success = (String) request.getAttribute("success");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- <script>
+	$(function(){
+		
+		$("#deliReady").click(function(){ //이벤트 사용하고 싶을 시 .click 대신 on("click", '#td', function(){}
+			$.ajax({
+				url:"deliReady.mp",
+				type:"get",
+				success:function(data){
+					//console.log(data);
+					$tableBody = $("#userInfoTable tbody");
+					$tableBody.html(""); //요청 시마다 tableBody가 누적되지 않도록 비워줌
+					
+					$.each(data, function(index, value){ //index 회차, value값
+						var $tr = $("<tr>");
+						var $noTd = $("<td>").text(value.userNo);
+						var $nameTd = $("<td>").text(decodeURIComponent(value.userName));
+						var $nationTd = $("<td>").text(decodeURIComponent(value.userNation));
+						
+						$tr.append($noTd);
+						$tr.append($nameTd);
+						$tr.append($nationTd);
+						
+						$tableBody.append($tr);
+					});
+					
+				},
+				error:function(data){
+					console.log("실패!");
+				}
+			});
+		});
+		
+	});
+
+</script>
+ -->
 <style>
+
+.pagingArea {
+	margin-top:50px;
+}
+
+.pagingArea > button {
+	background:#FFF;
+	border: 1px solid black;
+	
+}
 #sec1 {
 	width: 100%;
 	height: 100%;
@@ -42,15 +98,23 @@
 }
 
 .board {
+	margin-top:5%;
+	margin-left:auto;
+	margin-right:auto;
 	width: 80%;
-	margin: auto;
-	align: center;
+	text-align:center;
 	border-spacing: 10px;
+	border-botton:1px solid #ccc;
 }
 
+.th1 {
+	text-align:center;
+	border:1px solid black;
+}
 .row0 {
-	background: #eee;
-	margin: auto;
+	background: black;
+	text-align:center;
+	color:white;
 }
 
 .row1 {
@@ -73,51 +137,44 @@
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 
 	<section id="sec1">
+	<form action="<%=request.getContextPath()%>/listMyPage.mp" id="statusForm" method="post">
 		<div id="area">
-			<h3 align="center">배송상태</h3>
+			<h3 align="center">최근 배송상태</h3>
 			<table id="deliTable">
 				<tr>
-					<td class="deliReady"><img src="/sp/images/box.png" alt="" />
+						<input type="hidden" id="dr1" name="dr1">
+					<td><img src="/sp/images/box.png" alt="" id="deliReady" />
 						<br />
 						<p>
-							배송 준비중(<%
-							int ready = 0;
-						%><%=ready%>)
+							배송 준비중(<%=ready%>)
 						</p></td>
-					<td class="deliStart"><img src="/sp/images/delivery-truck.png"
-						alt="" /> <br />
+					<td><img src="/sp/images/delivery-truck.png" id="deliStart" /> <br />
 						<p>
-							배송 시작(<%
-							int start = 0;
-						%><%=start%>)
+							배송 중(<%=start%>)
 						</p></td>
-					<td class="deliSuccess"><img src="/sp/images/order.png" alt="" />
+					<td><img src="/sp/images/order.png" alt="" id="deliSuccess"/>
 						<br />
 						<p>
-							배송 완료(<%
-							int success = 0;
-						%><%=success%>)
+							배송 완료(<%=success%>)
 						</p></td>
 				</tr>
 			</table>
 		</div>
+		</form>
 		
-		
-		
-	<form action="" method="post">
 		<div>
 			<br />
-			<h3 align="center">주문 현황</h3>
+			<h3 align="center">최근 주문 현황</h3>
 			<table class="board">
 			<tbody></tbody>
 				<tr class="row0">
-					<th>주문번호</th>
-					<th>상품명</th>
-					<th>배송여부</th>
-					<th>주문날짜</th>
+					<th class="th1">주문번호</th>
+					<th class="th1">상품명</th>
+					<th class="th1">배송여부</th>
+					<th class="th1">주문날짜</th>
 				</tr>
 				<% for(myPage m : mplist){%>
-				<tr>
+				<tr class="">
 					<td><%=m.getOno() %></td>
 					<td><%=m.getPname()%></td>
 					<td><%=m.getDstatus()%></td>
@@ -126,42 +183,91 @@
 				<%}%>
 			</table>
 		</div>
-		</form>
-		<div align="center">	
-			<ul class="pagination" align="center">
-			  <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-			  <li class="page-item"><a class="page-link" href="#">1</a></li>
-			  <li class="page-item"><a class="page-link" href="#">2</a></li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
-			  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-			</ul>
+		
+		<div id="div_deliReady" style="display:none;">
+			<br />
+			<h3 align="center">배송 준비중</h3>
+			<table class="board">
+			<tbody></tbody>
+				<tr class="row0">
+					<th class="th1">주문번호</th>
+					<th class="th1">상품명</th>
+					<th class="th1">배송여부</th>
+					<th class="th1">주문날짜</th>
+				</tr>
+				<tbody></tbody>
+			</table>
 		</div>
+		
+		
+<%-- 페이징처리 --%>
+		<div class="pagingArea" align="center">
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1){ %>
+			<button class="btn_paging" disabled><</button>
+			<% }else { %>
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+				if(currentPage == p){
+			%>
+					<button class="btn_paging" disabled><%= p %></button>
+			<% } else { %>
+					<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=<%=p%>'"><%= p %></button>
+			<% 
+				}
+			   } 
+			%>
+			
+			<% if(currentPage >= maxPage){ %>
+			<button class="btn_paging" disabled>></button>
+			<% }else{ %>
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=<%=maxPage%>'">>></button>
+		</div>
+
 
 	</section>
 
+
+		
+		
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 <script>
-<%-- 	$(function(){
-		<% for(myPage m : mplist){%>
+		$(function(){
+			$("#listArea td").mouseenter(function(){ //마우스가 올라갔을 때
+				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
+			}).mouseout(function(){ //마우스가 내려갔을 때
+				$(this).parent().css({"background":"black"});				
+			}).click(function(){ //클릭했을 때
+				var num = $(this).parent().children("input").val();
+			
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
+			});
+		});
 		
-		 var $tableBody = $("table tbody");
-		 
-		 var $tr = $("<tr>");
-		 var $onoTd = $("<td>").text('<%=m.getOno()%>');
-		 var $pnameTd = $("<td>").text('<%=m.getPname()%>');
-		 var $dstatusTd = $("<td>").text('<%=m.getDstatus()%>');
-		 var $ddateTd = $("<td>").text('<%=m.getoDate()%>');
-		 
-
-		 $tr.append($onoTd);
-		 $tr.append($pnameTd);
-		 $tr.append($dstatusTd);
-		 $tr.append($ddateTd);
-		 
-		 $tableBody.append($tr);
-		<%}%>
-	}); --%>
-</script>
+		$(function(){
+			$("#deliReady").click(function(){
+				$("#dr1").val("1");
+				$("#statusForm").submit();
+			});
+			$("#deliStart").click(function(){
+				$("#dr1").val("2");
+				$("#statusForm").submit();
+			});
+			$("#deliSuccess").click(function(){
+				$("#dr1").val("3");
+				$("#statusForm").submit();
+			});
+		});
+		
+		
+		
+	</script>
 </body>
 </html>

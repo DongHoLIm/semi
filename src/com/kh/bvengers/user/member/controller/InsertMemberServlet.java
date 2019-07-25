@@ -23,7 +23,7 @@ public class InsertMemberServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String memberId = request.getParameter("memberId");
-		String memberPwd = request.getParameter("memberPassword");
+		String memberPwd = request.getParameter("password");
 		String memberName = request.getParameter("memberName");
 		String email = request.getParameter("email");
 		String address1 = request.getParameter("address1");
