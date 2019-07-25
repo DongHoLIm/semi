@@ -76,7 +76,9 @@
 
 }
 
-
+#accountNumber::-webkit-outer-spin-button, #accountNumber::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
 </style>
 </head>
 <body>
@@ -159,7 +161,16 @@
                 	<textarea cols="10" rows="10" name="contents" class="form-control" style="resize:none"></textarea>
                 	<!-- <input type="text" class=""/> -->
                 </td>
-
+            </tr>
+            <tr>
+            	<td>예금주</td>
+            	<td><input type="text" name="accountHolder" id="accountHolder" class="form-control"/></td>
+            	<td>은행명</td>
+            	<td><input type="text" name="bankCode" id="bankCode" class="form-control"/></td>
+            </tr>
+            <tr>
+	            <td>입금될 계좌번호</td>
+	            <td colspan="3"><input type="number" placeholder="-제외한 계좌번호를 입력해주세요" name="accountNo" id="accountNo" class="form-control"/></td>
             </tr>
             <tr>
                 <th>상품 보관일자 </th>
@@ -167,6 +178,7 @@
             </tr>
             <tr>
                 <td colspan="5">
+                	<input type="hidden" name="loginId"/>
                     <input type="submit" value="등록" id="btn_enroll" class="pull-right"/>
                     <input type="button" value="홈으로" id="btn_enroll" class="pull-left" onclick="javascript:location.href='index.jsp'"/>
                 </td>
