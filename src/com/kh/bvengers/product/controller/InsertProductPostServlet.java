@@ -28,7 +28,7 @@ import com.oreilly.servlet.MultipartRequest;
 @WebServlet("/insert.po")
 public class InsertProductPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,20 +43,20 @@ public class InsertProductPostServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 20;
-			
+
 			String root = request.getSession().getServletContext().getRealPath("/");
-			
+
 			System.out.println(root);
 			String savePath = root + "thumbnail_uploadFiles/";
-			
-			
+
+
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
+
 			ArrayList<String> saveFiles = new ArrayList<String>();
 			ArrayList<String> originFiles = new ArrayList<String>();
-			
+
 			Enumeration<String> files = multiRequest.getFileNames();
-			
+
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				if(multiRequest.getFilesystemName(name) != null) {
@@ -66,7 +66,7 @@ public class InsertProductPostServlet extends HttpServlet {
 				System.out.println("fileSystem name : " + multiRequest.getFilesystemName(name));
 				System.out.println("originFile name : " + multiRequest.getOriginalFileName(name));
 			}
-			
+
 			int memberNo =  Integer.parseInt(((Member) (request.getSession().getAttribute("loginUser"))).getMemberNo());
 			//로그인 기능 추가 시 위 주석 해제(현재 로그인한 유저 번호)
 			String postsTitle = multiRequest.getParameter("postsTitle");				//posts 제목
@@ -74,15 +74,15 @@ public class InsertProductPostServlet extends HttpServlet {
 			int productMoney = Integer.parseInt(multiRequest.getParameter("productMoney"));//product 가격
 			String contents = multiRequest.getParameter("contents");					//posts_contents 내용
 			String keepDate = multiRequest.getParameter("keepDate");					//product 보관일자
-			
-			String mainCate = multiRequest.getParameter("mainCate"); 
+
+			String mainCate = multiRequest.getParameter("mainCate");
 			String subCate1 = multiRequest.getParameter("subCate1");					//product 카테고리1
 			String subCate2 = multiRequest.getParameter("subCate2");					//product 카테고리2
 			String subCate3 = multiRequest.getParameter("subCate3");					//product 카테고리3
-			
+			System.out.println(contents);
 			String productCode = "";												//product 상품코드
 			String productCate = "";												//product 카테고리 코드
-			
+
 			if(mainCate.equals("pc")) {
 				if(subCate1.equals("desktop")) {
 					productCode = "11";
@@ -97,12 +97,12 @@ public class InsertProductPostServlet extends HttpServlet {
 					productCate = "CASE";
 				}else if(subCate2.equals("notebook")) {
 					productCode = "22";
-					productCate = "NOTEBOOK";		
+					productCate = "NOTEBOOK";
 				}else if(subCate2.equals("notebookEtc")) {
 					productCode = "23";
 					productCate = "NOTE_ETC";
 				}
-				
+
 			}else {
 				if(subCate3.equals("ha")) {
 					productCode = "31";
@@ -115,20 +115,20 @@ public class InsertProductPostServlet extends HttpServlet {
 					productCate = "CAMERA";
 				}
 			}
-			
+
 			int ran = (int) (Math.random() * 1000000);
 			productCode = productCode + ran;
-			
-			
+
+
 			//posts테이블 객체 생성
 			Posts posts = new Posts();
 			posts.setPostsTitle(postsTitle);
 			posts.setMemberNo(memberNo);
-			
+
 			//postsContents 객체 생성
 			PostsContents postsContents = new PostsContents();
 			postsContents.setContents(contents);
-			
+
 			//product 객체 생성
 			Product product = new Product();
 			product.setProductCode(productCode);
@@ -137,28 +137,28 @@ public class InsertProductPostServlet extends HttpServlet {
 			product.setProductCate(productCate);
 			product.setMemberNo(memberNo+"");
 			product.setKeepDate(keepDate);
-			
+
 			//attachment 객체는 ArrayList 형태로 생성
 			ArrayList<Attachment> fileList = new ArrayList<Attachment>();
 			for(int i = originFiles.size()-1; i >= 0; i--) {
 				Attachment at = new Attachment();
 				at.setFileSrc(savePath);
-				at.setOrginFileName(originFiles.get(i));
-				
+				at.setOrginFileName(originFiles.get(i));				
 				String newName = saveFiles.get(i).substring(saveFiles.get(i).length() - 24, saveFiles.get(i).length());
+
 				System.out.println("newName : " + newName);
-				
+
 				at.setNewFileName(newName);
 				at.setPostsId(posts.getPostsId()+"");
 				at.setProductCode(productCode);
 				fileList.add(at);
 			}
-			
+
 			System.out.println("controller board : " + posts);
 			System.out.println("controller attachment list : " + fileList);
-			
+
 			int result = new ProductService().insertProductPost(posts, postsContents, product, fileList);
-			
+
 			if(result >0) {
 				response.sendRedirect("index.jsp");
 			}else {
@@ -167,7 +167,7 @@ public class InsertProductPostServlet extends HttpServlet {
 					File failedFile = new File(savePath + saveFiles.get(i));
 					failedFile.delete();
 				}
-				
+
 				request.setAttribute("msg", "상품 등록 실패!");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}

@@ -16,7 +16,6 @@
 	font-size:20px;
 	margin:0 auto;
 }
-
 #btn_enroll {
 	border: 1px solid #ffd8d9;
 	font-size: 14px;
@@ -62,7 +61,7 @@
 .fileName{
 	width:70%;
 	display: inline-block;
-	padding: .5em .75em; 
+	padding: .5em .75em;
 	font-size: inherit;
 	font-family: inherit;
 	line-height: normal;
@@ -118,7 +117,7 @@
 						<option id="ka" value="ka">주방가전
 						<option id="camera" value="camera">카메라
 					</select>
-				</td>		
+				</td>
             </tr>
             <tr>
                 <th>상품명 </th>
@@ -160,7 +159,7 @@
                 	<textarea cols="10" rows="10" name="contents" class="form-control" style="resize:none"></textarea>
                 	<!-- <input type="text" class=""/> -->
                 </td>
-                
+
             </tr>
             <tr>
                 <th>상품 보관일자 </th>
@@ -179,7 +178,7 @@
 	        			$(".sub_cate1").show();
 	        			$(".sub_cate2").hide();
 	        			$(".sub_cate3").hide();
-        		
+
         		$(".cate_enroll").change(function(){
 	        		var select = $(".cate_enroll").val();
 
@@ -187,7 +186,7 @@
 	        			$(".sub_cate1").show();
 	        			$(".sub_cate2").hide();
 	        			$(".sub_cate3").hide();
-	        			
+
 	        		}else if(select == "laptop"){
 	        			$(".sub_cate1").hide();
 	        			$(".sub_cate2").show();
@@ -197,29 +196,29 @@
 	        			$(".sub_cate2").hide();
 	        			$(".sub_cate3").show();
 	        		}
-        		
+
         		});
-        		
+
         		$(".pullRight").change(function(){
-        			
+
         			if(window.FileReader){
         				var fileName = $(this)[0].files[0].name;
-       				} else { 
-       					var fileName = $(this).val().split('/').pop().split('\\').pop(); 
+       				} else {
+       					var fileName = $(this).val().split('/').pop().split('\\').pop();
 					}
 					console.log(fileName);
 					$(this).siblings(".fileName").val(fileName);
 
-        			
+
         		});
-        		
-        		
-        		
-        		
-        		
+
+
+
+
+
         	});
         </script>
-        
+
 </div>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>

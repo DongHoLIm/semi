@@ -12,21 +12,21 @@ function checkjoin(){
    var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
    var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
    var buf = new Array(13);
-   
+
    if($("#memberId").val() == ""){
       alert("아이디를 입력하세요");
       $("#memberId").focus();
       $("#memberId").val("");
       return false;
    }
-   
+
    if(!getCheck.test($("#password").val())){
       alert("비밀번호를 다시 설정하세요");
       $("#password").val("");
       $("#password2").focus();
       return false;
    }
-   
+
    if($("#password").val() != ($("#password2").val())){
       alert("비밀번호를 확인하세요");
       $("#password").val("");
@@ -34,7 +34,7 @@ function checkjoin(){
       $("#password").focus();
       return false;
    }
-   
+
 /*    if(($("#peoplejb").val()=="")||($("#peoplejb2").val()=="")){
       alert("주민등록번호를 입력하세요");
       $("#peoplejb").focus();
@@ -45,7 +45,7 @@ if($("#password").val() == ($("#password2").val())){
    $("form").submit();
 }
 }   
- 
+
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -94,7 +94,7 @@ if($("#password").val() == ($("#password2").val())){
    background-color: black;
    color: white;
    }
-   
+
 .btn_join:hover {color:white;}
 </style>
 </head>
@@ -102,12 +102,10 @@ if($("#password").val() == ($("#password2").val())){
 <body>
       <form action="<%=request.getContextPath() %>/insertMember.me" method="post">
       <div class = "header" align="center">
-      <br><br>
-      
+      <br><br>      
       <br>
-   </div>
-   
-   <div class="box_join" align="center">
+   </div>   
+  <div class="box_join" align="center">
       <h2>중고愛민족 회원가입</h2>
    <div class="box_login" align="center">
          <br><br>
@@ -169,7 +167,7 @@ if($("#password").val() == ($("#password2").val())){
                        }
                        // 조합된 참고항목을 해당 필드에 넣는다.
                        document.getElementById("sample6_extraAddress").value = extraAddr;
-                   
+
                    } else {
                        document.getElementById("sample6_extraAddress").value = '';
                    }
@@ -185,8 +183,6 @@ if($("#password").val() == ($("#password2").val())){
       function goMain(){
          location.href="<%=request.getContextPath()%>/index.jsp";
       }
-      
-      
       </script>
       <br><br>
 </body>
