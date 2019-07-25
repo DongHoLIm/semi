@@ -18,7 +18,7 @@
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: auto;
+	margin-bottom: 50px;
 }
 
 .detail td, .detail th {
@@ -73,7 +73,7 @@
 			<table class="detail" align="center">
 				<tr>
 					<th>판매자</th>
-					<th colspan="6"><label><%= b.getWriter() %></label></th>
+					<th colspan="6"><label id="writer"><%= b.getWriter() %></label></th>
 				</tr>
 				<tr>
 					<th rowspan="4">상품</th>
@@ -115,5 +115,11 @@
 		</form>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+	<script>
+		$("#writer").on("click", function(){
+			window.open("<%= request.getContextPath()%>/myInfo.me?userId=<%=b.getWriter()%>", '<%= b.getWriter()%>', 'width=400, height=600, location=no, toolbar=no, fullscreen=no');
+		});
+
+	</script>
 </body>
 </html>

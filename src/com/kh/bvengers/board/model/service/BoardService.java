@@ -46,9 +46,9 @@ public class BoardService {
 			if(result > 0) {
 				String postId = new BoardDao().selectCurrval(con)+"";
 				for(int i = 0; i < fileList.size(); i++) {
-				
+
 					fileList.get(i).setPostsId(postId);
-					
+
 				}
 			}
 
@@ -95,67 +95,76 @@ public class BoardService {
 
 	public int[] getListCount(int num) {
 		Connection con = getConnection();
-	
-		
+
+
 		int listCount = new BoardDao().getListCount(con, num);
-		
-		
+
+
 		int listCount2 = new BoardDao().getListCount2(con);
-	
+
 		int[] array = new int[2];
-		
+
 		array[0] = listCount;
 		array[1] = listCount2;
-		
+
 		close(con);
-		
+
 		return array;
-		
+
 	}
 	public ArrayList<Board> selectList(int currentPage, int limit){
-		
+
 		Connection con = getConnection();
-		
+
 		ArrayList<Board>list = new BoardDao().selectList(con,currentPage,limit);
-		
+
 		close(con);
-		
+
 		return list;
 	}
-	
+
 	public ArrayList<Board> selectList1(int currentPage1, int limit1) {
 
 		Connection con = getConnection();
-		
+
 		ArrayList<Board>list1 = new BoardDao().selectList1(con,currentPage1,limit1);
-		
+
 		close(con);
-		
+
 		return list1;
 	}
 
 	public HashMap<String, Object> selectOneNotice(int num) {
 		Connection con = getConnection();
-		
+
 		HashMap<String, Object> hmap = null;
-		
+
 		int result = new BoardDao().updateCount(con,num);
-		
+
 		if(result > 0) {
 			hmap = new BoardDao().selectOneNotice(con,num);
 			commit(con);
 		}else {
 			rollback(con);
 		}
-		
+
 		close(con);
-		
+
 		return hmap;
 	}
 
-	
+	public ArrayList<HashMap<String, Object>> mainList(String value) {
+		Connection con = getConnection();
 
-	
+		ArrayList<HashMap<String, Object>> list = new BoardDao().mainList(con, value);
+
+		close(con);
+		return list;
+	}
+
+
+
+
 
 }
 
