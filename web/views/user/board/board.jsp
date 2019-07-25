@@ -151,11 +151,6 @@
  		 
       </div>
 
-  <%if (loginUser != null && loginUser.getMemberId().equals("admin")){%>
-  <div style="align :center">
-  	<button onclick="location.href='views/user/board/boarderwriter.jsp'">작성하기</button>
-	</div>
-	<%}%>
 
 </div> 
 <div class="container">

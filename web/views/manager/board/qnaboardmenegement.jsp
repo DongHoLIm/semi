@@ -3,77 +3,135 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/d3js/5.9.0/d3.min.js"></script>
 <title>Insert title here</title>
 <style>
-#depotMain {
-	width: 80%;
-	height: 80%;
-	border :2px solid black;
-}
-
-tr {
-	border: 1px solid black;
-}
-
-#th {
-	border: 1px solid white;
-	background: black;
-	color: white;
+#board {
 	text-align: center;
 }
 
-#inOutButton {
-	padding-left:8%;
+#wirte {
+	position: absolute;
+	right: 30px;
 }
-#inOutMain {
-	border :2px solid black;
-	width:80%;
-	margin:0 auto;
+
+.spot {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
 }
-#table Area{
-align:center;
-width:80%;
+
+.svg-wrapper {
+	margin-top: 0;
+	position: relative;
+	width: 150px;
+	/*make sure to use same height/width as in the html*/
+	height: 40px;
+	display: inline-block;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px
 }
-.th{
-background:black;
-color:white;
-text-align:center;
-border:1px solid white;
+
+#shape {
+	stroke-width: 6px;
+	fill: transparent;
+	stroke: #009FFD;
+	stroke-dasharray: 85 400;
+	stroke-dashoffset: -220;
+	transition: 1s all ease;
+}
+
+#text {
+	margin-top: -35px;
+	text-align: center;
+}
+
+#text a {
+	color: white;
+	text-decoration: none;
+	font-weight: 100;
+	font-size: 1.1em;
+}
+
+.svg-wrapper:hover #shape {
+	stroke-dasharray: 50 0;
+	stroke-width: 3px;
+	stroke-dashoffset: 0;
+	stroke: #06D6A0;
 }
 </style>
+</head>
 <body>
 	<%@ include file="../hfl/managerHeader.jsp"%>
-	<br />
-	<h2 align="center">고객센터 관리</h2>
-	<div id="inOutMain"><br><br>
-		<div id="inOutButton" align="center">
-			<select name="search" id="search">
-				<option value="notebook">노트북</option>
-				<option value="">가전제품</option>
-				<option value=""></option>
-			</select>
-		<span>
-		<select name="select" style="width:20%;">
-			<option value="findId">아이디로 조회</option>
-			<option value="findName">이름으로 조회</option>
-			<option value="findLevel">등급으로 조회</option>
-		</select>
-		<input type="search" name="searchValue">
-		<button type="submit" style="border-radius: 5px; background-color: black; color:white;">조회</button>
-	</span>		</div><br><br>
-		<div id="table Area">
-			<table id="depotMain" align="center">
+	<div class="container">
+		<br> <br>
+		<h2 id="board">공지사항</h2>
+		<!-- <table class="table" id = "listArea"> -->
+		<table align="center" id="listArea" class="table">
+			<thead>
 				<tr>
-		<th class="th">No.</th>
-		<th class="th">ID</th>
-		<th class="th">게시글 제목</th>
-		<th class="th">판매여부</th>ㄴ
-		<th class="th">분류</th>
-		<th class="th">삭제</th>
-	</tr>
-			</table><br><br>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성날짜</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+
+			</tbody>
+		</table>
+
+		<br>
+		<br>
+
+		<div align="center">
+			<button
+				onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
 		</div>
+
+	</div>
+	<div class="container">
+		<br> <br>
+		<hr>
+		<h2 id="board">게시판</h2>
+		<form action="" method="post" align="right">
+			<select>
+				<option value="title">제목</option>
+				<option value="writer">작성자</option>
+				<option value="wdate">날짜</option>
+			</select> <input type="text"> <input type="submit" value="검색">
+		</form>
+		<table class="table" id="messageArea">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성날짜</th>
+					<th>조회수</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<%--   <%for(Board m: list1) {%> --%>
+				<tr>
+					<%--   <input type = "hidden" value = "<%=m.getPostsId() %>"> 
+					<td><%= m.getPostsId() %></td>
+					<td><%= m.getPostsTitle() %></td>
+					<td><%= m.getMemberName()%></td>
+					<td><%= m.getCreateDate()%></td>
+					<td><%= m.getPostsViews()%></td> --%>
+				</tr>
+			</tbody>
+
+		</table>
 	</div>
 
 

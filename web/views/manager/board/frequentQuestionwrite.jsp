@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%@include file ="../hfl/header.jsp" %>
+<header><%@ include file="../hfl/managerHeader.jsp" %></header>
 	<br>
 	<br>
-	<h2 align="center">게시글 작성</h2>
+	<h2 align="center">자주찾는 질문 작성</h2>
 
-	<div class="container">
+	<div class="container" style = "width:80%; height:150%">
 	 	<form action = "<%= request.getContextPath()%>/insertNotice" method = "post" encType="multipart/form-data">
-	<table class="table table-bordered">
+	<table class="table table-bordered" >
  		<tr hidden>
 			<td><input name="hiddenCode" value="2"></td>
  		</tr> 
@@ -18,14 +18,9 @@
 			<td><input type="text" name="title" class="form-control"></td>
 		</tr>
 		<tr>
-			<th>파일첨부:</th>
-			<td><input type="file" name="filename" class="form-control"></td>
-		</tr>
-
-		<tr>
 			<th>글내용:</th>
 		<td>
-		<textarea id="summernote" name = "content"></textarea>
+		<textarea id="summernote" name = "content" style = "width:80%; height:300%"></textarea>
 		</td>
 			<!-- <td><textarea cols="40" rows="50" class="form-control" name = "content"></textarea></td> -->
 		</tr>

@@ -52,7 +52,7 @@ td{
 					HashMap<String, Object> hmap = fileList.get(i);
 				 %>
 				<tr>
-				<td colspan = "6"><img id="titleImg" src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>"></td>
+				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>"></td>
 				</tr>
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
