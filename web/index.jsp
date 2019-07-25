@@ -41,8 +41,8 @@
 
 </head>
 <!-- header 영역 -->
-<header><%@ include file="views/user/hfl/header.jsp"%></header>
 <body>
+<header><%@ include file="views/user/hfl/header.jsp"%></header>
 	<div class="container">
 		<br>
 		<br>

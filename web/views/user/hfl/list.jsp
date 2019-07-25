@@ -42,9 +42,9 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse in">
         <div class="w3-dropdown-content w3-bar-block w3-border">
-        	<ul>
-        		<li><a href="<%=request.getContextPath() %>/" class="w3-button">본체</a></li>
-        		<li><a href="">모니터</a></li>
+        	<ul id="pc">
+        		<li value="desktop"><a class="w3-button">본체</a></li>
+        		<li value="pc_etc"><a>주변기기</a></li>
         	</ul>
         </div>
       </div>
@@ -57,9 +57,10 @@
       </div>
       <div id="collapse2" class="panel-collapse collapse">
         <div class="panel-body">
-        	<ul>
-        		<li><a href="">노트북</a></li>
-        		<li><a href="<%=request.getContextPath()%>/search.pd">노트북가방</a></li>
+        	<ul id="notebook">
+        		<li value="note"><a>노트북</a></li>
+        		<li value="case"><a>노트북 가방</a></li>
+        		<li value="note_etc"><a>노트북 주변기기</a></li>
         	</ul>
         </div>
       </div>
@@ -73,13 +74,21 @@
       <div id="collapse3" class="panel-collapse collapse">
         <div class="panel-body">
         	<ul>
-        		<li><a href="">주방용품</a></li>
-        		<li><a href="">생활가전</a></li>
+        		<li value="ka"><a>주방용품</a></li>
+        		<li value="ha"><a>생활가전</a></li>
+        		<li value="camera"><a>카메라</a></li>
         	</ul>
         </div>
       </div>
     </div>
   </div>
 </div>
+	<script>
+		$("ul").on("click", "li", function() {
+			var value = $(this).attr('value');
+			console.log(value);
+			location.href="<%=request.getContextPath()%>/list.pd?value="+value;
+		});
+	</script>
 </body>
 </html>
