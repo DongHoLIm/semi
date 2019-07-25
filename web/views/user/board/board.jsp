@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.member.model.vo.*" %>
 <%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+ 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage(); 
+	
+	ArrayList<Board> list1 = (ArrayList<Board>)request.getAttribute("list1");
+	PageInfo pi1 = (PageInfo)request.getAttribute("pi1");
+	int listCount1 = pi1.getListCount();
+	int currentPage1 = pi1.getCurrentPage();
+	int maxPage1 = pi1.getMaxPage();
+	int startPage1 = pi1.getStartPage();
+	int endPage1 = pi1.getEndPage();
 
+
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -86,9 +96,9 @@
 <div class="container">
    <br>
    <br>
-  <h2 id="board">공지사항</h2>
+ <h2 id="board">공지사항</h2>
   <!-- <table class="table" id = "listArea"> -->
-			<table align = "center" id = "listArea">
+			<table align = "center" id = "listArea" class="table">
       <thead>
       <tr>
         <th>번호</th>
@@ -147,7 +157,7 @@
 	</div>
 	<%}%>
 
-</div>
+</div> 
 <div class="container">
    <br>
    <br>
@@ -162,84 +172,85 @@
   <input type="text">
   <input type="submit" value="검색">
   </form>
-  <table class="table">
+  <table class="table" id = "messageArea">
       <thead>
       <tr>
         <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
         <th>작성날짜</th>
+        <th>조회수</th>
+        
       </tr>
     </thead>
     <tbody>
+    <%for(Board m: list1) {%>
       <tr>
-        <td>1</td>
-        <td><a href="boarderinsert.jsp">title</a></td>
-        <td>writer</td>
-        <td>2019-07-06</td>
+      <input type = "hidden" value = "<%=m.getPostsId() %>"> 
+					<td><%= m.getPostsId() %></td>
+					<td><%= m.getPostsTitle() %></td>
+					<td><%= m.getMemberName()%></td>
+					<td><%= m.getCreateDate()%></td>
+					<td><%= m.getPostsViews()%></td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-        <tr>
-        <td>4</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-        <tr>
-        <td>5</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
-      <tr>
-        <td>10</td>
-        <td>title</td>
-        <td>writer</td>
-        <td>2019-07-06</td>
-      </tr>
+      <%System.out.print("아이디는"+m.getPostsId()); } %>
     </tbody>
+      <div class="svg-wrapper" align ="center">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" align = "center"/>
+        <div id="text" align ="center" >
+          <a onclick="location.href='<%=request.getContextPath()%>/views/user/board/messageBoard.jsp'" style="color:black;align:center"><span class="spot" align ="center" ></span>글작성</a>
+        </div>
+      </svg>
+    </div>
   </table>
+   <div class = "pagingArea" align ="center" >
+		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage1=1'"><</button>      
+		<%if(currentPage1 <= 1) {%> 
+		<button disabled><</button>
+		<%} else{%>
+	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=currentPage1-1%>'"><</button>
+		<%}
+			System.out.println("최근 페이지는" + currentPage1);
+		%>    
+			<%for (int p = startPage1; p <= endPage1; p++) {
+				if(currentPage1 == p){
+			%>
+				<button disabled><%= p %></button>
+			<%} else{ %>
+					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=p%>'"><%= p %></button>
+			<% }  
+			}
+			%>
+			
+			
+			<%if(currentPage1 >= maxPage1){ %>
+			<button disabled>></button>
+			<%}else{ %>
+			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=currentPage1 + 1%>'">></button>
+			<%} %>
+			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=maxPage1%>'">>></button>
+ 		 
+      </div>
+  
 </div>
 
 	<script>
 		$(function(){
 			$("#listArea td").mouseenter(function(){
 				
+				$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			}).mouseout(function(){
+					$(this).parent().css({"background":"white"});	
+			}).click(function(){
+				var num = $(this).parent().children("input").val();
+				console.log(num);
+				 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
+			});
+		});
+		
+		$(function(){
+			$("#messageArea td").mouseenter(function(){
 				$(this).parent().css({"background":"darkgray","cursor":"pointer"});
 			}).mouseout(function(){
 					$(this).parent().css({"background":"white"});	

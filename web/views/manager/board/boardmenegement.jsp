@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,6 @@ border:1px solid white;
 		<button type="submit" style="border-radius: 5px; background-color: black; color:white;">조회</button>
 	</span>		</div><br><br>
 	  <div style="align :center">
-  	<button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
 	</div>
 		<div id="table Area">
 			<table id="depotMain" align="center">

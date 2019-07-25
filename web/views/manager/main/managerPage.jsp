@@ -61,6 +61,7 @@
 	
 	<section id="sec1">
 		<h2 align="center">공지사항</h2>
+		
 		<table class="board">
 			<tr class="row0">
 			<thead>
@@ -131,6 +132,10 @@
 				<td>19/06/15</td>
 			</tr>
 		</table>
+		<br>
+		<div align = "center">
+		<button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
+		</div>
 	<footer align="center">	
 		<ul class="pagination" align="center">
 		  <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>

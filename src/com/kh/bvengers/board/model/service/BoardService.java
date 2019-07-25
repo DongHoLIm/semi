@@ -49,7 +49,6 @@ public class BoardService {
 				
 					fileList.get(i).setPostsId(postId);
 					
-					System.out.println(fileList.size());
 				}
 			}
 
@@ -94,14 +93,23 @@ public class BoardService {
 		return list;
 	}
 
-	public int getListCount() {
+	public int[] getListCount(int num) {
 		Connection con = getConnection();
+	
 		
-		int listCount = new BoardDao().getListCount(con);
+		int listCount = new BoardDao().getListCount(con, num);
+		
+		
+		int listCount2 = new BoardDao().getListCount2(con);
+	
+		int[] array = new int[2];
+		
+		array[0] = listCount;
+		array[1] = listCount2;
 		
 		close(con);
 		
-		return listCount;
+		return array;
 		
 	}
 	public ArrayList<Board> selectList(int currentPage, int limit){
@@ -114,6 +122,17 @@ public class BoardService {
 		
 		return list;
 	}
+	
+	public ArrayList<Board> selectList1(int currentPage1, int limit1) {
+
+		Connection con = getConnection();
+		
+		ArrayList<Board>list1 = new BoardDao().selectList1(con,currentPage1,limit1);
+		
+		close(con);
+		
+		return list1;
+	}
 
 	public HashMap<String, Object> selectOneNotice(int num) {
 		Connection con = getConnection();
@@ -123,8 +142,8 @@ public class BoardService {
 		int result = new BoardDao().updateCount(con,num);
 		
 		if(result > 0) {
-			commit(con);
 			hmap = new BoardDao().selectOneNotice(con,num);
+			commit(con);
 		}else {
 			rollback(con);
 		}
@@ -133,6 +152,10 @@ public class BoardService {
 		
 		return hmap;
 	}
+
+	
+
+	
 
 }
 
