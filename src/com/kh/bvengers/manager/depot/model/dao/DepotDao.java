@@ -208,6 +208,9 @@ public class DepotDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
 		}
 		
 		return list;
@@ -223,8 +226,43 @@ public class DepotDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		return result;
+	}
+	public ArrayList<Depot> outProductList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList <Depot> list = null;
+		Depot d = null;
+		int i = 1;
+		String query = prop.getProperty("outproductList");
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			list = new ArrayList <Depot>();
+			while(rset.next()) {
+				d= new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setSelerId(rset.getString("MEMBER_ID"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCompletStatus(rset.getString("COMPLETE_STATUS"));
+				d.setCheckDate(rset.getDate("CHECK_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));				
+				i++;
+				list.add(d);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
 	}
 
 }
