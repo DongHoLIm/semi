@@ -25,6 +25,8 @@ public class JDBCTemplate {
 			Class.forName(driver);
 
 			con=DriverManager.getConnection(url, user, password);
+			
+			con.setAutoCommit(false);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

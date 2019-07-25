@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.depot.model.vo.*"%>
+    <%
+     	ArrayList<Depot> list = (ArrayList<Depot>) request.getAttribute("list");
+    
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +12,7 @@
 <style>
 	#depotMain{
 		width:80%;
-		height: 80%;"web/views/manager/board/boardmenegement.jsp"
+		height: 80%;
 		border:2px solid black;
 	}
 	tr{
@@ -22,6 +26,9 @@
 	}
 	#inOutButton{
 		padding-left:73%;
+	}
+	td{
+		text-align: center;
 	}
 </style>
 <body>
@@ -44,10 +51,19 @@
 				<th id="th">상품코드</th>
 				<th id="th">회원아이디</th>
 				<th id="th">위치관리번호</th>
-				<th id="th">바코드넘버</th>
 				<th id="th">적치 일자</th>
 				<th id="th">출고 일자</th>
 			</tr>
+			<% for(Depot d: list) {%>
+			<tr>
+				<td><%=d.getProductNumber() %></td>
+				<td><%=d.getProductCode() %></td>
+				<td><%=d.getSelerId() %></td>
+				<td><%=d.getLocationCode() %></td>
+				<td><%=d.getCheckDate() %></td>
+				<td><%=d.getReleaseDate() %></td>
+			</tr>
+			<%} %>
 			</table>
 		</div>
 	</div>

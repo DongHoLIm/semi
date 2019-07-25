@@ -56,7 +56,7 @@
                <li><a href="<%=request.getContextPath() %>/list.dp">검수요청관리</a></li>
                <li><a href="<%=request.getContextPath()%>/barcode.dp">바코드 출력</a></li>
                <li><a href="<%=request.getContextPath()%>/inDepot.dp">입고 관리</a></li>
-               <li><a href="/sp/views/manager/depot/depotOut.jsp">출고 관리</a></li>               
+               <li><a href="<%=request.getContextPath()%>/outProductList.dp">출고 관리</a></li>               
             </ul>
               </li>
          </ul>
