@@ -41,9 +41,7 @@ public class InsertProductPostServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("servlet 실행");
 		if(ServletFileUpload.isMultipartContent(request)) {
-			System.out.println("servlet if문 실행");
 			int maxSize = 1024 * 1024 * 20;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
@@ -147,7 +145,7 @@ public class InsertProductPostServlet extends HttpServlet {
 				at.setFileSrc(savePath);
 				at.setOrginFileName(originFiles.get(i));
 				
-				String newName = saveFiles.get(i).substring(saveFiles.get(i).length() - 19, saveFiles.get(i).length());
+				String newName = saveFiles.get(i).substring(saveFiles.get(i).length() - 24, saveFiles.get(i).length());
 				System.out.println("newName : " + newName);
 				
 				at.setNewFileName(newName);

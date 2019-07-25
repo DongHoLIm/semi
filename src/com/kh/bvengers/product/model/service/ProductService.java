@@ -4,6 +4,7 @@ import static com.kh.bvengers.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Posts;
@@ -57,6 +58,16 @@ public class ProductService {
 			
 			
 			return result;
+		}
+
+		public HashMap<String, Object> productPay(String postsId) {
+			Connection con = getConnection();
+			
+			HashMap<String, Object> productPay = new ProductDao().productPay(con, postsId);
+			
+			close(con);
+			
+			return productPay;
 		}
 		
 		
