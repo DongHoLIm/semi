@@ -27,7 +27,6 @@ public class SearchProductServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String search = request.getParameter("search");
 		String value = request.getParameter("searchProduct");
-		System.out.println(search);
 		ArrayList<HashMap<String, Object>> list = null;
 		if (search.equals("title")) {
 			list = new BoardService().searchProductByTitle(value);

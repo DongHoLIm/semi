@@ -17,6 +17,7 @@ import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PostsContents;
 import com.kh.bvengers.product.model.vo.Product;
+import com.kh.bvengers.user.member.model.vo.Member;
 
 public class ProductDao {
 	
@@ -230,6 +231,32 @@ public class ProductDao {
 		}
 		
 		return hmap;
+	}
+
+	
+
+	public int updateMemberEtc(Connection con, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMemberEtc");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, member.getAccountHolder());
+			pstmt.setString(2, member.getBankCode());
+			pstmt.setString(3, member.getAccountNo());
+			pstmt.setString(4, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	

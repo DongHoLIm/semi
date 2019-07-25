@@ -214,7 +214,7 @@
 
 			<hr width="80%"/>
 			<!-- 정보 입력창 -->
-			<form id="payForm" action="">
+			<form id="payForm" action="<%=request.getContextPath()%>/okPay.pa" align="center">
 				<table align="center" class="payInfo">
 					<tr>
 						<th><label>총 결제금액</label></th>
@@ -262,6 +262,7 @@
 							</td>
 					</tr>
 				</table>
+				<input type="submit" class="paytestBtn" value="결제 성공 시"/>
 			</form>
 			<br />
 		</div>
@@ -332,7 +333,7 @@
 				show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
 				items: [
 					{
-						item_name: '<%= productPay.get("productName") %>', //상품명
+						item_name: '<%= 	productPay.get("productName") %>', //상품명
 						qty: 1, //수량
 						unique: '<%=productPay.get("postsId") %>', //해당 상품을 구분짓는 primary key
 						price: '<%=productPay.get("productMoney") %>', //상품 단가

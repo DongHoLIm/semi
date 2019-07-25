@@ -64,7 +64,7 @@ public class RequestCheckStatusServlet extends HttpServlet {
 			response.sendRedirect(page);
 		}else {
 			page="views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "작성불가");
+			request.setAttribute("msg", "작성완료");
 			request.getRequestDispatcher(page).forward(request, response);			
 		}
 		

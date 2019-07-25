@@ -34,7 +34,7 @@ public class BoardDao {
 	public ArrayList<HashMap<String, Object>> selectProductList(Connection con) {
 		Statement stmt = null;
 		ArrayList<HashMap<String, Object>> list = null;
-		HashMap< String, Object> hmap = null;
+		HashMap<String, Object> hmap = null;
 		ResultSet rset = null;
 
 		String query = prop.getProperty("selectThumbnail");
@@ -45,7 +45,7 @@ public class BoardDao {
 			rset = stmt.executeQuery(query);
 			list = new ArrayList<HashMap<String, Object>>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				hmap = new HashMap<String, Object>();
 
 				hmap.put("fileNo", rset.getString("FILE_NO"));
@@ -70,15 +70,13 @@ public class BoardDao {
 			close(stmt);
 		}
 
-
 		return list;
 	}
-
 
 	public ArrayList<HashMap<String, Object>> searchProductByTitle(Connection con, String value) {
 		PreparedStatement pstmt = null;
 		ArrayList<HashMap<String, Object>> list = null;
-		HashMap< String, Object> hmap = null;
+		HashMap<String, Object> hmap = null;
 		ResultSet rset = null;
 		String find = '%' + value + '%';
 
@@ -91,7 +89,7 @@ public class BoardDao {
 
 			list = new ArrayList<HashMap<String, Object>>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				hmap = new HashMap<String, Object>();
 
 				hmap.put("fileNo", rset.getString("FILE_NO"));
@@ -158,7 +156,7 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Attachment>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				b = new Board();
 				b.setWriter(rset.getString("MEMBER_ID"));
 				b.setPostsId(rset.getInt("POSTS_ID"));
@@ -192,103 +190,99 @@ public class BoardDao {
 		return hmap;
 	}
 
-	//공지사항 작성 삽입
-		public int insertNoticeContent(Connection con, Board b) {
-			PreparedStatement pstmt = null;
-			int result = 0;
+	// 공지사항 작성 삽입
+	public int insertNoticeContent(Connection con, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
 
-			String query = prop.getProperty("insertNoticeContent");
+		String query = prop.getProperty("insertNoticeContent");
 
-			try {
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getPostsTitle());
+			pstmt.setInt(2, b.getMemberNo());
+			pstmt.setString(3, b.getPostsCode());
+			pstmt.setString(4, b.getContents());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int selectCurrval(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		int postId = 0;
+
+		String query = prop.getProperty("selectCurrval");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				postId = rset.getInt("currval");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		return postId;
+	}
+
+	public int insertAttachment(Connection con, ArrayList<Attachment> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("insertAttachment");
+
+		try {
+			for (int i = 0; i < fileList.size(); i++) {
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, b.getPostsTitle());
-				pstmt.setInt(2, b.getMemberNo());
-				pstmt.setString(3, b.getPostsCode());
-				pstmt.setString(4, b.getContents());
 
-				result = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return result;
-		}
+				pstmt.setString(1, fileList.get(i).getOrginFileName());
+				pstmt.setString(2, fileList.get(i).getNewFileName());
+				pstmt.setString(3, fileList.get(i).getFileSrc());
+				pstmt.setString(4, fileList.get(i).getPostsId());
 
-		public int selectCurrval(Connection con) {
-			Statement stmt = null;
-			ResultSet rset = null;
+				int level = 0;
 
-			int postId = 0;
-
-			String query = prop.getProperty("selectCurrval");
-
-			try {
-				stmt = con.createStatement();
-				rset = stmt.executeQuery(query);
-
-				if(rset.next()) {
-					postId = rset.getInt("currval");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				close(stmt);
-				close(rset);
-			}
-			return postId;
-		}
-
-		public int insertAttachment(Connection con, ArrayList<Attachment> fileList) {
-			PreparedStatement pstmt = null;
-			int result = 0;
-
-			String query = prop.getProperty("insertAttachment");
-
-			try {
-				for(int i = 0; i < fileList.size(); i++) {
-					pstmt = con.prepareStatement(query);
-					
-					pstmt.setString(1, fileList.get(i).getOrginFileName());
-					pstmt.setString(2, fileList.get(i).getNewFileName());
-					pstmt.setString(3, fileList.get(i).getFileSrc());
-					pstmt.setString(4, fileList.get(i).getPostsId());
-
-
-					int level = 0;
-
-					if(i==0) {
-						level=0;
-					}else {
-						level=1;
-					}
-
-					String level1 = level + "";
-
-					pstmt.setString(5, level1);
-
-					//pstmt.setInt(5, level);
-
-					System.out.println(level1);
-					
-					result += pstmt.executeUpdate();
+				if (i == 0) {
+					level = 0;
+				} else {
+					level = 1;
 				}
 
+				String level1 = level + "";
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
+				pstmt.setString(5, level1);
+
+				// pstmt.setInt(5, level);
+
+				System.out.println(level1);
+
+				result += pstmt.executeUpdate();
 			}
-      return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
-
-
+		return result;
+	}
 
 	public ArrayList<HashMap<String, Object>> searchProductByCategory(Connection con, String value) {
 		PreparedStatement pstmt = null;
 		ArrayList<HashMap<String, Object>> list = null;
-		HashMap< String, Object> hmap = null;
+		HashMap<String, Object> hmap = null;
 		ResultSet rset = null;
 		String find = '%' + value + '%';
 
@@ -301,7 +295,7 @@ public class BoardDao {
 
 			list = new ArrayList<HashMap<String, Object>>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				hmap = new HashMap<String, Object>();
 
 				hmap.put("fileNo", rset.getString("FILE_NO"));
@@ -332,7 +326,7 @@ public class BoardDao {
 	public ArrayList<HashMap<String, Object>> searchProductByContents(Connection con, String value) {
 		PreparedStatement pstmt = null;
 		ArrayList<HashMap<String, Object>> list = null;
-		HashMap< String, Object> hmap = null;
+		HashMap<String, Object> hmap = null;
 		ResultSet rset = null;
 		String find = '%' + value + '%';
 
@@ -345,7 +339,7 @@ public class BoardDao {
 
 			list = new ArrayList<HashMap<String, Object>>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				hmap = new HashMap<String, Object>();
 
 				hmap.put("fileNo", rset.getString("FILE_NO"));
@@ -385,7 +379,7 @@ public class BoardDao {
 
 			list = new ArrayList<PowerLink>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				PowerLink p = new PowerLink();
 				p.setFileName(rset.getString("NEW_FILE_NAME"));
 				p.setFileSrc(rset.getString("FILE_SRC"));
@@ -397,7 +391,6 @@ public class BoardDao {
 				list.add(p);
 			}
 
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -406,33 +399,33 @@ public class BoardDao {
 			close(stmt);
 		}
 		return list;
-  }
+	}
 
 	public int getListCount(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("selectListCount");
-		
+
 		try {
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-			
+
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				
+
+			if (rset.next()) {
+
 				listCount = rset.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 			close(rset);
-		}		
+		}
 		return listCount;
 	}
 
@@ -441,27 +434,27 @@ public class BoardDao {
 		int listCount2 = 0;
 		ResultSet rset = null;
 		int num = 2;
-		
+
 		String query = prop.getProperty("selectListCount");
-		
+
 		try {
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-			
+
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				
+
+			if (rset.next()) {
+
 				listCount2 = rset.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 			close(rset);
-		}		
+		}
 		return listCount2;
 	}
 
@@ -469,39 +462,39 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
-		
+
 		String query = prop.getProperty("selectListWithPaging");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			int startRow = (currentPage -1) * limit + 1;
+
+			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit - 1;
-			
+
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Board>();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				Board b = new Board();
-				
+
 				b.setPostsId(rset.getInt("POSTS_ID"));
 				b.setMemberName(rset.getString("MEMBER_NAME"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
-				
+
 				list.add(b);
-			
+
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
@@ -512,69 +505,65 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list1 = null;
-		
+
 		String query = prop.getProperty("selectListWithPaging1");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			int startRow1 = (currentPage1 -1) * limit1 + 1;
+
+			int startRow1 = (currentPage1 - 1) * limit1 + 1;
 			int endRow1 = startRow1 + limit1 - 1;
-			
+
 			pstmt.setInt(1, startRow1);
 			pstmt.setInt(2, endRow1);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list1 = new ArrayList<Board>();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				Board m = new Board();
-				
+
 				m.setPostsId(rset.getInt("POSTS_ID"));
 				m.setMemberName(rset.getString("MEMBER_NAME"));
 				m.setPostsTitle(rset.getString("POSTS_TITLE"));
 				m.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				m.setCreateDate(rset.getDate("CREATEDATE"));
-				
+
 				list1.add(m);
-			
+
 				System.out.println("dao" + rset.getInt("POSTS_ID"));
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		return list1;
 	}
-	
-	
-	
+
 	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		HashMap<String,Object> hmap = null;
+		HashMap<String, Object> hmap = null;
 		Board b = null;
-		ArrayList<HashMap<String, Object>>list = null;
-		
-		
+		ArrayList<HashMap<String, Object>> list = null;
+
 		String query = prop.getProperty("selectOneNotice");
-		
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<HashMap<String, Object>>();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				b = new Board();
 				b.setPostsId(rset.getInt("POSTS_ID"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
@@ -583,8 +572,7 @@ public class BoardDao {
 				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 				b.setContents(rset.getString("CONTENTS"));
-				
-			
+
 				hmap = new HashMap<String, Object>();
 
 				hmap.put("fileNo", rset.getString("FILE_NO"));
@@ -592,62 +580,67 @@ public class BoardDao {
 				hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
 				hmap.put("fileSrc", rset.getString("FILE_SRC"));
 				hmap.put("saveDate", rset.getDate("SAVE_DATE"));
-				
+
 				list.add(hmap);
 			}
-			
+
 			hmap = new HashMap<String, Object>();
 			hmap.put("board", b);
 			hmap.put("attachment", list);
-			
-			System.out.println("hmap " + hmap);
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
-		}	
+		}
 		return hmap;
 	}
 
+	public ArrayList<HashMap<String, Object>> mainList(Connection con, String value) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		Board b = null;
+		String val = "%" + value + "%";
+		String query = prop.getProperty("mainList");
 
-	
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, val);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<HashMap<String, Object>>();
+
+			while (rset.next()) {
+				hmap = new HashMap<String, Object>();
+
+				hmap.put("fileNo", rset.getString("FILE_NO"));
+				hmap.put("originFileName", rset.getString("ORIGIN_FILE_NAME"));
+				hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
+				hmap.put("fileSrc", rset.getString("FILE_SRC"));
+				hmap.put("saveDate", rset.getDate("SAVE_DATE"));
+				hmap.put("fileDiv", rset.getString("FILE_DIV"));
+				hmap.put("postsId", rset.getString("POSTS_ID"));
+				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
+				hmap.put("title", rset.getString("PRODUCT_NAME"));
+				hmap.put("price", rset.getInt("PRODUCT_MONEY"));
+				hmap.put("writer", rset.getString("MEMBER_NO"));
+				hmap.put("contents", rset.getString("CONTENTS"));
+				hmap.put("category", rset.getString("CATEGORY_DIV"));
+				list.add(hmap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

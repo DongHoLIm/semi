@@ -82,7 +82,7 @@ public class MemberService {
 	public int getListCount() {
 		Connection con = getConnection();
 		int listCount = new MemberDao().getListCount(con);
-		
+
 		close(con);
 		return listCount;
 	}
@@ -98,15 +98,15 @@ public class MemberService {
 		 Connection con = getConnection();
 		 Member checkPwd = new MemberDao().checkPwd(con, memberPwd);
 		 close(con);
-		 
-		 
+
+
 		return checkPwd;
 	}
 
 	public int deleteMember(String memberId) {
 		Connection con = getConnection();
 		int result = new MemberDao().deleteMember(con, memberId);
-		
+
 		if(result>0) {
 			commit(con);
 		}else {
@@ -122,6 +122,13 @@ public class MemberService {
 		if(m!=null) {
 			int result = new MemberDao().upblack(con,m);
 		}
+		close(con);
+		return m;
+	}
+
+	public Member searchInfo(String userId) {
+		Connection con = getConnection();
+		Member m = new MemberDao().searchInfo(con, userId);
 		close(con);
 		return m;
 	}
