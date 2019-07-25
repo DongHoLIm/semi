@@ -132,7 +132,7 @@ public class DepotDao {
 				d.setProductCode(rset.getString("PRODUCT_CODE"));
 				d.setProductName(rset.getString("PRODUCT_NAME"));
 				d.setLocationCode(rset.getString("LOCATION"));
-				d.setCheckDate(rset.getDate("DEPOT_DATE"));
+				d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
 				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
 				i++;
 				list.add(d);
@@ -165,7 +165,7 @@ public class DepotDao {
 				d.setProductCode(rset.getString("PRODUCT_CODE"));
 				d.setProductName(rset.getString("PRODUCT_NAME"));
 				d.setLocationCode(rset.getString("LOCATION"));
-				d.setCheckDate(rset.getDate("DEPOT_DATE"));
+				d.setCheckDate(rset.getDate("CHECK_DATE"));
 				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
 				i++;
 				list.add(d);
@@ -200,6 +200,7 @@ public class DepotDao {
 				d.setLocationCode(rset.getString("LOCATION"));
 				d.setCompletStatus(rset.getString("COMPLETE_STATUS"));
 				d.setCheckDate(rset.getDate("CHECK_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
 				
 				i++;
 				list.add(d);
@@ -210,6 +211,20 @@ public class DepotDao {
 		}
 		
 		return list;
+	}
+	public int updateRelesDate(Connection con, String productCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateRelesDate");
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			result= pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

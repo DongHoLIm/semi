@@ -10,11 +10,14 @@ public class Posts implements java.io.Serializable{
 	private String notice;
 	private String postsDelete;
 	private String boardCode;
+	private String writer;
+	
 	
 	public Posts() {}
 
+
 	public Posts(int postsId, String postsTitle, int memberNo, int postsViews, int recommendCount, String open,
-			String notice, String postsDelete, String boardCode) {
+			String notice, String postsDelete, String boardCode, String writer) {
 		super();
 		this.postsId = postsId;
 		this.postsTitle = postsTitle;
@@ -25,7 +28,10 @@ public class Posts implements java.io.Serializable{
 		this.notice = notice;
 		this.postsDelete = postsDelete;
 		this.boardCode = boardCode;
+		this.writer = writer;
 	}
+
+
 
 	public int getPostsId() {
 		return postsId;
@@ -98,13 +104,28 @@ public class Posts implements java.io.Serializable{
 	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
 	}
+	
+
+
+	public String getWriter() {
+		return writer;
+	}
+
+
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+
+
+
 
 	@Override
 	public String toString() {
 		return "Posts [postsId=" + postsId + ", postsTitle=" + postsTitle + ", memberNo=" + memberNo + ", postsViews="
 				+ postsViews + ", recommendCount=" + recommendCount + ", open=" + open + ", notice=" + notice
-				+ ", postsDelete=" + postsDelete + ", boardCode=" + boardCode + "]";
+				+ ", postsDelete=" + postsDelete + ", boardCode=" + boardCode + ", writer=" + writer + "]";
 	}
-	
 	
 }

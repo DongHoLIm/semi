@@ -1,5 +1,11 @@
+<%@page import="com.kh.bvengers.product.model.vo.Product"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	Product p = (Product) request.getAttribute("p");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +33,9 @@
 	left: 0;
 	min-width: 100%;
 	min-height: 400px;
+}
+#powerLink td{
+	padding: 10px;
 }
 </style>
 
@@ -80,100 +89,72 @@
 
 	<br>
 	<h3 align="center">파워 링크</h3>
-	<table align="center">
-		<tr>
-			<td><img src="images/flower3.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-			<td><img src="images/river1.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-			<td><img src="images/river2.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-			<td><img src="images/city1.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-		</tr>
-		<tr>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-		</tr>
-		<tr>
-			<td><img src="images/tower1.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-			<td><img src="images/flower4.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-			<td><img src="images/flower5.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-			<td><img src="images/galxy.PNG" class="img-rounded"
-				alt="Cinque Terre" width="304" height="236">&nbsp;&nbsp;</td>
-		</tr>
-		<tr>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-			<td><h3>
-					<a href="" name="title">진수의 분홍분홍 쿨러</a>
-				</h3>
-				<br>
-				<p>
-					가격: 5000000 <br> 내용: 노트북쿨러
-				</p></td>
-		</tr>
+	<form action="" id="powerLinkForm">
+	<table align="center" id="powerLink">
+		<tbody>
+			<tr id="imgTable"></tr>
+			<tr id="titleTable"></tr>
+			<tr id="priceTable"></tr>
+		</tbody>
 	</table>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-
-
-
-
+	</form>
 	<!-- footer 영역 -->
+	<script>
+		$(function(){
+			$.ajax({
+				url:"power.pd",
+				type:"get",
+				success:function(data){
+					var $tableImg = $("#imgTable");
+					var $tableTitle = $("#titleTable");
+					var $tablePrice = $("#priceTable");
+					$tableImg.html("");
+					$tableTitle.html("");
+					$tablePrice.html("");
+					var number = new Array();
+					for(var key in data){
+						var file = data[key].fileName;
+						var src = "<%= request.getContextPath()%>/thumbnail_uploadFiles/";
+						var $num = $("<td>&nbsp;").text(data[key].postsId);
+						var $imgTd = $("<td>")
+						var $imageLabel = $("<label>");
+						var $image = $("<img>").attr("src",src+file).css({"width":"250px", "height":"300px"}).css({"margin":"0 auto"}).addClass("powerProduct"+key);
+						var $titleTd = $("<td>").text(data[key].title);
+						var $priceTd = $("<td>").text(data[key].price+"원");
+
+
+						$imageLabel.append($image);
+						$imgTd.append($imageLabel);
+
+						$tableImg.append($imgTd);
+						$tableImg.append($num);
+
+						$tableTitle.append($titleTd);
+						$tableTitle.css({"text-align":"center"})
+
+						$tablePrice.append($priceTd);
+						$priceTd.css({"text-align":"center", "font-size":"20px"});
+
+						number.push(data[key].postsId);
+
+						$titleTd.css({"font-size":"1.3em", "font-weight":"bold"});
+
+						$($num).css("display","none");
+						$(".powerProduct"+key).css({"cursor":"pointer"});
+
+						$("#powerLink td").click(function(){
+							var num = $(this).next().html();
+							location.href="<%=request.getContextPath()%>/selectOne.pd?num=" + num;
+						});
+					}
+				},
+				error:function(){
+					console.log("파워테스트 실패");
+				}
+			});
+		});
+	</script>
+
 	<footer><%@ include file="views/user/hfl/footer.jsp"%></footer>
 </body>
 </html>

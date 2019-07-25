@@ -1,27 +1,23 @@
-package com.kh.bvengers.product.controller;
+package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.bvengers.product.model.service.ProductService;
-
 /**
- * Servlet implementation class PaymentServlet
+ * Servlet implementation class TestServlet
  */
-@WebServlet("/payment.pa")
-public class PaymentServlet extends HttpServlet {
+@WebServlet("/test.do")
+public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentServlet() {
+    public TestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +26,11 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String postsId = request.getParameter("postsId");
-		
-		HashMap<String, Object> productPay = new ProductService().productPay(postsId);
-		
-		
-		String page = "";
-		
-		if(productPay != null) {
-			page = "/views/user/product/payment.jsp";
-			request.setAttribute("productPay", productPay);
-		}else {
-			page="/views/common/errorPage.jsp";
-			request.setAttribute("msg", "상품 등록 실패!");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
-		
+		// TODO Auto-generated method stub
+		String name = request.getParameter("name");
+
+		System.out.println(name);
+		System.out.println("길을 잃고 방황하는 소리꾼");
 	}
 
 	/**
@@ -59,25 +42,3 @@ public class PaymentServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
