@@ -18,27 +18,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <script>
+ <script>
 	$(function(){
 		
 		$("#deliReady").click(function(){ //이벤트 사용하고 싶을 시 .click 대신 on("click", '#td', function(){}
 			$.ajax({
 				url:"deliReady.mp",
-				type:"get",
+				type:"post",
 				success:function(data){
 					//console.log(data);
-					$tableBody = $("#userInfoTable tbody");
+					$tableBody = $("#tdeliReady tbody");
 					$tableBody.html(""); //요청 시마다 tableBody가 누적되지 않도록 비워줌
 					
 					$.each(data, function(index, value){ //index 회차, value값
 						var $tr = $("<tr>");
-						var $noTd = $("<td>").text(value.userNo);
-						var $nameTd = $("<td>").text(decodeURIComponent(value.userName));
-						var $nationTd = $("<td>").text(decodeURIComponent(value.userNation));
+						var $OnoTd = $("<td>").text(value.Ono);
+						var $pNameTd = $("<td>").text(decodeURIComponent(value.pName));
+						var $dstatusTd = $("<td>").text(value.dstatus);
+						var $oDateTd = $("<td>").text(vaule.oDate)
 						
-						$tr.append($noTd);
-						$tr.append($nameTd);
-						$tr.append($nationTd);
+						$tr.append($OnoTd);
+						$tr.append($pNameTd);
+						$tr.append($dstatusTd);
+						$tr.append($oDateTd);
 						
 						$tableBody.append($tr);
 					});
@@ -53,7 +55,6 @@
 	});
 
 </script>
- -->
 <style>
 
 .pagingArea {
@@ -97,7 +98,7 @@
 	align: center;
 }
 
-.board {
+#tdeliReady {
 	margin-top:5%;
 	margin-left:auto;
 	margin-right:auto;
@@ -106,6 +107,14 @@
 	border-spacing: 10px;
 	border-botton:1px solid #ccc;
 }
+.board {
+	margin-top:5%;
+	margin-left:auto;
+	margin-right:auto;
+	width: 80%;
+	text-align:center;
+	border-spacing: 10px;
+	}
 
 .th1 {
 	text-align:center;
@@ -143,7 +152,7 @@
 			<table id="deliTable">
 				<tr>
 						<input type="hidden" id="dr1" name="dr1">
-					<td><img src="/sp/images/box.png" alt="" id="deliReady" />
+					<td id="deliReady"><img src="/sp/images/box.png" alt=""  />
 						<br />
 						<p>
 							배송 준비중(<%=ready%>)
@@ -184,17 +193,18 @@
 			</table>
 		</div>
 		
-		<div id="div_deliReady" style="display:none;">
+ 		<div id="div_deliReady" style="display:none;">
 			<br />
 			<h3 align="center">배송 준비중</h3>
-			<table class="board">
-			<tbody></tbody>
+			<table id="tdeliReady" >
+			<thead>
 				<tr class="row0">
 					<th class="th1">주문번호</th>
 					<th class="th1">상품명</th>
 					<th class="th1">배송여부</th>
 					<th class="th1">주문날짜</th>
 				</tr>
+				</thead>
 				<tbody></tbody>
 			</table>
 		</div>
@@ -239,7 +249,7 @@
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 <script>
-		$(function(){
+		<%-- $(function(){
 			$("#listArea td").mouseenter(function(){ //마우스가 올라갔을 때
 				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
 			}).mouseout(function(){ //마우스가 내려갔을 때
@@ -249,12 +259,13 @@
 			
 				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
 			});
-		});
+		}); --%>
 		
-		$(function(){
+		 $(function(){
 			$("#deliReady").click(function(){
-				$("#dr1").val("1");
-				$("#statusForm").submit();
+					$("#dr1").val("1");
+					$("#statusForm").submit();
+					
 			});
 			$("#deliStart").click(function(){
 				$("#dr1").val("2");
@@ -264,9 +275,16 @@
 				$("#dr1").val("3");
 				$("#statusForm").submit();
 			});
-		});
-		
-		
+		}); 
+		 
+		 $(function(){
+			$("#deliReady").click(function(){
+				if($("#div_deliReady").css("display") == "none"){
+					$("#div_deliReady").css("display") == "block");
+				}
+			});
+		 });
+		 
 		
 	</script>
 </body>

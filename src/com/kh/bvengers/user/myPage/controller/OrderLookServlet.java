@@ -10,24 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.bvengers.board.model.service.BoardService;
-import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.user.member.model.vo.Member;
 import com.kh.bvengers.user.myPage.model.Service.MyPageService;
 import com.kh.bvengers.user.myPage.model.vo.PageInfo;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
-
-@WebServlet("/listMyPage.mp")
-public class listMyPageServlet extends HttpServlet {
+@WebServlet("/orderLook.mp")
+public class OrderLookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public listMyPageServlet() {
+    public OrderLookServlet() {
         super();
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	int currentPage;		//현재 페이지를 표시할 변수
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int currentPage;		//현재 페이지를 표시할 변수
 		int limit;				//한 페이지에 보여질 게시물 수
 		int maxPage;			//전체 페이지에서 가장 마지막 페이지
 		int startPage;			//한 번에 표시될 페이징 버튼이 시작할 번호
@@ -66,34 +62,32 @@ public class listMyPageServlet extends HttpServlet {
 		
 		String page = "";
 		
-		ArrayList<myPage> mplist = new MyPageService().selectMyPageList(memberNo, currentPage, limit);
+		ArrayList<myPage> olList = new MyPageService().selectMyPageList(memberNo, currentPage, limit);
 		
-    	int ready = 0;
-    	int start = 0;
-    	int success = 0;
-		
-		if(mplist != null) {
+		if(olList != null) {
 			
-			for(myPage m : mplist) {
+			for(myPage m : olList) {
 				
 				if(m.getDstatus().equals("1")) {
 					m.setDstatus("배송 준비중");
-					ready += 1;
 				}else if(m.getDstatus().equals("2")) {
 					m.setDstatus("배송 중");
-					start += 1;
 				}else if(m.getDstatus().equals("3")){
 					m.setDstatus("배송완료");
-					success += 1;
+				}else if(m.getPayStatus().equals("1")) {
+					m.setPayStatus("결제 완료");
+				}else if(m.getPayStatus().equals("2")) {
+					m.setPayStatus("결제 취소");
+				}else if(m.getRefundStatus().equals("1")) {
+					m.setRefundStatus("환불 대기");
+				}else if(m.getRefundStatus().equals("2")) {
+					m.setRefundStatus("환불 완료");
 				}
 				
 			}
-			request.setAttribute("ready", ready+"");
-			request.setAttribute("start", start+"");
-			request.setAttribute("success", success+"");
 			
-			page = "views/user/mypage/myPage.jsp";//회원리스트나올페이지
-			request.setAttribute("mplist", mplist);
+			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
+			request.setAttribute("olList", olList);
 			request.setAttribute("pi", pi);
 		}else {
 			page="views/common/errorPagePrompt.jsp";
@@ -103,9 +97,6 @@ public class listMyPageServlet extends HttpServlet {
 	}
     	
     	
-    
- 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

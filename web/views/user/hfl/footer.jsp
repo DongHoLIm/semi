@@ -10,6 +10,7 @@
 	  padding: 10px;
 	  text-align: center;
 	  color: white;
+	  margin-top: 10%;
 	  position : relative;
 	  bottom : 0;
 	}

@@ -91,7 +91,7 @@ tr {
 
 	<section id="sec1">
 		<div id="area">
-			<h3 style="font-weight: bold">취소 / 반품조회</h3>
+			<h3 style="font-weight: bold">주문취소 조회</h3>
 
 			<div class="date-select" align="center">
 				<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;
@@ -106,30 +106,17 @@ tr {
 			<br />
 
 			<table border="1" class = "board">
-            <tr>
-               <th class="th_cancel">주문일자  </th>
-               <th class="th_cancel">상품정보  </th>
-               <th class="th_cancel">주문상태  </th>
-               <th class="th_cancel">확인/신청</th>
-            </tr>
-            <tr>
-               <td>주문일자내용</td>
-               <td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
-               <td>주문상태내용</td>
-               <td>확인/신청내용</td>
-            </tr>
-            <tr>
-               <td>주문일자내용</td>
-               <td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
-               <td>주문상태내용</td>
-               <td>확인/신청내용</td>
-            </tr>
-            <tr>
-               <td>주문일자내용</td>
-               <td><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
-               <td>주문상태내용</td>
-               <td>확인/신청내용</td>
-            </tr>
+          <tr>
+					<th class="th_cancel">주문일자</th>
+					<th class="th_cancel">상품정보</th>
+					<th class="th_cancel">주문상태</th>
+				</tr>
+				<tr>
+					<td>주문일자<br>주문번호<br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
+					<td>상품명</td>
+					<td><%= %><input type="text" value="주문상태" id="ip_status"readonly></td>
+				</tr>
+ 
          </table>
 		</div>
 		<div class="page-control">
