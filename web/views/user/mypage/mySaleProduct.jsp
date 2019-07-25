@@ -56,14 +56,15 @@
 	<section id="sec1">
 		<div id="outer">
 			<div>
-				<h2>나의 판매상품 현황</h2>
+				<h2>판매상품 현황</h2>
 				<table class="board">
 				<tr class="row0">
 				<thead>
-					<th>번호</th>
+					<th>주문번호</th>
 					<th>상품명</th>
-					<th>판매/정산여부</th>
-					<th>작성날짜</th>
+					<th>판매여부</th>
+					<th>정산여부</th>
+					<th>주문날짜</th>
 				</thead>
 				</tr>
 				<tr class="row1">

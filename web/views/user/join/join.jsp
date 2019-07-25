@@ -40,11 +40,11 @@ function checkjoin(){
       $("#peoplejb").focus();
       return false;
    } */
-
+   
 if($("#password").val() == ($("#password2").val())){
    $("form").submit();
 }
-}
+}   
 
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -73,7 +73,7 @@ if($("#password").val() == ($("#password2").val())){
    height:32px;
 }
 .btn_join{
-   height:40px;
+   height:40px; 
    width:40%;
    margin:0 auto;
    border: 1px solid black;
@@ -102,12 +102,10 @@ if($("#password").val() == ($("#password2").val())){
 <body>
       <form action="<%=request.getContextPath() %>/insertMember.me" method="post">
       <div class = "header" align="center">
-      <br><br>
-
+      <br><br>      
       <br>
-   </div>
-
-   <div class="box_join" align="center">
+   </div>   
+  <div class="box_join" align="center">
       <h2>중고愛민족 회원가입</h2>
    <div class="box_login" align="center">
          <br><br>
@@ -185,8 +183,6 @@ if($("#password").val() == ($("#password2").val())){
       function goMain(){
          location.href="<%=request.getContextPath()%>/index.jsp";
       }
-
-
       </script>
       <br><br>
 </body>

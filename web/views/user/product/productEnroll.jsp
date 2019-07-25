@@ -16,9 +16,6 @@
 	font-size:20px;
 	margin:0 auto;
 }
-	#sub_cate{
-
-	}
 #btn_enroll {
 	border: 1px solid #ffd8d9;
 	font-size: 14px;
@@ -88,7 +85,6 @@
 	<div><%@ include file="../hfl/list.jsp" %></div>
 <br><br><br><br>
 <div class="container">
-		<button class="testBtn" onclick="<%=request.getContextPath()%>/payment.pa">상품구매 테스트</button>
 		<caption class="title"><b>상품 등록</b></caption>
 		<form action="<%=request.getContextPath()%>/insert.po" method="post" encType="multipart/form-data">
 		<table class="table table-bordered" align="center" style="width:60%;">

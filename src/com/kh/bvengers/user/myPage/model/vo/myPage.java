@@ -8,17 +8,20 @@ public class myPage {
 	private String dstatus; //배송상태
 	private Date oDate;		//주문날짜
 	private String mno; 	//회원번호
+	private int bno;		//조회 갯수
 	
 	public myPage() {}
 
-	public myPage(String ono, String pname, String dstatus, Date oDate, String mno) {
+	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, int bno) {
 		super();
 		this.ono = ono;
 		this.pname = pname;
 		this.dstatus = dstatus;
 		this.oDate = oDate;
 		this.mno = mno;
+		this.bno = bno;
 	}
+	
 
 	public String getOno() {
 		return ono;
@@ -60,11 +63,20 @@ public class myPage {
 		this.mno = mno;
 	}
 
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+
 	@Override
 	public String toString() {
 		return "myPage [ono=" + ono + ", pname=" + pname + ", dstatus=" + dstatus + ", oDate=" + oDate + ", mno=" + mno
-				+ "]";
+				+ ", bno=" + bno + "]";
 	}
+
 
 	
 	
