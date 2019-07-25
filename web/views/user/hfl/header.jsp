@@ -33,7 +33,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
             <li><a href="/sp/views/user/product/productList.jsp"> 구매 </a></li>
-             <li><a href="/sp/views/user/product/productEnroll.jsp"> 상품등록 </a></li>
+             <li><a href="#" onclick="payUpload()"> 상품등록 </a></li>
            <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li>
            <li><a href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
            <li><a href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
@@ -69,6 +69,16 @@
   	function goMyPage(){
 		location.href="<%=request.getContextPath()%>/listMyPage.mp";
 	}
+  	
+  	function payUpload(){
+  		
+  	    if(<%= loginUser == null %>) {
+  	        alert("로그인 후 이용해 주세요.");
+ 	         location.href='/sp/views/user/login/login.jsp'; 
+  	    } else{
+  	         location.href='/sp/views/user/product/productEnroll.jsp'; 
+  	    }
+  	}
   </script>
 </nav>
 </body>
