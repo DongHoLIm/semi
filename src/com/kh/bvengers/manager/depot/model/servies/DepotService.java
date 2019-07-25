@@ -64,4 +64,17 @@ public class DepotService {
 		return list;
 	}
 
+	public int updateRelesDate(String productCode) {
+		Connection con = getConnection();
+		int result = new DepotDao().updateRelesDate(con,productCode);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
 }

@@ -20,14 +20,14 @@ function checkjoin(){
 		return false;
 	}
 	
-	if(!getCheck.test($("#memberPassword").val())){
+	if(!getCheck.test($("#password").val())){
 		alert("비밀번호를 다시 설정하세요");
 		$("#memberPassword").val("");
 		$("#memberPassword").focus();
 		return false;
 	}
 	
-	if($("#memberPassword").val() != ($("#memberPassword2").val())){
+	if($("#password").val() != ($("#password2").val())){
 		alert("비밀번호를 확인하세요");
 		$("#memberPassword").val("");
 		$("#memberPassword2").val("");
@@ -41,7 +41,7 @@ function checkjoin(){
 		return false;
 	} */
 	
-if($("#memberPassword").val() == ($("#memberPassword2").val())){
+if($("#password").val() == ($("#password2").val())){
 	$("form").submit();
 }
 }	
@@ -113,8 +113,8 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
 			<br><br>
 			<input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
 			<button type="button" class="btn_overlap" style="width:10%;" onclick="idCheck();">중복확인</button><br><br>
-			<input type="password" id="memberPassword" name="memberPassword" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
-			<input type="password" id="memberPassword2" name="memberPassword2" placeholder="  Password 확인" style="width:40%;"><br><br>
+			<input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
+			<input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
 			<input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
 			<input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
 			<input type="text" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>

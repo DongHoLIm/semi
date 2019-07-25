@@ -62,14 +62,20 @@
 	</table>
 <script type="text/javascript">	
 	function createBarCode(){
-		if(<%=result.length%>>=5){
-			alert("5개 이하로 선택후 출력해주세요");
+		if(<%=result.length%>>=10){
+			alert("10개 이하로 선택후 출력해주세요");
 		}else{
 			 $("#bcTarget0").barcode($("#productCode0").text(), "codabar");
 			 $("#bcTarget1").barcode($("#productCode1").text(), "codabar");
 			 $("#bcTarget2").barcode($("#productCode2").text(), "codabar");
 			 $("#bcTarget3").barcode($("#productCode3").text(), "codabar");
-			 $("#bcTarget4").barcode($("#productCode4").text(), "codabar");			 
+			 $("#bcTarget4").barcode($("#productCode4").text(), "codabar");	
+			 $("#bcTarget5").barcode($("#productCode5").text(), "codabar");
+			 $("#bcTarget6").barcode($("#productCode6").text(), "codabar");
+			 $("#bcTarget7").barcode($("#productCode7").text(), "codabar");
+			 $("#bcTarget8").barcode($("#productCode8").text(), "codabar");
+			 $("#bcTarget9").barcode($("#productCode9").text(), "codabar");
+			
 		}
 	}
 		

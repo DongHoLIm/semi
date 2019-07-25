@@ -26,7 +26,6 @@ public class RequestCheckStatusServlet extends HttpServlet {
 		String completStatus=request.getParameter("status");
 		String checkPassContent=request.getParameter("checkPassContent");
 		
-		
 		Depot d = new Depot();
 		String locationCode = location+session;
 		if(completStatus==null&&checkStatus==null) {
