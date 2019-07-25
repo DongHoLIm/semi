@@ -88,6 +88,7 @@ public class listMyPageServlet extends HttpServlet {
 					m.setDstatus("배송완료");
 					success += 1;
 				}
+				
 				if(m.getDstatus().equals(dr1)) {
 					mplist.add(m);
 				}
