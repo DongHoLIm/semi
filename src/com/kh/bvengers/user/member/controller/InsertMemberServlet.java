@@ -12,6 +12,7 @@ import com.kh.bvengers.user.member.model.vo.Member;
 
 @WebServlet("/insertMember.me")
 public class InsertMemberServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
 	public InsertMemberServlet() {
@@ -55,4 +56,5 @@ public class InsertMemberServlet extends HttpServlet {
 	}
 
 }
+
 
