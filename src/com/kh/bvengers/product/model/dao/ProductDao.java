@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.kh.bvengers.board.model.vo.Attachment;
@@ -192,5 +193,57 @@ public class ProductDao {
 		return postsId;
 	}
 
-
+	public HashMap<String, Object> productPay(Connection con, String postsId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> hmap = null;
+		
+		String query = prop.getProperty("productPay");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, postsId);
+			
+			rset = pstmt.executeQuery();
+			
+			hmap = new HashMap<String, Object>();
+			while(rset.next()) {
+				hmap.put("postsId", postsId);
+				hmap.put("productName", rset.getString("PRODUCT_NAME"));
+				hmap.put("productMoney", rset.getInt("PRODUCT_MONEY"));
+				hmap.put("productCate", rset.getString("PRODUCT_CATE"));
+				hmap.put("memberId", rset.getString("MEMBER_ID"));
+				hmap.put("postsTitle", rset.getString("POSTS_TITLE"));
+				hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
+				hmap.put("categoryCode", rset.getString("CATEGORY_CODE"));
+				hmap.put("categoryDiv", rset.getString("SUBCATE"));
+				hmap.put("mainCateDiv", rset.getString("MAINCATE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return hmap;
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

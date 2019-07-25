@@ -23,6 +23,7 @@ public class LoginWrapper extends HttpServletRequestWrapper {
 
 			value = super.getParameter(key);
 		}
+		
 		return value;
 	}
 
@@ -35,11 +36,12 @@ public class LoginWrapper extends HttpServletRequestWrapper {
 			md.update(bytes);
 
 			encPwd = Base64.getEncoder().encodeToString(md.digest());
+			System.out.println(encPwd);
 
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println(encPwd);
 		return encPwd;
 	}
 }

@@ -98,6 +98,7 @@
 		<br />
 	<div id="checkMain">
 		<div id="table Area">
+			
 			<table id="depotMain" align="center">
 			<tr>
 				<th id="th3">번호</th>
@@ -111,6 +112,7 @@
 			<tr>
 				<td><%=d.getProductNumber() %></td>
 				<td><%=d.getProductCode() %></td>
+				<td hidden><input type="hidden" value="<%=d.getProductCode() %>" name="updateProduct" /></td>
 				<td><%=d.getProductCate() %></td>
 				<td><%=d.getProductName() %></td>
 				<td><%=d.getCheckDate() %></td>
@@ -119,7 +121,8 @@
 					<%}else if(d.getCheckStatus().equals("2")) {%>
 						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>'" style="color:white">검수중</button>
 					<%}else{ %>
-						<label>검수완료</label>
+						<label for="">검수완료</label>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>'" style="color:white">수정</button>
 					<%} %>
 				</td>
 			</tr>	
@@ -128,7 +131,11 @@
 			</table>
 		</div>
 	</div>
-
+	<script>
+		function update(){
+			
+		}
+	</script>
 
 </body>
 </html>

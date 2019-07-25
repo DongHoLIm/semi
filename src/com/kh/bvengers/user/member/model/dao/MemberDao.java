@@ -510,8 +510,8 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
-  return result;
-}
+			return result;
+	}
   
   
   public Member getblackmember(Connection con, String memberId) {

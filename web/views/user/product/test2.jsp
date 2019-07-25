@@ -58,7 +58,9 @@
 	border: none;
 	width: 100px;
 	height: 50px;
-
+}
+#contents {
+	text-align:left;
 }
 </style>
 <meta charset="UTF-8">
@@ -67,9 +69,8 @@
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
 	<div class="outer">
-		<form action="<%=request.getContextPath()%>" method="post" encType="multipart/form-data" id="productDetail">
+		<form action="<%=request.getContextPath()%>/payment.pa" method="post" id="productDetail">
 			<table class="detail" align="center">
-				<input type="hidden" value="<%= b.getPostsId() %>" />
 				<tr>
 					<th>판매자</th>
 					<th colspan="6"><label><%= b.getWriter() %></label></th>
@@ -78,6 +79,7 @@
 					<th rowspan="4">상품</th>
 					<td rowspan="4">
 						<div id="titleImgArea" align="center">
+							<input type="hidden" value="<%= b.getPostsId() %>" name="postsId" />
 							<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= productImg.getNewFileName() %>" id="titleImg" />
 						</div>
 					</td>
@@ -98,14 +100,14 @@
 						<input type="button" value="장바구니" id="basketBtn" class="detailBtn"/>
 					</td>
 					<td width="300px">
-						<input type="button" value="구매하기" id="orderBtn" class="detailBtn"/>
+						<input type="submit" value="구매하기" id="orderBtn" class="detailBtn"/>
 					</td>
 				</tr>
 				<tr>
 					<th>상품 설명</th>
 					<td colspan="5">
 						<div id="titleContentArea">
-							<p id="contents"><%= b.getContents() %></p>
+							<p id="contents"><%= (b.getContents()).replace("\r\n","<br>") %></p>
 						</div>
 					</td>
 				</tr>

@@ -13,7 +13,7 @@
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;} 
+      .row.content {height:auto;}
     }
     li{
     	list-style: none;
@@ -22,17 +22,17 @@
     	color:black;
     	text-decoration: none;
     }
-     a:link { 
-     color: white; 
+     a:link {
+     color: white;
      }
 	 a:visited {
-	  color: black; 
+	  color: black;
 	  text-decoration: none;
 	  }
   </style>
 </head>
 <body>
- <div class="container" style="float: left; width: 20%; padding-top: 10%; "> 
+ <div class="container" style="float: left; width: 20%; padding-top: 10%; ">
   <div class="panel-group" id="accordion" >
     <div class="panel panel-default">
       <div class="panel-heading" style="background: black; color:white">
@@ -43,7 +43,7 @@
       <div id="collapse1" class="panel-collapse collapse in">
         <div class="w3-dropdown-content w3-bar-block w3-border">
         	<ul>
-        		<li><a href="" class="w3-button">본체</a></li>
+        		<li><a href="<%=request.getContextPath() %>/" class="w3-button">본체</a></li>
         		<li><a href="">모니터</a></li>
         	</ul>
         </div>
@@ -59,7 +59,7 @@
         <div class="panel-body">
         	<ul>
         		<li><a href="">노트북</a></li>
-        		<li><a href="">노트북가방</a></li>
+        		<li><a href="<%=request.getContextPath()%>/search.pd">노트북가방</a></li>
         	</ul>
         </div>
       </div>
@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 </div>
 </body>
 </html>

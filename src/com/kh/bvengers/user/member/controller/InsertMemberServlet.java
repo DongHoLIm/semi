@@ -12,6 +12,7 @@ import com.kh.bvengers.user.member.model.vo.Member;
 
 @WebServlet("/insertMember.me")
 public class InsertMemberServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
 	public InsertMemberServlet() {
@@ -20,8 +21,6 @@ public class InsertMemberServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("password");
 		String memberName = request.getParameter("memberName");
@@ -57,4 +56,5 @@ public class InsertMemberServlet extends HttpServlet {
 	}
 
 }
+
 

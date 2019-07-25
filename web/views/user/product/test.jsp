@@ -20,16 +20,8 @@
 }
 
 .thumbnailArea {
-	width: 1200px;
-	height: 550px;
+	width: 60%;
 	margin: 0 auto;
-}
-
-.searchArea {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
 }
 
 .thumb-list {
@@ -110,11 +102,88 @@
 .productImg:hover figcaption, .productImg.hover figcaption {
 	top: 230px;
 }
+
+.searchArea button {
+	border: 1px solid white;
+	color: white;
+	background: black;
+	float: right;
+	margin-right: 8px;
+	width: 35%;
+	height: 40px;
+}
+
+.searchArea {
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
+	position: absolute;
+	right: 50px;
+}
+
+.searchArea>a {
+	color: black;
+	padding: 0 8px;
+	overflow: hidden;
+	font-size: 1.2em;
+}
+
+.searchArea>a:after {
+	content: '▼';
+}
+
+.searchArea>ul {
+	position: absolute;
+	width: 50%;
+	background: #fff;
+	display: none;
+	background: black;
+	color: white;
+}
+
+.searchArea>ul>li {
+	cursor: pointer;
+	border-top: 0;
+	border-bottom: 1px solid red;
+	text-align:center;
+	width: 100%;
+	font-size: 1.2em;
+}
+
+.select>ul>li:first-child:after {
+	content: '▲';
+}
+.searchEtc{
+	width: 245px;
+}
 </style>
 </head>
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
+	<%@ include file="../hfl/list.jsp" %>
 	<div class="outer">
+		<form action="<%=request.getContextPath()%>/search.pd" id="searchForm">
+			<div class="searchArea">
+				<a href="#">검색 옵션 선택</a>
+				<ul>
+					<li value="title">제목으로 검색</li>
+					<li value="content">내용으로 검색</li>
+					<li value="category">카테고리로 검색</li>
+				</ul>
+				<input type="hidden" id="search" name="search"/>
+				<input type="search" name="searchProduct" class="searchEtc" />
+				<button type="submit" onclick="searchData();">검색하기</button>
+			</div>
+
+
+			<!-- <div class="searchArea">
+				<select name="search" id="search">
+					<option value="title">제목</option>
+					<option value="category">카테고리</option>
+					<option value="content">내용</option>
+				</select>
+			</div> -->
+		</form>
 		<br />
 		<div class="thumbnailArea">
 			<% for(int i = 0; i < list.size(); i++) {
@@ -141,27 +210,22 @@
 				</figure>
 			</div>
 			<% } %>
-			<form action="<%= request.getContextPath() %>/search.pd"
-				id="searchForm">
-				<div class="searchArea">
-					<select name="search" id="search">
-						<option value="title">제목</option>
-						<option value="category">카테고리</option>
-						<option value="content">내용</option>
-					</select> <input type="search" name="searchProduct" />
-					<button type="submit" onclick="search();">검색하기</button>
-				</div>
-			</form>
+
 		</div>
 	</div>
 
 	<!-- footer 영역 -->
 	<script>
-			$(function(){
-				$(".thumb-list").click(function(){
-					var num = $(this).children().children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/selectOne.pd?num="+ num;
-				});
+
+	function searchData() {
+		$("form").submit();
+	};
+
+		$(function(){
+			$(".thumb-list").click(function(){
+				var num = $(this).children().children().eq(0).val();
+				location.href="<%=request.getContextPath()%>/selectOne.pd?num="+ num;
+			});
 		});
 
 		$(function() {
@@ -175,9 +239,22 @@
 				});
 			});
 		});
-		function search() {
-			$("form").submit();
-		}
+
+		$("div.searchArea > a").click(function() {
+		    $(this).next("ul").toggle();
+		    return false;
+		});
+
+		$("div.searchArea > ul > li").click(function() {
+		    $(this).parent().hide().parent("div.searchArea").children("a").text($(this).text());
+		    var val = $(this).attr('value');
+		    $(this).prependTo($(this).parent());
+
+		    $("#search").val($(this).attr('value'));
+		    console.log($("#search").attr('value'));
+		});
+
+
 	</script>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>

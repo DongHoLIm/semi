@@ -33,7 +33,6 @@ public class SelectOneServlet extends HttpServlet {
 		Board b = (Board) hmap.get("board");
 		Product p = (Product) hmap.get("product");
 		ArrayList<Attachment> fileList = (ArrayList<Attachment>) hmap.get("attachment");
-
 		String page = "";
 
 		if(hmap != null) {
