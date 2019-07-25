@@ -51,9 +51,9 @@
         <div class="w3-dropdown-content w3-bar-block w3-border">
         	<div class="panel-body">
 	        	<ul class = "myPage">
-	        		<li><a href="/sp/views/user/mypage/orderLook.jsp">주문조회</a></li>
+	        		<li><a href="<%=request.getContextPath()%>/orderLook.mp">주문조회</a></li>
 	        		<li><a href="/sp/views/user/mypage/mySaleProduct.jsp">My판매현황</a></li>
-	        		<li><a href="/sp/views/user/mypage/cancleLook.jsp">취소/반품조회</a></li>
+	        		<li><a href="/sp/views/user/mypage/cancelLook.jsp">주문취소조회</a></li>
 	        		<li><a href="/sp/views/user/mypage/refund.jsp">환불/정산내역</a></li>
 	        	</ul>
         	</div>

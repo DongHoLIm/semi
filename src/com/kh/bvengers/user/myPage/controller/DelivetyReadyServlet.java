@@ -1,6 +1,8 @@
-package com.kh.bvengers.user.member.controller;
+package com.kh.bvengers.user.myPage.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.kh.bvengers.user.member.model.vo.Member;
 import com.kh.bvengers.user.myPage.model.Service.MyPageService;
@@ -30,29 +35,32 @@ public class DelivetyReadyServlet extends HttpServlet {
 		String memberNo = loginUser.getMemberNo();
 		
 		ArrayList<myPage> drlist = new MyPageService().selectDeliReadyList(memberNo);
-		ArrayList<myPage> mplist = new ArrayList<myPage>();
 		
+		JSONArray result = new JSONArray();
+		JSONObject dr1list = null;
 		
-		String page = "";
-		
-		
-    	
-		if(drlist != null) {
+		for(myPage m : drlist) {
+			dr1list = new JSONObject();
 			
-			for(myPage m : drlist) {
-				if(m.getDstatus().equals(dr1)) {
-					
-					mplist.add(m);
-				}
+			if(m.getDstatus().equals(dr1)) {
+				
+				dr1list.put("Ono", m.getOno());
+				dr1list.put("pName", URLEncoder.encode(m.getPname(), "UTF-8"));
+				dr1list.put("dstatus", m.getDstatus());
+				dr1list.put("oDate", m.getoDate());
 				
 			}
-			page = "views/user/mypage/myPage.jsp";
-			request.setAttribute("mplist", mplist);
-		}else {
-			page="views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "실패!");
+			result.add(dr1list);
 		}
-		request.getRequestDispatcher(page).forward(request, response);
+		System.out.println("result : " + result);
+		System.out.println("dr1list : " + dr1list);
+		
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		out.print(result.toJSONString());
+		out.flush();
+		out.close();
+	
 		
 
 	

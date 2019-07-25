@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String status = "";
+
+
+if(m.getrefund)
+}else if(m.getDstatus().equals("")){
+	status = m.getPstatus();
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,23 +130,11 @@ tr > th, tr>td{
 					<th class="th_orderLook">주문상태</th>
 				</tr>
 				<tr>
-					<td>주문일자<br>주문번호<br><input type="button" onclick="location.href='/sp/views/user/mypage/orderDetails.jsp'" value="주문상세"></td>
+					<td>주문일자<br>주문번호<br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
 					<td>상품명</td>
-					<td><input type="text" value="주문상태" id="ip_status"readonly></td>
+					<td><%= %><input type="text" value="주문상태" id="ip_status"readonly></td>
 				</tr>
 			</table>
-		</div>
-		
-		<div class="page-control">
-		<footer align="center">
-			<ul class="pagination" align="center">
-				<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">다음</a></li>
-			</ul>
-		</footer>
 		</div>
 
 	</section>

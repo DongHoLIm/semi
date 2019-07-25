@@ -9,10 +9,13 @@ public class myPage {
 	private Date oDate;		//주문날짜
 	private String mno; 	//회원번호
 	private int bno;		//조회 갯수
+	private String payStatus; //결제상태
+	private String refundStatus; //환불상태
 	
 	public myPage() {}
 
-	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, int bno) {
+	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, int bno, String payStatus,
+			String refundStatus) {
 		super();
 		this.ono = ono;
 		this.pname = pname;
@@ -20,8 +23,9 @@ public class myPage {
 		this.oDate = oDate;
 		this.mno = mno;
 		this.bno = bno;
+		this.payStatus = payStatus;
+		this.refundStatus = refundStatus;
 	}
-	
 
 	public String getOno() {
 		return ono;
@@ -41,6 +45,18 @@ public class myPage {
 
 	public String getMno() {
 		return mno;
+	}
+
+	public int getBno() {
+		return bno;
+	}
+
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+	public String getRefundStatus() {
+		return refundStatus;
 	}
 
 	public void setOno(String ono) {
@@ -63,22 +79,23 @@ public class myPage {
 		this.mno = mno;
 	}
 
-	public int getBno() {
-		return bno;
-	}
-
 	public void setBno(int bno) {
 		this.bno = bno;
+	}
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+
+	public void setRefundStatus(String refundStatus) {
+		this.refundStatus = refundStatus;
 	}
 
 	@Override
 	public String toString() {
 		return "myPage [ono=" + ono + ", pname=" + pname + ", dstatus=" + dstatus + ", oDate=" + oDate + ", mno=" + mno
-				+ ", bno=" + bno + "]";
+				+ ", bno=" + bno + ", payStatus=" + payStatus + ", refundStatus=" + refundStatus + "]";
 	}
-
-
 	
 	
-
 }

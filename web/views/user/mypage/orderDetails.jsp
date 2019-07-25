@@ -91,15 +91,6 @@ table, td {
 				<td>123456789&nbsp;<button>배송조회</button></td>
 				<td><button>환불신청</button></td>
 			</tr>
-			<tr>
-				<th class="th3">3</th>
-				<td>진수의 핑크핑크한 안경</td>
-				<td>1</td>
-				<td>60,000원</td>
-				<td><button>구매확정</button></td>
-				<td>123456789&nbsp;<button>배송조회</button></td>
-				<td><button>환불신청</button></td>
-			</tr>
 		</tbody>
 	</table>
 	<br>
@@ -117,6 +108,7 @@ table, td {
 			</tr>
 		</tbody>
 	</table>
+	<br>
 	<%@ include file="../hfl/footer.jsp"%>
 	<script>
 

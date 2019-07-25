@@ -47,6 +47,10 @@
 .pageNo {
 	margin: auto;
 }
+
+.th1 {
+	text-align:center;
+}
 </style>
 </head>
 <body>
@@ -60,11 +64,11 @@
 				<table class="board">
 				<tr class="row0">
 				<thead>
-					<th>주문번호</th>
-					<th>상품명</th>
-					<th>판매여부</th>
-					<th>정산여부</th>
-					<th>주문날짜</th>
+					<th class="th1">주문번호</th>
+					<th class="th1">상품명</th>
+					<th class="th1">판매여부</th>
+					<th class="th1">정산여부</th>
+					<th class="th1">주문날짜</th>
 				</thead>
 				</tr>
 				<tr class="row1">
@@ -72,51 +76,15 @@
 					<td>진수의 핑크핑크한 노트북쿨러</td>
 					<td>검수단계</td>
 					<td>19/07/26</td>
-				</tr>
-				<tr class="row2">
-					<td id="Notd">0004</td>
-					<td>영지의 오른쪽 에어팟</td>
-					<td>판매중</td>
-					<td>19/07/19</td>
-				</tr>
-				<tr class="row3">
-					<td id="Notd">0003</td>
-					<td>찬민이의 C타입 케이블</td>
-					<td>판매완료</td>
-					<td>19/07/17</td>
-				</tr>
-				<tr class="row4">
-					<td id="Notd">0002</td>
-					<td>동호의 왼쪽 에어팟</td>
-					<td>판매완료</td>
-					<td>19/07/16</td>
-				</tr>
-				<tr class="row5">
-					<td id="Notd">0001</td>
-					<td>강사님의 모니터 케이블</td>
-					<td>정산완료</td>
-					<td>19/07/13</td>
+					<td></td>
 				</tr>
 			</table>
 		</div>
-		<footer align="center">	
-			<ul class="pagination" align="center">
-			  <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-			  <li class="page-item"><a class="page-link" href="#">1</a></li>
-			  <li class="page-item"><a class="page-link" href="#">2</a></li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
-			  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-			</ul>
-		</footer>
 			</div>
 			
-			
-			
-			
-		</div>
+		
 	</section>
 		
-	<!-- footer 영역 -->
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>
 </html>
