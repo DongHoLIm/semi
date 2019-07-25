@@ -36,10 +36,10 @@ public class SelectOneNotice extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-		System.out.println(num + "입니다");
+		
 		
 		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
-		System.out.println(hmap + "다");
+
 		Board b = (Board)hmap.get("board");
 		System.out.println("b에는" + b);
 		ArrayList<Attachment> fileList = (ArrayList<Attachment>)hmap.get("attachment");

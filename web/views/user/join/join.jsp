@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
 function checkjoin(index){
 	if(index == 1){
 	var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
@@ -100,7 +99,6 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
    background-color: black;
    color: white;
    }
-
 .btn_join:hover {color:white;}
 </style>
 </head>
@@ -175,7 +173,6 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
                        }
                        // 조합된 참고항목을 해당 필드에 넣는다.
                        document.getElementById("sample6_extraAddress").value = extraAddr;
-
                    } else {
                        document.getElementById("sample6_extraAddress").value = '';
                    }

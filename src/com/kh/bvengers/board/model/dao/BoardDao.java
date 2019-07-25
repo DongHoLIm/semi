@@ -408,17 +408,19 @@ public class BoardDao {
 		return list;
   }
 
-	public int getListCount(Connection con) {
-		Statement stmt = null;
+	public int getListCount(Connection con, int num) {
+		PreparedStatement pstmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
 		
 		String query = prop.getProperty("selectListCount");
 		
 		try {
-			stmt = con.createStatement();
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
 			
-			rset = stmt.executeQuery(query);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				
@@ -428,10 +430,39 @@ public class BoardDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			close(stmt);
+			close(pstmt);
 			close(rset);
 		}		
 		return listCount;
+	}
+
+	public int getListCount2(Connection con) {
+		PreparedStatement pstmt = null;
+		int listCount2 = 0;
+		ResultSet rset = null;
+		int num = 2;
+		
+		String query = prop.getProperty("selectListCount");
+		
+		try {
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				listCount2 = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}		
+		return listCount2;
 	}
 
 	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
@@ -477,15 +508,63 @@ public class BoardDao {
 		return list;
 	}
 
+	public ArrayList<Board> selectList1(Connection con, int currentPage1, int limit1) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list1 = null;
+		
+		String query = prop.getProperty("selectListWithPaging1");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow1 = (currentPage1 -1) * limit1 + 1;
+			int endRow1 = startRow1 + limit1 - 1;
+			
+			pstmt.setInt(1, startRow1);
+			pstmt.setInt(2, endRow1);
+			
+			rset = pstmt.executeQuery();
+			
+			list1 = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board m = new Board();
+				
+				m.setPostsId(rset.getInt("POSTS_ID"));
+				m.setMemberName(rset.getString("MEMBER_NAME"));
+				m.setPostsTitle(rset.getString("POSTS_TITLE"));
+				m.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				m.setCreateDate(rset.getDate("CREATEDATE"));
+				
+				list1.add(m);
+			
+				System.out.println("dao" + rset.getInt("POSTS_ID"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list1;
+	}
+	
+	
+	
 	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		HashMap<String,Object> hmap = null;
 		Board b = null;
-		Attachment at = null;
-		ArrayList<Attachment>list = null;
+		ArrayList<HashMap<String, Object>>list = null;
+		
 		
 		String query = prop.getProperty("selectOneNotice");
+		
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -493,23 +572,28 @@ public class BoardDao {
 			
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<Attachment>();
+			list = new ArrayList<HashMap<String, Object>>();
 			
 			while(rset.next()) {
 				b = new Board();
 				b.setPostsId(rset.getInt("POSTS_ID"));
-				b.setPostsTitle(rset.getString("POST_TITLE"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setMemberId(rset.getString("Member_ID"));
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+				b.setContents(rset.getString("CONTENTS"));
 				
-				at = new Attachment();
-				at.setFileNo(rset.getString("FILE_NO"));
-				at.setOrginFileName(rset.getString("ORIGIN_FILE_NAME"));
-				at.setFileSrc("FILE_SRC");
-				at.setSaveDate("SAVE_DATE");
+			
+				hmap = new HashMap<String, Object>();
+
+				hmap.put("fileNo", rset.getString("FILE_NO"));
+				hmap.put("originFileName", rset.getString("ORIGIN_FILE_NAME"));
+				hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
+				hmap.put("fileSrc", rset.getString("FILE_SRC"));
+				hmap.put("saveDate", rset.getDate("SAVE_DATE"));
 				
-				list.add(at);
+				list.add(hmap);
 			}
 			
 			hmap = new HashMap<String, Object>();
@@ -528,6 +612,8 @@ public class BoardDao {
 		return hmap;
 	}
 
+
+	
 }
 
 

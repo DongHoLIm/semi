@@ -38,8 +38,6 @@ public class InsertNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
-		System.out.println(title);
-
 		if(ServletFileUpload.isMultipartContent(request)) {
 
 			int maxSize = 1024*1024*10;
@@ -60,17 +58,18 @@ public class InsertNoticeServlet extends HttpServlet {
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 
-				//System.out.println("name :" + name);
-
+				
+				
 				saveFiles.add(multiRequest.getFilesystemName(name));
 				originFiles.add(multiRequest.getOriginalFileName(name));
-
-				//System.out.println("fileSystem name :" + multiRequest.getFilesystemName(name));
-				//System.out.println("originFile :" + multiRequest.getOriginalFileName(name));
+				
+				System.out.println("fileSystem name :" + multiRequest.getFilesystemName(name));
+				System.out.println("originFile :" + multiRequest.getOriginalFileName(name));
 			}
 
 			String multiTitle = multiRequest.getParameter("title");
 			String multiContent = multiRequest.getParameter("content");
+			System.out.println(multiContent);
 			String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
 			String postCode = multiRequest.getParameter("hiddenCode");
 
@@ -79,7 +78,9 @@ public class InsertNoticeServlet extends HttpServlet {
 			b.setContents(multiContent);
 			b.setMemberNo(Integer.parseInt(uno));
 			b.setPostsCode(postCode);
-
+			
+			System.out.println(multiContent);
+			
 			ArrayList<Attachment>fileList = new ArrayList<Attachment>();
 
 			for(int i = originFiles.size() -1; i>=0; i--) {
@@ -91,7 +92,6 @@ public class InsertNoticeServlet extends HttpServlet {
 				fileList.add(at);
 
 			}
-
 			int result = new com.kh.bvengers.board.model.service.BoardService().insertNotice(b,fileList);
 
 			if(result > 0) {

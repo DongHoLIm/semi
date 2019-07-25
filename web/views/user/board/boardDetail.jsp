@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*"%>
+    pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b"); 
-	 ArrayList<Attachment> fileList = 
-			(ArrayList<Attachment>) request.getAttribute("fileList");
+	ArrayList<HashMap<String, Object>> fileList = (ArrayList<HashMap<String, Object>>) request.getAttribute("fileList");
 
+	
  %>
 <!DOCTYPE html>
 <html>
@@ -13,14 +13,14 @@
 <style>
 
 td{
-	border:1px solid black	;
+	border:1px solid lightgray;
 	}
 .tableArea{
 		border:1px solid white;
 		width:800px;
 		height:100%;
 		margin:0 auto;
-}
+} 
 #content{
 		height:230px;
 	}
@@ -32,7 +32,6 @@ td{
 <div>
 	<br>
 	<br>
-	<h2 align="center">공지사항</h2>
 	<div class="container">
 	 	<form action = "<%= request.getContextPath()%>/son.no" method = "post" encType="multipart/form-data">
 	<div class = "tableArea">
@@ -40,23 +39,25 @@ td{
 			<table align = "center" width = "800px">
 				<tr>
 					<td align = "center" colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
-					<!-- <td colspan = "5"><span></span></td> -->
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td><span><%= b.getMemberId() %></span></td>
+					<td align = "center"><span><%= b.getMemberId() %></span></td>
 					<td>조회수</td>
-					<td><span><%= b.getPostsViews() %></span></td>
+					<td align = "center"><span><%= b.getPostsViews() %></span></td>
 					<td>작성일</td>
-					<td><span><%= b.getCreateDate() %></span></td>
+					<td align = "center"><span><%= b.getCreateDate() %></span></td>
+				</tr>
+				<% for(int i = 0; i < fileList.size(); i++){ 
+					HashMap<String, Object> hmap = fileList.get(i);
+				 %>
+				<tr>
+				<td colspan = "6"><img id="titleImg" src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>"></td>
 				</tr>
 				<tr>
-					<td colspan = "6"><%=  %></td>
+					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
-				<tr>
-					<td colspan = "6"><%= b.getContents() %></td>
-				</tr>
-					
+					<%} %>
 			</table>
 		</div>
 				<br><br><br>
@@ -68,3 +69,8 @@ td{
 	</div>	
 </body>
 </html>
+
+
+
+
+
