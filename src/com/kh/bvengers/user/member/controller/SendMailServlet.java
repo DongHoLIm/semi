@@ -32,8 +32,8 @@ public class SendMailServlet extends HttpServlet {
 		String receiver = request.getParameter("email");
 		System.out.println(receiver);
 		
-		final String sender = "";//네이버아이디쓰삼(test@naver.com)
-		final String password = "";//네이버비밀번호
+		final String sender = "youngji0517@naver.com";//네이버아이디쓰삼(test@naver.com)
+		final String password = "rkdehddnjs";//네이버비밀번호
 		
 		
 		//인증 번호 생성기
