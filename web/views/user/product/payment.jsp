@@ -2,23 +2,27 @@
 <%@page import="com.kh.bvengers.board.model.vo.Attachment"%>
 <%@page import="com.kh.bvengers.board.model.vo.Posts"%>
 <%@page import="com.kh.bvengers.product.model.vo.Product"%>
+<%@page import="java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	Product product = (Product) request.getAttribute("product");
-	Posts posts = (Posts) request.getAttribute("posts");
-	Attachment attachment = (Attachment) request.getAttribute("attachment");
-	Category category = (Category) request.getAttribute("category");
+	Product pr = (Product) request.getAttribute("pr");
+	Posts po = (Posts) request.getAttribute("po");
+	Attachment att = (Attachment) request.getAttribute("att");
+	Category cate = (Category) request.getAttribute("cate");
+	
+	HashMap<String, Object> productPay = (HashMap<String, Object>) request.getAttribute("productPay");
+	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link
-	href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap"
-	rel="stylesheet">
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js" type="application/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 * {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -38,7 +42,7 @@
 	height: 100%;
 	margin-top: 30px;
 	padding-top: 2%;
-	border:3px solid #ddf;
+	border:5px solid #ddf;
 }
 
 #payForm {
@@ -75,7 +79,6 @@
 }
 
 .postsTitle {
-
 	font-family: 'Nanum Gothic', sans-serif;
 	font-size: 1.8vw;
 	padding: 1%;
@@ -107,11 +110,28 @@
 	border:1px solid #aabfde;
 }
 
+.payInfo th{
+	border:1px solid #aabfde;
+	
+	
+}
+.payInfo td{
+	
+	border:1px solid #aabfde;
+}
+
+.payInfo input {
+	margin:0 auto;
+	border: 1px solid #abd;
+	border-radius:5px;
+ 	width:100%;
+}
+
 .addressNum{
 	display: inline-block;
 	padding: .5em .75em;
 	color: #fff;
-	font-size: 1vw;
+	font-size: 0.9vw;
 	line-height: normal;
 	vertical-align: middle;
 	background-color: #7799dd;
@@ -119,6 +139,12 @@
 	border: 1px solid #7090d0;
 	border-bottom-color: #e2e2e2;
 	border-radius: .25em;
+}
+
+#phone1::-webkit-outer-spin-button, #phone1::-webkit-inner-spin-button,
+#phone2::-webkit-outer-spin-button, #phone2::-webkit-inner-spin-button,
+#phone3::-webkit-outer-spin-button, #phone3::-webkit-inner-spin-button{
+    -webkit-appearance: none;
 }
 
 .buy{
@@ -136,7 +162,7 @@
 	border-radius: .25em;
 }
 .buy:hover{
-	width:50%;
+	width:100%;
 	display: inline-block;
 	padding: .5em .75em;
 	color: #fff;
@@ -170,17 +196,19 @@
 			<table class="pt">
 				<tr>
 					<!-- 장바구니에 등록한 상품 사진, 제목, 카테고리, 품명, 가격,  -->
-					<td id="productImg" rowspan="3" width="20%"><img src="/sp/images/flower2.PNG" width=95% hright=100%></td>
-					<!--  -->
-					<td class="postsTitle" colspan="3" width="70%" height="30%"><label>게시글제목<%/* posts.getPostsTitle() */ %></label></td> <!-- 게시글 -제목: 제거 -->
+					<td id="productImg" rowspan="3" width="20%">
+						<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%=productPay.get("newFileName") %>" width=95% hright=100%>
+					</td>
+					
+					<td class="postsTitle" colspan="3" width="70%" height="30%"><label><%= productPay.get("postsTitle") %></label></td> <!-- 게시글 -제목: 제거 -->
 				</tr>
 				<tr>
-					<td id="Detail"><label>제품명 | <%/* product.getProductName() */ %></label></td>	
-					<td id="Detail"><label>카테고리 | <% /* category.getCategoryDiv() */ %></label></td>	
-					<td id="Detail"><label>판매자 | <% /* posts.getMemberNo() */%></label></td>	
+					<td id="Detail"><label>제품명 | <%= productPay.get("productName") %></label></td>	
+					<td id="Detail"><label>카테고리 | <%= productPay.get("mainCateDiv") %>><%= productPay.get("categoryDiv") %></label></td>	
+					<td id="Detail"><label>판매자 | <%= productPay.get("memberId") %></label></td>	
 				</tr>
 				<tr>
-					<td colspan="3" id="price" ><label><% /* product.getProductMoney() */%>원</label></td>
+					<td colspan="3" id="price" ><label><%= productPay.get("productMoney") %>원</label></td>
 				</tr>
 			</table>
 
@@ -189,37 +217,49 @@
 			<form id="payForm" action="">
 				<table align="center" class="payInfo">
 					<tr>
-						<td><label>총 결제금액</label></td>
+						<th><label>총 결제금액</label></th>
 						<td><input type="text" name="paymentPrice" id="paymentPrice"
-							value="<% /* product.getProductMoney() */ %>원" readonly></td>
+							value="<%= productPay.get("productMoney") %>원" readonly></td>
 					</tr>
 					<tr>
-						<td><label>택배 수령자 </label></td>
+						<th><label>택배 수령자 </label></th>
 						<td><input type="text" placeholder="수령자 이름을 입력하세요"
-							name="name" id="name"></td>
+							name="userName" id="userName"></td>
 					</tr>
 					<tr>
-						<td><label>우편번호 </label></td>
-						<td><input type="text" placeholder="우편번호" name="age" id="age" readonly> &nbsp; &nbsp;
-							<input type="button" name="addressNum" class="addressNum" value="우편번호찾기"></td>
+						<th><label>우편번호 </label></th>
+						<td><input type="text" placeholder="우편번호" name="addNum" id="addNum" style="width:75%"  readonly>
+						<input type="button" name="addressNum" class="addressNum" value="우편번호찾기" onclick="addFind();" style="width:23%;"></td>
 					</tr>
 					<tr>
-						<td><label>주소 </label></td>
-						<td><input type="text" placeholder="주소" name="address"
-							id="address" readonly> &nbsp; &nbsp; <input type="text"
-							name="subAddress" id="subAddress"><br></td>
+						<th><label>주소 </label></th>
+						<td><input type="text" placeholder="주소" name="address" id="address" readonly></td>
 					</tr>
 					<tr>
-						<td><label>연락처 </label></td>
-						<td><input type="text" placeholder="연락처" name="phone"
-							id="phone"></td>
+						<th><label>나머지주소</label></th>
+						<td><input type="text" placeholder="나머지 주소" name="subAddress" id="subAddress"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><label>배송시 요구사항 </label> <br>
-						<textarea placeholder="요구사항을 입력해주세요" width=100% name="message" rows="5" id="message"></textarea></td>
+						<th><label>연락처 </label></th>
+						<td>
+							<input type="number" name="phone1" id="phone1" style="width:30%" maxlength="3" oninput="phoneNum(this);">-
+							<input type="number" name="phone2" id="phone2" style="width:30%" maxlength="4" oninput="phoneNum(this);">-
+							<input type="number" name="phone3" id="phone3" style="width:30%" maxlength="4" oninput="phoneNum(this);">
+							
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><input type="submit" class="buy" value="결제하기" onclick="paymentApi();"></td>
+						<th><label>이메일</label></th>
+						<td><input type="email" placeholder="aaaa123@bbbb.ccc" id="mail" name="mail"/></td>
+					</tr>
+					<tr>
+						<th><label>배송시 요구사항 </label></th>
+						<td><textarea placeholder="요구사항을 입력해주세요" width=100% name="message" rows="7" id="message"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<input type="button" class="buy" value="결제하기" onclick="paymentApi();">
+							</td>
 					</tr>
 				</table>
 			</form>
@@ -227,19 +267,130 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-		function paymentApi(){
-			var popUrl = "paymentApi.jsp";	//팝업창에 출력될 페이지 URL
-
-			var popOption = "width=700px, resizable=no, scrollbars=no, status=no";    //팝업창 옵션(optoin)
-
-			window.open(popUrl,"",popOption);
+	 	function phoneNum(e){
+	 	    if(e.value.length > e.maxLength){
+	            e.value = e.value.slice(0, e.maxLength);
+	        }
+	    }
+		
+	 	function addFind(){
+			new daum.Postcode({
+		           oncomplete: function(data) {
+		
+		               var addr = ''; 
+		               var extraAddr = '';
+		
+		               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+		                   addr = data.roadAddress;
+		               } else { 							// 사용자가 지번 주소를 선택했을 경우(J)
+		                   addr = data.jibunAddress;
+		               }
+		
+		                   if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                       extraAddr += data.bname;
+		                   }
+		                   // 건물명이 있고, 공동주택일 경우 추가한다.
+		                   if(data.buildingName !== '' && data.apartment === 'Y'){
+		                       extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                   }
+		                   // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                   if(extraAddr !== ''){
+		                       extraAddr = ' (' + extraAddr + ')';
+		                   }
+		
+		               // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		               document.getElementById('addNum').value = data.zonecode;
+		               document.getElementById("address").value = addr;
+		               // 커서를 상세주소 필드로 이동한다.
+		               document.getElementById("subAddress").focus();
+		           }
+		       }).open();
 		}
+		
+		function paymentApi(){
+			var userName = document.getElementById('userName').value;
+			
+			var addNum = document.getElementById('addNum').value;
+			var address = document.getElementById('address').value;
+			var subAddress = document.getElementById('subAddress').value;
+			var addr = '우편번호 : ' + addNum + ' 주소 : ' + address + ' ' + subAddress;
+			
+			var phone1 = document.getElementById('phone1').value;
+			var phone2 = document.getElementById('phone2').value;
+			var phone3 = document.getElementById('phone3').value;
+			var phoneNum = phone1 + '-' + phone2 + '-' + phone3;
+			
+			var message = document.getElementById('message').value;
+			var mail = document.getElementById('mail').value;
+			
+			BootPay.request({
+				price: '<%= productPay.get("productMoney") %>', //실제 결제되는 가격
+				application_id: "5d2fec7c396fa61e224d5730",
+				name: '<%= productPay.get("postsTitle") %>', //결제창에서 보여질 이름
+				pg: '',
+				method: '', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
+				show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+				items: [
+					{
+						item_name: '<%= productPay.get("productName") %>', //상품명
+						qty: 1, //수량
+						unique: '<%=productPay.get("postsId") %>', //해당 상품을 구분짓는 primary key
+						price: '<%=productPay.get("productMoney") %>', //상품 단가
+						cat1: '<%= productPay.get("mainCateDiv") %>', // 대표 상품의 카테고리 상, 50글자 이내
+						cat2: '<%= productPay.get("categoryDiv") %>', // 대표 상품의 카테고리 중, 50글자 이내
+					}
+				],
+				user_info: {
+					username: userName,
+					email: mail,
+					addr: addr,
+					phone: phoneNum
+				},
+				order_id: '<%=productPay.get("postsId") %>', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+				params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+				//account_expire_at: '2018-05-25', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
+				extra: {
+				    //start_at: '2019-05-10', // 정기 결제 시작일 - 시작일을 지정하지 않으면 그 날 당일로부터 결제가 가능한 Billing key 지급
+					//end_at: '2022-05-10', // 정기결제 만료일 -  기간 없음 - 무제한
+			        vbank_result: 1, // 가상계좌 사용시 사용, 가상계좌 결과창을 볼지(1), 말지(0), 미설정시 봄(1)
+			        quota: '0,2,3' // 결제금액이 5만원 이상시 할부개월 허용범위를 설정할 수 있음, [0(일시불), 2개월, 3개월] 허용, 미설정시 12개월까지 허용
+				}
+			}).error(function (data) {
+				//결제 진행시 에러가 발생하면 수행됩니다.
+				console.log(data);
+			}).cancel(function (data) {
+				//결제가 취소되면 수행됩니다.
+				console.log(data);
+			}).ready(function (data) {
+				// 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
+				console.log(data);
+			}).confirm(function (data) {
+				//결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
+				//주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
+				console.log(data);
+				var enable = true; // 재고 수량 관리 로직 혹은 다른 처리
+				if (enable) {
+					this.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
+				} else {
+					this.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
+				}
+			}).close(function (data) {
+			    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
+			    console.log(data);
+			}).done(function (data) {
+				//결제가 정상적으로 완료되면 수행됩니다
+				//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+				console.log(data);
+			});
+		}
+		
+		
 	</script>
 
 
 
 	<!-- footer 영역 -->
-	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 
 </body>
 </html>
