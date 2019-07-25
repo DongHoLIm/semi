@@ -35,6 +35,7 @@ public class LoginWrapper extends HttpServletRequestWrapper {
 			md.update(bytes);
 
 			encPwd = Base64.getEncoder().encodeToString(md.digest());
+			System.out.println(encPwd);
 
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
