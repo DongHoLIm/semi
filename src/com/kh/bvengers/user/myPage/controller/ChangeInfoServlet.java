@@ -1,4 +1,4 @@
-package com.kh.bvengers.user.member.controller;
+package com.kh.bvengers.user.myPage.controller;
 
 import java.io.IOException;
 
