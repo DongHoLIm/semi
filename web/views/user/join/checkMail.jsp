@@ -24,9 +24,11 @@ function ckbtn(){
 			success:function(data){
 				if(data=="Success"){
 					alert("인증이완료되었습니다.");
+					
 					window.close();
 				}else if(data=="fail"){
-					alert("인증번호가 틀렸습니다.");
+					alert("인증번호가 틀렸습니다.\n다시 시도해주세요");
+					$(".chbtn").html("다시 인증하기");
 				}				
 			}	
 			

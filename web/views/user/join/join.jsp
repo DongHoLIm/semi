@@ -19,7 +19,10 @@ function checkjoin(index){
 		$("#memberId").val("");
 		return false;
 	}
-	
+	if($("#email").val() == ""){
+		alert("이메일 인증을 해주세요");
+		return false;
+	}
 	if(!getCheck.test($("#password").val())){
 		alert("비밀번호를 다시 설정하세요");
 		$("#password").val("");
@@ -43,6 +46,7 @@ function checkjoin(index){
 	
 if($("#memberPassword").val() == ($("#memberPassword2").val())){
 	$("form").submit();
+	
 }
 	}else if(index==2){
 		var email = $("#email").val();
@@ -89,7 +93,7 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
    background-color: black;
    color: white;
    }
-.btn_overlap {
+.btn_overlap,.btn_overla {
    margin:0 auto;
    border: 1px solid black;
    font-size: 14px;
@@ -116,14 +120,16 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
 	<div class="box_login" align="center">
 			<br><br>
 			<input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
-			<button type="button" class="btn_overlap" style="width:10%;" onclick="idCheck();">중복확인</button><br><br>
+			
+			
+			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
 			<input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
 			<input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
 			<input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
 			<input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
 			<input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
 			<input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
-			<button type="button" class="btn_overlap" style="width:10%;" onclick="checkjoin(2);">이메일인증</button><br><br>
+			<button type="button" class="btn_overla" style="width:10%;" onclick="checkjoin(2);">중복확인</button><br><br>
 			<input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
 			<input type="text" id="sample6_postcode" name = "address1" placeholder="우편번호" style="width:30%;">
 			<input type="button" name="zipCode"class="btn_overlap" onclick="sample6_execDaumPostcode()" style="width:10%;" value="우편번호 찾기"><br><br>
@@ -188,6 +194,29 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
       function goMain(){
          location.href="<%=request.getContextPath()%>/index.jsp";
       }
+      $(function(){
+          $(".btn_overlap").click(function(){
+             var memberId = $("#memberId").val();
+             
+             $.ajax({
+                url:"/sp/memberIdCheck.me",
+                type:"post",
+                data:{memberId:memberId},
+                success:function(data){
+                   
+                   if(data === "fail"){
+                      alert("아이디가 중복됩니다.\n다른 아이디를 사용하세요.");
+                      $("#memberId").val("").focus();
+                   }else{
+                      alert("사용 가능합니다.");
+                   }
+                },
+                error:function(){
+                   console.log("실패!");
+                }
+             });
+          });
+       }); 
       </script>
       <br><br>
 </body>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/checkmail.me")
 public class CheckEmailServlet extends HttpServlet {
@@ -23,9 +24,11 @@ public class CheckEmailServlet extends HttpServlet {
 					
 			PrintWriter out = response.getWriter();
 			
-			if(!status.equals(checkuser)) {
+			if(!status.equals(checkuser)) {// 실패시
 				out.append("fail");
-			}else {
+				HttpSession session = request.getSession();
+				session.setAttribute("emailstatus", "fail");
+			}else {//성공시
 				out.append("Success");
 				request.getSession().invalidate();
 			}

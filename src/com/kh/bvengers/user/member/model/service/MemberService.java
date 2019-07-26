@@ -135,4 +135,11 @@ public class MemberService {
 		return s;
 	}
 
+	public int memberidCk(String memberId) {
+		Connection con = getConnection();
+		int result = new MemberDao().memberidCk(con,memberId);
+		close(con);
+		return result;
+	}
+
 }

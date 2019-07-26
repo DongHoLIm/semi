@@ -30,7 +30,7 @@ public class SendMailServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String receiver = request.getParameter("email");
-		System.out.println(receiver);
+		//System.out.println(receiver);
 		
 		final String sender = "youngji0517@naver.com";//네이버아이디쓰삼(test@naver.com)
 		final String password = "rkdehddnjs";//네이버비밀번호
@@ -66,7 +66,7 @@ public class SendMailServlet extends HttpServlet {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", 25);
 		
-		System.out.println(props.get("mail.smtp.port"));
+		//System.out.println(props.get("mail.smtp.port"));
 		
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
