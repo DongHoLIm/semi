@@ -1,6 +1,6 @@
 package com.kh.bvengers.user.myPage.model.Dao;
 
-import static com.kh.bvengers.common.JDBCTemplate.*;
+import static com.kh.bvengers.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -31,7 +30,7 @@ public class MyPageDao {
 	}
 	
 	
-	public ArrayList<myPage> selectMyPageList(Connection con, String memberNo, int currentPage, int limit, int limit2) {
+	public ArrayList<myPage> selectMyPageList(Connection con, String memberNo, int currentPage, int limit) {
 		ArrayList<myPage> mplist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -138,6 +137,48 @@ public class MyPageDao {
 	}
 
 
-
+	public ArrayList<myPage> selectOrderLookList(Connection con, String memberNo, int currentPage, int limit) {
+		ArrayList<myPage> olList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOrderLook");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setString(1, memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			olList = new ArrayList<myPage>();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				m.setoDate(rset.getDate("ORDER_DATE"));
+				m.setOno(rset.getString("ORDER_NO"));
+				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setPayStatus(rset.getString("PAY_STATUS"));
+				m.setDstatus(rset.getString("DELIVERY_STATUS"));
+				m.setRefundStatus(rset.getString("REFUND_STATUS"));
+				
+				olList.add(m);
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		return olList;
+	}
 
 }
+
+

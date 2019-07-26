@@ -1,13 +1,21 @@
+<%@page import="com.kh.bvengers.user.myPage.model.vo.myPagePageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
-	String status = "";
 
-
-if(m.getrefund)
-}else if(m.getDstatus().equals("")){
-	status = m.getPstatus();
-}
+	ArrayList<myPage> olList = (ArrayList<myPage>) request.getAttribute("olList");
+	ArrayList<String> ss = (ArrayList<String>) request.getAttribute("ss");
+	myPagePageInfo pi = (myPagePageInfo) request.getAttribute("pi");
+	String status = (String) request.getAttribute("status");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	
+	
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +24,16 @@ if(m.getrefund)
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
+
+.pagingArea {
+	margin-top:50px;
+}
+
+.pagingArea > button {
+	background:#FFF;
+	border: 1px solid black;
+	
+}
 input[type=button]{
 	border:1px solid black;
 	background:#FFF;
@@ -129,14 +147,44 @@ tr > th, tr>td{
 					<th class="th_orderLook">상품정보</th>
 					<th class="th_orderLook">주문상태</th>
 				</tr>
-				<tr>
-					<td>주문일자<br>주문번호<br><input type="button" onclick="'<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
-					<td>상품명</td>
-					<td><input type="text" value="주문상태" id="ip_status"readonly></td>
+				<% for(myPage p : olList){%>
+				<tr class="">
+					<td><%=p.getoDate() %><br><%=p.getOno() %><br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
+					<td><%=p.getPname()%></td>
+					<td><%=status%> <%= ss %></td>
 				</tr>
+				<%}%>
 			</table>
 		</div>
+<%-- 페이징처리 --%>
+		<div class="pagingArea" align="center">
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1){ %>
+			<button class="btn_paging" disabled><</button>
+			<% }else { %>
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+				if(currentPage == p){
+			%>
+					<button class="btn_paging" disabled><%= p %></button>
+			<% } else { %>
+					<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=p%>'"><%= p %></button>
+			<% 
+				}
+			   } 
+			%>
+			
+			<% if(currentPage >= maxPage){ %>
+			<button class="btn_paging" disabled>></button>
+			<% }else{ %>
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
 
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=maxPage%>'">>></button>
+		</div>
 	</section>
 
 	<br>
