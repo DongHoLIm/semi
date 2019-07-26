@@ -74,7 +74,7 @@ public class JDBCTemplate {
 	public static void commit(Connection con) {
 		try {
 			if(con!=null && !con.isClosed()) {
-				con.close();
+				con.commit();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -84,7 +84,7 @@ public class JDBCTemplate {
 	public static void rollback(Connection con){
 		try {
 			if(con!=null && !con.isClosed()) {
-				con.close();
+				con.rollback();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

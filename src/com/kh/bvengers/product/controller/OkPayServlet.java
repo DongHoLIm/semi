@@ -33,9 +33,12 @@ public class OkPayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberNo =  ((Member) (request.getSession().getAttribute("loginUser"))).getMemberNo();
 		String paymentPrice = request.getParameter("paymentPrice");
+		paymentPrice = paymentPrice.substring(0, paymentPrice.length()-1);
 		String userName = request.getParameter("userName");
 		
-		String addNum = request.getParameter("addressNum");
+		String productCode = request.getParameter("productCode");
+		
+		String addNum = request.getParameter("addNum");
 		String address = request.getParameter("address");
 		String subAddress = request.getParameter("subAddress");
 		String subAdd = addNum + "$" + address + "$";
@@ -50,6 +53,7 @@ public class OkPayServlet extends HttpServlet {
 		
 		Payment pay = new Payment();
 		
+		pay.setProductCode(productCode);
 		pay.setMemberNo(memberNo);
 		pay.setPayMoney(Integer.parseInt(paymentPrice));
 		pay.setRecieverName(userName);
@@ -60,7 +64,13 @@ public class OkPayServlet extends HttpServlet {
 		
 		int result = new ProductService().okPay(pay);
 		
-		
+		if(result >0) {
+			response.sendRedirect("index.jsp");
+		}else {
+			request.setAttribute("msg", "구매 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+
 	}
 
 	/**

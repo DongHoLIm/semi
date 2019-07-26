@@ -120,7 +120,14 @@ public class InsertProductPostServlet extends HttpServlet {
 				}
 			}
 
-			int ran = (int) (Math.random() * 1000000);
+			int ran = 0;
+			for(;;) {
+				ran = (int) (Math.random() * 1000000);
+				if(ran > 100000) {
+					break;
+				}
+			}
+			
 			productCode = productCode + ran;
 
 			//member테이블 객체 생성
