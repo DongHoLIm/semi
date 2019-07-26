@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.board.model.service.BoardService;
 import com.kh.bvengers.board.model.vo.Board;
-import com.kh.bvengers.user.member.model.vo.PageInfo;
+import com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo;
 
 /**
  * Servlet implementation class SelectNoticeListServlet
@@ -85,8 +85,8 @@ public class SelectNoticeListServlet extends HttpServlet {
 			endPage1 = maxPage1;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage, notice, limit, maxPage, startPage, endPage);
-		PageInfo pi1 = new PageInfo(currentPage1, message, limit1, maxPage1, startPage1, endPage1);
+		MyPagePageInfo pi = new MyPagePageInfo(currentPage, notice, limit, maxPage, startPage, endPage);
+		MyPagePageInfo pi1 = new MyPagePageInfo(currentPage1, message, limit1, maxPage1, startPage1, endPage1);
 		
 		
 		ArrayList<Board> list = new BoardService().selectList(currentPage, limit);

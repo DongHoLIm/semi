@@ -8,11 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.Synthesizer;
 
 import com.kh.bvengers.user.member.model.service.MemberService;
-import com.kh.bvengers.user.member.model.vo.Member;
-import com.kh.bvengers.user.member.model.vo.PageInfo;
+import com.kh.bvengers.user.member.model.vo.*;
 
 @WebServlet("/memberList.me")
 public class MemberListServlet extends HttpServlet {

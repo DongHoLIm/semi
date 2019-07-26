@@ -1,6 +1,6 @@
 package com.kh.bvengers.user.member.model.vo;
 
-public class PageInfo {
+public class MemberPageInfo {
 	private int currentPage;
 	private int listCount;
 	private int limit;
@@ -8,9 +8,9 @@ public class PageInfo {
 	private int startPage;
 	private int endPage;
 	
-	public PageInfo() {}
+	public MemberPageInfo() {}
 
-	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
+	public MemberPageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
