@@ -39,7 +39,7 @@
            <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li>
            <li><a href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
            <li><a href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
-       <li><a href="/sp/views/user/serviceCenter/qna.jsp"> 고객센터</a></li>
+       <li><a href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
          </ul>
 
       <form class="navbar-form navbar-right" role="search">

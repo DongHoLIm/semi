@@ -2,72 +2,52 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-	
-#sec1 {
-		width:100%;
-		height:100%;
-		padding-top:2%;
-		padding-right:20%;
-		padding-bottom:2%;
-		padding-left:20%;
-		margin:0 auto;
-}
+<%@include file ="../hfl/header.jsp" %>
+	<br>
+	<br>
+	<h2 align="center">Q&A 작성</h2>
 
-.outer{
-	align:center;
-	
-}
-#qtable tr{
-	margin-top:5px;
-}
-#intd{
-	border:1px solid black;
-}
+	<div class="container">
+	 	<form action = "<%= request.getContextPath()%>/iuqs.qo" method = "post" encType="multipart/form-data">
+	<table class="table table-bordered">
+ 		<tr hidden>
+			<td><input name="hiddenCode" value="5"></td>
+ 		</tr> 
+ 		<tr>
+			<th>제목:</th>
+			<td><input type="text" name="title" class="form-control"></td>
+		</tr>
+		<tr>
+			<th>파일첨부:</th>
+			<td><input type="file" name="filename" class="form-control"></td>
+		</tr>
 
-#btnArea{
-	float:right;
-}
-
-</style>
-</head>
-<body>
-	<!-- header 영역 -->
-	<header><%@ include file="../hfl/header.jsp" %></header>
-	
-	<section id="sec1">
-			<h2 align="center">문의사항 작성</h2>
-			<form action="qna.jsp">
-				<div id="questionArea">
-				<table align="center" id="qtable">
-					<tr>
-						<td>제목 : </td>
-						<td id="intd"><input type="text" id="qtitle" name="qtitle" size="100%"/></td>
-					</tr>
-					<tr>
-						<td>파일첨부 : </td>
-						<td id="intd"><input type="file" id="qfile" name="qfile"/></td>
-					</tr>
-					<tr>
-						<td>글 내용 </td>
-						<td id="intd"><textarea name="qcontent" id="qcontent" cols="100" rows="15" style="resize:none;"></textarea></td>
-					</tr>
-				</table>
-				</div>
-				<div id="btnArea">
-					<button type="reset">다시 작성</button>
-					<button type="submit">작성 완료</button>
-				</div>
-				
-			</form>
-			
-	
-	</section>
-	
-	<!-- footer 영역 -->
-	<footer><%@ include file="../hfl/footer.jsp" %></footer>
+		<tr>
+			<th>글내용:</th>
+		<td>
+		<textarea id="summernote" name = "content"></textarea>
+		</td>
+			<!-- <td><textarea cols="40" rows="50" class="form-control" name = "content"></textarea></td> -->
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="등록">
+				<input type="reset" value="초기화">
+				<input type="button" value="글 리스트로" onclick="location.href='<%= request.getContextPath()%>/selectNotice.no'">
+		</tr>
+	</table>
+		</form>
+	</div>
+	<br>
+	<br>
 </body>
+<footer><%@ include file="../hfl/footer.jsp" %></footer>
+<script>
+$(function() {
+  $('#summernote').summernote({
+    height: 300,
+    lang: 'ko-KR' // 언어 세팅
+  });
+});
+</script>
 </html>

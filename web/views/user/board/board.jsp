@@ -139,7 +139,7 @@
 			<%} else{ %>
 					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
 			<% }  
-			}
+			}	
 			%>
 			
 			
@@ -206,9 +206,7 @@
 		<button disabled><</button>
 		<%} else{%>
 	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=currentPage1-1%>'"><</button>
-		<%}
-			System.out.println("최근 페이지는" + currentPage1);
-		%>    
+		<%}%>    
 			<%for (int p = startPage1; p <= endPage1; p++) {
 				if(currentPage1 == p){
 			%>

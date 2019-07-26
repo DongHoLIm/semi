@@ -2,6 +2,7 @@ package com.kh.bvengers.board.model.service;
 
 import static com.kh.bvengers.common.JDBCTemplate.*;
 
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,6 +136,18 @@ public class BoardService {
 		return array;
 
 	}
+	
+	public int getListQandACount(int num) {
+		
+		Connection con = getConnection();
+		
+		int listCount = new BoardDao().getListCount(con,num);
+		
+		close(con);
+		
+		return listCount;
+	}
+
 	public ArrayList<Board> selectList(int currentPage, int limit){
 
 		Connection con = getConnection();
@@ -157,16 +170,28 @@ public class BoardService {
 
 		return list1;
 	}
+	
+	public ArrayList<Board> selectQandAList(int currentPage1, int limit, int num) {
 
+		Connection con = getConnection();
 
+		ArrayList<Board>list = new BoardDao().selectQandAList(con,currentPage1,limit,num);
+
+		close(con);
+
+		return list;
+	}
+	
 	public ArrayList<Board> selectQuestionList(int limit) {
 
 		Connection con = getConnection();
 
 		ArrayList<Board>list = new BoardDao().selectQuestionList(con,limit);
 
-
-		return null;
+		
+		close(con);
+		
+		return list;
 	}
 
 
@@ -196,7 +221,9 @@ public class BoardService {
 	      ArrayList<HashMap<String, Object>> list = new BoardDao().mainList(con, value);
 
 	      close(con);
-	      return list;
+	      return list;  
+
+	}
 	   }
 
 	public ArrayList<Comment> insertComment(Comment b) {
@@ -213,7 +240,11 @@ public class BoardService {
 		}
 		return commentList;
 	}
+
 }
+
+
+
 
 
 
