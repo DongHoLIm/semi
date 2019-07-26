@@ -1,6 +1,6 @@
-package com.kh.bvengers.user.member.model.vo;
+package com.kh.bvengers.user.myPage.model.vo;
 
-public class PageInfo {
+public class MyPagePageInfo implements java.io.Serializable{
 	private int currentPage;
 	private int listCount;
 	private int limit;
@@ -8,9 +8,9 @@ public class PageInfo {
 	private int startPage;
 	private int endPage;
 	
-	public PageInfo() {}
+	public MyPagePageInfo() {}
 
-	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
+	public MyPagePageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -76,4 +76,3 @@ public class PageInfo {
 	
 	
 }
-

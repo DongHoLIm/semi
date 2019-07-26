@@ -66,7 +66,7 @@
 	<div align="center">
 
 		<br><br><br><br><br><br><br>
-		<form action="<%=request.getContextPath()%>/findId.me %>" method="post">
+		<form action="<%=request.getContextPath()%>/findId.me" method="post">
 			<div align="center" class="btn1">
   			<a href="#"> <button type="button" class="btn_search" float="left" id="btn_searchId">아이디 찾기</button></a>
   			<a href="searchPwdPage.jsp"> <button type="button" class="btn_search" float="left" id="btn_searchPwd">비밀번호 찾기</button></a>
