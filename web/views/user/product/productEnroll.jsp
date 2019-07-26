@@ -76,8 +76,13 @@
 
 }
 
-#accountNumber::-webkit-outer-spin-button, #accountNumber::-webkit-inner-spin-button{
+#accountNo::-webkit-outer-spin-button, #accountNo::-webkit-inner-spin-button{
     -webkit-appearance: none;
+}
+
+.productContainer{
+	align:center;
+	margin:0 auto;
 }
 </style>
 </head>
@@ -86,7 +91,7 @@
 	<header><%@ include file="../hfl/header.jsp" %></header>
 	<div><%@ include file="../hfl/list.jsp" %></div>
 <br><br><br><br>
-<div class="container">
+<div class="productContainer">
 		<caption class="title"><b>상품 등록</b></caption>
 		<form action="<%=request.getContextPath()%>/insert.po" method="post" encType="multipart/form-data">
 		<table class="table table-bordered" align="center" style="width:60%;">
@@ -128,7 +133,7 @@
             <tr>
                 <th>가격 </th>
                 <td colspan="3"><input type="text" name="productMoney" class="form-control"></td>
-            </tr>
+            </tr>		
             <tr>
                 <th>상품 이미지</th>
                 <td colspan="3">

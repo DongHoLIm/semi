@@ -79,12 +79,13 @@ public class ProductService {
 			int result1 = 0;
 			int result2 = 0;
 			int result3 = 0;
-			String siteCheck = "";
+			String siteCheck = null;
 			String orderNo = "";
 			
 			result1 = new ProductDao().insertPayOrder(con, pay);
 			
 			orderNo = new ProductDao().selectOrderCurr(con);
+			pay.setOrderNo(orderNo);
 			
 			siteCheck = new ProductDao().selectSite(con, pay);
 			
@@ -100,10 +101,15 @@ public class ProductService {
 			pay.setDeliverySiteCode(siteCheck);
 			
 			result3 = new ProductDao().insertDelivery(con, pay);
+			if(result3 > 0) {
+			}
 			
-			//result 조건문 쓰기!
-			
-			
+			if(result1 > 0 && result2 > 0 && result3 > 0) {
+				commit(con);
+				result = 1;
+			}else {
+				rollback(con);
+			}
 			
 			return result;
 		}

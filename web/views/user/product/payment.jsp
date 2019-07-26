@@ -214,7 +214,7 @@
 
 			<hr width="80%"/>
 			<!-- 정보 입력창 -->
-			<form id="payForm" action="<%=request.getContextPath()%>/okPay.pa" align="center">
+			<form id="payForm" action="<%=request.getContextPath()%>/okPay.pa" method="post" align="center">
 				<table align="center" class="payInfo">
 					<tr>
 						<th><label>총 결제금액</label></th>
@@ -245,6 +245,7 @@
 							<input type="number" name="phone1" id="phone1" style="width:30%" maxlength="3" oninput="phoneNum(this);">-
 							<input type="number" name="phone2" id="phone2" style="width:30%" maxlength="4" oninput="phoneNum(this);">-
 							<input type="number" name="phone3" id="phone3" style="width:30%" maxlength="4" oninput="phoneNum(this);">
+							<input type="hidden" name="productCode" value="<%=productPay.get("productCode") %>"/>
 							
 						</td>
 					</tr>

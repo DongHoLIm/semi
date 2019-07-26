@@ -211,6 +211,7 @@ public class ProductDao {
 			hmap = new HashMap<String, Object>();
 			while(rset.next()) {
 				hmap.put("postsId", postsId);
+				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
 				hmap.put("productName", rset.getString("PRODUCT_NAME"));
 				hmap.put("productMoney", rset.getInt("PRODUCT_MONEY"));
 				hmap.put("productCate", rset.getString("PRODUCT_CATE"));
@@ -289,7 +290,7 @@ public class ProductDao {
 	public String selectSite(Connection con, Payment pay) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String siteNum = "";
+		String siteNum = null;
 		
 		String query = prop.getProperty("selectSite");
 		
@@ -297,7 +298,6 @@ public class ProductDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pay.getSubDeliverySite());
 			pstmt.setString(2, pay.getMemberNo());
-			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -401,9 +401,12 @@ public class ProductDao {
 			pstmt.setString(2, pay.getMemberNo());
 			pstmt.setString(3, pay.getOrderNo());
 			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		
 		return result;
