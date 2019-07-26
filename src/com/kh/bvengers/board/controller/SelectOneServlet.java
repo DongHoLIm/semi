@@ -36,7 +36,7 @@ public class SelectOneServlet extends HttpServlet {
 		String page = "";
 
 		if(hmap != null) {
-			page = "views/user/product/test2.jsp";
+			page = "views/user/product/productDetails.jsp";
 			request.setAttribute("b", b);
 			request.setAttribute("p", p);
 			request.setAttribute("fileList", fileList);

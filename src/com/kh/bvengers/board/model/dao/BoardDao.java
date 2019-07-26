@@ -653,7 +653,6 @@ public class BoardDao {
 		ResultSet rset = null;
 		ArrayList<HashMap<String, Object>> list = null;
 		HashMap<String, Object> hmap = null;
-		Board b = null;
 		String val = "%" + value + "%";
 		String query = prop.getProperty("mainList");
 

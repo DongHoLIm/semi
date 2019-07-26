@@ -38,7 +38,7 @@ public class SearchProductServlet extends HttpServlet {
 		String page = "";
 		if (list != null) {
 			System.out.println(list);
-			page = "/views/user/product/test.jsp";
+			page = "/views/user/product/productList.jsp";
 			request.setAttribute("list", list);
 		} else {
 			page = "/views/common/errorPagePrompt.jsp";

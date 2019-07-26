@@ -1,5 +1,4 @@
-
-
+package com.kh.bvengers.user.member.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,24 +8,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.user.member.model.service.MemberService;
-import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.member.model.vo.Seller;
 
 @WebServlet("/myInfo.me")
-public class myInfo extends HttpServlet {
+public class MyInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public myInfo() {
+    public MyInfo() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		System.out.println(userId);
-		Member m = new MemberService().searchInfo(userId);
+		Seller s = new MemberService().searchInfo(userId);
 
+		String page="";
 
+		if(s!= null) {
+			page = "views/user/product/sellerPopup.jsp";
+			request.setAttribute("s", s);
+		} else {
+			System.out.println("망함");
+		}
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
