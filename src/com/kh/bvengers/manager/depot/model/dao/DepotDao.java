@@ -25,16 +25,23 @@ public class DepotDao {
 		}
 		
 	}
-	public ArrayList<Depot> selectCheckAll(Connection con) {
-		Statement stmt  =null;
+	public ArrayList<Depot> selectCheckAll(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt  =null;
 		ResultSet rset =null;
 		ArrayList<Depot> list = null;
 		Depot d = null;
 		int i = 1;
 		String query = prop.getProperty("selectRequestList");
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
 			list = new ArrayList<Depot>();
 			while(rset.next()) {
 				d = new Depot();
@@ -53,7 +60,7 @@ public class DepotDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return list;
 	}
@@ -115,16 +122,23 @@ public class DepotDao {
 		}
 		return result;
 	}
-	public ArrayList<Depot> selectAllList(Connection con) {
-		Statement stmt = null;
+	public ArrayList<Depot> selectAllList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList <Depot> list = null;
 		Depot d = null;
 		String query = prop.getProperty("selectAll");
 		int i = 1;
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
 			list= new ArrayList<Depot>();
 			while(rset.next()) {
 				d = new Depot();
@@ -142,22 +156,29 @@ public class DepotDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		
 		return list;
 	}
-	public ArrayList<Depot> selectBarcodeAllList(Connection con) {
-		Statement stmt = null;
+	public ArrayList<Depot> selectBarcodeAllList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList <Depot> list = null;
 		Depot d = null;
 		String query = prop.getProperty("createBarcode");
 		int i = 1;
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
 			list= new ArrayList<Depot>();
 			while(rset.next()) {
 				d = new Depot();
@@ -175,22 +196,29 @@ public class DepotDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		
 		return list;
 	}
-	public ArrayList<Depot> selectInList(Connection con) {
-		Statement stmt = null;
+	public ArrayList<Depot> selectInList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Depot> list = null;
 		Depot d = null;
 		int i =1;
 		String query = prop.getProperty("selectInList");
 		try {
-			stmt =con.createStatement();
-			rset =stmt.executeQuery(query);
+			pstmt =con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset =pstmt.executeQuery();
 			list= new ArrayList<Depot>();
 			while(rset.next()) {
 				d=new Depot();
@@ -210,7 +238,7 @@ public class DepotDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return list;
@@ -231,16 +259,23 @@ public class DepotDao {
 		}
 		return result;
 	}
-	public ArrayList<Depot> outProductList(Connection con) {
-		Statement stmt = null;
+	public ArrayList<Depot> outProductList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList <Depot> list = null;
 		Depot d = null;
 		int i = 1;
 		String query = prop.getProperty("outproductList");
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();			
 			list = new ArrayList <Depot>();
 			while(rset.next()) {
 				d= new Depot();
@@ -259,10 +294,115 @@ public class DepotDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return list;
+	}
+	public int getAllListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("AllListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return listCount;
+	}
+	public int getOutProductListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("OutProductListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return listCount;
+	}
+	public int getBarcodeCreateListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("createBarcodeCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return listCount;
+	}
+	public int getInDepotCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("selectInListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return listCount;
+	}
+	public int getCheckListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("selectRequestListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return listCount;
 	}
 
 }
