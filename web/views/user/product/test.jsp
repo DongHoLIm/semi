@@ -17,7 +17,8 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
-	height: 2000px;
+	height: 500px;
+	max-height: 2000px;
 }
 
 .thumbnailArea {

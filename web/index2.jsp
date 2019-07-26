@@ -44,7 +44,7 @@
 		<br>
 		<br>
 		<h3 align="center">광고배너</h3>
-		<form action="<%=request.getContextPath()%>/select.pd" method=post
+		<form action="<%=request.getContextPath()%>/views/user/mypage/chat.jsp" method=post
 			encType=multipart/form-data>
 			<button onclick="submit">테스트용</button>
 		</form>

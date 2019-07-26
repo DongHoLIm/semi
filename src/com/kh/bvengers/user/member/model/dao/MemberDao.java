@@ -15,6 +15,7 @@ import java.util.Properties;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.member.model.vo.Seller;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class MemberDao {
@@ -562,12 +563,38 @@ public class MemberDao {
 		String query = prop.getProperty("upblack");
 		return result;
   }
-	public Member searchInfo(Connection con, String userId) {
+	public Seller searchInfo(Connection con, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Member m = null;
+		Seller s = null;
+		String id = '%'+userId+'%';
+		String query = prop.getProperty("searchSellerInfo");
 
-		return null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				s = new Seller();
+				s.setId(rset.getString(1));
+				s.setName(rset.getString(2));
+				s.setEnrollDate(rset.getDate(3));
+				s.setSellCount(rset.getInt(4));
+				s.setGrade(rset.getString(5));
+				s.setProduct(rset.getString(6));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return s;
 	}
 
 }
