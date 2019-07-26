@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*" %>
 <%
  	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-	MyPagePageInfo pi = (MyPagePageInfo)request.getAttribute("pi");
+	BoardPageInfo pi = (BoardPageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -10,7 +10,8 @@
 	int endPage = pi.getEndPage(); 
 	
 	ArrayList<Board> list1 = (ArrayList<Board>)request.getAttribute("list1");
-	MyPagePageInfo pi1 = (MyPagePageInfo)request.getAttribute("pi1");
+	BoardPageInfo pi1 = (BoardPageInfo)request.getAttribute("pi1");
+
 	int listCount1 = pi1.getListCount();
 	int currentPage1 = pi1.getCurrentPage();
 	int maxPage1 = pi1.getMaxPage();

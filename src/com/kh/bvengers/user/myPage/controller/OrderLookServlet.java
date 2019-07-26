@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.bvengers.user.member.model.vo.Member;
 import com.kh.bvengers.user.myPage.model.Service.MyPageService;
-import com.kh.bvengers.user.myPage.model.vo.PageInfo;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
+import com.kh.bvengers.user.myPage.model.vo.myPagePageInfo;
 
 @WebServlet("/orderLook.mp")
 public class OrderLookServlet extends HttpServlet {
@@ -41,7 +41,7 @@ public class OrderLookServlet extends HttpServlet {
 		}
 		
 		//한 페이지에 보여질 목록 갯수
-		limit = 10;
+		limit = 5;
 		
 		//전체 목록 갯수를 리턴받음
 		int listCount = new MyPageService().getListCount(memberNo);
@@ -57,36 +57,35 @@ public class OrderLookServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = 
-				new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		myPagePageInfo pi = 
+				new myPagePageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		String page = "";
 		
-		ArrayList<myPage> olList = new MyPageService().selectMyPageList(memberNo, currentPage, limit);
+		ArrayList<myPage> olList = new MyPageService().selectOrderLookList(memberNo, currentPage, limit);
+
+		String status = "";
+		ArrayList<String> ss = new ArrayList<String>();
 		
 		if(olList != null) {
 			
-			for(myPage m : olList) {
-				
-				if(m.getDstatus().equals("1")) {
-					m.setDstatus("배송 준비중");
-				}else if(m.getDstatus().equals("2")) {
-					m.setDstatus("배송 중");
-				}else if(m.getDstatus().equals("3")){
-					m.setDstatus("배송완료");
-				}else if(m.getPayStatus().equals("1")) {
-					m.setPayStatus("결제 완료");
-				}else if(m.getPayStatus().equals("2")) {
-					m.setPayStatus("결제 취소");
-				}else if(m.getRefundStatus().equals("1")) {
-					m.setRefundStatus("환불 대기");
-				}else if(m.getRefundStatus().equals("2")) {
-					m.setRefundStatus("환불 완료");
-				}
-				
+				for(myPage m : olList) {					
+
+					if(m.getRefundStatus() == null){
+						status = m.getDstatus();
+						ss.add(m.getDstatus());
+					}else if(m.getDstatus() == null){
+						status = m.getPayStatus();
+					}else {
+						status = m.getRefundStatus();
+					}
 			}
 			
+				System.out.println(ss);
+			
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
+			request.setAttribute("ss", ss);
+			request.setAttribute("status", status);
 			request.setAttribute("olList", olList);
 			request.setAttribute("pi", pi);
 		}else {

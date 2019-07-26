@@ -208,6 +208,8 @@ public class BoardDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		return result;
 	}
@@ -276,6 +278,30 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+	
+	public int insertFrequentQuestion(Connection con, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertFrequentQuestion");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getPostsTitle());
+			pstmt.setInt(2, b.getMemberNo());
+			pstmt.setString(3, b.getPostsCode());
+			pstmt.setString(4, b.getContents());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
 		return result;
 	}
 
@@ -513,13 +539,15 @@ public class BoardDao {
 
 			int startRow1 = (currentPage1 - 1) * limit1 + 1;
 			int endRow1 = startRow1 + limit1 - 1;
-
+				System.out.println(startRow1);
+				System.out.println(endRow1);
 			pstmt.setInt(1, startRow1);
 			pstmt.setInt(2, endRow1);
 
 			rset = pstmt.executeQuery();
 
 			list1 = new ArrayList<Board>();
+		
 
 			while (rset.next()) {
 				Board m = new Board();
@@ -546,6 +574,20 @@ public class BoardDao {
 		return list1;
 	}
 
+
+	public ArrayList<Board> selectQuestionList(Connection con, int limit) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board>list = null;
+		
+		String query = prop.getProperty("selectQuestionList");
+		
+		
+		
+		return null;
+	}
+
 	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -558,7 +600,7 @@ public class BoardDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-
+			
 			rset = pstmt.executeQuery();
 
 			list = new ArrayList<HashMap<String, Object>>();
@@ -566,12 +608,19 @@ public class BoardDao {
 			while (rset.next()) {
 				b = new Board();
 				b.setPostsId(rset.getInt("POSTS_ID"));
+				System.out.println(rset.getInt("POSTS_ID"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				System.out.println(rset.getString("POSTS_TITLE"));
 				b.setMemberId(rset.getString("Member_ID"));
+				System.out.println(rset.getString("Member_ID"));
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				System.out.println(rset.getInt("POSTS_VIEWS"));
 				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
+				System.out.println(rset.getInt("RECOMMEND_COUNT"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
+				System.out.println(rset.getDate("CREATEDATE"));
 				b.setContents(rset.getString("CONTENTS"));
+				System.out.println(rset.getString("CONTENTS"));
 
 				hmap = new HashMap<String, Object>();
 
@@ -604,7 +653,6 @@ public class BoardDao {
 		ResultSet rset = null;
 		ArrayList<HashMap<String, Object>> list = null;
 		HashMap<String, Object> hmap = null;
-		Board b = null;
 		String val = "%" + value + "%";
 		String query = prop.getProperty("mainList");
 
@@ -642,5 +690,7 @@ public class BoardDao {
 		}
 		return list;
 	}
+
+	
 
 }

@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.kh.bvengers.product.model.vo.Product"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,10 +6,12 @@
 	pageEncoding="UTF-8"%>
 <%
 	Product p = (Product) request.getAttribute("p");
+	DecimalFormat dc = new DecimalFormat("###,###,###,###");
 %>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script
@@ -25,14 +28,12 @@
 
 .menu {
 	padding: 10px;
-	text-align:
 }
 
 .carousel-inner>.item>img {
 	top: 0;
 	left: 0;
-	min-width: 100%;
-	min-height: 400px;
+	width: 100%;
 }
 #powerLink td{
 	padding: 10px;
@@ -49,7 +50,6 @@
 		<h3 align="center">광고배너</h3>
 		<form action="<%=request.getContextPath()%>/select.pd" method=post
 			encType=multipart/form-data>
-			<button onclick="submit">테스트용</button>
 		</form>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 
@@ -62,7 +62,7 @@
 
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="images/galxy.PNG" alt="ad1">
+					<img src="images/phinix.png" alt="ad1">
 				</div>
 
 				<div class="item">
@@ -120,7 +120,7 @@
 						var $imageLabel = $("<label>");
 						var $image = $("<img>").attr("src",src+file).css({"width":"250px", "height":"300px"}).css({"margin":"0 auto"}).addClass("powerProduct"+key);
 						var $titleTd = $("<td>").text(data[key].title);
-						var $priceTd = $("<td>").text(data[key].price+"원");
+						var $priceTd = $("<td>").text(numeral(data[key].price).format('0,0')+"원");
 
 
 						$imageLabel.append($image);

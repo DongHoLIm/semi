@@ -25,7 +25,7 @@ public class SelectProductListServlet extends HttpServlet {
 		String page = "";
 
 		if(list != null) {
-			page = "/views/user/product/test.jsp";
+			page = "/views/user/product/productList.jsp";
 			request.setAttribute("list", list);
 		} else {
 			page = "views/common/errorPagePrompt.jsp";

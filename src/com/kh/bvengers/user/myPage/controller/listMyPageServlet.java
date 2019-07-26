@@ -10,12 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.bvengers.board.model.service.BoardService;
-import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.user.member.model.vo.Member;
 import com.kh.bvengers.user.myPage.model.Service.MyPageService;
-import com.kh.bvengers.user.myPage.model.vo.PageInfo;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
+import com.kh.bvengers.user.myPage.model.vo.myPagePageInfo;
 
 
 @WebServlet("/listMyPage.mp")
@@ -61,8 +59,8 @@ public class listMyPageServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = 
-				new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		myPagePageInfo pi = 
+				new myPagePageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		String page = "";
 		

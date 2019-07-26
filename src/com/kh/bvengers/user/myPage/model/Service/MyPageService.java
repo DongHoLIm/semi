@@ -13,7 +13,7 @@ public class MyPageService {
 	public ArrayList<myPage> selectMyPageList(String memberNo, int currentPage, int limit) {
 		Connection con = getConnection();
 		
-		ArrayList<myPage> mplist = new MyPageDao().selectMyPageList(con, memberNo, currentPage, limit, limit);
+		ArrayList<myPage> mplist = new MyPageDao().selectMyPageList(con, memberNo, currentPage, limit);
 		
 		close(con);
 		
@@ -41,6 +41,18 @@ public class MyPageService {
 		close(con);
 		
 		return drlist;
+	}
+
+
+	public ArrayList<myPage> selectOrderLookList(String memberNo, int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<myPage> olList = new MyPageDao().selectOrderLookList(con, memberNo, currentPage, limit);
+		
+		close(con);
+				
+		return olList;
+	
 	}
 
 }

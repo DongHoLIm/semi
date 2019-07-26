@@ -158,7 +158,7 @@ input-align:center;
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>
 			<% }else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"><</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"> < </button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
