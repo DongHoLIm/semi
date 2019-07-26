@@ -186,12 +186,13 @@ public class BoardService {
 		return hmap;
 	}
 
-	
+	public ArrayList<HashMap<String, Object>> mainList(String value) {
+	      Connection con = getConnection();
+	      ArrayList<HashMap<String, Object>> list = new BoardDao().mainList(con, value);
 
-
-
-
-
+	      close(con);
+	      return list;
+	   }
 }
 
 
