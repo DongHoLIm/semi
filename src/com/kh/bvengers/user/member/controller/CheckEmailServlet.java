@@ -1,6 +1,8 @@
 package com.kh.bvengers.user.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +18,19 @@ public class CheckEmailServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String status = request.getParameter("status");
+			String status = request.getParameter("mailchek");
+			String checkuser= request.getParameter("checkuser");		
 					
-		if(status.equals(1)) {
-			request.getRequestDispatcher("views/user/join/checkMail.jsp").forward(request, response);
-		}else {
-			request.getSession().invalidate();
-			response.sendRedirect("views/user/join/join.jsp");
+			PrintWriter out = response.getWriter();
 			
-		}
+			if(!status.equals(checkuser)) {
+				out.append("fail");
+			}else {
+				out.append("Success");
+				request.getSession().invalidate();
+			}
+			out.flush();
+			out.close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

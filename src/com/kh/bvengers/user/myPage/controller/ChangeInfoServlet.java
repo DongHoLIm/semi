@@ -14,14 +14,14 @@ import com.kh.bvengers.user.member.model.vo.Member;
 @WebServlet("/changeInfo.mp")
 public class ChangeInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public ChangeInfoServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String memberId = request.getParameter("memberId");
 		String memberPassword = request.getParameter("memberpassword");
 		String memberName = request.getParameter("memberName");
@@ -31,7 +31,7 @@ public class ChangeInfoServlet extends HttpServlet {
 		String add2 = request.getParameter("address2");
 		String add3 = request.getParameter("address3");
 		String address = add1 + " " + add2 + add3;
-		
+
 		Member m = new Member();
 		m.setMemberId(memberId);
 		m.setMemberPassword(memberPassword);
@@ -41,13 +41,13 @@ public class ChangeInfoServlet extends HttpServlet {
 		m.setPhone(phone);
 		int result = new MemberService().changeMember(m);
 		if(result > 0) {
-				
+
 			response.sendRedirect("/sp/views/user/mypage/myPage.jsp");
 		}else {
 			request.setAttribute("msg","회원정보변경 실패!");
 			request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);
 		}
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

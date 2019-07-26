@@ -9,10 +9,10 @@ import static com.kh.bvengers.common.JDBCTemplate.*;
 
 public class DepotService {
 
-	public ArrayList<Depot> selectCheckAll() {
+	public ArrayList<Depot> selectCheckAll(int currentPage, int limit) {
 		Connection con = getConnection();
 		
-		ArrayList<Depot>list = new DepotDao().selectCheckAll(con);
+		ArrayList<Depot>list = new DepotDao().selectCheckAll(con,currentPage,limit);
 		
 		close(con);
 		return list;
@@ -36,23 +36,23 @@ public class DepotService {
 		return lastNum;
 	}
 
-	public ArrayList<Depot> selectAllList() {
+	public ArrayList<Depot> selectAllList(int currentPage, int limit) {
 		Connection con = getConnection();
-		ArrayList<Depot> list = new DepotDao().selectAllList(con);
+		ArrayList<Depot> list = new DepotDao().selectAllList(con,currentPage,limit);
 		close(con);
 		return list;
 	}
 
-	public ArrayList<Depot> selectBarcodeAllList() {
+	public ArrayList<Depot> selectBarcodeAllList(int currentPage, int limit) {
 		Connection con = getConnection();
-		ArrayList<Depot> list = new DepotDao().selectBarcodeAllList(con);
+		ArrayList<Depot> list = new DepotDao().selectBarcodeAllList(con,currentPage,limit);
 		close(con);
 		return list;
 	}
 
-	public ArrayList<Depot> selectInList() {
+	public ArrayList<Depot> selectInList(int currentPage, int limit) {
 		Connection con = getConnection();
-		ArrayList<Depot> list =new DepotDao().selectInList(con);
+		ArrayList<Depot> list =new DepotDao().selectInList(con,currentPage,limit);
 		close(con);		
 		return list;
 	}
@@ -70,11 +70,51 @@ public class DepotService {
 		return result;
 	}
 
-	public ArrayList<Depot> outProductList() {
+	public ArrayList<Depot> outProductList(int currentPage, int limit) {
 		Connection con = getConnection();
-		ArrayList<Depot> list = new DepotDao().outProductList(con);		
+		ArrayList<Depot> list = new DepotDao().outProductList(con,currentPage,limit);		
 		close(con);
 		return list;
+	}
+
+	public int getAllListCount() {
+		Connection con = getConnection();
+		int listCount = new DepotDao().getAllListCount(con);
+		
+		close(con);
+		return listCount;
+	}
+
+	public int getOutProductListCount() {
+		Connection con = getConnection();
+		int listCount = new DepotDao().getOutProductListCount(con);
+		
+		close(con);
+		return listCount;
+	}
+
+	public int getBarcodeCreateListCount() {
+		Connection con = getConnection();
+		int listCount = new DepotDao().getBarcodeCreateListCount(con);
+		
+		close(con);
+		return listCount;
+	}
+
+	public int getInDepotCount() {
+		Connection con = getConnection();
+		int listCount = new DepotDao().getInDepotCount(con);
+		
+		close(con);
+		return listCount;
+	}
+
+	public int getCheckListCount() {
+		Connection con = getConnection();
+		int listCount = new DepotDao().getCheckListCount(con);
+		
+		close(con);
+		return listCount;
 	}
 
 }

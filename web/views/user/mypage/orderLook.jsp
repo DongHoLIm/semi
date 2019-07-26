@@ -107,7 +107,7 @@ input[type=button]{
 	margin: auto;
 }
 
-tr > th, tr>td{	
+tr > th, tr>td{
 	width: 25%;
 	margin: auto;
 	text-align:center;
@@ -140,7 +140,7 @@ tr > th, tr>td{
 
 		<div >
 			<br />
-	
+
 			<table border="1" align = "center" class = "board">
 				<tr>
 					<th class="th_orderLook">주문일자</th>
