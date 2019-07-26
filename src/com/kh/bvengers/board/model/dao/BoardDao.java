@@ -18,6 +18,8 @@ import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.PowerLink;
 import com.kh.bvengers.product.model.vo.Product;
 
+import oracle.net.aso.b;
+
 public class BoardDao {
 	private Properties prop = new Properties();
 
@@ -580,12 +582,44 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board>list = null;
+		Board b = null;
+		
+		int num =4;
 		
 		String query = prop.getProperty("selectQuestionList");
 		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				b = new Board();
+				
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setContents(rset.getString("CONTENTS"));
+				
+				System.out.println(rset.getString("POSTS_TITLE"));
+				System.out.println(rset.getString("CONTENTS"));
+				
+				list.add(b);
+			}
+			
+			
 		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
 		
-		return null;
+
+		return list;
 	}
 
 	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
@@ -691,6 +725,50 @@ public class BoardDao {
 		return list;
 	}
 
+	public ArrayList<Board> selectQandAList(Connection con, int currentPage, int limit, int num){
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+
+		String query = prop.getProperty("selectQandAListWithPaging");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<Board>();
+
+			while (rset.next()) {
+				Board b = new Board();
+
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+
+				list.add(b);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 
 }

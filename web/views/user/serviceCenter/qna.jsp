@@ -1,8 +1,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*"%>
+	pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*,java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
-	ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>)request.getAttribute("list");
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("List");
+	System.out.println(list);
+	ArrayList<Board> List = (ArrayList<Board>)request.getAttribute("list");
+	
+	BoardPageInfo pi1 = (BoardPageInfo)request.getAttribute("pi");
+
+	int listCount = pi1.getListCount();
+	int currentPage1 = pi1.getCurrentPage();
+	int maxPage1 = pi1.getMaxPage();
+	int startPage1 = pi1.getStartPage();
+	int endPage1 = pi1.getEndPage();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -31,11 +42,9 @@
 	.row0{
 		background:#eee;
 		margin:auto;
+		border-bottom: 2px solid #555;
 	}
-	.row1{
-		border-top: 2px solid #555;
-	}
-	.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10{
+	.row1,.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10{
 		border-top: 1px solid #ccc;
 		border-bottom: 1px solid #ccc;
 	}
@@ -103,8 +112,11 @@
 	<section id="sec1">
 	<div id="accordionArea">
 	<h2 align="left"> 자주 찾는 질문</h2>
+	<%for (Board b : list) {%>
 	<dl>
-	    <dt><span></span>아이디/패스워드는 어디서 찾나요?</dt>
+		<dt><span></span><%=b.getPostsTitle()%></dt>
+		<dt><span></span><%=b.getContents() %></dt>
+	   <!--  <dt><span></span>아이디/패스워드는 어디서 찾나요?</dt>
 		    <dd>우측 상단에 보이시는 로그인 버튼을 클릭 시 로그인 페이지로 이동되며 로그인페이지 하단에 아이디/패스워드 찾기 버튼을 통하여 확인하실 수 있습니다.</dd>
 	    <dt><span></span>주문한 물건이 어디쯤 배송중인가요?</dt>
 	    	<dd>현재 배송 상태에 관한 현황 정보는 마이페이지에서 확인하실 수 있습니다.</dd>
@@ -112,9 +124,13 @@
 	   		<dd>5층 할리스 7그램 프라빈 바나프레소 양평</dd>
 	    <dt><span></span>아이디는 어떻게 변경할 수 있나요?</dt>
 	    	<dd>아이디의 변경은 불가능합니다. 새로운 아이디를 사용하고 싶으신 경우 계정을 새로 만들어 이용해 주시기 바랍니다.</dd>
-	</dl>
+ -->	</dl>
+	<% }%>
 	</div>
 	<script>
+	$(document).ready(function(){
+		$('dt').removeClass('on').next().slideUp();
+	})
 	$('dt').on('click', function () {
 
 	    if ($(this).hasClass('on')) {
@@ -126,10 +142,11 @@
 	    function slideUp() {
 	        $('dt').removeClass('on').next().slideUp();
 	    };
+	    
 	})
 	</script>
 	
-	
+	<br><br><br><br>
 	<p align="center">내가 쓴 질문</p>
 		<table class="board">
 			<tr class="row0">
@@ -141,82 +158,52 @@
 			</thead>
 			</tr>
 			<tr class="row1">
-				<td id="Notd">0001</td>
-				<td>물건을 등록했는데 안팔려서 돈이 안들어와요</td>
-				<td>N</td>
-				<td>08/11/21</td>
+			<%for(Board b :List){ %>
+			<input type = "hidden" value = "<%=b.getPostsId() %>"> 
+					<td><%= b.getPostsId() %></td>
+					<td><%= b.getPostsTitle() %></td>
+					<td><%= b.getMemberName()%></td>
+					<td><%= b.getCreateDate()%></td>
 			</tr>
-			<tr class="row2">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row3">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row4"> 
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row5">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row6">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row7">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row8">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row9">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr class="row10">
-				<td id="Notd">-</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+		<% }%>	
+
+			
 			<tr>
 				<td colspan="4">
-					<button id="writer" align="right" onclick="location.href='questionWriter.jsp'"> 글 작성</button>
+					<button id="writer" align="right" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>
 				</td>
 			</tr>
 		</table>
 		
-		<footer align="center">	
-		<ul class="pagination" align="center">
-		  <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-		  <li class="page-item"><a class="page-link" href="#">1</a></li>
-		  <li class="page-item"><a class="page-link" href="#">2</a></li>
-		  <li class="page-item"><a class="page-link" href="#">3</a></li>
-		  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-		</ul>
+		 <div class = "pagingArea" align ="center" >
+		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>      
+		<%if(currentPage1 <= 1) {%> 
+		<button disabled><</button>
+		<%} else{%>
+	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage1-1%>'"><</button>
+		<%}
+			System.out.println("최근 페이지는" + currentPage1);
+		%>    
+			<%for (int p = startPage1; p <= endPage1; p++) {
+				if(currentPage1 == p){
+			%>
+				<button disabled><%= p %></button>
+			<%} else{ %>
+					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
+			<% }  
+			}	
+			%>
+			
+			
+			<%if(currentPage1 >= maxPage1){ %>
+			<button disabled>></button>
+			<%}else{ %>
+			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage1 + 1%>'">></button>
+			<%} %>
+			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage1%>'">>></button>
+ 		 
+      </div>
 		
-	</footer>
 	</section>
 	
 	<!-- footer 영역 -->
