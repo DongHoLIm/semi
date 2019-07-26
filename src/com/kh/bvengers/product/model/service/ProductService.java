@@ -13,6 +13,7 @@ import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PostsContents;
 import com.kh.bvengers.product.model.dao.ProductDao;
+import com.kh.bvengers.product.model.vo.Payment;
 import com.kh.bvengers.product.model.vo.Product;
 import com.kh.bvengers.user.member.model.vo.Member;
 
@@ -70,6 +71,41 @@ public class ProductService {
 			close(con);
 			
 			return productPay;
+		}
+
+		public int okPay(Payment pay) {
+			Connection con = getConnection();
+			int result = 0;
+			int result1 = 0;
+			int result2 = 0;
+			int result3 = 0;
+			String siteCheck = "";
+			String orderNo = "";
+			
+			result1 = new ProductDao().insertPayOrder(con, pay);
+			
+			orderNo = new ProductDao().selectOrderCurr(con);
+			
+			siteCheck = new ProductDao().selectSite(con, pay);
+			
+			if(siteCheck == null) {	//테이블에 주소 등록이 안되있을 시
+				result2 = new ProductDao().insertSite(con, pay);
+				
+				siteCheck = new ProductDao().siteCurr(con);
+				
+			}else {
+				result2 = 1; 
+			}
+			
+			pay.setDeliverySiteCode(siteCheck);
+			
+			result3 = new ProductDao().insertDelivery(con, pay);
+			
+			//result 조건문 쓰기!
+			
+			
+			
+			return result;
 		}
 		
 		
