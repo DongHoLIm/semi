@@ -262,7 +262,7 @@
 							</td>
 					</tr>
 				</table>
-				<input type="submit" class="paytestBtn" value="결제 성공 시"/>
+				<input type="submit" class="paytestBtn" value="결제 성공 시  테스트"/>
 			</form>
 			<br />
 		</div>

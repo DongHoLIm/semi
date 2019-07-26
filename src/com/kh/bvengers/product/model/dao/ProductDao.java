@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PostsContents;
+import com.kh.bvengers.product.model.vo.Payment;
 import com.kh.bvengers.product.model.vo.Product;
 import com.kh.bvengers.user.member.model.vo.Member;
 
@@ -258,6 +259,157 @@ public class ProductDao {
 		
 		return result;
 	}
+
+	public int insertPayOrder(Connection con, Payment pay) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertPayOrder");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pay.getMemberNo());
+			pstmt.setString(2, pay.getProductCode());
+			pstmt.setString(3, pay.getPayMoney()+"");
+			pstmt.setString(4, pay.getMemberNo());
+			pstmt.setString(5, pay.getPayMoney()+"");
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public String selectSite(Connection con, Payment pay) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String siteNum = "";
+		
+		String query = prop.getProperty("selectSite");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pay.getSubDeliverySite());
+			pstmt.setString(2, pay.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				siteNum = rset.getString("DELIVERY_SITE_NO");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return siteNum;
+	}
+
+	public int insertSite(Connection con, Payment pay) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertSite");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pay.getDeliverySite());
+			pstmt.setString(2, pay.getRecieverName());
+			pstmt.setString(3, pay.getRecieverPhone());
+			pstmt.setString(4, pay.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public String selectOrderCurr(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		String orderNo = "";
+		
+		String query = prop.getProperty("orderCurr");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				orderNo = rset.getString("currval");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return orderNo;
+	}
+	
+	public String siteCurr(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		String siteNo = "";
+		
+		String query = prop.getProperty("siteCurr");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				siteNo = rset.getString("currval");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return siteNo;
+	}
+
+	public int insertDelivery(Connection con, Payment pay) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertDelivery");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pay.getDeliverySiteCode());
+			pstmt.setString(2, pay.getMemberNo());
+			pstmt.setString(3, pay.getOrderNo());
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	
 	
 	
 }
