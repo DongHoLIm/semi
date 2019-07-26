@@ -56,8 +56,11 @@ public class InsertNoticeServlet extends HttpServlet {
 			Enumeration<String> files = multiRequest.getFileNames();
 
 			while(files.hasMoreElements()) {
+				
+				
 				String name = files.nextElement();
 
+				if(!name.equals("files")) {
 				
 				
 				saveFiles.add(multiRequest.getFilesystemName(name));
@@ -65,7 +68,10 @@ public class InsertNoticeServlet extends HttpServlet {
 				
 				System.out.println("fileSystem name :" + multiRequest.getFilesystemName(name));
 				System.out.println("originFile :" + multiRequest.getOriginalFileName(name));
-			}
+				}else {
+					
+				}
+				}
 
 			String multiTitle = multiRequest.getParameter("title");
 			String multiContent = multiRequest.getParameter("content");

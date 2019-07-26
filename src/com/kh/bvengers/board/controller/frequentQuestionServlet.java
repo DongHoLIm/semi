@@ -1,11 +1,17 @@
 package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.soap.AddressingFeature.Responses;
+
+import com.kh.bvengers.board.model.service.BoardService;
+import com.kh.bvengers.board.model.vo.Board;
+import com.kh.bvengers.user.member.model.vo.Member;
 
 /**
  * Servlet implementation class frequentQuestionServlet
@@ -26,12 +32,29 @@ public class frequentQuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("어디야");
 		String title = request.getParameter("title");
+		System.out.println(title);
 		String content = request.getParameter("content");
-	
-	
-	
-	
+		String postCode = "4";
+		String writer = String.valueOf(((Member) request.getSession().getAttribute("loginUser")).getMemberNo());
+		System.out.println("tq" + writer);
+		
+		Board b = new Board();
+		b.setPostsTitle(title);
+		b.setContents(content);
+		b.setMemberNo(Integer.parseInt(writer));
+		b.setPostsCode(postCode);
+		
+		int result = new BoardService().insertNotice(b);
+		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath()+"/sfqs.qo");
+		}else {
+			request.setAttribute("msg", "자주 찾는 질문 등록 실패삼");
+			request.getRequestDispatcher("views/common/errorpage.jsp").forward(request, response);
+		}
+		
 	}
 
 	/**
