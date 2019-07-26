@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.kh.bvengers.user.member.model.dao.MemberDao;
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.member.model.vo.Seller;
+
 import static com.kh.bvengers.common.JDBCTemplate.*;
 public class MemberService {
 
@@ -126,11 +128,11 @@ public class MemberService {
 		return m;
 	}
 
-	public Member searchInfo(String userId) {
+	public Seller searchInfo(String userId) {
 		Connection con = getConnection();
-		Member m = new MemberDao().searchInfo(con, userId);
+		Seller s = new MemberDao().searchInfo(con, userId);
 		close(con);
-		return m;
+		return s;
 	}
 
 }

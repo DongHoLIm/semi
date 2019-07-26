@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.bvengers.user.member.model.vo.Member"%>
+
     <%
     Member loginUser = (Member) session.getAttribute("loginUser");
     %>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
@@ -32,7 +34,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-            <li><a href="/sp/views/user/product/productList.jsp"> 구매 </a></li>
+            <li><a href="<%=request.getContextPath()%>/select.pd"> 구매 </a></li>
              <li><a href="#" onclick="payUpload()"> 상품등록 </a></li>
            <li><a href="/sp/views/user/basket/basket.jsp"> 장바구니 </a></li>
            <li><a href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
@@ -65,18 +67,18 @@
   	function logout(){
 		location.href="<%=request.getContextPath()%>/logout.me";
   	}
-  	
+
   	function goMyPage(){
 		location.href="<%=request.getContextPath()%>/listMyPage.mp";
 	}
-  	
+
   	function payUpload(){
-  		
+
   	    if(<%= loginUser == null %>) {
   	        alert("로그인 후 이용해 주세요.");
- 	         location.href='/sp/views/user/login/login.jsp'; 
+ 	         location.href='/sp/views/user/login/login.jsp';
   	    } else{
-  	         location.href='/sp/views/user/product/productEnroll.jsp'; 
+  	         location.href='/sp/views/user/product/productEnroll.jsp';
   	    }
   	}
   </script>

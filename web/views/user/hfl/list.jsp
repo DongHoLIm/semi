@@ -8,28 +8,43 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;}
-    }
-    li{
-    	list-style: none;
-    }
-    a{
-    	color:black;
-    	text-decoration: none;
-    }
-     a:link {
-     color: white;
-     }
-	 a:visited {
-	  color: black;
-	  text-decoration: none;
-	  }
-  </style>
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content {
+		height: auto;
+	}
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+a:link {
+	color: white;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+.container {
+	position : fixed;
+	left : 0;
+	margin-top:auto;
+	margin-bottom:auto;
+}
+.panel-collapse {
+	margin : 3%;
+}
+</style>
 </head>
 <body>
  <div class="container" style="float: left; width: 20%; padding-top: 10%; ">
@@ -40,7 +55,7 @@
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">PC</a>
         </h4>
       </div>
-      <div id="collapse1" class="panel-collapse collapse in">
+      <div id="collapse1" class="panel-collapse collapse">
         <div class="w3-dropdown-content w3-bar-block w3-border">
         	<ul id="pc">
         		<li value="desktop"><a class="w3-button">본체</a></li>

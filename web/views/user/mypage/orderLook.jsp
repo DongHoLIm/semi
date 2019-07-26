@@ -89,7 +89,7 @@ input[type=button]{
 	margin: auto;
 }
 
-tr > th, tr>td{	
+tr > th, tr>td{
 	width: 25%;
 	margin: auto;
 	text-align:center;
@@ -122,7 +122,7 @@ tr > th, tr>td{
 
 		<div >
 			<br />
-	
+
 			<table border="1" align = "center" class = "board">
 				<tr>
 					<th class="th_orderLook">주문일자</th>
@@ -130,9 +130,9 @@ tr > th, tr>td{
 					<th class="th_orderLook">주문상태</th>
 				</tr>
 				<tr>
-					<td>주문일자<br>주문번호<br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
+					<td>주문일자<br>주문번호<br><input type="button" onclick="'<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
 					<td>상품명</td>
-					<td><%= %><input type="text" value="주문상태" id="ip_status"readonly></td>
+					<td><input type="text" value="주문상태" id="ip_status"readonly></td>
 				</tr>
 			</table>
 		</div>

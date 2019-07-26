@@ -27,7 +27,6 @@ public class SelectPowerLinkServlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 
-		System.out.println("list : " + list);
 		new Gson().toJson(list, response.getWriter());
 
 	}
