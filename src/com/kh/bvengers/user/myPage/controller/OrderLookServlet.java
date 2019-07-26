@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.bvengers.user.member.model.vo.Member;
 import com.kh.bvengers.user.myPage.model.Service.MyPageService;
+import com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
-import com.kh.bvengers.user.myPage.model.vo.myPagePageInfo;
 
 @WebServlet("/orderLook.mp")
 public class OrderLookServlet extends HttpServlet {
@@ -57,8 +57,8 @@ public class OrderLookServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		myPagePageInfo pi = 
-				new myPagePageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		MyPagePageInfo pi = 
+				new MyPagePageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		String page = "";
 		

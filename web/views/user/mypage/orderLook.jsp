@@ -1,11 +1,11 @@
-<%@page import="com.kh.bvengers.user.myPage.model.vo.myPagePageInfo"%>
+<%@page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
 
 	ArrayList<myPage> olList = (ArrayList<myPage>) request.getAttribute("olList");
 	ArrayList<String> ss = (ArrayList<String>) request.getAttribute("ss");
-	myPagePageInfo pi = (myPagePageInfo) request.getAttribute("pi");
+	MyPagePageInfo pi = (MyPagePageInfo) request.getAttribute("pi");
 	String status = (String) request.getAttribute("status");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();

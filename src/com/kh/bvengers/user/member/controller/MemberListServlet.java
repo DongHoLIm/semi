@@ -47,7 +47,7 @@ public class MemberListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+		MemberPageInfo pi = new MemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 		
 		ArrayList<Member> list = new MemberService().selectList(currentPage,limit);
 		String page ="";

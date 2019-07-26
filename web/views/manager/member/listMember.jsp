@@ -3,7 +3,7 @@
 	<%
 	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
     Member loginUser = (Member) session.getAttribute("loginUser");
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	MemberPageInfo pi = (MemberPageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();

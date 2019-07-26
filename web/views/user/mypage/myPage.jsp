@@ -1,4 +1,4 @@
-<%@page import="com.kh.bvengers.user.myPage.model.vo.myPagePageInfo"%>
+<%@page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
@@ -6,7 +6,7 @@
 	String ready = (String) request.getAttribute("ready");
 	String start = (String) request.getAttribute("start");
 	String success = (String) request.getAttribute("success");
-	myPagePageInfo pi = (myPagePageInfo) request.getAttribute("pi");
+	MyPagePageInfo pi = (MyPagePageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
