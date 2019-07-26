@@ -40,15 +40,8 @@
 <%@ include file = "../hfl/managerHeader.jsp" %>
    <br />
    <h3 align="center">입고 관리</h3>
+   <br />
    <div id="inOutMain">
-      <div id="inOutButton">
-         <select name="search" id="search">
-            <option value="userId">회원 아이디</option>
-            <option value="location">위치관리번호</option>
-         </select>
-         <input type="text" />
-         <input type="submit" style="color:white;background:black;" value="검색"/>
-      </div>
       <div id="table Area">
          <table id="depotMain" align="center">
          <tr>
