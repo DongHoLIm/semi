@@ -17,10 +17,10 @@ import com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo;
 
 
 @WebServlet("/listMyPage.mp")
-public class listMyPageServlet extends HttpServlet {
+public class ListMyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public listMyPageServlet() {
+    public ListMyPageServlet() {
         super();
     }
 

@@ -2,6 +2,7 @@ package com.kh.bvengers.user.myPage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,9 +48,9 @@ public class OrderLookServlet extends HttpServlet {
 		int listCount = new MyPageService().getListCount(memberNo);
 		
 		
-		maxPage = (int)((double)listCount / limit + 0.9);
+		maxPage = (int)((double)listCount / limit + 0.8);
 		
-		startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+		startPage = (((int)((double) currentPage / limit + 0.8)) - 1) * 10 + 1;
 		
 		endPage = startPage + 10 - 1;
 		
@@ -66,22 +67,46 @@ public class OrderLookServlet extends HttpServlet {
 
 		String status = "";
 		ArrayList<String> ss = new ArrayList<String>();
+		HashMap<String, String> smap = new HashMap<String, String>();
+		
 		
 		if(olList != null) {
 			
 				for(myPage m : olList) {					
 
 					if(m.getRefundStatus() == null){
-						status = m.getDstatus();
-						ss.add(m.getDstatus());
-					}else if(m.getDstatus() == null){
-						status = m.getPayStatus();
+						if(m.getDstatus() != null) {
+							if(m.getDstatus().equals("1")) {
+								m.setDstatus("배송 준비중");
+								m.setPayStatus("");
+							}else if(m.getDstatus().equals("2")) {
+								m.setDstatus("배송 중");
+								m.setPayStatus("");
+							}else if(m.getDstatus().equals("3")){
+								m.setDstatus("배송 완료");
+								m.setPayStatus("");
+							}
+						}else if(m.getDstatus() == null) {
+							if(m.getPayStatus().equals("1")) {
+								m.setPayStatus("결제 완료");
+							}else if(m.getPayStatus().equals("2")) {
+								m.setPayStatus("결제 취소");
+							}
+						}
+						
 					}else {
-						status = m.getRefundStatus();
+						
+						if(m.getRefundStatus().equals("1")) {
+							m.setRefundStatus("환불 대기");
+							m.setPayStatus("");
+							m.setDstatus("");
+						}else if(m.getRefundStatus().equals("2")) {
+							m.setRefundStatus("환불 완료");
+							m.setDstatus("");
+						}
 					}
+						
 			}
-			
-				System.out.println(ss);
 			
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
 			request.setAttribute("ss", ss);

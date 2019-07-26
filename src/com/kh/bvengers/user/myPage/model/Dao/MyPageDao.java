@@ -169,6 +169,8 @@ public class MyPageDao {
 				olList.add(m);
 			}	
 			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
