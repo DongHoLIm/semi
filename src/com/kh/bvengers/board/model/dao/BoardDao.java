@@ -15,6 +15,8 @@ import java.util.Properties;
 
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
+import com.kh.bvengers.board.model.vo.Comment;
+import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PowerLink;
 import com.kh.bvengers.product.model.vo.Product;
 
@@ -280,13 +282,13 @@ public class BoardDao {
 		}
 		return result;
 	}
-	
+
 	public int insertFrequentQuestion(Connection con, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertFrequentQuestion");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, b.getPostsTitle());
@@ -300,8 +302,8 @@ public class BoardDao {
 		}finally {
 			close(pstmt);
 		}
-		
-		
+
+
 		return result;
 	}
 
@@ -547,7 +549,7 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 
 			list1 = new ArrayList<Board>();
-		
+
 
 			while (rset.next()) {
 				Board m = new Board();
@@ -576,15 +578,15 @@ public class BoardDao {
 
 
 	public ArrayList<Board> selectQuestionList(Connection con, int limit) {
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board>list = null;
-		
+
 		String query = prop.getProperty("selectQuestionList");
-		
-		
-		
+
+
+
 		return null;
 	}
 
@@ -600,7 +602,7 @@ public class BoardDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-			
+
 			rset = pstmt.executeQuery();
 
 			list = new ArrayList<HashMap<String, Object>>();
@@ -691,6 +693,62 @@ public class BoardDao {
 		return list;
 	}
 
-	
+	public int insertComment(Connection con, Comment b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("insertComment");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getMemberId());
+			pstmt.setString(2, b.getCommentContents());
+			pstmt.setString(3, b.getPostsId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Comment> selectCommentList(Connection con, String postsId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		ArrayList<Comment> commentList = null;
+
+		String query = prop.getProperty("selectCommentList");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, postsId);
+
+			rset = pstmt.executeQuery();
+
+			commentList = new ArrayList<Comment>();
+			while(rset.next()) {
+				Comment b = new Comment();
+				b.setCommentNo(rset.getString("COMMENT_NO"));
+				b.setMemberId(rset.getString("MEMBER_ID"));
+				b.setCommentDate(rset.getDate("COMMENT_DATE"));
+				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
+				b.setCommentContents(rset.getString("COMMENT_CONTENTS"));
+				b.setPostsId(rset.getString("POSTS_ID"));
+
+				commentList.add(b);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return commentList;
+	}
+
+
 
 }

@@ -62,6 +62,13 @@
 #contents {
 	text-align:left;
 }
+#addBtn{
+	background: black;
+	color: white;
+	border: 1px solid white;
+	width: 150px;
+	height: 50px;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -94,8 +101,9 @@
 				<tr>
 					<td colspan="4">
 						<input type="hidden" id="priceInput" value="<%=p.getProductMoney() %>"/>
-						<label id="price">원</label></td>
-					</tr>
+						<label id="price">원</label>
+					</td>
+				</tr>
 				<tr>
 					<td width="300px">
 						<input type="button" value="장바구니" id="basketBtn" class="detailBtn"/>
@@ -112,8 +120,20 @@
 						</div>
 					</td>
 				</tr>
+				<tr>
+					<th colspan="5" id="commentHeader">댓글 작성</th>
+				</tr>
+				<tr>
+					<td colspan="5" ><textarea id="commentContent" rows="3" cols="150" style="resize:no"></textarea></td>
+				</tr>
+				<tr>
+					<td rowspan="4" colspan="5" ><label id="addBtn">댓글 등록</label></td>
+				</tr>
 			</table>
 		</form>
+		<table id="commentSelectTable" border="1" align="center">
+			<tbody></tbody>
+		</table>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 	<script>
@@ -124,6 +144,37 @@
 			var price = numeral($("#priceInput").attr('value')).format( '0,0' );
 
 			$("#price").text(price+"원");
+			$("#addBtn").click(function(){
+				var writer = <%= loginUser.getMemberNo()%>;
+				var postsId = <%= b.getPostsId()%>;
+				var content = $("#commentContent").val();
+
+
+				$.ajax({
+					url:"insertComment.pd",
+					data:{writer:writer, content:content, postsId:postsId},
+					type:"post",
+					success:function(data){
+						var $commentSelectTable = $("#commentSelectTable tbody");
+						$commentSelectTable.html("");
+
+						for(var key in data){
+							var $tr = $("<tr>");
+							var $writeTd = $("<td>").text(data[key].bWriter).css("width", "100px");
+							var $contentTd = $("<td>").text(data[key].bContent).css("width","400px");
+							var $dataTd = $("<td>").text(data[key].bDate).css("width", "200px");
+
+							$tr.append($writeTd);
+							$tr.append($contentTd);
+							$tr.append($dateTd);
+							$commentSelectTable.append($tr);
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			});
 		});
 	</script>
 </body>
