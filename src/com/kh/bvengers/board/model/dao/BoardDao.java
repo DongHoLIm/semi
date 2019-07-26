@@ -759,8 +759,18 @@ public class BoardDao {
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 
 				list.add(b);
-
+				}
+			
+			}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
 			}
+			return list;
+		}
+			
 	public int insertComment(Connection con, Comment b) {
 		PreparedStatement pstmt = null;
 		int result = 0;

@@ -224,7 +224,7 @@ public class BoardService {
 	      return list;  
 
 	}
-	   }
+	   
 
 	public ArrayList<Comment> insertComment(Comment b) {
 		Connection con = getConnection();
