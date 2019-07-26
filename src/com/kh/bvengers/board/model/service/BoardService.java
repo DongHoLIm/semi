@@ -6,10 +6,15 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.catalina.util.Introspection;
+
 import com.kh.bvengers.board.model.dao.BoardDao;
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
+import com.kh.bvengers.board.model.vo.Comment;
+import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PowerLink;
+import com.sun.org.apache.bcel.internal.generic.ALOAD;
 
 public class BoardService {
 
@@ -66,22 +71,22 @@ public class BoardService {
 		//자주찾는 질문 작성
 		public int insertNotice(Board b) {
 			Connection con = getConnection();
-			
+
 			int result = new BoardDao().insertFrequentQuestion(con,b);
-			
+
 			if(result > 0) {
 				commit(con);
 			}else {
 				rollback(con);
 			}
-			
+
 			close(con);
-			
+
 			return result;
 		}
-		
-		
-		
+
+
+
 	public ArrayList<HashMap<String, Object>> searchProductByTitle(String value) {
 		// TODO Auto-generated method stub
 		Connection con = getConnection();
@@ -141,7 +146,7 @@ public class BoardService {
 		return list;
 	}
 
-	
+
 	public ArrayList<Board> selectList1(int currentPage1, int limit1) {
 
 		Connection con = getConnection();
@@ -152,15 +157,15 @@ public class BoardService {
 
 		return list1;
 	}
-	
-	
+
+
 	public ArrayList<Board> selectQuestionList(int limit) {
 
 		Connection con = getConnection();
-		
+
 		ArrayList<Board>list = new BoardDao().selectQuestionList(con,limit);
-		
-		
+
+
 		return null;
 	}
 
@@ -170,7 +175,7 @@ public class BoardService {
 		Connection con = getConnection();
 
 		HashMap<String, Object> hmap = null;
-		
+
 		int result = new BoardDao().updateCount(con,num);
 
 		if(result > 0) {
@@ -193,6 +198,21 @@ public class BoardService {
 	      close(con);
 	      return list;
 	   }
+
+	public ArrayList<Comment> insertComment(Comment b) {
+		Connection con = getConnection();
+		ArrayList<Comment> commentList = null;
+
+		int result = new BoardDao().insertComment(con, b);
+
+		if(result > 0) {
+			commit(con);
+			commentList = new BoardDao().selectCommentList(con, b.getPostsId());
+		} else {
+			rollback(con);
+		}
+		return commentList;
+	}
 }
 
 
