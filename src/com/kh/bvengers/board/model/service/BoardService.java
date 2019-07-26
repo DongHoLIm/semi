@@ -63,7 +63,25 @@ public class BoardService {
 
 			return result;
 		}
-
+		//자주찾는 질문 작성
+		public int insertNotice(Board b) {
+			Connection con = getConnection();
+			
+			int result = new BoardDao().insertFrequentQuestion(con,b);
+			
+			if(result > 0) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+			
+			close(con);
+			
+			return result;
+		}
+		
+		
+		
 	public ArrayList<HashMap<String, Object>> searchProductByTitle(String value) {
 		// TODO Auto-generated method stub
 		Connection con = getConnection();
@@ -123,6 +141,7 @@ public class BoardService {
 		return list;
 	}
 
+	
 	public ArrayList<Board> selectList1(int currentPage1, int limit1) {
 
 		Connection con = getConnection();
@@ -133,16 +152,30 @@ public class BoardService {
 
 		return list1;
 	}
+	
+	
+	public ArrayList<Board> selectQuestionList(int limit) {
+
+		Connection con = getConnection();
+		
+		ArrayList<Board>list = new BoardDao().selectQuestionList(con,limit);
+		
+		
+		return null;
+	}
+
+
 
 	public HashMap<String, Object> selectOneNotice(int num) {
 		Connection con = getConnection();
 
 		HashMap<String, Object> hmap = null;
-
+		
 		int result = new BoardDao().updateCount(con,num);
 
 		if(result > 0) {
 			hmap = new BoardDao().selectOneNotice(con,num);
+			System.out.println("zz" + hmap);
 			commit(con);
 		}else {
 			rollback(con);
@@ -153,14 +186,7 @@ public class BoardService {
 		return hmap;
 	}
 
-	public ArrayList<HashMap<String, Object>> mainList(String value) {
-		Connection con = getConnection();
-
-		ArrayList<HashMap<String, Object>> list = new BoardDao().mainList(con, value);
-
-		close(con);
-		return list;
-	}
+	
 
 
 

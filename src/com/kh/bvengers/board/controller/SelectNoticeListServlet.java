@@ -2,6 +2,7 @@ package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.board.model.service.BoardService;
 import com.kh.bvengers.board.model.vo.Board;
-import com.kh.bvengers.user.member.model.vo.PageInfo;
+import com.kh.bvengers.board.model.vo.BoardPageInfo;
 
 /**
  * Servlet implementation class SelectNoticeListServlet
@@ -85,12 +86,15 @@ public class SelectNoticeListServlet extends HttpServlet {
 			endPage1 = maxPage1;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage, notice, limit, maxPage, startPage, endPage);
-		PageInfo pi1 = new PageInfo(currentPage1, message, limit1, maxPage1, startPage1, endPage1);
+		BoardPageInfo pi = new BoardPageInfo(currentPage, notice, limit, maxPage, startPage, endPage);
+		BoardPageInfo pi1 = new BoardPageInfo(currentPage1, message, limit1, maxPage1, startPage1, endPage1);
 		
 		
 		ArrayList<Board> list = new BoardService().selectList(currentPage, limit);
 		ArrayList<Board> list1 = new BoardService().selectList1(currentPage1, limit1);
+		
+		Collections.reverse(list1);
+		Collections.reverse(list);
 		
 		String page = "";
 		String page1 = ""; 
