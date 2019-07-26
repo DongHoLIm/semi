@@ -5,6 +5,7 @@
 
 	ArrayList<myPage> olList = (ArrayList<myPage>) request.getAttribute("olList");
 	ArrayList<String> ss = (ArrayList<String>) request.getAttribute("ss");
+	
 	MyPagePageInfo pi = (MyPagePageInfo) request.getAttribute("pi");
 	String status = (String) request.getAttribute("status");
 	int listCount = pi.getListCount();
@@ -12,8 +13,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-	
-	
+	String status2 = "";
 	
 	
 %>
@@ -140,18 +140,25 @@ tr > th, tr>td{
 
 		<div >
 			<br />
-
 			<table border="1" align = "center" class = "board">
 				<tr>
-					<th class="th_orderLook">주문일자</th>
+					<th class="th_orderLook">주문정보</th>
 					<th class="th_orderLook">상품정보</th>
 					<th class="th_orderLook">주문상태</th>
 				</tr>
 				<% for(myPage p : olList){%>
 				<tr class="">
-					<td><%=p.getoDate() %><br><%=p.getOno() %><br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
+					<td>주문일자 : <%=p.getoDate() %><br>주문번호 : <%=p.getOno() %><br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp" value="주문상세"></td>
 					<td><%=p.getPname()%></td>
-					<td><%=status%> <%= ss %></td>
+					
+				<% if(p.getRefundStatus() != "" && p.getRefundStatus() != "1" && p.getRefundStatus() != "2"){
+				   	status2 = p.getRefundStatus();
+					if(p.getDstatus() != "" && p.getDstatus() != "1" && p.getDstatus() != "2" && p.getDstatus() != "3"){
+				 	status2 = p.getDstatus();
+					if(p.getPayStatus() != "" && p.getPayStatus() != "1" && p.getPayStatus() != "2"){
+				   	status2 = p.getPayStatus();
+					}}}%>
+					<td><%=status2 %></td>
 				</tr>
 				<%}%>
 			</table>

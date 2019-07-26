@@ -46,5 +46,9 @@ body {
 	</form>
 </div>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
+<script>
+
+
+</script>
 </body>
 </html>

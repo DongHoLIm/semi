@@ -206,7 +206,6 @@
 						<p class="price">
 							<label id="priceLabels">판매가 : </label>
 							<% int fprice = (int)hmap.get("price");
-								System.out.println(fprice);
 								DecimalFormat dc = new DecimalFormat("###,###,###,###");
 								String price = dc.format(fprice);
 							%>

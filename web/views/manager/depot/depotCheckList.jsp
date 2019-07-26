@@ -50,58 +50,6 @@
 	<br />
 	<h3 align="center">검수요청 관리</h3>
 		<br />
-		<div id="searchButton">
-			<form action="">
-				<select name="check" id="check" onchange="changeSearchBox();">
-					<option value="location">위치관리번호</option>
-					<option value="date">검수요청일자</option>
-					<option value="status">검수진행상태</option>
-				</select>
-				<div id="locationNum">
-					<input type="text" name="searchCheck" id="searchCheck"/>
-					<button type="submit" style="color:white;" >검색</button>
-				</div>
-				<div id="checkDate">
-					<input type="date" />
-					<button type="submit" style="color:white;">검색</button>
-				</div>
-				<div id="checkStatus">
-					<select name="" id="">
-						<option value="">검수요청</option>
-						<option value="">검수중</option>
-						<option value="">검수완료</option>
-					</select>
-					<button type="submit" style="color:white;">검색</button>
-				</div>
-			</form>	
-			<script>
-				$(function(){
-					$("#checkDate").hide();
-					$("#checkStatus").hide();
-				});
-				function changeSearchBox(){
-					var langSelect = document.getElementById("check");
-					
-					var selectVal = langSelect.options[langSelect.selectedIndex].value;
-					
-					if(selectVal=="location"){
-						$("#locationNum").show();
-						$("#checkDate").hide();
-						$("#checkStatus").hide();
-					}else if(selectVal=="date"){
-						$("#locationNum").hide();
-						$("#checkDate").show();
-						$("#checkStatus").hide();
-					}else{
-						$("#locationNum").hide();
-						$("#checkDate").hide();
-						$("#checkStatus").show();
-					}
-						
-				}
-			</script>
-		</div>
-		<br />
 	<div id="checkMain">
 		<div id="table Area">
 			

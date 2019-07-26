@@ -30,7 +30,10 @@ public class InsertMemberServlet extends HttpServlet {
 		String address4 = request.getParameter("address4");
 		String address = address1 +"$"+ address2 +"$"+ address3 +"$"+ address4;
 		String phone = request.getParameter("phone");
-
+		String emailstatus = (String) request.getSession().getAttribute("emailstatus");
+		
+		System.out.println("fucking");
+		System.out.println(emailstatus);
 
 		Member m = new Member();
 			m.setMemberId(memberId);
@@ -39,15 +42,23 @@ public class InsertMemberServlet extends HttpServlet {
 			m.setEmail(email);
 			m.setAddress(address);
 			m.setPhone(phone);
+			
+			//if(!emailstatus.equals("fail")) {
 			int result = new MemberService().insertMember(m);
-
+			
 			if(result>0) {
 				response.sendRedirect("/sp/index.jsp");
 			}else {
-				request.setAttribute("msg","실패하셨습니다.");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				request.setAttribute("msg","이메일 인증에 실패하셨습니다.");
+				request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
 			}
-		}
+			
+			//}else {
+				//request.setAttribute("msg","실패하셨습니다.");
+				//request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		//	}
+			}
+		
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

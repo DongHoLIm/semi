@@ -596,5 +596,27 @@ public class MemberDao {
 
 		return s;
 	}
+	public int memberidCk(Connection con, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("memberidCk");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 
 }

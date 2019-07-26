@@ -12,15 +12,15 @@ button{
 	background:#FFF;
 }
 
-table {
+
+.t1 {
+	margin-left:30%;
+	border: 1px solid #bcbcbc;
 	text-align:center;
 	width: 50%;
 }
-.t1 {
-	margin-left:30%;
-}
 
-table, td {
+td {
 	border: 1px solid #bcbcbc;
 	margin:0 auto;
 }
@@ -32,6 +32,7 @@ table, td {
 .th4{
 	text-align: center;
 	width:20%;
+	border:1px solid #bcbcbc;
 }
 </style>
 </head>
@@ -109,7 +110,8 @@ table, td {
 		</tbody>
 	</table>
 	<br>
-	<%@ include file="../hfl/footer.jsp"%>
+	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+	
 	<script>
 
 	$(function(){

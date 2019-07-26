@@ -1,6 +1,7 @@
-package com.kh.bvengers.user.member.controller;
+package com.kh.bvengers.user.myPage.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,8 @@ public class MemberInfoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html; charset=UTF-8");
+	PrintWriter out = response.getWriter();
 	
 	String memberPwd = request.getParameter("password");
 	
@@ -33,8 +36,12 @@ public class MemberInfoServlet extends HttpServlet {
 		
 		response.sendRedirect("/sp/views/user/mypage/changeInfo.jsp");
 	}else {
-		request.setAttribute("msg", "비밀번호가 맞지 않습니다");
-		request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);
+		out.println("<script>");
+		out.println("alert('비밀번호가 맞지 않습니다.');");
+		out.println("history.back();");
+		out.println("</script>");
+		/*request.setAttribute("msg", "비밀번호가 맞지 않습니다");
+		request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);*/
 	}
 	
 	}
