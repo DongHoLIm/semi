@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+String check = (String) request.getSession().getAttribute("mailkey");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link
 	href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap"
 	rel="stylesheet">
@@ -67,7 +70,7 @@
 	<div align="center">
 
 		<br><br><br><br><br><br><br>
-		<form action="" method="post">
+		<form action="<%=request.getContextPath() %>/findPwd.me" method="post">
 			<div align="center" class="btn1">
   			<a href="searchIdPage.jsp"> <button type="button" class="btn_search" float="left">아이디 찾기</button></a>
   			<a href="#"> <button type="button" class="btn_search" float="left">비밀번호 찾기</button></a>
@@ -83,19 +86,49 @@
 			<input type="text" placeholder="아이디" name="userId" id="userId" size=30><br>
 			
 			<input type="text" placeholder="이름" name="userName" id="userName" size=30><br>
-			
-			<input type="tel" placeholder="이메일" name="phone" id="phone" size=19>
-			<button type="button" class="btn_searchPwd">인증번호</button><br>
+			<input type="text" name="hiddencard" value="1" id="hiddencard" style="display:none">
+			<input type="email" placeholder="이메일" name="email" id="email" size=19>
+			<button type="button" class="btn_searchPwd" onclick="send_pwd(2);" >인증번호</button><br>
 			
 			<input type="text" placeholder="인증번호 입력" name="checkNumber" id="checkNumber" size=30><br>
 			
 			<br><br>
 			
-			<input type="submit" value="확인" class="btn_pwd"> &nbsp; &nbsp;
+			<input type="button" value="확인" class="btn_pwd" id="ok" onclick="send_pwd(1);"> &nbsp; &nbsp;
 			<input type="reset" value="취소" class="btn_pwd">
 			<br><br>
 		</form>
 	</div>
+	<script>
+	function send_pwd(index){
+		
+		if(index == 1){
+			
+			$(function(){
+				$("form").submit();
+			});
+		}else if(index ==2){
+			var userId = $("#userId").val();
+			var userName = $("#userName").val();
+			var email = $("#email").val();
+			$.ajax({
+				url:"/sp/checkuser.me",
+				type:"post",
+				data:{userId:userId,userName:userName,email:email},
+				success:function(data){
+					if(data==="fail"){
+						alert("존재하지 않는 회원입니다.");
+					}else{
+						alert("존재하는 회원입니다.\n이메일로 임시 비밀번호를 보내드렸습니다.\n임시 비밀번호로 로그인 하세요")
+					}
+				}
+				});
+			}
+		
+		
+	}
+	
+	</script>
 	<br><br><br><br><br><br><br>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>

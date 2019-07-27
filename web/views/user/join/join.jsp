@@ -44,14 +44,15 @@ function checkjoin(index){
 		return false;
 	} */
 	
-if($("#memberPassword").val() == ($("#memberPassword2").val())){
+if($("#password").val() == ($("#password2").val())){
 	$("form").submit();
 	
 }
 	}else if(index==2){
 		var email = $("#email").val();
+		var hc = $("#hiddencard").val();
 		console.log(email);
-		window.open('<%=request.getContextPath()%>/send.me?email='+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
+		window.open('<%=request.getContextPath()%>/send.me?email='+hc+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
 		
 	}
 }	
@@ -121,7 +122,7 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
 			<br><br>
 			<input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
 			
-			
+			<input type="text" name="hiddencard" value="2" id="hiddencard" style="display:none">
 			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
 			<input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
 			<input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
