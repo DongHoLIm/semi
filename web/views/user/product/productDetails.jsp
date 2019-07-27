@@ -127,16 +127,55 @@
 					<td colspan="5" ><textarea id="commentContent" rows="3" cols="150" style="resize:no"></textarea></td>
 				</tr>
 				<tr>
-					<td rowspan="4" colspan="5" ><label id="addBtn">댓글 등록</label></td>
+					<td rowspan="4" colspan="5" ><button id="addBtn">댓글 등록</button></td>
 				</tr>
 			</table>
 		</form>
+		<table id="commentHeagerTable" border="1" align="center">
+			<tr>
+				<td colspan="2" style="width:100px">작성자</td>
+				<td colspan="3" style="width:400px">내용</td>
+				<td style="width:200px">작성일</td>
+				<td style="width:100px">추천수</td>
+			</tr>
+		</table>
 		<table id="commentSelectTable" border="1" align="center">
-			<tbody></tbody>
+			<tbody>
+			</tbody>
 		</table>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 	<script>
+		$(function(){
+			var postsId = <%= b.getPostsId()%>;
+			$(document).ready(function(){
+
+				$.ajax({
+					url:"selectComment.pd",
+					data:{postsId:postsId},
+					type:"post",
+					success:function(data){
+						var $commentSelectTable = $("#commentSelectTable tbody");
+						$commentSelectTable.html("");
+						for(var key in data){
+							var $tr = $("<tr>");
+							var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
+							var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							var $recommend = $("<td>").text(data[key].recommendCount).css("width", "100px");
+							$tr.append($writeTd);
+							$tr.append($contentTd);
+							$tr.append($dateTd);
+							$tr.append($recommend);
+							$commentSelectTable.append($tr);
+						}
+					},
+					error:function(){
+						alert("댓글 입력 실패");
+					}
+				});
+			});
+		});
 		$("#writer").on("click", function(){
 			window.open("<%= request.getContextPath()%>/myInfo.me?userId=<%=b.getWriter()%>", '<%= b.getWriter()%>', 'width=400, height=600, location=no, toolbar=no, fullscreen=no');
 		});
@@ -146,9 +185,8 @@
 			$("#price").text(price+"원");
 			$("#addBtn").click(function(){
 				var writer = <%= loginUser.getMemberNo()%>;
-				var postsId = <%= b.getPostsId()%>;
 				var content = $("#commentContent").val();
-
+				var postsId = <%= b.getPostsId()%>;
 
 				$.ajax({
 					url:"insertComment.pd",
@@ -160,18 +198,19 @@
 
 						for(var key in data){
 							var $tr = $("<tr>");
-							var $writeTd = $("<td>").text(data[key].bWriter).css("width", "100px");
-							var $contentTd = $("<td>").text(data[key].bContent).css("width","400px");
-							var $dataTd = $("<td>").text(data[key].bDate).css("width", "200px");
-
+							var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
+							var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							var $recommend = $("<td>").text(data[key].recommendCount).css("width", "100px");
 							$tr.append($writeTd);
 							$tr.append($contentTd);
 							$tr.append($dateTd);
+							$tr.append($recommend);
 							$commentSelectTable.append($tr);
 						}
 					},
-					error:function(data){
-						console.log(data);
+					error:function(){
+						alert("댓글 입력 실패");
 					}
 				});
 			});
