@@ -1,6 +1,9 @@
-package com.kh.bvengers.product.controller;
+package com.kh.bvengers.manager.statistic.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -9,19 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.bvengers.product.model.service.ProductService;
+import com.kh.bvengers.manager.statistic.model.service.StatisticService;
+import com.kh.bvengers.manager.statistic.model.vo.AdjustmentPay;
 
 /**
- * Servlet implementation class PaymentServlet
+ * Servlet implementation class MemberStatisticsServlet
  */
-@WebServlet("/payment.pa")
-public class PaymentServlet extends HttpServlet {
+@WebServlet("/memberStatistics")
+public class MemberStatisticsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentServlet() {
+    public MemberStatisticsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +34,23 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String postsId = request.getParameter("postsId");
+		SimpleDateFormat format = new SimpleDateFormat ( "yyMMdd");
+		Date dTime = new Date();
+		String time = format.format(dTime);
+		System.out.println(time);
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>(); 
 		
-		HashMap<String, Object> productPay = new ProductService().productPay(postsId);
+		list = new StatisticService().memberStatistic(time);
 		
-		
-		String page = "";
-		
-		if(productPay != null) {
-			page = "/views/user/product/payment.jsp";
-			request.setAttribute("productPay", productPay);
+		String page = null;
+		if(list != null) {
+			page = "/views/manager/statistics/memberStatistics.jsp";
+			request.setAttribute("dataList", list);
 		}else {
 			page="/views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "상품 등록 실패!");
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
-		
-		
 	}
 
 	/**
@@ -59,25 +62,3 @@ public class PaymentServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
