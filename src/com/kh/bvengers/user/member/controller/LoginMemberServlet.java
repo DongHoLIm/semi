@@ -36,7 +36,7 @@ public class LoginMemberServlet extends HttpServlet {
 		}else if(loginUser!= null && loginUser.getMemberId().equals("admin")){
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
-			response.sendRedirect("views/manager/main/managerPage.jsp");
+			response.sendRedirect("/sp/smnl.mm");
 		}else if(loginUser == null){
 			request.setAttribute("msg", "로그인실패");
 			request.getRequestDispatcher("views/user/login/login.jsp").forward(request, response);

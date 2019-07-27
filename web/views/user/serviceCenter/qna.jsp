@@ -148,7 +148,7 @@
 	
 	<br><br><br><br>
 	<p align="center">내가 쓴 질문</p>
-		<table class="board">
+		<table class="board" id = messageArea>
 			<tr class="row0">
 			<thead>
 				<th>글 번호</th>
@@ -165,16 +165,13 @@
 					<td><%= b.getMemberName()%></td>
 					<td><%= b.getCreateDate()%></td>
 			</tr>
-		<% }%>	
-
-			
+		<%  int num = b.getPostsId();}%>	
 			<tr>
-				<td colspan="4">
-					<button id="writer" align="right" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>
-				</td>
 			</tr>
+			
+			<button id="writer" align="right" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>
 		</table>
-		
+		<br><br>
 		 <div class = "pagingArea" align ="center" >
 		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>      
 		<%if(currentPage1 <= 1) {%> 
@@ -205,7 +202,22 @@
       </div>
 		
 	</section>
+	<script>
+
+	$(function(){
+		$("#messageArea td").mouseenter(function(){
+			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+		}).mouseout(function(){
+				$(this).parent().css({"background":"white"});	
+		}).click(function(){
+			var num = $(this).parent().children("input").val();
+			console.log(num);
+			 location.href="<%=request.getContextPath()%>/soqa.qo?num=" + num;
+		});
+	});
+		
 	
+	</script>
 	<!-- footer 영역 -->
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>

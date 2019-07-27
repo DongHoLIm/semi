@@ -624,6 +624,56 @@ public class BoardDao {
 		return list;
 	}
 
+	
+	public ArrayList<Board> selectManagerNoticeList(Connection con, int currentPage, int limit, int num) {
+	
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+		
+		
+		String query = prop.getProperty("selectManagerNoticeList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int start = (currentPage-1)*limit+1;
+			int end = start + limit +1;
+			
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberId(rset.getString("MEMBER_ID"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+				list.add(b);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		
+		return list;
+	}
+	
+	
+	
+	
 	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -727,7 +777,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public ArrayList<Board> selectQandAList(Connection con, int currentPage, int limit, int num){
+	public ArrayList<Board> selectQandAList(Connection con, int currentPage, int limit, int num,String uno){
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -739,11 +789,17 @@ public class BoardDao {
 			pstmt = con.prepareStatement(query);
 
 			int startRow = (currentPage - 1) * limit + 1;
+			
+			System.out.println("aaa" + startRow);
+			
 			int endRow = startRow + limit - 1;
-
+			
+			System.out.println("sdjasd"+endRow);
+			
 			pstmt.setInt(1, num);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setString(2, uno);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 
 			rset = pstmt.executeQuery();
 
@@ -827,5 +883,7 @@ public class BoardDao {
 		}
 		return commentList;
 	}
+
+
 
 }

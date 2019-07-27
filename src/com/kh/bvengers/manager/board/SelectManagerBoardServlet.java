@@ -1,4 +1,4 @@
-package com.kh.bvengers.board.controller;
+package com.kh.bvengers.manager.board;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,20 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.bvengers.board.model.service.BoardService;
 import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.BoardPageInfo;
-import com.kh.bvengers.user.member.model.vo.Member;
-
 
 /**
- * Servlet implementation class SelectFrequentQuestionServelt
+ * Servlet implementation class SelectManagerBoardServlet
  */
-@WebServlet("/sfqs.qo")
-public class SelectFrequentQuestionServelt extends HttpServlet {
+@WebServlet("/smbs.mb")
+public class SelectManagerBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectFrequentQuestionServelt() {
+    public SelectManagerBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,61 +32,54 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int limit = 5;
-		
-		int currentPage1;
-		int limit1;
-		int maxPage1;
-		int startPage1;
-		int endPage1;
-		
-		int num = 5;
 
 		String page = "";
-		String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
 		
-		System.out.println("멤버 번호" + uno);
-		currentPage1 = 1;
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
 		
-		limit1 = 10;
-
+		int num =2;
+		
+		currentPage = 1;
+		
 		int listCount = new BoardService().getListQandACount(num);
 		
-		if(request.getParameter("currentPage1") != null) {
-			currentPage1 = Integer.parseInt(request.getParameter("currentPage1"));
+		if(request.getParameter("currnetPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		maxPage1 = (int)((double)listCount / limit + 0.9);
+		limit =  10;
 		
-		startPage1 = (((int)((double)currentPage1 / limit + 0.9))-1) * 10 + 1;
-
+		maxPage = (int)((double)listCount/limit+0.9);
 		
-		endPage1 = startPage1 + 10 - 1;	
+		startPage = (((int)((double)currentPage / limit + 0.9))-1) * 10 + 1;
 		
-		if(maxPage1 < endPage1) {
-			endPage1 = maxPage1;
+		endPage = startPage + 10 -1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
 		}
+	
+		BoardPageInfo pi = new BoardPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		BoardPageInfo pi = new BoardPageInfo(currentPage1, listCount, limit1, maxPage1, startPage1, endPage1);
-
-	      ArrayList<Board> list = new BoardService().selectQandAList(currentPage1, limit, num,uno);
+		ArrayList<Board> list = new BoardService().selectManagerList(currentPage, limit, num);
 
 	      if (list != null) {
 	         request.setAttribute("list", list);
 	         request.setAttribute("pi", pi);
+	     	page = "views/manager/board/boardmenegement.jsp";
+	     	
 	      } else {
 	         page= "views/common/errorPage.jsp";
 	         request.setAttribute("msg", "게시판 조회 실패!");
 	      }
+	      
+	      request.getRequestDispatcher(page).forward(request, response);
+		
 	
-		ArrayList<Board>List = new BoardService().selectQuestionList(limit);
-	
-
-			page = "views/user/serviceCenter/qna.jsp";
-			request.setAttribute("List", List);
-			System.out.println("aaa"+List);
-		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

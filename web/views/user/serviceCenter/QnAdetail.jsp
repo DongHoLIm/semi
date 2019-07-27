@@ -3,12 +3,12 @@
  <% Board b = (Board)request.getAttribute("b"); 
 	ArrayList<HashMap<String, Object>> fileList = (ArrayList<HashMap<String, Object>>) request.getAttribute("fileList");
 
+	
  %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
 
@@ -42,7 +42,7 @@ td{
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td align = "center" id = "writer"><span><%= b.getMemberId() %></span></td>
+					<td align = "center"><span><%= b.getMemberId() %></span></td>
 					<td>조회수</td>
 					<td align = "center"><span><%= b.getPostsViews() %></span></td>
 					<td>작성일</td>
@@ -62,25 +62,11 @@ td{
 		</div>
 				<br><br><br>
 		</form>
-		<div>
-		<button id= "report" align = "left" onclick = "report();">신고하기</button>
-		</div>
 	</div>
 	<br>
 	<br>
  <footer><%@ include file="../hfl/footer.jsp" %></footer> 
 	</div>	
-	<script>
-	function report(){
-	  var writer = $("#writer").text();
-	  var postId =<%= b.getPostsId() %>;
-      var array = writer+"/"+postId;	
-      console.log(array);
-      console.log("ss");	
-      window.open('<%=request.getContextPath()%>/ss.re?array='+array,'신고하기','width=430,height=450,status=no,scrollbars=yes');
-	}
-	</script>
-
 </body>
 </html>
 
