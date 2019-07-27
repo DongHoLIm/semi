@@ -142,4 +142,11 @@ public class MemberService {
 		return result;
 	}
 
+	public int checkuser(String memberId, String memberName, String email) {
+		Connection con = getConnection();
+		int result = new MemberDao().checkuser(con,memberId,memberName,email);
+		close(con);
+		return result;
+	}
+
 }

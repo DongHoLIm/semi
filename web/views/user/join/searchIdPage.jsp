@@ -87,7 +87,7 @@
 			
 			<br><br>
 			
-			<input type="submit" value="확인" class="btn_id" onclick="findId();"> &nbsp; &nbsp;
+			<input type="button" value="확인" class="btn_id" onclick="findId();"> &nbsp; &nbsp;
 			<input type="reset" value="취소" class="btn_id">
 			<br><br>
 		</form>
