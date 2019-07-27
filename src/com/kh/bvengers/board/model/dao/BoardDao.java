@@ -212,7 +212,7 @@ public class BoardDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
 		return result;
@@ -301,10 +301,9 @@ public class BoardDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
-
 
 		return result;
 	}
@@ -543,15 +542,14 @@ public class BoardDao {
 
 			int startRow1 = (currentPage1 - 1) * limit1 + 1;
 			int endRow1 = startRow1 + limit1 - 1;
-				System.out.println(startRow1);
-				System.out.println(endRow1);
+			System.out.println(startRow1);
+			System.out.println(endRow1);
 			pstmt.setInt(1, startRow1);
 			pstmt.setInt(2, endRow1);
 
 			rset = pstmt.executeQuery();
 
 			list1 = new ArrayList<Board>();
-
 
 			while (rset.next()) {
 				Board m = new Board();
@@ -578,48 +576,44 @@ public class BoardDao {
 		return list1;
 	}
 
-
 	public ArrayList<Board> selectQuestionList(Connection con, int limit) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<Board>list = null;
+		ArrayList<Board> list = null;
 		Board b = null;
-		
-		int num =4;
-		
+
+		int num = 4;
+
 		String query = prop.getProperty("selectQuestionList");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Board>();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				b = new Board();
-				
+
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setContents(rset.getString("CONTENTS"));
-				
+
 				System.out.println(rset.getString("POSTS_TITLE"));
 				System.out.println(rset.getString("CONTENTS"));
-				
+
 				list.add(b);
 			}
-			
-			
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
 
 		return list;
 	}
@@ -777,8 +771,8 @@ public class BoardDao {
 		return list;
 	}
 
-	public ArrayList<Board> selectQandAList(Connection con, int currentPage, int limit, int num,String uno){
-		
+
+	public ArrayList<Board> selectQandAList(Connection con, int currentPage, int limit, int num,String uno){		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
@@ -815,18 +809,18 @@ public class BoardDao {
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 
 				list.add(b);
-				}
-			
-			}catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(pstmt);
 			}
-			return list;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
-			
+		return list;
+	}
+
 	public int insertComment(Connection con, Comment b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -838,6 +832,8 @@ public class BoardDao {
 			pstmt.setString(1, b.getMemberId());
 			pstmt.setString(2, b.getCommentContents());
 			pstmt.setString(3, b.getPostsId());
+
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -853,7 +849,7 @@ public class BoardDao {
 
 		ArrayList<Comment> commentList = null;
 
-		String query = prop.getProperty("selectCommentList");
+		String query = prop.getProperty("selectComment");
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -862,7 +858,7 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 
 			commentList = new ArrayList<Comment>();
-			while(rset.next()) {
+			while (rset.next()) {
 				Comment b = new Comment();
 				b.setCommentNo(rset.getString("COMMENT_NO"));
 				b.setMemberId(rset.getString("MEMBER_ID"));

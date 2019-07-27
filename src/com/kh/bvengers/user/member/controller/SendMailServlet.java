@@ -28,10 +28,24 @@ public class SendMailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		//String receiver="";
 		String receiver = request.getParameter("email");
-		//System.out.println(receiver);
+		String hc = request.getParameter("hc");
+		System.out.println(hc);
+		Boolean ch = true;
 		
+		if(hc==null) {
+		hc = receiver.charAt(0)+"";
+		System.out.println(hc);
+		String test = "";
+		if(hc.equals("2")) {
+			for(int i=1; i<receiver.length(); i++) {
+				test += receiver.charAt(i);
+			}
+			receiver=test;
+				
+		}
+		}
 		final String sender = "youngji0517@naver.com";//네이버아이디쓰삼(test@naver.com)
 		final String password = "rkdehddnjs";//네이버비밀번호
 		
@@ -56,10 +70,23 @@ public class SendMailServlet extends HttpServlet {
 		}
 		String key = temp.toString();
 		System.out.println(key);
+		System.out.println(receiver);
 		
-		String title = "중고애민족 회원가입 인증 메일입니다.";
-		String contents = "인증번호는 "+key;
-		String host = "smtp.naver.com";
+		String title="";
+		String contents="";
+		String host="smtp.naver.com";
+		
+		if(hc.equals("2")) {
+		title = "중고애민족 회원가입 인증 메일입니다.";
+		contents = "인증번호는 "+key;
+		}else {
+		title = "중고애민족 임시 비밀번호 메일입니다.";
+		contents = "임시 비밀번호는 "+key;
+		}
+		
+		System.out.println(title + " " +contents+" "+ host + " ");
+		System.out.println(hc);
+		String page="";
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
@@ -77,8 +104,9 @@ public class SendMailServlet extends HttpServlet {
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(sender));
+			
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-
+			
 			// sender Email Address
 			message.setFrom(sender);
 
@@ -94,12 +122,16 @@ public class SendMailServlet extends HttpServlet {
 			
 			HttpSession ss = request.getSession();
 			ss.setAttribute("mailkey", key);
-			request.getRequestDispatcher("views/user/join/checkMail.jsp").forward(request,response);
-			
+			if(hc.equals("1")) {
+				page="views/user/join/searchPwd.jsp";
+			}else{
+				page="views/user/join/checkMail.jsp";
+			}
 		} catch (MessagingException e) {
 			System.out.println("전송 실패!! ㅠㅠ");
 			e.printStackTrace();
 		}
+		request.getRequestDispatcher(page).forward(request,response);
 		
 	}
 	

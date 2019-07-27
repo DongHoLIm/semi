@@ -136,15 +136,15 @@ public class BoardService {
 		return array;
 
 	}
-	
+
 	public int getListQandACount(int num) {
-		
+
 		Connection con = getConnection();
-		
+
 		int listCount = new BoardDao().getListCount(con,num);
-		
+
 		close(con);
-		
+
 		return listCount;
 	}
 
@@ -181,16 +181,16 @@ public class BoardService {
 
 		return list;
 	}
-	
+
 	public ArrayList<Board> selectQuestionList(int limit) {
 
 		Connection con = getConnection();
 
 		ArrayList<Board>list = new BoardDao().selectQuestionList(con,limit);
 
-		
+
 		close(con);
-		
+
 		return list;
 	}
 
@@ -232,10 +232,10 @@ public class BoardService {
 	      ArrayList<HashMap<String, Object>> list = new BoardDao().mainList(con, value);
 
 	      close(con);
-	      return list;  
+	      return list;
 
 	}
-	   
+
 
 	public ArrayList<Comment> insertComment(Comment b) {
 		Connection con = getConnection();
@@ -249,6 +249,16 @@ public class BoardService {
 		} else {
 			rollback(con);
 		}
+		close(con);
+		return commentList;
+	}
+
+	public ArrayList<Comment> selectComment(Comment b) {
+		Connection con = getConnection();
+		ArrayList<Comment> commentList = null;
+
+		commentList = new BoardDao().selectCommentList(con, b.getPostsId());
+		close(con);
 		return commentList;
 	}
 

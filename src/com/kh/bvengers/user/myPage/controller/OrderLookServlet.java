@@ -64,11 +64,6 @@ public class OrderLookServlet extends HttpServlet {
 		String page = "";
 		
 		ArrayList<myPage> olList = new MyPageService().selectOrderLookList(memberNo, currentPage, limit);
-
-		String status = "";
-		ArrayList<String> ss = new ArrayList<String>();
-		HashMap<String, String> smap = new HashMap<String, String>();
-		
 		
 		if(olList != null) {
 			
@@ -109,10 +104,13 @@ public class OrderLookServlet extends HttpServlet {
 			}
 			
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
-			request.setAttribute("ss", ss);
-			request.setAttribute("status", status);
 			request.setAttribute("olList", olList);
 			request.setAttribute("pi", pi);
+			
+			//HttpSession session = request.getSession();
+			//session.setAttribute("loginUser", loginUser);
+			//response.sendRedirect("views/user/mypage/orderLook.jsp");
+			
 		}else {
 			page="views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "실패!");

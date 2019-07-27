@@ -618,5 +618,27 @@ public class MemberDao {
 		
 		return result;
 	}
+	public int checkuser(Connection con, String memberId, String memberName, String email) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("checkuser");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberName);
+			pstmt.setString(3, email);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }

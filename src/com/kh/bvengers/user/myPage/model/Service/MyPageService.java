@@ -55,4 +55,20 @@ public class MyPageService {
 	
 	}
 
+
+	public ArrayList<myPage> selectOrderDetailList(String memberNo, String ono) {
+		Connection con = getConnection();
+		ArrayList<myPage> odList = new MyPageDao().selectOrderDetailList(con, memberNo, ono);
+
+		close(con);
+		
+		return odList;
+	}
+
+
+	public myPage orderCheck(String ono) {
+		
+		return null;
+	}
+
 }

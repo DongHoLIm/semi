@@ -43,6 +43,5 @@ function ckbtn(){
 	<input type="text" id="key" name="key" placeholder="인증번호 입력칸" style="width:50%;">
 	<button value="확인" class="chbtn" onclick="ckbtn();">인증하기</button> 
 
-	</script>
 </body>
 </html>
