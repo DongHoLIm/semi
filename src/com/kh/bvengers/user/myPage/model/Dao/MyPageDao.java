@@ -13,7 +13,6 @@ import java.util.Properties;
 
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
-
 public class MyPageDao {
 	Properties prop = new Properties();
 
@@ -53,7 +52,6 @@ public class MyPageDao {
 			while(rset.next()) {
 			myPage m = new myPage();
 			
-			m.setBno(rset.getInt("RNUM"));
 			m.setOno(rset.getString("ORDER_NO"));
 			m.setPname(rset.getString("PRODUCT_NAME"));
 			m.setDstatus(rset.getString("DELIVERY_STATUS"));
@@ -181,6 +179,47 @@ public class MyPageDao {
 		return olList;
 	}
 
+	public ArrayList<myPage> selectOrderDetailList(Connection con, String memberNo, String ono) {
+		ArrayList<myPage> odList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOrderDetail");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, ono);
+			pstmt.setString(2, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			odList = new ArrayList<myPage>();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				m.setDtPay(rset.getInt("PRODUCT_DTPAY"));
+				m.setoDate(rset.getDate("ORDER_DATE"));
+				m.setOno(rset.getString("ORDER_NO"));
+				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setPayStatus(rset.getString("REFUND_STATUS"));
+				m.setDstatus(rset.getString("DELIVERY_STATUS"));
+				m.setInNo(rset.getString("INVOICE_NO"));
+				m.setrName(rset.getString("RECIEVER_NAME"));
+				m.setdSite(rset.getString("DELIVERY_SITE"));
+				m.setrPhone(rset.getString("RECIEVER_PHONE"));
+				m.setMno(rset.getString("MEMBER_NO"));	
+				
+				odList.add(m);
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		return odList;
+	}
 }
-
-

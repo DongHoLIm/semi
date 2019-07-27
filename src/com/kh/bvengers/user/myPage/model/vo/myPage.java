@@ -8,23 +8,31 @@ public class myPage {
 	private String dstatus; //배송상태
 	private Date oDate;		//주문날짜
 	private String mno; 	//회원번호
-	private int bno;		//조회 갯수
 	private String payStatus; //결제상태
 	private String refundStatus; //환불상태
+	private int dtPay;//주문상세금액
+	private String inNo; //송장번호
+	private String rName; //수취인이름
+	private String dSite;//배송지
+	private String rPhone;//수취인연락처
 	
 	public myPage() {}
 
-	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, int bno, String payStatus,
-			String refundStatus) {
+	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, String payStatus,
+			String refundStatus, int dtPay, String inNo, String rName, String dSite, String rPhone) {
 		super();
 		this.ono = ono;
 		this.pname = pname;
 		this.dstatus = dstatus;
 		this.oDate = oDate;
 		this.mno = mno;
-		this.bno = bno;
 		this.payStatus = payStatus;
 		this.refundStatus = refundStatus;
+		this.dtPay = dtPay;
+		this.inNo = inNo;
+		this.rName = rName;
+		this.dSite = dSite;
+		this.rPhone = rPhone;
 	}
 
 	public String getOno() {
@@ -47,16 +55,32 @@ public class myPage {
 		return mno;
 	}
 
-	public int getBno() {
-		return bno;
-	}
-
 	public String getPayStatus() {
 		return payStatus;
 	}
 
 	public String getRefundStatus() {
 		return refundStatus;
+	}
+
+	public int getDtPay() {
+		return dtPay;
+	}
+
+	public String getInNo() {
+		return inNo;
+	}
+
+	public String getrName() {
+		return rName;
+	}
+
+	public String getdSite() {
+		return dSite;
+	}
+
+	public String getrPhone() {
+		return rPhone;
 	}
 
 	public void setOno(String ono) {
@@ -79,10 +103,6 @@ public class myPage {
 		this.mno = mno;
 	}
 
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
-
 	public void setPayStatus(String payStatus) {
 		this.payStatus = payStatus;
 	}
@@ -91,10 +111,31 @@ public class myPage {
 		this.refundStatus = refundStatus;
 	}
 
+	public void setDtPay(int dtPay) {
+		this.dtPay = dtPay;
+	}
+
+	public void setInNo(String inNo) {
+		this.inNo = inNo;
+	}
+
+	public void setrName(String rName) {
+		this.rName = rName;
+	}
+
+	public void setdSite(String dSite) {
+		this.dSite = dSite;
+	}
+
+	public void setrPhone(String rPhone) {
+		this.rPhone = rPhone;
+	}
+
 	@Override
 	public String toString() {
 		return "myPage [ono=" + ono + ", pname=" + pname + ", dstatus=" + dstatus + ", oDate=" + oDate + ", mno=" + mno
-				+ ", bno=" + bno + ", payStatus=" + payStatus + ", refundStatus=" + refundStatus + "]";
+				+ ", payStatus=" + payStatus + ", refundStatus=" + refundStatus + ", dtPay=" + dtPay + ", inNo=" + inNo
+				+ ", rName=" + rName + ", dSite=" + dSite + ", rPhone=" + rPhone + "]";
 	}
 	
 	
