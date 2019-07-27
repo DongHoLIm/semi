@@ -1,20 +1,20 @@
-<%@page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
+<%@ page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
 
 	ArrayList<myPage> olList = (ArrayList<myPage>) request.getAttribute("olList");
-	ArrayList<String> ss = (ArrayList<String>) request.getAttribute("ss");
-	
 	MyPagePageInfo pi = (MyPagePageInfo) request.getAttribute("pi");
-	String status = (String) request.getAttribute("status");
+	
+	
+	/* request.setAttribute("olList", olList); */
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-	String status2 = "";
-	
+	String status = "";
+	String page2 = "";
 	
 %>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
 	border: 1px solid black;
 	
 }
-input[type=button]{
+.btn_od {
 	border:1px solid black;
 	background:#FFF;
 }
@@ -128,7 +128,6 @@ tr > th, tr>td{
 	<section id="sec1">
 		<div id="area">
 			<h3 style="font-weight: bold">주문조회</h3>
-
 		<div class="date-select" align="center">
 			<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;<input
 				type="button" value="1주일">&nbsp;
@@ -140,28 +139,32 @@ tr > th, tr>td{
 
 		<div >
 			<br />
+	<form action="orderDetail.mp" method="post" id="odForm">
 			<table border="1" align = "center" class = "board">
 				<tr>
-					<th class="th_orderLook">주문정보</th>
+					<th class="th_orderLook">주문번호</th>
+					<th class="th_orderLook">주문일자</th>
 					<th class="th_orderLook">상품정보</th>
 					<th class="th_orderLook">주문상태</th>
 				</tr>
 				<% for(myPage p : olList){%>
 				<tr class="">
-					<td>주문일자 : <%=p.getoDate() %><br>주문번호 : <%=p.getOno() %><br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp" value="주문상세"></td>
+					<td><%=p.getOno() %></td>
+					<td><%=p.getoDate() %><br><button class="btn_od">주문상세</button></td>
 					<td><%=p.getPname()%></td>
 					
 				<% if(p.getRefundStatus() != "" && p.getRefundStatus() != "1" && p.getRefundStatus() != "2"){
-				   	status2 = p.getRefundStatus();
+				   	status = p.getRefundStatus();
 					if(p.getDstatus() != "" && p.getDstatus() != "1" && p.getDstatus() != "2" && p.getDstatus() != "3"){
-				 	status2 = p.getDstatus();
+				 	status = p.getDstatus();
 					if(p.getPayStatus() != "" && p.getPayStatus() != "1" && p.getPayStatus() != "2"){
-				   	status2 = p.getPayStatus();
+				   	status = p.getPayStatus();
 					}}}%>
-					<td><%=status2 %></td>
+					<td><%=status %></td>
 				</tr>
 				<%}%>
 			</table>
+			</form>
 		</div>
 <%-- 페이징처리 --%>
 		<div class="pagingArea" align="center">
@@ -196,5 +199,46 @@ tr > th, tr>td{
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+
+<script>
+
+$(".btn_od").click(function(){ 
+	var ono = $(this).parent().siblings().eq(0).text();
+	console.log(ono);
+	 location.href='<%=request.getContextPath()%>/orderDetail.mp?ono='+ono;
+ });
+
+
+
+<%-- $("#btn_od").click(function(){ 
+	var od = $(this).parent().siblings().eq(0).text();
+	console.log(od);
+ location.href='<%=request.getContextPath()%>/orderDetail.mp?od='+od;
+ }); --%>
+
+
+ <%-- function goOd(){
+	$("#btn_od").click(function(){
+		var od = $(this).parent().siblings().eq(0).text();
+		console.log(od);
+		 location.href='<%=request.getContextPath()%>/orderDetail.mp?od='+od;
+		
+}); --%>
+	<%-- location.href="<%=request.getContextPath()%>/orderDetails.jsp"; --%>
+
+
+/* $(function(){
+	$("#btn_od").click(function(){
+		request.getRequestDispatcher("orderDetail.mp").forward(request, response);
+		
+	});
+});
+ */
+</script>	
+	
+	
+	
+	
+	
 </body>
 </html>
