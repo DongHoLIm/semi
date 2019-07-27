@@ -15,7 +15,6 @@ import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.Comment;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PowerLink;
-import com.sun.org.apache.bcel.internal.generic.ALOAD;
 
 public class BoardService {
 
