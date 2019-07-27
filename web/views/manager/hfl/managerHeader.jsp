@@ -21,7 +21,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/sp/views/manager/main/managerPage.jsp">중고 愛 민족</a>
+      <a class="navbar-brand" href="<%=request.getContextPath()%>/smnl.mm">중고 愛 민족</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -47,8 +47,8 @@
            </li>
            <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 게시글관리 <span class="caret"></span></a>
                <ul class="dropdown-menu">
-               <li><a href="/sp/views/manager/board/boardmenegement.jsp">게시판 관리</a></li>
-               <li><a href="/sp/views/manager/board/qnaboardmenegement.jsp">고객센터 관리</a></li>
+               <li><a href="<%=request.getContextPath()%>/smbs.mb">게시판 관리</a></li>
+               <li><a href="<%=request.getContextPath()%>/smqs.mq">고객센터 관리</a></li>
                </ul>
            </li>
               <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" > 창고관리 <span class="caret"></span></a>

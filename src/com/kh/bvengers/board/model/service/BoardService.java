@@ -170,12 +170,12 @@ public class BoardService {
 
 		return list1;
 	}
-
-	public ArrayList<Board> selectQandAList(int currentPage1, int limit, int num) {
+	
+	public ArrayList<Board> selectQandAList(int currentPage1, int limit, int num ,String uno) {
 
 		Connection con = getConnection();
 
-		ArrayList<Board>list = new BoardDao().selectQandAList(con,currentPage1,limit,num);
+		ArrayList<Board>list = new BoardDao().selectQandAList(con,currentPage1,limit,num,uno);
 
 		close(con);
 
@@ -194,6 +194,17 @@ public class BoardService {
 		return list;
 	}
 
+	public ArrayList<Board> selectManagerList(int currentPage, int limit, int num) {
+
+		Connection con = getConnection();
+		
+		ArrayList<Board>list = new BoardDao().selectManagerNoticeList(con,currentPage,limit,num);
+		
+		close(con);
+		
+		
+		return list;
+	}
 
 
 	public HashMap<String, Object> selectOneNotice(int num) {

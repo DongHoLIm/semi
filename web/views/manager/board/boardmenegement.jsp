@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
+	
+<%
+ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+BoardPageInfo pi = (BoardPageInfo)request.getAttribute("pi");
+int listCount = pi.getListCount();
+int currentPage = pi.getCurrentPage();
+int maxPage = pi.getMaxPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage(); 
+ %>
 	
 <!DOCTYPE html>
 <html>
@@ -71,13 +81,63 @@ border:1px solid white;
 		<th class="th">No.</th>
 		<th class="th">ID</th>
 		<th class="th">게시글 제목</th>
-		<th class="th">답변여부</th>
 		<th class="th">삭제</th>
 	</tr>
-			</table><br><br>
+		<%for (Board b : list) {%>
+			<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>"> 				
+			<td><%= b.getPostsId() %></td>
+			<td><%= b.getPostsTitle() %></td>
+			<td><%= b.getMemberId() %></td>
+			<td><%= b.getCreateDate() %></td>
+			<%} %>	
+	
+			</table>
+			<br><br><br><br>
+		  <div class = "pagingArea" align ="center" class="pagination" >
+		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>      
+		<%if(currentPage <= 1) {%> 
+		<button disabled><</button>
+		<%} else{%>
+	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage-1%>'"><</button>
+		<%}
+			System.out.println("최근 페이지는" + currentPage);
+		%>    
+			<%for (int p = startPage; p <= endPage; p++) {
+				if(currentPage == p){
+			%>
+				<button disabled><%= p %></button>
+			<%} else{ %>
+					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
+			<% }  
+			}	
+			%>
+			
+			
+			<%if(currentPage >= maxPage){ %>
+			<button disabled>></button>
+			<%}else{ %>
+			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage + 1%>'">></button>
+			<%} %>
+			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage%>'">>></button>
+ 		 
+      </div>
 		</div>
 	</div>
-
+<script>
+	$(function(){
+		$("#depotMain td").mouseenter(function(){
+			
+			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+		}).mouseout(function(){
+				$(this).parent().css({"background":"white"});	
+		}).click(function(){
+			var num = $(this).parent().children("input").val();
+			console.log(num);
+			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
+		});
+	});
+	
+	</script>
 
 </body>
 </html>
