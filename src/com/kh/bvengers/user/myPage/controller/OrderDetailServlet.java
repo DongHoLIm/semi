@@ -28,6 +28,7 @@ public class OrderDetailServlet extends HttpServlet {
 		String memberNo = loginUser.getMemberNo();
 		String ono = request.getParameter("ono");
 		System.out.println("ono : " + ono);
+		System.out.println("ld : " + memberNo);
 		
 		
 		ArrayList<myPage> odList = new MyPageService().selectOrderDetailList(memberNo, ono);
@@ -77,6 +78,7 @@ public class OrderDetailServlet extends HttpServlet {
 			page="views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "실패!");
 		}
+		
 		request.getRequestDispatcher(page).forward(request, response);
 		
 		
