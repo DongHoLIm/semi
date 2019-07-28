@@ -79,19 +79,23 @@ align:center;
 			<br />
 		
 		
-			<h3 align="center">구매확정 조회</h3>
+			<h3 align="center">구매내역 조회</h3>
 			<table class="board">
-				<tr class="row0">
-				<thead>
-					<th>번호</th>
-					<th>판매자 아이디</th>
-					<th>판매 상품</th>
-					<th>구매자 아이디</th>
-					<th>검수 유무</th><!-- 체크박스로 넣으면 되삼. -->
-					<th>주문날짜</th>
-					<th>진행 상태</th>
-				</thead>
-				</tr>
+					<tr class="row0">
+						<th>번호</th>
+						<th>판매자 아이디</th>
+						<th>판매 상품</th>
+						<th>구매자 아이디</th>
+						<th>주문날짜</th>
+						<th>확정날짜</th>
+						<th>진행 상태</th>
+						<th>선택</th>
+					</tr>
+				<tbody>
+					<tr>
+						
+					</tr>
+				</tbody>
 			</table>
 				<div id="numberBox"><%@ include file="../hfl/pagination.jsp" %></div>
 		<div id="area">

@@ -952,11 +952,31 @@ public class BoardDao {
 		return commentList;
 	}
 
-	
-
-	
-	
-	
-
-
+	public ArrayList<Board> paymentManagement(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+		 
+		String query = prop.getProperty("");
+		
+		
+		return null;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

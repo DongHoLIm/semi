@@ -79,6 +79,7 @@ public class ProductService {
 			int result1 = 0;
 			int result2 = 0;
 			int result3 = 0;
+			int result4 = 0;
 			String siteCheck = null;
 			String orderNo = "";
 			
@@ -101,10 +102,11 @@ public class ProductService {
 			pay.setDeliverySiteCode(siteCheck);
 			
 			result3 = new ProductDao().insertDelivery(con, pay);
-			if(result3 > 0) {
-			}
 			
-			if(result1 > 0 && result2 > 0 && result3 > 0) {
+			result4 = new ProductDao().disabledPostOpen(con, pay);
+			
+			
+			if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
 				commit(con);
 				result = 1;
 			}else {

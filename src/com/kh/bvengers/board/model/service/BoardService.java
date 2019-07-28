@@ -270,6 +270,17 @@ public class BoardService {
 		return commentList;
 	}
 
+
+	public ArrayList<Board> paymentManagement() {
+		Connection con = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().paymentManagement(con);
+		
+		close(con);
+		
+		
+		return list;
+
 	public int insertReport(String dustId, String post_id, String content, String reporter) {
 		Connection con = getConnection();
 		
