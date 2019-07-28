@@ -215,6 +215,28 @@
 				});
 			});
 		});
+		 $("#basketBtn").click(function(){
+			 $(function(){
+				var fileName="<%=productImg.getNewFileName()%>";
+				$.ajax({
+					url:"basketList.bk",
+					type:"post",
+					data:{fileName:fileName},
+					success: function(data){
+						if(data==null){
+							alert("해당상품은 이미 장바구니에 있습니다.");
+						}else{
+						if(confirm("장바구니로 이동하시겠습니까?")==true){
+							location.href = "<%=request.getContextPath()%>/basketAllList.bk";
+						}else{
+							
+						}							
+						}
+					}			
+				
+				})				
+			 });		
+		}); 		
 	</script>
 </body>
 </html>

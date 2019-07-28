@@ -243,4 +243,93 @@ public class DepotService {
 		return list;
 	}
 
+	public int searchRdP(String releaseDate, String productCode) {
+		Connection con =getConnection();
+		int listCount = new DepotDao().searchRdP(con,releaseDate,productCode);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Depot> searchListRdP(String releaseDate, String productCode, int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<Depot> list = new DepotDao().searchListRdP(con,releaseDate,productCode,currentPage,limit);
+		close(con);
+		return list;
+	}
+
+	public int searchLIdRd(String location, String insertDate, String releaseDate) {
+		Connection con =getConnection();
+		int listCount = new DepotDao().searchLIdRd(con,location,insertDate,releaseDate);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Depot> searchListLIdRd(String location, String insertDate, String releaseDate, int currentPage,
+			int limit) {
+		Connection con = getConnection();
+		ArrayList<Depot> list = new DepotDao().searchListLIdRd(con,location,insertDate,releaseDate,currentPage,limit);
+		close(con);
+		return list;
+	}
+
+	public int searchLIdP(String location, String insertDate, String productCode) {
+		Connection con =getConnection();
+		int listCount = new DepotDao().searchLIdP(con,location,insertDate,productCode);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Depot> searchListLIdP(String location, String insertDate, String productCode, int currentPage,
+			int limit) {
+		Connection con = getConnection();
+		ArrayList<Depot> list = new DepotDao().searchListLIdP(con,location,insertDate,productCode,currentPage,limit);
+		close(con);
+		return list;
+	}
+
+	public int searchLRdP(String location, String releaseDate, String productCode) {
+		Connection con =getConnection();
+		int listCount = new DepotDao().searchLRdP(con,location,releaseDate,productCode);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Depot> searchListLRdP(String location, String releaseDate, String productCode, int currentPage,
+			int limit) {
+		Connection con = getConnection();
+		ArrayList<Depot> list = new DepotDao().searchListLRdP(con,location,releaseDate,productCode,currentPage,limit);
+		close(con);
+		return list;
+	}
+
+	public int searchIdRdP(String insertDate, String releaseDate, String productCode) {
+		Connection con =getConnection();
+		int listCount = new DepotDao().searchIdRdP(con,insertDate,releaseDate,productCode);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Depot> searchListIdRdP(String insertDate, String releaseDate, String productCode, int currentPage,
+			int limit) {
+		Connection con = getConnection();
+		ArrayList<Depot> list = new DepotDao().searchListIdRdP(con,insertDate,releaseDate,productCode,currentPage,limit);
+		close(con);
+		return list;
+	}
+
+	public int searchTotal(String location, String insertDate, String releaseDate, String productCode) {
+		Connection con =getConnection();
+		int listCount = new DepotDao().searchTotal(con,location,insertDate,releaseDate,productCode);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Depot> searchListTotal(String location, String insertDate, String releaseDate, String productCode,
+			int currentPage, int limit) {
+		  Connection con = getConnection();
+			ArrayList<Depot> list = new DepotDao().searchListTotal(con,location,insertDate,releaseDate,productCode,currentPage,limit);
+			close(con);
+			return list;
+	}
+
 }
