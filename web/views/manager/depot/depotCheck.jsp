@@ -3,7 +3,7 @@
   <%
   	String value = request.getParameter("value");
   	String [] str =value.split(","); 
-  			
+  	System.out.println(str[3]);		
   %>
 <!DOCTYPE html>
 <html>
@@ -50,7 +50,7 @@
 		<table>
 			<tr>
 				<td rowspan="4" width="200px" height="300px">
-				<img alt="" src="<%=request.getContextPath()%>/images/flower4.PNG" width="200px" height="300px">
+				<img alt="" src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%=str[3] %>" width="200px" height="300px">
 				</td>
 			
 				<td><label for="">상품명</label></td>

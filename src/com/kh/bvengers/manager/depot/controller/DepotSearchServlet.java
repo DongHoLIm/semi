@@ -15,6 +15,7 @@ import com.kh.bvengers.manager.depot.model.servies.DepotService;
 import com.kh.bvengers.manager.depot.model.vo.Depot;
 import com.kh.bvengers.manager.depot.model.vo.DepotPageInfo;
 
+
 @WebServlet("/search.dp")
 public class DepotSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -205,17 +206,124 @@ public class DepotSearchServlet extends HttpServlet {
 			hmap.put("pi", pi);
 			hmap.put("list", list);
 		}else if(location.equals("")&&insertDate.equals("")&&releaseDate!=null&&productCode!=null) {
+			listCount = new DepotService().searchRdP(releaseDate,productCode);
 			
+			maxPage = (int)((double)listCount/limit+0.9);
+			
+			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+			
+			endPage = startPage + 10 - 1;
+			
+			if(maxPage < endPage) {
+				endPage = maxPage;
+			}
+			hmap =new HashMap<String,Object>();
+			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+			list = new DepotService().searchListRdP(releaseDate,productCode,currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
 		}else if(location!=null&&insertDate!=null&&releaseDate!=null&&productCode.equals("")) {
+			listCount = new DepotService().searchLIdRd(location,insertDate,releaseDate);
 			
+			maxPage = (int)((double)listCount/limit+0.9);
+			
+			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+			
+			endPage = startPage + 10 - 1;
+			
+			if(maxPage < endPage) {
+				endPage = maxPage;
+			}
+			hmap =new HashMap<String,Object>();
+			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+			list = new DepotService().searchListLIdRd(location,insertDate,releaseDate,currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
 		}else if(location!=null&&insertDate!=null&&releaseDate.equals("")&&productCode!=null) {
+			listCount = new DepotService().searchLIdP(location,insertDate,productCode);
 			
+			maxPage = (int)((double)listCount/limit+0.9);
+			
+			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+			
+			endPage = startPage + 10 - 1;
+			
+			if(maxPage < endPage) {
+				endPage = maxPage;
+			}
+			hmap =new HashMap<String,Object>();
+			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+			list = new DepotService().searchListLIdP(location,insertDate,productCode,currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
 		}else if(location!=null&&insertDate.equals("")&&releaseDate!=null&&productCode!=null) {
+			listCount = new DepotService().searchLRdP(location,releaseDate,productCode);
 			
+			maxPage = (int)((double)listCount/limit+0.9);
+			
+			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+			
+			endPage = startPage + 10 - 1;
+			
+			if(maxPage < endPage) {
+				endPage = maxPage;
+			}
+			hmap =new HashMap<String,Object>();
+			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+			list = new DepotService().searchListLRdP(location,releaseDate,productCode,currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
 		}else if(location.equals("")&&insertDate!=null&&releaseDate!=null&&productCode!=null) {
+			listCount = new DepotService().searchIdRdP(insertDate,releaseDate,productCode);
 			
+			maxPage = (int)((double)listCount/limit+0.9);
+			
+			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+			
+			endPage = startPage + 10 - 1;
+			
+			if(maxPage < endPage) {
+				endPage = maxPage;
+			}
+			hmap =new HashMap<String,Object>();
+			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+			list = new DepotService().searchListIdRdP(insertDate,releaseDate,productCode,currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
 		}else if(location!=null&&insertDate!=null&&releaseDate!=null&&productCode!=null) {
+			listCount = new DepotService().searchTotal(location,insertDate,releaseDate,productCode);
 			
+			maxPage = (int)((double)listCount/limit+0.9);
+			
+			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+			
+			endPage = startPage + 10 - 1;
+			
+			if(maxPage < endPage) {
+				endPage = maxPage;
+			}
+			hmap =new HashMap<String,Object>();
+			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+			list = new DepotService().searchListTotal(location,insertDate,releaseDate,productCode,currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
+		}else {
+			listCount = new DepotService().getCheckListCount();
+			
+			maxPage = (int)((double)listCount/limit+0.9);
+			
+			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+			
+			endPage = startPage + 10 - 1;
+			
+			if(maxPage < endPage) {
+				endPage = maxPage;
+			}
+			
+			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+			list = new DepotService().selectCheckAll(currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
 		}
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
@@ -225,5 +333,5 @@ public class DepotSearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+	
 }
