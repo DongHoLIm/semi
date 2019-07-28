@@ -2,7 +2,6 @@ package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.bvengers.board.model.service.BoardService;
 import com.kh.bvengers.board.model.vo.Board;
-import com.kh.bvengers.board.model.vo.Attachment;
-
+import com.kh.bvengers.board.model.vo.Comment;
 
 /**
- * Servlet implementation class SelectOneNotice
+ * Servlet implementation class insertwriteComment
  */
-@WebServlet("/son.no")
-public class SelectOneNotice extends HttpServlet {
+@WebServlet("/iwc.bo")
+public class insertwriteComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneNotice() {
+    public insertwriteComment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,27 +33,23 @@ public class SelectOneNotice extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		String writer = request.getParameter("writer");
+		String postId = request.getParameter("postId");
+		String content = request.getParameter("content");
+		System.out.println("여기는 와?");
 		
+		Comment b = new Comment();
+		b.setCommentContents(content);
+		b.setPostsId(postId);
+		b.setMemberId(writer);
 		
+	
+		ArrayList<Comment> list = new BoardService().insertComment(b);
 		
-		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
-
-		Board b = (Board)hmap.get("board");
-		ArrayList<Attachment> fileList = (ArrayList<Attachment>)hmap.get("attachment");
-
-		String page = "";
-		
-		if(hmap != null) {
-			page = "views/user/board/boardDetail.jsp";
-			request.setAttribute("b", b);
-			request.setAttribute("fileList", fileList);
-		}else {
-			page = "views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "사진 게시판 상세보기 실패!");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(list, response.getWriter());
+	
 	}
 
 	/**
@@ -66,18 +61,3 @@ public class SelectOneNotice extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

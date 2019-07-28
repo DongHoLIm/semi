@@ -701,6 +701,7 @@ public class BoardDao {
 				System.out.println(rset.getDate("CREATEDATE"));
 				b.setContents(rset.getString("CONTENTS"));
 				System.out.println(rset.getString("CONTENTS"));
+				b.setMemberNo(rset.getInt("MEMBER_NO"));
 
 				hmap = new HashMap<String, Object>();
 
@@ -778,6 +779,7 @@ public class BoardDao {
 		ArrayList<Board> list = null;
 
 		String query = prop.getProperty("selectQandAListWithPaging");
+		
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -810,15 +812,58 @@ public class BoardDao {
 
 				list.add(b);
 			}
+						
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		
+		}finally {
 			close(rset);
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public ArrayList<Board> selectCount(Connection con, int num) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> count = null;
+		
+		String query = prop.getProperty("selectcommentcount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			pstmt.setInt(1, num);
+			
+			count = new ArrayList<Board>();
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Board b = new Board();
+				b.setCount("COUNT(POSTS_ID)");
+				
+				count.add(b);
+				System.out.println(count + "ddsad");
+			}
+
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return count;
 	}
 
 	public int insertComment(Connection con, Comment b) {
@@ -842,6 +887,33 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	public int insertReport(Connection con, String dustId, String post_id, String content, String reporter) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReport");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, reporter);
+			pstmt.setString(2, dustId);
+			pstmt.setString(3, post_id);
+			pstmt.setString(4, content);
+			
+			
+			result = pstmt.executeUpdate();
+			
+				} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 	public ArrayList<Comment> selectCommentList(Connection con, String postsId) {
 		PreparedStatement pstmt = null;
@@ -880,6 +952,11 @@ public class BoardDao {
 		return commentList;
 	}
 
+	
+
+	
+	
+	
 
 
 }

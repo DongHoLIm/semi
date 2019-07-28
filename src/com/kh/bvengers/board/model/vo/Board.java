@@ -21,6 +21,7 @@ public class Board  implements Serializable{
 	private String memberName;
 	private Date createDate;
 	private String MemberId;
+	private String count;
 	
 	
 	public Board() {
@@ -36,9 +37,15 @@ public class Board  implements Serializable{
 
 
 
+
+
+
+
+
+
 	public Board(int postsId, String postsTitle, int memberNo, int postsViews, int recommendCount, String open,
 			String notice, String postsDelete, String boardCode, String contents, String writer, String postsCode,
-			String memberName, Date createDate, String memberId) {
+			String memberName, Date createDate, String memberId, String count) {
 		super();
 		this.postsId = postsId;
 		this.postsTitle = postsTitle;
@@ -54,7 +61,8 @@ public class Board  implements Serializable{
 		this.postsCode = postsCode;
 		this.memberName = memberName;
 		this.createDate = createDate;
-		this.MemberId = memberId;
+		MemberId = memberId;
+		this.count = count;
 	}
 
 
@@ -62,6 +70,36 @@ public class Board  implements Serializable{
 
 
 
+
+
+
+
+
+
+
+
+
+	public String getCount() {
+		return count;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setCount(String count) {
+		this.count = count;
+	}
 
 
 
@@ -218,17 +256,18 @@ public class Board  implements Serializable{
 
 
 
-
-
-
 	@Override
 	public String toString() {
 		return "Board [postsId=" + postsId + ", postsTitle=" + postsTitle + ", memberNo=" + memberNo + ", postsViews="
 				+ postsViews + ", recommendCount=" + recommendCount + ", open=" + open + ", notice=" + notice
 				+ ", postsDelete=" + postsDelete + ", boardCode=" + boardCode + ", contents=" + contents + ", writer="
 				+ writer + ", postsCode=" + postsCode + ", memberName=" + memberName + ", createDate=" + createDate
-				+ ", MemberId=" + MemberId + "]";
+				+ ", MemberId=" + MemberId + ", count=" + count + "]";
 	}
+
+
+
+
 
 
 

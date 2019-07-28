@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.bvengers.board.model.service.BoardService;
+import com.kh.bvengers.user.member.model.vo.Member;
+
 /**
  * Servlet implementation class reportServlet
  */
@@ -27,10 +30,30 @@ public class reportServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String array = request.getParameter("array");
-		System.out.println(array);
+	
+		String[] reportarr = array.split("/");
 		
-		String reportarr[] = array.split("/");
+		String dustId = reportarr[0];
+		String post_id = reportarr[1];
+		System.out.println("글"+dustId);
+		System.out.println("번호"+post_id);
 		
+		String page = "";
+
+		String content = request.getParameter("content");
+		
+		String reporter = String.valueOf(((Member) request.getSession().getAttribute("loginUser")).getMemberNo());
+			
+		int result = new BoardService().insertReport(dustId,post_id,content,reporter);
+		
+		if(result>0) {
+			page = "views/user/board/board.jsp";
+		}else {
+			request.setAttribute("msg","신고 실패하셨습니다.");
+			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
+
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
