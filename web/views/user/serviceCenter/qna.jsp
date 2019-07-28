@@ -164,7 +164,7 @@
 					<td><%= b.getPostsTitle() %></td>
 					<td><%= b.getMemberName()%></td>
 					<td><%= b.getCreateDate()%></td>
-					<% int count = b.getCount();
+					<% int count = Integer.parseInt(b.getCount());
 						System.out.println("andjs"+count);	
 					if(count%2 == 0){ %>
 					<td>Y</td>

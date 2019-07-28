@@ -280,6 +280,7 @@ public class BoardService {
 		
 		
 		return list;
+	}
 
 	public int insertReport(String dustId, String post_id, String content, String reporter) {
 		Connection con = getConnection();
