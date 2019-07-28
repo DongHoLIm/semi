@@ -1,19 +1,19 @@
 package com.kh.bvengers.board.model.service;
 
-import static com.kh.bvengers.common.JDBCTemplate.*;
-
+import static com.kh.bvengers.common.JDBCTemplate.close;
+import static com.kh.bvengers.common.JDBCTemplate.commit;
+import static com.kh.bvengers.common.JDBCTemplate.getConnection;
+import static com.kh.bvengers.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import org.apache.catalina.util.Introspection;
+import java.util.List;
 
 import com.kh.bvengers.board.model.dao.BoardDao;
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.Comment;
-import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PowerLink;
 
 public class BoardService {
@@ -39,6 +39,7 @@ public class BoardService {
 			rollback(con);
 		}
 		close(con);
+		
 		return hmap;
 	}
 
@@ -175,9 +176,17 @@ public class BoardService {
 		Connection con = getConnection();
 
 		ArrayList<Board>list = new BoardDao().selectQandAList(con,currentPage1,limit,num,uno);
-
+	
+		ArrayList<Board>countlist = new BoardDao().selectCount(con,num);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("list", list);
+		map.put("countlist", countlist);
+		
+		
 		close(con);
-
+		
 		return list;
 	}
 
@@ -261,6 +270,7 @@ public class BoardService {
 		return commentList;
 	}
 
+
 	public ArrayList<Board> paymentManagement() {
 		Connection con = getConnection();
 		
@@ -270,6 +280,19 @@ public class BoardService {
 		
 		
 		return list;
+
+	public int insertReport(String dustId, String post_id, String content, String reporter) {
+		Connection con = getConnection();
+		
+		int result = new BoardDao().insertReport(con,dustId,post_id,content,reporter);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		return result;
 	}
 
 }

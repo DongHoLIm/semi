@@ -3,7 +3,6 @@ package com.kh.bvengers.user.basket.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
 import com.kh.bvengers.user.basket.model.service.BasketService;
 import com.kh.bvengers.user.basket.model.vo.Basket;
 import com.kh.bvengers.user.member.model.vo.Member;
 
 /**
- * Servlet implementation class BasketListServlet
+ * Servlet implementation class BasketAllListServlet
  */
-@WebServlet("/basketList.bk")
-public class BasketListServlet extends HttpServlet {
+@WebServlet("/basketAllList.bk")
+public class BasketAllListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BasketListServlet() {
+    public BasketAllListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,17 +35,16 @@ public class BasketListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();		
 		Member m = (Member) session.getAttribute("loginUser");
-		String fileName = request.getParameter("fileName");
-		String userId = m.getMemberNo();
-		System.out.println("왔냐?");
-		
-		ArrayList <Basket> list = new BasketService().selectOneBasket(fileName,userId);
-		
-		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(list,response.getWriter());
+		String userNo = m.getMemberNo();
+		ArrayList<Basket>list = new BasketService().basketAllList(userNo);
+		String page = "";
+		if(list!=null) {
+			page="views/user/basket/basket.jsp";
+			request.setAttribute("list", list);
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

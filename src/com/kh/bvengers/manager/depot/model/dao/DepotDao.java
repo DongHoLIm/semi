@@ -51,6 +51,7 @@ public class DepotDao {
 				d.setProductCate(rset.getString("PRODUCT_CATE"));
 				d.setCheckDate(rset.getDate("CHECK_DATE"));
 				d.setCheckStatus(rset.getString("CHECK_STATUS"));
+				d.setFileName(rset.getString("NEW_FILE_NAME"));
 				i++;
 				list.add(d);
 			}
@@ -666,7 +667,7 @@ public class DepotDao {
 		ArrayList<Depot> list = null;
 		Depot d = null;
 		int i = 1;
-		String query = prop.getProperty("searchListP");
+		String query = prop.getProperty("searchListLId");
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, location);
@@ -913,10 +914,388 @@ public class DepotDao {
 		String query = prop.getProperty("searchListIdp");
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, insertDate);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, insertDate);
+			pstmt.setInt(3, currentPage);
+			pstmt.setInt(4, limit);
+			rset = pstmt.executeQuery();
+			list =new ArrayList<Depot> ();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				
+				list.add(d);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	public int searchRdP(Connection con, String releaseDate, String productCode) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("searchRdP");
+		try {
+			pstmt= con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, releaseDate);
+			rset =pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	public ArrayList<Depot> searchListRdP(Connection con, String releaseDate, String productCode, int currentPage,
+			int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Depot> list = null;
+		Depot d = null;
+		int i = 1;
+		String query = prop.getProperty("searchListIdp");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, productCode);
 			pstmt.setString(2, releaseDate);
 			pstmt.setInt(3, currentPage);
 			pstmt.setInt(4, limit);
+			rset = pstmt.executeQuery();
+			list =new ArrayList<Depot> ();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				
+				list.add(d);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	public int searchLIdRd(Connection con, String location, String insertDate, String releaseDate) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("searchLIdRd");
+		try {
+			pstmt= con.prepareStatement(query);
+			pstmt.setString(1, location);
+			pstmt.setString(2, insertDate);
+			pstmt.setString(3, releaseDate);
+			rset =pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	public ArrayList<Depot> searchListLIdRd(Connection con, String location, String insertDate, String releaseDate,
+			int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Depot> list = null;
+		Depot d = null;
+		int i = 1;
+		String query = prop.getProperty("searchListLIdRd");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, location);
+			pstmt.setString(2, releaseDate);
+			pstmt.setString(3, insertDate);
+			pstmt.setInt(4, currentPage);
+			pstmt.setInt(5, limit);
+			rset = pstmt.executeQuery();
+			list =new ArrayList<Depot> ();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				
+				list.add(d);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	public int searchLIdP(Connection con, String location, String insertDate, String productCode) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("searchLIdP");
+		try {
+			pstmt= con.prepareStatement(query);
+			pstmt.setString(1, location);
+			pstmt.setString(2, insertDate);
+			pstmt.setString(3, productCode);
+			rset =pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	public ArrayList<Depot> searchListLIdP(Connection con, String location, String insertDate, String productCode,
+			int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Depot> list = null;
+		Depot d = null;
+		int i = 1;
+		String query = prop.getProperty("searchListLIdP");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, insertDate);
+			pstmt.setString(3, location);
+			pstmt.setInt(4, currentPage);
+			pstmt.setInt(5, limit);
+			rset = pstmt.executeQuery();
+			list =new ArrayList<Depot> ();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				
+				list.add(d);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	public int searchLRdP(Connection con, String location, String releaseDate, String productCode) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("searchLRdP");
+		try {
+			pstmt= con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, releaseDate);
+			pstmt.setString(3, location);
+			rset =pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	public ArrayList<Depot> searchListLRdP(Connection con, String location, String releaseDate, String productCode,
+			int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Depot> list = null;
+		Depot d = null;
+		int i = 1;
+		String query = prop.getProperty("searchListLRdP");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, releaseDate);
+			pstmt.setString(3, location);
+			pstmt.setInt(4, currentPage);
+			pstmt.setInt(5, limit);
+			rset = pstmt.executeQuery();
+			list =new ArrayList<Depot> ();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				
+				list.add(d);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	public int searchIdRdP(Connection con, String insertDate, String releaseDate, String productCode) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("searchIdRdP");
+		try {
+			pstmt= con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, insertDate);
+			pstmt.setString(3, releaseDate);
+			rset =pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	public ArrayList<Depot> searchListIdRdP(Connection con, String insertDate, String releaseDate, String productCode,
+			int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Depot> list = null;
+		Depot d = null;
+		int i = 1;
+		String query = prop.getProperty("searchListIdRdP");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, insertDate);
+			pstmt.setString(3, releaseDate);
+			pstmt.setInt(4, currentPage);
+			pstmt.setInt(5, limit);
+			rset = pstmt.executeQuery();
+			list =new ArrayList<Depot> ();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductNumber(i);
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				i++;
+				
+				list.add(d);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	public int searchTotal(Connection con, String location, String insertDate, String releaseDate, String productCode) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("searchTotal");
+		try {
+			pstmt= con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, insertDate);
+			pstmt.setString(3, releaseDate);
+			pstmt.setString(4, location);
+			rset =pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	public ArrayList<Depot> searchListTotal(Connection con, String location, String insertDate, String releaseDate,
+			String productCode, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Depot> list = null;
+		Depot d = null;
+		int i = 1;
+		String query = prop.getProperty("searchListTotal");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			pstmt.setString(2, insertDate);
+			pstmt.setString(3, releaseDate);
+			pstmt.setString(4, location);
+			pstmt.setInt(5, currentPage);
+			pstmt.setInt(6, limit);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {

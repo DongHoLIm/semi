@@ -8,6 +8,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
   %>  
  
 <!DOCTYPE html>
@@ -71,14 +72,15 @@
 				<td><%=d.getProductName() %></td>
 				<td><%=d.getCheckDate() %></td>
 				<td><%if(d.getCheckStatus().equals("1")){ %>
-						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>'" style="color:white">검수요청</button>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>,<%=d.getFileName() %>'" style="color:white">검수요청</button>
 					<%}else if(d.getCheckStatus().equals("2")) {%>
-						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>'" style="color:white">검수중</button>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>,<%=d.getFileName() %>'" style="color:white">검수중</button>
 					<%}else{ %>
 						<label for="">검수완료</label>
-						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>'" style="color:white">수정</button>
+						<button onclick="location.href='<%=request.getContextPath()%>/views/manager/depot/depotCheck.jsp?value=<%=d.getProductCode() %>,<%=d.getProductName() %>,<%=d.getProductCate() %>,<%=d.getFileName() %>'" style="color:white">수정</button>
 					<%} %>
 				</td>
+				
 			</tr>	
 			<%} %>
 			

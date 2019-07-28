@@ -16,15 +16,14 @@ public class Depot implements java.io.Serializable{
 	private String checkPassContent;
 	private Date releaseDate;
 	private String selerId;
+	private String fileName;
 	
 	public Depot() {}
 	
-	
-	
-	
+
 	public Depot(int productNumber, String productCode, String productCate, String productName, Date checkDate,
 			String checkStatus, String locationCode, String session, String location, String completStatus,
-			String checkPassContent, Date releaseDate, String selerId) {
+			String checkPassContent, Date releaseDate, String selerId, String fileName) {
 		super();
 		this.productNumber = productNumber;
 		this.productCode = productCode;
@@ -39,10 +38,20 @@ public class Depot implements java.io.Serializable{
 		this.checkPassContent = checkPassContent;
 		this.releaseDate = releaseDate;
 		this.selerId = selerId;
+		this.fileName = fileName;
+	}
+
+	
+
+	public String getFileName() {
+		return fileName;
 	}
 
 
-	
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 
 	public String getSelerId() {
 		return selerId;
@@ -169,19 +178,15 @@ public class Depot implements java.io.Serializable{
 	}
 
 
-
-
 	@Override
 	public String toString() {
 		return "Depot [productNumber=" + productNumber + ", productCode=" + productCode + ", productCate=" + productCate
 				+ ", productName=" + productName + ", checkDate=" + checkDate + ", checkStatus=" + checkStatus
 				+ ", locationCode=" + locationCode + ", session=" + session + ", location=" + location
 				+ ", completStatus=" + completStatus + ", checkPassContent=" + checkPassContent + ", releaseDate="
-				+ releaseDate + ", selerId=" + selerId + "]";
+				+ releaseDate + ", selerId=" + selerId + ", fileName=" + fileName + "]";
 	}
-
 	
-
-
+	
 	
 }
