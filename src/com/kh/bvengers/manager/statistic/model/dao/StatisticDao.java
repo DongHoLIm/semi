@@ -48,7 +48,6 @@ public class StatisticDao {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(rset);
@@ -59,18 +58,19 @@ public class StatisticDao {
 	}
 	
 	public ArrayList<HashMap<String, Object>> memberStatistic(Connection con, ArrayList<String> dateList, String time) {
-		SimpleDateFormat format = new SimpleDateFormat ( "yy/MM/dd");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<HashMap<String, Object>>  list = null;
 		HashMap<String, Object> hmap = null;
 		
-		int arrLength = 0;
-		
-		
 		String query = prop.getProperty("memberStatistic");
 		try {
 			list = new ArrayList<HashMap<String, Object>>();
+			int dateLength = dateList.size();
+			if(dateLength > 10) {
+				dateLength = 10;
+			}
+			
 			for(int i = 0; i < dateList.size(); i++) {
 				
 				pstmt = con.prepareStatement(query);
@@ -85,8 +85,13 @@ public class StatisticDao {
 					String dd = time.substring(4);
 					hmap.put("payDate", MM+"월"+dd+"일");
 					hmap.put("row", rset.getString("COUNT(*)"));
-					double dpay = Integer.parseInt(rset.getString("SUM(PAY_MONEY)"))/10000;
-					hmap.put("allPay", dpay);
+					
+					int dpay = 0;
+					if(rset.getString("SUM(PAY_MONEY)") != null) {
+						dpay = Integer.parseInt(rset.getString("SUM(PAY_MONEY)"))/10000;
+					}
+					
+					hmap.put("allPay", dpay+"");
 					list.add(hmap);
 				}
 				time = Integer.parseInt(time)-1+"";

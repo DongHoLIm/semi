@@ -31,8 +31,8 @@
 	width: 80%;
 }
 
-.staticsTable {
-	/* visibility:hidden; */
+.datatable {
+	visibility:hidden;
 }
 
 #datatable td{
@@ -45,6 +45,20 @@
 	background: #ddd;
 }
 
+.newTable {
+	margin-top:10px;
+	width: 80%;
+}
+
+.newTable td{
+	border: 1px solid black;
+	background: #eee;
+}
+
+.newTable, .newTable th{
+	border: 2px solid black;
+	background: #ddd;
+}
 </style>
 </head>
 <header><%@ include file="../hfl/managerHeader.jsp"%></header>
@@ -54,7 +68,34 @@
 			<div id="container" class="statisticsContainer"style="wdith:80%; min-width: 310px; height: 400px; margin: 0 auto"></div><!-- 차트가 생성 -->
 		</div>
 		<div id=stat class="staticsTable">
-			
+			<!-- 가로테이블 -->
+			<table id="newTable" class="newTable">
+		   		<thead>
+			        <tr><th></th>
+						<%for(int i = 0; i < dataList.size(); i++) {%>
+							<th>
+								<%=dataList.get(dataList.size()-i-1).get("payDate") %>
+							</th>
+						<%} %>
+					</tr>
+				</thead>
+				<tbody>
+					<tr><th>결제 건수</th>
+						<%for(int i = 0; i < dataList.size(); i++){ %>
+							<td>
+								<%=dataList.get(dataList.size()-i-1).get("row") %>
+							</td>
+						<%} %>
+					</tr>
+					<tr><th>결제 금액</th>
+						<%for(int i = 0; i < dataList.size(); i++){ %>
+							<td>
+								<%=dataList.get(dataList.size()-i-1).get("allPay") %>(만)
+							</td>
+						<%} %>
+					</tr>
+				</tbody>
+			</table>
 			<!-- 세로테이블 -->
 			<table id="datatable" class="datatable">
 	    		<thead>
@@ -64,44 +105,27 @@
 			        </tr>
 			    </thead>
 			    <tbody class="tableBody">
-			        <%-- <%for(int i = 0; i < dataList.size(); i++) {%>
+			    	
+			        <%
+			        	int length = dataList.size();
+			        	if(length > 7){
+			        		length = 7;
+			        	}
+			        	for(int i = 0; i < length; i++) {
+			        %>
 			        	<tr>
 			        		<th><%=dataList.get(dataList.size()-i-1).get("payDate") %></th>
 			        		<td><%=dataList.get(dataList.size()-i-1).get("row") %></td>
 			        		<td><%=dataList.get(dataList.size()-i-1).get("allPay") %></td>
 			        	</tr>
-			        <%} %> --%>
+			        <%} %>
 		    	</tbody>
 			</table>
 			
-			<!-- 가로테이블 -->
-			<table id="newTable">
-				<thead><tr></tr></thead>
-				<tbody></tbody>
-			</table>
+			
 		</div>
 	</div>
 	
-	<%-- <table id="datatable" class="datatable">
-   		<thead>
-	        <tr><th></th>
-				<%for(int i = 0; i < dataList.size(); i++) {%>
-					<th>
-						<%=dataList.get(dataList.size()-i-1).get("payDate") %>
-					</th>
-				<%} %>
-			</tr>
-		</thead>
-		<tbody>
-			<tr><th>결제 건수</th>
-				<%for(int i = 0; i < dataList.size(); i++){ %>
-					<td>
-						<%=dataList.get(dataList.size()-i-1).get("row") %>
-					</td>
-				<%} %>
-			</tr>
-		</tbody>
-	</table> --%>	
 	<%@ include file="../hfl/footer.jsp"%>
 	
 	<script>
@@ -113,7 +137,7 @@
 		        type: 'column'
 		    },
 		    title: {
-		        text: '회원현황'
+		        text: '고객현황'
 		    },
 		    yAxis: {
 		        allowDecimals: false,
@@ -123,56 +147,13 @@
 		    },
 		    tooltip: {
 		        formatter: function () {
-		            return '<b>' + this.series.name + '</b><br/>' +
-		                this.point.y + ' ' + this.point.name.toLowerCase();
+		            return '<b>' + this.series.name + '</b><br/>'/*  +
+		                this.point.y + ' '  */+ this.point.name.toLowerCase();
 		        }
 		    }
 		    
 		});
 		
-		$(function(){
-			var oriRows = <%= dataList.size() %>;
-			if(oriRows > 7){
-				oriRows = 7;
-			}
-			
-			var i = 0;
-			for(var i = 0; i < oriRows; i++){
-				<%int i = 0;%>
-				var trows = "<tr></tr>";
-				
-				var th = "<th></th>";
-				var td1 = "<td></td>";
-				var td2 = "<td></td>";
-
-				var payDate = <%=dataList.get(dataList.size()-i-1).get("payDate") %>; 
-				var payRow = <%=dataList.get(dataList.size()-i-1).get("row") %>;
-				var allPay = <%=dataList.get(dataList.size()-i-1).get("allPay") %>;
-				
-				th.append(payDate);
-				td1.append(payRow);
-				td2.append(allPay);
-				
-				trows.append(th);
-				trows.append(td1);
-				trows.append(td2);
-				
-				$(".datatable > tbody").append(trows);
-				<% i++; %>
-			}
-			
-			
-			
-			/* var newCols = oriRows;
-			
-			for(var i = 0; i < newCols; i ++){
-				
-			} */
-			
-			
-			
-			
-		});
 	</script>
 </body>
 </html>

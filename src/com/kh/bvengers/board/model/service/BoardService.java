@@ -261,6 +261,17 @@ public class BoardService {
 		return commentList;
 	}
 
+	public ArrayList<Board> paymentManagement() {
+		Connection con = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().paymentManagement(con);
+		
+		close(con);
+		
+		
+		return list;
+	}
+
 }
 
 

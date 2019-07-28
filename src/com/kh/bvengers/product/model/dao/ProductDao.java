@@ -412,6 +412,26 @@ public class ProductDao {
 		return result;
 	}
 
+	public int disabledPostOpen(Connection con, Payment pay) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("disabledPostOpen");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pay.getProductCode());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return 0;
+	}
+
 	
 	
 	
