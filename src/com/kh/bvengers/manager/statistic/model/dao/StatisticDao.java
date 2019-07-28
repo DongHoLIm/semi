@@ -63,15 +63,17 @@ public class StatisticDao {
 		ArrayList<HashMap<String, Object>>  list = null;
 		HashMap<String, Object> hmap = null;
 		
+		int count = 0;
+		
 		String query = prop.getProperty("memberStatistic");
 		try {
 			list = new ArrayList<HashMap<String, Object>>();
 			int dateLength = dateList.size();
-			if(dateLength > 10) {
-				dateLength = 10;
+			if(dateLength > 6) {
+				dateLength = 6;
 			}
 			
-			for(int i = 0; i < dateList.size(); i++) {
+			for(int i = 0; i < dateLength; i++) {
 				
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, time);
@@ -89,6 +91,8 @@ public class StatisticDao {
 					int dpay = 0;
 					if(rset.getString("SUM(PAY_MONEY)") != null) {
 						dpay = Integer.parseInt(rset.getString("SUM(PAY_MONEY)"))/10000;
+					}else {
+						count++;
 					}
 					
 					hmap.put("allPay", dpay+"");
@@ -97,6 +101,35 @@ public class StatisticDao {
 				time = Integer.parseInt(time)-1+"";
 			}
 			
+			if(count > 0) {
+				
+				for(int i = 0; i < count; i++) {
+					
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, time);
+					rset = pstmt.executeQuery();
+					
+					while(rset.next()) {
+						hmap = new HashMap<String, Object>();
+						
+						String yy = time.substring(0,2);
+						String MM = time.substring(2,4);
+						String dd = time.substring(4);
+						hmap.put("payDate", MM+"월"+dd+"일");
+						hmap.put("row", rset.getString("COUNT(*)"));
+						
+						int dpay = 0;
+						if(rset.getString("SUM(PAY_MONEY)") != null) {
+							dpay = Integer.parseInt(rset.getString("SUM(PAY_MONEY)"))/10000;
+						}
+						
+						hmap.put("allPay", dpay+"");
+						list.add(hmap);
+					}
+					time = Integer.parseInt(time)-1+"";
+				}
+				
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

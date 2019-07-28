@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
+import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Comment;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PowerLink;
@@ -952,15 +953,41 @@ public class BoardDao {
 		return commentList;
 	}
 
-	public ArrayList<Board> paymentManagement(Connection con) {
+	public ArrayList<Calculate> paymentManagement(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
-		ArrayList<Board> list = null;
+		ArrayList<Calculate> list = null;
 		 
-		String query = prop.getProperty("");
+		String query = prop.getProperty("selectPaymentList");
 		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			list = new ArrayList<Calculate>();
+			while(rset.next()) {
+				Calculate c = new Calculate();
+				
+				c.setOrderNo(rset.getString("orderNo"));
+				c.setSellerNo(rset.getString("sellNo"));
+				c.setSellerId(rset.getString("seller"));
+				c.setPostsTitle(rset.getString("title"));
+				c.setBuyerNo(rset.getString("buyNo"));
+				c.setBuyerId(rset.getString("buyer"));
+				c.setOrderDate(rset.getString("orderDate"));
+				c.setCalculateDate(rset.getString("deliDate"));
+				c.setDeliveryStatus(rset.getString("deliStatus"));
+				c.setDeliveryNo(rset.getString("DNO"));
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
 		
-		return null;
+		return list;
 	}
 }
 
