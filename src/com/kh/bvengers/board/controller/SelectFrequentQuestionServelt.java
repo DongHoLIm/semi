@@ -48,7 +48,6 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 		String page = "";
 		String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
 		
-		System.out.println("멤버 번호" + uno);
 		currentPage1 = 1;
 		
 		limit1 = 10;
@@ -73,7 +72,8 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 		BoardPageInfo pi = new BoardPageInfo(currentPage1, listCount, limit1, maxPage1, startPage1, endPage1);
 
 	      ArrayList<Board> list = new BoardService().selectQandAList(currentPage1, limit, num,uno);
-
+	
+	      
 	      if (list != null) {
 	         request.setAttribute("list", list);
 	         request.setAttribute("pi", pi);
@@ -88,7 +88,7 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 			page = "views/user/serviceCenter/qna.jsp";
 			request.setAttribute("List", List);
 			System.out.println("aaa"+List);
-		request.getRequestDispatcher(page).forward(request, response);
+			request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
 
@@ -61,12 +62,67 @@ td{
 			</table>
 		</div>
 				<br><br><br>
+				<div class = "replyArea">
+		<div class = "replayWriterArea">
+			<table align = "center">
+				<tr>
+					<td>댓글 작성</td>
+					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
+					<td><button id = "addReply">댓글 등록</button></td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
+		
+		</div>
 		</form>
 	</div>
 	<br>
 	<br>
  <footer><%@ include file="../hfl/footer.jsp" %></footer> 
 	</div>	
+	<script>
+	
+	$(function(){
+		$("#addReply").click(function(){
+			var writer =  <%= loginUser.getMemberNo()%>;
+		    var postId = <%= b.getPostsId()%>;
+		    var content = $("#replyContent").val();
+		    
+		    $.ajax({
+		    	url:"iwc.bo",
+		    	data:{writer:writer, content:content, postId:postId},
+		    	type:"post",
+		    	success:function(data) 	 {
+		    		console.log(data);
+		    		
+		    	var $replySelectTable = $ ("#replySelectTable tbody");
+		    	$replySelectTable.html("");
+		    	
+		    	for(var key in data){
+		    		var $tr = $("<tr>");
+					var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
+					var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
+					var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+								
+					$tr.append($writeTd);
+					$tr.append($contentTd);
+					$tr.append($dateTd);
+					$replySelectTable.append($tr);
+		    	}
+		    	
+		    	},
+		    	error:function(){
+		    		console.log("실패!");
+		    	}
+		    });
+		});
+	});
+	
+	
+	
+	</script>
 </body>
 </html>
 
