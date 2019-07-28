@@ -87,26 +87,29 @@ String check = (String) request.getSession().getAttribute("mailkey");
 			
 			<input type="text" placeholder="이름" name="userName" id="userName" size=30><br>
 			<input type="text" name="hiddencard" value="1" id="hiddencard" style="display:none">
+			<input type="text" name="hiddenvalue" value="0" id="hiddenvalue" style="display:none">
 			<input type="email" placeholder="이메일" name="email" id="email" size=19>
 			<button type="button" class="btn_searchPwd" onclick="send_pwd(2);" >인증번호</button><br>
-			
-			<input type="text" placeholder="인증번호 입력" name="checkNumber" id="checkNumber" size=30><br>
-			
 			<br><br>
 			
-			<input type="button" value="확인" class="btn_pwd" id="ok" onclick="send_pwd(1);"> &nbsp; &nbsp;
+			<input type="button" value="변경하러 가기" class="btn_pwd" id="ok" onclick="send_pwd(1);"> &nbsp; &nbsp;
 			<input type="reset" value="취소" class="btn_pwd">
 			<br><br>
-		</form>
+	</form>
 	</div>
 	<script>
 	function send_pwd(index){
 		
 		if(index == 1){
-			
-			$(function(){
+			if($("#hiddenvalue").val()=="1"){
+				//var userId = ("#userId").val();
+				//location.href="views/user/join/searchPwdResult.jsp?userId"+userId;
+			 $(function(){
 				$("form").submit();
-			});
+			}); 
+			}
+			
+		
 		}else if(index ==2){
 			var userId = $("#userId").val();
 			var userName = $("#userName").val();
@@ -120,6 +123,7 @@ String check = (String) request.getSession().getAttribute("mailkey");
 						alert("존재하지 않는 회원입니다.");
 					}else{
 						alert("존재하는 회원입니다.\n이메일로 임시 비밀번호를 보내드렸습니다.\n임시 비밀번호로 로그인 하세요")
+						$("#hiddenvalue").val("1");
 					}
 				}
 				});
