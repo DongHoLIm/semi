@@ -11,11 +11,14 @@ public class Calculate implements java.io.Serializable{
 	private String calculateDate;
 	private String deliveryStatus;
 	private String deliveryNo;
+	private String releaseDate;
+	private String dateResult;
 	
 	public Calculate() {}
 
 	public Calculate(String orderNo, String sellerNo, String sellerId, String buyerNo, String buyerId,
-			String postsTitle, String orderDate, String calculateDate, String deliveryStatus, String deliveryNo) {
+			String postsTitle, String orderDate, String calculateDate, String deliveryStatus, String deliveryNo,
+			String releaseDate, String dateResult) {
 		super();
 		this.orderNo = orderNo;
 		this.sellerNo = sellerNo;
@@ -27,6 +30,8 @@ public class Calculate implements java.io.Serializable{
 		this.calculateDate = calculateDate;
 		this.deliveryStatus = deliveryStatus;
 		this.deliveryNo = deliveryNo;
+		this.releaseDate = releaseDate;
+		this.dateResult = dateResult;
 	}
 
 	public String getOrderNo() {
@@ -109,13 +114,29 @@ public class Calculate implements java.io.Serializable{
 		this.deliveryNo = deliveryNo;
 	}
 
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public String getDateResult() {
+		return dateResult;
+	}
+
+	public void setDateResult(String dateResult) {
+		this.dateResult = dateResult;
+	}
+
 	@Override
 	public String toString() {
 		return "Calculate [orderNo=" + orderNo + ", sellerNo=" + sellerNo + ", sellerId=" + sellerId + ", buyerNo="
 				+ buyerNo + ", buyerId=" + buyerId + ", postsTitle=" + postsTitle + ", orderDate=" + orderDate
 				+ ", calculateDate=" + calculateDate + ", deliveryStatus=" + deliveryStatus + ", deliveryNo="
-				+ deliveryNo + "]";
+				+ deliveryNo + ", releaseDate=" + releaseDate + ", dateResult=" + dateResult + "]";
 	}
-
+	
 	
 }

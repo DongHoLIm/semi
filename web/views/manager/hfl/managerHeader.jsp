@@ -29,9 +29,8 @@
                <ul class="dropdown-menu">
                <li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li>
                <li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
-               <li><a href="/sp/views/manager/product/calculate.jsp">정산 내역</a></li>
-               <li><a href="/sp/views/manager/product/delivery.jsp">구매 확정 내역</a></li>
-               <li><a href="<%=request.getContextPath()%>/productManagement">구매 확정 테스트 </a></li>
+               <li><a href="/sp/views/manager/product/calculate.jsp">정산 내역 관리</a></li>
+               <li><a href="<%=request.getContextPath()%>/productManagement">구매 내역 관리</a></li>
                </ul>
             </li>
              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 회원관리<span class="caret"></span> </a>
