@@ -68,7 +68,33 @@
 	border: 1px solid white;
 	width: 150px;
 	height: 50px;
+	margin-bottom:10%;
 }
+#commentHeagerTable{
+	text-align:center;
+}
+#comments{
+	width: 113%;
+}
+#commentHeagerTable th {
+	text-align:center;
+	font-weight: bold;
+	font-size: 1.2em;
+	height: 50px;
+}
+#commentHeagerTable .tWriter{
+	width: 100px;
+}
+#commentHeagerTable .tContent{
+	width: 500px;
+}
+#commentHeagerTable .tDate{
+	width: 200px;
+}
+#commentHeagerTable .tRecommend{
+	width: 100px;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -124,25 +150,28 @@
 					<th colspan="5" id="commentHeader">댓글 작성</th>
 				</tr>
 				<tr>
-					<td colspan="5" ><textarea id="commentContent" rows="3" cols="150" style="resize:no"></textarea></td>
-				</tr>
-				<tr>
-					<td rowspan="4" colspan="5" ><button id="addBtn">댓글 등록</button></td>
+					<td colspan="5" ><textarea id="commentContent" rows="15" cols="150" style="resize:no"></textarea></td>
 				</tr>
 			</table>
 		</form>
+		<form id="comments">
+		<button id="addBtn" align="center">댓글 등록</button>
 		<table id="commentHeagerTable" border="1" align="center">
 			<tr>
-				<td colspan="2" style="width:100px">작성자</td>
-				<td colspan="3" style="width:400px">내용</td>
-				<td style="width:200px">작성일</td>
-				<td style="width:100px">추천수</td>
+				<th colspan="7">댓글 리스트</th>
+			</tr>
+			<tr>
+				<td colspan="2" class="tWriter">작성자</td>
+				<td colspan="3" class="tContent">내용</td>
+				<td class="tDate">작성일</td>
+				<td class="tRecommend">추천수</td>
 			</tr>
 		</table>
 		<table id="commentSelectTable" border="1" align="center">
 			<tbody>
 			</tbody>
 		</table>
+		</form>
 	</div>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 	<script>
@@ -159,15 +188,20 @@
 						$commentSelectTable.html("");
 						for(var key in data){
 							var $tr = $("<tr>");
-							var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
-							var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
-							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
-							var $recommend = $("<td>").text(data[key].recommendCount).css("width", "100px");
+							var $writeTd = $("<td>").text(data[key].memberId).addClass("tWriter");
+							var $contentTd = $("<td>").text(data[key].commentContents).addClass("tContent");
+							var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
+							var $recommend = $("<td>").text(data[key].recommendCount).addClass("tRecommend");
 							$tr.append($writeTd);
 							$tr.append($contentTd);
 							$tr.append($dateTd);
 							$tr.append($recommend);
 							$commentSelectTable.append($tr);
+							$(".tWriter").css({"width":"100px", "height":"50px"});
+							$(".tContent").css("width", "500px");
+							$(".tDate").css("width", "200px");
+							$(".tRecommend").css("width","100px");
+							$commentSelectTable.css({"text-align":"center", "width":"1000px","margin":"auto"});
 						}
 					},
 					error:function(){
@@ -183,37 +217,25 @@
 			var price = numeral($("#priceInput").attr('value')).format( '0,0' );
 
 			$("#price").text(price+"원");
-			$("#addBtn").click(function(){
-				var writer = <%= loginUser.getMemberNo()%>;
-				var content = $("#commentContent").val();
-				var postsId = <%= b.getPostsId()%>;
+				<% if(loginUser!=null){%>
+				$("#addBtn").click(function(){
+					var writer = <%=loginUser.getMemberNo()%>;
+					var content = $("#commentContent").val();
+					var postsId = <%=b.getPostsId()%>;
 
-				$.ajax({
-					url:"insertComment.pd",
-					data:{writer:writer, content:content, postsId:postsId},
-					type:"post",
-					success:function(data){
-						var $commentSelectTable = $("#commentSelectTable tbody");
-						$commentSelectTable.html("");
-
-						for(var key in data){
-							var $tr = $("<tr>");
-							var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
-							var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
-							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
-							var $recommend = $("<td>").text(data[key].recommendCount).css("width", "100px");
-							$tr.append($writeTd);
-							$tr.append($contentTd);
-							$tr.append($dateTd);
-							$tr.append($recommend);
-							$commentSelectTable.append($tr);
+					$.ajax({
+						url:"insertComment.pd",
+						data:{writer:writer, content:content, postsId:postsId},
+						type:"post",
+						success:function(data){
+								location.reload();
+						},
+						error:function(){
+							alert("댓글 입력 실패");
 						}
-					},
-					error:function(){
-						alert("댓글 입력 실패");
-					}
+					});
 				});
-			});
+			<%}%>
 		});
 		 $("#basketBtn").click(function(){
 			 $(function(){
@@ -229,14 +251,14 @@
 						if(confirm("장바구니로 이동하시겠습니까?")==true){
 							location.href = "<%=request.getContextPath()%>/basketAllList.bk";
 						}else{
-							
-						}							
+
 						}
-					}			
-				
-				})				
-			 });		
-		}); 		
+						}
+					}
+
+				})
+			 });
+		});
 	</script>
 </body>
 </html>
