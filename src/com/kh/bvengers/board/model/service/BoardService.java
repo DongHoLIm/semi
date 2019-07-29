@@ -296,6 +296,13 @@ public class BoardService {
 		return result;
 	}
 
+	public Board showDetail(String postId) {
+		Connection con = getConnection();
+		Board b = new BoardDao().showDetail(con,postId);
+		close(con);
+		return b;
+	}
+
 }
 
 
