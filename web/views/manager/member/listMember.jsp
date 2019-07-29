@@ -77,19 +77,17 @@ input-align:center;
 	<div id="inOutMain">
 		<br>
 		<br>
-		<form action="<%=request.getContextPath()%>/searchMember.me" method="post">
 		<div id="inOutButton" align="center">
-			<select name="selecthowsearch" style="width: 30%;">
+			<select name="selecthowsearch" id="selecthowsearch" style="width: 30%;">
 				<option value="findId">아이디로 조회</option>
 				<option value="findName">이름으로 조회</option>
 				<option value="findLevel">등급으로 조회</option>
-			</select> <input type="search" name="searchValue">
-			<button type="submit"
+			</select> <input type="search" name="searchValue" id="searchValue">
+			<button id = "searchbtn"
 				style="border-radius: 5px; background-color: black; color: white;">조회</button>
 		</div>
 		<br>
 		<br>
-		</form>
 		<div class="btns">
 		선택회원을
 		<button value="블랙리스트" id="blacklist"
@@ -150,7 +148,11 @@ input-align:center;
 	      else
 	        $("#depotMain input:checkbox").prop("checked", false);
 	    });
-
+	$("#searchbtn").on("click",function(){
+		var howselect = $("#selecthowsearch option:selected").val();
+		var value = $("#searchValue").text();
+		
+	});
 </script>
 <div class="pagingArea" align="center">
 	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>
