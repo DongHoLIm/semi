@@ -38,8 +38,8 @@ public class LoginMemberServlet extends HttpServlet {
 			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect("/sp/smnl.mm");
 		}else if(loginUser == null){
-			request.setAttribute("msg", "로그인실패");
-			request.getRequestDispatcher("views/user/login/login.jsp").forward(request, response);
+			request.setAttribute("msg", "정지회원입니다.");
+			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
 		}
 	}
 	

@@ -140,9 +140,24 @@ $(".detail").click(function(){
 	var postsId = $(this).text();
 	location.href='<%=request.getContextPath()%>/reportDetail.mb?postsId='+postsId;
 });
-$(".blacklist").click(function(){
-	var blistId = $(this).parent().siblings().eq(2).text();
 
+$(function(){
+$(".blacklist").click(function(){
+	var memberId = $(this).parent().siblings().eq(2).text();
+	var reason = $(this).parent().siblings().eq(3).text();
+	$.ajax({
+		url:"/sp/blacklist.me",
+		type:"post",
+		data:{memberId:memberId,reason:reason},
+		success:function(data){
+			if(data==="success"){
+				alert("블랙리스트처리완료");
+			}else{
+				alert("처리 실패!");
+			}
+		}
+	});
+});
 });
 $(function(){
 	$(".mstop").click(function(){
