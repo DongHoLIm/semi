@@ -80,14 +80,13 @@ public class OrderLookServlet extends HttpServlet {
 							}else if(m.getDstatus().equals("3")){
 								m.setDstatus("배송 완료");
 								m.setPayStatus("");
-							}
-						}else if(m.getDstatus() == null) {
-							if(m.getPayStatus().equals("1")) {
-								m.setPayStatus("결제 완료");
+							
 							}else if(m.getPayStatus().equals("2")) {
 								m.setPayStatus("결제 취소");
+								m.setDstatus("");
 							}
 						}
+						
 						
 					}else {
 						

@@ -213,6 +213,7 @@ public class MyPageDao {
 				odList.add(m);
 			}	
 			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
