@@ -147,7 +147,15 @@ $(document).ready(function() {
 </script>
 <style>
 .searchBox {
-	width: 80%;
+	width: 100%;
+	height:70%;
+	padding: 2%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.searchdiv {
+	width: 50%;
 	height:70%;
 	padding: 2%;
 	margin: 0 auto;
@@ -155,18 +163,29 @@ $(document).ready(function() {
 	border:1px solid black;
 }
 
+.th_select {
+	text-align:right;
+}
+
+input[type=button] {
+	border:1px solid black;
+	background:#FFF;
+}
+
 </style>
 </head>
 <body>
+<div class="searchdiv">
   <table class="searchBox">
-                    <caption style="border:1px solid black;">조회</caption>
+                   <!-- <caption style="font-size:20px;">주문조회</caption> -->
                     <colgroup>
                         <col width="123px">
                         <col width="*">
                     </colgroup>
+                    <h2>주문조회</h2>
                     <tbody>
                         <tr>
-                            <th>조회기간</th>
+                            <th class="th_select">기간별 조회</th>
                             <td>
                                <span class="chkbox2">
                                             <input type="button" name="dateType" id="dateType3" value="1주일" onclick="setSearchDate('1w')"/>
@@ -181,8 +200,8 @@ $(document).ready(function() {
                                             <label for="dateType5"></label>
                                         </span>
                                
-                                <div class="clearfix">
-                                    <!-- 시작일 -->
+                                <!-- <div class="clearfix">
+                                    시작일 -->
                                     <span class="dset">
                                         <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >
                                         <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
@@ -193,12 +212,12 @@ $(document).ready(function() {
                                       <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
                                         <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
                                     </span>
-                                </div>   
+                                <!-- </div>  -->  
                             </td>
                         </tr>
                     <tbody>
                 </table>
-
+			</div>
 </body>
 
 
