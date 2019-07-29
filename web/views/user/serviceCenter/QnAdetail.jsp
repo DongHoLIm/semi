@@ -62,6 +62,7 @@ td{
 			</table>
 		</div>
 				<br><br><br>
+		</form>
 				<div class = "replyArea">
 		<div class = "replayWriterArea">
 			<table align = "center">
@@ -76,7 +77,6 @@ td{
 			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
 		
 		</div>
-		</form>
 	</div>
 	<br>
 	<br>
@@ -97,7 +97,7 @@ td{
 		    	success:function(data) 	 {
 		    		console.log(data);
 		    		
-		    	var $replySelectTable = $ ("#replySelectTable tbody");
+		    	 var $replySelectTable = $ ("#replySelectTable tbody");
 		    	$replySelectTable.html("");
 		    	
 		    	for(var key in data){
@@ -110,7 +110,7 @@ td{
 					$tr.append($contentTd);
 					$tr.append($dateTd);
 					$replySelectTable.append($tr);
-		    	}
+		    	} 
 		    	
 		    	},
 		    	error:function(){

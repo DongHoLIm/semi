@@ -17,11 +17,9 @@ import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Comment;
-import com.kh.bvengers.board.model.vo.Posts;
+import com.kh.bvengers.board.model.vo.Count;
 import com.kh.bvengers.board.model.vo.PowerLink;
 import com.kh.bvengers.product.model.vo.Product;
-
-import oracle.net.aso.b;
 
 public class BoardDao {
 	private Properties prop = new Properties();
@@ -791,7 +789,6 @@ public class BoardDao {
 			
 			int endRow = startRow + limit - 1;
 			
-			System.out.println("sdjasd"+endRow);
 			
 			pstmt.setInt(1, num);
 			pstmt.setString(2, uno);
@@ -810,7 +807,9 @@ public class BoardDao {
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
-
+				b.setCount(rset.getString("COP"));
+				
+				
 				list.add(b);
 			}
 						
@@ -827,45 +826,7 @@ public class BoardDao {
 		return list;
 	}
 	
-	public ArrayList<Board> selectCount(Connection con, int num) {
 
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<Board> count = null;
-		
-		String query = prop.getProperty("selectcommentcount");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-		
-			pstmt.setInt(1, num);
-			
-			count = new ArrayList<Board>();
-			
-			rset = pstmt.executeQuery();
-			
-			while (rset.next()) {
-				Board b = new Board();
-				b.setCount("COUNT(POSTS_ID)");
-				
-				count.add(b);
-				System.out.println(count + "ddsad");
-			}
-
-
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		
-		
-		return count;
-	}
 
 	public int insertComment(Connection con, Comment b) {
 		PreparedStatement pstmt = null;
