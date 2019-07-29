@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.board.model.service.BoardService;
+import com.kh.bvengers.board.model.vo.BoardPageInfo;
 import com.kh.bvengers.board.model.vo.Calculate;
 
 /**
@@ -31,7 +32,7 @@ public class ProductManagementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Calculate> list = new BoardService().paymentManagement();
+		//ArrayList<Calculate> list = new BoardService().paymentManagement();
 		
 		int currentPage;
 		int limit;
@@ -50,11 +51,26 @@ public class ProductManagementServlet extends HttpServlet {
 		
 		int listCount = new BoardService().getListCount();
 		
+		maxPage = (int)((double)listCount/limit + 0.5);
+		
+		startPage = (((int)((double) currentPage / limit + 0.5))-1)*10+1;
+		
+		endPage = startPage + 2 -1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		BoardPageInfo bi = new BoardPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		
+		ArrayList<Calculate> list = new BoardService().paymentManagement(currentPage, limit);
+		
 		String page = "";
 		
 		if(list != null) {
 			page = "views/manager/product/delivery.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("bi", bi);
 			
 		}else {
 			page = "views/common/errorPagePrompt.jsp";
