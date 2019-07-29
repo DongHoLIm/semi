@@ -323,6 +323,14 @@ public class BoardService {
 		return 0;
 	}
 
+	public ArrayList<Calculate> paymentManagement(int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		//ArrayList<Calculate> list 
+		
+		return null;
+	}
+
 }
 
 

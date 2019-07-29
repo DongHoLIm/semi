@@ -1032,10 +1032,12 @@ public class BoardDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
 		}
 		
-		
-		return 0;
+		return listCount;
 	}
 }
 
