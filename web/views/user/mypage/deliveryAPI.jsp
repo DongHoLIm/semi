@@ -1,6 +1,9 @@
+<%@page import="com.kh.bvengers.user.myPage.model.vo.myPage"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -88,7 +91,7 @@ $(document).ready(function(){
         $.ajax({
             type:"GET",
             dataType : "json",
-            url:"http://info.sweettracker.co.kr/api/v1/companylist?t_key="+myKey,
+            url:"https://info.sweettracker.co.kr/api/v1/companylist?t_key="+myKey,
             success:function(data){
             		
             		// 방법 1. JSON.parse 이용하기
@@ -176,7 +179,6 @@ $(document).ready(function(){
 <body>
 <span id="tekbeCompnayName" size=20>택배회사명: </span>
 <select id="tekbeCompnayList" name="tekbeCompnayList"></select><br/><br/>
-
 <span id="invoiceNumber">운송장번호: </span>
 <input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
 <button id="myButton1">택배 조회하기 </button>

@@ -280,7 +280,7 @@
 		 $(function(){
 			$("#deliReady").click(function(){
 				if($("#div_deliReady").css("display") == "none"){
-					$("#div_deliReady").css("display") == "block");
+					$("#div_deliReady").css("display") == "block";
 				}
 			});
 		 });
