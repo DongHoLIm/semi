@@ -1,34 +1,39 @@
-package com.kh.bvengers.user.member.controller;
+package com.kh.bvengers.manager.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.bvengers.user.member.model.service.MemberService;
+import com.kh.bvengers.manager.member.model.service.ManagerMemberService;
 
-@WebServlet("/changePwd.me")
-public class ChangePwdServlet extends HttpServlet {
+@WebServlet("/memberStop.me")
+public class MemberStopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ChangePwdServlet() {
+    public MemberStopServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = (String) request.getParameter("memberId");
-		String memberPwd = (String) request.getParameter("password");
+		int term = Integer.parseInt(request.getParameter("term"));
+		String reason = (String) request.getParameter("reason");
 		
-		int result = new MemberService().changePwd(memberId,memberPwd);
-		String page ="";
+		int result = new ManagerMemberService().memberban(memberId,term,reason);
+	
+		PrintWriter out = response.getWriter();
 		if(result>0) {
-			page = "/index.jsp";
+			out.append("success");
 		}else {
-			page="views/common/errorPagePrompt.jsp";
+			out.append("fail");
 		}
-		request.getRequestDispatcher(page).forward(request, response);
+		out.flush();
+		out.close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,16 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-	String check = (String) request.getSession().getAttribute("mailkey");
-    String memberId = (String) request.getAttribute("memberId");
-    %>
+<%
+String check = (String) request.getSession().getAttribute("mailkey");
+String memberId = (String) request.getAttribute("memberId");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
+<link
+	href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap"
+	rel="stylesheet">
+<title>비밀번호 찾기</title>
+<style>
+	form {
+		width:40%;
+		background:white;
+		color:black;
+		border-radius: 5px;
+		font-family: 'Sunflower', sans-serif;
+		border-radius: 5px;
+		border:1px solid black;
+	}
+	.btn1 {
+		background:black;	
+		color:white;
+		border-radius: 5px;
+	}
+	
+	.btn_search {
+	width:49%;
+	height: 50px;
+	border: 1px solid black;
+	font-size: 16px;
+	font-family: 'Sunflower', sans-serif;
+	background-color: black;
+	border-radius: 5px;
+	color: white;
+	}
+	
+	.btn_searchPwd {
+	width:64px;
+	height: 25px;
+	border: 1px solid black;
+	font-size: 13px;
+	font-family: 'Sunflower', sans-serif;
+	background-color: black;
+	color: white;
+	}
+	
+	.btn_pwd {
+	margin:0 auto;
+	width: 10%;
+	height: 30px;
+	border: 1px solid black;
+	font-size: 13px;
+	font-family: 'Sunflower', sans-serif;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+	}
+	
+	.btn_pwd:hover {color:white;}
+	
+</style>
+</head>
+<header><%@ include file="../hfl/header.jsp" %></header>
+<body>
+	<div align="center">
+
+		<br><br><br><br><br><br><br>
+<form action="<%=request.getContextPath()%>/changePwd.me" method="post">
+	<h1>비밀번호 재설정</h1>
+	<input type="text" id="userinput" name="userinput" placeholder="비밀번호를 입력해주세요" style="width:50%;">
+	<input type="password" id="password" name="password" placeholder="바꿀 비밀번호를 입력하세요" style="width:50%">
+	<input type="password" id="password2" name="password2" placeholder="한번 더 입력하세요" style="width:50%"><br><br>
+	<input type="button" value="확인" class="okok" onclick="okok();"><br><br>
+	<input type="text" value="<%=memberId %>" id="memberId" name="memberId" style="display:none;">
+	<input type="text" id="hiddenvalue" name="hiddenvalue" style="display:none;" value="<%=check%>">
+	</form>
+	</div>
+	<script>
 function okok(){
 	var key="<%=check%>";
 	var userinput=$("#userinput").val();
@@ -25,21 +97,28 @@ function okok(){
 		return false;
 	}
 	
-	if(($("#password").val() == ($("#password2").val()))&& $("userinput").val()!=""){
+	if($("#userinput").val()==""||($("#userinput").val()!=$("#hiddenvalue").val())){
+		alert("임시 비밀번호를 확인해주세요");
+		return false;
+	}
+	
+	if(($("#password").val() == $("#password2").val())){
 		alert("비밀번호가 변경되었습니다!");
 		$("form").submit();	
+		
+		console.log("<%=check%>");
+		
+		
+		
+		
 	}else{
 		alert("비밀번호를 다시 설정하세요");
 		return false;
 	}
 	
 	
-	/* if(key==userinput){
-		alert("임시비밀번호가 일치합니다.");
-		console.log(key);
-		$("form").submit();
-	} */
- 	$(function(){
+	
+ <%-- 	$(function(){
 		$(".okok").click(function(){
 		var status="<%=check%>";
 		var checkuser = $("#userinput").val();
@@ -58,17 +137,10 @@ function okok(){
 			}
 		});
 	}); 
-		});
+		}); --%>
 }
 </script>
-</head>
-<body>
-	<form action="<%=request.getContextPath()%>/changePwd.me" method="post">
-	<h1>비밀번호 재설정</h1>
-	<input type="text" id="userinput" name="userinput" placeholder="비밀번호를 입력해주세요" style="width:50%;">
-	<input type="password" id="password" name="password" placeholder="바꿀 비밀번호를 입력하세요" style="width:50%">
-	<input type="password" id="password2" name="password2" placeholder="한번 더 입력하세요" style="width:50%">
-	<input type="button" value="확인" class="okok" onclick="okok();">
-	</form>
+	<br><br><br><br><br><br><br>
+<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>
 </html>

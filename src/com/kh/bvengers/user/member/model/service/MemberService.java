@@ -118,15 +118,7 @@ public class MemberService {
 		return result;
 	}
 
-	public Member getblackmember(String memberId) {
-		Connection con = getConnection();
-		Member m = new MemberDao().getblackmember(con,memberId);
-		if(m!=null) {
-			int result = new MemberDao().upblack(con,m);
-		}
-		close(con);
-		return m;
-	}
+	
 
 	public Seller searchInfo(String userId) {
 		Connection con = getConnection();
@@ -145,6 +137,18 @@ public class MemberService {
 	public int checkuser(String memberId, String memberName, String email) {
 		Connection con = getConnection();
 		int result = new MemberDao().checkuser(con,memberId,memberName,email);
+		close(con);
+		return result;
+	}
+
+	public int changePwd(String memberId, String memberPwd) {
+		Connection con = getConnection();
+		int result = new MemberDao().changePwd(con,memberId,memberPwd);
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
 		close(con);
 		return result;
 	}
