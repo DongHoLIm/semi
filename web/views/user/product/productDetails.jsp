@@ -62,7 +62,7 @@
 #contents {
 	text-align:left;
 }
-#addBtn{
+.btns{
 	background: black;
 	color: white;
 	border: 1px solid white;
@@ -70,31 +70,37 @@
 	height: 50px;
 	margin-bottom:10%;
 }
-#commentHeagerTable{
+#commentHeaderTable{
 	text-align:center;
 }
 #comments{
 	width: 113%;
 }
-#commentHeagerTable th {
+#commentHeaderTable th {
 	text-align:center;
 	font-weight: bold;
 	font-size: 1.2em;
 	height: 50px;
+	background: black;
+	color: white;
 }
-#commentHeagerTable .tWriter{
+#commentHeaderTable .tWriter{
 	width: 100px;
 }
-#commentHeagerTable .tContent{
+#commentHeaderTable .tContent{
 	width: 500px;
 }
-#commentHeagerTable .tDate{
+#commentHeaderTable .tDate{
 	width: 200px;
 }
-#commentHeagerTable .tRecommend{
+#commentHeaderTable .tRecommend{
 	width: 100px;
 }
-
+#btnArea {
+	width: 30%;
+	align:center;
+	margin : 20px auto;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -155,8 +161,11 @@
 			</table>
 		</form>
 		<form id="comments">
-		<button id="addBtn" align="center">댓글 등록</button>
-		<table id="commentHeagerTable" border="1" align="center">
+		<div id="btnArea">
+		<button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
+		<button id="showBtn" type="button" class="btns" align="center">댓글 보기</button>
+		</div>
+		<table id="commentHeaderTable" class="commentTables" border="1" align="center">
 			<tr>
 				<th colspan="7">댓글 리스트</th>
 			</tr>
@@ -167,7 +176,7 @@
 				<td class="tRecommend">추천수</td>
 			</tr>
 		</table>
-		<table id="commentSelectTable" border="1" align="center">
+		<table id="commentSelectTable" class="commentTables" border="1" align="center">
 			<tbody>
 			</tbody>
 		</table>
@@ -178,7 +187,6 @@
 		$(function(){
 			var postsId = <%= b.getPostsId()%>;
 			$(document).ready(function(){
-
 				$.ajax({
 					url:"selectComment.pd",
 					data:{postsId:postsId},
@@ -202,6 +210,7 @@
 							$(".tDate").css("width", "200px");
 							$(".tRecommend").css("width","100px");
 							$commentSelectTable.css({"text-align":"center", "width":"1000px","margin":"auto"});
+							$(".commentTables").hide();
 						}
 					},
 					error:function(){
@@ -217,25 +226,32 @@
 			var price = numeral($("#priceInput").attr('value')).format( '0,0' );
 
 			$("#price").text(price+"원");
-				<% if(loginUser!=null){%>
-				$("#addBtn").click(function(){
-					var writer = <%=loginUser.getMemberNo()%>;
-					var content = $("#commentContent").val();
-					var postsId = <%=b.getPostsId()%>;
+			<% if(loginUser!=null){%>
+			$("#addBtn").click(function(){
+				var writer = <%=loginUser.getMemberNo()%>;
+				var content = $("#commentContent").val();
+				var postsId = <%=b.getPostsId()%>;
 
-					$.ajax({
-						url:"insertComment.pd",
-						data:{writer:writer, content:content, postsId:postsId},
-						type:"post",
-						success:function(data){
-								location.reload();
-						},
-						error:function(){
-							alert("댓글 입력 실패");
-						}
-					});
+				$.ajax({
+					url:"insertComment.pd",
+					data:{writer:writer, content:content, postsId:postsId},
+					type:"post",
+					success:function(data){
+							location.reload();
+							$(".commentTables").show();
+					},
+					error:function(){
+						alert("댓글 입력 실패");
+					}
 				});
+			});
 			<%}%>
+			$("#showBtn").click(function(){
+				$(".commentTables").toggle();
+				if($(this).html().equals("댓글 보기")){
+					console.log("gd");
+				};
+			});
 		});
 		 $("#basketBtn").click(function(){
 			 $(function(){

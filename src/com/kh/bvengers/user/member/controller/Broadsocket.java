@@ -18,7 +18,6 @@ public class Broadsocket {
 
 	@OnMessage
 	public void onMessage(String message, Session session) {
-		System.out.println(message);
 		synchronized (clients) {
 			for (Session client : clients) {
 				if (!client.equals(session)) {
