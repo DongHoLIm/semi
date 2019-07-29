@@ -2,6 +2,7 @@ package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,7 +73,7 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 		BoardPageInfo pi = new BoardPageInfo(currentPage1, listCount, limit1, maxPage1, startPage1, endPage1);
 
 	      ArrayList<Board> list = new BoardService().selectQandAList(currentPage1, limit, num,uno);
-	
+	      
 	      
 	      if (list != null) {
 	         request.setAttribute("list", list);
@@ -87,7 +88,6 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 
 			page = "views/user/serviceCenter/qna.jsp";
 			request.setAttribute("List", List);
-			System.out.println("aaa"+List);
 			request.getRequestDispatcher(page).forward(request, response);
 	}
 

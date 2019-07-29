@@ -153,8 +153,9 @@
 			<thead>
 				<th>글 번호</th>
 				<th>제목</th>
-				<th>답변여부</th>
+				<th>작성자</th>
 				<th>작성일자</th>
+				<th>답변여부</th>
 			</thead>
 			</tr>
 			<tr class="row1">
@@ -164,14 +165,12 @@
 					<td><%= b.getPostsTitle() %></td>
 					<td><%= b.getMemberName()%></td>
 					<td><%= b.getCreateDate()%></td>
-					<% int count = Integer.parseInt(b.getCount());
-						System.out.println("andjs"+count);	
-					if(count%2 == 0){ %>
-					<td>Y</td>
-					<% 		
-						}else{ %>
-					<td> Y</td>
-					<% } %>
+			<% int count = Integer.parseInt(b.getCount());
+			if( count % 2 == 0){ %>
+				<td>N</td>
+			<%}else{ %>
+				<td>Y</td>
+			<%} %>
 			</tr>
 		<%  int num = b.getPostsId();}%>	
 			<tr>

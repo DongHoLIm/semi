@@ -34,11 +34,11 @@ public class SelectOneNotice extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		String num = request.getParameter("postId");
+		System.out.println("come on baby");
 		
 		
-		
-		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
+		/*HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
 
 		Board b = (Board)hmap.get("board");
 		ArrayList<Attachment> fileList = (ArrayList<Attachment>)hmap.get("attachment");
@@ -54,7 +54,7 @@ public class SelectOneNotice extends HttpServlet {
 			request.setAttribute("msg", "사진 게시판 상세보기 실패!");
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		request.getRequestDispatcher(page).forward(request, response);*/
 	}
 
 	/**

@@ -29,20 +29,6 @@ public class Board  implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
-	
-
-
-
-
-
-
-
-
-
-
-
 	public Board(int postsId, String postsTitle, int memberNo, int postsViews, int recommendCount, String open,
 			String notice, String postsDelete, String boardCode, String contents, String writer, String postsCode,
 			String memberName, Date createDate, String memberId, String count) {
@@ -64,69 +50,18 @@ public class Board  implements Serializable{
 		MemberId = memberId;
 		this.count = count;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public String getCount() {
 		return count;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public void setCount(String count) {
 		this.count = count;
 	}
-
-
-
 	public String getMemberId() {
 		return MemberId;
 	}
-
-
-
-
-
-
-
-
-
 	public void setMemberId(String memberId) {
 		MemberId = memberId;
 	}
-
-
-
-
-
-
-
-
-
 	public Date getCreateDate() {
 		return createDate;
 	}
