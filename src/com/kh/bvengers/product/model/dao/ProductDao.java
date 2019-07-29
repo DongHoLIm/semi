@@ -429,7 +429,7 @@ public class ProductDao {
 			close(pstmt);
 		}
 		
-		return 0;
+		return result;
 	}
 
 	

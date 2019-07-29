@@ -33,6 +33,22 @@ public class ProductManagementServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Calculate> list = new BoardService().paymentManagement();
 		
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		//작성 글 증가 시 5~10까지 추가
+		limit = 2;
+		
+		int listCount = new BoardService().getListCount();
 		
 		String page = "";
 		
