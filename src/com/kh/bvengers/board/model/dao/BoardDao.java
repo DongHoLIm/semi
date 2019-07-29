@@ -938,6 +938,11 @@ public class BoardDao {
 				c.setCalculateDate(rset.getString("deliDate"));
 				c.setDeliveryStatus(rset.getString("deliStatus"));
 				c.setDeliveryNo(rset.getString("DNO"));
+				if(rset.getString("releaseDate") != null) {
+					c.setReleaseDate(rset.getString("releaseDate"));
+					c.setDateResult(rset.getString("dateResult"));
+				}
+				
 				list.add(c);
 			}
 			
@@ -978,6 +983,59 @@ public class BoardDao {
 		}
 		
 		return b;
+	}
+
+	public int checkStatus(Connection con, Calculate cal) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("checkStatus");
+		
+		try {
+			if(cal.getReleaseDate() != null && 
+					Integer.parseInt(cal.getDateResult()) > 0 &&
+			  !cal.getDeliveryStatus().equals("3") && 
+			  !cal.getDeliveryStatus().equals("3")) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, cal.getDeliveryNo());
+				
+				result = pstmt.executeUpdate();
+				
+			}else {
+				result = 1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectDeliveryCount");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
 	}
 }
 

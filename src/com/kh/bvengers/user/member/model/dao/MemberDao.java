@@ -62,6 +62,7 @@ public class MemberDao {
 				loginUser.setAccountNo(rset.getString("ACCOUNT_NO"));
 				loginUser.setGradeCode(rset.getString("GRADE_CODE"));
 				loginUser.setSellCount(rset.getInt("SELL_COUNT"));
+				
 			}
 
 		} catch (SQLException e) {
@@ -167,17 +168,22 @@ public class MemberDao {
 
 		return list;
 	}
-	public ArrayList<Member> searchId(Connection con, String searchValue) {
+	public ArrayList<Member> searchId(Connection con, int currentPage, int limit, String searchValue) {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		System.out.println(searchValue);
 		String query = prop.getProperty("searchId");
-
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, searchValue);
-
+			
+			int startRow = (currentPage-1)*limit +1;
+			int endRow = startRow + limit-1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, searchValue);
+			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
@@ -185,7 +191,7 @@ public class MemberDao {
 
 				m.setMemberNo(rset.getString("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+			//	m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
 				m.setMemberName(rset.getString("MEMBER_NAME"));
 				m.setEmail(rset.getString("EMAIL"));
 				m.setAddress(rset.getString("ADDRESS"));
@@ -212,7 +218,7 @@ public class MemberDao {
 
 		return list;
 	}
-	public ArrayList<Member> searchName(Connection con, String searchValue) {
+	public ArrayList<Member> searchName(Connection con, int currentPage, int limit, String searchValue) {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -221,8 +227,14 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, searchValue);
-
+			
+			int startRow = (currentPage-1)*limit +1;
+			int endRow = startRow + limit-1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, searchValue);
+			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
@@ -230,7 +242,7 @@ public class MemberDao {
 
 				m.setMemberNo(rset.getString("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+			//	m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
 				m.setMemberName(rset.getString("MEMBER_NAME"));
 				m.setEmail(rset.getString("EMAIL"));
 				m.setAddress(rset.getString("ADDRESS"));
@@ -257,7 +269,7 @@ public class MemberDao {
 
 		return list;
 	}
-	public ArrayList<Member> searchLevel(Connection con, String searchValue) {
+	public ArrayList<Member> searchLevel(Connection con, int currentPage, int limit, String searchValue) {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -266,8 +278,14 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, searchValue);
-
+			
+			int startRow = (currentPage-1)*limit +1;
+			int endRow = startRow + limit-1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, searchValue);
+			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
@@ -275,7 +293,7 @@ public class MemberDao {
 
 				m.setMemberNo(rset.getString("MEMBER_NO"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
-				m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+			//	m.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
 				m.setMemberName(rset.getString("MEMBER_NAME"));
 				m.setEmail(rset.getString("EMAIL"));
 				m.setAddress(rset.getString("ADDRESS"));

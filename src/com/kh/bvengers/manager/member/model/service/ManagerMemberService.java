@@ -36,4 +36,16 @@ public class ManagerMemberService {
 		return result;
 	}
 
+	public int blackmember(String memberId, String reason) {
+		Connection con = getConnection();
+		int result = new ManagerMemberDao().blackmember(con,memberId,reason);
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
 }

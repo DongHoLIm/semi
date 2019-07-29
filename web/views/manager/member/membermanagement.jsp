@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+	pageEncoding="UTF-8"import="java.util.* , com.kh.bvengers.user.member.model.vo.*"%>
+	<%
+	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
+    Member loginUser = (Member) session.getAttribute("loginUser");
+	MemberPageInfo pi = (MemberPageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,6 +108,19 @@ font-size:3;
 					<th class="th">가입일</th>
 					<th class="th">판매횟수</th>
 				</tr>
+				<%for(Member m : list){ %>
+				<tr>
+					<td><input type="checkbox" class="chk"></td>
+					<td><%=m.getMemberId() %></td>
+					<td><%=m.getMemberName() %></td>
+					<td><%=m.getPhone() %></td>
+					<td><%=m.getGradeCode() %></td>
+					<td><%=m.getAddress()%></td>
+					<td><%=m.getEnrollDate() %></td>
+					<td><%=m.getSellCount() %></td>
+					<td><button class="mbdetail">상세보기</button></td>
+				</tr>
+				<%} %>
 			</table>
 			<br>
 			<br>

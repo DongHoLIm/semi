@@ -117,10 +117,13 @@ align:center;
 						<%} %>
 					</td>
 					<td><input type="checkbox" name="selectTr"/></td>
+					
 				</tr>
 				<% } %>
 				</tbody>
 			</table>
+			
+			
 				<div id="numberBox"><%@ include file="../hfl/pagination.jsp" %></div>
 		<div id="area">
 			<h3 align="center">배송상태</h3>

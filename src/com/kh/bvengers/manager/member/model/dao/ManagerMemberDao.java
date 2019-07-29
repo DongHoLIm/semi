@@ -107,5 +107,22 @@ public class ManagerMemberDao {
 		
 		return result;
 	}
+	public int blackmember(Connection con, String memberId, String reason) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("blackmember");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, reason);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

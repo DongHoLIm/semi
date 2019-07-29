@@ -1,18 +1,18 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*,java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
+   pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*,java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("List");
-	System.out.println(list);
-	ArrayList<Board> List = (ArrayList<Board>)request.getAttribute("list");
-	
-	BoardPageInfo pi1 = (BoardPageInfo)request.getAttribute("pi");
+   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("List");
+   System.out.println(list);
+   ArrayList<Board> List = (ArrayList<Board>)request.getAttribute("list");
 
-	int listCount = pi1.getListCount();
-	int currentPage1 = pi1.getCurrentPage();
-	int maxPage1 = pi1.getMaxPage();
-	int startPage1 = pi1.getStartPage();
-	int endPage1 = pi1.getEndPage();
+   BoardPageInfo pi1 = (BoardPageInfo)request.getAttribute("pi");
+
+   int listCount = pi1.getListCount();
+   int currentPage1 = pi1.getCurrentPage();
+   int maxPage1 = pi1.getMaxPage();
+   int startPage1 = pi1.getStartPage();
+   int endPage1 = pi1.getEndPage();
 
 %>
 <!DOCTYPE html>
@@ -22,64 +22,86 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-	#sec1 {
-			width:100%;
-			height:100%;
-			padding-top:2%;
-			padding-right:20%;
-			padding-bottom:2%;
-			padding-left:20%;
-			margin:auto;
-	}
-	
-	.board{
-		width:80%;
-		margin:auto;
-		align:center;
+   #sec1 {
+         width:100%;
+         height:100%;
+         padding-top:2%;
+         padding-right:20%;
+         padding-bottom:2%;
+         padding-left:20%;
+         margin:auto;
+   }
+
+   .board{
+      width:80%;
+      margin:auto;
+      align:center;
         border-spacing: 10px;
-	}
-	
-	.row0{
-		background:#eee;
-		margin:auto;
-		border-bottom: 2px solid #555;
-	}
-	.row1,.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10{
-		border-top: 1px solid #ccc;
-		border-bottom: 1px solid #ccc;
-	}
-	.pageNo{
-		margin:auto;
-	}
-	
-	#writer{
-		margin-top:2px;
-		float:right;
-		background:white;
-		border:1px solid skyblue;
-	}
-	
-	dt, dd {
-		padding: 10px; 
-	}
-	
-	dt {
-		-webkit-border-radius: 10px;
-		-moz-border-radius: 10px;
-		border-radius: 10px;
-		border:1px solid black;
-		margin-bottom: 5px;
-	}
-	dt:hover{
-		background:#ededed;
-	}
-	dt span {
-		display: inline-block;
-		width: 5px;
-		height: 5px;
-		background-color: black;
-		vertical-align: middle;
-		margin-right: 10px;
+   }
+
+   .row0{
+      background:#eee;
+      margin:auto;
+      border-bottom: 2px solid #555;
+   }
+   .row1,.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10{
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+   }
+   .pageNo{
+      margin:auto;
+   }
+
+   #writer{
+      margin-top:2px;
+      float:right;
+      background:white;
+      border:1px solid skyblue;
+   }
+
+   dt, dd {
+      padding: 10px;
+   }
+
+   dt {
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      border:1px solid black;
+      margin-bottom: 5px;
+   }
+   dt:hover{
+      background:#ededed;
+   }
+   dt span {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background-color: black;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+   dd {
+      background:    -webkit-linear-gradient(#fff, #eee);
+      background:    -moz-linear-gradient(#fff, #eee);
+      background:    -o-linear-gradient(#fff, #eee);
+      background:    -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
+      background:    linear-gradient(#fff, #eee);
+
+      margin-bottom: 5px;
+      display: none;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+    #accordionArea{
+       padding-right:2%;
+       padding-left:2%;
+       width:80%;
+       margin:0 auto;
+       border:1px solid #ddd;
+
     }
 	
 	dd {
@@ -205,27 +227,26 @@
 			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage1 + 1%>'">></button>
 			<%} %>
 			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage1%>'">>></button>
- 		 
       </div>
-		
-	</section>
-	<script>
 
-	$(function(){
-		$("#messageArea td").mouseenter(function(){
-			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
-		}).mouseout(function(){
-				$(this).parent().css({"background":"white"});	
-		}).click(function(){
-			var num = $(this).parent().children("input").val();
-			console.log(num);
-			 location.href="<%=request.getContextPath()%>/soqa.qo?num=" + num;
-		});
-	});
-		
-	
-	</script>
-	<!-- footer 영역 -->
-	<footer><%@ include file="../hfl/footer.jsp" %></footer>
+   </section>
+   <script>
+
+   $(function(){
+      $("#messageArea td").mouseenter(function(){
+         $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+      }).mouseout(function(){
+            $(this).parent().css({"background":"white"});
+      }).click(function(){
+         var num = $(this).parent().children("input").val();
+         console.log(num);
+          location.href="<%=request.getContextPath()%>/soqa.qo?num=" + num;
+      });
+   });
+
+
+   </script>
+   <!-- footer 영역 -->
+   <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>
 </html>

@@ -27,7 +27,7 @@ public class SearchAllMemberServlet extends HttpServlet {
 		String page = "";
 		if(list!=null) {
 			request.setAttribute("list", list);
-			page = "views/menager/member/membermanagement.jsp";
+			page = "views/manager/member/membermanagement.jsp";
 		}else {
 			request.setAttribute("msg", "목록조회실패!");
 			page="/views/common/errorPagePrompt.jsp";
