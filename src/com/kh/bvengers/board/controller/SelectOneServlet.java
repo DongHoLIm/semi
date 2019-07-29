@@ -40,8 +40,6 @@ public class SelectOneServlet extends HttpServlet {
 			request.setAttribute("b", b);
 			request.setAttribute("p", p);
 			request.setAttribute("fileList", fileList);
-		} else {
-
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 
