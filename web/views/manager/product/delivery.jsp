@@ -1,5 +1,10 @@
+<%@page import="com.kh.bvengers.board.model.vo.Calculate"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<Calculate> list = (ArrayList<Calculate>) request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +46,7 @@
 }
 
 .board {
-	width: 80%;
+	width: 100%;
 	margin: auto;
 	align: center;
 	border-spacing: 10px;
@@ -83,18 +88,37 @@ align:center;
 			<table class="board">
 					<tr class="row0">
 						<th>번호</th>
-						<th>판매자 아이디</th>
+						<th>판매자ID</th>
 						<th>판매 상품</th>
-						<th>구매자 아이디</th>
+						<th>구매자ID</th>
 						<th>주문날짜</th>
-						<th>확정날짜</th>
-						<th>진행 상태</th>
+						<th>발생일자</th>
+						<th>진행상태</th>
 						<th>선택</th>
 					</tr>
 				<tbody>
-					<tr>
-						
-					</tr>
+					<% for(Calculate c : list){ %>
+				<tr>
+					<input type="hidden" value="<%= c.getDeliveryNo() %>">
+					<td><%= c.getOrderNo() %></td>
+					<td><%= c.getSellerId() %></td>
+					<td><%= c.getPostsTitle() %></td>
+					<td><%= c.getBuyerId() %></td>
+					<td><%= c.getOrderDate() %></td>
+					<td><%= c.getCalculateDate() %></td>
+					<td>
+						<!-- 검수테이블 id를 검색 후 검색결과가 있을 경우 정산완료, null일 경우 아래 if문 실행하도록 이후에 보수 -->
+						<% if(c.getDeliveryStatus().equals("1")){%>
+							주문완료
+						<%}else if(c.getDeliveryStatus().equals("2")){ %>
+							배송중
+						<%}else if(c.getDeliveryStatus().equals("3")){ %>
+							구매확정
+						<%} %>
+					</td>
+					<td><input type="checkbox" name="selectTr"/></td>
+				</tr>
+				<% } %>
 				</tbody>
 			</table>
 				<div id="numberBox"><%@ include file="../hfl/pagination.jsp" %></div>

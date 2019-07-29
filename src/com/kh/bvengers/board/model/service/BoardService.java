@@ -13,6 +13,7 @@ import java.util.List;
 import com.kh.bvengers.board.model.dao.BoardDao;
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
+import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Comment;
 import com.kh.bvengers.board.model.vo.PowerLink;
 
@@ -271,10 +272,10 @@ public class BoardService {
 	}
 
 
-	public ArrayList<Board> paymentManagement() {
+	public ArrayList<Calculate> paymentManagement() {
 		Connection con = getConnection();
 		
-		ArrayList<Board> list = new BoardDao().paymentManagement(con);
+		ArrayList<Calculate> list = new BoardDao().paymentManagement(con);
 		
 		close(con);
 		

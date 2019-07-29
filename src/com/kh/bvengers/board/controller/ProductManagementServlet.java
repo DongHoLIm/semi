@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.board.model.service.BoardService;
-import com.kh.bvengers.board.model.vo.Board;
+import com.kh.bvengers.board.model.vo.Calculate;
 
 /**
  * Servlet implementation class ProductManagementServlet
@@ -31,7 +31,21 @@ public class ProductManagementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Board> list = new BoardService().paymentManagement();
+		ArrayList<Calculate> list = new BoardService().paymentManagement();
+		
+		
+		String page = "";
+		
+		if(list != null) {
+			page = "views/manager/product/delivery.jsp";
+			request.setAttribute("list", list);
+			
+		}else {
+			page = "views/common/errorPagePrompt.jsp";
+			request.setAttribute("msg", "조회 실패!");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 		
 	}
