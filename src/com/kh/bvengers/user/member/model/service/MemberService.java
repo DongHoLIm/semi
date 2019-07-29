@@ -52,16 +52,18 @@ public class MemberService {
 		return list;
 	}
 
-	public ArrayList<Member> searchMember(String selecthowsearch, String searchValue) {
+	public ArrayList<Member> searchMember(int currentPage, int limit, String selecthowsearch, String searchValue) {
 		Connection con = getConnection();
 		ArrayList<Member> list = null;
 		if(selecthowsearch.equals("findId")) {
-			list = new MemberDao().searchId(con,searchValue);
+			list = new MemberDao().searchId(con,currentPage,limit,searchValue);
 		}else if(selecthowsearch.equals("findName")) {
-			list = new MemberDao().searchName(con,searchValue);
+			list = new MemberDao().searchName(con,currentPage,limit,searchValue);
+			System.out.println(searchValue);
 		}else {
-			list = new MemberDao().searchLevel(con,searchValue);
-		}
+			list = new MemberDao().searchLevel(con,currentPage,limit,searchValue);
+			System.out.println(searchValue);
+		} 
 
 		close(con);
 		return list;

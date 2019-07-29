@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.user.member.model.service.MemberService;
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.member.model.vo.MemberPageInfo;
 
 @WebServlet("/searchMember.me")
 public class SearchMemberServlet extends HttpServlet {
@@ -21,27 +22,52 @@ public class SearchMemberServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		limit=10;
+		int listCount = new MemberService().getListCount();
+		maxPage = (int)((double)listCount / limit+0.9);
+		
+		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
+		
+		endPage = startPage + 10 -1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		MemberPageInfo pi = new MemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+		
 		String selecthowsearch = request.getParameter("selecthowsearch");
 		String searchValue = "";
 		
 		if(selecthowsearch.equals("findId")) {
-			searchValue = request.getParameter("searchValue");
+			searchValue = (String)request.getParameter("searchValue");
 		}else if(selecthowsearch.equals("findName")) {
-			searchValue = request.getParameter("searchValue");
+			searchValue = (String)request.getParameter("searchValue");
 		}else {
-			searchValue = request.getParameter("searchValue");
+			searchValue =(String)request.getParameter("searchValue");
 		}
 		
-		System.out.println(selecthowsearch);
-		System.out.println(searchValue);
+		System.out.println("servlet : "+selecthowsearch);
+		System.out.println("servlet : "+searchValue);
 		
-		ArrayList<Member> list = new MemberService().searchMember(selecthowsearch,searchValue);
+		
+		ArrayList<Member> list = new MemberService().searchMember(currentPage,limit,selecthowsearch,searchValue);
 		System.out.println(list);
-		
 		String page = "";
 		if(list!=null) {
 			request.setAttribute("list", list);
-			page = "views/manager/member/blackList.jsp";
+			request.setAttribute("pi", pi);
+			page = "views/manager/member/listMember.jsp";
 		}else {
 			request.setAttribute("msg", "목록조회실패!");
 			page="/views/common/errorPagePrompt.jsp";
