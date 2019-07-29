@@ -29,6 +29,24 @@
 
 <style>
 
+
+.searchdiv {
+	width: 60%;
+	height:70%;
+	padding: 2%;
+	margin: 0 auto;
+	text-align:center;
+	border:1px solid black;
+}
+
+
+input[type=button] {
+	border:1px solid black;
+	background:#FFF;
+	text-align:center;
+	margin:0 auto;
+}
+
 .pagingArea {
 	margin-top:50px;
 }
@@ -37,10 +55,6 @@
 	background:#FFF;
 	border: 1px solid black;
 	
-}
-input[type=button] {
-	border:1px solid black;
-	background:#FFF;
 }
 .btn_od {
 	border:1px solid black;
@@ -133,21 +147,51 @@ tr > th, tr>td{
 	<br><br>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 
-	<section id="sec1">
-		<div id="area">
-			<h3 style="font-weight: bold">주문조회</h3>
-		<div class="date-select" align="center">
-			<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;
-			<input type="button" value="1주일" id="selectWeek">&nbsp;
-			</span> &nbsp;<input type="button" value="15일" id="selectFifteenth">&nbsp; &nbsp;
-			<input type="button" value="1개월" id="selectMonth">&nbsp; 
-			<input type="date"> - <input type="date"><br> <br>
-			<input type="text" id="testDatepicker">
-			
-		</div>
-		</div>
-		
-		<div >
+
+<div class="searchdiv">
+  <table class="searchBox">
+                   <!-- <caption style="font-size:20px;">주문조회</caption> -->
+                    <colgroup>
+                        <col width="123px">
+                        <col width="*">
+                    </colgroup>
+                    <h2>주문조회</h2>
+                    <tbody>
+                        <tr>
+                            <th class="th_select">기간별 조회</th>
+                            <td>
+                               <span class="chkbox2">
+                                            <input type="button" name="dateType" id="dateType3" value="1주일" onclick="setSearchDate('1w')"/>
+                                            <label for="dateType3"></label>
+                                        </span>
+                                        <span class="chkbox2">
+                                            <input type="button" name="dateType" id="dateType5" value="15일" onclick="setSearchDate('1m')"/>
+                                            <label for="dateType4"></label>
+                                        </span>
+                                        <span class="chkbox2">
+                                            <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
+                                            <label for="dateType5"></label>
+                                        </span>
+                               
+                                <!-- <div class="clearfix">
+                                    시작일 -->
+                                    <span class="dset">
+                                        <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >
+                                        <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
+                                    </span>
+                                    <span class="demi">~</span>
+                                    <!-- 종료일 -->
+                                    <span class="dset">
+                                      <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
+                                        <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
+                                    </span>
+                                <!-- </div>  -->  
+                            </td>
+                        </tr>
+                    <tbody>
+                </table>
+			</div>
+		<div class="t_div">
 			<br />
 			<table border="1" align = "center" class = "board">
 				<tr>
@@ -203,7 +247,6 @@ tr > th, tr>td{
 
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=maxPage%>'">>></button>
 		</div>
-	</section>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
