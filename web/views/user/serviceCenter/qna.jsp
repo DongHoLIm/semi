@@ -103,16 +103,16 @@
        border:1px solid #ddd;
 
     }
-	
+
 	dd {
 		background:	 -webkit-linear-gradient(#fff, #eee);
 		background:	 -moz-linear-gradient(#fff, #eee);
 		background:	 -o-linear-gradient(#fff, #eee);
 		background:	 -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
 		background:	 linear-gradient(#fff, #eee);
-		
-		margin-bottom: 5px; 
-		display: none; 
+
+		margin-bottom: 5px;
+		display: none;
 		-webkit-border-radius: 10px;
 		-moz-border-radius: 10px;
 		border-radius: 10px;
@@ -123,14 +123,33 @@
 	 	width:80%;
 	 	margin:0 auto;
 	 	border:1px solid #ddd;
-	 	
+
+	 }
+	 #map {
+	 	margin: 0 auto;
+	 }
+	 #mapOuter{
+	 	text-align: center;
+	 }
+	 #mapOuter label{
+	 	font-size: 1.5em;
+		margin-bottom: 50px;
+	 	margin-top: 50px;
+	 	font-weight: bold;
+	 }
+	 #findRoad{
+	 margin-top: 10px;
+	 	background: black;
+	 	color: white;
+	 	width: 100px;
+	 	height: 50px;
 	 }
 </style>
 </head>
 <body>
 	<!-- header 영역 -->
 	<header><%@ include file="../hfl/header.jsp" %></header>
-	
+
 	<section id="sec1">
 	<div id="accordionArea">
 	<h2 align="left"> 자주 찾는 질문</h2>
@@ -164,10 +183,10 @@
 	    function slideUp() {
 	        $('dt').removeClass('on').next().slideUp();
 	    };
-	    
+
 	})
 	</script>
-	
+
 	<br><br><br><br>
 	<p align="center">내가 쓴 질문</p>
 		<table class="board" id = messageArea>
@@ -182,7 +201,7 @@
 			</tr>
 			<tr class="row1">
 			<%for(Board b :List){ %>
-			<input type = "hidden" value = "<%=b.getPostsId() %>"> 
+			<input type = "hidden" value = "<%=b.getPostsId() %>">
 					<td><%= b.getPostsId() %></td>
 					<td><%= b.getPostsTitle() %></td>
 					<td><%= b.getMemberName()%></td>
@@ -194,33 +213,33 @@
 				<td>Y</td>
 			<%} %>
 			</tr>
-		<%  int num = b.getPostsId();}%>	
+		<%  int num = b.getPostsId();}%>
 			<tr>
 			</tr>
-			
+
 			<button id="writer" align="right" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>
 		</table>
+
 		<br><br>
 		 <div class = "pagingArea" align ="center" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>      
-		<%if(currentPage1 <= 1) {%> 
+		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>
+		<%if(currentPage1 <= 1) {%>
 		<button disabled><</button>
 		<%} else{%>
 	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage1-1%>'"><</button>
 		<%}
-			System.out.println("최근 페이지는" + currentPage1);
-		%>    
+		%>
 			<%for (int p = startPage1; p <= endPage1; p++) {
 				if(currentPage1 == p){
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
 					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
-			<% }  
-			}	
+			<% }
+			}
 			%>
-			
-			
+
+
 			<%if(currentPage1 >= maxPage1){ %>
 			<button disabled>></button>
 			<%}else{ %>
@@ -228,7 +247,6 @@
 			<%} %>
 			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage1%>'">>></button>
       </div>
-
    </section>
    <script>
 
@@ -244,9 +262,19 @@
       });
    });
 
-
    </script>
+   <br />
+   <div id="mapOuter">
+   <label>찾아오시는 길</label>
+   <%@ include file="../serviceCenter/aboutCompany.jsp" %>
+   <button type="button" id="findRoad">길찾기</button>
+   </div>
    <!-- footer 영역 -->
    <footer><%@ include file="../hfl/footer.jsp" %></footer>
+   <script>
+   		$("#findRoad").click(function(){
+   	   		window.open("https://map.kakao.com/link/to/kh정보교육원,37.499117,127.032882");
+   	   	});
+   </script>
 </body>
 </html>
