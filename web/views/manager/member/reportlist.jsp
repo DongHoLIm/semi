@@ -108,12 +108,12 @@ border:1px solid white;
 		</form>
 
 <div class="pagingArea" align="center">
-	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>
+	<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>
 			<% }else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"> < </button>
+			<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=<%=currentPage - 1%>'"> < </button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
@@ -121,7 +121,7 @@ border:1px solid white;
 			%>
 					<button disabled><%= p %></button>
 			<% } else { %>
-					<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=<%=p%>'"><%= p %></button>
 			<% 
 				}
 			   } 
@@ -130,15 +130,15 @@ border:1px solid white;
 			<% if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<% }else{ %>
-			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage + 1 %>'">></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=<%=currentPage + 1 %>'">></button>
 			<% } %>
 
-			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=maxPage%>'">>></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=<%=maxPage%>'">>></button>
 </div>
 <script>
 $(".detail").click(function(){
-	var postsId = $(this).text();
-	location.href='<%=request.getContextPath()%>/reportDetail.mb?postsId='+postsId;
+	var num = $(this).text();
+	location.href='<%=request.getContextPath()%>/son.no?num='+num;
 });
 
 $(function(){

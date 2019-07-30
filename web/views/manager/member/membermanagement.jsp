@@ -1,20 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"import="java.util.* , com.kh.bvengers.user.member.model.vo.*"%>
+	pageEncoding="UTF-8" import="java.util.* , com.kh.bvengers.user.member.model.vo.*"%>
 	<%
-	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
+	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list1");
     Member loginUser = (Member) session.getAttribute("loginUser");
-	MemberPageInfo pi = (MemberPageInfo) request.getAttribute("pi");
+	MemberPageInfo pi = (MemberPageInfo) request.getAttribute("pi1");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-	%>	
+	
+	
+	
+	%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #depotMain {
 	width: 80%;
@@ -57,49 +61,51 @@ tr {
 table th{
 text-align:center;
 }
+table td{
+text-align:center;
+}
 .btns{
 margin-left:13%;
 font-weight:bold;
 font-size:3;
+}
+#chk{
+input-align:center;
 }
 </style>
 <body>
 	<%@ include file="../hfl/managerHeader.jsp"%>
 	<br />
 	<h2 align="center">회원 관리</h2>
-	<%-- <%if(loginUser == null || !loginUser.getMemberId().equals("admin")){ 
-		request.setAttribute("msg", "잘못된 경로로 접근했어요");
-		request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);
-	}else{%> --%>
+	
 	<div id="inOutMain">
 		<br>
 		<br>
-		<form action="<%=request.getContextPath()%>/memberList.me" method="post">
 		<div id="inOutButton" align="center">
-			<select name="selecthowsearch" style="width: 30%;">
+			<select name="selecthowsearch" id="selecthowsearch" style="width: 30%;">
 				<option value="findId">아이디로 조회</option>
 				<option value="findName">이름으로 조회</option>
 				<option value="findLevel">등급으로 조회</option>
-			</select> <input type="search" name="searchValue">
-			<button type="submit"
+			</select> <input type="search" name="searchValue" id="searchValue">
+			<button id = "searchbtn"
 				style="border-radius: 5px; background-color: black; color: white;">조회</button>
 		</div>
 		<br>
 		<br>
-		</form>
 		<div class="btns">
 		선택회원을
-		<button value="블랙리스트"
+		<button value="블랙리스트" id="blacklist"
 			style="align: center; border-radius: 5px; background-color: black; color: white;">블랙리스트</button>
-		<button value="활동정지"
+		<button value="활동정지" id="stop"
 			style="border-radius: 5px; background-color: black; color: white;">활동정지</button>
 		</div>
 		<br>
 		<br>
 		<div id="table Area">
 			<table id="depotMain" align="center">
+			<thead>
 				<tr>
-					<th class="th"><input type="checkbox"></th>
+					<th class="th"><input type="checkbox" id="chkAll"></th>
 					<th class="th">아이디</th>
 					<th class="th">이름</th>
 					<th class="th">전화번호</th>
@@ -107,7 +113,9 @@ font-size:3;
 					<th class="th">주소</th>
 					<th class="th">가입일</th>
 					<th class="th">판매횟수</th>
+					<th class="th">회원 상세 조회</th>
 				</tr>
+				</thead>
 				<%for(Member m : list){ %>
 				<tr>
 					<td><input type="checkbox" class="chk"></td>
@@ -127,5 +135,62 @@ font-size:3;
 		</div>
 	</div>
 
+<script>
+
+ 	  $(".mbdetail").click(function(){ 
+			var mi = $(this).parent().siblings().eq(1).text();
+			console.log(mi);
+		 location.href='<%=request.getContextPath()%>/mbdetail.me?mi='+mi;
+		 });
+	$(".chk").on("click",function(){
+		var chkid = $(this).parent().siblings().eq(0).text();
+	location.href='<%=request.getContextPath()%>/updateBL.me?chkid='+chkid;		
+	})
+ 	 
+	$("#chkAll").on("click", function() {
+	      var chkAll = $(this).is(":checked");
+	      if (chkAll)
+	        $("#depotMain input:checkbox").prop("checked", true);
+	      else
+	        $("#depotMain input:checkbox").prop("checked", false);
+	    });
+	$("#searchbtn").on("click",function(){
+		var howselect = $("#selecthowsearch option:selected").val();
+		var value = $("#searchValue").val();
+		var send = $("#selecthowsearch option:selected").val() + "$" + $("#searchValue").val();
+		console.log(send);
+		 location.href='<%=request.getContextPath()%>/searchMember.me?send='+send;
+		
+	});
+</script>
+<div class="pagingArea" align="center">
+	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1){ %>
+			<button disabled><</button>
+			<% }else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"> < </button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+				if(currentPage == p){
+			%>
+					<button disabled><%= p %></button>
+			<% } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=p%>'"><%= p %></button>
+			<% 
+				}
+			   } 
+			
+			%>
+			
+			<% if(currentPage >= maxPage){ %>
+			<button disabled>></button>
+			<% }else{ %>
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+
+			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=maxPage%>'">>></button>
+</div>
 </body>
 </html>
