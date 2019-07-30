@@ -1,6 +1,7 @@
 package com.kh.bvengers.user.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ public class SearchMemberServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		int currentPage;
 		int limit;
 		int maxPage;
@@ -32,7 +34,7 @@ public class SearchMemberServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit=10;
+		limit=5;
 		int listCount = new MemberService().getListCount();
 		maxPage = (int)((double)listCount / limit+0.9);
 		
@@ -46,33 +48,33 @@ public class SearchMemberServlet extends HttpServlet {
 		
 		MemberPageInfo pi = new MemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 		
-		String selecthowsearch = request.getParameter("selecthowsearch");
-		String searchValue = "";
+		/*String selecthowsearch = (String)request.getParameter("howselect");
+		String searchValue = (String)request.getParameter("value");
+		*/
+		String send = (String) request.getParameter("send");
 		
-		if(selecthowsearch.equals("findId")) {
-			searchValue = (String)request.getParameter("searchValue");
-		}else if(selecthowsearch.equals("findName")) {
-			searchValue = (String)request.getParameter("searchValue");
-		}else {
-			searchValue =(String)request.getParameter("searchValue");
-		}
+		int idx = send.indexOf("$");
 		
-		System.out.println("servlet : "+selecthowsearch);
-		System.out.println("servlet : "+searchValue);
+		String selecthowsearch = send.substring(0,idx);
+		String searchValue = send.substring(idx+1);
 		
 		
 		ArrayList<Member> list = new MemberService().searchMember(currentPage,limit,selecthowsearch,searchValue);
-		System.out.println(list);
 		String page = "";
+		//PrintWriter out = response.getWriter();
+		
 		if(list!=null) {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 			page = "views/manager/member/listMember.jsp";
+			request.getRequestDispatcher(page).forward(request, response);
 		}else {
 			request.setAttribute("msg", "목록조회실패!");
 			page="/views/common/errorPagePrompt.jsp";
+			request.getRequestDispatcher(page).forward(request, response);
 		}
-		request.getRequestDispatcher(page).forward(request, response);
+		/*out.flush();
+		out.close();*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

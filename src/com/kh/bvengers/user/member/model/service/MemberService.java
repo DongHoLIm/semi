@@ -59,10 +59,8 @@ public class MemberService {
 			list = new MemberDao().searchId(con,currentPage,limit,searchValue);
 		}else if(selecthowsearch.equals("findName")) {
 			list = new MemberDao().searchName(con,currentPage,limit,searchValue);
-			System.out.println(searchValue);
 		}else {
 			list = new MemberDao().searchLevel(con,currentPage,limit,searchValue);
-			System.out.println(searchValue);
 		} 
 
 		close(con);
