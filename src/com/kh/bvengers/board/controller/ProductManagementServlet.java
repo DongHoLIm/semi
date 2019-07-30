@@ -47,15 +47,15 @@ public class ProductManagementServlet extends HttpServlet {
 		}
 		
 		//작성 글 증가 시 5~10까지 추가
-		limit = 2;
+		limit = 3;
 		
 		int listCount = new BoardService().getListCount();
 		
-		maxPage = (int)((double)listCount/limit + 0.5);
+		maxPage = (int)((double)listCount/limit + 0.9);
 		
-		startPage = (((int)((double) currentPage / limit + 0.5))-1)*10+1;
+		startPage = (((int)((double) currentPage / limit + 0.9))-1)*10+1;
 		
-		endPage = startPage + 2 -1;
+		endPage = startPage + 3 -1;
 		
 		if(maxPage < endPage) {
 			endPage = maxPage;

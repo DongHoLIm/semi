@@ -320,15 +320,28 @@ public class BoardService {
 		Connection con = getConnection();
 		
 		int listCounter = new BoardDao().getListCount(con);
-		return 0;
+		return listCounter;
 	}
 
 	public ArrayList<Calculate> paymentManagement(int currentPage, int limit) {
 		Connection con = getConnection();
 		
-		//ArrayList<Calculate> list 
+		ArrayList<Calculate> list = new BoardDao().paymentManagement(con, currentPage, limit); 
 		
-		return null;
+		int count = list.size() +1;
+		for(int i = 0; i < list.size(); i++) {
+			int result = 0;
+			
+			result = new BoardDao().checkStatus(con, list.get(i));
+			
+			if(result > 0) {
+				count--;
+			}
+		}
+		
+		close(con);
+		
+		return list;
 	}
 
 }
