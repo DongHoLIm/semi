@@ -331,6 +331,58 @@ public class BoardService {
 		return null;
 	}
 
+	public Board selectOne(int num) {
+		Connection con = getConnection();
+		
+		Board b = new BoardDao().selectOne(con, num);
+		
+		
+		close(con);
+		
+		return b;
+	}
+
+	public int updateNotice(Board b) {
+		Connection con = getConnection();
+		
+		System.out.println("여기는 와>");
+		
+		int resulttitle = new BoardDao().updateNotice(con,b);
+		
+		int resultcontent = new BoardDao().updateNoticeContent(con,b);
+		
+		int result = 0;
+		
+		
+		if(resulttitle>0&&resultcontent>0) {
+			commit(con);
+			result = 1;
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+
+		
+	}
+
+	public int insertpicture(Board b, ArrayList<Attachment> fileList) {
+		Connection con = getConnection();
+
+		int result1= new BoardDao().insertNoticePicture(con, fileList,b);
+
+		if( result1 >0) {
+			commit(con);
+			
+		}else {
+			rollback(con);
+		}
+
+		return result1;
+	}
+
 }
 
 

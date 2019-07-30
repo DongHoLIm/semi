@@ -52,14 +52,19 @@ td{
 					HashMap<String, Object> hmap = fileList.get(i);
 				 %>
 				<tr>
+				<% if(request.getContextPath()!=null){%>
 				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>"></td>
+				<%}else{%>
+				<%}%><td colspan = "6"></td>
 				</tr>
+				
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
 					<%} %>
 			</table>
 		</div>
+		
 				<br><br><br>
 		</form>
 			
@@ -77,6 +82,13 @@ td{
 		<div>
 			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
 		
+		</div>
+		<div>
+		<button id= "report" align = "left" onclick = "report();">신고하기</button>
+		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
+			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
+		<%} %>
+			
 		</div>
 	<br>
 	<br>
@@ -99,6 +111,7 @@ td{
 
 	$(function(){
 		$("#addReply").click(function(){
+			<% if(loginUser!=null){%>
 			var writer =  <%= loginUser.getMemberNo()%>;
 		    var postId = <%= b.getPostsId()%>;
 		    var content = $("#replyContent").val();
@@ -130,6 +143,11 @@ td{
 		    		console.log("실패!");
 		    	}
 		    });
+		<%}else{ %>
+			alert("로그인이 필요합니다!");
+			location.href="views/user/login/login.jsp";
+
+			<%}%>
 		});
 	});
 	</script>
