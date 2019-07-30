@@ -1089,7 +1089,6 @@ public class BoardDao {
 		
 		return list;
 	}
-}
 
 	public Board selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;

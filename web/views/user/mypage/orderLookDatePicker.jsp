@@ -1,5 +1,17 @@
+<%@page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
+<%@page import="com.kh.bvengers.user.myPage.model.vo.myPage"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<myPage> list = (ArrayList<myPage>) request.getAttribute("dateList");
+	MyPagePageInfo pi  = (MyPagePageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,10 +86,9 @@ $(document).ready(function() {
             $("#searchStartDate").datepicker( "option", "maxDate", selectedDate );
             $(".searchDate").find(".chkbox2").removeClass("on");
            
-            var f = document.frm;
-            f.method = "post";
+          /*   var f = document.frm;
             $(".adminbuildenergyno").remove(); //name값이 다수여서 지워여야함
-            f.submit();
+            f.submit(); */
         });
        
     
@@ -91,23 +102,21 @@ $(document).ready(function() {
     $.fn.schDate = function() {
        var $obj = $(this);
        /* var $chk = $obj.find("input[type=radio]"); */
-       $("#dateType1").click(function(){
-       var d1 = $(this).parent().siblings().eq(0).text();
-    	  $("#dateType2").parent(".chkbox2").removeClass("on");
-    	  $("#dateType3").parent(".chkbox2").removeClass("on");
-    	  $("#dateType1").parent(".chkbox2").addClass("on");
-       console.log(d1);
-    	  <%-- location.href='<%=request.getContextPath()%>/orderLook.mp?d1='+d1; --%>
-       });
-       $("#dateType2").click(function(){
-     	  $("#dateType1").parent(".chkbox2").removeClass("on");
-     	  $("#dateType3").parent(".chkbox2").removeClass("on");
-     	  $("#dateType2").parent(".chkbox2").addClass("on");
-        });
        $("#dateType3").click(function(){
-      	  $("#dateType1").parent(".chkbox2").removeClass("on");
-      	  $("#dateType2").parent(".chkbox2").removeClass("on");
-      	  $("#dateType3").parent(".chkbox2").addClass("on");
+       var d1 = $(this).parent().siblings().eq(0).text();
+    	  $("#dateType4").parent(".chkbox2").removeClass("on");
+    	  $("#dateType5").parent(".chkbox2").removeClass("on");
+    	  $("#dateType3").parent(".chkbox2").addClass("on");
+       });
+       $("#dateType4").click(function(){
+     	  $("#dateType3").parent(".chkbox2").removeClass("on");
+     	  $("#dateType5").parent(".chkbox2").removeClass("on");
+     	  $("#dateType4").parent(".chkbox2").addClass("on");
+        });
+       $("#dateType5").click(function(){
+      	  $("#dateType3").parent(".chkbox2").removeClass("on");
+      	  $("#dateType4").parent(".chkbox2").removeClass("on");
+      	  $("#dateType5").parent(".chkbox2").addClass("on");
          });
        
        /* $chk.click(function() {
@@ -138,11 +147,11 @@ $(document).ready(function() {
        var endDate = $.datepicker.formatDate('yy-mm-dd', today);
        $('#searchEndDate').val(endDate);
     
-       if (str == 'w') {
-           today.setDate(today.getDate() - (num * 7));
-       } else if (str == 'f') {
-           today.setDate(today.getDate() - (num * 15));
-       } else if (str == 'm') {
+       if(str == 'd'){
+           today.setDate(today.getDate() - num);
+       }else if (str == 'w'){
+           today.setDate(today.getDate() - (num*7));
+       }else if (str == 'm'){
            today.setMonth(today.getMonth() - num);
            today.setDate(today.getDate() + 1);
        }
@@ -156,9 +165,9 @@ $(document).ready(function() {
        // 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
        $("#searchStartDate").datepicker("option", "maxDate", endDate);
     
-       var f = document.frm;
+       /* var f = document.form;
        f.method = "post";
-       $(".adminbuildenergyno").remove(); //name값이 다수여서 지워여야함
+       $(".adminbuildenergyno").remove(); //name값이 다수여서 지워여야함 */
        
     };
  
@@ -218,16 +227,16 @@ input[type=button] {
              <th class="th_select">기간별 조회</th>
              <td class="td_select">
                 <span class="chkbox2">
-                       <input type="button" name="dateType" id="dateType1" value="1주일" onclick="setSearchDate('1w')"/>
-                       <label for="dateType1"></label>
-                   </span>
-                   <span class="chkbox2">
-                       <input type="button" name="dateType" id="dateType2" value="15일" onclick="setSearchDate('1f')"/>
-                       <label for="dateType2"></label>
-                   </span>
-                   <span class="chkbox2">
-                       <input type="button" name="dateType" id="dateType3" value="1개월" onclick="setSearchDate('1m')"/>
+                       <input type="button" name="dateType" id="dateType3" value="1주일" onclick="setSearchDate('1w')"/>
                        <label for="dateType3"></label>
+                   </span>
+                   <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType4" value="2주일" onclick="setSearchDate('2w')"/>
+                       <label for="dateType4"></label>
+                   </span>
+                   <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
+                       <label for="dateType5"></label>
                    </span>
                    
           
@@ -244,30 +253,99 @@ input[type=button] {
                    <a href="#none" class="btncalendar dateclick"><img src="<%=request.getContextPath()%>/images/btn_calendar.gif"></a>
                </span>
                <span>
-                   	<input type="submit" name="selectDate" id="selectDate" value="조회" onclick="orderDate();">
+                   	<input type="button" name="selectDate" id="selectDate"  onclick="search();" value="조회">
                    </span>
-           <!-- </div>  -->  
                    </td>
                </tr>
            <tbody>
        </table>
 </div>
 </body>
-
-
+ 
 <script>
 
-function orderDate(){
-	var startDate = "${adminBuildEnergyVo.startdate}";
-	var endDate = "${adminBuildEnergyVo.enddate}";
-	
-	console.log(startDate);
-	console.log(endDate)
-	
-	location.href="<%=request.getContextPath()%>/views/user/mypage/orderDate.mp?startDate="+startDate"&endDate"+endDate;
+function search(){
+	$(function(){
+		var start =$("input[id='searchStartDate']").val();
+		var end = $("input[id='searchEndDate']").val();
+		console.log(start);
+		console.log(end);
+		$.ajax({
+			url:"orderDate.mp",
+			type:"post",
+			data:{"start":start,"end":end},
+			success:function(data){
+				var $dateTbody = $("#dateBoard tbody");
+				var $pagingDiv1 =$("#pagingArea div");
+				$dateTbody.html(""); 
+				$pagingDiv1.html("");
+				console.log(data);
+				var i = 1;
+				for(var i = 0; i < data["dateList"].length; i++){
+					var $tr = $("<tr>").addClass("od");
+					var $ono = $("<td>").text(data["dateList"][i].ono);							
+					var $oDate = $("<td>").text(data["dateList"][i].oDate);
+					var $pname = $("<td>").text(data["dateList"][i].pname);
+					var $dstatus = $("<td>").text(data["dateList"][i].payStatus);
+					var $payStatus = $("<td>").text(data["dateList"][i].dstatus);
+					var $refundStatus = $("<td>").text(data["dateList"][i].refundStatus);
+				
+					$tr.append($ono);
+					$tr.append($oDate);
+					$tr.append($pname);
+					$tr.append($dstatus);
+					$tr.append($payStatus);
+					$tr.append($refundStatus);							
+					$dateTbody.append($tr);
+				}
+				var currentPage = data["pi"].currentPage;
+				var endPage = data["pi"].endPage;
+				var limit = data["pi"].limit;
+				var listCount = data["pi"].listCount;
+				var maxPage = data["pi"].maxPage;
+				var startPage = data["pi"].startPage;
+				
+				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+				var $firstBtn = $("<button>").text('<<');
+				var $preBtn = $("<button>").text('<');
+				var $numBtn = $("<button>");
+				var $nextBtn =$("<button>").text('>');
+				var $lastBtn =$("<button>").text('>>');
+				
 
-		}
+				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=1"');						
+				if(currentPage <= 1){
+					$preBtn.attr('disabled',true);							
+				}else{
+					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage - 1"');						
+				}
+				for(var i = startPage ; i <= endPage ;i++){		
+					if(currentPage == i){
+						$numBtn.attr('disabled',true);																
+					}else{
+						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=i"');																
+					}
+					$numBtn.text(i);			
+				}
+				if(currentPage >= maxPage){
+					$nextBtn.attr('disabled',true);							
+				}else{
+					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage + 1 "');							
+				}
+				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=maxPage"');
+				
+				$pagingDiv2.append($firstBtn);
+				$pagingDiv2.append($preBtn);
+				$pagingDiv2.append($numBtn);
+				$pagingDiv2.append($nextBtn);
+				$pagingDiv2.append($lastBtn);
+				
+				$pagingDiv1.append($pagingDiv2);
+			},			
+		});
+	});
+}
+</script> 
 
-</script>
 
 </html>
