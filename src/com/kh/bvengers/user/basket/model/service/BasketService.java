@@ -31,4 +31,23 @@ public class BasketService {
 		return list;
 	}
 
+	public ArrayList<Basket> deleteBasketList(String[] code, String userNo) {
+		Connection con = getConnection();
+		ArrayList<Basket>list =null;
+		int result = 0;
+		
+		
+		for(int i =0;i<code.length;i++) {
+			result =new BasketDao().deleteBasket(con,code[i],userNo);
+			if(result>0) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+		}
+		list = new BasketDao().basketAllList(con,userNo);			
+		
+		return list;
+	}
+
 }
