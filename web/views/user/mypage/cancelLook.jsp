@@ -112,9 +112,9 @@ tr {
 					<th class="th_cancel">주문상태</th>
 				</tr>
 				<tr>
-					<td>주문일자<br>주문번호<br><input type="button" onclick="<%=request.getContextPath()%>/orderDetails.jsp'" value="주문상세"></td>
+					<td>주문일자<br>주문번호<br><input type="button" onclick="orderDetails.jsp'" value="주문상세"></td>
 					<td>상품명</td>
-					<td><%= %><input type="text" value="주문상태" id="ip_status"readonly></td>
+					<td><input type="text" value="주문상태" id="ip_status"readonly></td>
 				</tr>
  
          </table>

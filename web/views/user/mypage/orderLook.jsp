@@ -22,29 +22,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-
 <style>
 
+.tt_div { 
+	width:60%;
+	height:100%;
+	margin-left:auto;
+	margin-right:auto;
 
-.searchdiv {
-	width: 60%;
-	height:70%;
-	padding: 2%;
-	margin: 0 auto;
-	text-align:center;
-	border:1px solid black;
 }
 
-
-input[type=button] {
-	border:1px solid black;
-	background:#FFF;
-	text-align:center;
-	margin:0 auto;
+.t_div {
+	width:100%;
+	height:70%;
+	margin: 0 auto;
+	text-align: center;
+	
 }
 
 .pagingArea {
@@ -69,22 +62,6 @@ input[type=button] {
 	text-align:center;
 }
 
-#sec1 {
-	width: 100%;
-	height: 100%;
-	padding-right: 20%;
-	padding-left: 20%;
-	margin: auto;
-}
-
-#area {
-	width: 80%;
-	height:70%;
-	padding: 2%;
-	margin: 0 auto;
-	text-align: center;
-	border:1px solid black;
-}
 
 #deliTable {
 	align: center;
@@ -144,11 +121,10 @@ tr > th, tr>td{
 </head>
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
-	<br><br>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
-
-
-<div class="searchdiv">
+	<%@ include file="orderLookDatePicker.jsp" %>
+<div class="tt_div">
+<%-- <div class="searchdiv">
   <table class="searchBox">
                    <!-- <caption style="font-size:20px;">주문조회</caption> -->
                     <colgroup>
@@ -159,38 +135,39 @@ tr > th, tr>td{
                     <tbody>
                         <tr>
                             <th class="th_select">기간별 조회</th>
-                            <td>
+                            <td class="td_select">
                                <span class="chkbox2">
-                                            <input type="button" name="dateType" id="dateType3" value="1주일" onclick="setSearchDate('1w')"/>
+                                            <input type="button" name="dateType" id="dateType1" value="1주일" onclick="setSearchDate('1w')"/>
+                                            <label for="dateType1"></label>
+                                        </span>
+                                        <span class="chkbox2">
+                                            <input type="button" name="dateType" id="dateType2" value="15일" onclick="setSearchDate('1w')"/>
+                                            <label for="dateType2"></label>
+                                        </span>
+                                        <span class="chkbox2">
+                                            <input type="button" name="dateType" id="dateType3" value="1개월" onclick="setSearchDate('1m')"/>
                                             <label for="dateType3"></label>
-                                        </span>
-                                        <span class="chkbox2">
-                                            <input type="button" name="dateType" id="dateType5" value="15일" onclick="setSearchDate('1m')"/>
-                                            <label for="dateType4"></label>
-                                        </span>
-                                        <span class="chkbox2">
-                                            <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
-                                            <label for="dateType5"></label>
                                         </span>
                                
                                 <!-- <div class="clearfix">
                                     시작일 -->
                                     <span class="dset">
-                                        <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >
-                                        <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
+                                        <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" size=20 value="${adminBuildEnergyVo.startdate }" >
+                                        <a href="#none" class="btncalendar dateclick"><img src="<%=request.getContextPath()%>/images/btn_calendar.gif"></a>
                                     </span>
                                     <span class="demi">~</span>
                                     <!-- 종료일 -->
                                     <span class="dset">
-                                      <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
-                                        <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
+                                      <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" size=20 value="${adminBuildEnergyVo.enddate }" >
+                                        <a href="#none" class="btncalendar dateclick"><img src="<%=request.getContextPath()%>/images/btn_calendar.gif"></a>
                                     </span>
                                 <!-- </div>  -->  
                             </td>
                         </tr>
                     <tbody>
                 </table>
-			</div>
+			</div> --%>
+			
 		<div class="t_div">
 			<br />
 			<table border="1" align = "center" class = "board">
@@ -217,7 +194,7 @@ tr > th, tr>td{
 				</tr>
 				<%}%>
 			</table>
-		</div>
+		</div></div>
 <%-- 페이징처리 --%>
 		<div class="pagingArea" align="center">
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=1'"><<</button>
@@ -244,21 +221,27 @@ tr > th, tr>td{
 			<% }else{ %>
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=currentPage + 1 %>'">></button>
 			<% } %>
-
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=maxPage%>'">>></button>
 		</div>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 
-<script type="text/javascript">	
+<script>
+ 
+    $(".btn_od").click(function(){ 
+    	var ono = $(this).parent().siblings().eq(0).text();
+    	console.log(ono);
+     	location.href='<%=request.getContextPath()%>/orderDetail.mp?ono='+ono;
+     });
 
-$(".btn_od").click(function(){ 
+</script>
+<%-- $(".btn_od").click(function(){ 
 	var ono = $(this).parent().siblings().eq(0).text();
 	console.log(ono);
  	location.href='<%=request.getContextPath()%>/orderDetail.mp?ono='+ono;
- });
-
+ }); --%>
+<%-- 
 $("#selectWeek").click(function(){ 
 	
 	location.href='<%=request.getContextPath()%>/orderLook.mp?';
@@ -272,43 +255,8 @@ $("#selectFifteenth").click(function(){
 $("#selectMonth").click(function(){ 
 	
 	location.href='<%=request.getContextPath()%>/orderLook.mp?';
- });
-
-
-$(function() {
-	  $( "#testDatepicker" ).datepicker({
-	        showOn: "both", 
-	        buttonImage: "button.png", 
-	        buttonImageOnly: true 
-	  });
-	});
-
-
-<%-- $("#btn_od").click(function(){ 
-	var od = $(this).parent().siblings().eq(0).text();
-	console.log(od);
- location.href='<%=request.getContextPath()%>/orderDetail.mp?od='+od;
  }); --%>
 
-
- <%-- function goOd(){
-	$("#btn_od").click(function(){
-		var od = $(this).parent().siblings().eq(0).text();
-		console.log(od);
-		 location.href='<%=request.getContextPath()%>/orderDetail.mp?od='+od;
-		
-}); --%>
-	<%-- location.href="<%=request.getContextPath()%>/orderDetails.jsp"; --%>
-
-
-/* $(function(){
-	$("#btn_od").click(function(){
-		request.getRequestDispatcher("orderDetail.mp").forward(request, response);
-		
-	});
-});
- */
-</script>	
 	
 	
 	
