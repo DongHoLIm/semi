@@ -14,7 +14,7 @@ import com.kh.bvengers.user.member.model.service.MemberService;
 @WebServlet("/checkuser.me")
 public class CheckConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public CheckConfirmServlet() {
         super();
     }
@@ -23,13 +23,11 @@ public class CheckConfirmServlet extends HttpServlet {
 		String memberId = request.getParameter("userId");
 		String memberName = request.getParameter("userName");
 		String email = request.getParameter("email");
-		
+
 		String status = (String)request.getAttribute("status");
-		
+
 		PrintWriter out = response.getWriter();
-		System.out.println(status);
 		int result = new MemberService().checkuser(memberId,memberName,email);
-		System.out.println("result : "+result);
 		if(result>0) {
 			out.append(status);
 			request.setAttribute("hc", "1");
@@ -40,7 +38,7 @@ public class CheckConfirmServlet extends HttpServlet {
 		}
 		out.flush();
 		out.close();
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

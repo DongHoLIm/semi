@@ -20,7 +20,7 @@ import com.kh.bvengers.board.model.vo.Comment;
 @WebServlet("/iwc.bo")
 public class insertwriteComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,20 +36,19 @@ public class insertwriteComment extends HttpServlet {
 		String writer = request.getParameter("writer");
 		String postId = request.getParameter("postId");
 		String content = request.getParameter("content");
-		System.out.println("여기는 와?");
-		
+
 		Comment b = new Comment();
 		b.setCommentContents(content);
 		b.setPostsId(postId);
 		b.setMemberId(writer);
-		
-	
+
+
 		ArrayList<Comment> list = new BoardService().insertComment(b);
-		
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(list, response.getWriter());
-	
+
 	}
 
 	/**

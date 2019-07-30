@@ -3,7 +3,6 @@
    pageEncoding="UTF-8" import = "java.util.*, com.kh.bvengers.board.model.*,java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
    ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("List");
-   System.out.println(list);
    ArrayList<Board> List = (ArrayList<Board>)request.getAttribute("list");
 
    BoardPageInfo pi1 = (BoardPageInfo)request.getAttribute("pi");

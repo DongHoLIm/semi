@@ -14,7 +14,7 @@ import static com.kh.bvengers.common.JDBCTemplate.*;
 
 public class BasketDao {
 	private Properties prop = new Properties();
-	
+
 	public BasketDao() {
 		String fileName = BasketDao.class.getResource("/sql/user/basket/basket-query.properties").getPath();
 		try {
@@ -34,17 +34,17 @@ public class BasketDao {
 			pstmt.setString(1, fileName);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Basket>();
-			
+
 			while(rset.next()) {
 				bk = new Basket();
-				
+
 				bk.setProductCode(rset.getString("PRODUCT_CODE"));
 				bk.setPrice(rset.getInt("PRODUCT_MONEY"));
 				bk.setContent(rset.getString("CONTENTS"));
 				bk.setProductName(rset.getString("PRODUCT_NAME"));
-				
+
 				list.add(bk);
-				
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -53,13 +53,12 @@ public class BasketDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return list;
 	}
 	public int insertBasket(Connection con,ArrayList<Basket> list, String userId) {
 		PreparedStatement pstmt =null;
 		String productCode = list.get(0).getProductCode();
-		System.out.println(productCode);
 		int result = 0;
 		String query = prop.getProperty("insertBasket");
 		try {
@@ -73,8 +72,8 @@ public class BasketDao {
 		}finally {
 			close(pstmt);
 		}
-		
-		
+
+
 		return result;
 	}
 	public ArrayList<Basket> basketAllList(Connection con, String userNo) {
@@ -104,7 +103,7 @@ public class BasketDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return list;
 	}
 

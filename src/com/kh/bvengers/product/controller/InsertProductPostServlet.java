@@ -46,7 +46,6 @@ public class InsertProductPostServlet extends HttpServlet {
 
 			String root = request.getSession().getServletContext().getRealPath("/");
 
-			System.out.println(root);
 			String savePath = root + "thumbnail_uploadFiles/";
 
 
@@ -63,8 +62,6 @@ public class InsertProductPostServlet extends HttpServlet {
 					saveFiles.add(multiRequest.getFilesystemName(name));
 					originFiles.add(multiRequest.getOriginalFileName(name));
 				}
-				System.out.println("fileSystem name : " + multiRequest.getFilesystemName(name));
-				System.out.println("originFile name : " + multiRequest.getOriginalFileName(name));
 			}
 
 			int memberNo =  Integer.parseInt(((Member) (request.getSession().getAttribute("loginUser"))).getMemberNo());
@@ -74,16 +71,16 @@ public class InsertProductPostServlet extends HttpServlet {
 			int productMoney = Integer.parseInt(multiRequest.getParameter("productMoney"));//product 가격
 			String contents = multiRequest.getParameter("contents");					//posts_contents 내용
 			String keepDate = multiRequest.getParameter("keepDate");					//product 보관일자
-			
+
 			String accountHolder = multiRequest.getParameter("accountHolder");			//member 예금주
 			String bankCode = multiRequest.getParameter("bankCode");					//member 은행명
 			String accountNo = multiRequest.getParameter("accountNo");					//member 계좌번호
-			
+
 			String mainCate = multiRequest.getParameter("mainCate");					//product 상위 카테고리
 			String subCate1 = multiRequest.getParameter("subCate1");					//product 카테고리1
 			String subCate2 = multiRequest.getParameter("subCate2");					//product 카테고리2
 			String subCate3 = multiRequest.getParameter("subCate3");					//product 카테고리3
-			
+
 			String productCode = "";												//product 상품코드
 			String productCate = "";												//product 카테고리 코드
 
@@ -127,7 +124,7 @@ public class InsertProductPostServlet extends HttpServlet {
 					break;
 				}
 			}
-			
+
 			productCode = productCode + ran;
 
 			//member테이블 객체 생성
@@ -136,7 +133,7 @@ public class InsertProductPostServlet extends HttpServlet {
 			member.setAccountHolder(accountHolder);
 			member.setBankCode(bankCode);
 			member.setAccountNo(accountNo);
-			
+
 			//posts테이블 객체 생성
 			Posts posts = new Posts();
 			posts.setPostsTitle(postsTitle);
@@ -145,7 +142,7 @@ public class InsertProductPostServlet extends HttpServlet {
 			//postsContents 객체 생성
 			PostsContents postsContents = new PostsContents();
 			postsContents.setContents(contents);
-			
+
 			//product 객체 생성
 			Product product = new Product();
 			product.setProductCode(productCode);
@@ -154,16 +151,15 @@ public class InsertProductPostServlet extends HttpServlet {
 			product.setProductCate(productCate);
 			product.setMemberNo(memberNo+"");
 			product.setKeepDate(keepDate);
-			
+
 			//attachment 객체는 ArrayList 형태로 생성
 			ArrayList<Attachment> fileList = new ArrayList<Attachment>();
 			for(int i = originFiles.size()-1; i >= 0; i--) {
 				Attachment at = new Attachment();
 				at.setFileSrc(savePath);
-				at.setOrginFileName(originFiles.get(i));				
+				at.setOrginFileName(originFiles.get(i));
 				String newName = saveFiles.get(i).substring(saveFiles.get(i).length() - 24, saveFiles.get(i).length());
 
-				System.out.println("newName : " + newName);
 
 				at.setNewFileName(newName);
 				at.setPostsId(posts.getPostsId()+"");
@@ -171,8 +167,6 @@ public class InsertProductPostServlet extends HttpServlet {
 				fileList.add(at);
 			}
 
-			System.out.println("controller board : " + posts);
-			System.out.println("controller attachment list : " + fileList);
 
 			int result = new ProductService().insertProductPost(member, posts, postsContents, product, fileList);
 

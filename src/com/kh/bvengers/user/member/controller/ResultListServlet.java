@@ -15,17 +15,14 @@ import com.kh.bvengers.user.member.model.vo.MemberPageInfo;
 @WebServlet("/resultlist.me")
 public class ResultListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public ResultListServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("오잉");
 		ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
 		MemberPageInfo pi = (MemberPageInfo)request.getAttribute("pi");
-		System.out.println(list);
-		System.out.println(pi);
 		request.getRequestDispatcher("views/manager/member/listMember.jsp").forward(request, response);
 	}
 

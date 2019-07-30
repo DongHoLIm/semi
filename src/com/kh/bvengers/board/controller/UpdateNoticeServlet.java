@@ -23,7 +23,7 @@ import com.oreilly.servlet.MultipartRequest;
 @WebServlet("/update.no")
 public class UpdateNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,7 +36,7 @@ public class UpdateNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		/*String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		System.out.println(title);
@@ -50,47 +50,46 @@ public class UpdateNoticeServlet extends HttpServlet {
 		b.setPostsId(num);
 		*/
 		/*int result = new BoardService().updateNotice(b);*/
-		
+
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024*1024*10;
-			
-			
-			
+
+
+
 			String root = request.getSession().getServletContext().getRealPath("/");
-			System.out.println(root);
-			
+
 			String saveSrc = root + "thumbnail_uploadFiles/";
-			
+
 			MultipartRequest multiRequest = new MultipartRequest(request,saveSrc,maxSize,"UTF-8",new com.kh.bvengers.common.MyFileRenamePolicy());
-			
+
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
 			int no = Integer.parseInt(multiRequest.getParameter("no"));
 
-			
+
 			Board b = new Board();
 			b.setPostsTitle(title);
 			b.setContents(content);
 			b.setPostsId(no);
-			
+
 			int result = new BoardService().updateNotice(b);
-			
+
 			ArrayList<String> saveFiles = new ArrayList<String>();
-		
+
 			ArrayList<String> originFiles = new ArrayList<String>();
-		
-		
+
+
 			Enumeration<String> files = multiRequest.getFileNames();
-			
-			
+
+
 
 			while(files.hasMoreElements()) {
-				
-				
+
+
 				String name = files.nextElement();
 
 				if((!name.equals("files"))&& name!=null) {
-										
+
 				while(files.hasMoreElements()) {
 					if(multiRequest.getFilesystemName(name) != null) {
 						saveFiles.add(multiRequest.getFilesystemName(name));
@@ -98,41 +97,37 @@ public class UpdateNoticeServlet extends HttpServlet {
 					}else {
 						break;
 					}
-					System.out.println("fileSystem name : " + multiRequest.getFilesystemName(name));
-					System.out.println("originFile name : " + multiRequest.getOriginalFileName(name));
-					System.out.println("어디서");
 				}
-				System.out.println("돌아");
 				}
 			}
-				
+
 				ArrayList<Attachment> fileList = new ArrayList<Attachment>();
 				for(int i = originFiles.size() - 1; i >= 0 ; i--) {
 					Attachment at = new Attachment();
 					at.setFileSrc(saveSrc);
 					at.setOrginFileName(originFiles.get(i));
 					at.setNewFileName(saveFiles.get(i));
-					
+
 					fileList.add(at);
 				}
-				
+
 				int resultpicture = new com.kh.bvengers.board.model.service.BoardService().insertpicture(b,fileList);
 
 				String page = "";
-				
+
 				if(result > 0 && resultpicture >0) {
-					
+
 					response.sendRedirect("/jsp/selectOne.no?num=" + no);
-					
+
 				}else {
 					page = "views/common/errorPage.jsp";
 					request.setAttribute("msg", "공지사항 수정 실패!!");
 					request.getRequestDispatcher(page).forward(request, response);
 				}
-				
+
 				}
 			}
-		
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

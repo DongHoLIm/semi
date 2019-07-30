@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.depot.model.vo.*"%>
   <%
   	String value = request.getParameter("value");
-  	String [] str =value.split(","); 
-  	System.out.println(str[3]);		
+  	String [] str =value.split(",");
   %>
 <!DOCTYPE html>
 <html>
@@ -24,11 +23,11 @@
 	}
 	tr{
 		border:1px solid black;
-		
+
 	}
 	td{
 		border:1px solid black;
-		width:724px; 
+		width:724px;
 		height:40px;
 	}
 	button{
@@ -52,7 +51,7 @@
 				<td rowspan="4" width="200px" height="300px">
 				<img alt="" src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%=str[3] %>" width="200px" height="300px">
 				</td>
-			
+
 				<td><label for="">상품명</label></td>
 				<td><label for=""><%=str[1] %></label></td>
 				<td hidden><input type="text" value="<%=str[1] %>" name="productName" /></td>
@@ -101,7 +100,7 @@
 				<td colspan="3" id="complteStatus">
 					<input type="radio" value="pass" name="status" id="pass"/>통과 &nbsp;&nbsp;&nbsp;
 					<input type="radio" value="fail" name="status" id="notpass"/>미통과 &nbsp;&nbsp;&nbsp;
-					<input type="radio" value="checkPass" name="status" id="reasonPass"/>조건부통과 &nbsp;&nbsp;&nbsp;			 		
+					<input type="radio" value="checkPass" name="status" id="reasonPass"/>조건부통과 &nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -116,10 +115,10 @@
 				<td colspan="3">
 				<button type="submit" id="Btn" style="color:white;">검수상태변경</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="reset" id="Btn" style="color:white;" onclick="history.back()">취소</button>
-				</td>				
+				</td>
 			</tr>
-		</table>		
-		</form>	
+		</table>
+		</form>
 		<script>
 			$(function (){
 				$("#reasonTitle").hide();
@@ -140,7 +139,7 @@
 				});
 				$("input[id='reasonPass']").click(function(){
 					$("#reasonTitle").show();
-					$("#reason").show();	
+					$("#reason").show();
 				});
 				$("input[id='pass']").click(function(){
 					$("#reasonTitle").hide();
@@ -150,8 +149,8 @@
 					$("#reasonTitle").hide();
 					$("#reason").hide();
 				});
-			});		
-		</script>	
+			});
+		</script>
 	</div>
 </body>
 </html>

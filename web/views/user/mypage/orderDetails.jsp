@@ -60,9 +60,9 @@ button{
 		<caption>결제 정보</caption>
 		<tbody>
 			<tr>
-			<% for(myPage m : odList){ 
+			<% for(myPage m : odList){
 			     int num = m.getDtPay()+2500;
-				System.out.print(num); %>
+				%>
 				<th class="th3">주문금액</th>
 				<% String price = dc.format(m.getDtPay());
 			 	   String total = dc.format(m.getDtPay()+2500);
@@ -137,9 +137,9 @@ button{
    		 }
   	})
 }); */
-  	
+
 </script>
-	
-	
+
+
 </body>
 </html>

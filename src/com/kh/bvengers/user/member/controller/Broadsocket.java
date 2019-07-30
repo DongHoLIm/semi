@@ -2,7 +2,9 @@ package com.kh.bvengers.user.member.controller;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.websocket.OnClose;
@@ -15,6 +17,7 @@ import javax.websocket.server.ServerEndpoint;
 public class Broadsocket {
 
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
+	private static Map<String, Session> client = Collections.synchronizedMap(new HashMap<String, Session>());
 
 	@OnMessage
 	public void onMessage(String message, Session session) {
@@ -23,8 +26,8 @@ public class Broadsocket {
 				if (!client.equals(session)) {
 					try {
 						client.getBasicRemote().sendText(message);
+
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -34,7 +37,6 @@ public class Broadsocket {
 
 	@OnOpen
 	public void onOpen(Session session) {
-		System.out.println(session);
 		clients.add(session);
 	}
 

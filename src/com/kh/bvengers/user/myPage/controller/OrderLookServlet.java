@@ -19,7 +19,7 @@ import com.kh.bvengers.user.myPage.model.vo.myPage;
 @WebServlet("/orderLook.mp")
 public class OrderLookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public OrderLookServlet() {
         super();
     }
@@ -29,49 +29,48 @@ public class OrderLookServlet extends HttpServlet {
 		int maxPage;			//전체 페이지에서 가장 마지막 페이지
 		int startPage;			//한 번에 표시될 페이징 버튼이 시작할 번호
 		int endPage;			//한 번에 표시될 페이징 버튼이 끝나는 번호
-		
+
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String memberNo = loginUser.getMemberNo();
 		String d1 = request.getParameter("d1");
-		
-		System.out.println(d1);
-		
-		
+
+
+
 		//게시판은 1페이지부터 시작함
 		currentPage = 1;
-		
+
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
+
 		//한 페이지에 보여질 목록 갯수
 		limit = 5;
-		
+
 		//전체 목록 갯수를 리턴받음
 		int listCount = new MyPageService().getListCount(memberNo);
-		
-		
+
+
 		maxPage = (int)((double)listCount / limit + 0.8);
-		
+
 		startPage = (((int)((double) currentPage / limit + 0.8)) - 1) * 10 + 1;
-		
+
 		endPage = startPage + 10 - 1;
-		
+
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-		
-		MyPagePageInfo pi = 
+
+		MyPagePageInfo pi =
 				new MyPagePageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		
+
 		String page = "";
-		
+
 		ArrayList<myPage> olList = new MyPageService().selectOrderLookList(memberNo, currentPage, limit);
-		
+
 		if(olList != null) {
-			
-				for(myPage m : olList) {					
+
+				for(myPage m : olList) {
 
 					if(m.getRefundStatus() == null){
 						if(m.getDstatus() != null) {
@@ -84,16 +83,16 @@ public class OrderLookServlet extends HttpServlet {
 							}else if(m.getDstatus().equals("3")){
 								m.setDstatus("배송 완료");
 								m.setPayStatus("");
-							
+
 							}else if(m.getPayStatus().equals("2")) {
 								m.setPayStatus("결제 취소");
 								m.setDstatus("");
 							}
 						}
-						
-						
+
+
 					}else {
-						
+
 						if(m.getRefundStatus().equals("1")) {
 							m.setRefundStatus("환불 대기");
 							m.setPayStatus("");
@@ -103,25 +102,25 @@ public class OrderLookServlet extends HttpServlet {
 							m.setDstatus("");
 						}
 					}
-						
+
 			}
-			
+
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
 			request.setAttribute("olList", olList);
 			request.setAttribute("pi", pi);
-			
+
 			//HttpSession session = request.getSession();
 			//session.setAttribute("loginUser", loginUser);
 			//response.sendRedirect("views/user/mypage/orderLook.jsp");
-			
+
 		}else {
 			page="views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "실패!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}
-    	
-    	
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

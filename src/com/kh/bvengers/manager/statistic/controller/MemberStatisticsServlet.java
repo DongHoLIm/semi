@@ -21,7 +21,7 @@ import com.kh.bvengers.manager.statistic.model.vo.AdjustmentPay;
 @WebServlet("/memberStatistics")
 public class MemberStatisticsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,11 +37,10 @@ public class MemberStatisticsServlet extends HttpServlet {
 		SimpleDateFormat format = new SimpleDateFormat ( "yyMMdd");
 		Date dTime = new Date();
 		String time = format.format(dTime);
-		System.out.println(time);
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>(); 
-		
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+
 		list = new StatisticService().memberStatistic(time);
-		
+
 		String page = null;
 		if(list != null) {
 			page = "/views/manager/statistics/memberStatistics.jsp";

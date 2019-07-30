@@ -28,7 +28,6 @@ public class MyInfo extends HttpServlet {
 			page = "views/user/product/sellerPopup.jsp";
 			request.setAttribute("s", s);
 		} else {
-			System.out.println("망함");
 		}
 
 		request.getRequestDispatcher(page).forward(request, response);

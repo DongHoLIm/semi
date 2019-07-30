@@ -271,7 +271,6 @@ public class BoardDao {
 
 				// pstmt.setInt(5, level);
 
-				System.out.println(level1);
 
 				result += pstmt.executeUpdate();
 			}
@@ -541,8 +540,6 @@ public class BoardDao {
 
 			int startRow1 = (currentPage1 - 1) * limit1 + 1;
 			int endRow1 = startRow1 + limit1 - 1;
-			System.out.println(startRow1);
-			System.out.println(endRow1);
 			pstmt.setInt(1, startRow1);
 			pstmt.setInt(2, endRow1);
 
@@ -560,8 +557,6 @@ public class BoardDao {
 				m.setCreateDate(rset.getDate("CREATEDATE"));
 
 				list1.add(m);
-
-				System.out.println("dao" + rset.getInt("POSTS_ID"));
 
 			}
 
@@ -600,9 +595,6 @@ public class BoardDao {
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setContents(rset.getString("CONTENTS"));
 
-				System.out.println(rset.getString("POSTS_TITLE"));
-				System.out.println(rset.getString("CONTENTS"));
-
 				list.add(b);
 			}
 
@@ -617,56 +609,49 @@ public class BoardDao {
 		return list;
 	}
 
-	
 	public ArrayList<Board> selectManagerNoticeList(Connection con, int currentPage, int limit, int num) {
-	
+
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
-		
-		
+
 		String query = prop.getProperty("selectManagerNoticeList");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			int start = (currentPage-1)*limit+1;
-			int end = start + limit +1;
-			
+
+			int start = (currentPage - 1) * limit + 1;
+			int end = start + limit + 1;
+
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Board>();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				Board b = new Board();
-				
+
 				b.setPostsId(rset.getInt("POSTS_ID"));
 				b.setMemberId(rset.getString("MEMBER_ID"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 				list.add(b);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-	
-		
+
 		return list;
 	}
-	
-	
-	
-	
+
 	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -687,19 +672,12 @@ public class BoardDao {
 			while (rset.next()) {
 				b = new Board();
 				b.setPostsId(rset.getInt("POSTS_ID"));
-				System.out.println(rset.getInt("POSTS_ID"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
-				System.out.println(rset.getString("POSTS_TITLE"));
 				b.setMemberId(rset.getString("Member_ID"));
-				System.out.println(rset.getString("Member_ID"));
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
-				System.out.println(rset.getInt("POSTS_VIEWS"));
 				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
-				System.out.println(rset.getInt("RECOMMEND_COUNT"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
-				System.out.println(rset.getDate("CREATEDATE"));
 				b.setContents(rset.getString("CONTENTS"));
-				System.out.println(rset.getString("CONTENTS"));
 				b.setMemberNo(rset.getInt("MEMBER_NO"));
 
 				hmap = new HashMap<String, Object>();
@@ -771,25 +749,20 @@ public class BoardDao {
 		return list;
 	}
 
-
-	public ArrayList<Board> selectQandAList(Connection con, int currentPage, int limit, int num,String uno){		
+	public ArrayList<Board> selectQandAList(Connection con, int currentPage, int limit, int num, String uno) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 
 		String query = prop.getProperty("selectQandAListWithPaging");
-		
 
 		try {
 			pstmt = con.prepareStatement(query);
 
 			int startRow = (currentPage - 1) * limit + 1;
-			
-			System.out.println("aaa" + startRow);
-			
+
 			int endRow = startRow + limit - 1;
-			
-			
+
 			pstmt.setInt(1, num);
 			pstmt.setString(2, uno);
 			pstmt.setInt(3, startRow);
@@ -808,25 +781,20 @@ public class BoardDao {
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 				b.setCount(rset.getString("COP"));
-				
-				
+
 				list.add(b);
 			}
-						
-			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		
-		}finally {
+
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		return list;
 	}
-	
-
 
 	public int insertComment(Connection con, Comment b) {
 		PreparedStatement pstmt = null;
@@ -849,33 +817,31 @@ public class BoardDao {
 		}
 		return result;
 	}
-	
+
 	public int insertReport(Connection con, String dustId, String post_id, String content, String reporter) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertReport");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, reporter);
 			pstmt.setString(2, dustId);
 			pstmt.setString(3, post_id);
 			pstmt.setString(4, content);
-			
-			
+
 			result = pstmt.executeUpdate();
-			
-				} catch (SQLException e) {
+
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
-
 
 	public ArrayList<Comment> selectCommentList(Connection con, String postsId) {
 		PreparedStatement pstmt = null;
@@ -918,16 +884,16 @@ public class BoardDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Calculate> list = null;
-		 
+
 		String query = prop.getProperty("selectPaymentList");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
 			list = new ArrayList<Calculate>();
-			while(rset.next()) {
+			while (rset.next()) {
 				Calculate c = new Calculate();
-				
+
 				c.setOrderNo(rset.getString("orderNo"));
 				c.setSellerNo(rset.getString("sellNo"));
 				c.setSellerId(rset.getString("seller"));
@@ -938,21 +904,21 @@ public class BoardDao {
 				c.setCalculateDate(rset.getString("deliDate"));
 				c.setDeliveryStatus(rset.getString("deliStatus"));
 				c.setDeliveryNo(rset.getString("DNO"));
-				if(rset.getString("releaseDate") != null) {
+				if (rset.getString("releaseDate") != null) {
 					c.setReleaseDate(rset.getString("releaseDate"));
 					c.setDateResult(rset.getString("dateResult"));
 				}
-				
+
 				list.add(c);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(stmt);
 			close(rset);
 		}
-		
+
 		return list;
 	}
 
@@ -960,56 +926,55 @@ public class BoardDao {
 		Board b = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("showDetail");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, postId);
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				/*b.setPostsId(rset.getInt("POSTS_ID"));
-				b.setPostsTitle(rset.getString("POSTS_TITLE"));
-				b.setMemberId(rset.getString("Member_ID"));
-				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
-				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
-				b.setCreateDate(rset.getDate("CREATEDATE"));
-				b.setContents(rset.getString("CONTENTS"));
-				b.setMemberNo(rset.getInt("MEMBER_NO"));*/
+
+			if (rset.next()) {
+				/*
+				 * b.setPostsId(rset.getInt("POSTS_ID"));
+				 * b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				 * b.setMemberId(rset.getString("Member_ID"));
+				 * b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				 * b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
+				 * b.setCreateDate(rset.getDate("CREATEDATE"));
+				 * b.setContents(rset.getString("CONTENTS"));
+				 * b.setMemberNo(rset.getInt("MEMBER_NO"));
+				 */
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return b;
 	}
 
 	public int checkStatus(Connection con, Calculate cal) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("checkStatus");
-		
+
 		try {
-			if(cal.getReleaseDate() != null && 
-					Integer.parseInt(cal.getDateResult()) > 0 &&
-			  !cal.getDeliveryStatus().equals("3") && 
-			  !cal.getDeliveryStatus().equals("3")) {
+			if (cal.getReleaseDate() != null && Integer.parseInt(cal.getDateResult()) > 0
+					&& !cal.getDeliveryStatus().equals("3") && !cal.getDeliveryStatus().equals("3")) {
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, cal.getDeliveryNo());
-				
+
 				result = pstmt.executeUpdate();
-				
-			}else {
+
+			} else {
 				result = 1;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		return result;
 	}
 
@@ -1017,51 +982,52 @@ public class BoardDao {
 		Statement stmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("selectDeliveryCount");
-		
+
 		try {
 			stmt = con.createStatement();
-			
+
 			rset = stmt.executeQuery(query);
-			
-			if(rset.next()) {
+
+			if (rset.next()) {
 				listCount = rset.getInt(1);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(stmt);
 			close(rset);
 		}
-		
+
 		return listCount;
-	}	
+	}
+
 	public ArrayList<Calculate> paymentManagement(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Calculate> list = null;
-		 
+
 		String query = prop.getProperty("selectOrderPaging");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit - 1;
-			
+
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Calculate>();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				Calculate c = new Calculate();
-				
+
 				c.setOrderNo(rset.getString("orderNo"));
 				c.setSellerNo(rset.getString("sellNo"));
 				c.setSellerId(rset.getString("seller"));
@@ -1072,159 +1038,131 @@ public class BoardDao {
 				c.setCalculateDate(rset.getString("deliDate"));
 				c.setDeliveryStatus(rset.getString("deliStatus"));
 				c.setDeliveryNo(rset.getString("DNO"));
-				if(rset.getString("releaseDate") != null) {
+				if (rset.getString("releaseDate") != null) {
 					c.setReleaseDate(rset.getString("releaseDate"));
 					c.setDateResult(rset.getString("dateResult"));
 				}
-				
+
 				list.add(c);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 			close(rset);
 		}
-		
+
 		return list;
 	}
-}
 
 	public Board selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Board b = null;
-		
+
 		String query = prop.getProperty("selectOne");
-		
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-			
+
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				System.out.println("tq2");
+
+			if (rset.next()) {
 				b = new Board();
-				
+
 				b.setPostsId(rset.getInt("POSTS_ID"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setContents(rset.getString("CONTENTS"));
 				b.setWriter(rset.getString("MEMBER_ID"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
-				
-				System.out.println("zzsdads"+b);
+
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
 		return b;
 	}
 
 	public int updateNotice(Connection con, Board b) {
 
 		PreparedStatement pstmt = null;
-	
-		
+
 		String query = prop.getProperty("updateNoticeTitle");
-		
+
 		int result = 0;
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, b.getPostsTitle());
 			pstmt.setInt(2, b.getPostsId());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int updateNoticeContent(Connection con, Board b) {
 		PreparedStatement pstmt = null;
-		
+
 		String query = prop.getProperty("updateContent");
 		int result = 0;
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, b.getContents());
 			pstmt.setInt(2, b.getPostsId());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
-		
-		
-		
+
 		return result;
 	}
 
 	public int insertNoticePicture(Connection con, ArrayList<Attachment> fileList, Board b) {
 		PreparedStatement pstmt = null;
-		
+
 		int result = 0;
-		
+
 		String query = prop.getProperty("updatePicture");
-		
-			try {
-				for(int i = 0; i < fileList.size(); i++) {
-				pstmt= con.prepareStatement(query);
+
+		try {
+			for (int i = 0; i < fileList.size(); i++) {
+				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, fileList.get(i).getOrginFileName());
 				pstmt.setString(2, fileList.get(i).getNewFileName());
 				pstmt.setString(3, fileList.get(i).getFileSrc());
 				pstmt.setInt(3, b.getPostsId());
-				
-				
+
 				result += pstmt.executeUpdate();
-				
-				
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
-		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 
-
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-
-
-
-
-
+}

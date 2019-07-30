@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/send.me")
 public class SendMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public SendMailServlet() {
         super();
     }
@@ -31,51 +31,47 @@ public class SendMailServlet extends HttpServlet {
 		//String receiver="";
 		String receiver = request.getParameter("email");
 		String hc = request.getParameter("hc");
-		System.out.println(hc);
 		Boolean ch = true;
-		
+
 		if(hc==null) {
 		hc = receiver.charAt(0)+"";
-		System.out.println(hc);
 		String test = "";
 		if(hc.equals("2")) {
 			for(int i=1; i<receiver.length(); i++) {
 				test += receiver.charAt(i);
 			}
 			receiver=test;
-				
+
 		}
 		}
 		final String sender = "youngji0517@naver.com";//네이버아이디쓰삼(test@naver.com)
 		final String password = "rkdehddnjs";//네이버비밀번호
-		
-		
+
+
 		//인증 번호 생성기
 		StringBuffer temp = new StringBuffer();
 		Random rnd = new Random();
 		for(int i = 0; i < 10; i++) {
 			int rIndex =rnd.nextInt(3);
 			switch(rIndex) {
-			case 0 : 
+			case 0 :
 				//a-z
 				temp.append((char) ((int)(rnd.nextInt(26))+97));break;
-			case 1 : 
+			case 1 :
 				//A-Z
 				temp.append((char) ((int)(rnd.nextInt(26))+65));break;
-			case 2 : 
+			case 2 :
 				//0-9
 				temp.append((rnd.nextInt(10)));break;
 			}
-			
+
 		}
 		String key = temp.toString();
-		System.out.println(key);
-		System.out.println(receiver);
-		
+
 		String title="";
 		String contents="";
 		String host="smtp.naver.com";
-		
+
 		if(hc.equals("2")) {
 		title = "중고애민족 회원가입 인증 메일입니다.";
 		contents = "인증번호는 "+key;
@@ -83,30 +79,27 @@ public class SendMailServlet extends HttpServlet {
 		title = "중고애민족 임시 비밀번호 메일입니다.";
 		contents = "임시 비밀번호는 "+key;
 		}
-		
-		System.out.println(title + " " +contents+" "+ host + " ");
-		System.out.println(hc);
+
 		String page="";
-		
+
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", 25);
-		
-		//System.out.println(props.get("mail.smtp.port"));
-		
+
+
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(sender, password);
 			}
 		});
-		
+
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(sender));
-			
+
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-			
+
 			// sender Email Address
 			message.setFrom(sender);
 
@@ -118,8 +111,7 @@ public class SendMailServlet extends HttpServlet {
 
 			// send the message
 			Transport.send(message);
-			System.out.println("전송 완료!!!!");
-			
+
 			HttpSession ss = request.getSession();
 			ss.setAttribute("mailkey", key);
 			if(hc.equals("1")) {
@@ -128,13 +120,12 @@ public class SendMailServlet extends HttpServlet {
 				page="views/user/join/checkMail.jsp";
 			}
 		} catch (MessagingException e) {
-			System.out.println("전송 실패!! ㅠㅠ");
 			e.printStackTrace();
 		}
 		request.getRequestDispatcher(page).forward(request,response);
-		
+
 	}
-	
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

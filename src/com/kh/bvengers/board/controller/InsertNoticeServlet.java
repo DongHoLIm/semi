@@ -43,7 +43,6 @@ public class InsertNoticeServlet extends HttpServlet {
 			int maxSize = 1024*1024*10;
 
 			String root = request.getSession().getServletContext().getRealPath("/");
-			System.out.println(root);
 
 			String saveSrc = root + "thumbnail_uploadFiles/";
 
@@ -56,26 +55,23 @@ public class InsertNoticeServlet extends HttpServlet {
 			Enumeration<String> files = multiRequest.getFileNames();
 
 			while(files.hasMoreElements()) {
-				
-				
+
+
 				String name = files.nextElement();
 
 				if(!name.equals("files")) {
-				
-				
+
+
 				saveFiles.add(multiRequest.getFilesystemName(name));
 				originFiles.add(multiRequest.getOriginalFileName(name));
-				
-				System.out.println("fileSystem name :" + multiRequest.getFilesystemName(name));
-				System.out.println("originFile :" + multiRequest.getOriginalFileName(name));
+
 				}else {
-					
+
 				}
 				}
 
 			String multiTitle = multiRequest.getParameter("title");
 			String multiContent = multiRequest.getParameter("content");
-			System.out.println(multiContent);
 			String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
 			String postCode = multiRequest.getParameter("hiddenCode");
 
@@ -84,9 +80,8 @@ public class InsertNoticeServlet extends HttpServlet {
 			b.setContents(multiContent);
 			b.setMemberNo(Integer.parseInt(uno));
 			b.setPostsCode(postCode);
-			
-			System.out.println(multiContent);
-			
+
+
 			ArrayList<Attachment>fileList = new ArrayList<Attachment>();
 
 			for(int i = originFiles.size() -1; i>=0; i--) {
