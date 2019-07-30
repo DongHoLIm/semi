@@ -10,6 +10,8 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	
+	
+	
 	%>
 <!DOCTYPE html>
 <html>
@@ -90,20 +92,11 @@ input-align:center;
 		</div>
 		<br>
 		<br>
-		<div class="btns">
-		선택회원을
-		<button value="블랙리스트" id="blacklist"
-			style="align: center; border-radius: 5px; background-color: black; color: white;">블랙리스트</button>
-		<button value="활동정지" id="stop"
-			style="border-radius: 5px; background-color: black; color: white;">활동정지</button>
-		</div>
-		<br>
-		<br>
 		<div id="table Area">
 			<table id="depotMain" align="center">
 			<thead>
 				<tr>
-					<th class="th"><input type="checkbox" id="chkAll"></th>
+					<!-- <th class="th"><input type="checkbox" id="chkAll"></th> -->
 					<th class="th">아이디</th>
 					<th class="th">이름</th>
 					<th class="th">전화번호</th>
@@ -114,10 +107,9 @@ input-align:center;
 					<th class="th">회원 상세 조회</th>
 				</tr>
 				</thead>
-				<tbody>
 				<%for(Member m : list){ %>
 				<tr>
-					<td><input type="checkbox" class="chk"></td>
+					<!-- <td><input type="checkbox" class="chk"></td> -->
 					<td><%=m.getMemberId() %></td>
 					<td><%=m.getMemberName() %></td>
 					<td><%=m.getPhone() %></td>
@@ -128,7 +120,6 @@ input-align:center;
 					<td><button class="mbdetail">상세보기</button></td>
 				</tr>
 				<%} %>
-				</tbody>
 			</table>
 			<br>
 			<br>
@@ -147,13 +138,13 @@ input-align:center;
 	location.href='<%=request.getContextPath()%>/updateBL.me?chkid='+chkid;		
 	})
  	 
-	$("#chkAll").on("click", function() {
+/* 	$("#chkAll").on("click", function() {
 	      var chkAll = $(this).is(":checked");
 	      if (chkAll)
 	        $("#depotMain input:checkbox").prop("checked", true);
 	      else
 	        $("#depotMain input:checkbox").prop("checked", false);
-	    });
+	    }); */
 	$("#searchbtn").on("click",function(){
 		var howselect = $("#selecthowsearch option:selected").val();
 		var value = $("#searchValue").val();
@@ -181,6 +172,7 @@ input-align:center;
 			<% 
 				}
 			   } 
+			
 			%>
 			
 			<% if(currentPage >= maxPage){ %>

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.kh.bvengers.manager.member.model.dao.ManagerMemberDao;
 import com.kh.bvengers.manager.member.model.vo.Report;
+import com.kh.bvengers.manager.member.model.vo.SANCTION;
 
 public class ManagerMemberService {
 
@@ -47,5 +48,34 @@ public class ManagerMemberService {
 		close(con);
 		return result;
 	}
+
+	public ArrayList<SANCTION> badmanList(int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<SANCTION> sanlist = new ManagerMemberDao().badmanList(con,currentPage,limit);
+		close(con);
+		return sanlist;
+	}
+
+	public int ListCount() {
+		Connection con = getConnection();
+		int listCount = new ManagerMemberDao().ListCount(con);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<SANCTION> searchstopbadman(String searchValue) {
+		Connection con = getConnection();
+		ArrayList<SANCTION> list = new ManagerMemberDao().searchstopbadman(con,searchValue);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<SANCTION> searchbadblackman(String searchValue) {
+		Connection con = getConnection();
+		ArrayList<SANCTION> list = new ManagerMemberDao().searchbadblackman(con,searchValue);
+		close(con);
+		return list;
+	}
+
 
 }

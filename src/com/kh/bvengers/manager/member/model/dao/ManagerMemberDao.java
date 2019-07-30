@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.bvengers.manager.member.model.vo.Report;
+import com.kh.bvengers.manager.member.model.vo.SANCTION;
 public class ManagerMemberDao {
 
 	Properties prop = new Properties();
@@ -123,6 +124,134 @@ public class ManagerMemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	public ArrayList<SANCTION> badmanList(Connection con, int currentPage, int limit) {
+		ArrayList<SANCTION> sanlist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
+		System.out.println(startRow);
+		String query = prop.getProperty("badmanList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			sanlist = new ArrayList<SANCTION>();
+			while(rset.next()) {
+				SANCTION s = new SANCTION();
+				
+				s.setSanctionNo(rset.getString("SANCTION_NO"));
+				s.setMemberNo(rset.getString("MEMBER_NO"));
+				s.setReason(rset.getString("REASON"));
+				s.setSanctionDate(rset.getDate("SANCTION_DATE"));
+				s.setSanctionDiv(rset.getString("SANCTION_DIV"));
+				s.setSanctionStatus(rset.getString("SANCTION_STATUS"));
+				s.setStopTerm(rset.getInt("STOP_TERM"));
+				
+				sanlist.add(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return sanlist;
+	}
+	public int ListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		
+		String query = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return listCount;
+	}
+	public ArrayList<SANCTION> searchstopbadman(Connection con, String searchValue) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<SANCTION> list = null;
+		
+		String query = prop.getProperty("stopmanList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, searchValue);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<SANCTION>();
+			if(rset.next()) {
+				SANCTION s = new SANCTION();
+				
+				s.setSanctionNo(rset.getString("SANCTION_NO"));
+				s.setMemberNo(rset.getString("MEMBER_NO"));
+				s.setReason(rset.getString("REASON"));
+				s.setSanctionDate(rset.getDate("SANCTION_DATE"));
+				s.setSanctionDiv(rset.getString("SANCTION_DIV"));
+				s.setSanctionStatus(rset.getString("SANCTION_STATUS"));
+				s.setStopTerm(rset.getInt("STOP_TERM"));
+				
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<SANCTION> searchbadblackman(Connection con, String searchValue) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<SANCTION> list = null;
+		
+		String query = prop.getProperty("blackmanList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, searchValue);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<SANCTION>();
+			if(rset.next()) {
+				SANCTION s = new SANCTION();
+				
+				s.setSanctionNo(rset.getString("SANCTION_NO"));
+				s.setMemberNo(rset.getString("MEMBER_NO"));
+				s.setReason(rset.getString("REASON"));
+				s.setSanctionDate(rset.getDate("SANCTION_DATE"));
+				s.setSanctionDiv(rset.getString("SANCTION_DIV"));
+				s.setSanctionStatus(rset.getString("SANCTION_STATUS"));
+				s.setStopTerm(rset.getInt("STOP_TERM"));
+				
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 }
