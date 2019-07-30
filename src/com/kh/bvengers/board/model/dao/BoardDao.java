@@ -1038,7 +1038,58 @@ public class BoardDao {
 		}
 		
 		return listCount;
+	}	
+	public ArrayList<Calculate> paymentManagement(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Calculate> list = null;
+		 
+		String query = prop.getProperty("selectOrderPaging");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Calculate>();
+			
+			while(rset.next()) {
+				Calculate c = new Calculate();
+				
+				c.setOrderNo(rset.getString("orderNo"));
+				c.setSellerNo(rset.getString("sellNo"));
+				c.setSellerId(rset.getString("seller"));
+				c.setPostsTitle(rset.getString("title"));
+				c.setBuyerNo(rset.getString("buyNo"));
+				c.setBuyerId(rset.getString("buyer"));
+				c.setOrderDate(rset.getString("orderDate"));
+				c.setCalculateDate(rset.getString("deliDate"));
+				c.setDeliveryStatus(rset.getString("deliStatus"));
+				c.setDeliveryNo(rset.getString("DNO"));
+				if(rset.getString("releaseDate") != null) {
+					c.setReleaseDate(rset.getString("releaseDate"));
+					c.setDateResult(rset.getString("dateResult"));
+				}
+				
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
 	}
+}
 
 	public Board selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
