@@ -107,5 +107,22 @@ public class BasketDao {
 		
 		return list;
 	}
+	public int deleteBasket(Connection con, String productCode, String userNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteBasket");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userNo);
+			pstmt.setString(2, productCode);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}		
+		return result;
+	}
 
 }
