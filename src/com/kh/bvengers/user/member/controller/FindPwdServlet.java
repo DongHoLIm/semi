@@ -13,17 +13,16 @@ import com.kh.bvengers.user.member.model.service.MemberService;
 @WebServlet("/findPwd.me")
 public class FindPwdServlet extends HttpServlet {
    private static final long serialVersionUID = 1L;
-       
+
     public FindPwdServlet() {
         super();
     }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String newPwd = (String) request.getSession().getAttribute("mailkey");      
+      String newPwd = (String) request.getSession().getAttribute("mailkey");
       String memberId = (String) request.getParameter("userId");
-      System.out.println("findPwd");
       //int result = new MemberService().changePwd(newPwd, memberId);
-      
+
       //String page = "";
       //if(result>0) {
          //page="views/user/join/searchPwdResult.jsp";

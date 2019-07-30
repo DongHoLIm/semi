@@ -7,8 +7,8 @@ int listCount = pi.getListCount();
 int currentPage = pi.getCurrentPage();
 int maxPage = pi.getMaxPage();
 int startPage = pi.getStartPage();
-int endPage = pi.getEndPage(); 
- 
+int endPage = pi.getEndPage();
+
  %>
 <!DOCTYPE html>
 <html>
@@ -21,21 +21,21 @@ int endPage = pi.getEndPage();
 		height:100%;
 		padding-right:10%;
 		padding-left:10%;
-		
+
 		margin:auto;
 	}
 	thead{
 			background:#eee;
-			
+
 	}
 	.board{
 		width:80%;
 		margin:auto;
 		align:center;
         border-spacing: 10px;
-        
+
 	}
-	
+
 	.row0{
 		background:black;
 		color:white;
@@ -52,13 +52,13 @@ int endPage = pi.getEndPage();
 		border-top: 1px solid #ccc;
 		border-bottom: 1px solid #ccc;
 	}
-	
+
 	.pageNo{
 		margin:auto;
-		
+
 	}
-	
-	
+
+
 
 </style>
 </head>
@@ -68,10 +68,10 @@ int endPage = pi.getEndPage();
 	<header><%@ include file="../hfl/managerHeader.jsp" %></header>
 	<br />
 	<br />
-	
+
 	<section id="sec1">
 		<h2 align="center">공지사항</h2>
-		
+
 		<table class="board" id = "listArea">
 			<tr class="row0">
 			<thead>
@@ -82,69 +82,68 @@ int endPage = pi.getEndPage();
 			</thead>
 			</tr>
 			<%for (Board b : list) {%>
-				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>"> 				
+				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
 				<td><%= b.getMemberId() %></td>
 				<td><%= b.getCreateDate() %></td>
-			<%} %>	
+			<%} %>
 		</table>
 		<div align = "center">
       <button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
       </div>
-		
+
 			<br><br><br><br>
 		  <div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>      
-		<%if(currentPage <= 1) {%> 
+		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>
+		<%if(currentPage <= 1) {%>
 		<button disabled><</button>
 		<%} else{%>
 	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
-			System.out.println("최근 페이지는" + currentPage);
-		%>    
+		%>
 			<%for (int p = startPage; p <= endPage; p++) {
 				if(currentPage == p){
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
 					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
-			<% }  
-			}	
+			<% }
+			}
 			%>
-			
-			
+
+
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
 			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
 			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage%>'">>></button>
- 		 
+
       </div>
 		<br>
-		
+
 	</section>
 	<br />
-	
+
 	<footer><%@ include file="../../user/hfl/footer.jsp" %></footer>
-	
+
 	<script>
 	$(function(){
 		$("#listArea td").mouseenter(function(){
-			
+
 			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
 		}).mouseout(function(){
-				$(this).parent().css({"background":"white"});	
+				$(this).parent().css({"background":"white"});
 		}).click(function(){
 			var num = $(this).parent().children("input").val();
 			console.log(num);
 			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
 		});
 	});
-	
+
 	</script>
-	
+
 </body>
 </html>
 

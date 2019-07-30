@@ -16,7 +16,7 @@ import com.kh.bvengers.board.model.vo.Board;
 @WebServlet("/sonn.no")
 public class SelectNotice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,22 +30,19 @@ public class SelectNotice extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			int num = Integer.parseInt(request.getParameter("num"));
-			System.out.println("확인"+num);
 			Board b = new BoardService().selectOne(num);
-			
+
 			String page = "";
-			
+
 			if(b != null) {
 				page = "views/user/board/updateNotice.jsp";
 				request.setAttribute("b", b);
-				System.out.println("zzzzzfdfdsfsd"+b);
 			} else {
-				System.out.println("tq");
 			}
-			
+
 			request.getRequestDispatcher(page).forward(request, response);
-		
-	
+
+
 	}
 
 	/**

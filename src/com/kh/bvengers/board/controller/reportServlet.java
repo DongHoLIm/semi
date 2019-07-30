@@ -16,7 +16,7 @@ import com.kh.bvengers.user.member.model.vo.Member;
 @WebServlet("/ss.re")
 public class reportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,22 +30,20 @@ public class reportServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String array = request.getParameter("array");
-	
+
 		String[] reportarr = array.split("/");
-		
+
 		String dustId = reportarr[0];
 		String post_id = reportarr[1];
-		System.out.println("글"+dustId);
-		System.out.println("번호"+post_id);
-		
+
 		String page = "";
 
 		String content = request.getParameter("content");
-		
+
 		String reporter = String.valueOf(((Member) request.getSession().getAttribute("loginUser")).getMemberNo());
-			
+
 		int result = new BoardService().insertReport(dustId,post_id,content,reporter);
-		
+
 		if(result>0) {
 			page = "views/user/board/board.jsp";
 		}else {

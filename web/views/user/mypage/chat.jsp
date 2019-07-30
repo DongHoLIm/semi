@@ -18,7 +18,9 @@
 </body>
 <script>
 	var textarea = document.getElementById("messageWindow");
-	var webSocket = new WebSocket('ws://localhost:8001/sp/broadcasting');
+	var id = "<%=loginUser.getMemberId()%>";
+	var no = "<%=loginUser.getMemberNo()%>";
+	var webSocket = new WebSocket('ws://localhost:8001/sp/chatting?id=' + id'&no='+no);
 	var inputMessage = document.getElementById('inputMessage');
 
 	webSocket.onerror = function(event) {
@@ -31,7 +33,7 @@
 		onMessage(event);
 	};
 	function onMessage(event) {
-		textarea.value += "상대 : " + event.data + "\n";
+		textarea.value += event.data + "\n";
 	};
 	function onOpen(event) {
 		textarea.value += "연결 성공\n";
@@ -40,8 +42,8 @@
 		alert(event.data);
 	};
 	function send() {
-		textarea.value += "<%=loginUser.getMemberId() %>" + " : " +inputMessage.value + "\n";
-		webSocket.send(inputMessage.value);
+		//textarea.value += id + " : " + inputMessage.value + "\n";
+		webSocket.send(id + " : " + inputMessage.value);
 		inputMessage.value = "";
 	};
 </script>

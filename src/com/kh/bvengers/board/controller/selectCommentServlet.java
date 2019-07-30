@@ -28,7 +28,6 @@ public class selectCommentServlet extends HttpServlet {
 		String postsId = request.getParameter("postsId");
 		Comment b = new Comment();
 		b.setPostsId(postsId);
-		System.out.println("p = " + postsId);
 		ArrayList<Comment> commentList = new BoardService().selectComment(b);
 
 		response.setContentType("application/json");

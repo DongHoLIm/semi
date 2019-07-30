@@ -15,15 +15,14 @@ import com.kh.bvengers.user.member.model.vo.Member;
 @WebServlet("/searchAll.me")
 public class SearchAllMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public SearchAllMemberServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		ArrayList<Member> list = new MemberService().selectAll();
-		System.out.println(list);
 		String page = "";
 		if(list!=null) {
 			request.setAttribute("list", list);

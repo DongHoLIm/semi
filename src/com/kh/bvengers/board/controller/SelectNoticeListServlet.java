@@ -21,7 +21,7 @@ import com.kh.bvengers.board.model.vo.BoardPageInfo;
 @WebServlet("/selectNotice.no")
 public class SelectNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,21 +34,21 @@ public class SelectNoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		int currentPage;
 		int limit;
 		int maxPage;
 		int startPage;
 		int endPage;
-		
+
 		int currentPage1;
 		int limit1;
 		int maxPage1;
 		int startPage1;
 		int endPage1;
-		
+
 		int num = 1;
-		
+
 		//1페이지부터 시작
 		currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
@@ -58,50 +58,46 @@ public class SelectNoticeListServlet extends HttpServlet {
 		if(request.getParameter("currentPage1") != null) {
 			currentPage1 = Integer.parseInt(request.getParameter("currentPage1"));
 		}
-		
+
 		limit = 5;
 		limit1 = 10;
 		int[] array = new int[2];
 		//전체 목록 개수 리턴
 		array = new BoardService().getListCount(num);
-		
+
 			int notice = array[0];
 			int message = array[1];
-		System.out.println("chick :"+message);
-		System.out.println("listCount :" + notice);
 
 		maxPage = (int)((double)notice/ limit+0.9);
 		maxPage1 = (int)((double)message/ limit1+0.9);
-		
+
 		startPage = (((int)((double)currentPage / limit + 0.9))-1) * 10 + 1;
 		startPage1 = (((int)((double)currentPage1 / limit1 + 0.9))-1) * 10 + 1;
-		
+
 		endPage = startPage + 10 -1 ;
 		endPage1 = startPage1 + 10 -1 ;
-		
+
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-		
+
 		if(maxPage1 < endPage1) {
 			endPage1 = maxPage1;
 		}
-		
+
 		BoardPageInfo pi = new BoardPageInfo(currentPage, notice, limit, maxPage, startPage, endPage);
-		BoardPageInfo pi1 = new BoardPageInfo(currentPage1, message, limit1, maxPage1, startPage1, endPage1);		
-		
+		BoardPageInfo pi1 = new BoardPageInfo(currentPage1, message, limit1, maxPage1, startPage1, endPage1);
+
 		ArrayList<Board> list = new BoardService().selectList(currentPage, limit);
 		ArrayList<Board> list1 = new BoardService().selectList1(currentPage1, limit1);
-		
+
 		Collections.reverse(list1);
 		Collections.reverse(list);
-		
+
 		String page = "";
-		String page1 = ""; 
-				
-		System.out.println("list" + list);
-		System.out.println("chick" + list1);
-		
+		String page1 = "";
+
+
 		if(list != null) {
 			page = "views/user/board/board.jsp";
 			request.setAttribute("list", list);
@@ -110,8 +106,8 @@ public class SelectNoticeListServlet extends HttpServlet {
 			page = "views/user/board/board.jsp";
 			request.setAttribute("msg", "게시판 조회 실패");
 		}
-		
-		
+
+
 		if(list1 != null) {
 			page1 = "views/user/board/board.jsp";
 			request.setAttribute("list1", list1);
@@ -120,11 +116,11 @@ public class SelectNoticeListServlet extends HttpServlet {
 			page1= "views/user/board/board.jsp";
 			request.setAttribute("msg", "게시판 조회 실패");
 		}
-		
-		
+
+
 		request.getRequestDispatcher(page1).forward(request,response);
 	}
-	
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

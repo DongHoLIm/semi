@@ -25,7 +25,6 @@ public class InsertCommentServlet extends HttpServlet {
 		String writer = request.getParameter("writer");
 		String postsId = request.getParameter("postsId");
 		String content = request.getParameter("content");
-		System.out.println("여기는 서블릿");
 		Comment b = new Comment();
 		b.setCommentContents(content);
 		b.setPostsId(postsId);

@@ -40,7 +40,7 @@ public class BoardService {
 			rollback(con);
 		}
 		close(con);
-		
+
 		return hmap;
 	}
 
@@ -177,26 +177,26 @@ public class BoardService {
 
 		return list1;
 	}
-	
+
 	public ArrayList<Board> selectQandAList(int currentPage1, int limit, int num ,String uno) {
 
 		Connection con = getConnection();
 
 		ArrayList<Board>list = new BoardDao().selectQandAList(con,currentPage1,limit,num,uno);
-	
+
 /*		ArrayList<Board>countlist = new BoardDao().selectCount(con,num);
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("list", list);
 		map.put("countlist", countlist);
 		*/
-		
+
 		close(con);
-		
+
 		return list;
 	}
-	
+
 
 
 	public ArrayList<Board> selectQuestionList(int limit) {
@@ -214,12 +214,12 @@ public class BoardService {
 	public ArrayList<Board> selectManagerList(int currentPage, int limit, int num) {
 
 		Connection con = getConnection();
-		
+
 		ArrayList<Board>list = new BoardDao().selectManagerNoticeList(con,currentPage,limit,num);
-		
+
 		close(con);
-		
-		
+
+
 		return list;
 	}
 
@@ -232,8 +232,8 @@ public class BoardService {
 		Board b = null;
 		
 		Attachment at = null;
-
-		int result = new BoardDao().updateCount(con,num);	
+    
+    int result = new BoardDao().updateCount(con,num);	
 		
 		b = new BoardDao().selectOnecontent(con,num);
 		
@@ -293,115 +293,105 @@ public class BoardService {
 
 	public ArrayList<Calculate> paymentManagement() {
 		Connection con = getConnection();
-		
+
 		ArrayList<Calculate> list = new BoardDao().paymentManagement(con);
-		
+
 		int count = list.size() +1;
 		for(int i = 0; i < list.size(); i++) {
 			int result = 0;
-			
+
 			result = new BoardDao().checkStatus(con, list.get(i));
-			
+
 			if(result > 0) {
 				count--;
 			}
 		}
-		
+
 		close(con);
-		
-		
+
+
 		return list;
 	}
 
 	public int insertReport(String dustId, String post_id, String content, String reporter) {
 		Connection con = getConnection();
-		
+
 		int result = new BoardDao().insertReport(con,dustId,post_id,content,reporter);
-		
+
 		if(result > 0) {
 			commit(con);
 		}else {
 			rollback(con);
 		}
-		
+
 		return result;
 	}
 
 
 	public int getListCount() {
 		Connection con = getConnection();
-		
+
 		int listCounter = new BoardDao().getListCount(con);
 		return listCounter;
 	}
 
 	public ArrayList<Calculate> paymentManagement(int currentPage, int limit) {
 		Connection con = getConnection();
-		
-		ArrayList<Calculate> list = new BoardDao().paymentManagement(con, currentPage, limit); 
-		
+
+		ArrayList<Calculate> list = new BoardDao().paymentManagement(con, currentPage, limit);
+
 		int count = list.size() +1;
 		for(int i = 0; i < list.size(); i++) {
 			int result = 0;
-			
+
 			result = new BoardDao().checkStatus(con, list.get(i));
-			
+
 			if(result > 0) {
 				count--;
 			}
 		}
-		
+
 		close(con);
-		
+
 		return list;
 	}
 
 	public Board selectOne(int num) {
 		Connection con = getConnection();
-		
+
 		Board b = new BoardDao().selectOne(con, num);
-		
-		
+
+
 		close(con);
-		
+
 		return b;
 	}
 
 	public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 		Connection con = getConnection();
-		
-		System.out.println("여기는 와>");
-		
+
+
 		int resulttitle = new BoardDao().updateNotice(con,b);
-		
+
 		int resultcontent = new BoardDao().updateNoticeContent(con,b);
 		
 		int result1 = 0;
-		if(fileList !=null) {
-		
-		 result1= new BoardDao().insertNoticePicture(con, fileList,b);
-		
+		if(fileList !=null) {		
+		 result1= new BoardDao().insertNoticePicture(con, fileList,b);		
 		}else {
 			result1 = 1;
-		}
-		
-		int result = 0;
-		
-		
+		}		
+		int result = 0;		
 		if(resulttitle>0&&resultcontent>0&&result1>0) {
 			commit(con);
 			result = 1;
 		}else {
 			rollback(con);
 		}
-		
 		close(con);
-		System.out.println("zzz"+result);
-		
 		return result;
-
-		
 	}
+  
 	public int insertpicture(Board b, ArrayList<Attachment> fileList) {
 		Connection con = getConnection();
 
@@ -409,7 +399,7 @@ public class BoardService {
 
 		if( result1 >0) {
 			commit(con);
-			
+
 		}else {
 			rollback(con);
 		}

@@ -29,8 +29,6 @@ public class TestServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
 
-		System.out.println(name);
-		System.out.println("길을 잃고 방황하는 소리꾼");
 	}
 
 	/**
