@@ -310,12 +310,7 @@ public class BoardService {
 		return result;
 	}
 
-	public Board showDetail(String postId) {
-		Connection con = getConnection();
-		Board b = new BoardDao().showDetail(con,postId);
-		close(con);
-		return b;
-	}
+
 	public int getListCount() {
 		Connection con = getConnection();
 		
@@ -392,8 +387,25 @@ public class BoardService {
 		}else {
 			rollback(con);
 		}
-
+		
+		close(con);
+		
 		return result1;
+	}
+
+	public int changeDeliStatus(String deliNo) {
+		Connection con = getConnection();
+		
+		int result = new BoardDao().changeDeliStatus(con, deliNo);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
 	}
 
 }

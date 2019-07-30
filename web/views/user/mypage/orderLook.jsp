@@ -4,15 +4,7 @@
 <%
 
 	ArrayList<myPage> olList = (ArrayList<myPage>) request.getAttribute("olList");
-	MyPagePageInfo pi = (MyPagePageInfo) request.getAttribute("pi");
-	
-	
 	/* request.setAttribute("olList", olList); */
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
 	String status = "";
 	String page2 = "";
 	
@@ -80,7 +72,7 @@
 	align: center;
 }
 
-.board {
+.dateBoard {
 	width: 80%;
 	margin: auto;
 	align: center;
@@ -170,13 +162,16 @@ tr > th, tr>td{
 			
 		<div class="t_div">
 			<br />
-			<table border="1" align = "center" class = "board">
+			<table border="1" align = "center" class = "dateBoard">
+				<thead>
 				<tr>
 					<th class="th_orderLook">주문번호</th>
 					<th class="th_orderLook">주문일자</th>
 					<th class="th_orderLook">상품정보</th>
 					<th class="th_orderLook">주문상태</th>
 				</tr>
+				</thead>
+				<tbody>
 				<% for(myPage p : olList){%>
 				<tr class="od">
 					<td><%=p.getOno() %></td>
@@ -193,10 +188,11 @@ tr > th, tr>td{
 					<td><%=status %></td>
 				</tr>
 				<%}%>
+				</tbody>
 			</table>
 		</div></div>
 <%-- 페이징처리 --%>
-		<div class="pagingArea" align="center">
+		<div id="pagingArea" align="center">
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1){ %>

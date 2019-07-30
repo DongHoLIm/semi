@@ -956,34 +956,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public Board showDetail(Connection con, String postId) {
-		Board b = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = prop.getProperty("showDetail");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, postId);
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				/*b.setPostsId(rset.getInt("POSTS_ID"));
-				b.setPostsTitle(rset.getString("POSTS_TITLE"));
-				b.setMemberId(rset.getString("Member_ID"));
-				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
-				b.setRecommendCount(rset.getInt("RECOMMEND_COUNT"));
-				b.setCreateDate(rset.getDate("CREATEDATE"));
-				b.setContents(rset.getString("CONTENTS"));
-				b.setMemberNo(rset.getInt("MEMBER_NO"));*/
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return b;
-	}
+	
 
 	public int checkStatus(Connection con, Calculate cal) {
 		PreparedStatement pstmt = null;
@@ -1089,7 +1062,6 @@ public class BoardDao {
 		
 		return list;
 	}
-
 
 	public Board selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
@@ -1209,13 +1181,35 @@ public class BoardDao {
 		return result;
 	}
 
-
-
-
-
-
-
+	public int changeDeliStatus(Connection con, String deliNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("changeDeliStatus");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, deliNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
+
+
+
+
+
+
+
+}
 
 
 

@@ -11,16 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.manager.member.model.service.ManagerMemberService;
 import com.kh.bvengers.manager.member.model.vo.MMemberPageInfo;
-import com.kh.bvengers.manager.member.model.vo.Report;
-import com.kh.bvengers.user.member.model.service.MemberService;
+import com.kh.bvengers.manager.member.model.vo.SANCTION;
 
-@WebServlet("/reportList.me")
-public class ReportListServlet extends HttpServlet {
+@WebServlet("/badmanlist.me")
+public class BadMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ReportListServlet() {
-        super();
-    }
+
+	public BadMemberServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage;
@@ -28,32 +27,31 @@ public class ReportListServlet extends HttpServlet {
 		int maxPage;
 		int startPage;
 		int endPage;
-		currentPage = 1;
+		currentPage=1;
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
-		limit=10;
-		
-		int listCount = new MemberService().getListCount();
-		
-		
+
+		limit = 10;
+		int listCount = new ManagerMemberService().ListCount();
+
 		maxPage = (int)((double)listCount / limit+0.9);
-		
+
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
-		
+
 		endPage = startPage + 10 -1;
-		
+
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
-		
 		MMemberPageInfo pi = new MMemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
-		
-		ArrayList<Report> list = new ManagerMemberService().selectList(currentPage,limit);
-		String page ="";
+
+		ArrayList<SANCTION> list = new ManagerMemberService().badmanList(currentPage,limit);
+		System.out.println(currentPage);
+		System.out.println(limit);
+		String page = "";
 		if(list!=null) {
-			page = "views/manager/member/reportlist.jsp";//회원리스트나올페이지
+			page = "views/manager/member/blackList.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		}else {
@@ -61,6 +59,7 @@ public class ReportListServlet extends HttpServlet {
 			request.setAttribute("msg", "실패!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
