@@ -58,10 +58,7 @@ public class InsertNoticeServlet extends HttpServlet {
 
 
 				String name = files.nextElement();
-
-				if(!name.equals("files")) {
-
-
+				if(!name.equals("files")&&name!=null) {
 				saveFiles.add(multiRequest.getFilesystemName(name));
 				originFiles.add(multiRequest.getOriginalFileName(name));
 
@@ -80,7 +77,6 @@ public class InsertNoticeServlet extends HttpServlet {
 			b.setContents(multiContent);
 			b.setMemberNo(Integer.parseInt(uno));
 			b.setPostsCode(postCode);
-
 
 			ArrayList<Attachment>fileList = new ArrayList<Attachment>();
 

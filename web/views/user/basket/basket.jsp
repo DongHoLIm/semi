@@ -72,7 +72,7 @@
 
 <div id="basketList">
 	<h2 id="basketTitle">장바구니</h2>
-	<button>리스트제거</button>
+	<button onclick="removeList();">리스트제거</button>
   <table class="table">
     <thead>
       <tr>
@@ -87,7 +87,7 @@
     <tbody>
     <%for(Basket bk : list){ %>
       <tr>
-        <td id="td1"><input type="checkbox" id="select"/></td>
+        <td id="td1"><input type="checkbox" id="select" value="<%=bk.getProductCode() %>"/></td>
         <td id="td1"><img src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=bk.getFileName() %>" alt=""  id="fileImage"/></td>
         <td id="td1"><h4 id="productName"><%=bk.getProductName() %></h4></td>
         <td id="td1"><p id="info"><%=bk.getPrice() %></p></td>
@@ -120,7 +120,25 @@
   </div>
 </div>
 <script>
-
+	function removeList(){
+		$(function(){
+			var code = "";
+			
+			$("#select:checked").each(function(index){
+				code+=$(this).val()+","
+			});
+			var deliveryPrice = 2500;
+			var total =0;
+			$.ajax({
+				url:"deleteList.bk",
+				type:"post",
+				data:{"code":code},
+				success:function(data){
+						window.location.reload();	
+				}
+			});
+		});
+	}
 </script>
 </body>
 <footer><%@ include file="../hfl/footer.jsp"%></footer>

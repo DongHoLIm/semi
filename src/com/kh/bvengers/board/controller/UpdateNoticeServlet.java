@@ -36,21 +36,6 @@ public class UpdateNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		/*String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		System.out.println(title);
-		System.out.println(content);
-		String hapche = (String) request.getParameter("hapche");
-		System.out.println(hapche);
-		int num = Integer.parseInt(request.getParameter("no"));
-		System.out.println("시발넘버:"+num);*/
-		/*b.setPostsTitle(title);
-		b.setContents(content);
-		b.setPostsId(num);
-		*/
-		/*int result = new BoardService().updateNotice(b);*/
-
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024*1024*10;
 
@@ -72,8 +57,8 @@ public class UpdateNoticeServlet extends HttpServlet {
 			b.setContents(content);
 			b.setPostsId(no);
 
-			int result = new BoardService().updateNotice(b);
 
+			int result = new BoardService().updateNotice(b);
 			ArrayList<String> saveFiles = new ArrayList<String>();
 
 			ArrayList<String> originFiles = new ArrayList<String>();
@@ -83,14 +68,18 @@ public class UpdateNoticeServlet extends HttpServlet {
 
 
 
+
 			while(files.hasMoreElements()) {
 
 
 				String name = files.nextElement();
 
 				if((!name.equals("files"))&& name!=null) {
-
+			ArrayList<Attachment> fileList = null;
+			while(files.hasMoreElements()) {	
 				while(files.hasMoreElements()) {
+					String name = files.nextElement();
+					if((!name.equals("files"))&& name!=null) {
 					if(multiRequest.getFilesystemName(name) != null) {
 						saveFiles.add(multiRequest.getFilesystemName(name));
 						originFiles.add(multiRequest.getOriginalFileName(name));
@@ -100,8 +89,8 @@ public class UpdateNoticeServlet extends HttpServlet {
 				}
 				}
 			}
+				fileList = new ArrayList<Attachment>();
 
-				ArrayList<Attachment> fileList = new ArrayList<Attachment>();
 				for(int i = originFiles.size() - 1; i >= 0 ; i--) {
 					Attachment at = new Attachment();
 					at.setFileSrc(saveSrc);
@@ -109,16 +98,15 @@ public class UpdateNoticeServlet extends HttpServlet {
 					at.setNewFileName(saveFiles.get(i));
 
 					fileList.add(at);
-				}
+				}				
+				int result = new BoardService().updateNotice(b, fileList);
 
-				int resultpicture = new com.kh.bvengers.board.model.service.BoardService().insertpicture(b,fileList);
-
-				String page = "";
-
-				if(result > 0 && resultpicture >0) {
-
-					response.sendRedirect("/jsp/selectOne.no?num=" + no);
-
+				String page = "";				
+			
+				if(result > 0) {
+					//response.sendRedirect("views/manager/main/managerPage.jsp");
+					response.sendRedirect("/sp/son.no?num=" + no);
+				
 				}else {
 					page = "views/common/errorPage.jsp";
 					request.setAttribute("msg", "공지사항 수정 실패!!");

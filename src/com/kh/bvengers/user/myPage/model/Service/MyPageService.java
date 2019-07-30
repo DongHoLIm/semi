@@ -66,9 +66,38 @@ public class MyPageService {
 	}
 
 
-	public myPage orderCheck(String ono) {
+	public int getOrderLookListCount(String memberNo) {
+		Connection con = getConnection();
 		
-		return null;
+		int listCount = new MyPageDao().getOrderLookListCount(con, memberNo);
+		
+		close(con);
+		
+		return listCount;
 	}
 
-}
+
+	public int getOrderDateCount(String memberNo, String start, String end) {
+		Connection con = getConnection();
+		
+		int listCount = new MyPageDao().getOrderDateCount(con, memberNo, start, end);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+
+	public ArrayList<myPage> orderDateList(String memberNo, String start, String end, int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<myPage> dateList = new MyPageDao().selectOrderDateList(con, memberNo, start, end, currentPage, limit);
+		
+		close(con);
+		
+		return dateList;
+	}
+		
+	}
+
+

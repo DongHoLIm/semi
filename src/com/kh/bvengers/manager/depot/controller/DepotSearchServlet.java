@@ -51,6 +51,8 @@ public class DepotSearchServlet extends HttpServlet {
 		ArrayList <Depot> list = null;
 		
 		DepotPageInfo pi =null;
+		
+		
 		if(location!=null&&insertDate.equals("")&&releaseDate.equals("")&&productCode.equals("")) {
 			listCount = new DepotService().searchL(location);
 			

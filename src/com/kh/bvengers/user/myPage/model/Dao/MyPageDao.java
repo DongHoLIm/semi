@@ -223,4 +223,115 @@ public class MyPageDao {
 		}
 		return odList;
 	}
+
+
+	public ArrayList<myPage> selectOrderDateList(Connection con, String memberNo, String start, String end,
+			int currentPage, int limit) {
+		ArrayList<myPage> dateList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOrderDate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+		
+			pstmt.setString(1, memberNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
+			
+			rset = pstmt.executeQuery();
+			dateList = new ArrayList<myPage>();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				m.setoDate(rset.getDate("ORDER_DATE"));
+				m.setOno(rset.getString("ORDER_NO"));
+				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setPayStatus(rset.getString("PAY_STATUS"));
+				m.setDstatus(rset.getString("DELIVERY_STATUS"));
+				m.setRefundStatus(rset.getString("REFUND_STATUS"));
+				
+				dateList.add(m);
+			}	
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		return dateList;
+	}
+
+
+	public int getOrderLookListCount(Connection con, String memberNo) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOrderLookCount");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+
+	public int getOrderDateCount(Connection con, String memberNo, String start, String end) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOrderDateCount");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
 }

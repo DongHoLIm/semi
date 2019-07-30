@@ -34,9 +34,6 @@ public class OrderLookServlet extends HttpServlet {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String memberNo = loginUser.getMemberNo();
 		String d1 = request.getParameter("d1");
-
-
-
 		//게시판은 1페이지부터 시작함
 		currentPage = 1;
 
@@ -48,9 +45,8 @@ public class OrderLookServlet extends HttpServlet {
 		limit = 5;
 
 		//전체 목록 갯수를 리턴받음
-		int listCount = new MyPageService().getListCount(memberNo);
-
-
+		int listCount = new MyPageService().getOrderLookListCount(memberNo);
+	
 		maxPage = (int)((double)listCount / limit + 0.8);
 
 		startPage = (((int)((double) currentPage / limit + 0.8)) - 1) * 10 + 1;
@@ -65,7 +61,6 @@ public class OrderLookServlet extends HttpServlet {
 				new MyPagePageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 
 		String page = "";
-
 		ArrayList<myPage> olList = new MyPageService().selectOrderLookList(memberNo, currentPage, limit);
 
 		if(olList != null) {
@@ -107,12 +102,8 @@ public class OrderLookServlet extends HttpServlet {
 
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
 			request.setAttribute("olList", olList);
+			//request.setAttribute("dateList", dateList);
 			request.setAttribute("pi", pi);
-
-			//HttpSession session = request.getSession();
-			//session.setAttribute("loginUser", loginUser);
-			//response.sendRedirect("views/user/mypage/orderLook.jsp");
-
 		}else {
 			page="views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "실패!");

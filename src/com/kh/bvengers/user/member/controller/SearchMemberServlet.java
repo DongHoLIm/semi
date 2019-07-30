@@ -34,7 +34,7 @@ public class SearchMemberServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit=5;
+		limit=10;
 		int listCount = new MemberService().getListCount();
 		maxPage = (int)((double)listCount / limit+0.9);
 		
@@ -64,9 +64,9 @@ public class SearchMemberServlet extends HttpServlet {
 		//PrintWriter out = response.getWriter();
 		
 		if(list!=null) {
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
-			page = "views/manager/member/listMember.jsp";
+			request.setAttribute("list1", list);
+			request.setAttribute("pi1", pi);
+			page = "views/manager/member/membermanagement.jsp";
 			request.getRequestDispatcher(page).forward(request, response);
 		}else {
 			request.setAttribute("msg", "목록조회실패!");

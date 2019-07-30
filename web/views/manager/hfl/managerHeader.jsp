@@ -36,7 +36,7 @@
              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 회원관리<span class="caret"></span> </a>
                 <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/memberList.me">고객정보</a></li>
-               <li><a href="/sp/views/manager/member/blackList.jsp">블랙리스트 관리</a></li>
+               <li><a href="<%=request.getContextPath()%>/badmanlist.me">경고회원 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/reportList.me">신고정보</a></li>
             </ul>
              </li>
