@@ -1063,7 +1063,6 @@ public class BoardDao {
 		return list;
 	}
 
-
 	public Board selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1182,13 +1181,35 @@ public class BoardDao {
 		return result;
 	}
 
-
-
-
-
-
-
+	public int changeDeliStatus(Connection con, String deliNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("changeDeliStatus");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, deliNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
+
+
+
+
+
+
+
+}
 
 
 
