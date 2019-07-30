@@ -197,7 +197,7 @@ public class BoardDao {
 	public int insertNoticeContent(Connection con, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-
+		
 		String query = prop.getProperty("insertNoticeContent");
 
 		try {
@@ -710,6 +710,7 @@ public class BoardDao {
 				hmap.put("fileSrc", rset.getString("FILE_SRC"));
 				hmap.put("saveDate", rset.getDate("SAVE_DATE"));
 
+
 				list.add(hmap);
 			}
 
@@ -726,7 +727,80 @@ public class BoardDao {
 		}
 		return hmap;
 	}
+	
+	
+	public Board selectOnecontent(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board b = null;
+		String query = prop.getProperty("selectContent");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
 
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				b = new Board();
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setMemberId(rset.getString("Member_ID"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+				b.setContents(rset.getString("CONTENTS"));
+				b.setMemberNo(rset.getInt("MEMBER_NO"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		
+		
+		return b;
+	}
+
+	public Attachment selectOnePicture(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Attachment at = null;
+		
+		String query = prop.getProperty("selectOnePicture");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				at = new Attachment();
+				at.setFileNo(rset.getString("FILE_NO"));
+				at.setOrginFileName(rset.getString("ORIGIN_FILE_NAME"));
+				at.setFileSrc(rset.getString("FILE_SRC"));
+				at.setSaveDate(rset.getString("SAVE_DATE"));
+				at.setPostsId(rset.getString("POSTS_ID"));
+				at.setNewFileName(rset.getString("NVL(NEW_FILE_NAME,'사진없음')"));
+		
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return at;
+	}
+	
+	
 	public ArrayList<HashMap<String, Object>> mainList(Connection con, String value) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -1166,7 +1240,7 @@ public class BoardDao {
 				pstmt.setString(1, fileList.get(i).getOrginFileName());
 				pstmt.setString(2, fileList.get(i).getNewFileName());
 				pstmt.setString(3, fileList.get(i).getFileSrc());
-				pstmt.setInt(3, b.getPostsId());
+				pstmt.setInt(4, b.getPostsId());
 				
 				
 				result += pstmt.executeUpdate();
@@ -1180,7 +1254,6 @@ public class BoardDao {
 		
 		return result;
 	}
-
 	public int changeDeliStatus(Connection con, String deliNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -1193,22 +1266,53 @@ public class BoardDao {
 			
 			result = pstmt.executeUpdate();
 			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
+			close(rset);
 			close(pstmt);
 		}
+		
 		
 		return result;
 	}
 
-
-
-
-
-
-
+	public HashMap<String, Object> selectOneNoticenopic(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Board b = null;
+	
+		String query = prop.getProperty("selectNoPicture");
+		
+		HashMap<String, Object> hmap = null;
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				hmap = new HashMap<String, Object>();
+				
+				hmap.put("postId",rset.getInt("pi"));
+				hmap.put("PostTitle", rset.getString("pt"));
+				hmap.put("postView", rset.getInt("pv"));
+				hmap.put("MemberId",rset.getString("mi"));
+				hmap.put("Contents", rset.getString("c"));
+			
+			}
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return hmap;
+	}
 }
 
 
