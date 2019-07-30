@@ -249,7 +249,6 @@
 			$("#showBtn").click(function(){
 				$(".commentTables").toggle();
 				if($(this).html().equals("댓글 보기")){
-					console.log("gd");
 				};
 			});
 		});
