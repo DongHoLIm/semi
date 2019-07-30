@@ -85,7 +85,6 @@ align:center;
 </head>
 <header><%@ include file="../hfl/managerHeader.jsp" %></header>
 <body>
-<form>
 	<section id="sec1">
 		<br />
 	
@@ -99,12 +98,15 @@ align:center;
 				<th>주문날짜</th>
 				<th>발생일자</th>
 				<th>진행상태</th>
-				<th>선택</th>
+				<th>상태변경</th>
 			</tr>
 			<tbody>
-				<% for(Calculate c : list){ %>
+				<% int rowCount = 0;
+					for(Calculate c : list){
+				%>
 					<tr>
-						<input type="hidden" value="<%= c.getDeliveryNo() %>">
+						<input type="hidden" value="<%= c.getDeliveryNo() %> name="deliNo">
+						<input type="hidden" value="<%=rowCount%>" name="rowCount" id="rowCount" />
 						<td><%= c.getOrderNo() %></td>
 						<td><%= c.getSellerId() %></td>
 						<td><%= c.getPostsTitle() %></td>
@@ -121,10 +123,15 @@ align:center;
 								구매확정
 							<%} %>
 						</td>
-						<td><input type="checkbox" name="selectTr"/></td>
+						<td>
+							<button type="button" name="statusss"
+										onclick="location.href='<%=request.getContextPath()%>/deliSucess?deliNo=<%=c.getDeliveryNo()%>'">상태변경</button>
+						</td>
 						
 					</tr>
-				<% } %>
+				<% 	rowCount++;
+					} 
+				%>
 			</tbody>
 		</table>
 			
@@ -217,11 +224,9 @@ align:center;
 		
 				<div id="numberBox"><%@ include file="../hfl/pagination.jsp" %></div>
 	</section>
-		
-</form>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
-
+	
 </body>
 </html>

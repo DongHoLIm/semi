@@ -392,8 +392,25 @@ public class BoardService {
 		}else {
 			rollback(con);
 		}
-
+		
+		close(con);
+		
 		return result1;
+	}
+
+	public int changeDeliStatus(String deliNo) {
+		Connection con = getConnection();
+		
+		int result = new BoardDao().changeDeliStatus(con, deliNo);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
 	}
 
 }
