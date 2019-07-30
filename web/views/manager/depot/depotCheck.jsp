@@ -115,7 +115,7 @@
 			<tr>
 				<td colspan="3">
 				<button type="submit" id="Btn" style="color:white;">검수상태변경</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="reset" id="Btn" style="color:white;">취소</button>
+				<button type="reset" id="Btn" style="color:white;" onclick="history.back()">취소</button>
 				</td>				
 			</tr>
 		</table>		

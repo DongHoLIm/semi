@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.basket.model.vo.*"%>
-    <%
-    	ArrayList <Basket> list = (ArrayList <Basket>) request.getAttribute("list");
-    	int delieryPrice =2500;
-    	int totalPrice =0;
-    %>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,31 +66,31 @@
 <%@ include file="../hfl/list.jsp"%>
 
 <div id="basketList">
-	<h2 id="basketTitle">장바구니</h2>
-	<button>리스트제거</button>
+	<h2 id="basketTitle">장바구니</h2>      
   <table class="table">
     <thead>
       <tr>
-        <th id="th3">선택</th>
+        <th id="th3"></th>
         <th id="th3"></th>
         <th id="th3">상품명</th>
         <th id="th3">상품금액</th>
         <th id="th3">배송비</th>
         <th id="th3">주문금액</th>
+        <th id="th3">선택</th>
       </tr>
     </thead>
     <tbody>
-    <%for(Basket bk : list){ %>
       <tr>
         <td id="td1"><input type="checkbox" id="select"/></td>
-        <td id="td1"><img src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=bk.getFileName() %>" alt=""  id="fileImage"/></td>
-        <td id="td1"><h4 id="productName"><%=bk.getProductName() %></h4></td>
-        <td id="td1"><p id="info"><%=bk.getPrice() %></p></td>
-        <td id="td1"><p id="info1"><%=delieryPrice %></p></td>
-        <td id="td1"><p id="info"><%=bk.getPrice()+delieryPrice %></p></td>
-        <td hidden><%=totalPrice+=bk.getPrice() %></td>
+        <td id="td1"><img src="<%=request.getContextPath() %>/images/flower4.PNG" alt=""  id="fileImage"/></td>
+        <td id="td1"><h4 id="productName">진수의 블링블링 노트북쿨러</h4></td>
+        <td id="td1"><p id="info">300000</p></td>
+        <td id="td1"><p id="info1">2500</p></td>
+        <td id="td1"><p id="info">302500</p></td>
+        <td id="td1">
+        	<input type="button" value="바로구매" id="directBtn"/>
+        </td>
       </tr>
-      <%} %>
     </tbody>
   </table>
   <table id="totalInfo" align="center">
@@ -107,21 +102,18 @@
   		<th id="th3">결제 예정 금액&nbsp;&nbsp;</th>
   	</tr>
   	<tr>
-  		<td><%=totalPrice %> &nbsp;&nbsp;</td>
+  		<td>300000 &nbsp;&nbsp;</td>
   		<td>+ &nbsp;&nbsp;</td>
-  		<td><%=delieryPrice %> &nbsp;&nbsp;</td>
+  		<td>2500 &nbsp;&nbsp;</td>
   		<td>= &nbsp;&nbsp;</td>
-  		<td><%=totalPrice+delieryPrice %></td>
+  		<td>302500</td>
   	</tr>
   </table>
   <div id="total">
   	<button onclick="">선택 상품 주문</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  	<button onclick="selectAll()">전체 상품 주문</button>
+  	<button onclick="">전체 상품 주문</button>
   </div>
 </div>
-<script>
-
-</script>
 </body>
 <footer><%@ include file="../hfl/footer.jsp"%></footer>
 </html>

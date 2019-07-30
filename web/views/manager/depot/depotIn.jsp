@@ -114,11 +114,8 @@
         			 type:"post",
         			 data:{"productCode":aCode},
         			 success:function(data){
-        				 
-        			 },
-        			 error:function(data){
-        				 
-        			 }
+        				 window.location.reload();
+        			 }        			
         		 });
     		 });    		
     	 }else{
