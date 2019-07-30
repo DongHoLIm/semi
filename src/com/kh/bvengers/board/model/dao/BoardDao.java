@@ -1038,8 +1038,7 @@ public class BoardDao {
 		}
 		
 		return listCount;
-	}
-	
+	}	
 	public ArrayList<Calculate> paymentManagement(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1092,10 +1091,131 @@ public class BoardDao {
 	}
 }
 
+	public Board selectOne(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board b = null;
+		
+		String query = prop.getProperty("selectOne");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				System.out.println("tq2");
+				b = new Board();
+				
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setContents(rset.getString("CONTENTS"));
+				b.setWriter(rset.getString("MEMBER_ID"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+				
+				System.out.println("zzsdads"+b);
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return b;
+	}
+
+	public int updateNotice(Connection con, Board b) {
+
+		PreparedStatement pstmt = null;
+	
+		
+		String query = prop.getProperty("updateNoticeTitle");
+		
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getPostsTitle());
+			pstmt.setInt(2, b.getPostsId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateNoticeContent(Connection con, Board b) {
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("updateContent");
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getContents());
+			pstmt.setInt(2, b.getPostsId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
+
+	public int insertNoticePicture(Connection con, ArrayList<Attachment> fileList, Board b) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updatePicture");
+		
+			try {
+				for(int i = 0; i < fileList.size(); i++) {
+				pstmt= con.prepareStatement(query);
+				pstmt.setString(1, fileList.get(i).getOrginFileName());
+				pstmt.setString(2, fileList.get(i).getNewFileName());
+				pstmt.setString(3, fileList.get(i).getFileSrc());
+				pstmt.setInt(3, b.getPostsId());
+				
+				
+				result += pstmt.executeUpdate();
+				
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		return result;
+	}
 
 
 
 
+
+
+
+	}
 
 
 
