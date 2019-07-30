@@ -33,10 +33,37 @@ public class OrderLookServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String memberNo = loginUser.getMemberNo();
-		String d1 = request.getParameter("d1");
+/*		String start = request.getParameter("startdate");
+		String end = request.getParameter("enddate");
+		System.out.println(start);
+		System.out.println(end);
+		startdate.replace("-", "");
+		enddate.replace("-", "");
+		String startdate = "";
+		String enddate = "";
+		if(start.equals("")&&end.equals("")) {
+			
+		}else if(start!=null&&end!=null) {
+			
+		}else {
+			
+		}
+		for(int i = 0; i < start.length(); i++) {
+			
+			if(start.charAt(i) != '-') {
+				startdate += start.charAt(i);
+				
+			}
+		}
+		for(int j = 0; j < end.length(); j++) {
+			if(end.charAt(j) != '-') {
+				enddate += end.charAt(j);
+			}
+		}
 		
-		System.out.println(d1);
-		
+		System.out.println(startdate);
+		System.out.println(enddate);
+		*/
 		
 		//게시판은 1페이지부터 시작함
 		currentPage = 1;
@@ -49,7 +76,7 @@ public class OrderLookServlet extends HttpServlet {
 		limit = 5;
 		
 		//전체 목록 갯수를 리턴받음
-		int listCount = new MyPageService().getListCount(memberNo);
+		int listCount = new MyPageService().getOrderLookListCount(memberNo);
 		
 		
 		maxPage = (int)((double)listCount / limit + 0.8);
@@ -67,6 +94,7 @@ public class OrderLookServlet extends HttpServlet {
 		
 		String page = "";
 		
+		//ArrayList<myPage> dateList = new MyPageService().selectOrderDateList(memberNo, startdate, enddate, currentPage, limit);
 		ArrayList<myPage> olList = new MyPageService().selectOrderLookList(memberNo, currentPage, limit);
 		
 		if(olList != null) {
@@ -108,11 +136,8 @@ public class OrderLookServlet extends HttpServlet {
 			
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
 			request.setAttribute("olList", olList);
+			//request.setAttribute("dateList", dateList);
 			request.setAttribute("pi", pi);
-			
-			//HttpSession session = request.getSession();
-			//session.setAttribute("loginUser", loginUser);
-			//response.sendRedirect("views/user/mypage/orderLook.jsp");
 			
 		}else {
 			page="views/common/errorPagePrompt.jsp";
