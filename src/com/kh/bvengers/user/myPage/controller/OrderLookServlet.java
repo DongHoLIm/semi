@@ -33,6 +33,10 @@ public class OrderLookServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String memberNo = loginUser.getMemberNo();
+		String d1 = request.getParameter("d1");
+		
+		System.out.println(d1);
+		
 		
 		//게시판은 1페이지부터 시작함
 		currentPage = 1;

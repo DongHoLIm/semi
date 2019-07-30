@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -90,11 +90,30 @@ $(document).ready(function() {
     
     $.fn.schDate = function() {
        var $obj = $(this);
-       var $chk = $obj.find("input[type=radio]");
-       $chk.click(function() {
+       /* var $chk = $obj.find("input[type=radio]"); */
+       $("#dateType1").click(function(){
+       var d1 = $(this).parent().siblings().eq(0).text();
+    	  $("#dateType2").parent(".chkbox2").removeClass("on");
+    	  $("#dateType3").parent(".chkbox2").removeClass("on");
+    	  $("#dateType1").parent(".chkbox2").addClass("on");
+       console.log(d1);
+    	  <%-- location.href='<%=request.getContextPath()%>/orderLook.mp?d1='+d1; --%>
+       });
+       $("#dateType2").click(function(){
+     	  $("#dateType1").parent(".chkbox2").removeClass("on");
+     	  $("#dateType3").parent(".chkbox2").removeClass("on");
+     	  $("#dateType2").parent(".chkbox2").addClass("on");
+        });
+       $("#dateType3").click(function(){
+      	  $("#dateType1").parent(".chkbox2").removeClass("on");
+      	  $("#dateType2").parent(".chkbox2").removeClass("on");
+      	  $("#dateType3").parent(".chkbox2").addClass("on");
+         });
+       
+       /* $chk.click(function() {
            $('input:not(:checked)').parent(".chkbox2").removeClass("on");
            $('input:checked').parent(".chkbox2").addClass("on");
-       });
+       }); */
     }
     
     // DateClick
@@ -119,10 +138,10 @@ $(document).ready(function() {
        var endDate = $.datepicker.formatDate('yy-mm-dd', today);
        $('#searchEndDate').val(endDate);
     
-       if (str == 'd') {
-           today.setDate(today.getDate() - num);
-       } else if (str == 'w') {
+       if (str == 'w') {
            today.setDate(today.getDate() - (num * 7));
+       } else if (str == 'f') {
+           today.setDate(today.getDate() - (num * 15));
        } else if (str == 'm') {
            today.setMonth(today.getMonth() - num);
            today.setDate(today.getDate() + 1);
@@ -140,36 +159,47 @@ $(document).ready(function() {
        var f = document.frm;
        f.method = "post";
        $(".adminbuildenergyno").remove(); //name값이 다수여서 지워여야함
-       f.submit();
-    }
+       
+    };
  
 
 </script>
 <style>
+.td_select {
+	width:87%;
+}
 .searchBox {
-	width: 100%;
-	height:70%;
-	padding: 2%;
-	margin: 0 auto;
-	text-align: center;
+   width: 100%;
+   height:70%;
+   padding: 2%;
+   margin: 0 auto;
+   text-align: center;
 }
 
 .searchdiv {
-	width: 50%;
-	height:70%;
-	padding: 2%;
-	margin: 0 auto;
-	text-align: center;
-	border:1px solid black;
+   width: 60%;
+   height:70%;
+   padding: 2%;
+   margin: 0 auto;
+   text-align: center;
+   border:1px solid black;
 }
 
 .th_select {
-	text-align:right;
+	width:13%;
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+
+#selectDate {
+	border:1px solid black;
+   background:#FFF;
 }
 
 input[type=button] {
-	border:1px solid black;
-	background:#FFF;
+   border:1px solid black;
+   background:#FFF;
 }
 
 </style>
@@ -178,47 +208,66 @@ input[type=button] {
 <div class="searchdiv">
   <table class="searchBox">
                    <!-- <caption style="font-size:20px;">주문조회</caption> -->
-                    <colgroup>
-                        <col width="123px">
-                        <col width="*">
-                    </colgroup>
-                    <h2>주문조회</h2>
-                    <tbody>
-                        <tr>
-                            <th class="th_select">기간별 조회</th>
-                            <td>
-                               <span class="chkbox2">
-                                            <input type="button" name="dateType" id="dateType3" value="1주일" onclick="setSearchDate('1w')"/>
-                                            <label for="dateType3"></label>
-                                        </span>
-                                        <span class="chkbox2">
-                                            <input type="button" name="dateType" id="dateType5" value="15일" onclick="setSearchDate('1m')"/>
-                                            <label for="dateType4"></label>
-                                        </span>
-                                        <span class="chkbox2">
-                                            <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
-                                            <label for="dateType5"></label>
-                                        </span>
-                               
-                                <!-- <div class="clearfix">
-                                    시작일 -->
-                                    <span class="dset">
-                                        <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >
-                                        <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
-                                    </span>
-                                    <span class="demi">~</span>
-                                    <!-- 종료일 -->
-                                    <span class="dset">
-                                      <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
-                                        <a href="#none" class="btncalendar dateclick"><img src="/images/datepicker.png"></a>
-                                    </span>
-                                <!-- </div>  -->  
-                            </td>
-                        </tr>
-                    <tbody>
-                </table>
-			</div>
+     <colgroup>
+         <col width="123px">
+         <col width="*">
+     </colgroup>
+     <h2>주문조회</h2>
+     <tbody>
+         <tr>
+             <th class="th_select">기간별 조회</th>
+             <td class="td_select">
+                <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType1" value="1주일" onclick="setSearchDate('1w')"/>
+                       <label for="dateType1"></label>
+                   </span>
+                   <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType2" value="15일" onclick="setSearchDate('1f')"/>
+                       <label for="dateType2"></label>
+                   </span>
+                   <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType3" value="1개월" onclick="setSearchDate('1m')"/>
+                       <label for="dateType3"></label>
+                   </span>
+                   
+          
+           <!-- <div class="clearfix">
+               시작일 -->
+               <span class="dset">
+                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >
+                   <a href="#none" class="btncalendar dateclick"><img src="<%=request.getContextPath()%>/images/btn_calendar.gif"></a>
+               </span>
+               <span class="demi">~</span>
+               <!-- 종료일 -->
+               <span class="dset">
+                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
+                   <a href="#none" class="btncalendar dateclick"><img src="<%=request.getContextPath()%>/images/btn_calendar.gif"></a>
+               </span>
+               <span>
+                   	<input type="submit" name="selectDate" id="selectDate" value="조회" onclick="orderDate();">
+                   </span>
+           <!-- </div>  -->  
+                   </td>
+               </tr>
+           <tbody>
+       </table>
+</div>
 </body>
 
+
+<script>
+
+function orderDate(){
+	var startDate = "${adminBuildEnergyVo.startdate}";
+	var endDate = "${adminBuildEnergyVo.enddate}";
+	
+	console.log(startDate);
+	console.log(endDate)
+	
+	location.href="<%=request.getContextPath()%>/views/user/mypage/orderDate.mp?startDate="+startDate"&endDate"+endDate;
+
+		}
+
+</script>
 
 </html>
