@@ -9,12 +9,14 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
 	%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #depotMain {
 	width: 80%;
@@ -99,6 +101,7 @@ input-align:center;
 		<br>
 		<div id="table Area">
 			<table id="depotMain" align="center">
+			<thead>
 				<tr>
 					<th class="th"><input type="checkbox" id="chkAll"></th>
 					<th class="th">아이디</th>
@@ -110,6 +113,8 @@ input-align:center;
 					<th class="th">판매횟수</th>
 					<th class="th">회원 상세 조회</th>
 				</tr>
+				</thead>
+				<tbody>
 				<%for(Member m : list){ %>
 				<tr>
 					<td><input type="checkbox" class="chk"></td>
@@ -123,6 +128,7 @@ input-align:center;
 					<td><button class="mbdetail">상세보기</button></td>
 				</tr>
 				<%} %>
+				</tbody>
 			</table>
 			<br>
 			<br>
@@ -150,7 +156,10 @@ input-align:center;
 	    });
 	$("#searchbtn").on("click",function(){
 		var howselect = $("#selecthowsearch option:selected").val();
-		var value = $("#searchValue").text();
+		var value = $("#searchValue").val();
+		var send = $("#selecthowsearch option:selected").val() + "$" + $("#searchValue").val();
+		console.log(send);
+		 location.href='<%=request.getContextPath()%>/searchMember.me?send='+send;
 		
 	});
 </script>

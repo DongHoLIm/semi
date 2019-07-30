@@ -21,7 +21,6 @@ public class MemberListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int currentPage;
 		int limit;
 		int maxPage;
