@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b"); 
-	ArrayList<HashMap<String, Object>> fileList = (ArrayList<HashMap<String, Object>>) request.getAttribute("fileList");
-
+ 	Attachment a = (Attachment)request.getAttribute("fileList");
+ 	System.out.println("b"+b);
+ 	System.out.println("fileList"+a);
+ 	//ArrayList<HashMap<String, Object>> fileList = (ArrayList<HashMap<String, Object>>) request.getAttribute("fileList");
+	
  %>
 <!DOCTYPE html>
 <html>
@@ -48,20 +51,18 @@ td{
 					<td>작성일</td>
 					<td align = "center"><span><%= b.getCreateDate() %></span></td>
 				</tr>
-				<% for(int i = 0; i < fileList.size(); i++){ 
-					HashMap<String, Object> hmap = fileList.get(i);
-				 %>
-				<tr>
-				<% if(request.getContextPath()!=null){%>
-				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>"></td>
-				<%}else{%>
-				<%}%><td colspan = "6"></td>
-				</tr>
 				
+				<tr>
+				<% if(!(a.getNewFileName().equals("사진없음"))){%>
+				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
+				<%}else{%>
+				<td colspan = "6"></td><%}%>
+				</tr>
+
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
-					<%} %>
+				
 			</table>
 		</div>
 		

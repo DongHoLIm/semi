@@ -93,4 +93,13 @@ public class Attachment implements Serializable {
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
+
+	@Override
+	public String toString() {
+		return "Attachment [fileNo=" + fileNo + ", orginFileName=" + orginFileName + ", newFileName=" + newFileName
+				+ ", fileSrc=" + fileSrc + ", saveDate=" + saveDate + ", fileDiv=" + fileDiv + ", postsId=" + postsId
+				+ ", productCode=" + productCode + "]";
+	}
+	
+	
 }

@@ -40,7 +40,8 @@ public class SelectOneNotice extends HttpServlet {
 		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
 
 		Board b = (Board)hmap.get("board");
-		ArrayList<Attachment> fileList = (ArrayList<Attachment>)hmap.get("attachment");
+		Attachment fileList = (Attachment)hmap.get("attachment");
+
 
 		String page = "";
 		
