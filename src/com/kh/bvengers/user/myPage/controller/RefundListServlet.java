@@ -53,19 +53,19 @@ public class RefundListServlet extends HttpServlet {
 		}
 
 		limit = 5;
-		limit1 = 10;
+		limit1 = 5;
 		int[] array = new int[2];
 		//전체 목록 개수 리턴
-		array = new MyPageService().getrcListCount(num);
+		array = new MyPageService().getrcListCount(memberNo);
 
-			int notice = array[0];
-			int message = array[1];
+			int listCountR = array[0];
+			int listCountC = array[1];
 
-		maxPage = (int)((double)notice/ limit+0.9);
-		maxPage1 = (int)((double)message/ limit1+0.9);
+		maxPage = (int)((double)listCountR/ limit + 0.8);
+		maxPage1 = (int)((double)listCountC/ limit1 + 0.8);
 
-		startPage = (((int)((double)currentPage / limit + 0.9))-1) * 10 + 1;
-		startPage1 = (((int)((double)currentPage1 / limit1 + 0.9))-1) * 10 + 1;
+		startPage = (((int)((double)currentPage / limit + 0.8)) - 1) * 10 + 1;
+		startPage1 = (((int)((double)currentPage1 / limit1 + 0.8)) -1) * 10 + 1;
 
 		endPage = startPage + 10 -1 ;
 		endPage1 = startPage1 + 10 -1 ;
@@ -78,20 +78,30 @@ public class RefundListServlet extends HttpServlet {
 			endPage1 = maxPage1;
 		}
 
-		MyPagePageInfo pi = new MyPagePageInfo(currentPage, notice, limit, maxPage, startPage, endPage);
-		MyPagePageInfo pi1 = new MyPagePageInfo(currentPage1, message, limit1, maxPage1, startPage1, endPage1);
+		MyPagePageInfo pi = new MyPagePageInfo(currentPage, listCountR, limit, maxPage, startPage, endPage);
+		MyPagePageInfo pi1 = new MyPagePageInfo(currentPage1, listCountC, limit1, maxPage1, startPage1, endPage1);
 
-		ArrayList<myPage> rList = new MyPageService().selectRefundList(currentPage, limit);
-		ArrayList<myPage> cList = new MyPageService().selectCalculateList(currentPage1, limit1);
+		ArrayList<myPage> rList = new MyPageService().selectRefundList(memberNo, currentPage, limit);
+		ArrayList<myPage> cList = new MyPageService().selectCalculateList(memberNo, currentPage1, limit1);
 
-		Collections.reverse(rList);
-		Collections.reverse(cList);
+		/*Collections.reverse(rList);
+		Collections.reverse(cList);*/
 
 		String page = "";
 		String page1 = "";
 
 
 		if(rList != null) {
+			
+			for(myPage m : rList) {
+				
+				if(m.getRefundStatus().equals("1")) {
+					m.setRefundStatus("환불 대기");
+				}else if(m.getRefundStatus().equals("2")) {
+					m.setRefundStatus("환불 완료");
+				}
+			}
+			
 			page = "views/user/mypage/refund.jsp";
 			request.setAttribute("rList", rList);
 			request.setAttribute("pi", pi);
@@ -102,6 +112,18 @@ public class RefundListServlet extends HttpServlet {
 
 
 		if(cList != null) {
+			
+			for(myPage m : cList) {
+				
+				if(m.getaStatus().equals("1")) {
+					m.setaStatus("정산 대기");
+				}else if(m.getaStatus().equals("2")) {
+					m.setaStatus("정산 완료");
+				}else if(m.getaStatus().equals("3")) {
+					m.setaStatus("환불 완료");
+				}
+			}
+			
 			page1 = "views/user/mypage/refund.jsp";
 			request.setAttribute("cList", cList);
 			request.setAttribute("pi1", pi1);
@@ -109,7 +131,6 @@ public class RefundListServlet extends HttpServlet {
 			page1 = "views/user/mypage/refund.jsp";
 			request.setAttribute("msg", "게시판 조회 실패");
 		}
-
 
 		request.getRequestDispatcher(page1).forward(request,response);
 	}

@@ -39,10 +39,16 @@ public class ChangeInfoServlet extends HttpServlet {
 		m.setEmail(email);
 		m.setAddress(address);
 		m.setPhone(phone);
+		
+		String page = "";
+		
 		int result = new MemberService().changeMember(m);
 		if(result > 0) {
 
-			response.sendRedirect("/sp/views/user/mypage/myPage.jsp");
+			response.sendRedirect("/sp/views/user/mypage/changeInfo.jsp");
+			
+			//page = "views/user/mypage/changeInfo.jsp";
+			
 		}else {
 			request.setAttribute("msg","회원정보변경 실패!");
 			request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);

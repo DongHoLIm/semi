@@ -101,11 +101,11 @@ public class MyPageService {
 	}
 
 
-	public int[] getrcListCount(int num) {
+	public int[] getrcListCount(String memberNo) {
 		Connection con = getConnection();
 
-		int listCountR = new MyPageDao().getListCountR(con, num);
-		int listCountC = new MyPageDao().getListCountC(con);
+		int listCountR = new MyPageDao().getListCountR(con, memberNo);
+		int listCountC = new MyPageDao().getListCountC(con, memberNo);
 
 		int[] array = new int[2];
 
@@ -118,10 +118,10 @@ public class MyPageService {
 	}
 
 
-	public ArrayList<myPage> selectRefundList(int currentPage, int limit) {
+	public ArrayList<myPage> selectRefundList(String memberNo, int currentPage, int limit) {
 		Connection con = getConnection();
 
-		ArrayList<myPage> rList = new MyPageDao().selectRefundList(con, currentPage, limit);
+		ArrayList<myPage> rList = new MyPageDao().selectRefundList(con, memberNo, currentPage, limit);
 
 		close(con);
 
@@ -129,16 +129,16 @@ public class MyPageService {
 		}
 
 
-	public ArrayList<myPage> selectCalculateList(int currentPage1, int limit1) {
+	public ArrayList<myPage> selectCalculateList(String memberNo, int currentPage1, int limit1) {
 		Connection con = getConnection();
-		ArrayList<myPage> cList = new MyPageDao().selectCalculateList(con, currentPage1, limit1);
+		ArrayList<myPage> cList = new MyPageDao().selectCalculateList(con, memberNo, currentPage1, limit1);
 		
 		close(con);
 		
 		return cList;
 	
 	}
-		
+
 	}
 
 

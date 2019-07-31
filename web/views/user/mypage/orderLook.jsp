@@ -277,20 +277,6 @@ input[type=button] {
 }
 
 
-.row0 {
-	background: #eee;
-	margin: auto;
-}
-
-.row1 {
-	border-top: 2px solid #555;
-}
-
-.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
 .pageNo {
 	margin: auto;
 }
