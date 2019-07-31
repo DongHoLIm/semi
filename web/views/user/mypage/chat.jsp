@@ -22,7 +22,7 @@
 	var textarea = document.getElementById("messageWindow");
 	var id = "<%=loginUser.getMemberId()%>";
 	var no = <%=ch.getMemberNo()%>;
-	var webSocket = new WebSocket('ws://localhost:8001/sp/chatting?id='+id+'&no='+no);
+	var webSocket = new WebSocket('ws://localhost:8001/sp/chatting?id='+id);
 	var inputMessage = document.getElementById('inputMessage');
 
 	webSocket.onerror = function(event) {
@@ -44,7 +44,7 @@
 		alert(event.data);
 	};
 	function send() {
-		//textarea.value += id + " : " + inputMessage.value + "\n";
+		textarea.value += id + " : " + inputMessage.value + "\n";
 		webSocket.send(id + " : " + inputMessage.value);
 		inputMessage.value = "";
 	};

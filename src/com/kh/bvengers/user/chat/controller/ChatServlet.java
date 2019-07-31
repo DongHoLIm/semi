@@ -20,7 +20,6 @@ public class ChatServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String no = request.getParameter("no");
-		System.out.println("chat no ::: " + no);
 		int result = new ChatService().selectChat(no);
 
 		if(result > 0) {

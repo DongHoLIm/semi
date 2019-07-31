@@ -12,41 +12,35 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import com.kh.bvengers.user.chat.model.service.TargetService;
-
 @ServerEndpoint("/chatting")
 public class chatting {
 	private static Map<String, Session> client = Collections.synchronizedMap(new HashMap<String, Session>());
+	private static Map<String, Session> admin = Collections.synchronizedMap(new HashMap<String, Session>());
 
 	public chatting() {
 	}
 
 	@OnMessage
 	public void onMessage(String message, Session session) {
+		String[] cId = message.split(":");
+		String id = cId[0];
+		synchronized (admin) {
+			try {
+				Iterator<String> keySetIterator = admin.keySet().iterator();
+				while (keySetIterator.hasNext()) {
+					String key = keySetIterator.next();
+					client.get(key).getBasicRemote().sendText(message);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		synchronized (client) {
-			String id = session.getQueryString();
-			String[] cId = id.split("=");
-			id = cId[1];
-			int idx = id.indexOf("&");
-			id = id.substring(0, idx);
-
-			String no = session.getQueryString();
-			String[] cNo = no.split("&");
-			int idx2 = no.indexOf("=");
-			no = cNo[1].substring(idx2 + 1, cNo[1].length());
-
-			String target = new TargetService().selectTarget(no);
 			try {
 				Iterator<String> keySetIterator = client.keySet().iterator();
 				while (keySetIterator.hasNext()) {
 					String key = keySetIterator.next();
-					if(id.equals("admin") || target.equals(id))
-					client.get(key).getBasicRemote().sendText(message);
-					System.out.println("key: " + key + " value: " + client.get(key) + " target: " + target + " no:" + no);
-					/*if (key.equals(target)) {
-					} else if(key.equals("admin")) {
-						client.get(key).getBasicRemote().sendText(message);
-					}*/
+					admin.get(key).getBasicRemote().sendText(message);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -60,9 +54,11 @@ public class chatting {
 		String id = session.getQueryString();
 		String[] cId = id.split("=");
 		id = cId[1];
-		int idx = id.indexOf("&");
-		id = id.substring(0, idx);
-		client.put(id, session);
+		if (id.equals("admin")) {
+			admin.put(id, session);
+		} else {
+			client.put(id, session);
+		}
 	}
 
 	@OnClose
@@ -70,9 +66,6 @@ public class chatting {
 		String id = session.getQueryString();
 		String[] cId = id.split("=");
 		id = cId[1];
-		int idx = id.indexOf("&");
-		id = id.substring(0, idx);
 		client.remove(id, session);
 	}
-
 }
