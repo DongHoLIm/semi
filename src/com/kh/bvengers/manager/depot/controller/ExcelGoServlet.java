@@ -8,24 +8,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.bvengers.manager.depot.model.servies.DepotService;
 import com.kh.bvengers.manager.depot.model.vo.Depot;
 import com.kh.bvengers.manager.depot.model.vo.DepotPageInfo;
 
-
-@WebServlet("/list.dp")
-public class DepotListServlet extends HttpServlet {
+/**
+ * Servlet implementation class ExcelGoServlet
+ */
+@WebServlet("/excelGo.dp")
+public class ExcelGoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public DepotListServlet() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ExcelGoServlet() {
         super();
-       
+        // TODO Auto-generated constructor stub
     }
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage;		
 		int limit;				
@@ -41,7 +46,7 @@ public class DepotListServlet extends HttpServlet {
 		
 		limit = 10;
 		
-		int listCount = new DepotService().getCheckListCount();
+		int listCount = new DepotService().getAllListCount();
 		
 		maxPage = (int)((double)listCount/limit+0.9);
 		
@@ -54,24 +59,25 @@ public class DepotListServlet extends HttpServlet {
 		}
 		
 		DepotPageInfo pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		ArrayList <Depot> list = new DepotService().selectCheckAll(currentPage,limit);
+		ArrayList <Depot> list = new DepotService().selectAllList(currentPage,limit);
 		
 		String page ="";
-		
-		if(list!=null) {			
-			page = "views/manager/depot/depotCheckList.jsp";
-			request.setAttribute("list",list);			
-			request.setAttribute("pi", pi);			
+		if(list!=null) {
+			page ="views/manager/depot/DepotExcel.jsp";
+			request.setAttribute("list",list);
+			
 		}else {
-			page="views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "fucking list");			
+			page ="views/common/errorPagePrompt.jsp";
+			request.setAttribute("msg", "excel출력 실패");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

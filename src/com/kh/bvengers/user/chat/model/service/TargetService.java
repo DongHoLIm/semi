@@ -10,9 +10,9 @@ public class TargetService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int selectTarget(String id) {
+	public String selectTarget(String no) {
 		Connection con = getConnection();
-		int target = new TargetDao().selectTarget(id, con);
+		String target = new TargetDao().selectTarget(no, con);
 		close(con);
 		return target;
 	}

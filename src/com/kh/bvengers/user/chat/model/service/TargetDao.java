@@ -25,20 +25,20 @@ public class TargetDao {
 		}
 	}
 
-	public int selectTarget(String id, Connection con) {
+	public String selectTarget(String no, Connection con) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		int target = 0;
+		String target = null;
 
 		String query = prop.getProperty("selectTarget");
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, id);
+			pstmt.setString(1, no);
 
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				target = rset.getInt("MEMBER_NO");
+				target = rset.getString("MEMBER_ID");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

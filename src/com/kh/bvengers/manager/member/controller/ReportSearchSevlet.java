@@ -1,4 +1,5 @@
 package com.kh.bvengers.manager.member.controller;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,12 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.manager.member.model.service.ManagerMemberService;
 import com.kh.bvengers.manager.member.model.vo.MMemberPageInfo;
-import com.kh.bvengers.manager.member.model.vo.SANCTION;
-@WebServlet("/badsearch.me")
-public class BadMemberSearchServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import com.kh.bvengers.manager.member.model.vo.Report;
 
-    public BadMemberSearchServlet() {
+@WebServlet("/reportsearch.me")
+public class ReportSearchSevlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public ReportSearchSevlet() {
         super();
     }
 
@@ -29,11 +31,9 @@ public class BadMemberSearchServlet extends HttpServlet {
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
-		limit=5;
-		int listCount = new ManagerMemberService().getListCount();
+		limit = 5;
+		int listCount = new ManagerMemberService().getreListCount();
 		maxPage = (int)((double)listCount / limit+0.9);
-		
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
 		
 		endPage = startPage + 10 -1;
@@ -44,29 +44,29 @@ public class BadMemberSearchServlet extends HttpServlet {
 		}
 		
 		MMemberPageInfo pi = new MMemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
-
 		String howsearch[] = request.getParameterValues("selecthowsearch");
 		String select = howsearch[0];
-		String searchValue = (String) request.getParameter("searchValue");
-
-		ArrayList<SANCTION> list = null;
-		if(select.equals("stopbadman")) {
-			list = new ManagerMemberService().searchstopbadman(currentPage,limit,searchValue);
-		}else if(select.equals("badblackman")){
-			list = new ManagerMemberService().searchbadblackman(currentPage,limit,searchValue);
+		//String searchValue = (String) request.getParameter("searchValue");
+		
+		ArrayList<Report> list = null;
+		
+		if(select.equals("before")) {
+			list = new ManagerMemberService().searchbefore(currentPage,limit);
+		}else if(select.equals("ing")) {
+			list = new ManagerMemberService().searching(currentPage,limit);
+		}else if(select.equals("after")) {
+			list = new ManagerMemberService().searchafter(currentPage,limit);
 		}
 		String page = "";
 		if(list!=null) {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
-			page = "views/manager/member/blackList.jsp";
-			
+			page = "views/manager/member/reportlist.jsp";
 		}else {
 			request.setAttribute("msg", "실패");
-			page="/views/common/errorPagePrompt.jsp";
+			page = "/views/common/errorPagePrompt.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -63,16 +63,44 @@ public class ManagerMemberService {
 		return listCount;
 	}
 
-	public ArrayList<SANCTION> searchstopbadman(String searchValue) {
+	public ArrayList<SANCTION> searchstopbadman(int currentPage, int limit, String searchValue) {
 		Connection con = getConnection();
-		ArrayList<SANCTION> list = new ManagerMemberDao().searchstopbadman(con,searchValue);
+		ArrayList<SANCTION> list = new ManagerMemberDao().searchstopbadman(con,currentPage,limit,searchValue);
 		close(con);
 		return list;
 	}
 
-	public ArrayList<SANCTION> searchbadblackman(String searchValue) {
+	public ArrayList<SANCTION> searchbadblackman(int currentPage, int limit, String searchValue) {
 		Connection con = getConnection();
-		ArrayList<SANCTION> list = new ManagerMemberDao().searchbadblackman(con,searchValue);
+		ArrayList<SANCTION> list = new ManagerMemberDao().searchbadblackman(con,currentPage,limit,searchValue);
+		close(con);
+		return list;
+	}
+
+	public int getreListCount() {
+		Connection con = getConnection();
+		int listCount = new ManagerMemberDao().getreListCount(con);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Report> searchbefore(int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<Report> list = new ManagerMemberDao().searchbefore(con,currentPage,limit);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Report> searching(int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<Report> list = new ManagerMemberDao().searching(con,currentPage,limit);
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Report> searchafter(int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<Report> list = new ManagerMemberDao().searchafter(con,currentPage,limit);
 		close(con);
 		return list;
 	}
