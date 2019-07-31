@@ -49,22 +49,20 @@ public class BoardService {
 			Connection con = getConnection();
 
 			int result = new BoardDao().insertNoticeContent(con,b);
-			
+
 			int result1 = 0;
-			
+
 			if(fileList.get(0).getOrginFileName() != null) {
-			
+
 			if(result > 0) {
-				System.out.println("어디삼");
 				String postId = new BoardDao().selectCurrval(con)+"";
 				for(int i = 0; i < fileList.size(); i++) {
 					fileList.get(i).setPostsId(postId);
 				}
 			}
 			result1= new BoardDao().insertAttachment(con, fileList);
-			
+
 			}else {
-				System.out.println("사진 없음");
 				result1 = 1;
 			}
 			if(result > 0 && result1 >0) {
@@ -73,7 +71,6 @@ public class BoardService {
 			}else {
 				rollback(con);
 			}
-			System.out.println(result);
 			return result;
 		}
 		//자주찾는 질문 작성
@@ -228,22 +225,21 @@ public class BoardService {
 		Connection con = getConnection();
 
 		HashMap<String, Object> hmap = null;
-		
+
 		Board b = null;
-		
+
 		Attachment at = null;
-    
-    int result = new BoardDao().updateCount(con,num);	
-		
+
+    int result = new BoardDao().updateCount(con,num);
+
 		b = new BoardDao().selectOnecontent(con,num);
-		
+
 		at = new BoardDao().selectOnePicture(con,num);
-		System.out.println("영긴"+at);
-		
+
 		hmap = new HashMap<String,Object>();
 		hmap.put("board", b);
 		hmap.put("attachment", at);
-		
+
 		if(result > 0 && hmap != null) {
 			commit(con);
 		}else {
@@ -374,14 +370,14 @@ public class BoardService {
 		int resulttitle = new BoardDao().updateNotice(con,b);
 
 		int resultcontent = new BoardDao().updateNoticeContent(con,b);
-		
+
 		int result1 = 0;
-		if(fileList !=null) {		
-		 result1= new BoardDao().insertNoticePicture(con, fileList,b);		
+		if(fileList !=null) {
+		 result1= new BoardDao().insertNoticePicture(con, fileList,b);
 		}else {
 			result1 = 1;
-		}		
-		int result = 0;		
+		}
+		int result = 0;
 		if(resulttitle>0&&resultcontent>0&&result1>0) {
 			commit(con);
 			result = 1;
@@ -391,7 +387,7 @@ public class BoardService {
 		close(con);
 		return result;
 	}
-  
+
 	public int insertpicture(Board b, ArrayList<Attachment> fileList) {
 		Connection con = getConnection();
 
@@ -403,24 +399,24 @@ public class BoardService {
 		}else {
 			rollback(con);
 		}
-		
+
 		close(con);
-		
+
 		return result1;
 	}
 
 	public int changeDeliStatus(String deliNo) {
 		Connection con = getConnection();
-		
+
 		int result = new BoardDao().changeDeliStatus(con, deliNo);
-		
+
 		if(result > 0) {
 			commit(con);
 		}else {
 			rollback(con);
 		}
 		close(con);
-		
+
 		return result;
 	}
 

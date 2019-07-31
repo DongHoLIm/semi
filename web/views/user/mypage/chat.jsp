@@ -1,5 +1,9 @@
+<%@page import="com.kh.bvengers.user.chat.model.vo.Chat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	Chat ch = (Chat)request.getAttribute("ch");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,18 +13,16 @@
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
 	<fieldset>
-		<textarea name="" id="messageWindow" cols="50" rows="10" rows="10"
-			readonly></textarea>
-		<br /> <input type="text" id="inputMessage" /> <input type="button"
-			value="send" onclick="send();" />
+		<textarea name="" id="messageWindow" cols="50" rows="10" rows="10" readonly></textarea>
+		<br /> <input type="text" id="inputMessage" /> <input type="button" value="send" onclick="send();" />
 	</fieldset>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>
 <script>
 	var textarea = document.getElementById("messageWindow");
 	var id = "<%=loginUser.getMemberId()%>";
-	var no = "<%=loginUser.getMemberNo()%>";
-	var webSocket = new WebSocket('ws://localhost:8001/sp/chatting?id=' + id'&no='+no);
+	var no = <%=ch.getMemberNo()%>;
+	var webSocket = new WebSocket('ws://localhost:8001/sp/chatting?id='+id+'&no='+no);
 	var inputMessage = document.getElementById('inputMessage');
 
 	webSocket.onerror = function(event) {

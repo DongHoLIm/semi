@@ -27,27 +27,32 @@ public class chatting {
 			String id = session.getQueryString();
 			String[] cId = id.split("=");
 			id = cId[1];
+			int idx = id.indexOf("&");
+			id = id.substring(0, idx);
+
 			String no = session.getQueryString();
 			String[] cNo = no.split("&");
-			no = cNo[1];
-			System.out.println("no ::: " + no);
-			int target = new TargetService().selectTarget(id);
+			int idx2 = no.indexOf("=");
+			no = cNo[1].substring(idx2 + 1, cNo[1].length());
+
+			String target = new TargetService().selectTarget(no);
 			try {
 				Iterator<String> keySetIterator = client.keySet().iterator();
 				while (keySetIterator.hasNext()) {
 					String key = keySetIterator.next();
-					System.out.println("key: " + key + " value: " + client.get(key) + " target: " + target);
-					/*
-					 * if(!client.get(key).equals("admin")) { }
-					 */
-					if (target == 1 || target == 2301) {
+					if(id.equals("admin") || target.equals(id))
+					client.get(key).getBasicRemote().sendText(message);
+					System.out.println("key: " + key + " value: " + client.get(key) + " target: " + target + " no:" + no);
+					/*if (key.equals(target)) {
+					} else if(key.equals("admin")) {
 						client.get(key).getBasicRemote().sendText(message);
-					}
+					}*/
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	@OnOpen
@@ -55,6 +60,8 @@ public class chatting {
 		String id = session.getQueryString();
 		String[] cId = id.split("=");
 		id = cId[1];
+		int idx = id.indexOf("&");
+		id = id.substring(0, idx);
 		client.put(id, session);
 	}
 
@@ -63,6 +70,8 @@ public class chatting {
 		String id = session.getQueryString();
 		String[] cId = id.split("=");
 		id = cId[1];
+		int idx = id.indexOf("&");
+		id = id.substring(0, idx);
 		client.remove(id, session);
 	}
 

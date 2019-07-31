@@ -47,8 +47,6 @@ public class BadMemberServlet extends HttpServlet {
 		MMemberPageInfo pi = new MMemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 
 		ArrayList<SANCTION> list = new ManagerMemberService().badmanList(currentPage,limit);
-		System.out.println(currentPage);
-		System.out.println(limit);
 		String page = "";
 		if(list!=null) {
 			page = "views/manager/member/blackList.jsp";
