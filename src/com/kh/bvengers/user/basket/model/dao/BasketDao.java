@@ -67,8 +67,7 @@ public class BasketDao {
 			pstmt.setString(2,userId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}finally {
 			close(pstmt);
 		}
