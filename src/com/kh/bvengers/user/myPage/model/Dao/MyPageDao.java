@@ -334,17 +334,17 @@ public class MyPageDao {
 		return listCount;
 	}
 
-	public int getListCountR(Connection con, int num) {
+	public int getListCountR(Connection con, String memberNo) {
 		PreparedStatement pstmt = null;
 		int listCountR = 0;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("selectListCount");
+		String query = prop.getProperty("selectListCountR");
 
 		try {
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, num);
+			pstmt.setString(1, memberNo);
 
 			rset = pstmt.executeQuery();
 
@@ -353,7 +353,6 @@ public class MyPageDao {
 				listCountR = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -361,19 +360,17 @@ public class MyPageDao {
 		}
 		return listCountR;
 	}
-
-	public int getListCountC(Connection con) {
+	
+	public int getListCountC(Connection con, String memberNo) {
 		PreparedStatement pstmt = null;
 		int listCountC = 0;
 		ResultSet rset = null;
-		int num = 2;
-
-		String query = prop.getProperty("selectListCount");
+		String query = prop.getProperty("selectListCountC");
 
 		try {
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, num);
+			pstmt.setString(1, memberNo);
 
 			rset = pstmt.executeQuery();
 
@@ -391,7 +388,7 @@ public class MyPageDao {
 	}
 
 
-	public ArrayList<myPage> selectRefundList(Connection con, int currentPage, int limit) {
+	public ArrayList<myPage> selectRefundList(Connection con, String memberNo, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<myPage> rList = null;
@@ -404,28 +401,81 @@ public class MyPageDao {
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2,  endRow);
+			pstmt.setString(1, memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3,  endRow);
 			
 			rList = new ArrayList<myPage>();
+			rset = pstmt.executeQuery();
 			
-			
-			
-			
+			while(rset.next()) {
+				myPage m = new myPage();
+				m.setOno(rset.getString("ORDER_NO"));
+				m.setoDate(rset.getDate("ORDER_DATE"));
+				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setDtPay(rset.getInt("PRODUCT_DTPAY"));
+				m.setRefundStatus(rset.getString("REFUND_STATUS"));
+				
+				rList.add(m);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		
 		return rList;
 	}
+		
+	
 
-
-	public ArrayList<myPage> selectCalculateList(Connection con, int currentPage1, int limit1) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<myPage> selectCalculateList(Connection con, String memberNo, int currentPage1, int limit1) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<myPage> cList = null;
+		
+		String query = prop.getProperty("selectCalculateList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage1 - 1) * limit1 + 1;
+			int endRow = startRow + limit1 - 1;
+			
+			pstmt.setString(1, memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3,  endRow);
+			
+			cList = new ArrayList<myPage>();
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				
+				m.setAno(rset.getString("ADJUST_NO"));
+				m.setaDate(rset.getDate("ADJUST_DATE"));
+				m.setaStatus(rset.getString("ADJUST_DIV"));
+				m.setaPrice(rset.getInt("PRICE"));
+				m.setAname(rset.getString("ACCOUNT_HOLDER"));
+				m.setbCode(rset.getString("BANK_CODE"));
+				m.setAccountNo(rset.getString("ACCOUNT_NO"));
+				
+				cList.add(m);
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return cList;
 	}
 
-	
+
 	
 }
