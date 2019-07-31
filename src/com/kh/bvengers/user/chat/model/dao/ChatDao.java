@@ -1,14 +1,17 @@
 package com.kh.bvengers.user.chat.model.dao;
 
+import static com.kh.bvengers.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
-import static com.kh.bvengers.common.JDBCTemplate.*;
 import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.user.chat.model.vo.Chat;
 
@@ -96,6 +99,39 @@ public class ChatDao {
 		}
 
 		return ch;
+	}
+
+	public ArrayList<Chat> selectChatList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Chat> chList = null;
+		Chat ch = null;
+		String query = prop.getProperty("selectChatList");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			chList = new ArrayList<Chat>();
+			while(rset.next()) {
+				ch = new Chat();
+				ch.setMemberNo(rset.getString("MEMBER_NO"));
+				ch.setMemberId(rset.getString("MEMBER_ID"));
+				ch.setChat(rset.getString("CHAT"));
+				ch.setChatDate(rset.getDate("CHAT_DATE"));
+
+				chList.add(ch);
+				System.out.println(chList);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return chList;
 	}
 
 }

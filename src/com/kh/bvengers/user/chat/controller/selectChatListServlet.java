@@ -1,6 +1,8 @@
 package com.kh.bvengers.user.chat.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,26 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.bvengers.user.chat.model.service.ChatService;
 import com.kh.bvengers.user.chat.model.vo.Chat;
 
-@WebServlet("/joinChat.ch")
-public class JoinChatServlet extends HttpServlet {
+@WebServlet("/chatList.ch")
+public class selectChatListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public JoinChatServlet() {
+    public selectChatListServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("no"));
-
-		Chat ch = new ChatService().joinChat(no);
-
+		ArrayList<Chat> chList = new ChatService().selectChatList();
 		String page = "";
 
-		if(ch!=null) {
-			page = "views/user/mypage/chat.jsp";
-			request.setAttribute("ch", ch);
+		if(chList!=null) {
+			page = "views/manager/chat/chatList.jsp";
+			request.setAttribute("chList", chList);
 			request.getRequestDispatcher(page).forward(request, response);
 		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -68,7 +68,7 @@ int endPage = pi.getEndPage();
 	<header><%@ include file="../hfl/managerHeader.jsp" %></header>
 	<br />
 	<br />
-
+	<button type="button" onclick="location.href='<%=request.getContextPath()%>/chatList.ch'">채팅 테스트</button>
 	<section id="sec1">
 		<h2 align="center">공지사항</h2>
 

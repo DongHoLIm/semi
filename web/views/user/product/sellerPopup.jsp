@@ -61,7 +61,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" id="closeTd"><input type="button" value="닫기"
-					onclick="close();" id="closeBtn" /></td>
+					onclick="window.close();" id="closeBtn" /></td>
 			</tr>
 		</table>
 

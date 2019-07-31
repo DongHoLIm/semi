@@ -1,6 +1,7 @@
 package com.kh.bvengers.user.chat.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.bvengers.user.chat.model.dao.ChatDao;
 import com.kh.bvengers.user.chat.model.vo.Chat;
@@ -28,6 +29,15 @@ public class ChatService {
 		Chat ch = new ChatDao().joinChat(con, no);
 		close(con);
 		return ch;
+	}
+
+	public ArrayList<Chat> selectChatList() {
+		Connection con = getConnection();
+		ArrayList<Chat> chList = new ChatDao().selectChatList(con);
+
+		close(con);
+
+		return chList;
 	}
 
 

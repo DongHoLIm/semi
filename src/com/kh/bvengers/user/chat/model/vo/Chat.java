@@ -6,15 +6,16 @@ public class Chat {
 	private String memberNo;
 	private String chat;
 	private Date chatDate;
+	private String memberId;
 	public Chat() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Chat(String memberNo, String chat, Date chatDate) {
-		super();
+	public Chat(String memberNo, String chat, Date chatDate, String memberId) {
 		this.memberNo = memberNo;
 		this.chat = chat;
 		this.chatDate = chatDate;
+		this.memberId = memberId;
 	}
 	public String getMemberNo() {
 		return memberNo;
@@ -34,10 +35,16 @@ public class Chat {
 	public void setChatDate(Date chatDate) {
 		this.chatDate = chatDate;
 	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	@Override
 	public String toString() {
-		return "Chat [memberNo=" + memberNo + ", chat=" + chat + ", chatDate=" + chatDate + "]";
+		return "Chat [memberNo=" + memberNo + ", chat=" + chat + ", chatDate=" + chatDate + ", memberId=" + memberId
+				+ "]";
 	}
-
 
 }
