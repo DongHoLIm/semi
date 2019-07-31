@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +90,7 @@
 
 	<header><%@ include file="../hfl/header.jsp" %></header>
 	<div><%@ include file="../hfl/list.jsp" %></div>
+	<%if(loginUser!=null) {%>
 <br><br><br><br>
 <div class="productContainer">
 		<caption class="title"><b>상품 등록</b></caption>
@@ -238,5 +239,13 @@
 
 </div>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>
+<%}else{%>
+	<script>
+		$(function(){
+			alert("로그인후 이용해주세요");
+			history.back();
+		});
+	</script>
+<%} %>
 </body>
 </html>
