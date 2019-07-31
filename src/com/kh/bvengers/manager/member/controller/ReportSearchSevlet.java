@@ -37,8 +37,6 @@ public class ReportSearchSevlet extends HttpServlet {
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
 		
 		endPage = startPage + 10 -1;
-		System.out.println(startPage);
-		System.out.println(endPage);
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
@@ -52,8 +50,6 @@ public class ReportSearchSevlet extends HttpServlet {
 		
 		if(select.equals("before")) {
 			list = new ManagerMemberService().searchbefore(currentPage,limit);
-		}else if(select.equals("ing")) {
-			list = new ManagerMemberService().searching(currentPage,limit);
 		}else if(select.equals("after")) {
 			list = new ManagerMemberService().searchafter(currentPage,limit);
 		}

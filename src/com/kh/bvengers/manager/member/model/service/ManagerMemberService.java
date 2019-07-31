@@ -91,12 +91,6 @@ public class ManagerMemberService {
 		return list;
 	}
 
-	public ArrayList<Report> searching(int currentPage, int limit) {
-		Connection con = getConnection();
-		ArrayList<Report> list = new ManagerMemberDao().searching(con,currentPage,limit);
-		close(con);
-		return list;
-	}
 
 	public ArrayList<Report> searchafter(int currentPage, int limit) {
 		Connection con = getConnection();

@@ -321,13 +321,13 @@ public class MemberDao {
 		ArrayList<Member> mlist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
 
 		String query = prop.getProperty("selectListwithPageing");
 		try {
 			pstmt = con.prepareStatement(query);
 
-			int startRow = (currentPage-1)*limit +1;
-			int endRow = startRow + limit-1;
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
@@ -577,7 +577,6 @@ public class MemberDao {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);

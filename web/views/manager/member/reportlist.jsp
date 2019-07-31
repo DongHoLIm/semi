@@ -64,10 +64,9 @@ border:1px solid white;
 			
 		<select name="selecthowsearch" style="width:20%;">
 			<option value="before">처리전</option>
-			<option value="ing">처리중</option>
 			<option value="after">처리완료</option>
 		</select>
-		<input type="search" name="searchValue" id="searchValue">
+		<!-- <input type="search" name="searchValue" id="searchValue"> -->
 		<button type="submit" style="border-radius: 5px; background-color: black; color:white;">조회</button>
 	</div><br><br>
 		<div id="table Area">

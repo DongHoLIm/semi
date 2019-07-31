@@ -29,7 +29,6 @@ public class LoginMemberServlet extends HttpServlet {
 		System.out.println(memberPwd);
 		Member loginUser = new MemberService().loginCheck(memberId,memberPwd);
 		
-		
 		if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);

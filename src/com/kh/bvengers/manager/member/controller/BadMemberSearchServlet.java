@@ -37,8 +37,6 @@ public class BadMemberSearchServlet extends HttpServlet {
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
 		
 		endPage = startPage + 10 -1;
-		System.out.println(startPage);
-		System.out.println(endPage);
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
@@ -50,6 +48,7 @@ public class BadMemberSearchServlet extends HttpServlet {
 		String searchValue = (String) request.getParameter("searchValue");
 
 		ArrayList<SANCTION> list = null;
+		
 		if(select.equals("stopbadman")) {
 			list = new ManagerMemberService().searchstopbadman(currentPage,limit,searchValue);
 		}else if(select.equals("badblackman")){
