@@ -9,10 +9,13 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.bvengers.board.model.dao.BoardDao;
 import com.kh.bvengers.board.model.vo.Attachment;
+import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PostsContents;
 import com.kh.bvengers.product.model.dao.ProductDao;
+import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.product.model.vo.Payment;
 import com.kh.bvengers.product.model.vo.Product;
 import com.kh.bvengers.user.member.model.vo.Member;
@@ -114,6 +117,27 @@ public class ProductService {
 			}
 			
 			return result;
+		}
+
+		public int getListCount() {
+			Connection con = getConnection();
+			
+			int result = new ProductDao().getListCount(con);
+			
+			
+			return result;
+		}
+
+		public ArrayList<Calcul> selectCalcul(int currentPage, int limit) {
+			Connection con = getConnection();
+			
+			ArrayList<Calcul> list = new ProductDao().selectCalcul(con, currentPage, limit);
+
+			close(con);
+
+			return list;
+			
+			
 		}
 		
 		
