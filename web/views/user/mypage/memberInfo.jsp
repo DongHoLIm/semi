@@ -39,7 +39,7 @@ body {
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <div align="center" class="checkInfo">
 <br><br>
-	<form action="<%=request.getContextPath()%>/memberInfo.mp" method="post">
+	<form action="<%=request.getContextPath()%>/memberInfo.me" method="post">
 		<h4 align="center">아이디 <%=loginUser.getMemberId()%>님</h4><br>
 		<input type="password" placeholder=" 비밀번호를 입력해주세요." name="password" id="password" size=20 style="border-radius:5px; height:32px;"><br><br>
 		<button class="btn_info">확인</button><br><br><br><br>

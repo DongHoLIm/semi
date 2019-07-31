@@ -96,9 +96,9 @@ public class MemberService {
 		return m;
 	}
 
-	public Member checkPwd(String memberPwd) {
+	public Member checkPwd(String memberNo, String password) {
 		 Connection con = getConnection();
-		 Member checkPwd = new MemberDao().checkPwd(con, memberPwd);
+		 Member checkPwd = new MemberDao().checkPwd(con, memberNo, password);
 		 close(con);
 
 

@@ -5,6 +5,8 @@ import static com.kh.bvengers.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.bvengers.board.model.dao.BoardDao;
+import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.user.myPage.model.Dao.MyPageDao;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
@@ -96,6 +98,45 @@ public class MyPageService {
 		close(con);
 		
 		return dateList;
+	}
+
+
+	public int[] getrcListCount(int num) {
+		Connection con = getConnection();
+
+		int listCountR = new MyPageDao().getListCountR(con, num);
+		int listCountC = new MyPageDao().getListCountC(con);
+
+		int[] array = new int[2];
+
+		array[0] = listCountR;
+		array[1] = listCountC;
+
+		close(con);
+
+		return array;
+	}
+
+
+	public ArrayList<myPage> selectRefundList(int currentPage, int limit) {
+		Connection con = getConnection();
+
+		ArrayList<myPage> rList = new MyPageDao().selectRefundList(con, currentPage, limit);
+
+		close(con);
+
+		return rList;
+		}
+
+
+	public ArrayList<myPage> selectCalculateList(int currentPage1, int limit1) {
+		Connection con = getConnection();
+		ArrayList<myPage> cList = new MyPageDao().selectCalculateList(con, currentPage1, limit1);
+		
+		close(con);
+		
+		return cList;
+	
 	}
 		
 	}

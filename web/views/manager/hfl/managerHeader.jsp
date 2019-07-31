@@ -31,6 +31,7 @@
                <li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
                <li><a href="/sp/views/manager/product/calculate.jsp">정산 내역 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/productManagement">구매 내역 관리</a></li>
+               <li><a href="/sp/views/manager/product/refundManagement.jsp">환불 내역 관리</a></li>
                </ul>
             </li>
              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 회원관리<span class="caret"></span> </a>
