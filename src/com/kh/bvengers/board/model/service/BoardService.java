@@ -8,7 +8,6 @@ import static com.kh.bvengers.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.kh.bvengers.board.model.dao.BoardDao;
 import com.kh.bvengers.board.model.vo.Attachment;
@@ -16,6 +15,7 @@ import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Comment;
 import com.kh.bvengers.board.model.vo.PowerLink;
+import com.kh.bvengers.product.model.vo.Calcul;
 
 public class BoardService {
 
@@ -408,9 +408,15 @@ public class BoardService {
 	public int changeDeliStatus(String deliNo) {
 		Connection con = getConnection();
 
-		int result = new BoardDao().changeDeliStatus(con, deliNo);
-
-		if(result > 0) {
+		int result = new BoardDao().changeDeliStatus(con, deliNo);			
+		Calcul cal = new BoardDao().calculateInfo(con, deliNo);
+   
+		int result1 = 0;
+		if(cal != null) {
+			result1 = new BoardDao().insertCalculate(con, cal);
+		}
+		
+		if(result > 0 && result1 > 0) {
 			commit(con);
 		}else {
 			rollback(con);

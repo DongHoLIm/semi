@@ -105,7 +105,7 @@ align:center;
 					for(Calculate c : list){
 				%>
 					<tr>
-						<input type="hidden" value="<%= c.getDeliveryNo() %> name="deliNo">
+						<input type="hidden" value="<%= c.getDeliveryNo() %>" name="deliNo">
 						<input type="hidden" value="<%=rowCount%>" name="rowCount" id="rowCount" />
 						<td><%= c.getOrderNo() %></td>
 						<td><%= c.getSellerId() %></td>

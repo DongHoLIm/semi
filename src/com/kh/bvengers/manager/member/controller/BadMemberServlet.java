@@ -32,7 +32,7 @@ public class BadMemberServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 
-		limit = 10;
+		limit = 5;
 		int listCount = new ManagerMemberService().ListCount();
 
 		maxPage = (int)((double)listCount / limit+0.9);
@@ -47,6 +47,7 @@ public class BadMemberServlet extends HttpServlet {
 		MMemberPageInfo pi = new MMemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 
 		ArrayList<SANCTION> list = new ManagerMemberService().badmanList(currentPage,limit);
+
 		String page = "";
 		if(list!=null) {
 			page = "views/manager/member/blackList.jsp";
