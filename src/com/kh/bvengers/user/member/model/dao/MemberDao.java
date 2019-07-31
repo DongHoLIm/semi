@@ -39,8 +39,7 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, memberId);
-			pstmt.setString(2, memberPwd);
+			pstmt.setString(1, memberId);			
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {

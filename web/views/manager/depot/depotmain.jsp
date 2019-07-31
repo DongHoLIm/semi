@@ -144,7 +144,8 @@
 						var $lastBtn =$("<button>").text('>>');
 						
 						
-						
+						$pagingDiv2.append($firstBtn);
+						$pagingDiv2.append($preBtn);
 						$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/listall.dp?currentPage=1"');						
 						if(currentPage <= 1){
 							$preBtn.attr('disabled',true);							
@@ -157,18 +158,16 @@
 							}else{
 								$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/listall.dp?currentPage=i"');																
 							}
-							$numBtn.text(i);			
+							$numBtn.text(i);
+							$pagingDiv2.append($numBtn);
 						}
 						if(currentPage >= maxPage){
 							$nextBtn.attr('disabled',true);							
 						}else{
 							$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/listall.dp?currentPage=currentPage + 1 "');							
 						}
-						$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/listall.dp?currentPage=maxPage"');
+						$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/listall.dp?currentPage=maxPage"');						
 						
-						$pagingDiv2.append($firstBtn);
-						$pagingDiv2.append($preBtn);
-						$pagingDiv2.append($numBtn);
 						$pagingDiv2.append($nextBtn);
 						$pagingDiv2.append($lastBtn);
 						

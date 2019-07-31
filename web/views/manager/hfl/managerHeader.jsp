@@ -25,7 +25,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-             <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 상품관리<span class="caret"></span> </a>
+             <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 상품관리<span class="caret"></span> </a>
                <ul class="dropdown-menu">
                <li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li>
                <li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
@@ -34,20 +34,20 @@
                <li><a href="/sp/views/manager/product/refundManagement.jsp">환불 내역 관리</a></li>
                </ul>
             </li>
-             <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 회원관리<span class="caret"></span> </a>
+             <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 회원관리<span class="caret"></span> </a>
                 <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/memberList.me">고객정보</a></li>
                <li><a href="<%=request.getContextPath()%>/badmanlist.me">경고회원 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/reportList.me">신고정보</a></li>
             </ul>
              </li>
-           <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 통계 <span class="caret"></span></a>
+           <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 통계 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/memberStatistics">고객현황</a></li>
                <li><a href="<%=request.getContextPath()%>/views/manager/statistics/salesStatistics.jsp">매출현황</a></li>
             </ul>
            </li>
-           <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" href="#"> 게시글관리 <span class="caret"></span></a>
+           <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 게시글관리 <span class="caret"></span></a>
                <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/smbs.mb">게시판 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/smqs.mq">고객센터 관리</a></li>

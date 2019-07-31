@@ -35,14 +35,18 @@ public class BasketAllListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();		
 		Member m = (Member) session.getAttribute("loginUser");
-		String userNo = m.getMemberNo();
-		ArrayList<Basket>list = new BasketService().basketAllList(userNo);
-		String page = "";
-		if(list!=null) {
+		String page = "";	
+		if(m!=null) {
+			String userNo = m.getMemberNo();
+			ArrayList<Basket>list = new BasketService().basketAllList(userNo);				
 			page="views/user/basket/basket.jsp";
 			request.setAttribute("list", list);
-			request.getRequestDispatcher(page).forward(request, response);
+		}else {
+			page="views/common/errorPagePrompt.jsp";
+			request.setAttribute("msg","로그인후 이용해주세요");			
 		}
+		request.getRequestDispatcher(page).forward(request, response);
+				
 	}
 
 	/**

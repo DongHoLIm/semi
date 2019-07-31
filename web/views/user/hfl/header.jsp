@@ -38,52 +38,27 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
             <li><a href="<%=request.getContextPath()%>/select.pd"> 구매 </a></li>
-             <li><a href="#" onclick="payUpload()"> 상품등록 </a></li>
+             <li><a href="<%=request.getContextPath() %>/views/user/product/productEnroll.jsp"> 상품등록 </a></li>
            <li><a href="<%=request.getContextPath()%>/basketAllList.bk"> 장바구니 </a></li>
            <li><a href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
            <li><a href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
        <li><a href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
-         </ul>
-
-      <form class="navbar-form navbar-right" role="search">
-        <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Search..">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-        </div>
-      </form>
+         </ul>     
       <% if(loginUser == null) {%>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
       </ul>
       <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
        <ul class="nav navbar-nav navbar-right">
-        <li><a onclick="logout();"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
+        <li><a href="<%=request.getContextPath()%>/logout.me"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
       </ul>
       <%}%>
     </div>
   </div>
   <script>
-  	function logout(){
-		location.href="<%=request.getContextPath()%>/logout.me";
-  	}
-
   	function goMyPage(){
 		location.href="<%=request.getContextPath()%>/listMyPage.mp";
-	}
-
-  	function payUpload(){
-
-  	    if(<%= loginUser == null %>) {
-  	        alert("로그인 후 이용해 주세요.");
- 	         location.href='/sp/views/user/login/login.jsp';
-  	    } else{
-  	         location.href='/sp/views/user/product/productEnroll.jsp';
-  	    }
-  	}
+	}  	
   </script>
 </nav>
 </body>
