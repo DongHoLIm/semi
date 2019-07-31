@@ -161,8 +161,9 @@
   <h2 id="board">게시판</h2>
   <form action ="" method = "post" align="right" >
   <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
+			<option value="">--조회할목록선택--</option>
 			<option value="findId" >아이디로 조회</option>
-			<option value="findName" >이름으로 조회</option>
+			<option value="findName" >제목으로 조회</option>
 			<option value="findLevel" >등급으로 조회</option>
 		</select>
 		<input type="search" name="searchValue" id = "inputSearch" >
@@ -200,7 +201,7 @@
       </svg>
     </div>
   </table>
-   <div class = "pagingArea" align ="center" >
+   <div id = "pagingArea" align ="center" >
       <button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage1=1'"><</button>
       <%if(currentPage1 <= 1) {%>
       <button disabled><</button>
@@ -264,7 +265,46 @@
     		  $.ajax({
     			url:"/sp/sbl.sh",
     			data:{"selectid":id,"input":input},
-    			type:"post"
+    			type:"post",
+    			success:function(data){
+    				var $Tbody = $("#messageArea tbody");
+    				var $pagingDiv = ("#pagingArea div");
+    				$Tbody.html("");
+    				$pagingDiv = ("");
+					console.log(data);
+					var i = 1;
+					for(var i = 0; i < data["list"].length; i++){
+						var $tr = $("<tr>");
+						var $hiddenPostsId=$("<input hidden>");
+						var $postsId = $("<td><label>").text(data["list"][i].postsId);
+						var $postsTitle = $("<td><label>").text(data["list"][i].postsTitle);
+						var $postsViews = $("<td><label>").text(data["list"][i].postsViews);
+						var $memberName = $("<td><label>").text(data["list"][i].memberName);
+						var $createDate = $("<td><label>").text(data["list"][i].createDate);
+						$hiddenPostsId.attr("value",data['list'][i].postsId);
+						$tr.append($hiddenPostsId);
+						$tr.append($postsId);
+						$tr.append($postsTitle);
+						$tr.append($memberName);
+						$tr.append($createDate);
+						$tr.append($postsViews);
+						$Tbody.append($tr);
+					}
+					$("#messageArea tbody td").mouseenter(function(){
+
+			            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			         }).mouseout(function(){
+			               $(this).parent().css({"background":"white"});
+			         }).click(function(){
+			            var num = $(this).parent().children("input").val();;
+			            console.log(num);
+			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
+			         });
+					
+						
+					
+    			}
+    			
     			
     		  })
     		  

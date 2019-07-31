@@ -1453,6 +1453,144 @@ public class BoardDao {
 		
 		return cal;
 	}
+
+	public int getBoardIdListCount(Connection con, String input) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String in = "'%"+ input +"%'";
+		
+		String query = prop.getProperty("SelectBoardIDCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, in);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Board> searchListId(Connection con,String input,String type, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board>list = null;
+		Board b = null;
+		String in = "%"+ input +"%";
+		int i = 1;
+		
+		String query = prop.getProperty("SearchListIdlist");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, in);
+			pstmt.setInt(2, currentPage);
+			pstmt.setInt(3, limit);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				b = new Board();
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_ID"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+
+				list.add(b);
+
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		return list;
+	}
+
+	public int getBoardIdListNameCount(Connection con,String input) {
+
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("SelectBoardNameCount");
+		String in = "%"+ input +"%";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, in);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+		
+	
+	}
+
+	public ArrayList<Board> searchListName(Connection con, String input, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board>list = null;
+		Board b = null;
+		String in = "%"+ input +"%";
+		String query = prop.getProperty("searchTitle");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, in);
+			pstmt.setInt(2, currentPage);
+			pstmt.setInt(3, limit);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Board>();
+			System.out.println("내가 뭘");
+			while(rset.next()) {
+				b = new Board();
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_ID"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+
+				list.add(b);
+				System.out.println("야 품위지켜" + list);
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+	
+		return list;
+	}
 }
 
 
