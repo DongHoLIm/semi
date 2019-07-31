@@ -14,7 +14,7 @@ import com.kh.bvengers.manager.member.model.vo.SANCTION;
 @WebServlet("/badsearch.me")
 public class BadMemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public BadMemberSearchServlet() {
         super();
     }
@@ -48,7 +48,7 @@ public class BadMemberSearchServlet extends HttpServlet {
 		String howsearch[] = request.getParameterValues("selecthowsearch");
 		String select = howsearch[0];
 		String searchValue = (String) request.getParameter("searchValue");
-		
+
 		ArrayList<SANCTION> list = null;
 		if(select.equals("stopbadman")) {
 			list = new ManagerMemberService().searchstopbadman(currentPage,limit,searchValue);
