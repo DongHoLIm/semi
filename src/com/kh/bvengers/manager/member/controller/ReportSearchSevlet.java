@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.manager.member.model.service.ManagerMemberService;
 import com.kh.bvengers.manager.member.model.vo.MMemberPageInfo;
-import com.kh.bvengers.manager.member.model.vo.SANCTION;
+import com.kh.bvengers.manager.member.model.vo.Report;
 
-@WebServlet("/badmanlist.me")
-public class BadMemberServlet extends HttpServlet {
+@WebServlet("/reportsearch.me")
+public class ReportSearchSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public BadMemberServlet() {
-		super();
-	}
+       
+    public ReportSearchSevlet() {
+        super();
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage;
@@ -27,39 +27,46 @@ public class BadMemberServlet extends HttpServlet {
 		int maxPage;
 		int startPage;
 		int endPage;
-		currentPage=1;
+		currentPage = 1;
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
 		limit = 5;
-		int listCount = new ManagerMemberService().ListCount();
-
+		int listCount = new ManagerMemberService().getreListCount();
 		maxPage = (int)((double)listCount / limit+0.9);
-
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
-
+		
 		endPage = startPage + 10 -1;
-
+		System.out.println(startPage);
+		System.out.println(endPage);
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
+		
 		MMemberPageInfo pi = new MMemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
-
-		ArrayList<SANCTION> list = new ManagerMemberService().badmanList(currentPage,limit);
+		String howsearch[] = request.getParameterValues("selecthowsearch");
+		String select = howsearch[0];
+		//String searchValue = (String) request.getParameter("searchValue");
 		
+		ArrayList<Report> list = null;
 		
+		if(select.equals("before")) {
+			list = new ManagerMemberService().searchbefore(currentPage,limit);
+		}else if(select.equals("ing")) {
+			list = new ManagerMemberService().searching(currentPage,limit);
+		}else if(select.equals("after")) {
+			list = new ManagerMemberService().searchafter(currentPage,limit);
+		}
 		String page = "";
 		if(list!=null) {
-			page = "views/manager/member/blackList.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
+			page = "views/manager/member/reportlist.jsp";
 		}else {
-			page="";
-			request.setAttribute("msg", "실패!");
+			request.setAttribute("msg", "실패");
+			page = "/views/common/errorPagePrompt.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

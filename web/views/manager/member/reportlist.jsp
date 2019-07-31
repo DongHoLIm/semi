@@ -58,16 +58,16 @@ border:1px solid white;
 	<%@ include file="../hfl/managerHeader.jsp"%>
 	<br />
 	<h2 align="center">신고대상 관리</h2>
-	<form action="" method="post">
+	<form action="<%=request.getContextPath()%>/reportsearch.me" method="post">
 	<div id="inOutMain"><br><br>
 		<div id="inOutButton" align="center">
 			
 		<select name="selecthowsearch" style="width:20%;">
-			<option value="findId">아이디로 조회</option>
-			<option value="findName">이름으로 조회</option>
-			<option value="findLevel">등급으로 조회</option>
+			<option value="before">처리전</option>
+			<option value="ing">처리중</option>
+			<option value="after">처리완료</option>
 		</select>
-		<input type="search" name="searchValue">
+		<input type="search" name="searchValue" id="searchValue">
 		<button type="submit" style="border-radius: 5px; background-color: black; color:white;">조회</button>
 	</div><br><br>
 		<div id="table Area">

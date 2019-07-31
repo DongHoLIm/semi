@@ -183,17 +183,20 @@ public class ManagerMemberDao {
 		}
 		return listCount;
 	}
-	public ArrayList<SANCTION> searchstopbadman(Connection con, String searchValue) {
+	public ArrayList<SANCTION> searchstopbadman(Connection con, int currentPage, int limit, String searchValue) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<SANCTION> list = null;
-		
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
 		String query = prop.getProperty("stopmanList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, searchValue);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<SANCTION>();
@@ -218,17 +221,20 @@ public class ManagerMemberDao {
 		}
 		return list;
 	}
-	public ArrayList<SANCTION> searchbadblackman(Connection con, String searchValue) {
+	public ArrayList<SANCTION> searchbadblackman(Connection con, int currentPage, int limit, String searchValue) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<SANCTION> list = null;
-		
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
 		String query = prop.getProperty("blackmanList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, searchValue);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<SANCTION>();
@@ -244,6 +250,126 @@ public class ManagerMemberDao {
 				s.setStopTerm(rset.getInt("STOP_TERM"));
 				
 				list.add(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public int getreListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		
+		String query = prop.getProperty("getreListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount=rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return listCount;
+	}
+	public ArrayList<Report> searchbefore(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
+		ArrayList<Report> list = null;
+		String query = prop.getProperty("searchbefore");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Report>();
+			if(rset.next()) {
+				Report r = new Report();
+				
+				r.setReportNo(rset.getString("REPORT_NO"));
+				r.setReporter(rset.getString("REPORTER"));
+				r.setMemberDest(rset.getString("POSTS_ID"));
+				r.setReportDate(rset.getDate("REPORT_DATE"));
+				r.setReportComments(rset.getString("REPORT_COMMENTS"));
+				
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Report> searching(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Report> list = null;
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
+		String query = prop.getProperty("searching");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Report>();
+			if(rset.next()) {
+				Report r = new Report();
+				
+				r.setReportNo(rset.getString("REPORT_NO"));
+				r.setReporter(rset.getString("REPORTER"));
+				r.setMemberDest(rset.getString("POSTS_ID"));
+				r.setReportDate(rset.getDate("REPORT_DATE"));
+				r.setReportComments(rset.getString("REPORT_COMMENTS"));
+				
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Report> searchafter(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Report> list = null;
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
+		String query = prop.getProperty("searchafter");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Report>();
+			if(rset.next()) {
+				Report r = new Report();
+				
+				r.setReportNo(rset.getString("REPORT_NO"));
+				r.setReporter(rset.getString("REPORTER"));
+				r.setMemberDest(rset.getString("POSTS_ID"));
+				r.setReportDate(rset.getDate("REPORT_DATE"));
+				r.setReportComments(rset.getString("REPORT_COMMENTS"));
+				
+				list.add(r);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
