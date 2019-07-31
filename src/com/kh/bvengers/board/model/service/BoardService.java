@@ -363,30 +363,43 @@ public class BoardService {
 		return b;
 	}
 
-	public int updateNotice(Board b, ArrayList<Attachment> fileList) {
-		Connection con = getConnection();
+public int updateNotice(Board b, ArrayList<Attachment> fileList) {
+      Connection con = getConnection();
 
 
-		int resulttitle = new BoardDao().updateNotice(con,b);
+      int resulttitle = new BoardDao().updateNotice(con,b);
 
-		int resultcontent = new BoardDao().updateNoticeContent(con,b);
+      int resultcontent = new BoardDao().updateNoticeContent(con,b);
+      
+      int result1 = 0;
+      int updateResult = 0;
+      
+      int resultatt = new BoardDao().SelectCount(con,b);
 
-		int result1 = 0;
-		if(fileList !=null) {
-		 result1= new BoardDao().insertNoticePicture(con, fileList,b);
-		}else {
-			result1 = 1;
-		}
-		int result = 0;
-		if(resulttitle>0&&resultcontent>0&&result1>0) {
-			commit(con);
-			result = 1;
-		}else {
-			rollback(con);
-		}
-		close(con);
-		return result;
-	}
+      
+      
+      if(resultatt > 0) {
+         
+      if(fileList !=null) {
+    
+       result1= new BoardDao().insertNoticePicture(con, fileList,b);      
+      }else {
+         result1 = 1;
+      }   
+      
+      }else {
+         updateResult = new BoardDao().insertNewPicture(con,b,fileList);           
+      }   
+      int result = 0;      
+      if(resulttitle>0&&resultcontent>0) {
+         commit(con);
+         result = 1;
+      }else {
+         rollback(con);
+      }
+      close(con);
+      return result;
+   }
 
 	public int insertpicture(Board b, ArrayList<Attachment> fileList) {
 		Connection con = getConnection();

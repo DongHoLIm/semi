@@ -1219,9 +1219,9 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 
 		int result = 0;
-
+		System.out.println("여기는 와?");
 		String query = prop.getProperty("updatePicture");
-
+		
 		try {
 			for (int i = 0; i < fileList.size(); i++) {
 				pstmt = con.prepareStatement(query);
@@ -1240,6 +1240,56 @@ public class BoardDao {
 
 		return result;
 	}
+	
+	public int insertNewPicture(Connection con, Board b, ArrayList<Attachment> fileList) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("insertNew");
+
+		try {
+			for (int i = 0; i < fileList.size(); i++) {
+				pstmt = con.prepareStatement(query);
+
+				pstmt.setString(1, fileList.get(i).getOrginFileName());
+				pstmt.setString(2, fileList.get(i).getNewFileName());
+				pstmt.setString(3, fileList.get(i).getFileSrc());
+				pstmt.setInt(4, b.getPostsId());
+
+				int level = 0;
+
+				if (i == 0) {
+					level = 0;
+				} else {
+					level = 1;
+				}
+
+				String level1 = level + "";
+
+				pstmt.setString(5, level1);
+
+				
+
+				result += pstmt.executeUpdate();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	
+	}
+	
+	
+	
+	
+	
+	
+	
 	public int changeDeliStatus(Connection con, String deliNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -1293,6 +1343,58 @@ public class BoardDao {
 		}
 
 		return hmap;
+	}
+	public int SelectCount(Connection con, Board b) {
+		PreparedStatement pstmt = null;
+		ResultSet result = null;
+		
+		int number = 0;
+		int num = b.getPostsId();
+		System.out.println("넘버" + num);
+		String query = prop.getProperty("countatt");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, num);
+			
+			result = pstmt.executeQuery();
+		
+			
+			if(result.next()) {
+				number = result.getInt(1);	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		return number;
+	}
+
+	public int searchCountList(Connection con, String type) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		
+		String query = prop.getProperty("searchCountList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, type);
+			
+			rset = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 
 	public int insertCalculate(Connection con, Calcul cal) {
@@ -1352,3 +1454,28 @@ public class BoardDao {
 		return cal;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

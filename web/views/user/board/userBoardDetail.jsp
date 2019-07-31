@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b"); 
- Attachment a = (Attachment)request.getAttribute("fileList");
+ 	Attachment a = (Attachment)request.getAttribute("fileList");
 	
+ 	String member =  b.getMemberId();
  %>
 <!DOCTYPE html>
 <html>
@@ -42,26 +43,32 @@ td{
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td align = "center"><span><%= b.getMemberId() %></span></td>
+					<td align = "center" id = "writer"><span><%= b.getMemberId() %></span></td>
 					<td>조회수</td>
 					<td align = "center"><span><%= b.getPostsViews() %></span></td>
 					<td>작성일</td>
 					<td align = "center"><span><%= b.getCreateDate() %></span></td>
 				</tr>
+				
 				<tr>
 				<% if(!(a.getNewFileName().equals("사진없음"))){%>
 				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
 				<%}else{%>
 				<td colspan = "6"></td><%}%>
 				</tr>
+
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
+				
 			</table>
 		</div>
+		
 				<br><br><br>
 		</form>
-				<div class = "replyArea">
+			
+
+	<div class = "replyArea">
 		<div class = "replayWriterArea">
 			<table align = "center">
 				<tr>
@@ -73,17 +80,37 @@ td{
 		</div>
 		<div>
 			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
-		<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
+		
 		</div>
-	</div>
+		<div>
+		<button id= "report" align = "left" onclick = "report();">신고하기</button>
+		<% if (loginUser != null && (loginUser.getMemberId().equals(b.getMemberId()))){ %>
+			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
+		<%} %>
+			
+		</div>
 	<br>
 	<br>
  <footer><%@ include file="../hfl/footer.jsp" %></footer> 
 	</div>	
 	<script>
-	
+	function report(){
+	  var writer = <%= b.getMemberNo()%>;
+	  console.log(writer);
+	  var postId =<%= b.getPostsId()%>;
+	  console.log(postId);
+	  var array = writer+"/"+postId;	
+      console.log(array);
+      
+      var url = "views/user/board/report.jsp?array="+array;
+    	    
+      window.open(url,'신고하기','width=430,height=450,status=no,scrollbars=yes');
+	};
+
+
 	$(function(){
 		$("#addReply").click(function(){
+			<% if(loginUser!=null){%>
 			var writer =  <%= loginUser.getMemberNo()%>;
 		    var postId = <%= b.getPostsId()%>;
 		    var content = $("#replyContent").val();
@@ -95,7 +122,7 @@ td{
 		    	success:function(data) 	 {
 		    		console.log(data);
 		    		
-		    	 var $replySelectTable = $ ("#replySelectTable tbody");
+		    	var $replySelectTable = $ ("#replySelectTable tbody");
 		    	$replySelectTable.html("");
 		    	
 		    	for(var key in data){
@@ -108,19 +135,22 @@ td{
 					$tr.append($contentTd);
 					$tr.append($dateTd);
 					$replySelectTable.append($tr);
-		    	} 
+		    	}
 		    	
 		    	},
 		    	error:function(){
 		    		console.log("실패!");
 		    	}
 		    });
+		<%}else{ %>
+			alert("로그인이 필요합니다!");
+			location.href="views/user/login/login.jsp";
+
+			<%}%>
 		});
 	});
-	
-	
-	
 	</script>
+
 </body>
 </html>
 

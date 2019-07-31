@@ -2,8 +2,6 @@
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b");
  	Attachment a = (Attachment)request.getAttribute("fileList");
- 	//ArrayList<HashMap<String, Object>> fileList = (ArrayList<HashMap<String, Object>>) request.getAttribute("fileList");
-
  %>
 <!DOCTYPE html>
 <html>
