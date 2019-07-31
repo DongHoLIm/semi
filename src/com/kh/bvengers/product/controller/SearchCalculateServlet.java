@@ -2,6 +2,7 @@ package com.kh.bvengers.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,18 +14,17 @@ import com.kh.bvengers.product.model.service.ProductService;
 import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.product.model.vo.CalculPageInfo;
 
-
 /**
- * Servlet implementation class SelectCalculateServlet
+ * Servlet implementation class SearchCalculateServlet
  */
-@WebServlet("/selectCalculate.cal")
-public class SelectCalculateServlet extends HttpServlet {
+@WebServlet("/search.cal")
+public class SearchCalculateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectCalculateServlet() {
+    public SearchCalculateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +33,38 @@ public class SelectCalculateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage;
-		int limit;
+		int currentPage = Integer.parseInt(request.getParameter("curr"));
+		int limit = Integer.parseInt(request.getParameter("limited"));
 		int maxPage;
 		int startPage;
 		int endPage;
 		
-		currentPage = 1;
+		String selOption = null;
+		String selectDate = null;
 		
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		if(!request.getParameter("selOption").equals("select")) {
+			if(request.getParameter("selOption").equals("wait")) {
+				selOption = "1";
+			}else if(request.getParameter("success").equals("wait")){
+				selOption = "2";
+			}else {
+				selOption = "3";
+			}
+		}
+		if(request.getParameter("selectDate") != "") {
+			selectDate = request.getParameter("selectDate");
 		}
 		
-		//작성 글 증가 시 5~10까지 추가
-		limit = 5;
-		
-		int listCount = new ProductService().getListCount();
+		int listCount = 0;
+		if(selOption != null && selectDate != null) {
+			listCount = new ProductService().getListCountall(selOption, selectDate);
+		}else if(selOption != null) {
+			listCount = new ProductService().getListCountSeachOp(selOption);
+		}else if(selectDate != null){
+			listCount = new ProductService().getListCountSeachDt(selectDate);
+		}else {
+			listCount = new ProductService().getListCount();
+		}
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		
@@ -60,9 +76,20 @@ public class SelectCalculateServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		
 		CalculPageInfo ci = new CalculPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Calcul> list = new ProductService().selectCalcul(currentPage, limit);
+		ArrayList<Calcul> list = null;
+		
+		if(selOption != null && selectDate != null) {
+			list = new ProductService().selectCalculSearch(currentPage, limit, selOption, selectDate);
+		}else if(selOption != null) {
+			list = new ProductService().selectCalculSearchOp(currentPage, limit, selOption);
+		}else if(selectDate != null){
+			list = new ProductService().selectCalculSearchDt(currentPage, limit, selectDate);
+		}else {
+			list = new ProductService().selectCalcul(currentPage, limit);	
+		}
 		
 		String page = "";
 		
@@ -77,8 +104,6 @@ public class SelectCalculateServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-		
-		
 		
 	}
 
