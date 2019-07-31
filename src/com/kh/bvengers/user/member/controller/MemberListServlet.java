@@ -31,7 +31,7 @@ public class MemberListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit=5;
+		limit=20;
 		
 		int listCount = new MemberService().getListCount();
 		
@@ -41,8 +41,6 @@ public class MemberListServlet extends HttpServlet {
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
 		
 		endPage = startPage + 10 -1;
-		System.out.println("엔드페ㅣ지"+endPage);
-		System.out.println("시작점"+startPage);
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}

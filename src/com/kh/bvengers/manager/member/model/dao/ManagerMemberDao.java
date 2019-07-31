@@ -53,14 +53,14 @@ public class ManagerMemberDao {
 		ArrayList<Report> mlist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
 		
 		String query = prop.getProperty("selectList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			int startRow = (currentPage-1)*limit +1;
-			int endRow = startRow + limit-1;
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
@@ -131,7 +131,6 @@ public class ManagerMemberDao {
 		ResultSet rset = null;
 		int startRow = (currentPage-1)*limit +1;
 		int endRow = startRow + limit-1;
-		System.out.println(startRow);
 		String query = prop.getProperty("badmanList");
 		
 		try {
@@ -315,38 +314,7 @@ public class ManagerMemberDao {
 		}
 		return list;
 	}
-	public ArrayList<Report> searching(Connection con, int currentPage, int limit) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<Report> list = null;
-		int startRow = (currentPage-1)*limit +1;
-		int endRow = startRow + limit-1;
-		String query = prop.getProperty("searching");
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			rset = pstmt.executeQuery();
-			list = new ArrayList<Report>();
-			if(rset.next()) {
-				Report r = new Report();
-				
-				r.setReportNo(rset.getString("REPORT_NO"));
-				r.setReporter(rset.getString("REPORTER"));
-				r.setMemberDest(rset.getString("POSTS_ID"));
-				r.setReportDate(rset.getDate("REPORT_DATE"));
-				r.setReportComments(rset.getString("REPORT_COMMENTS"));
-				
-				list.add(r);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
+
 	public ArrayList<Report> searchafter(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

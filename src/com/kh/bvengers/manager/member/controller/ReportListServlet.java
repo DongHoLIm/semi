@@ -33,9 +33,9 @@ public class ReportListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit=10;
+		limit=5;
 		
-		int listCount = new MemberService().getListCount();
+		int listCount = new ManagerMemberService().getListCount();
 		
 		
 		maxPage = (int)((double)listCount / limit+0.9);

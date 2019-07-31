@@ -92,6 +92,11 @@ td{
  <footer><%@ include file="../hfl/footer.jsp" %></footer>
 	</div>
 	<script>
+	$(function(){
+		$("#replySelectTable").on("click", function(){
+			$(this).val = "";
+		});
+	}));
 	function report(){
 	  var writer = <%= b.getMemberNo()%>;
 	  console.log(writer);

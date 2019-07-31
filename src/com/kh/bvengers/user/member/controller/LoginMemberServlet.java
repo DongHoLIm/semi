@@ -29,18 +29,22 @@ public class LoginMemberServlet extends HttpServlet {
 		Member loginUser = new MemberService().loginCheck(memberId,memberPwd);
 		
 		
-		if(loginUser!=null && !loginUser.getMemberId().equals("admin")) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			response.sendRedirect("index.jsp");
-		}else if(loginUser!= null && loginUser.getMemberId().equals("admin")){
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			response.sendRedirect("/sp/smnl.mm");
-		}else if(loginUser == null){
-			request.setAttribute("msg", "정지회원입니다.");
-			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
-		}
+		   
+	      if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
+	         HttpSession session = request.getSession();
+	         session.setAttribute("loginUser", loginUser);
+	         response.sendRedirect(request.getContextPath()+"/index.jsp");
+	      }else if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && loginUser.getMemberId().equals("admin")){
+	         HttpSession session = request.getSession();
+	         session.setAttribute("loginUser", loginUser);
+	         response.sendRedirect(request.getContextPath()+"/smnl.mm");
+	      }else if(!loginUser.getMemberPassword().equals(memberPwd)){
+	         request.setAttribute("msg", "잘못입력하셨습니다.");
+	         request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
+	      }else{
+	         request.setAttribute("msg", "정지회원입니다.");
+	         request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
+	      }
 	}
 	
 
