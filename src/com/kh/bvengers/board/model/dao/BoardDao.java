@@ -15,10 +15,10 @@ import java.util.Properties;
 
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
-import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Comment;
-import com.kh.bvengers.board.model.vo.Count;
 import com.kh.bvengers.board.model.vo.PowerLink;
+import com.kh.bvengers.board.model.vo.Calculate;
+import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.product.model.vo.Product;
 
 public class BoardDao {
@@ -1035,7 +1035,7 @@ public class BoardDao {
 
 		try {
 			if (cal.getReleaseDate() != null && Integer.parseInt(cal.getDateResult()) > 0
-					&& !cal.getDeliveryStatus().equals("3") && !cal.getDeliveryStatus().equals("3")) {
+					&& !cal.getDeliveryStatus().equals("3")) {
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, cal.getDeliveryNo());
 
@@ -1047,6 +1047,8 @@ public class BoardDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 
 		return result;
@@ -1342,7 +1344,6 @@ public class BoardDao {
 
 		return hmap;
 	}
-
 	public int SelectCount(Connection con, Board b) {
 		PreparedStatement pstmt = null;
 		ResultSet result = null;
@@ -1396,7 +1397,62 @@ public class BoardDao {
 		return 0;
 	}
 
-	
+	public int insertCalculate(Connection con, Calcul cal) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertCalculate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, cal.getMemberNo());
+			pstmt.setString(2, cal.getPrice());
+			pstmt.setString(3, cal.getPayDtno());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Calcul calculateInfo(Connection con, String deliNo) {
+		PreparedStatement pstmt = null;
+		Calcul cal = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("calculateInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, deliNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				cal = new Calcul();
+				
+				cal.setMemberNo(rset.getString("mno"));
+				cal.setPayDtno(rset.getString("pdno"));
+				cal.setPrice(rset.getString("pmoney"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+		}
+		
+		
+		
+		return cal;
+	}
 }
 
 

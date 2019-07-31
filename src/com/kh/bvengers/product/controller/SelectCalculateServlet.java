@@ -1,4 +1,4 @@
-package com.kh.bvengers.board.controller;
+package com.kh.bvengers.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.bvengers.board.model.service.BoardService;
-import com.kh.bvengers.board.model.vo.BoardPageInfo;
-import com.kh.bvengers.board.model.vo.Calculate;
+import com.kh.bvengers.product.model.service.ProductService;
+import com.kh.bvengers.product.model.vo.Calcul;
+import com.kh.bvengers.product.model.vo.CalculPageInfo;
+
 
 /**
- * Servlet implementation class ProductManagementServlet
+ * Servlet implementation class SelectCalculateServlet
  */
-@WebServlet("/productManagement")
-public class ProductManagementServlet extends HttpServlet {
+@WebServlet("/selectCalculate")
+public class SelectCalculateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductManagementServlet() {
+    public SelectCalculateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +33,6 @@ public class ProductManagementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ArrayList<Calculate> list = new BoardService().paymentManagement();
-		
 		int currentPage;
 		int limit;
 		int maxPage;
@@ -49,7 +48,7 @@ public class ProductManagementServlet extends HttpServlet {
 		//작성 글 증가 시 5~10까지 추가
 		limit = 3;
 		
-		int listCount = new BoardService().getListCount();
+		int listCount = new ProductService().getListCount();
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		
@@ -61,22 +60,23 @@ public class ProductManagementServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		BoardPageInfo bi = new BoardPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		CalculPageInfo ci = new CalculPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Calculate> list = new BoardService().paymentManagement(currentPage, limit);
+		ArrayList<Calcul> list = new ProductService().selectCalcul(currentPage, limit);
 		
 		String page = "";
 		
 		if(list != null) {
-			page = "views/manager/product/delivery.jsp";
+			page = "views/manager/product/calculate.jsp";
 			request.setAttribute("list", list);
-			request.setAttribute("bi", bi);
+			request.setAttribute("ci", ci);
 		}else {
 			page = "views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "조회 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
+		
 		
 		
 	}

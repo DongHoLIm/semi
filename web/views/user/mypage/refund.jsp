@@ -109,18 +109,17 @@ tr {
 				type="button" value="1주일">&nbsp;
 			</span> &nbsp;<input type="button" value="15일">&nbsp; &nbsp;<input
 				type="button" value="1개월">&nbsp; <input type="date">
-			- <input type="date"><br> <br>
+			- <input type="date"><br>
 		</div>
 		</div>
 	<br>
 		<div align=center>
 			<table border="1" class = "board">
 				<tr>
-					<th class="th_refund">주문정보</th>
-					<th class="th_refund">주문 상품 정보</th>
-					<th class="th_refund">환불정보</th>
+					<th class="th_refund">주문번호</th>
+					<th class="th_refund">신청날짜</th>
+					<th class="th_refund">상품명</th>
 					<th class="th_refund">환불금액</th>
-					<th class="th_refund">입금일</th>
 					<th class="th_refund">상태</th>
 				</tr>
 				<tr>
@@ -128,28 +127,44 @@ tr {
 				<td>녕</td>
 				<td>하</td>
 				<td>신</td>
-				<td>가</td>
-				<td>요</td>
-			</tr>
-			<tr>
-				<td>안</td>
-				<td>녕</td>
-				<td>하</td>
-				<td>신</td>
-				<td>가</td>
-				<td>요</td>
-			</tr>
-			<tr>
-				<td>안</td>
-				<td>녕</td>
-				<td>하</td>
-				<td>신</td>
-				<td>가</td>
-				<td>요</td>
 			</tr>
 			</table>
+			
+			
+			<div class = "pagingArea" align ="center" >
+      <button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>
+      <%if(currentPage <= 1) {%>
+      <button disabled><</button>
+      <%} else{%>
+   <button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage-1%>'"><</button>
+      <%}
+
+      %>
+         <%for (int p = startPage; p <= endPage; p++) {
+            if(currentPage == p){
+         %>
+            <button disabled><%= p %></button>
+         <%} else{ %>
+               <button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
+         <% }
+         }
+         %>
+
+
+         <%if(currentPage >= maxPage){ %>
+         <button disabled>></button>
+         <%}else{ %>
+         <button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage + 1%>'">></button>
+         <%} %>
+         <button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage%>'">>></button>
+
+      </div>
+      
+      
 		</div>
 		<br><br><br><br>
+		
+		
 		<div id="area">
 			<h3 style="font-weight: bold">정산 내역</h3>
 
@@ -178,35 +193,10 @@ tr {
 				<td>신</td>
 				<td>가</td>
 			</tr>
-			<tr>
-				<td>안</td>
-				<td>녕</td>
-				<td>하</td>
-				<td>신</td>
-				<td>가</td>
-			</tr>
-			<tr>
-				<td>안</td>
-				<td>녕</td>
-				<td>하</td>
-				<td>신</td>
-				<td>가</td>
-			</tr>
 		</table>
 		</div>
 	</section>
 
-		<div class="page-control">
-		<footer align="center">
-			<ul class="pagination" align="center">
-				<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">다음</a></li>
-			</ul>
-		</footer>
-		</div>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>

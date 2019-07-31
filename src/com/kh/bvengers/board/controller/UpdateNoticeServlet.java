@@ -44,7 +44,6 @@ public class UpdateNoticeServlet extends HttpServlet {
 
 
          String root = request.getSession().getServletContext().getRealPath("/");
-         System.out.println(root);
 
          String saveSrc = root + "thumbnail_uploadFiles/";
 
@@ -82,8 +81,6 @@ public class UpdateNoticeServlet extends HttpServlet {
                }else {
                   break;
                }
-               System.out.println("fileSystem name : " + multiRequest.getFilesystemName(name));
-               System.out.println("originFile name : " + multiRequest.getOriginalFileName(name));
             }
             }
          }
@@ -103,7 +100,6 @@ public class UpdateNoticeServlet extends HttpServlet {
 
             String page = "";
 
-            System.out.println("여기는"+result);
             if(result > 0) {
                //response.sendRedirect("views/manager/main/managerPage.jsp");
                response.sendRedirect("/sp/son.no?num=" + no);

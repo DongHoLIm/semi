@@ -15,11 +15,12 @@ public class myPage {
 	private String rName; //수취인이름
 	private String dSite;//배송지
 	private String rPhone;//수취인연락처
+	private String pstatus;
 	
 	public myPage() {}
 
 	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, String payStatus,
-			String refundStatus, int dtPay, String inNo, String rName, String dSite, String rPhone) {
+			String refundStatus, int dtPay, String inNo, String rName, String dSite, String rPhone, String pstatus) {
 		super();
 		this.ono = ono;
 		this.pname = pname;
@@ -33,6 +34,7 @@ public class myPage {
 		this.rName = rName;
 		this.dSite = dSite;
 		this.rPhone = rPhone;
+		this.pstatus = pstatus;
 	}
 
 	public String getOno() {
@@ -131,11 +133,19 @@ public class myPage {
 		this.rPhone = rPhone;
 	}
 
+	public String getPstatus() {
+		return pstatus;
+	}
+
+	public void setPstatus(String pstatus) {
+		this.pstatus = pstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "myPage [ono=" + ono + ", pname=" + pname + ", dstatus=" + dstatus + ", oDate=" + oDate + ", mno=" + mno
 				+ ", payStatus=" + payStatus + ", refundStatus=" + refundStatus + ", dtPay=" + dtPay + ", inNo=" + inNo
-				+ ", rName=" + rName + ", dSite=" + dSite + ", rPhone=" + rPhone + "]";
+				+ ", rName=" + rName + ", dSite=" + dSite + ", rPhone=" + rPhone + ", pstatus=" + pstatus + "]";
 	}
 	
 	
