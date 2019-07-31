@@ -505,6 +505,267 @@ public class ProductDao {
 		return list;
 	}
 
+	public int disposeSuccess(Connection con, String code) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("disposeSuccess");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, code);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int disposeFail(Connection con, String code) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("disposeFail");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, code);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getListCountall(Connection con, String selOption, String selectDate) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("calculateSearchCount1");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, selOption);
+			pstmt.setString(2, selectDate);
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public int getListCountSeachOp(Connection con, String selOption) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("calculateSearchCount2");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, selOption);
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public int getListCountSeachDt(Connection con, String selectDate) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("calculateSearchCount3");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, selectDate);
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Calcul> selectCalculSearch(Connection con, int currentPage, int limit, String selOption,
+			String selectDate) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Calcul> list = null;
+		
+		String query = prop.getProperty("selectCalculSearch");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, selOption);
+			pstmt.setString(4, selectDate);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Calcul>();
+			
+			while(rset.next()) {
+				Calcul c = new Calcul();
+				
+				c.setAdjustNo(rset.getString("adNo"));
+				c.setPayDtno(rset.getString("pno"));
+				c.setPrice(rset.getString("money"));
+				c.setMemberNo(rset.getString("memberNo"));
+				c.setAdjustDiv(rset.getString("div"));
+				c.setAdjustDate(rset.getString("aDate"));
+				
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
+	}
+
+	public ArrayList<Calcul> selectCalculSearchOp(Connection con, int currentPage, int limit, String selOption) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Calcul> list = null;
+		
+		String query = prop.getProperty("selectCalculSearchOp");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, selOption);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Calcul>();
+			
+			while(rset.next()) {
+				Calcul c = new Calcul();
+				
+				c.setAdjustNo(rset.getString("adNo"));
+				c.setPayDtno(rset.getString("pno"));
+				c.setPrice(rset.getString("money"));
+				c.setMemberNo(rset.getString("memberNo"));
+				c.setAdjustDiv(rset.getString("div"));
+				c.setAdjustDate(rset.getString("aDate"));
+				
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
+	}
+
+	public ArrayList<Calcul> selectCalculSearchDt(Connection con, int currentPage, int limit, String selectDate) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Calcul> list = null;
+		
+		String query = prop.getProperty("selectCalculSearchDt");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, selectDate);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Calcul>();
+			
+			while(rset.next()) {
+				Calcul c = new Calcul();
+				
+				c.setAdjustNo(rset.getString("adNo"));
+				c.setPayDtno(rset.getString("pno"));
+				c.setPrice(rset.getString("money"));
+				c.setMemberNo(rset.getString("memberNo"));
+				c.setAdjustDiv(rset.getString("div"));
+				c.setAdjustDate(rset.getString("aDate"));
+				
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
 	
 	
 	

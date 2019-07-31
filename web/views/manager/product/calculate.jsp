@@ -11,6 +11,7 @@
 	int maxPage = ci.getMaxPage();
 	int startPage = ci.getStartPage();
 	int endPage = ci.getEndPage();
+	int limit = (int) request.getAttribute("limit");
 %>
 <!DOCTYPE html>
 <html>
@@ -65,22 +66,31 @@ tr {
 		<br>
 		<br>
 		<div id="inOutButton" align="center">
-		<form action="search.cal">
-			<select name="category" style="width: 10%;">
+			<form action="search.cal">
+			
+			<input type="hidden" value="<%=list.size()%>" name="rowCount" id="rowCount" />
+			<input type="hidden" value="<%=currentPage %>" name="curr" />
+			<input type="hidden" value="<%=limit %>" name="limited" />
+			<select name="selOption" style="width: 10%;">
 				<option value="select">선택</option>
 				<option value="wait">정산대기</option>
 				<option value="success">정산완료</option>
 				<option value="sellfail">환불처리</option>
 			</select>
-			<span> <input type="date" name="selectDate"/>
+			<span> <input type="date" name="selectDate" id="selectDate"/>
 				<button type="submit"
 					style="border-radius: 5px; background-color: black; color: white;">조회</button>
 			</span>
-		</form>
+			</form>
 		</div>
+		
+		
 		<br>
 		<br>
 		<div id="table Area">
+			<button onclick="disposeSuccess();">정산처리</button>
+			<button onclick="disposeFail();">환불처리</button>
+			
 			<table id="depotMain" align="center">
 				<thead>
 					<tr>
@@ -90,6 +100,7 @@ tr {
 						<th class="th">회원번호</th>
 						<th class="th">정산여부</th><!-- 1 : 정산 대기, 2: 정산완료, 3.환불처리 -->
 						<th class="th">이력발생일자</th>
+						<th class="th">선택</th>
 					</tr>
 				</thead>
 				<tbody align="center">
@@ -111,7 +122,13 @@ tr {
 						<%} %>
 						
 						<td><%= c.getAdjustDate() %></td>
-						
+						<td>
+						<%if(c.getAdjustDiv().equals("1")){ %>
+						<input type="checkbox" id="check" value="<%= c.getAdjustNo()%>"/>
+						<%}else{ %>
+						처리완료
+						<%} %>
+						</td>
 						
 					</tr>
 				<% 	rowCount++;
@@ -121,20 +138,20 @@ tr {
 			</table>
 			<br>
 			<div class="pagingArea" align="center">
-			<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate?currentPage=1'"><<</button>
+			<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate.cal?currentPage=1'"><<</button>
 			
 			<%if(currentPage <= 1){%>
 				<button disabled><</button>
 			<%}else{ %>
-				<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate?currentPage=<%=currentPage -1%>'"><</button>
+				<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate.cal?currentPage=<%=currentPage -1%>'"><</button>
 			<%} %>
 			
 			<%for(int p = startPage; p <= endPage; p++){ 
 				if(currentPage == p){
 			%>
-					<button type="button" disabled><%= p %></button>
+					<button type="button" id="nowPage" value="<%= p %>" disabled><%= p %></button>
 				<%}else{ %>
-					<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate?currentPage=<%=p%>'"><%=p %></button>
+					<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate.cal?currentPage=<%=p%>'"><%=p %></button>
 			<%
 				}
 			}
@@ -144,16 +161,67 @@ tr {
 			<%if(currentPage >= maxPage){ %>
 				<button type="button" disabled>></button>
 			<%}else{ %>
-				<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate?currentPage=<%=currentPage + 1 %>'">></button>
+				<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate.cal?currentPage=<%=currentPage + 1 %>'">></button>
 			<%} %>
-			<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate?currentPage=<%= maxPage%>'">>></button>
+			<button type="button" onclick="location.href='<%=request.getContextPath()%>/selectCalculate.cal?currentPage=<%= maxPage%>'">>></button>
 		</div>
 			
 			
 			<br>
 		</div>
 	</div>
-
+	<script>
+		function disposeSuccess(){
+			$(function(){
+				var code = "";
+				var limit = <%=limit%>;
+				var currentPage = $("#nowPage").val();
+				$("#check:checked").each(function(index){
+					code+=$(this).val()+","
+				});
+				
+				$.ajax({
+					url:"disposeSuccess.cal",
+					type:"post",
+					data:{"code":code, "currentPage":currentPage, "limit":limit},
+					success:function(data){
+							window.location.reload();	
+					}
+				});
+			});
+		};
+		
+		function disposeFail(){
+			$(function(){
+				var code = "";
+				var limit = <%=limit%>;
+				var currentPage = $("#nowPage").val();
+				$("#check:checked").each(function(index){
+					code+=$(this).val()+","
+				});
+				
+				$.ajax({
+					url:"disposeFail.cal",
+					type:"post",
+					data:{"code":code, "currentPage":currentPage, "limit":limit},
+					success:function(data){
+							window.location.reload();	
+					}
+				});
+			});
+		};
+	</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

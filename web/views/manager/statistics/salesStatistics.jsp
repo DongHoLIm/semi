@@ -5,8 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #graphs {
 	border: 1px dashed black;
@@ -69,36 +73,86 @@ table th {
 </head>
 <header><%@ include file="../hfl/managerHeader.jsp"%></header>
 <body>
-	<div id="outer" align="center">
-		<div id="graphs" class="statics">
-			<input type="button" value="매출금액" class="menuBtn btns red" disabled />
-			<input type="button" value="판매이익" class="menuBtn btns blue" disabled />
-			<form action="">
-
-			</form>
+	<div id="statisticsOuter" align="center">
+		<div id="graphs" class="statics" style="width:100%;">
+			<div id="container" class="statisticsContainer"style="wdith:80%; min-width: 310px; height: 400px; margin: 0 auto"></div><!-- 차트가 생성 -->
 		</div>
-		<div id=stat class="statics">
-			<input type="button" value="연도별 매출현황" disabled class="btns" />
-			<table>
-				<tr>
-					<th class="tHeader">연도</th>
-					<th class="data">2018</th>
-					<th class="data">2019</th>
-				</tr>
-				<tr>
-					<th class="tHeader">매출금액</th>
-					<td class="data"></td>
-					<td class="data"></td>
-				</tr>
-				<tr>
-					<th class="tHeader">판매이익</th>
-					<td class="data"></td>
-					<td class="data"></td>
-				</tr>
+		
+		<div id=stat class="staticsTable">
+			<input type="button" value="매출현황" disabled class="btns" />
+			<table id="datatable">
+			    <thead>
+			        <tr>
+			            <th></th>
+			            <th>매출금액</th>
+			            <th>판매금액</th>
+			            <th>환불금액</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <tr>
+			            <th>Apples</th>
+			            <td>3</td>
+			            <td>4</td>
+			            <td>4</td>
+			        </tr>
+			        <tr>
+			            <th>Pears</th>
+			            <td>2</td>
+			            <td>0</td>
+			            <td>14</td>
+			        </tr>
+			        <tr>
+			            <th>Plums</th>
+			            <td>5</td>
+			            <td>11</td>
+			            <td>8</td>
+			        </tr>
+			        <tr>
+			            <th>Bananas</th>
+			            <td>1</td>
+			            <td>1</td>
+			            <td>6</td>
+			        </tr>
+			        <tr>
+			            <th>Oranges</th>
+			            <td>2</td>
+			            <td>4</td>
+			            <td>7</td>
+			        </tr>
+			    </tbody>
 			</table>
 		</div>
 	</div>
 
 	<%@ include file="../hfl/footer.jsp"%>
+	
+	<script>
+		Highcharts.chart('container', {
+		    data: {
+		        table: 'datatable'
+		    },
+		    chart: {
+		        type: 'column'
+		    },
+		    title: {
+		        text: '매출현황'
+		    },
+		    yAxis: {
+		        allowDecimals: false,
+		        title: {
+		            text: '금액(만)'
+		        }
+		    },
+		    tooltip: {
+		        formatter: function () {
+		            return '<b>' + this.series.name + '</b><br/>'/*  +
+		                this.point.y + ' '  */+ this.point.name.toLowerCase();
+		        }
+		    }
+		    
+		});
+		
+	</script>
 </body>
 </html>

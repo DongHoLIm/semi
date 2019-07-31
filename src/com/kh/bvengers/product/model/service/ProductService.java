@@ -9,9 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.kh.bvengers.board.model.dao.BoardDao;
 import com.kh.bvengers.board.model.vo.Attachment;
-import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PostsContents;
 import com.kh.bvengers.product.model.dao.ProductDao;
@@ -132,13 +130,115 @@ public class ProductService {
 			Connection con = getConnection();
 			
 			ArrayList<Calcul> list = new ProductDao().selectCalcul(con, currentPage, limit);
-
+			
 			close(con);
 
 			return list;
 			
 			
 		}
+
+		public ArrayList<Calcul> disposeSuccess(String[] code, int currentPage, int limit) {
+			Connection con = getConnection();
+			ArrayList<Calcul> list = null;
+			int result = 0;
+			
+			for(int i = 0; i < code.length; i++) {
+				result = new ProductDao().disposeSuccess(con, code[i]);
+				if(result > 0 ) {
+					commit(con);
+				}else {
+					rollback(con);
+				}
+				
+			}
+			
+			list = new ProductDao().selectCalcul(con, currentPage, limit);
+			
+			return list;
+		}
+
+		public ArrayList<Calcul> disposeFail(String[] code, int currentPage, int limit) {
+			Connection con = getConnection();
+			ArrayList<Calcul> list = null;
+			int result = 0;
+			
+			for(int i = 0; i < code.length; i++) {
+				result = new ProductDao().disposeFail(con, code[i]);
+				if(result > 0 ) {
+					commit(con);
+				}else {
+					rollback(con);
+				}
+				
+			}
+			
+			list = new ProductDao().selectCalcul(con, currentPage, limit);
+			
+			return list;
+		}
+
+		public int getListCountall(String selOption, String selectDate) {
+			Connection con = getConnection();
+			
+			int result = new ProductDao().getListCountall(con, selOption, selectDate);
+			
+			close(con);
+
+			return result;
+		}
+
+		public int getListCountSeachOp(String selOption) {
+			Connection con = getConnection();
+			
+			int result = new ProductDao().getListCountSeachOp(con, selOption);
+			
+			close(con);
+
+			return result;
+		}
+
+		public int getListCountSeachDt(String selectDate) {
+			Connection con = getConnection();
+			
+			int result = new ProductDao().getListCountSeachDt(con, selectDate);
+			
+			close(con);
+
+			return result;
+		}
+
+		public ArrayList<Calcul> selectCalculSearch(int currentPage, int limit, String selOption, String selectDate) {
+			Connection con = getConnection();
+			
+			ArrayList<Calcul> list = new ProductDao().selectCalculSearch(con, currentPage, limit, selOption, selectDate);
+			
+			close(con);
+
+			return list;
+		}
+
+		public ArrayList<Calcul> selectCalculSearchOp(int currentPage, int limit, String selOption) {
+			Connection con = getConnection();
+			
+			ArrayList<Calcul> list = new ProductDao().selectCalculSearchOp(con, currentPage, limit, selOption);
+			
+			close(con);
+
+			return list;
+		}
+
+		public ArrayList<Calcul> selectCalculSearchDt(int currentPage, int limit, String selectDate) {
+			Connection con = getConnection();
+			
+			ArrayList<Calcul> list = new ProductDao().selectCalculSearchDt(con, currentPage, limit, selectDate);
+			
+			close(con);
+
+			return list;
+		}
+
+		
 		
 		
 }
