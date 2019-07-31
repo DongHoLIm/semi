@@ -12,8 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.bvengers.user.member.model.service.MemberService;
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.wrapper.LoginWrapper;
 
-@WebServlet("/memberInfo.mp")
+@WebServlet("/memberInfo.me")
 public class MemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,22 +27,21 @@ public class MemberInfoServlet extends HttpServlet {
 	response.setContentType("text/html; charset=UTF-8");
 	PrintWriter out = response.getWriter();
 	
-	String memberPwd = request.getParameter("password");
-	
-	Member checkPwd = new MemberService().checkPwd(memberPwd);
+	HttpSession session = request.getSession();
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	String memberNo = loginUser.getMemberNo();
+	/*String password = new LoginWrapper(request).getParameter(request.getParameter("password"));*/
+	String password = request.getParameter("password");
+	Member checkPwd = new MemberService().checkPwd(memberNo, password);
 	
 	if(checkPwd != null) {
-		HttpSession session = request.getSession();
 		session.setAttribute("checkPwd", checkPwd);
-		
 		response.sendRedirect("/sp/views/user/mypage/changeInfo.jsp");
 	}else {
 		out.println("<script>");
 		out.println("alert('비밀번호가 맞지 않습니다.');");
 		out.println("history.back();");
 		out.println("</script>");
-		/*request.setAttribute("msg", "비밀번호가 맞지 않습니다");
-		request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);*/
 	}
 	
 	}

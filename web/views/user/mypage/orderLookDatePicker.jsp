@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<myPage> list = (ArrayList<myPage>) request.getAttribute("dateList");
+	ArrayList<myPage> dateList = (ArrayList<myPage>) request.getAttribute("dateList");
 	MyPagePageInfo pi  = (MyPagePageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -262,7 +262,7 @@ input[type=button] {
 </div>
 </body>
  
-<script>
+<%-- <script>
 
 function search(){
 	$(function(){
@@ -345,7 +345,7 @@ function search(){
 		});
 	});
 }
-</script> 
+</script>  --%>
 
 
 </html>

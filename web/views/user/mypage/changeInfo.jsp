@@ -52,14 +52,14 @@ input {
 <header><%@ include file="../hfl/header.jsp" %></header>
 
 <%
-	String [] add =(String []) loginUser.getAddress().split(" ");
+	String [] add =(String []) loginUser.getAddress().split("\\$");
 	%>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 <br><br><br><br>
 <div class="change_div">
 	<h4><%=loginUser.getMemberName() %>님의 회원 정보 수정</h4>
 	<br><br>
-	<form action="<%=request.getContextPath()%>/changeInfo.mp" method="post">
+	<form action="<%=request.getContextPath()%>/changeInfo.me" method="post">
 		<table class="change_info" style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td><label>아이디</label></td>

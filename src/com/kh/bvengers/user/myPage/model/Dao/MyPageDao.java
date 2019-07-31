@@ -334,4 +334,98 @@ public class MyPageDao {
 		return listCount;
 	}
 
+	public int getListCountR(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		int listCountR = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectListCount");
+
+		try {
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+
+				listCountR = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return listCountR;
+	}
+
+	public int getListCountC(Connection con) {
+		PreparedStatement pstmt = null;
+		int listCountC = 0;
+		ResultSet rset = null;
+		int num = 2;
+
+		String query = prop.getProperty("selectListCount");
+
+		try {
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+
+				listCountC = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return listCountC;
+	}
+
+
+	public ArrayList<myPage> selectRefundList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<myPage> rList = null;
+		
+		String query = prop.getProperty("selectRefundList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2,  endRow);
+			
+			rList = new ArrayList<myPage>();
+			
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return rList;
+	}
+
+
+	public ArrayList<myPage> selectCalculateList(Connection con, int currentPage1, int limit1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
 }

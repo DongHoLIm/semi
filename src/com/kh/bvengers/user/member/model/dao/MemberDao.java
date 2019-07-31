@@ -473,7 +473,7 @@ public class MemberDao {
 
 		return m;
 	}
-	public Member checkPwd(Connection con, String memberPwd) {
+	public Member checkPwd(Connection con, String memberNo, String password) {
 		PreparedStatement pstmt = null;
 		Member checkPwd = null;
 		ResultSet rset = null;
@@ -482,7 +482,8 @@ public class MemberDao {
 
 		try {
 		pstmt = con.prepareStatement(query);
-		pstmt.setString(1, memberPwd);
+		pstmt.setString(1, memberNo);
+		pstmt.setString(2, password);
 
 		rset = pstmt.executeQuery();
 
