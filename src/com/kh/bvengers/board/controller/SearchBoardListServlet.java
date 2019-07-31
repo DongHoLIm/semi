@@ -11,21 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.bvengers.board.model.service.BoardService;
 import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.BoardPageInfo;
+import com.kh.bvengers.manager.depot.model.vo.DepotPageInfo;
 
 /**
  * Servlet implementation class SearchBoardList
  */
 @WebServlet("/sbl.sh")
-public class SearchBoardList extends HttpServlet {
+public class SearchBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchBoardList() {
+    public SearchBoardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,6 +38,7 @@ public class SearchBoardList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("selectid");
 		String input = request.getParameter("input");
+		System.out.println(input);
 		
 		int currentPage;
 		int limit;
@@ -58,9 +61,9 @@ public class SearchBoardList extends HttpServlet {
 		BoardPageInfo pi =null;
 		
 		
-		if(type!=null && input.equals("")&&type.equals("")) {
-			//listCount = new BoardService().countlistSearch(type);
-			
+		if(type.equals("findId")) {
+			listCount = new BoardService().countlistSearch(input);
+					
 			maxPage = (int)((double)listCount/limit+0.9);
 			
 			StartPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
@@ -70,16 +73,39 @@ public class SearchBoardList extends HttpServlet {
 			if(maxPage < endPage) {
 				endPage = maxPage;
 			}
+			
+			hmap =new HashMap<String,Object>();
+			pi = new BoardPageInfo(currentPage, listCount, limit, maxPage, StartPage, endPage);
+			list = new BoardService().searchListId(type,input,currentPage,limit);
+			hmap.put("pi", pi);
+			hmap.put("list", list);
+			
+			
+		}else if(type.equals("findName")) {
+					
+				listCount = new BoardService().countlistNameSearch(input);
+				maxPage = (int)((double)listCount/limit+0.9);
+				
+				StartPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+				
+				endPage = StartPage + 10 - 1;
+				
+				if(maxPage < endPage) {
+					endPage = maxPage;
+				}
+				
+				hmap =new HashMap<String,Object>();
+				pi = new BoardPageInfo(currentPage, listCount, limit, maxPage, StartPage, endPage);
+				list = new BoardService().searchListName(input,currentPage,limit);
+				hmap.put("pi", pi);
+				hmap.put("list", list);
+			
 		}
+
 		
-		
-		
-		
-		
-		
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(hmap,response.getWriter());
 	}
 
 	/**

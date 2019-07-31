@@ -439,6 +439,47 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 		return result;
 	}
 
+	public int countlistSearch(String input) {
+		Connection con = getConnection();
+		int listCount = new BoardDao().getBoardIdListCount(con,input);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> searchListId(String type, String input, int currentPage, int limit) {
+
+		Connection con  = getConnection();
+		System.out.println("서버" + input);
+		ArrayList<Board> list = new BoardDao().searchListId(con,input,type,currentPage,limit);
+		close(con);
+		
+		return list;
+	}
+
+	public int countlistNameSearch(String input) {
+		Connection con = getConnection();
+		int listCount = new BoardDao().getBoardIdListNameCount(con, input);
+		System.out.println("서버" + input);
+		System.out.println("st" + listCount);
+		
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> searchListName(String input, int currentPage, int limit) {
+
+		Connection con  = getConnection();
+		ArrayList<Board> list = new BoardDao().searchListName(con,input,currentPage,limit);
+		System.out.println("9tl" + list);
+		close(con);
+
+		return list;
+	}
+
 }
 
 
