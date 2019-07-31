@@ -8,7 +8,9 @@
     	int maxPage = pi.getMaxPage();
     	int startPage = pi.getStartPage();
     	int endPage = pi.getEndPage();
+    	
     %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +59,9 @@
 	<br>
 	<h2 align="center">창고현황</h2>
 	<br />
+	
 	<div id="selectSearch" align="center">		
-		<form action="">
+	
 			<table id="depotSearch" >
 				<tr>
 					<th id="th3">창고 위치</th>
@@ -84,10 +87,12 @@
 					<td><input type="date" style="width: 200px;" id="insertDate"/></td>
 					<td><input type="date" style="width: 200px;" id="releaseDate"/></td>
 					<td><input type="text" style="width: 200px;" id="productCode"/></td>
-					<td><button type="button" onclick="search();">검색</button></td>
+					<td>
+					<button type="button" onclick="search();">검색</button>
+					<button id="excelGo"onclick="goExcel();">엑셀다운로드</button> 
+					</td>
 				</tr>
 			</table>
-		</form> 
 	</div>
 	<script>
 		function search(){
@@ -172,6 +177,11 @@
 				});
 			});
 		}
+		$(function(){
+			$("#excelGo").click(function(){
+				location.href="<%=request.getContextPath()%>/excelGo.dp";
+			});
+		});
 	</script>	
 	<br>
 	<br><br>
@@ -199,6 +209,7 @@
 			<%} %>
 			</tbody>
 		</table>
+		
 		<br>
 	<div id ="pagingArea">
 		<div class="pagingArea" align="center">
