@@ -109,7 +109,7 @@ tr {
 				type="button" value="1주일">&nbsp;
 			</span> &nbsp;<input type="button" value="15일">&nbsp; &nbsp;<input
 				type="button" value="1개월">&nbsp; <input type="date">
-			- <input type="date"><br> <br>
+			- <input type="date"><br>
 		</div>
 		</div>
 	<br>
