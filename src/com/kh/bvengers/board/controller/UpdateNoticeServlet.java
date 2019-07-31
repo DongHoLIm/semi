@@ -54,11 +54,11 @@ public class UpdateNoticeServlet extends HttpServlet {
          String content = multiRequest.getParameter("content");
          int no = Integer.parseInt(multiRequest.getParameter("no"));
 
-
          Board b = new Board();
          b.setPostsTitle(title);
          b.setContents(content);
          b.setPostsId(no);
+         System.out.println("zzzzz" + b.getPostsId());
 
 
          ArrayList<String> saveFiles = new ArrayList<String>();
@@ -78,14 +78,13 @@ public class UpdateNoticeServlet extends HttpServlet {
                if(multiRequest.getFilesystemName(name) != null) {
                   saveFiles.add(multiRequest.getFilesystemName(name));
                   originFiles.add(multiRequest.getOriginalFileName(name));
+                  
                }else {
                   break;
                }
                System.out.println("fileSystem name : " + multiRequest.getFilesystemName(name));
                System.out.println("originFile name : " + multiRequest.getOriginalFileName(name));
-               System.out.println("어디서");
             }
-            System.out.println("돌아");
             }
          }
 

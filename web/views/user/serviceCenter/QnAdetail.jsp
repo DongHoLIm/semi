@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b"); 
-	ArrayList<HashMap<String, Object>> fileList = (ArrayList<HashMap<String, Object>>) request.getAttribute("fileList");
-
+ Attachment a = (Attachment)request.getAttribute("fileList");
 	
  %>
 <!DOCTYPE html>
@@ -49,16 +48,15 @@ td{
 					<td>작성일</td>
 					<td align = "center"><span><%= b.getCreateDate() %></span></td>
 				</tr>
-				<% for(int i = 0; i < fileList.size(); i++){ 
-					HashMap<String, Object> hmap = fileList.get(i);
-				 %>
 				<tr>
-				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= hmap.get("newFileName")%>"></td>
+				<% if(!(a.getNewFileName().equals("사진없음"))){%>
+				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
+				<%}else{%>
+				<td colspan = "6"></td><%}%>
 				</tr>
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
-					<%} %>
 			</table>
 		</div>
 				<br><br><br>
@@ -75,7 +73,7 @@ td{
 		</div>
 		<div>
 			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
-		
+		<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 		</div>
 	</div>
 	<br>

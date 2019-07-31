@@ -3,6 +3,7 @@
  <% Board b = (Board)request.getAttribute("b"); 
  	Attachment a = (Attachment)request.getAttribute("fileList");
 	
+ 	String member =  b.getMemberId();
  %>
 <!DOCTYPE html>
 <html>
@@ -83,7 +84,7 @@ td{
 		</div>
 		<div>
 		<button id= "report" align = "left" onclick = "report();">신고하기</button>
-		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
+		<% if (loginUser != null && (loginUser.getMemberId().equals(b.getMemberId()))){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 		<%} %>
 			

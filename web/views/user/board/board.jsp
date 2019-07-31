@@ -159,14 +159,14 @@
    <br>
    <hr>
   <h2 id="board">게시판</h2>
-  <form action = "" method = "post" align="right" >
-  <select>
-     <option value="title">제목</option>
-     <option value="writer">작성자</option>
-     <option value="wdate">날짜</option>
-  </select>
-  <input type="text">
-  <input type="submit" value="검색">
+  <form action ="" method = "post" align="right" >
+  <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
+			<option value="findId" >아이디로 조회</option>
+			<option value="findName" >이름으로 조회</option>
+			<option value="findLevel" >등급으로 조회</option>
+		</select>
+		<input type="search" name="searchValue" id = "inputSearch" >
+		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
   </form>
   <table class="table" id = "messageArea">
       <thead>
@@ -251,9 +251,29 @@
          }).click(function(){
             var num = $(this).parent().children("input").val();
             console.log(num);
-             location.href="<%=request.getContextPath()%>/son.no?num=" + num;
+             location.href="<%=request.getContextPath()%>/sub.bo?num=" + num;
          });
       });
+      
+      function search(){
+    	  $(function(){
+    		  var id = $("select[id = 'select']").val();
+    		  console.log(id);
+    		  var input = $("input[id = 'inputSearch']").val();
+    		  console.log(input);
+    		  $.ajax({
+    			url:"/sp/sbl.sh",
+    			data:{"selectid":id,"input":input},
+    			type:"post"
+    			
+    		  })
+    		  
+    		  
+    		  
+    	  });
+    	  
+      }
+  
    </script>
 
 </body>

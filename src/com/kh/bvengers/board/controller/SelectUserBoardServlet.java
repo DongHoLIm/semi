@@ -1,7 +1,6 @@
 package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -15,16 +14,16 @@ import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
 
 /**
- * Servlet implementation class SelectOneQandA
+ * Servlet implementation class SelectUserBoardServlet
  */
-@WebServlet("/soqa.qo")
-public class SelectOneQandA extends HttpServlet {
+@WebServlet("/sub.bo")
+public class SelectUserBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneQandA() {
+    public SelectUserBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +33,26 @@ public class SelectOneQandA extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
 		
 		
 		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
 
 		Board b = (Board)hmap.get("board");
-		System.out.println("b에는" + b);
 		Attachment fileList = (Attachment)hmap.get("attachment");
+
 
 		String page = "";
 		
 		if(hmap != null) {
-			page = "views/user/serviceCenter/QnAdetail.jsp";
+			page = "views/user/board/userBoardDetail.jsp";
 			request.setAttribute("b", b);
 			request.setAttribute("fileList", fileList);
 		}else {
 			page = "views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "Q&A 상세보기 실패!");
+			request.setAttribute("msg", "사진 게시판 상세보기 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-	
 	}
 
 	/**

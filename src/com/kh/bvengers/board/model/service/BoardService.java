@@ -376,13 +376,29 @@ public class BoardService {
 		int resultcontent = new BoardDao().updateNoticeContent(con,b);
 		
 		int result1 = 0;
-		if(fileList !=null) {		
+		int updateResult = 0;
+		
+		int resultatt = new BoardDao().SelectCount(con,b);
+
+		
+		
+		if(resultatt > 0) {
+			
+		if(fileList !=null) {
+			System.out.println("미친놈아 여기는 오냐");
 		 result1= new BoardDao().insertNoticePicture(con, fileList,b);		
 		}else {
 			result1 = 1;
-		}		
+		}	
+		
+		}else {
+			updateResult = new BoardDao().insertNewPicture(con,b,fileList);
+			System.out.println(b.getPostsId() +  "이 시발놈아");
+			
+		}
+	
 		int result = 0;		
-		if(resulttitle>0&&resultcontent>0&&result1>0) {
+		if(resulttitle>0&&resultcontent>0) {
 			commit(con);
 			result = 1;
 		}else {
