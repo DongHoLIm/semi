@@ -35,14 +35,14 @@ public class DeliSucessServlet extends HttpServlet {
 		
 		String page = "";
 		if(result > 0) {
-			page = "/productManagement?currentPage="+request.getAttribute("currentPage");
-			
+			page = "/sp/productManagement";
+			response.sendRedirect(page);
 		}else {
 			page = "views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "업데이트 실패!");
+			request.getRequestDispatcher(page).forward(request, response);
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
 		
 		
 		

@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PostsContents;
+import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.product.model.vo.Payment;
 import com.kh.bvengers.product.model.vo.Product;
 import com.kh.bvengers.user.member.model.vo.Member;
@@ -430,6 +431,78 @@ public class ProductDao {
 		}
 		
 		return result;
+	}
+
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectCalculateCount");
+
+		try {
+			stmt = con.createStatement();
+
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Calcul> selectCalcul(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Calcul> list = null;
+		
+		String query = prop.getProperty("selectCalculate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Calcul>();
+			
+			while(rset.next()) {
+				Calcul c = new Calcul();
+				
+				c.setAdjustNo(rset.getString("adNo"));
+				c.setPayDtno(rset.getString("pno"));
+				c.setPrice(rset.getString("money"));
+				c.setMemberNo(rset.getString("memberNo"));
+				c.setAdjustDiv(rset.getString("div"));
+				c.setAdjustDate(rset.getString("aDate"));
+				
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
 	}
 
 	
