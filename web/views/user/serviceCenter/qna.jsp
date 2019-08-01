@@ -188,19 +188,19 @@
 
 	<br><br><br><br>
 	<p align="center">내가 쓴 질문</p>
-		<table class="board" id = messageArea>
-			<tr class="row0">
+		<table class="board" id = "messageArea">
 			<thead>
+			<tr class="row0">
 				<th>글 번호</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일자</th>
 				<th>답변여부</th>
-			</thead>
 			</tr>
-			<tr class="row1">
+			</thead>
 			<%for(Board b :List){ %>
-			<input type = "hidden" value = "<%=b.getPostsId() %>">
+			<tr class="row1">
+			<input type = "hidden" id="postId" value = "<%=b.getPostsId() %>">
 					<td><%= b.getPostsId() %></td>
 					<td><%= b.getPostsTitle() %></td>
 					<td><%= b.getMemberName()%></td>
@@ -212,7 +212,7 @@
 				<td>Y</td>
 			<%} %>
 			</tr>
-		<%  int num = b.getPostsId();}%>
+		<% }%>
 			<tr>
 			</tr>
 
@@ -221,11 +221,11 @@
 
 		<br><br>
 		 <div class = "pagingArea" align ="center" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>
+		<button onclick = "location.href = '<%=request.getContextPath()%>/sfqs.qo?currentPage=1'"><</button>
 		<%if(currentPage1 <= 1) {%>
 		<button disabled><</button>
 		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage1-1%>'"><</button>
+	<button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=currentPage1-1%>'"><</button>
 		<%}
 		%>
 			<%for (int p = startPage1; p <= endPage1; p++) {
@@ -233,7 +233,7 @@
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -242,9 +242,9 @@
 			<%if(currentPage1 >= maxPage1){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage1 + 1%>'">></button>
+			<button onclick ="location.hreh='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=currentPage1 + 1%>'">></button>
 			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage1%>'">>></button>
+			<button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=maxPage1%>'">>></button>
       </div>
    </section>
    <script>

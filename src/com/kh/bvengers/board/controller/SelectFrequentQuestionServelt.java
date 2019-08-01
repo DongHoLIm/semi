@@ -53,7 +53,7 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 		
 		limit1 = 10;
 
-		int listCount = new BoardService().getListQandACount(num);
+		int listCount = new BoardService().getListQandACount(num,uno);
 		
 		if(request.getParameter("currentPage1") != null) {
 			currentPage1 = Integer.parseInt(request.getParameter("currentPage1"));
@@ -71,7 +71,7 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 		}
 		
 		BoardPageInfo pi = new BoardPageInfo(currentPage1, listCount, limit1, maxPage1, startPage1, endPage1);
-
+		System.out.println("여기는"+pi);
 	      ArrayList<Board> list = new BoardService().selectQandAList(currentPage1, limit, num,uno);
 	      
 	      

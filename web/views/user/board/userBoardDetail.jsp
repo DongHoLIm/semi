@@ -77,10 +77,22 @@ td{
 					<td><button id = "addReply">댓글 등록</button></td>
 				</tr>
 			</table>
-		</div>
-		<div>
-			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
-		
+				<br><br>
+			<table id="replySelectTable" class="commentTables" border="1" align="center">
+			<tr>
+				<th colspan="7" style = "width:800px">댓글 리스트</th>
+			</tr>
+			<tbody>
+			<tr>
+				<td colspan="2" class="tWriter">작성자</td>
+				<td colspan="3" class="tContent">내용</td>
+				<td class="tDate">작성일</td>				
+			</tr>			
+			</tbody>
+			<tfoot>
+			
+			</tfoot>
+		</table>
 		</div>
 		<div>
 		<button id= "report" align = "left" onclick = "report();">신고하기</button>
@@ -94,6 +106,37 @@ td{
  <footer><%@ include file="../hfl/footer.jsp" %></footer> 
 	</div>	
 	<script>
+	$(function(){
+		var postsId = <%= b.getPostsId()%>;
+		$(document).ready(function(){
+			$.ajax({
+				url:"selectComment.pd",
+				data:{postsId:postsId},
+				type:"post",
+				success:function(data){
+					var $replySelectTable = $("#replySelectTable tfoot");
+					$replySelectTable.html("");
+						for(var key in data){
+							var $tr = $("<tr>");
+							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
+							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							
+						$tr.append($writeTd);
+						$tr.append($contentTd);
+						$tr.append($dateTd);
+						$replySelectTable.append($tr);
+					}
+				},
+				error:function(){
+					alert("댓글 입력 실패");
+				}
+				
+			});
+		});
+	
+	});
+		
 	function report(){
 	  var writer = <%= b.getMemberNo()%>;
 	  console.log(writer);
@@ -117,25 +160,13 @@ td{
 		    
 		    $.ajax({
 		    	url:"iwc.bo",
-		    	data:{writer:writer, content:content, postId:postId},
+		    	data:{"writer":writer, "content":content, "postId":postId},
 		    	type:"post",
 		    	success:function(data) 	 {
-		    		console.log(data);
-		    		
-		    	var $replySelectTable = $ ("#replySelectTable tbody");
-		    	$replySelectTable.html("");
 		    	
-		    	for(var key in data){
-		    		var $tr = $("<tr>");
-					var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
-					var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
-					var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
-								
-					$tr.append($writeTd);
-					$tr.append($contentTd);
-					$tr.append($dateTd);
-					$replySelectTable.append($tr);
-		    	}
+		
+					$("#replySelectTable tfoot").show();
+		    	
 		    	
 		    	},
 		    	error:function(){

@@ -141,11 +141,11 @@ public class BoardService {
 
 	}
 
-	public int getListQandACount(int num) {
+	public int getListQandACount(int num, String uno) {
 
 		Connection con = getConnection();
 
-		int listCount = new BoardDao().getListCount(con,num);
+		int listCount = new BoardDao().getListQnACount(con,num,uno);
 
 		close(con);
 
@@ -212,7 +212,7 @@ public class BoardService {
 
 		Connection con = getConnection();
 
-		ArrayList<Board>list = new BoardDao().selectManagerNoticeList(con,currentPage,limit,num);
+		ArrayList<Board>list = new BoardDao().selectManagerQnAList(con,currentPage,limit,num);
 
 		close(con);
 
@@ -474,6 +474,24 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 
 		Connection con  = getConnection();
 		ArrayList<Board> list = new BoardDao().searchListName(con,input,currentPage,limit);
+		close(con);
+
+		return list;
+	}
+
+	public int countQnAlistSearch(String input) {
+		Connection con = getConnection();
+		int listCount = new BoardDao().getManagerQnAtitleCount(con,input);
+		
+		close(con);
+		
+		return listCount;
+	
+	}
+
+	public ArrayList<Board> searchListTitleList(String type, String input, int currentPage, int limit) {
+		Connection con  = getConnection();
+		ArrayList<Board> list = new BoardDao().searchQnAListTitle(con,input,currentPage,limit);
 		System.out.println("9tl" + list);
 		close(con);
 

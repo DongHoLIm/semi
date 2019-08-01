@@ -46,7 +46,7 @@ public class SelectManagerQnAServlet extends HttpServlet {
 		
 		int listCount = new BoardService().getListQandACount(num);
 		
-		if(request.getParameter("currnetPage") != null) {
+		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
@@ -68,7 +68,9 @@ public class SelectManagerQnAServlet extends HttpServlet {
 
 	      if (list != null) {
 	         request.setAttribute("list", list);
+	         System.out.println("list" + list);
 	         request.setAttribute("pi", pi);
+	         System.out.println("pi"+pi);
 	     	page = "views/manager/board/qnaboardmenagement.jsp";
 	     	
 	      } else {

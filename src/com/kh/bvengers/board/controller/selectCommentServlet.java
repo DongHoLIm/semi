@@ -29,7 +29,7 @@ public class selectCommentServlet extends HttpServlet {
 		Comment b = new Comment();
 		b.setPostsId(postsId);
 		ArrayList<Comment> commentList = new BoardService().selectComment(b);
-
+		System.out.println("여기는"+commentList);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(commentList, response.getWriter());

@@ -8,7 +8,7 @@
 	<h2 align="center">게시글 작성</h2>
 
 	<div class="container">
-	 	<form action = "<%= request.getContextPath()%>/insertNotice" method = "post" encType="multipart/form-data">
+	 	<form action = "<%= request.getContextPath()%>/inbs.bo" method = "post" encType="multipart/form-data">
 	<table class="table table-bordered">
  		<tr hidden>
 			<td><input name="hiddenCode" value="2"></td>

@@ -40,7 +40,6 @@ public class SelectOneQandA extends HttpServlet {
 		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
 
 		Board b = (Board)hmap.get("board");
-		System.out.println("b에는" + b);
 		Attachment fileList = (Attachment)hmap.get("attachment");
 
 		String page = "";

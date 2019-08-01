@@ -59,30 +59,26 @@ border:1px solid white;
 	<h2 align="center">게시물 관리</h2>
 	<div id="inOutMain"><br><br>
 		<div id="inOutButton" align="center">
-			<select name="search" id="search">
-				<option value="notebook">노트북</option>
-				<option value="">가전제품</option>
-				<option value=""></option>
-			</select>
-		<span>
-		<select name="select" style="width:20%;">
-			<option value="findId">아이디로 조회</option>
-			<option value="findName">이름으로 조회</option>
-			<option value="findLevel">등급으로 조회</option>
+		  <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
+			<option value="">--조회할목록선택--</option>
+			<option value="findId" >아이디로 조회</option>
+			<option value="findName" >제목으로 조회</option>
 		</select>
-		<input type="search" name="searchValue">
-		<button type="submit" style="border-radius: 5px; background-color: black; color:white;">조회</button>
-	</span>		</div><br><br>
+		<input type="search" name="searchValue" id = "inputSearch" >
+		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
+		</div><br><br>
 	  <div style="align :center">
 	</div>
 		<div id="table Area">
 			<table id="depotMain" align="center">
-				<tr>
+		<thead>
+		<tr>
 		<th class="th">No.</th>
 		<th class="th">ID</th>
 		<th class="th">게시글 제목</th>
-		<th class="th">삭제</th>
+		<th class="th">작성날짜</th>
 	</tr>
+	</thead>
 		<%for (Board b : list) {%>
 			<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
 			<td><%= b.getPostsId() %></td>
@@ -94,11 +90,11 @@ border:1px solid white;
 			</table>
 			<br><br><br><br>
 		  <div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>
+		<button onclick = "location.href = '<%=request.getContextPath()%>/smbs.mb?currentPage=1'"><</button>
 		<%if(currentPage <= 1) {%>
 		<button disabled><</button>
 		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage-1%>'"><</button>
+	<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
 		%>
 			<%for (int p = startPage; p <= endPage; p++) {
@@ -106,7 +102,7 @@ border:1px solid white;
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -115,9 +111,9 @@ border:1px solid white;
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick ="location.hreh='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage%>'">>></button>
+			<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=maxPage%>'">>></button>
 
       </div>
 		</div>
@@ -135,7 +131,64 @@ border:1px solid white;
 			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
 		});
 	});
+	
+	  function search(){
+    	  $(function(){
+    		  var id = $("select[id = 'select']").val();
+    		  console.log(id);
+    		  var input = $("input[id = 'inputSearch']").val();
+    		  console.log(input);
+    		  $.ajax({
+    			url:"/sp/sbl.sh",
+    			data:{"selectid":id,"input":input},
+    			type:"post",
+    			success:function(data){
+    				var $Tbody = $("#depotMain tbody ");
+    				var $pagingDiv = ("#pagingArea div");
+    				$Tbody.html("");
+    				$pagingDiv = ("");
+					console.log(data);
+					var i = 1;
+					for(var i = 0; i < data["list"].length; i++){
+						var $tr = $("<tr>");
+						var $hiddenPostsId=$("<input hidden>");
+						var $postsId = $("<td><label>").text(data["list"][i].postsId);
+						var $postsTitle = $("<td><label>").text(data["list"][i].postsTitle);
+						var $postsViews = $("<td><label>").text(data["list"][i].postsViews);
+						var $memberName = $("<td><label>").text(data["list"][i].memberName);
+						var $createDate = $("<td><label>").text(data["list"][i].createDate);
+						$hiddenPostsId.attr("value",data['list'][i].postsId);
+						$tr.append($hiddenPostsId);
+						$tr.append($postsId);
+						$tr.append($postsTitle);
+						$tr.append($memberName);
+						$tr.append($createDate);
+						$tr.append($postsViews);
+						$Tbody.append($tr);
+					}
+					$("#depotMain tbody td").mouseenter(function(){
 
+			            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			         }).mouseout(function(){
+			               $(this).parent().css({"background":"white"});
+			         }).click(function(){
+			            var num = $(this).parent().children("input").val();;
+			            console.log(num);
+			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
+			         });
+					
+						
+					
+    			}
+    			
+    			
+    		  })
+    		  
+    		  
+    		  
+    	  });
+    	  
+      }
 	</script>
 
 </body>
