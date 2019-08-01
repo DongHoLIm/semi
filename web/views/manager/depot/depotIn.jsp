@@ -76,24 +76,24 @@
 		<br>
 	<div class="pagingArea" align="center">
 			<button onclick="location.href='<%=request.getContextPath()%>/inDepot.dp?currentPage=1'"><<</button>
-			
+
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>
 			<% }else { %>
 			<button onclick="location.href='<%=request.getContextPath()%>/inDepot.dp?currentPage=<%=currentPage - 1%>'"> < </button>
 			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++){ 
+
+			<% for(int p = startPage; p <= endPage; p++){
 				if(currentPage == p){
 			%>
 					<button disabled><%= p %></button>
 			<% } else { %>
 					<button onclick="location.href='<%=request.getContextPath()%>/inDepot.dp?currentPage=<%=p%>'"><%= p %></button>
-			<% 
+			<%
 				}
-			   } 
+			   }
 			%>
-			
+
 			<% if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<% }else{ %>
@@ -108,21 +108,20 @@
     	 if(incode==code){
     		 $(function (){
     			 var aCode = code;
-    			 console.log("hellow")
     			 $.ajax({
         			 url:"outProduct.do",
         			 type:"post",
         			 data:{"productCode":aCode},
         			 success:function(data){
         				 window.location.reload();
-        			 }        			
+        			 }
         		 });
-    		 });    		
+    		 });
     	 }else{
     		 alert("잘못입력하셨습니다.");
     	 }
      }
    </script>
-   	
+
 </body>
 </html>

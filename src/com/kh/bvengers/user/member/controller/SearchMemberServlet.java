@@ -17,7 +17,7 @@ import com.kh.bvengers.user.member.model.vo.MemberPageInfo;
 @WebServlet("/searchMember.me")
 public class SearchMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public SearchMemberServlet() {
         super();
     }
@@ -32,35 +32,33 @@ public class SearchMemberServlet extends HttpServlet {
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
+
 		limit=10;
 		int listCount = new MemberService().getListCount();
 		maxPage = (int)((double)listCount / limit+0.9);
-		
+
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
-		
+
 		endPage = startPage + 10 -1;
-		System.out.println("endPage : "+endPage);
-		System.out.println("maxPage : "+maxPage);
-		
+
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
-		
+
 		MemberPageInfo pi = new MemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
-		
+
 		String send = (String) request.getParameter("send");
-		
+
 		int idx = send.indexOf("$");
-		
+
 		String selecthowsearch = send.substring(0,idx);
 		String searchValue = send.substring(idx+1);
-		
-		
+
+
 		ArrayList<Member> list = new MemberService().searchMember(currentPage,limit,selecthowsearch,searchValue);
 		String page = "";
 		//PrintWriter out = response.getWriter();
-		
+
 		if(list!=null) {
 			request.setAttribute("list1", list);
 			request.setAttribute("pi1", pi);

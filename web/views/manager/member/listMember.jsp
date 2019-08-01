@@ -9,9 +9,9 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-	
-	
-	
+
+
+
 	%>
 <!DOCTYPE html>
 <html>
@@ -77,7 +77,7 @@ input-align:center;
 	<%@ include file="../hfl/managerHeader.jsp"%>
 	<br />
 	<h2 align="center">회원 관리</h2>
-	
+
 	<div id="inOutMain">
 		<br>
 		<br>
@@ -128,16 +128,15 @@ input-align:center;
 
 <script>
 
- 	  $(".mbdetail").click(function(){ 
+ 	  $(".mbdetail").click(function(){
 			var mi = $(this).parent().siblings().eq(1).text();
-			console.log(mi);
 		 location.href='<%=request.getContextPath()%>/mbdetail.me?mi='+mi;
 		 });
 	$(".chk").on("click",function(){
 		var chkid = $(this).parent().siblings().eq(0).text();
-	location.href='<%=request.getContextPath()%>/updateBL.me?chkid='+chkid;		
+	location.href='<%=request.getContextPath()%>/updateBL.me?chkid='+chkid;
 	})
- 	 
+
 /* 	$("#chkAll").on("click", function() {
 	      var chkAll = $(this).is(":checked");
 	      if (chkAll)
@@ -149,32 +148,31 @@ input-align:center;
 		var howselect = $("#selecthowsearch option:selected").val();
 		var value = $("#searchValue").val();
 		var send = $("#selecthowsearch option:selected").val() + "$" + $("#searchValue").val();
-		console.log(send);
 		 location.href='<%=request.getContextPath()%>/searchMember.me?send='+send;
-		
+
 	});
 </script>
 <div class="pagingArea" align="center">
 	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>
-			
+
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>
 			<% }else { %>
 			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"> < </button>
 			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++){ 
+
+			<% for(int p = startPage; p <= endPage; p++){
 				if(currentPage == p){
 			%>
 					<button disabled><%= p %></button>
 			<% } else { %>
 					<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=p%>'"><%= p %></button>
-			<% 
+			<%
 				}
-			   } 
-			
+			   }
+
 			%>
-			
+
 			<% if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<% }else{ %>

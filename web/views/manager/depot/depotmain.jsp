@@ -25,12 +25,12 @@
 		border:2px solid black;
 	}
 	tr{
-		border:1px solid black;		
+		border:1px solid black;
 	}
 	td{
 		border:1px solid black;
 		text-align:center;
-		
+
 	}
 	#th3{
 		border:1px solid black;
@@ -39,7 +39,7 @@
 		color:white;
 	}
 	#location{
-		padding-right: 190px;	
+		padding-right: 190px;
 	}
 	#date{
 		padding-right: 190px;
@@ -51,7 +51,7 @@
 		width: 100%;
 		margin: 0 auto;
 		height: 12%;
-		
+
 	}
 </style>
 <body>
@@ -59,9 +59,9 @@
 	<br>
 	<h2 align="center">창고현황</h2>
 	<br />
-	
-	<div id="selectSearch" align="center">		
-	
+
+	<div id="selectSearch" align="center">
+
 			<table id="depotSearch" >
 				<tr>
 					<th id="th3">창고 위치</th>
@@ -88,8 +88,8 @@
 					<td><input type="date" style="width: 200px;" id="releaseDate"/></td>
 					<td><input type="text" style="width: 200px;" id="productCode"/></td>
 					<td>
-					<button type="button" onclick="search();">검색</button>					
-					<button id="excelGo"onclick="goExcel();">엑셀다운로드</button> 
+					<button type="button" onclick="search();">검색</button>
+					<button id="excelGo"onclick="goExcel();">엑셀다운로드</button>
 					</td>
 				</tr>
 			</table>
@@ -100,7 +100,7 @@
 				var location = $("select[id='depotLocation']").val();
 				var insertDate = $("input[id='insertDate']").val();
 				var releaseDate = $("input[id='releaseDate']").val();
-				var productCode =$("input[id='productCode']").val();				
+				var productCode =$("input[id='productCode']").val();
 				$.ajax({
 					url:"search.dp",
 					data:{"location":location,"insertDate":insertDate,"releaseDate":releaseDate,"productCode":productCode},
@@ -108,12 +108,12 @@
 					success:function(data){
 						var $depotTbody = $("#depotMain tbody");
 						var $pagingDiv1 =$("#pagingArea div");
-						$depotTbody.html(""); 
+						$depotTbody.html("");
 						$pagingDiv1.html("");
 						var i = 1;
 						for(var i = 0; i < data["list"].length; i++){
 							var $tr = $("<tr>");
-							var $num = $("<td><label>").text(data["list"][i].productNumber);							
+							var $num = $("<td><label>").text(data["list"][i].productNumber);
 							var $code = $("<td><label>").text(data["list"][i].productCode);
 							var $location=$("<td><label>").text(data["list"][i].locationCode);
 							var $name = $("<td><label>").text(data["list"][i].productName);
@@ -124,7 +124,7 @@
 							$tr.append($name);
 							$tr.append($location);
 							$tr.append($checkd);
-							$tr.append($released);							
+							$tr.append($released);
 							$depotTbody.append($tr);
 						}
 						var currentPage = data["pi"].currentPage;
@@ -133,45 +133,45 @@
 						var listCount = data["pi"].listCount;
 						var maxPage = data["pi"].maxPage;
 						var startPage = data["pi"].startPage;
-						
+
 						var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
 						var $firstBtn = $("<button>").text('<<');
 						var $preBtn = $("<button>").text('<');
-						
+
 						var $nextBtn =$("<button>").text('>');
 						var $lastBtn =$("<button>").text('>>');
-						
-						
+
+
 						$pagingDiv2.append($firstBtn);
 						$pagingDiv2.append($preBtn);
-						$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+						$firstBtn.attr('onclick',"newPage("+currentPage+")");
 						if(currentPage <= 1){
-							$preBtn.attr('disabled',true);							
+							$preBtn.attr('disabled',true);
 						}else{
-							$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+							$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");
 						}
-						for(var i = startPage ; i <= endPage ;i++){		
+						for(var i = startPage ; i <= endPage ;i++){
 							var $numBtn = $("<button>");
 							if(currentPage == i){
-								$numBtn.attr('disabled',true);																
+								$numBtn.attr('disabled',true);
 							}else{
-								$numBtn.attr('onclick',"newPage("+i+")");																
+								$numBtn.attr('onclick',"newPage("+i+")");
 							}
 							$numBtn.text(i);
 							$pagingDiv2.append($numBtn);
 						}
 						if(currentPage >= maxPage){
-							$nextBtn.attr('disabled',true);							
+							$nextBtn.attr('disabled',true);
 						}else{
-							$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+							$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');
 						}
-						$lastBtn.attr('onclick','newPage('+maxPage+')');						
-						
+						$lastBtn.attr('onclick','newPage('+maxPage+')');
+
 						$pagingDiv2.append($nextBtn);
 						$pagingDiv2.append($lastBtn);
-						
-						$pagingDiv1.append($pagingDiv2);							
-						}		
+
+						$pagingDiv1.append($pagingDiv2);
+						}
 				});
 			});
 		}
@@ -194,13 +194,12 @@
 				success:function(data){
 					var $depotTbody = $("#depotMain tbody");
 					var $pagingDiv1 =$("#pagingArea div");
-					$depotTbody.html(""); 
+					$depotTbody.html("");
 					$pagingDiv1.html("");
-					/* console.log(data); */
 					var i = 1;
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
-						var $num = $("<td><label>").text(data["list"][i].productNumber);							
+						var $num = $("<td><label>").text(data["list"][i].productNumber);
 						var $code = $("<td><label>").text(data["list"][i].productCode);
 						var $location=$("<td><label>").text(data["list"][i].locationCode);
 						var $name = $("<td><label>").text(data["list"][i].productName);
@@ -211,7 +210,7 @@
 						$tr.append($name);
 						$tr.append($location);
 						$tr.append($checkd);
-						$tr.append($released);							
+						$tr.append($released);
 						$depotTbody.append($tr);
 					}
 					var currentPage = data["pi"].currentPage;
@@ -220,48 +219,48 @@
 					var listCount = data["pi"].listCount;
 					var maxPage = data["pi"].maxPage;
 					var startPage = data["pi"].startPage;
-					
+
 					var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
 					var $firstBtn = $("<button>").text('<<');
 					var $preBtn = $("<button>").text('<');
-					
+
 					var $nextBtn =$("<button>").text('>');
 					var $lastBtn =$("<button>").text('>>');
-					
-					
+
+
 					$pagingDiv2.append($firstBtn);
 					$pagingDiv2.append($preBtn);
-					$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+					$firstBtn.attr('onclick',"newPage("+currentPage+")");
 					if(currentPage <= 1){
-						$preBtn.attr('disabled',true);							
+						$preBtn.attr('disabled',true);
 					}else{
-						$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+						$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");
 					}
-					for(var i = startPage ; i <= endPage ;i++){		
+					for(var i = startPage ; i <= endPage ;i++){
 						var $numBtn = $("<button>");
 						if(currentPage == i){
-							$numBtn.attr('disabled',true);																
+							$numBtn.attr('disabled',true);
 						}else{
-							$numBtn.attr('onclick',"newPage("+i+")");																
+							$numBtn.attr('onclick',"newPage("+i+")");
 						}
 						$numBtn.text(i);
 						$pagingDiv2.append($numBtn);
 					}
 					if(currentPage >= maxPage){
-						$nextBtn.attr('disabled',true);							
+						$nextBtn.attr('disabled',true);
 					}else{
-						$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+						$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');
 					}
-					$lastBtn.attr('onclick','newPage('+maxPage+')');						
-					
+					$lastBtn.attr('onclick','newPage('+maxPage+')');
+
 					$pagingDiv2.append($nextBtn);
 					$pagingDiv2.append($lastBtn);
-					
-					$pagingDiv1.append($pagingDiv2);							
-					}		
+
+					$pagingDiv1.append($pagingDiv2);
+					}
 			});
 		}
-	</script>	
+	</script>
 	<br>
 	<br><br>
 		<table id="depotMain" align="center">
@@ -288,35 +287,35 @@
 			<%} %>
 			</tbody>
 		</table>
-		
+
 		<br>
 	<div id ="pagingArea">
 		<div class="pagingArea" align="center">
 				<button onclick="location.href='<%=request.getContextPath()%>/listall.dp?currentPage=1'"><<</button>
-				
+
 				<% if(currentPage <= 1){ %>
 				<button disabled><</button>
 				<% }else { %>
 				<button onclick="location.href='<%=request.getContextPath()%>/listall.dp?currentPage=<%=currentPage - 1%>'"> < </button>
 				<% } %>
-				
-				<% for(int p = startPage; p <= endPage; p++){ 
+
+				<% for(int p = startPage; p <= endPage; p++){
 					if(currentPage == p){
 				%>
 						<button disabled><%= p %></button>
 				<% } else { %>
 						<button onclick="location.href='<%=request.getContextPath()%>/listall.dp?currentPage=<%=p%>'"><%= p %></button>
-				<% 
+				<%
 					}
-				   } 
+				   }
 				%>
-				
+
 				<% if(currentPage >= maxPage){ %>
 				<button disabled>></button>
 				<% }else{ %>
 				<button onclick="location.href='<%=request.getContextPath()%>/listall.dp?currentPage=<%=currentPage + 1 %>'">></button>
 				<% } %>
-	
+
 				<button onclick="location.href='<%=request.getContextPath()%>/listall.dp?currentPage=<%=maxPage%>'">>></button>
 			</div>
 	</div>

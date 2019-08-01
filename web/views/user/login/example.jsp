@@ -12,21 +12,21 @@ function checkjoin(index){
 	var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	var buf = new Array(13);
-	
+
 	if($("#memberId").val() == ""){
 		alert("아이디를 입력하세요");
 		$("#memberId").focus();
 		$("#memberId").val("");
 		return false;
 	}
-	
+
 	if(!getCheck.test($("#password").val())){
 		alert("비밀번호를 다시 설정하세요");
 		$("#password").val("");
 		$("#password").focus();
 		return false;
 	}
-	
+
 	if($("#password").val() != ($("#password2").val())){
 		alert("비밀번호를 확인하세요");
 		$("#password").val("");
@@ -34,27 +34,26 @@ function checkjoin(index){
 		$("#password").focus();
 		return false;
 	}
-	
+
  	if(($("#peoplejb").val()=="")||($("#peoplejb2").val()=="")){
 		alert("주민등록번호를 입력하세요");
 		$("#peoplejb").focus();
 		return false;
-	} 
-	
+	}
+
  	if()
- 	
+
 if($("#memberPassword").val() == ($("#memberPassword2").val())){
 	$("form").submit();
-	
-	
-}< 
+
+
+}<
 	}else if(index==2){
 		var email = $("#email").val();
-		console.log(email);
 		window.open('<%=request.getContextPath()%>/send.me?email='+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
-		
-	} 
-}	
+
+	}
+}
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -82,7 +81,7 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
    height:32px;
 }
 .btn_join{
-   height:40px; 
+   height:40px;
    width:40%;
    margin:0 auto;
    border: 1px solid black;
@@ -111,10 +110,10 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
 		<form action="<%=request.getContextPath() %>/insertMember.me" method="post">
 		<div class = "header" align="center">
 		<br><br>
-		
+
 		<br>
 	</div>
-	
+
 	<div class="box_join" align="center">
 		<h2>중고愛민족 회원가입</h2>
 	<div class="box_login" align="center">
@@ -195,13 +194,13 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
        $(function(){
           $(".btn_overlap").click(function(){
              var memberId = $("#memberId").val();
-             
+
              $.ajax({
                 url:"/sp/memberIdCheck.me",
                 type:"post",
                 data:{memberId:memberId},
                 success:function(data){
-                   
+
                    if(data === "fail"){
                       alert("아이디가 중복됩니다.");
                    }else{
@@ -209,13 +208,12 @@ if($("#memberPassword").val() == ($("#memberPassword2").val())){
                    }
                 },
                 error:function(){
-                   console.log("실패!");
                 }
              });
           });
-       }); 
+       });
       </script>
-      
+
       <br><br>
 </body>
       <footer><%@ include file="../hfl/footer.jsp" %></footer>

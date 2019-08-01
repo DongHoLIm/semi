@@ -20,38 +20,36 @@
 <title>Insert title here</title>
  <script>
 	$(function(){
-		
+
 		$("#deliReady").click(function(){ //이벤트 사용하고 싶을 시 .click 대신 on("click", '#td', function(){}
 			$.ajax({
 				url:"deliReady.mp",
 				type:"post",
 				success:function(data){
-					//console.log(data);
 					$tableBody = $("#tdeliReady tbody");
 					$tableBody.html(""); //요청 시마다 tableBody가 누적되지 않도록 비워줌
-					
+
 					$.each(data, function(index, value){ //index 회차, value값
 						var $tr = $("<tr>");
 						var $OnoTd = $("<td>").text(value.Ono);
 						var $pNameTd = $("<td>").text(decodeURIComponent(value.pName));
 						var $dstatusTd = $("<td>").text(value.dstatus);
 						var $oDateTd = $("<td>").text(vaule.oDate)
-						
+
 						$tr.append($OnoTd);
 						$tr.append($pNameTd);
 						$tr.append($dstatusTd);
 						$tr.append($oDateTd);
-						
+
 						$tableBody.append($tr);
 					});
-					
+
 				},
 				error:function(data){
-					console.log("실패!");
 				}
 			});
 		});
-		
+
 	});
 
 </script>
@@ -64,7 +62,7 @@
 .pagingArea > button {
 	background:#FFF;
 	border: 1px solid black;
-	
+
 }
 #sec1 {
 	width: 100%;
@@ -170,7 +168,7 @@
 			</table>
 		</div>
 		</form>
-		
+
 		<div>
 			<br />
 			<h3 align="center">최근 주문 현황</h3>
@@ -192,7 +190,7 @@
 				<%}%>
 			</table>
 		</div>
-		
+
  		<div id="div_deliReady" style="display:none;">
 			<br />
 			<h3 align="center">배송 준비중</h3>
@@ -208,29 +206,29 @@
 				<tbody></tbody>
 			</table>
 		</div>
-		
-		
+
+
 <%-- 페이징처리 --%>
 		<div class="pagingArea" align="center">
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=1'"><<</button>
-			
+
 			<% if(currentPage <= 1){ %>
 			<button class="btn_paging" disabled><</button>
 			<% }else { %>
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=<%=currentPage - 1%>'"><</button>
 			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++){ 
+
+			<% for(int p = startPage; p <= endPage; p++){
 				if(currentPage == p){
 			%>
 					<button class="btn_paging" disabled><%= p %></button>
 			<% } else { %>
 					<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/listMyPage.mp?currentPage=<%=p%>'"><%= p %></button>
-			<% 
+			<%
 				}
-			   } 
+			   }
 			%>
-			
+
 			<% if(currentPage >= maxPage){ %>
 			<button class="btn_paging" disabled>></button>
 			<% }else{ %>
@@ -244,8 +242,8 @@
 	</section>
 
 
-		
-		
+
+
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 <script>
@@ -253,19 +251,19 @@
 			$("#listArea td").mouseenter(function(){ //마우스가 올라갔을 때
 				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
 			}).mouseout(function(){ //마우스가 내려갔을 때
-				$(this).parent().css({"background":"black"});				
+				$(this).parent().css({"background":"black"});
 			}).click(function(){ //클릭했을 때
 				var num = $(this).parent().children("input").val();
-			
+
 				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
 			});
 		}); --%>
-		
+
 		 $(function(){
 			$("#deliReady").click(function(){
 					$("#dr1").val("1");
 					$("#statusForm").submit();
-					
+
 			});
 			$("#deliStart").click(function(){
 				$("#dr1").val("2");
@@ -275,8 +273,8 @@
 				$("#dr1").val("3");
 				$("#statusForm").submit();
 			});
-		}); 
-		 
+		});
+
 		 $(function(){
 			$("#deliReady").click(function(){
 				if($("#div_deliReady").css("display") == "none"){
@@ -284,8 +282,8 @@
 				}
 			});
 		 });
-		 
-		
+
+
 	</script>
 </body>
 </html>
