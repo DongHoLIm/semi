@@ -63,38 +63,20 @@ a {
 		<a id="kakao-login-btn"></a> <a
 			href="http://developers.kakao.com/logout"></a>
 		<script type='text/javascript'>
-			//<![CDATA[
-			// 사용할 앱의 JavaScript 키를 설정해 주세요.
+			
 			Kakao.init('f96020a12441dbfb7b9174b8e19d971c');
-			// 카카오 로그인 버튼을 생성합니다.
+			
 			Kakao.Auth.createLoginButton({
 				container : '#kakao-login-btn',
 				success : function(authObj) {
 					Kakao.API.request({
 					url:'/v1/user/me',
-				success:function(res){
-					alert(JSON.stringify(authObj));
-					//alert(JSON.stringify(res));
-					//console.log(JSON.stringify(authObj));
-					//console.log(JSON.stringify(res));
-					//console.log(res.id);
-					console.log(res.daccount_email);
-					//console.log(res.properties['nickname']);
-					console.log(authObj.access_token);
+				success:function(res){				
 					var nickname = res.properties['nickname'];
 					var id = res.id;
 					var token = authObj.access_token;
 					var array = id+","+nickname+"/"+token;					
 					location.href="<%=request.getContextPath()%>/kakaojoin.me?array="+array;
-					/* $.ajax({
-						url:"/sp/kakaojoin.me",
-						type:"post",
-						data:{nickname:nickname,id:id},
-						success:function(data){
-							
-						}
-					}); */
-					
 				}
 					});
 				},
@@ -102,7 +84,7 @@ a {
 					alert(JSON.stringify(err));
 				}
 			});
-			
+
 			//]]>
 		</script>
 	</div>
@@ -110,18 +92,18 @@ a {
 	<script>
 		function login() {
 			$("#loginForm").submit();
-			
+
 			$("#loginForm").submit(function(){
 				if(msg != null){
 					alert("떙~!");
-					
+
 				}
 			});
-				
-				
+
+
 		}
-		
-		
+
+
 	</script>
 </body>
 </html>

@@ -81,16 +81,6 @@ int endPage = pi.getEndPage();
 		<br> <br>
 		<hr>
 		<h2 id="board">Q&A</h2>
-		<form method="post" align="right">
-			 <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
-				<option value="title">제목</option>
-				<option value="writer">작성자</option>
-				<option value="wdate">답변여부</option>
-			</select> 
-		<input type="search" name="searchValue" id = "inputSearch" >
-		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
-
-		</form>
 		<table class="table" id="messageArea">
 			<thead>
 				<tr>
@@ -104,7 +94,7 @@ int endPage = pi.getEndPage();
 			</thead>
 			<tbody>
 				<%for (Board b : list) {%>
-				<tr class = "row1"> 
+				<tr class = "row1">
 				<input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
@@ -149,7 +139,7 @@ int endPage = pi.getEndPage();
 			<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=maxPage%>'">>></button>
 
       </div>
-      
+
 	</div>
 
 <script>
@@ -161,19 +151,16 @@ int endPage = pi.getEndPage();
 				$(this).parent().css({"background":"white"});
 		}).click(function(){
 			var num = $(this).parent().children("input").val();
-			console.log(num);
 			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
 		});
 	});
-	
+
 	 function search(){
    	  $(function(){
    		  var id = $("select[id = 'select']").val();
-   		  console.log(id);
    		  var input = $("input[id = 'inputSearch']").val();
-   		  console.log(input);
    		  $.ajax({
-   			url:"/sp/smql.li",
+   			url:"/sp/SearchManagerQnAServelt.qna",
    			data:{"selectid":id,"input":input},
    			type:"post",
    			success:function(data){
@@ -181,7 +168,6 @@ int endPage = pi.getEndPage();
    				var $pagingDiv = ("#pagingArea div");
    				$Tbody.html("");
    				$pagingDiv = ("");
-					console.log(data);
 					var i = 1;
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
@@ -207,21 +193,20 @@ int endPage = pi.getEndPage();
 			               $(this).parent().css({"background":"white"});
 			         }).click(function(){
 			            var num = $(this).parent().children("input").val();;
-			            console.log(num);
 			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
 			         });
-					
-						
-					
+
+
+
    			}
-   			
-   			
+
+
    		  })
-   		  
-   		  
-   		  
+
+
+
    	  });
-   	  
+
      }
 
 	</script>

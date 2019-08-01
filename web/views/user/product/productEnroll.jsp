@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>    
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,7 +134,7 @@
             <tr>
                 <th>가격 </th>
                 <td colspan="3"><input type="text" name="productMoney" class="form-control"></td>
-            </tr>		
+            </tr>
             <tr>
                 <th>상품 이미지</th>
                 <td colspan="3">
@@ -224,7 +224,6 @@
        				} else {
        					var fileName = $(this).val().split('/').pop().split('\\').pop();
 					}
-					console.log(fileName);
 					$(this).siblings(".fileName").val(fileName);
 
 

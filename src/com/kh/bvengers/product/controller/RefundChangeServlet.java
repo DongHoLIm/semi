@@ -26,25 +26,24 @@ public class RefundChangeServlet extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String pno = request.getParameter("pno");
 		String pcode = request.getParameter("pcode");
-	
+		int result = 0;
 		
+		result = new ProductService().passRefund(pass, pno, pcode);
 		
-		int result = new ProductService().passRefund(pass, pno, pcode);
-
 		if(result > 0) {
-			
-			response.sendRedirect("views/manager/product/refundManagement.jsp");
-			
+			/*response.sendRedirect("views/manager/product/refundManagement.jsp");*/
+			//page = "views/manager/product/refundManagement.jsp";
+			request.getRequestDispatcher("/refundProduct.mp").forward(request, response);
 		}else {
-			}
+			
 
-			request.setAttribute("msg", "상품 등록 실패!");
+			request.setAttribute("msg", "실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
+	}
 		
-		
-		
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

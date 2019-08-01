@@ -156,15 +156,7 @@
 	<dl>
 		<dt><span></span><%=b.getPostsTitle()%></dt>
 		<dt><span></span><%=b.getContents() %></dt>
-	   <!--  <dt><span></span>아이디/패스워드는 어디서 찾나요?</dt>
-		    <dd>우측 상단에 보이시는 로그인 버튼을 클릭 시 로그인 페이지로 이동되며 로그인페이지 하단에 아이디/패스워드 찾기 버튼을 통하여 확인하실 수 있습니다.</dd>
-	    <dt><span></span>주문한 물건이 어디쯤 배송중인가요?</dt>
-	    	<dd>현재 배송 상태에 관한 현황 정보는 마이페이지에서 확인하실 수 있습니다.</dd>
-	    <dt><span></span>오늘 스터디는 어디서 하나요?</dt>
-	   		<dd>5층 할리스 7그램 프라빈 바나프레소 양평</dd>
-	    <dt><span></span>아이디는 어떻게 변경할 수 있나요?</dt>
-	    	<dd>아이디의 변경은 불가능합니다. 새로운 아이디를 사용하고 싶으신 경우 계정을 새로 만들어 이용해 주시기 바랍니다.</dd>
- -->	</dl>
+	</dl>
 	<% }%>
 	</div>
 	<script>
@@ -256,7 +248,6 @@
             $(this).parent().css({"background":"white"});
       }).click(function(){
          var num = $(this).parent().children("input").val();
-         console.log(num);
           location.href="<%=request.getContextPath()%>/soqa.qo?num=" + num;
       });
    });

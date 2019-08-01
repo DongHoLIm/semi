@@ -99,6 +99,8 @@ public class RefundListServlet extends HttpServlet {
 					m.setRefundStatus("환불 대기");
 				}else if(m.getRefundStatus().equals("2")) {
 					m.setRefundStatus("환불 완료");
+				}else if(m.getRefundStatus().equals("3")) {
+					m.setRefundStatus("환불 취소");
 				}
 			}
 			
@@ -119,8 +121,6 @@ public class RefundListServlet extends HttpServlet {
 					m.setaStatus("정산 대기");
 				}else if(m.getaStatus().equals("2")) {
 					m.setaStatus("정산 완료");
-				}else if(m.getaStatus().equals("3")) {
-					m.setaStatus("환불 완료");
 				}
 			}
 			
@@ -129,7 +129,7 @@ public class RefundListServlet extends HttpServlet {
 			request.setAttribute("pi1", pi1);
 		}else {
 			page1 = "views/user/mypage/refund.jsp";
-			request.setAttribute("msg", "게시판 조회 실패");
+			request.setAttribute("msg", "조회 실패");
 		}
 
 		request.getRequestDispatcher(page1).forward(request,response);
