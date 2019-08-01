@@ -76,9 +76,9 @@ td{
 				</tr>
 			</table>
 		<br>
-	
+
 		</div>
-	
+
 		<div>
 		<button id= "report" align = "left" onclick = "report();">신고하기</button>
 		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
@@ -99,11 +99,8 @@ td{
 
 	function report(){
 	  var writer = <%= b.getMemberNo()%>;
-	  console.log(writer);
 	  var postId =<%= b.getPostsId()%>;
-	  console.log(postId);
 	  var array = writer+"/"+postId;
-      console.log(array);
 
       var url = "views/user/board/report.jsp?array="+array;
 
@@ -123,7 +120,6 @@ td{
 		    	data:{writer:writer, content:content, postId:postId},
 		    	type:"post",
 		    	success:function(data) 	 {
-		    		console.log(data);
 
 		    	var $replySelectTable = $ ("#replySelectTable tbody");
 		    	$replySelectTable.html("");
@@ -142,7 +138,6 @@ td{
 
 		    	},
 		    	error:function(){
-		    		console.log("실패!");
 		    	}
 		    });
 		<%}else{ %>

@@ -25,11 +25,11 @@ String memberId = (String) request.getAttribute("memberId");
 		border:1px solid black;
 	}
 	.btn1 {
-		background:black;	
+		background:black;
 		color:white;
 		border-radius: 5px;
 	}
-	
+
 	.btn_search {
 	width:49%;
 	height: 50px;
@@ -40,7 +40,7 @@ String memberId = (String) request.getAttribute("memberId");
 	border-radius: 5px;
 	color: white;
 	}
-	
+
 	.btn_searchPwd {
 	width:64px;
 	height: 25px;
@@ -50,7 +50,7 @@ String memberId = (String) request.getAttribute("memberId");
 	background-color: black;
 	color: white;
 	}
-	
+
 	.btn_pwd {
 	margin:0 auto;
 	width: 10%;
@@ -62,9 +62,9 @@ String memberId = (String) request.getAttribute("memberId");
 	background-color: black;
 	color: white;
 	}
-	
+
 	.btn_pwd:hover {color:white;}
-	
+
 </style>
 </head>
 <header><%@ include file="../hfl/header.jsp" %></header>
@@ -91,38 +91,37 @@ function okok(){
 		alert("비밀번호를 입력해주세요");
 		return false;
 	}
-	
+
 	if((!getCheck.test($("#password").val()))||!getCheck.test($("#password2").val())){
 		alert("비밀번호를 다시 설정하세요");
 		return false;
 	}
-	
+
 	if($("#userinput").val()==""||($("#userinput").val()!=$("#hiddenvalue").val())){
 		alert("임시 비밀번호를 확인해주세요");
 		return false;
 	}
-	
+
 	if(($("#password").val() == $("#password2").val())){
 		alert("비밀번호가 변경되었습니다!");
-		$("form").submit();	
-		
-		console.log("<%=check%>");
-		
-		
-		
-		
+		$("form").submit();
+
+
+
+
+
 	}else{
 		alert("비밀번호를 다시 설정하세요");
 		return false;
 	}
-	
-	
-	
+
+
+
  <%-- 	$(function(){
 		$(".okok").click(function(){
 		var status="<%=check%>";
 		var checkuser = $("#userinput").val();
-			
+
 		$.ajax({
 			url:"checkmail.me",
 			type:"post",
@@ -132,11 +131,11 @@ function okok(){
 				alert("인증이 완료되었습니다.");
 				}else if(data=="fail"){
 					alert("인증 실패!\n 다시 설정해주세요");
-					
+
 				}
 			}
 		});
-	}); 
+	});
 		}); --%>
 }
 </script>

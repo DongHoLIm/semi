@@ -127,17 +127,14 @@ border:1px solid white;
 				$(this).parent().css({"background":"white"});
 		}).click(function(){
 			var num = $(this).parent().children("input").val();
-			console.log(num);
 			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
 		});
 	});
-	
+
 	  function search(){
     	  $(function(){
     		  var id = $("select[id = 'select']").val();
-    		  console.log(id);
     		  var input = $("input[id = 'inputSearch']").val();
-    		  console.log(input);
     		  $.ajax({
     			url:"/sp/sbl.sh",
     			data:{"selectid":id,"input":input},
@@ -147,7 +144,6 @@ border:1px solid white;
     				var $pagingDiv = ("#pagingArea div");
     				$Tbody.html("");
     				$pagingDiv = ("");
-					console.log(data);
 					var i = 1;
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
@@ -173,21 +169,20 @@ border:1px solid white;
 			               $(this).parent().css({"background":"white"});
 			         }).click(function(){
 			            var num = $(this).parent().children("input").val();;
-			            console.log(num);
 			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
 			         });
-					
-						
-					
+
+
+
     			}
-    			
-    			
+
+
     		  })
-    		  
-    		  
-    		  
+
+
+
     	  });
-    	  
+
       }
 	</script>
 

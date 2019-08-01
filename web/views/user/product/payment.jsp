@@ -10,9 +10,9 @@
 	Posts po = (Posts) request.getAttribute("po");
 	Attachment att = (Attachment) request.getAttribute("att");
 	Category cate = (Category) request.getAttribute("cate");
-	
+
 	HashMap<String, Object> productPay = (HashMap<String, Object>) request.getAttribute("productPay");
-	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -112,11 +112,11 @@
 
 .payInfo th{
 	border:1px solid #aabfde;
-	
-	
+
+
 }
 .payInfo td{
-	
+
 	border:1px solid #aabfde;
 }
 
@@ -190,7 +190,7 @@
 
 		<div id="area">
 
-			
+
 
 			<!-- 장바구니 목록(상품테이블) -->
 			<table class="pt">
@@ -199,13 +199,13 @@
 					<td id="productImg" rowspan="3" width="20%">
 						<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%=productPay.get("newFileName") %>" width=95% hright=100%>
 					</td>
-					
+
 					<td class="postsTitle" colspan="3" width="70%" height="30%"><label><%= productPay.get("postsTitle") %></label></td> <!-- 게시글 -제목: 제거 -->
 				</tr>
 				<tr>
-					<td id="Detail"><label>제품명 | <%= productPay.get("productName") %></label></td>	
-					<td id="Detail"><label>카테고리 | <%= productPay.get("mainCateDiv") %>><%= productPay.get("categoryDiv") %></label></td>	
-					<td id="Detail"><label>판매자 | <%= productPay.get("memberId") %></label></td>	
+					<td id="Detail"><label>제품명 | <%= productPay.get("productName") %></label></td>
+					<td id="Detail"><label>카테고리 | <%= productPay.get("mainCateDiv") %>><%= productPay.get("categoryDiv") %></label></td>
+					<td id="Detail"><label>판매자 | <%= productPay.get("memberId") %></label></td>
 				</tr>
 				<tr>
 					<td colspan="3" id="price" ><label><%= productPay.get("productMoney") %>원</label></td>
@@ -246,7 +246,7 @@
 							<input type="number" name="phone2" id="phone2" style="width:30%" maxlength="4" oninput="phoneNum(this);">-
 							<input type="number" name="phone3" id="phone3" style="width:30%" maxlength="4" oninput="phoneNum(this);">
 							<input type="hidden" name="productCode" value="<%=productPay.get("productCode") %>"/>
-							
+
 						</td>
 					</tr>
 					<tr>
@@ -274,20 +274,20 @@
 	            e.value = e.value.slice(0, e.maxLength);
 	        }
 	    }
-		
+
 	 	function addFind(){
 			new daum.Postcode({
 		           oncomplete: function(data) {
-		
-		               var addr = ''; 
+
+		               var addr = '';
 		               var extraAddr = '';
-		
+
 		               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 		                   addr = data.roadAddress;
 		               } else { 							// 사용자가 지번 주소를 선택했을 경우(J)
 		                   addr = data.jibunAddress;
 		               }
-		
+
 		                   if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
 		                       extraAddr += data.bname;
 		                   }
@@ -299,7 +299,7 @@
 		                   if(extraAddr !== ''){
 		                       extraAddr = ' (' + extraAddr + ')';
 		                   }
-		
+
 		               // 우편번호와 주소 정보를 해당 필드에 넣는다.
 		               document.getElementById('addNum').value = data.zonecode;
 		               document.getElementById("address").value = addr;
@@ -308,23 +308,23 @@
 		           }
 		       }).open();
 		}
-		
+
 		function paymentApi(){
 			var userName = document.getElementById('userName').value;
-			
+
 			var addNum = document.getElementById('addNum').value;
 			var address = document.getElementById('address').value;
 			var subAddress = document.getElementById('subAddress').value;
 			var addr = '우편번호 : ' + addNum + ' 주소 : ' + address + ' ' + subAddress;
-			
+
 			var phone1 = document.getElementById('phone1').value;
 			var phone2 = document.getElementById('phone2').value;
 			var phone3 = document.getElementById('phone3').value;
 			var phoneNum = phone1 + '-' + phone2 + '-' + phone3;
-			
+
 			var message = document.getElementById('message').value;
 			var mail = document.getElementById('mail').value;
-			
+
 			BootPay.request({
 				price: '<%= productPay.get("productMoney") %>', //실제 결제되는 가격
 				application_id: "5d2fec7c396fa61e224d5730",
@@ -359,17 +359,13 @@
 				}
 			}).error(function (data) {
 				//결제 진행시 에러가 발생하면 수행됩니다.
-				console.log(data);
 			}).cancel(function (data) {
 				//결제가 취소되면 수행됩니다.
-				console.log(data);
 			}).ready(function (data) {
 				// 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
-				console.log(data);
 			}).confirm(function (data) {
 				//결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
 				//주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
-				console.log(data);
 				var enable = true; // 재고 수량 관리 로직 혹은 다른 처리
 				if (enable) {
 					this.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
@@ -378,15 +374,13 @@
 				}
 			}).close(function (data) {
 			    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-			    console.log(data);
 			}).done(function (data) {
 				//결제가 정상적으로 완료되면 수행됩니다
 				//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-				console.log(data);
 			});
 		}
-		
-		
+
+
 	</script>
 
 

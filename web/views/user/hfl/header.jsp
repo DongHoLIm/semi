@@ -40,7 +40,7 @@
            <li><a href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
            <li><a href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
        <li><a href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
-         </ul>     
+         </ul>
       <% if(loginUser == null) {%>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
@@ -48,14 +48,23 @@
       <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
        <ul class="nav navbar-nav navbar-right">
         <li><a href="<%=request.getContextPath()%>/logout.me"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
+      	<li onclick="submit();"> <a><span class="glyphicon glyphicon-user" ></span>채팅 문의 </a></li>
       </ul>
+		<script>
+		function submit(){
+			var no = <%=loginUser.getMemberNo()%>;
+			location.href="<%=request.getContextPath()%>/chat.ch?no="+no;
+		}
+		</script>
       <%}%>
+
     </div>
   </div>
   <script>
   	function goMyPage(){
 		location.href="<%=request.getContextPath()%>/listMyPage.mp";
-	}  	
+	}
+
   </script>
 </nav>
 </body>

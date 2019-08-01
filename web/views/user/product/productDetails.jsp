@@ -8,7 +8,10 @@
 	Product p = (Product) request.getAttribute("p");
 	Board b = (Board) request.getAttribute("b");
 	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
-	Attachment productImg = fileList.get(0);
+	for(int i = 0; i < fileList.size(); i++){
+		Attachment productImg = fileList.get(i);
+
+	}
 %>
 <!DOCTYPE html>
 <html>

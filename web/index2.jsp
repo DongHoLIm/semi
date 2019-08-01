@@ -165,7 +165,6 @@
 					}
 				},
 				error:function(){
-					console.log("파워테스트 실패");
 				}
 			});
 		});

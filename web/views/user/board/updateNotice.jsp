@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
- <% 
+ <%
 	Board b = (Board) request.getAttribute("b");
  %>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ td{
 		width:800px;
 		height:100%;
 		margin:0 auto;
-} 
+}
 #content{
 		height:230px;
 	}
@@ -56,7 +56,7 @@ td{
 			<th style = "border:1px solid lightgray">글내용:</th>
 		<td colspan = "4">
 		<textarea id="summernote" name = "content" ><%=b.getContents()%></textarea>
-		
+
 		</td>
 		</tr>
 			</table>
@@ -64,13 +64,13 @@ td{
 		<br><br>
 		<div align="center">
                   <button type = "button" id="sm" name="sm" onclick="submit();">작성 완료</button>
-		</div>		
+		</div>
 				<br><br><br>
 		</form>
 		</div>
 	<br>
 	<br>
- <footer><%@ include file="../hfl/footer.jsp" %></footer> 
+ <footer><%@ include file="../hfl/footer.jsp" %></footer>
 
 	<script>
 $(function() {
@@ -85,7 +85,6 @@ $(function(){
  	var content = $("textarea").eq(1).html();
 	var no = $("#no").val();
 	var hapche = title+content+no;
-	console.log(title +content+no);
 	<%-- location.href = '<%=request.getContextPath()%>/update.no?hapche='+hapche; --%>
 });
 

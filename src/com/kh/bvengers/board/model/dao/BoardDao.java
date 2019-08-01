@@ -499,7 +499,7 @@ public class BoardDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, uno);
 			pstmt.setInt(2, num);
-			
+
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
@@ -514,7 +514,7 @@ public class BoardDao {
 			close(rset);
 		}
 		return listCount;
-		
+
 	}
 	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
@@ -1251,9 +1251,8 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 
 		int result = 0;
-		System.out.println("여기는 와?");
 		String query = prop.getProperty("updatePicture");
-		
+
 		try {
 			for (int i = 0; i < fileList.size(); i++) {
 				pstmt = con.prepareStatement(query);
@@ -1272,7 +1271,7 @@ public class BoardDao {
 
 		return result;
 	}
-	
+
 	public int insertNewPicture(Connection con, Board b, ArrayList<Attachment> fileList) {
 
 		PreparedStatement pstmt = null;
@@ -1301,7 +1300,7 @@ public class BoardDao {
 
 				pstmt.setString(5, level1);
 
-				
+
 
 				result += pstmt.executeUpdate();
 			}
@@ -1312,16 +1311,16 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return result;
-		
-	
+
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 	public int changeDeliStatus(Connection con, String deliNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -1379,32 +1378,31 @@ public class BoardDao {
 	public int SelectCount(Connection con, Board b) {
 		PreparedStatement pstmt = null;
 		ResultSet result = null;
-		
+
 		int number = 0;
 		int num = b.getPostsId();
-		System.out.println("넘버" + num);
 		String query = prop.getProperty("countatt");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			pstmt.setInt(1, num);
-			
+
 			result = pstmt.executeQuery();
-		
-			
+
+
 			if(result.next()) {
-				number = result.getInt(1);	
+				number = result.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
 		return number;
 	}
 
@@ -1412,35 +1410,35 @@ public class BoardDao {
 		PreparedStatement pstmt= null;
 		ResultSet rset = null;
 		int listCount =0;
-		
+
 		String query = prop.getProperty("searchCountList");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, type);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
 
 	public int insertCalculate(Connection con, Calcul cal) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertCalculate");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, cal.getMemberNo());
 			pstmt.setString(2, cal.getPrice());
 			pstmt.setString(3, cal.getPayDtno());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1448,7 +1446,7 @@ public class BoardDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -1456,33 +1454,33 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		Calcul cal = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("calculateInfo");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, deliNo);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				cal = new Calcul();
-				
+
 				cal.setMemberNo(rset.getString("mno"));
 				cal.setPayDtno(rset.getString("pdno"));
 				cal.setPrice(rset.getString("pmoney"));
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			
+
 		}
-		
-		
-		
+
+
+
 		return cal;
 	}
 
@@ -1491,13 +1489,13 @@ public class BoardDao {
 		ResultSet rset = null;
 		int listCount =0;
 		String in = "'%"+ input +"%'";
-		
+
 		String query = prop.getProperty("SelectBoardIDCount");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, in);
-			
+
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				listCount = rset.getInt(1);
@@ -1520,9 +1518,9 @@ public class BoardDao {
 		Board b = null;
 		String in = "%"+ input +"%";
 		int i = 1;
-		
+
 		String query = prop.getProperty("SearchListIdlist");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, in);
@@ -1530,7 +1528,7 @@ public class BoardDao {
 			pstmt.setInt(3, limit);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Board>();
-			
+
 			while(rset.next()) {
 				b = new Board();
 				b.setPostsId(rset.getInt("POSTS_ID"));
@@ -1542,13 +1540,13 @@ public class BoardDao {
 				list.add(b);
 
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
+
+
 		return list;
 	}
 
@@ -1559,13 +1557,13 @@ public class BoardDao {
 		int listCount =0;
 		String query = prop.getProperty("SelectBoardNameCount");
 		String in = "%"+ input +"%";
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, in);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				listCount = rset.getInt(1);
 			}
@@ -1578,8 +1576,8 @@ public class BoardDao {
 		}
 
 		return listCount;
-		
-	
+
+
 	}
 
 	public ArrayList<Board> searchListName(Connection con, String input, int currentPage, int limit) {
@@ -1589,15 +1587,15 @@ public class BoardDao {
 		Board b = null;
 		String in = "%"+ input +"%";
 		String query = prop.getProperty("searchTitle");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, in);
 			pstmt.setInt(2, currentPage);
 			pstmt.setInt(3, limit);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Board>();
 			while(rset.next()) {
 				b = new Board();
@@ -1609,7 +1607,7 @@ public class BoardDao {
 
 				list.add(b);
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1617,8 +1615,8 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-	
+
+
 		return list;
 	}
 
@@ -1628,13 +1626,13 @@ public class BoardDao {
 		int listCount =0;
 		String query = prop.getProperty("SelectBoardNameCount");
 		String in = "%"+ input +"%";
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, in);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				listCount = rset.getInt(1);
 			}
@@ -1647,7 +1645,7 @@ public class BoardDao {
 		}
 
 		return listCount;
-	
+
 	}
 
 	public ArrayList<Board> searchQnAListTitle(Connection con, String input, int currentPage, int limit) {
@@ -1657,15 +1655,15 @@ public class BoardDao {
 		Board b = null;
 		String in = "%"+ input +"%";
 		String query = prop.getProperty("searchQnATitle");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, in);
 			pstmt.setInt(2, currentPage);
 			pstmt.setInt(3, limit);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Board>();
 			while(rset.next()) {
 				b = new Board();
@@ -1676,9 +1674,8 @@ public class BoardDao {
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 
 				list.add(b);
-				System.out.println("야 품위지켜" + list);
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1686,8 +1683,8 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-	
+
+
 		return list;
 	}
 
@@ -1737,7 +1734,7 @@ public class BoardDao {
 		return list;
 	}
 
-	
+
 	}
 
 
