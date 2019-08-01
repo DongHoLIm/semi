@@ -23,7 +23,7 @@ import com.kh.bvengers.manager.depot.model.vo.DepotPageInfo;
 @WebServlet("/sbl.sh")
 public class SearchBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,71 +38,70 @@ public class SearchBoardListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("selectid");
 		String input = request.getParameter("input");
-		System.out.println(input);
-		
+
 		int currentPage;
 		int limit;
 		int maxPage;
 		int StartPage;
 		int endPage;
-		
+
 		currentPage = 1;
-		
+
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
+
 		limit = 10;
-	
-		int listCount = 0;	
+
+		int listCount = 0;
 		HashMap<String, Object> hmap = null;
 		ArrayList <Board> list = null;
-		
+
 		BoardPageInfo pi =null;
-		
-		
+
+
 		if(type.equals("findId")) {
 			listCount = new BoardService().countlistSearch(input);
-					
+
 			maxPage = (int)((double)listCount/limit+0.9);
-			
+
 			StartPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
-			
+
 			endPage = StartPage + 10 - 1;
-			
+
 			if(maxPage < endPage) {
 				endPage = maxPage;
 			}
-			
+
 			hmap =new HashMap<String,Object>();
 			pi = new BoardPageInfo(currentPage, listCount, limit, maxPage, StartPage, endPage);
 			list = new BoardService().searchListId(type,input,currentPage,limit);
 			hmap.put("pi", pi);
 			hmap.put("list", list);
-			
-			
+
+
 		}else if(type.equals("findName")) {
-					
+
 				listCount = new BoardService().countlistNameSearch(input);
 				maxPage = (int)((double)listCount/limit+0.9);
-				
+
 				StartPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
-				
+
 				endPage = StartPage + 10 - 1;
-				
+
 				if(maxPage < endPage) {
 					endPage = maxPage;
 				}
-				
+
 				hmap =new HashMap<String,Object>();
 				pi = new BoardPageInfo(currentPage, listCount, limit, maxPage, StartPage, endPage);
 				list = new BoardService().searchListName(input,currentPage,limit);
 				hmap.put("pi", pi);
 				hmap.put("list", list);
-			
+
 		}
 
-		
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(hmap,response.getWriter());

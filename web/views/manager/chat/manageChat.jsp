@@ -33,8 +33,25 @@
 	webSocket.onmessage = function(event) {
 		onMessage(event);
 	};
+   function enterkey() {
+        if (window.event.keyCode == 13) {
+            send();
+        }
+    }
+    window.setInterval(function() {
+        var elem = document.getElementById('messageWindow');
+        elem.scrollTop = elem.scrollHeight;
+    }, 0);
 	function onMessage(event) {
-		textarea.value += event.data + "\n";
+		var message = event.data;
+		var idx = message.indexOf(":");
+
+		var sender = message.substring(0, idx);
+		var msg = message.substring(idx+1);
+
+		if(sender!="admin"){
+			textarea.value += sender : " + msg + "\n";
+		}
 	};
 	function onOpen(event) {
 		textarea.value += "연결 성공\n";
@@ -42,10 +59,16 @@
 	function onError(event) {
 		alert(event.data);
 	};
+
 	function send() {
-		textarea.value += id + ": " + inputMessage.value + "\n";
-		webSocket.send(no + ": " + inputMessage.value);
-		inputMessage.value = "";
+		if (textarea.value != "") {
+			textarea.value += id + ": " + inputMessage.value + "\n";
+			webSocket.send(id + "*" + no + ": " + inputMessage.value);
+			inputMessage.value = "";
+		} else {
+			inputMessage.value = "";
+		}
+		;
 	};
 </script>
 </html>

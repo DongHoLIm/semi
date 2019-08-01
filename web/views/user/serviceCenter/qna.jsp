@@ -248,7 +248,6 @@
             $(this).parent().css({"background":"white"});
       }).click(function(){
          var num = $(this).parent().children("input").val();
-         console.log(num);
           location.href="<%=request.getContextPath()%>/soqa.qo?num=" + num;
       });
    });

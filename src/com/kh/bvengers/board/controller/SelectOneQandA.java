@@ -20,7 +20,7 @@ import com.kh.bvengers.board.model.vo.Board;
 @WebServlet("/soqa.qo")
 public class SelectOneQandA extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,16 +34,15 @@ public class SelectOneQandA extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
-		
-		
+
+
 		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
 
 		Board b = (Board)hmap.get("board");
 		Attachment fileList = (Attachment)hmap.get("attachment");
 
 		String page = "";
-		
+
 		if(hmap != null) {
 			page = "views/user/serviceCenter/QnAdetail.jsp";
 			request.setAttribute("b", b);
@@ -52,9 +51,9 @@ public class SelectOneQandA extends HttpServlet {
 			page = "views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "Q&A 상세보기 실패!");
 		}
-		
+
 		request.getRequestDispatcher(page).forward(request, response);
-	
+
 	}
 
 	/**

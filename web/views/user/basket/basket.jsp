@@ -114,8 +114,8 @@
   	</tr>
   </table>
   <div id="total">
-  	<button onclick="">선택 상품 주문</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  	<button onclick="selectAll()">전체 상품 주문</button>
+  	<button onclick="choiceProduct();">선택 상품 주문</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	<button onclick="selectAll();">전체 상품 주문</button>
   </div>
 </div>
 <script>
@@ -139,7 +139,19 @@
 		});
 	}
 	function selectAll(){
-		
+		$(function(){
+			   var list = new Array();
+			   $("input[id=select]").each(function(index, item){
+			      list.push($(item).val());
+			   });
+			
+			var code = list.join(',');
+			console.log(code);
+			
+			location.href="<%= request.getContextPath()%>/payment.pa?code="+code;
+			
+			
+		});
 	}
 </script>
 <footer><%@ include file="../hfl/footer.jsp"%></footer>

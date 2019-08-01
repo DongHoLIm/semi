@@ -94,7 +94,7 @@ int endPage = pi.getEndPage();
 			</thead>
 			<tbody>
 				<%for (Board b : list) {%>
-				<tr class = "row1"> 
+				<tr class = "row1">
 				<input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
@@ -139,7 +139,7 @@ int endPage = pi.getEndPage();
 			<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=maxPage%>'">>></button>
 
       </div>
-      
+
 	</div>
 
 <script>
@@ -151,17 +151,14 @@ int endPage = pi.getEndPage();
 				$(this).parent().css({"background":"white"});
 		}).click(function(){
 			var num = $(this).parent().children("input").val();
-			console.log(num);
 			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
 		});
 	});
-	
+
 	 function search(){
    	  $(function(){
    		  var id = $("select[id = 'select']").val();
-   		  console.log(id);
    		  var input = $("input[id = 'inputSearch']").val();
-   		  console.log(input);
    		  $.ajax({
    			url:"/sp/SearchManagerQnAServelt.qna",
    			data:{"selectid":id,"input":input},
@@ -171,7 +168,6 @@ int endPage = pi.getEndPage();
    				var $pagingDiv = ("#pagingArea div");
    				$Tbody.html("");
    				$pagingDiv = ("");
-					console.log(data);
 					var i = 1;
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
@@ -197,21 +193,20 @@ int endPage = pi.getEndPage();
 			               $(this).parent().css({"background":"white"});
 			         }).click(function(){
 			            var num = $(this).parent().children("input").val();;
-			            console.log(num);
 			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
 			         });
-					
-						
-					
+
+
+
    			}
-   			
-   			
+
+
    		  })
-   		  
-   		  
-   		  
+
+
+
    	  });
-   	  
+
      }
 
 	</script>

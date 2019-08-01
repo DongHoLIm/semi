@@ -235,7 +235,6 @@
                $(this).parent().css({"background":"white"});
          }).click(function(){
             var num = $(this).parent().children("input").val();
-            console.log(num);
              location.href="<%=request.getContextPath()%>/son.no?num=" + num;
          });
       });
@@ -247,17 +246,14 @@
                $(this).parent().css({"background":"white"});
          }).click(function(){
             var num = $(this).parent().children("input").val();
-            console.log(num);
              location.href="<%=request.getContextPath()%>/sub.bo?num=" + num;
          });
       });
-      
+
       function search(){
     	  $(function(){
     		  var id = $("select[id = 'select']").val();
-    		  console.log(id);
     		  var input = $("input[id = 'inputSearch']").val();
-    		  console.log(input);
     		  $.ajax({
     			url:"/sp/sbl.sh",
     			data:{"selectid":id,"input":input},
@@ -267,7 +263,6 @@
     				var $pagingDiv = ("#pagingArea div");
     				$Tbody.html("");
     				$pagingDiv = ("");
-					console.log(data);
 					var i = 1;
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
@@ -293,23 +288,22 @@
 			               $(this).parent().css({"background":"white"});
 			         }).click(function(){
 			            var num = $(this).parent().children("input").val();;
-			            console.log(num);
 			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
 			         });
-					
-						
-					
+
+
+
     			}
-    			
-    			
+
+
     		  })
-    		  
-    		  
-    		  
+
+
+
     	  });
-    	  
+
       }
-  
+
    </script>
 
 </body>

@@ -370,27 +370,27 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
       int resulttitle = new BoardDao().updateNotice(con,b);
 
       int resultcontent = new BoardDao().updateNoticeContent(con,b);
-      
+
       int result1 = 0;
       int updateResult = 0;
-      
+
       int resultatt = new BoardDao().SelectCount(con,b);
 
-      
-      
+
+
       if(resultatt > 0) {
-         
+
       if(fileList !=null) {
-    
-       result1= new BoardDao().insertNoticePicture(con, fileList,b);      
+
+       result1= new BoardDao().insertNoticePicture(con, fileList,b);
       }else {
          result1 = 1;
-      }   
-      
+      }
+
       }else {
-         updateResult = new BoardDao().insertNewPicture(con,b,fileList);           
-      }   
-      int result = 0;      
+         updateResult = new BoardDao().insertNewPicture(con,b,fileList);
+      }
+      int result = 0;
       if(resulttitle>0&&resultcontent>0) {
          commit(con);
          result = 1;
@@ -421,14 +421,14 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 	public int changeDeliStatus(String deliNo) {
 		Connection con = getConnection();
 
-		int result = new BoardDao().changeDeliStatus(con, deliNo);			
+		int result = new BoardDao().changeDeliStatus(con, deliNo);
 		Calcul cal = new BoardDao().calculateInfo(con, deliNo);
-   
+
 		int result1 = 0;
 		if(cal != null) {
 			result1 = new BoardDao().insertCalculate(con, cal);
 		}
-		
+
 		if(result > 0 && result1 > 0) {
 			commit(con);
 		}else {
@@ -442,31 +442,27 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 	public int countlistSearch(String input) {
 		Connection con = getConnection();
 		int listCount = new BoardDao().getBoardIdListCount(con,input);
-		
+
 		close(con);
-		
+
 		return listCount;
 	}
 
 	public ArrayList<Board> searchListId(String type, String input, int currentPage, int limit) {
 
 		Connection con  = getConnection();
-		System.out.println("서버" + input);
 		ArrayList<Board> list = new BoardDao().searchListId(con,input,type,currentPage,limit);
 		close(con);
-		
+
 		return list;
 	}
 
 	public int countlistNameSearch(String input) {
 		Connection con = getConnection();
 		int listCount = new BoardDao().getBoardIdListNameCount(con, input);
-		System.out.println("서버" + input);
-		System.out.println("st" + listCount);
-		
-		
+
 		close(con);
-		
+
 		return listCount;
 	}
 
@@ -482,17 +478,16 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 	public int countQnAlistSearch(String input) {
 		Connection con = getConnection();
 		int listCount = new BoardDao().getManagerQnAtitleCount(con,input);
-		
+
 		close(con);
-		
+
 		return listCount;
-	
+
 	}
 
 	public ArrayList<Board> searchListTitleList(String type, String input, int currentPage, int limit) {
 		Connection con  = getConnection();
 		ArrayList<Board> list = new BoardDao().searchQnAListTitle(con,input,currentPage,limit);
-		System.out.println("9tl" + list);
 		close(con);
 
 		return list;

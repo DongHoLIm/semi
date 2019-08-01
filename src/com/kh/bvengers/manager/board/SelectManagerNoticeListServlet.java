@@ -20,7 +20,7 @@ import com.kh.bvengers.user.member.model.vo.Member;
 @WebServlet("/smnl.mm")
 public class SelectManagerNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,48 +39,47 @@ public class SelectManagerNoticeListServlet extends HttpServlet {
 		int maxPage;
 		int startPage;
 		int endPage;
-		
+
 		int num =1;
-		
+
 		String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
 		//scurrentPage = 1;
-		
+
 		int listCount = new BoardService().getListQandACount(num,uno);
-		
+
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}else {
 			currentPage=1;
 		}
-		
+
 		limit =  10;
-		
+
 		maxPage = (int)((double)listCount/limit+0.9);
-		
+
 		startPage = (((int)((double)currentPage / limit + 0.9))-1) * 10 + 1;
-		
+
 		endPage = startPage + 10 -1;
-		
+
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-		
+
 		BoardPageInfo pi = new BoardPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		
+
 		 ArrayList<Board> list = new BoardService().selectManagerList(currentPage, limit, num);
 
 	      if (list != null) {
 	         request.setAttribute("list", list);
 	         request.setAttribute("pi", pi);
 	     	page = "views/manager/main/managerPage.jsp";
-	     	System.out.println(pi);
 	      } else {
 	         page= "views/common/errorPage.jsp";
 	         request.setAttribute("msg", "게시판 조회 실패!");
 	      }
-	      
+
 	      request.getRequestDispatcher(page).forward(request, response);
-	
+
 	}
 
 	/**

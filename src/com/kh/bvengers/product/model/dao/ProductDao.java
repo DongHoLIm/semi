@@ -846,17 +846,18 @@ public class ProductDao {
 		
 		return rList;
 		
-	}/*
+	}
 
-	public int passRefund(Connection con, String pass, String ono) {
+
+	public int passRefund1(Connection con, String pass, String pno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = prop.getProperty("passRefund");
+		String query = prop.getProperty("passRefund1");
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, pass);
+			pstmt.setString(1, pno);
 			
 			result = pstmt.executeUpdate();
 			
@@ -869,11 +870,69 @@ public class ProductDao {
 		return result;
 	}
 
-	public int passAdjust(Connection con, String pass, String ono) {
-		// TODO Auto-generated method stub
-		return 0;
-	}*/
-	
+	public int passRefund2(Connection con, String pass, String pno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("passRefund2");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int passAdjust1(Connection con, String pass, String pcode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("passAdjust1");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pcode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int passAdjust2(Connection con, String pass, String pcode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("passAdjust2");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pcode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 }
 

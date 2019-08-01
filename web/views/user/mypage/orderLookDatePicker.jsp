@@ -17,22 +17,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
 $(document).ready(function() {
-    
+
     var now = new Date();
     var firstDate, lastDate;
-    
+
     firstDate = new Date(now.getFullYear(),now.getMonth(),1);
     lastDate = new Date(now.getFullYear(),now.getMonth()+1,0);
-    
+
     $('#startdate').val($.datepicker.formatDate('yy-mm-dd', firstDate));
     $('#enddate').val($.datepicker.formatDate('yy-mm-dd', lastDate));
- 
-    // Datepicker           
+
+    // Datepicker
     $(".datepicker").datepicker({
         dateFormat : 'yy-mm-dd',
 //         buttonImage : '/images/datepicker.png',
@@ -47,10 +47,10 @@ $(document).ready(function() {
         currentText: '오늘 날짜',
         closeText: '닫기',
         onClose : function ( selectedDate ) {
-       
+
             var eleId = $(this).attr("id");
             var optionName = "";
- 
+
             if(eleId.indexOf("StartDate") > 0) {
                 eleId = eleId.replace("StartDate", "EndDate");
                 optionName = "minDate";
@@ -58,47 +58,47 @@ $(document).ready(function() {
                 eleId = eleId.replace("EndDate", "StartDate");
                 optionName = "maxDate";
             }
- 
-            $("#"+eleId).datepicker( "option", optionName, selectedDate );       
+
+            $("#"+eleId).datepicker( "option", optionName, selectedDate );
             $(".searchDate").find(".chkbox2").removeClass("on");
         }
     });
-   
-        $('#searchStartDate').datepicker("option","onClose", function( selectedDate ) {   
+
+        $('#searchStartDate').datepicker("option","onClose", function( selectedDate ) {
             // 시작일 datepicker가 닫힐때
             // 종료일의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
             $("#searchEndDate").datepicker( "option", "minDate", selectedDate );
             $(".searchDate").find(".chkbox2").removeClass("on");
         });
-       
-    
+
+
         //종료일.
-        $('#searchEndDate').datepicker("option","onClose", function( selectedDate ) {   
+        $('#searchEndDate').datepicker("option","onClose", function( selectedDate ) {
             // 종료일 datepicker가 닫힐때
             // 시작일의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정
             $("#searchStartDate").datepicker( "option", "maxDate", selectedDate );
             $(".searchDate").find(".chkbox2").removeClass("on");
         });
-       
-        $('#searchEndDate').datepicker("option","onSelect", function( selectedDate ) {   
+
+        $('#searchEndDate').datepicker("option","onSelect", function( selectedDate ) {
             // 종료일 datepicker가 닫힐때
             // 시작일의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정
             $("#searchStartDate").datepicker( "option", "maxDate", selectedDate );
             $(".searchDate").find(".chkbox2").removeClass("on");
-           
+
           /*   var f = document.frm;
             $(".adminbuildenergyno").remove(); //name값이 다수여서 지워여야함
             f.submit(); */
         });
-       
-    
+
+
         $(".dateclick").dateclick();    // DateClick
         $(".searchDate").schDate();        // searchDate
-       
+
     });
-    
+
     // Search Date
-    
+
     $.fn.schDate = function() {
        var $obj = $(this);
        /* var $chk = $obj.find("input[type=radio]"); */
@@ -118,13 +118,13 @@ $(document).ready(function() {
       	  $("#dateType4").parent(".chkbox2").removeClass("on");
       	  $("#dateType5").parent(".chkbox2").addClass("on");
          });
-       
+
        /* $chk.click(function() {
            $('input:not(:checked)').parent(".chkbox2").removeClass("on");
            $('input:checked').parent(".chkbox2").addClass("on");
        }); */
     }
-    
+
     // DateClick
     jQuery.fn.dateclick = function() {
        var $obj = $(this);
@@ -132,21 +132,21 @@ $(document).ready(function() {
            $(this).parent().find("input").focus();
        });
     }
-    
+
     function setSearchDate(start) {
-    
+
        var num = start.substring(0, 1);
        var str = start.substring(1, 2);
-    
+
        var today = new Date();
-    
+
        //var year = today.getFullYear();
        //var month = today.getMonth() + 1;
        //var day = today.getDate();
-    
+
        var endDate = $.datepicker.formatDate('yy-mm-dd', today);
        $('#searchEndDate').val(endDate);
-    
+
        if(str == 'd'){
            today.setDate(today.getDate() - num);
        }else if (str == 'w'){
@@ -155,22 +155,22 @@ $(document).ready(function() {
            today.setMonth(today.getMonth() - num);
            today.setDate(today.getDate() + 1);
        }
-    
+
        var startDate = $.datepicker.formatDate('yy-mm-dd', today);
        $('#searchStartDate').val(startDate);
-    
+
        // 종료일은 시작일 이전 날짜 선택하지 못하도록 비활성화
        $("#searchEndDate").datepicker("option", "minDate", startDate);
-    
+
        // 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
        $("#searchStartDate").datepicker("option", "maxDate", endDate);
-    
+
        /* var f = document.form;
        f.method = "post";
        $(".adminbuildenergyno").remove(); //name값이 다수여서 지워여야함 */
-       
+
     };
- 
+
 
 </script>
 <style>
@@ -198,7 +198,7 @@ $(document).ready(function() {
 	width:13%;
 	margin-left:auto;
 	margin-right:auto;
-	
+
 }
 
 #selectDate {
@@ -238,8 +238,8 @@ input[type=button] {
                        <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
                        <label for="dateType5"></label>
                    </span>
-                   
-          
+
+
            <!-- <div class="clearfix">
                시작일 -->
                <span class="dset">
@@ -261,91 +261,6 @@ input[type=button] {
        </table>
 </div>
 </body>
- 
-<%-- <script>
-
-function search(){
-	$(function(){
-		var start =$("input[id='searchStartDate']").val();
-		var end = $("input[id='searchEndDate']").val();
-		console.log(start);
-		console.log(end);
-		$.ajax({
-			url:"orderDate.mp",
-			type:"post",
-			data:{"start":start,"end":end},
-			success:function(data){
-				var $dateTbody = $("#dateBoard tbody");
-				var $pagingDiv1 =$("#pagingArea div");
-				$dateTbody.html(""); 
-				$pagingDiv1.html("");
-				console.log(data);
-				var i = 1;
-				for(var i = 0; i < data["dateList"].length; i++){
-					var $tr = $("<tr>").addClass("od");
-					var $ono = $("<td>").text(data["dateList"][i].ono);							
-					var $oDate = $("<td>").text(data["dateList"][i].oDate);
-					var $pname = $("<td>").text(data["dateList"][i].pname);
-					var $dstatus = $("<td>").text(data["dateList"][i].payStatus);
-					var $payStatus = $("<td>").text(data["dateList"][i].dstatus);
-					var $refundStatus = $("<td>").text(data["dateList"][i].refundStatus);
-				
-					$tr.append($ono);
-					$tr.append($oDate);
-					$tr.append($pname);
-					$tr.append($dstatus);
-					$tr.append($payStatus);
-					$tr.append($refundStatus);							
-					$dateTbody.append($tr);
-				}
-				var currentPage = data["pi"].currentPage;
-				var endPage = data["pi"].endPage;
-				var limit = data["pi"].limit;
-				var listCount = data["pi"].listCount;
-				var maxPage = data["pi"].maxPage;
-				var startPage = data["pi"].startPage;
-				
-				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
-				var $firstBtn = $("<button>").text('<<');
-				var $preBtn = $("<button>").text('<');
-				var $numBtn = $("<button>");
-				var $nextBtn =$("<button>").text('>');
-				var $lastBtn =$("<button>").text('>>');
-				
-
-				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=1"');						
-				if(currentPage <= 1){
-					$preBtn.attr('disabled',true);							
-				}else{
-					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage - 1"');						
-				}
-				for(var i = startPage ; i <= endPage ;i++){		
-					if(currentPage == i){
-						$numBtn.attr('disabled',true);																
-					}else{
-						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=i"');																
-					}
-					$numBtn.text(i);			
-				}
-				if(currentPage >= maxPage){
-					$nextBtn.attr('disabled',true);							
-				}else{
-					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage + 1 "');							
-				}
-				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=maxPage"');
-				
-				$pagingDiv2.append($firstBtn);
-				$pagingDiv2.append($preBtn);
-				$pagingDiv2.append($numBtn);
-				$pagingDiv2.append($nextBtn);
-				$pagingDiv2.append($lastBtn);
-				
-				$pagingDiv1.append($pagingDiv2);
-			},			
-		});
-	});
-}
-</script>  --%>
 
 
 </html>
