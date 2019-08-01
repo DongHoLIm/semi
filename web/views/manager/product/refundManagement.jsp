@@ -1,6 +1,24 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.kh.bvengers.product.model.vo.Refund"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.bvengers.product.model.vo.CalculPageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
+<%
+   ArrayList<Refund> rList = (ArrayList<Refund>)request.getAttribute("rList");
+   CalculPageInfo pi = (CalculPageInfo)request.getAttribute("pi");
+   int listCount = pi.getListCount();
+   int currentPage = pi.getCurrentPage();
+   int maxPage = pi.getMaxPage();
+   int startPage = pi.getStartPage();
+   int endPage = pi.getEndPage();
+
+   DecimalFormat dc = new DecimalFormat("###,###,###,###");
+
+
+%>	
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,6 +62,10 @@ border:1px solid white;
 .od {
 	text-align:center;
 }
+
+.refundMain tr td {
+	border:1px solid black;
+}
 </style>
 <body>
 	<%@ include file="../hfl/managerHeader.jsp"%>
@@ -65,17 +87,75 @@ border:1px solid white;
 		<th class="th">검수여부</th>
 		<th class="th">환불상태</th>
 	</tr>
+		<% for(Refund r : rList) {%>
 			<tr class="od">
-					<td>주문번호</td>
-					<td>신청날짜</td>
-					<td>회원번호</td>
-					<td>검수여부</td>
-					<td>환불상태</td>
+					<td><%=r.getOno() %></td>
+					<td><%=r.getrDate() %></td>
+					<td><%=r.getMno() %></td>
+					<td><button class="btn_1" value="1">통과</button>
+					<button class="btn_2" value="2">미통과</button>
+					<button class="btn_3" value="3">조건부 통과</button></td>
+					<td><%=r.getrStatus() %></td>
+					<input type="hidden" id="pno"value="<%=r.getPno()%>">
+					<input type="hidden" id="pcode" value="<%=r.getpCode()%>">
+				
+					
 				</tr>
-	
+		<% } %>
 			</table><br><br>
 		</div>
+		
+		
+	<div class = "pagingArea" align ="center" >
+      <button onclick = "location.href = '<%=request.getContextPath()%>/refundProduct.mp?currentPage1=1'"><</button>
+      <%if(currentPage <= 1) {%>
+      <button disabled><</button>
+      <%} else{%>
+   <button onclick = "location.href='<%=request.getContextPath()%>/refundProduct.mp?currentPage1=<%=currentPage-1%>'"><</button>
+      <%}%>
+         <%for (int p = startPage; p <= endPage; p++) {
+            if(currentPage == p){
+         %>
+            <button disabled><%= p %></button>
+         <%} else{ %>
+               <button onclick = "location.href='<%=request.getContextPath()%>/refundProduct.mp?currentPage1=<%=p%>'"><%= p %></button>
+         <% }
+         }
+         %>
+
+
+         <%if(currentPage >= maxPage){ %>
+         <button disabled>></button>
+         <%}else{ %>
+         <button onclick ="location.hreh='<%=request.getContextPath()%>/refundProduct.mp?currentPage1=<%=currentPage + 1%>'">></button>
+         <%} %>
+         <button onclick = "location.href='<%=request.getContextPath()%>/refundProduct.mp?currentPage1=<%=maxPage%>'">>></button>
+
+      </div>
 	</div>
+	
+<script>
+
+$(".btn_1").click(function(){ 
+	var pass = $(this).val();
+	var pno = $("#pno").val();
+	var pcode = $("#pcode").val();
+	console.log(pno);
+	console.log(pcode);
+ 	location.href='<%=request.getContextPath()%>/refundChange.mp?pass='+pass+'&&ono='+ono;
+ });
+ 
+$(".btn_2").click(function(){ 
+	var pass = $(this).val();
+	location.href='<%=request.getContextPath()%>/refundChange.mp?pass='+pass+'&&ono='+ono;
+ });
+ 
+$(".btn_3").click(function(){ 
+	var pass = $(this).val();
+	location.href='<%=request.getContextPath()%>/refundChange.mp?pass='+pass+'&&ono='+ono;
+ });
+
+</script>
 
 		
 </body>

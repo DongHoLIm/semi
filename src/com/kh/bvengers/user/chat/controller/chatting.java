@@ -23,37 +23,34 @@ public class chatting {
 
 	@OnMessage
 	public void onMessage(String message, Session session) {
-		String hapche = session.getQueryString();
-		System.out.println(hapche);
-		int idx = hapche.indexOf("$");
-		String jd = hapche.substring(0, idx);
-		String no = hapche.substring(idx+1);
-		
-		System.out.println(jd);
-		System.out.println(no);
-		
-		
-		
-		String[] cId = message.split(":");
-		String id = cId[0];
-		synchronized (admin) {
-			try {
-				Iterator<String> keySetIterator = admin.keySet().iterator();
-				while (keySetIterator.hasNext()) {
-					String key = keySetIterator.next();
-					client.get(key).getBasicRemote().sendText(message);
-					
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		int idx2 = message.indexOf("*");
+		String mId = message.substring(0, idx2);
+		int idx = message.indexOf(":");
+		String id = message.substring(idx2+1, idx);
+		String messages = message.substring(idx+1);
 		synchronized (client) {
 			try {
 				Iterator<String> keySetIterator = client.keySet().iterator();
 				while (keySetIterator.hasNext()) {
 					String key = keySetIterator.next();
-					admin.get(key).getBasicRemote().sendText(message);
+
+
+					if (key.equals(id)) {
+						admin.get(key).getBasicRemote().sendText(mId+":"+messages);
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		synchronized (admin) {
+			try {
+				Iterator<String> keySetIterator = admin.keySet().iterator();
+				while (keySetIterator.hasNext()) {
+					String key = keySetIterator.next();
+					if (key.equals(id)) {
+						client.get(key).getBasicRemote().sendText(mId+":"+messages);
+					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -64,10 +61,13 @@ public class chatting {
 
 	@OnOpen
 	public void onOpen(Session session) {
-		String id = session.getQueryString();
-		String[] cId = id.split("=");
-		id = cId[1];
-		if (id.equals("admin")) {
+		String params = session.getQueryString();
+		String ids[] = params.split("=");
+		String id = ids[1];
+		int idx = id.indexOf("&");
+		id = id.substring(0, idx);
+		String sub = ids[2];
+		if (sub.equals("admin")) {
 			admin.put(id, session);
 		} else {
 			client.put(id, session);
@@ -76,9 +76,16 @@ public class chatting {
 
 	@OnClose
 	public void onClose(Session session) {
-		String id = session.getQueryString();
-		String[] cId = id.split("=");
-		id = cId[1];
-		client.remove(id, session);
+		String params = session.getQueryString();
+		String ids[] = params.split("=");
+		String id = ids[1];
+		int idx = id.indexOf("&");
+		id = id.substring(0, idx);
+		String sub = ids[2];
+		if (sub.equals("admin")) {
+			admin.remove(id, session);
+		} else {
+			client.remove(id, session);
+		}
 	}
 }

@@ -54,12 +54,13 @@
 				<table id="chatListTable">
 					<thead>
 						<tr>
-							<th class="tableHeader" colspan="3">회원 문의 내역</th>
+							<th class="tableHeader" colspan="4">회원 문의 내역</th>
 						</tr>
 						<tr>
 							<td class="memberNo">회원번호</td>
 							<td class="memberId">회원ID</td>
 							<td class="chatDate">문의일</td>
+							<td class="chatStatus">완료 여부</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -70,6 +71,7 @@
 							<td class="memberNo"><%=ch.getMemberNo()%></td>
 							<td class="memberId"><%=ch.getMemberId()%></td>
 							<td class="chatDate"><%=ch.getChatDate()%></td>
+							<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/joinChat.ch?no='+<%=ch.getMemberNo() %>">답변하기</button></td>
 						</tr>
 						<%
 							}
@@ -79,5 +81,12 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$("#chatListTable td").onclick(function(){
+			window.open('<%=request.getContextPath()%>/send.me?email='+hc+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
+		});
+	});
+	</script>
 </body>
 </html>

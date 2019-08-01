@@ -30,10 +30,10 @@ public class MemberService {
 	}
 
 
-	public int changeMember(Member m) {
+	public int changeMember(Member loginUser) {
 		Connection con = getConnection();
 
-		int result = new MemberDao().changeMember(con, m);
+		int result = new MemberDao().changeMember(con, loginUser);
 
 		if(result > 0) {
 			commit(con);
@@ -144,6 +144,18 @@ public class MemberService {
 	public int changePwd(String memberId, String memberPwd) {
 		Connection con = getConnection();
 		int result = new MemberDao().changePwd(con,memberId,memberPwd);
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
+	public int kakaojoin(String id, String nickname) {
+		Connection con = getConnection();
+		int result = new MemberDao().kakaojoin(con,id,nickname);
 		if(result>0) {
 			commit(con);
 		}else {

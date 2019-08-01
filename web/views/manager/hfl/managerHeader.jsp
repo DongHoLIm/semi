@@ -31,7 +31,7 @@
                <li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/selectCalculate.cal">정산 내역 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/productManagement">구매 내역 관리</a></li>
-               <li><a href="/sp/views/manager/product/refundManagement.jsp">환불 내역 관리</a></li>
+               <li><a href="<%=request.getContextPath()%>/refundProduct.mp">환불 내역 관리</a></li>
                </ul>
             </li>
              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 회원관리<span class="caret"></span> </a>
@@ -44,7 +44,7 @@
            <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 통계 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/memberStatistics">고객현황</a></li>
-               <li><a href="<%=request.getContextPath()%>/views/manager/statistics/salesStatistics.jsp">매출현황</a></li>
+               <li><a href="<%=request.getContextPath()%>/salesStatistics.st">매출현황</a></li>
             </ul>
            </li>
            <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 게시글관리 <span class="caret"></span></a>

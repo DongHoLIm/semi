@@ -70,12 +70,39 @@ a {
 			Kakao.Auth.createLoginButton({
 				container : '#kakao-login-btn',
 				success : function(authObj) {
+					Kakao.API.request({
+					url:'/v1/user/me',
+				success:function(res){
 					alert(JSON.stringify(authObj));
+					//alert(JSON.stringify(res));
+					//console.log(JSON.stringify(authObj));
+					//console.log(JSON.stringify(res));
+					//console.log(res.id);
+					console.log(res.daccount_email);
+					//console.log(res.properties['nickname']);
+					console.log(authObj.access_token);
+					var nickname = res.properties['nickname'];
+					var id = res.id;
+					console.log(nickname);
+					console.log(id);
+					
+					$.ajax({
+						url:"/sp/kakaojoin.me",
+						type:"post",
+						data:{nickname:nickname,id:id},
+						success:function(data){
+							
+						}
+					});
+					
+				}
+					});
 				},
 				fail : function(err) {
 					alert(JSON.stringify(err));
 				}
 			});
+			
 			//]]>
 		</script>
 	</div>

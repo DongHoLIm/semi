@@ -27,11 +27,10 @@ public class MainListServlet extends HttpServlet {
 
 		String page = "";
 		if (list != null) {
-			page = "/views/user/product/test.jsp";
+			page = "/views/user/product/productList.jsp";
 			request.setAttribute("list", list);
 		} else {
 			page = "/views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "게시판 조회 실패!!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}

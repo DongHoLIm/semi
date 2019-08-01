@@ -255,7 +255,6 @@
 		    $(this).prependTo($(this).parent());
 
 		    $("#search").val($(this).attr('value'));
-		    console.log($("#search").attr('value'));
 		});
 
 

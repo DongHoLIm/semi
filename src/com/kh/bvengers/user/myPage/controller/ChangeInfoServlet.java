@@ -32,19 +32,18 @@ public class ChangeInfoServlet extends HttpServlet {
 		String add3 = request.getParameter("address3");
 		String address = add1 + " " + add2 + add3;
 
-		Member m = new Member();
-		m.setMemberId(memberId);
-		m.setMemberPassword(memberPassword);
-		m.setMemberName(memberName);
-		m.setEmail(email);
-		m.setAddress(address);
-		m.setPhone(phone);
+		Member loginUser = new Member();
+		loginUser.setMemberId(memberId);
+		loginUser.setMemberPassword(memberPassword);
+		loginUser.setMemberName(memberName);
+		loginUser.setEmail(email);
+		loginUser.setAddress(address);
+		loginUser.setPhone(phone);
 		
-		String page = "";
-		
-		int result = new MemberService().changeMember(m);
+		int result = new MemberService().changeMember(loginUser);
 		if(result > 0) {
 
+			request.setAttribute("loginUser", loginUser);
 			response.sendRedirect("/sp/views/user/mypage/changeInfo.jsp");
 			
 			//page = "views/user/mypage/changeInfo.jsp";

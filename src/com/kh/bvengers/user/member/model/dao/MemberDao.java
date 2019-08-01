@@ -98,7 +98,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public int changeMember(Connection con, Member m) {
+	public int changeMember(Connection con, Member loginUser) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 
@@ -106,11 +106,11 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, m.getMemberPassword());
-			pstmt.setString(2, m.getEmail());
-			pstmt.setString(3, m.getAddress());
-			pstmt.setString(4, m.getPhone());
-			pstmt.setString(5, m.getMemberId());
+			pstmt.setString(1, loginUser.getMemberPassword());
+			pstmt.setString(2, loginUser.getEmail());
+			pstmt.setString(3, loginUser.getAddress());
+			pstmt.setString(4, loginUser.getPhone());
+			pstmt.setString(5, loginUser.getMemberId());
 
 			result = pstmt.executeUpdate();
 
@@ -171,12 +171,12 @@ public class MemberDao {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		int startRow = (currentPage-1)*limit +1;
+		int endRow = startRow + limit-1;
 		String query = prop.getProperty("searchId");
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			int startRow = (currentPage-1)*limit +1;
-			int endRow = startRow + limit-1;
 			
 			pstmt.setString(1, searchValue);
 			pstmt.setInt(2, startRow);
@@ -654,6 +654,25 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
+		
+		return result;
+	}
+	public int kakaojoin(Connection con, String id, String nickname) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("kakaojoin");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, nickname);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return result;
 	}

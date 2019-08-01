@@ -69,18 +69,14 @@ public class OrderLookServlet extends HttpServlet {
 					if(m.getRefundStatus() == null){
 						if(m.getDstatus() != null) {
 							if(m.getDstatus().equals("1")) {
-								m.setDstatus("배송 준비중");
-								m.setPayStatus("");
+								m.setPstatus("배송 준비중");
 							}else if(m.getDstatus().equals("2")) {
-								m.setDstatus("배송 중");
-								m.setPayStatus("");
+								m.setPstatus("배송 중");
 							}else if(m.getDstatus().equals("3")){
-								m.setDstatus("배송 완료");
-								m.setPayStatus("");
+								m.setPstatus("배송 완료");
 
 							}else if(m.getPayStatus().equals("2")) {
-								m.setPayStatus("결제 취소");
-								m.setDstatus("");
+								m.setPstatus("결제 취소");
 							}
 						}
 
@@ -88,13 +84,13 @@ public class OrderLookServlet extends HttpServlet {
 					}else {
 
 						if(m.getRefundStatus().equals("1")) {
-							m.setRefundStatus("환불 대기");
-							m.setPayStatus("");
-							m.setDstatus("");
+							m.setPstatus("환불 대기");
 						}else if(m.getRefundStatus().equals("2")) {
-							m.setRefundStatus("환불 완료");
-							m.setDstatus("");
+							m.setPstatus("환불 완료");
+						}else if(m.getRefundStatus().equals("3")) {
+							m.setPstatus("환불 취소");
 						}
+						
 					}
 
 			}

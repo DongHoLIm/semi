@@ -96,10 +96,7 @@ td{
 			$(this).val = "";
 		});
 	});
-	
-	
-	
-	
+
 	function report(){
 	  var writer = <%= b.getMemberNo()%>;
 	  console.log(writer);

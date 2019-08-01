@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -57,11 +59,16 @@ public class StatisticDao {
 		return dateList;
 	}
 	
-	public ArrayList<HashMap<String, Object>> memberStatistic(Connection con, ArrayList<String> dateList, String time) {
+	public ArrayList<HashMap<String, Object>> memberStatistic(Connection con, ArrayList<String> dateList, Calendar calender) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<HashMap<String, Object>>  list = null;
 		HashMap<String, Object> hmap = null;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyMMdd"); 
+		
+		
+
 		
 		int count = 0;
 		
@@ -74,6 +81,9 @@ public class StatisticDao {
 			}
 			
 			for(int i = 0; i < dateLength; i++) {
+				Date date = calender.getTime();
+				String time = format.format(date);
+				
 				
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, time);
@@ -98,12 +108,14 @@ public class StatisticDao {
 					hmap.put("allPay", dpay+"");
 					list.add(hmap);
 				}
-				time = Integer.parseInt(time)-1+"";
+				calender.add(Calendar.DATE, -1);
 			}
 			
 			if(count > 0) {
 				
 				for(int i = 0; i < count; i++) {
+					Date date = calender.getTime();
+					String time = format.format(date);
 					
 					pstmt = con.prepareStatement(query);
 					pstmt.setString(1, time);
@@ -126,7 +138,7 @@ public class StatisticDao {
 						hmap.put("allPay", dpay+"");
 						list.add(hmap);
 					}
-					time = Integer.parseInt(time)-1+"";
+					calender.add(Calendar.DATE, -1);
 				}
 				
 			}
@@ -141,8 +153,320 @@ public class StatisticDao {
 		return list;
 	}
 
-	
+	public ArrayList<String> salesCountDate(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<String> dateList = null;
+		
+		String query = prop.getProperty("salesCountDate");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			int i = 0;
+			dateList = new ArrayList<String>();
+			while(rset.next()) {
+				dateList.add(i, rset.getString("DA"));
+				i++;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return dateList;
+	}
 
+	public ArrayList<HashMap<String, Object>> allDatalist(Connection con, ArrayList<String> dateList) {
+		SimpleDateFormat format = new SimpleDateFormat ( "yyMMdd");
+		Date dTime = new Date();
+		Calendar calender = Calendar.getInstance();
+		calender.setTime(dTime);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>>  list = null;
+		HashMap<String, Object> hmap = null;
+		
+		int count = 0;
+		
+		String query = prop.getProperty("salesStatisticsAll");
+		try {
+			
+			list = new ArrayList<HashMap<String, Object>>();
+			int dateLength = dateList.size();
+			if(dateLength > 6) {
+				dateLength = 6;
+			}
+			
+			
+			for(int i = 0; i < dateLength; i++) {
+				Date date = calender.getTime();
+				String time = format.format(date);
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, time);
+				
+				
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					
+					hmap = new HashMap<String, Object>();
+					
+					String yy = time.substring(0,2);
+					String MM = time.substring(2,4);
+					String dd = time.substring(4);
+					hmap.put("payDate", MM+"월"+dd+"일");
+					
+					int allPrice = 0;
+					if(rset.getString("SUM(PRICE)") != null) {
+						allPrice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
+					}else {
+						count++;
+					}
+					
+					hmap.put("allPrice", allPrice+"");
+					list.add(hmap);
+				}
+				calender.add(Calendar.DATE, -1);
+			}
+			
+			if(count > 0) {
+				
+				for(int i = 0; i < count; i++) {
+					Date date = calender.getTime();
+					String time = format.format(date);
+					
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, time);
+
+					rset = pstmt.executeQuery();
+					
+					while(rset.next()) {
+						hmap = new HashMap<String, Object>();
+						
+						String yy = time.substring(0,2);
+						String MM = time.substring(2,4);
+						String dd = time.substring(4);
+						hmap.put("payDate", MM+"월"+dd+"일");
+						
+						int allPrice = 0;
+						if(rset.getString("SUM(PRICE)") != null) {
+							allPrice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
+						}
+						
+						hmap.put("allPrice", allPrice+"");
+						list.add(hmap);
+					}
+					calender.add(Calendar.DATE, -1);
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<HashMap<String, Object>> calculateDatalist(Connection con, ArrayList<String> dateList) {
+		SimpleDateFormat format = new SimpleDateFormat ( "yyMMdd");
+		Date dTime = new Date();
+		Calendar calender = Calendar.getInstance();
+		calender.setTime(dTime);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>>  list = null;
+		HashMap<String, Object> hmap = null;
+		
+		int count = 0;
+		
+		String query = prop.getProperty("salesStatistics");
+		try {
+			list = new ArrayList<HashMap<String, Object>>();
+			int dateLength = dateList.size();
+			if(dateLength > 6) {
+				dateLength = 6;
+			}
+			
+			for(int i = 0; i < dateLength; i++) {
+				Date date = calender.getTime();
+				String time = format.format(date);
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, time);
+				pstmt.setString(2, "2");
+				
+				rset = pstmt.executeQuery();				
+				while(rset.next()) {
+					hmap = new HashMap<String, Object>();
+					
+					String yy = time.substring(0,2);
+					String MM = time.substring(2,4);
+					String dd = time.substring(4);
+					hmap.put("payDate", MM+"월"+dd+"일");
+					
+					int calParice = 0;
+					if(rset.getString("SUM(PRICE)") != null) {
+						calParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
+					}else {
+						count++;
+					}
+					
+					hmap.put("calParice", calParice+"");
+					list.add(hmap);
+				}
+				calender.add(Calendar.DATE, -1);
+			}
+			
+			if(count > 0) {
+				
+				for(int i = 0; i < count; i++) {
+					Date date = calender.getTime();
+					String time = format.format(date);
+					
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, time);
+					pstmt.setString(2, "2");
+					
+					rset = pstmt.executeQuery();
+					
+					while(rset.next()) {
+						hmap = new HashMap<String, Object>();
+						
+						String yy = time.substring(0,2);
+						String MM = time.substring(2,4);
+						String dd = time.substring(4);
+						hmap.put("payDate", MM+"월"+dd+"일");
+						
+						int calParice = 0;
+						if(rset.getString("SUM(PRICE)") != null) {
+							calParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
+							hmap.put("calParice", calParice+"");
+							list.add(hmap);
+						}
+						
+					}
+					calender.add(Calendar.DATE, -1);
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<HashMap<String, Object>> refundDatalist(Connection con, ArrayList<String> dateList) {
+		SimpleDateFormat format = new SimpleDateFormat ( "yyMMdd");
+		Date dTime = new Date();
+		Calendar calender = Calendar.getInstance();
+		calender.setTime(dTime);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>>  list = null;
+		HashMap<String, Object> hmap = null;
+		
+		int count = 0;
+		
+		String query = prop.getProperty("salesStatistics");
+		try {
+			list = new ArrayList<HashMap<String, Object>>();
+			int dateLength = dateList.size();
+			if(dateLength > 6) {
+				dateLength = 6;
+			}
+			
+			for(int i = 0; i < dateLength; i++) {
+				Date date = calender.getTime();
+				String time = format.format(date);
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, time);
+				pstmt.setString(2, "3");
+				
+				rset = pstmt.executeQuery();				
+				while(rset.next()) {
+					hmap = new HashMap<String, Object>();
+					
+					String yy = time.substring(0,2);
+					String MM = time.substring(2,4);
+					String dd = time.substring(4);
+					hmap.put("payDate", MM+"월"+dd+"일");
+					
+					int refundParice = 0;
+					if(rset.getString("SUM(PRICE)") != null) {
+						refundParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
+					}else {
+						count++;
+					}
+					
+					hmap.put("refundParice", refundParice+"");
+					list.add(hmap);
+				}
+				calender.add(Calendar.DATE, -1);
+			}
+			
+			if(count > 0) {
+				
+				for(int i = 0; i < count; i++) {
+					Date date = calender.getTime();
+					String time = format.format(date);
+					
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, time);
+					pstmt.setString(2, "3");
+					
+					rset = pstmt.executeQuery();
+					
+					while(rset.next()) {
+						hmap = new HashMap<String, Object>();
+						
+						String yy = time.substring(0,2);
+						String MM = time.substring(2,4);
+						String dd = time.substring(4);
+						hmap.put("payDate", MM+"월"+dd+"일");
+						
+						int refundParice = 0;
+						if(rset.getString("SUM(PRICE)") != null) {
+							refundParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
+							hmap.put("refundParice", refundParice+"");
+							list.add(hmap);
+						}
+						
+					}
+					calender.add(Calendar.DATE, -1);
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	
 }
 
 
