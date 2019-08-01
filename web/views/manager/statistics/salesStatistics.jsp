@@ -1,5 +1,15 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<ArrayList<HashMap<String, Object>>> datalist = (ArrayList<ArrayList<HashMap<String, Object>>>) request.getAttribute("dataList");
+	
+	ArrayList<HashMap<String, Object>> allDatalist = datalist.get(0);
+	ArrayList<HashMap<String, Object>> calculateDatalist = datalist.get(1);
+	ArrayList<HashMap<String, Object>> refundDatalist = datalist.get(2);
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,116 +22,119 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
+.statisticsOuter{
+	padding-left: 10%;
+	padding-right: 10%;
+	margin:0 auto;
+	margin-top: 5%;
+}
 #graphs {
 	border: 1px dashed black;
-	width: 43%;
-	height: 600px;
+	width: 80%;
 }
 
-#staticBtns {
-	margin-top: 10%;
-	margin-left: 3%;
+.datatable {
+	visibility:hidden;
 }
 
-.btns {
-	margin-top: 2%;
-	background: white;
-	border: none;
-	color:black;
-	margin-bottom: 5%;
-	font-size : 1.15em;
-	font-weight: bold;
-}
-
-.menuBtn {
-	margin-left: 5%;
-}
-
-.statics {
-	display: inline-block;
-	height: 600px;
-}
-
-table th, table td {
+#datatable td{
 	border: 1px solid black;
-	text-align: center;
+	background: #eee;
 }
 
-table th {
-	background: black;
-	color:white;
-	border:1px solid white;
+#datatable, #datatable th {
+	border: 2px solid black;
+	background: #ddd;
 }
 
-.red {
-	color : red;
+.newTable {
+	margin-top:10px;
+	width: 80%;
 }
-.blue {
-	color : blue;
+
+.newTable td{
+	border: 1px solid black;
+	background: #eee;
 }
-.data {
-	width: 180px;
-}
-.tHeader {
-	width: 100px;
-	height: 50px;
-}
-#outer{
-	margin-top: 8%;
+
+.newTable, .newTable th{
+	border: 2px solid black;
+	background: #ddd;
 }
 </style>
 </head>
 <header><%@ include file="../hfl/managerHeader.jsp"%></header>
 <body>
-	<div id="statisticsOuter" align="center">
+	<div class="statisticsOuter" align="center">
 		<div id="graphs" class="statics" style="width:100%;">
 			<div id="container" class="statisticsContainer"style="wdith:80%; min-width: 310px; height: 400px; margin: 0 auto"></div><!-- 차트가 생성 -->
 		</div>
-		
 		<div id=stat class="staticsTable">
-			<input type="button" value="매출현황" disabled class="btns" />
-			<table id="datatable">
+			<!-- 가로테이블 -->
+			<table id="newTable" class="newTable">
+		   		<thead>
+			        <tr><th>단위(만)</th>
+						<%for(int i = 0; i < allDatalist.size(); i++) {%>
+							<th>
+								<%=allDatalist.get(allDatalist.size()-i-1).get("payDate") %>
+							</th>
+						<%} %>
+					</tr>
+				</thead>
+				<tbody>
+					<tr><th>총 판매금액</th>
+						<%for(int i = 0; i < calculateDatalist.size(); i++){ %>
+							<td>
+								<%=calculateDatalist.get(calculateDatalist.size()-i-1).get("calParice") %>
+							</td>
+						<%} %>
+					</tr>
+					<tr><th>환불금액</th>
+						<%for(int i = 0; i < refundDatalist.size(); i++){ %>
+							<td>
+								<%=refundDatalist.get(refundDatalist.size()-i-1).get("refundParice") %>
+							</td>
+						<%} %>
+					</tr>
+					<tr><th>매출이익</th>
+						<%for(int i = 0; i < allDatalist.size(); i++){ %>
+							<td>
+								<%=allDatalist.get(allDatalist.size()-i-1).get("allPrice") %>
+							</td>
+						<%} %>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 세로테이블 -->
+			<table id="datatable" hidden>
 			    <thead>
 			        <tr>
 			            <th></th>
-			            <th>매출금액</th>
-			            <th>판매금액</th>
+			            <th>매출이익</th>
 			            <th>환불금액</th>
+			            <th>총 판매금액</th>
 			        </tr>
 			    </thead>
-			    <tbody>
-			        <tr>
-			            <th>Apples</th>
-			            <td>3</td>
-			            <td>4</td>
-			            <td>4</td>
-			        </tr>
-			        <tr>
-			            <th>Pears</th>
-			            <td>2</td>
-			            <td>0</td>
-			            <td>14</td>
-			        </tr>
-			        <tr>
-			            <th>Plums</th>
-			            <td>5</td>
-			            <td>11</td>
-			            <td>8</td>
-			        </tr>
-			        <tr>
-			            <th>Bananas</th>
-			            <td>1</td>
-			            <td>1</td>
-			            <td>6</td>
-			        </tr>
-			        <tr>
-			            <th>Oranges</th>
-			            <td>2</td>
-			            <td>4</td>
-			            <td>7</td>
-			        </tr>
-			    </tbody>
+			    <tbody class="tableBody">
+			    	
+			        <%
+			        	int length = allDatalist.size();
+			        	if(length > 7){
+			        		length = 7;
+			        	}
+			        	for(int i = 0; i < length; i++) {
+			        		
+			        %>
+			        	<tr>
+			        		<th><%=allDatalist.get(allDatalist.size()-i-1).get("payDate") %></th>
+			        		<td><%=calculateDatalist.get(calculateDatalist.size()-i-1).get("calParice") %></td>
+			        		<td><%=refundDatalist.get(refundDatalist.size()-i-1).get("refundParice") %></td>
+			        		<td><%=allDatalist.get(allDatalist.size()-i-1).get("allPrice") %></td>
+			        	</tr>
+			        <%} %>
+		    	</tbody>
 			</table>
+			<br />
 		</div>
 	</div>
 
@@ -140,7 +153,7 @@ table th {
 		    },
 		    yAxis: {
 		        allowDecimals: false,
-		        title: {
+		        title: { 
 		            text: '금액(만)'
 		        }
 		    },
