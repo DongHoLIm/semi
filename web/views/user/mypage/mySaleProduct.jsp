@@ -68,7 +68,7 @@
 					<th class="th1">상품명</th>
 					<th class="th1">판매여부</th>
 					<th class="th1">정산여부</th>
-					<th class="th1">주문날짜</th>
+					<th class="th1">보관일자</th>
 				</thead>
 				</tr>
 				<tr class="row1">

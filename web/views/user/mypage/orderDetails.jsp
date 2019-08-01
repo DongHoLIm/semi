@@ -97,16 +97,20 @@ button{
 				<th class="th3"><%=m.getOno()%></th>
 				<td class="th3"><%=m.getPname()%></td>
 				<td class="th3"><%=price%>원</td>
-				<% if(m.getRefundStatus() != "" && m.getRefundStatus() != "1" && m.getRefundStatus() != "2"){
+				<%-- <% if(m.getRefundStatus() != "" && m.getRefundStatus() != "1" && m.getRefundStatus() != "2"){
 				   	status = m.getRefundStatus();
 					if(m.getDstatus() != "" && m.getDstatus() != "1" && m.getDstatus() != "2" && m.getDstatus() != "3"){
 				 	status = m.getDstatus();
 					if(m.getPayStatus() != "" && m.getPayStatus() != "1" && m.getPayStatus() != "2"){
 				   	status = m.getPayStatus();
-					}}}%>
-				<td class="th3"><%=status %></td>
+					}}}%> --%>
+				<td class="th3"><%=m.getPstatus() %></td>
 				<td><%=m.getInNo()%>&nbsp;<button onclick="window.open('<%=request.getContextPath()%>/views/user/mypage/deliveryAPI.jsp','window_name','width=800,height=500,location=yes,status=no,scrollbars=yes');">배송조회</button></td>
-				<td class="th3"><button onclick="window.open('<%=request.getContextPath()%>/views/user/mypage/refundPopUp.jsp','window_name','width=600,height=400,location=yes,status=no,scrollbars=yes');" class="returnPopUp">환불신청</button></td>
+				<% if(m.getPstatus().equals("환불 대기") || m.getPstatus().equals("환불 완료")){ %>
+				<td class="th3"><button class="returnPopUp" disabled>환불신청</button></td>
+				<% }else{ %>
+				<td class="th3"><button class="returnPopUp">환불신청</button></td>
+				<% } %>
 			</tr>
 		</tbody>
 	</table>
@@ -130,6 +134,15 @@ button{
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 	<script>
 
+	$(function(){
+		
+	$(".returnPopUp").click(function(){ 
+    	var ono = $(this).parent().siblings().eq(0).text();
+    	window.open('<%=request.getContextPath()%>/views/user/mypage/refundPopUp.jsp?ono='+ono,'window_name','width=600,height=400,location=yes,status=no,scrollbars=yes')
+     });
+	});
+	
+	
 	/* $(function(){
   	$('#btn_confirm').click(function(){
    		 if($(this).html() == '구매확정' ) {

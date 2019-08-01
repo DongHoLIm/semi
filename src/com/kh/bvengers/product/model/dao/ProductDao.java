@@ -19,7 +19,9 @@ import com.kh.bvengers.board.model.vo.PostsContents;
 import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.product.model.vo.Payment;
 import com.kh.bvengers.product.model.vo.Product;
+import com.kh.bvengers.product.model.vo.Refund;
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class ProductDao {
 	
@@ -766,7 +768,111 @@ public class ProductDao {
 		return list;
 	}
 
+
+
+
+	public int getRefundManagerListCount(Connection con) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectRefundManagerCount");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
 	
+	
+
+	public ArrayList<Refund> selectRefundManagerList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Refund> rList = null;
+		
+		String query = prop.getProperty("selectRefundManagerList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			rList = new ArrayList<Refund>();
+			
+			while(rset.next()) {
+				Refund r = new Refund();
+				
+				r.setOno(rset.getString("ORDER_NO"));
+				r.setrDate(rset.getDate("REFUND_DATE"));
+				r.setMno(rset.getString("MEMBER_NO"));
+				r.setcStatus(rset.getString("COMPLETE_STATUS"));
+				r.setrStatus(rset.getString("REFUND_STATUS"));
+				r.setPno(rset.getString("PAY_NO"));
+				r.setpCode(rset.getString("PRODUCT_CODE"));
+				
+				rList.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return rList;
+		
+	}/*
+
+	public int passRefund(Connection con, String pass, String ono) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("passRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pass);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int passAdjust(Connection con, String pass, String ono) {
+		// TODO Auto-generated method stub
+		return 0;
+	}*/
 	
 	
 }

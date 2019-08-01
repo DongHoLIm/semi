@@ -51,7 +51,7 @@
 		&nbsp;연락처 : 02-6952-2012<br><br><br>
 		위 주소로 물품을 보내주시면 검수 후 환불 안내드리겠습니다.</p>
 	<div class="return2">
-		<input type="submit" value="확인" class="btn_return" onclick="location.href = '/sp/views/user/mypage/myPage.jsp'">
+		<input type="submit" value="확인" class="btn_return" onclick="location.href='<%=request.getContextPath()%>/index.jsp'">
 	</div>
 	</div>
 		<footer><%@ include file="../hfl/footer.jsp" %></footer>

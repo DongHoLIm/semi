@@ -139,6 +139,73 @@ public class MyPageService {
 	
 	}
 
+
+	public int getRefundDateCount(String memberNo, String start, String end) {
+		Connection con = getConnection();
+		
+		int listCount = new MyPageDao().getRefundDateCount(con, memberNo, start, end);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+
+	public ArrayList<myPage> refundDateList(String memberNo, String start, String end, int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<myPage> rList = new MyPageDao().selectRefundDateList(con, memberNo, start, end, currentPage, limit);
+		
+		close(con);
+		
+		return rList;
+	}
+
+
+	public int getCalculateDateCount(String memberNo, String start, String end) {
+		Connection con = getConnection();
+		
+		int listCount = new MyPageDao().getCalculateDateCount(con, memberNo, start, end);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+
+	public ArrayList<myPage> calculateDateList(String memberNo, String start, String end, int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<myPage> cList = new MyPageDao().selectCalculateDateList(con, memberNo, start, end, currentPage, limit);
+		
+		close(con);
+		
+		return cList;
+	}
+
+
+	public int refundApply(String ono, String memberNo) {
+		Connection con = getConnection();
+		int result = 0;
+		int result1 = 0;
+		int result2 = 0;
+
+		
+		String pno = new MyPageDao().selectPayNo(con, ono, memberNo);
+		String pcode = new MyPageDao().selectPcode(con, ono);
+		result1 = new MyPageDao().passRefund(con, pno);
+		result2 = new MyPageDao().passProduct(con, pcode);
+		if(result1 > 0 && result2 > 0) {
+			commit(con);
+			result = 1;
+		}else {
+			rollback(con);
+		}
+		
+		
+		return result;
+	}
+
 	}
 
 

@@ -360,14 +360,14 @@ tr > th, tr>td{
 					<td><%=p.getoDate() %></td>
 					<td><%=p.getPname()%><br><button class="btn_od">주문상세</button></td>
 					
-				<% if(p.getRefundStatus() != "" && p.getRefundStatus() != "1" && p.getRefundStatus() != "2"){
+				<%-- <% if(p.getRefundStatus() != "" && p.getRefundStatus() != "1" && p.getRefundStatus() != "2"){
 				   	status = p.getRefundStatus();
 					if(p.getDstatus() != "" && p.getDstatus() != "1" && p.getDstatus() != "2" && p.getDstatus() != "3"){
 				 	status = p.getDstatus();
 					if(p.getPayStatus() != "" && p.getPayStatus() != "1" && p.getPayStatus() != "2"){
 				   	status = p.getPayStatus();
-					}}}%>
-					<td><%=status %></td>
+					}}}%> --%>
+					<td><%=p.getPstatus() %></td>
 				</tr>
 				<%}%>
 				</tbody>
@@ -375,7 +375,6 @@ tr > th, tr>td{
 		</div></div>
 <%-- 페이징처리 --%>
 		<div id="pagingArea" align="center">
-		<div>
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1){ %>
@@ -401,7 +400,6 @@ tr > th, tr>td{
 			<% } %>
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=maxPage%>'">>></button>
 		</div>
-	</div>
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 
@@ -409,7 +407,6 @@ tr > th, tr>td{
  
     $(".btn_od").click(function(){ 
     	var ono = $(this).parent().siblings().eq(0).text();
-    	console.log(ono);
      	location.href='<%=request.getContextPath()%>/orderDetail.mp?ono='+ono;
      });
 
@@ -426,10 +423,9 @@ tr > th, tr>td{
     			data:{"start":start,"end":end},
     			success:function(data){
     				var $dateTbody = $(".dateBoard tbody");
-    				var $pagingDiv1 =$("#pagingArea div");
+    				var $pagingDiv1 = $("#pagingArea");
     				$dateTbody.html(""); 
     				$pagingDiv1.html("");
-    				console.log(data);
     				for(var i = 0; i < data["dateList"].length; i++){
     					var $tr = $("<tr class='od'>");
     					var $ono = $("<td>").text(data["dateList"][i].ono);							

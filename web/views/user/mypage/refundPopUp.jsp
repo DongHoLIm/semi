@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    
+    String ono = (String)request.getParameter("ono");
+    
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +49,7 @@
 				반품/환불 신청은 배송완료 후 7일 이내에만 가능합니다.<br> 단순변심 반품은 불가능하며 상품 파손의 경우에만
 				반품이 가능합니다.<br> 단, 택배비 관련 문의는 고객센터에 직접 연락해주시길 바랍니다.
 			</p>
+			<input type="text" id="hiddenvalue" value="<%=ono %>" style="display:none;">
 		<div class="r2" align="right">
 			안내 사항을 모두 확인하였으며, 이에 동의합니다.&nbsp;<input type="checkbox" name="return_check" class="return_check">
 		</div>
@@ -63,7 +70,9 @@
 				})
 			});
 					$("#check").click(function(){
-						window.opener.location.href="returnAddress.jsp";
+						/* window.opener.location.href="refundApply.mp"; */
+						var ono =  $("#hiddenvalue").val();
+						window.opener.location.href='<%=request.getContextPath()%>/refundApply.mp?ono='+ono;
 						window.close();
 					});
 		</script>

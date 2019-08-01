@@ -6,82 +6,67 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-input[type=button]{
-	border:1px solid black;
-	background:#FFF;
+
+.td_select {
+	width:87%;
+}
+.searchBox {
+   width: 100%;
+   height:70%;
+   padding: 2%;
+   margin: 0 auto;
+   text-align: center;
 }
 
-.th_cancel {
-	text-align:center;
-}
-tr {
-	text-align:center;
-}
-
-#sec1 {
-	width: 100%;
-	height: 100%;
-	padding-right: 20%;
-	padding-left: 20%;
-	margin: auto;
+.searchdiv {
+   width: 85%;
+   height:70%;
+   padding: 2%;
+   margin: 0 auto;
+   text-align: center;
+   border:1px solid black;
 }
 
-#area {
-
-	border:1px solid black;
-	background:#FFF;
-	width: 80%;
-	height:70%;'
-	padding: 2%;
-	margin: 0 auto;
-	text-align: center;
+.th_select {
+	width:13%;
+	margin-left:auto;
+	margin-right:auto;
+	
 }
 
-#deliTable {
-	align: center;
+
+input[type=button] {
+   border:1px solid black;
+   background:#FFF;
 }
 
-#deliTable tr {
-	text-align:center;
+.tt_div { 
+	width:60%;
+	height:100%;
+	margin-left:auto;
+	margin-right:auto;
+
 }
 
-#deliTable tr td {
-	text-align:center;
-}
-
-#deliTable tr td img {
-	width: 30%;
-	text-align:center;
-}
-
-.board {
+.board1 {
 	width: 80%;
 	margin: auto;
 	align: center;
 	border-spacing: 10px;
 }
-
-.row0 {
-	background: #eee;
-	margin: auto;
+}
+.board1 tr td {
+	text-align:center;
 }
 
-.row1 {
-	border-top: 2px solid #555;
+.rl {
+	text-align:center;
 }
 
-.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+.th_refund {
+	text-align:center;
 }
 
-.pageNo {
-	margin: auto;
-}
-
-.page-control {
-	margin-top:10%;
-}
 </style>
 </head>
 <body>
@@ -89,48 +74,129 @@ tr {
 	<br>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 
-	<section id="sec1">
-		<div id="area">
-			<h3 style="font-weight: bold">주문취소 조회</h3>
-
-			<div class="date-select" align="center">
-				<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;
-				<input type="button" value="1주일">&nbsp;
-				</span> &nbsp;<input type="button" value="15일">&nbsp; &nbsp;<input
-					type="button" value="1개월">&nbsp; <input type="date">
-				- <input type="date"><br> <br>
-			</div>
-		</div>
-
-		<div>
-			<br />
-
-			<table border="1" class = "board">
-          <tr>
-					<th class="th_cancel">주문일자</th>
-					<th class="th_cancel">상품정보</th>
-					<th class="th_cancel">주문상태</th>
+<div class="tt_div">
+<div class="searchdiv">
+  <table class="searchBox">
+                   <!-- <caption style="font-size:20px;">주문조회</caption> -->
+     <colgroup>
+         <col width="123px">
+         <col width="*">
+     </colgroup>
+     <h3>주문취소 조회</h3>
+     <tbody>
+         <tr>
+             <th class="th_select">기간별 조회</th>
+             <td class="td_select">
+                <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType3" value="1주일" onclick="setSearchDate('1w')"/>
+                       <label for="dateType3"></label>
+                   </span>
+                   <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType4" value="2주일" onclick="setSearchDate('2w')"/>
+                       <label for="dateType4"></label>
+                   </span>
+                   <span class="chkbox2">
+                       <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
+                       <label for="dateType5"></label>
+                   </span>
+                   
+          
+           <!-- <div class="clearfix">
+               시작일 -->
+               <span class="dset">
+                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >               </span>
+               <span class="demi">~</span>
+               <!-- 종료일 -->
+               <span class="dset">
+                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
+               </span>
+               <span>
+                   	<input type="button" name="selectDate" id="selectDate"  onclick="search1();" value="조회">
+                   </span>
+                   </td>
+               </tr>
+           <tbody>
+       </table>
+</div>
+	<br>
+		<div align=center>
+			<table border="1" class="board1">
+				<thead>
+				<tr class="rl">
+					<th class="th_refund">주문번호</th>
+					<th class="th_refund">상품명</th>
+					<th class="th_refund">상품금액</th>
+					<th class="th_refund">결제상태</th>
 				</tr>
+				</thead>
+				<tbody>
+				<tr class="rl">
+				<td>dd</td>
+				<td>dd</td>
+				<td>dd</td>
+				<td>dd</td>
+<%-- 				<% for(myPage m : rList) {%>
 				<tr>
-					<td>주문일자<br>주문번호<br><input type="button" onclick="orderDetails.jsp'" value="주문상세"></td>
-					<td>상품명</td>
-					<td><input type="text" value="주문상태" id="ip_status"readonly></td>
-				</tr>
- 
-         </table>
-		</div>
-		<div class="page-control">
-		<footer align="center">
-			<ul class="pagination" align="center">
-				<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">다음</a></li>
-			</ul>
-		</footer>
-		</div>
-	</section>
+				<td><%=m.getOno() %></td>
+				<td><%=m.getrDate() %></td>
+				<td><%=m.getPname() %></td>
+				<% String price = dc.format(m.getDtPay());%>
+				<td><%=price %>원</td>
+				<td><%=m.getRefundStatus() %></td>
+			</tr>
+			<% } %> --%>
+			</tr>
+			</tbody>
+			</table>			
+			</div>
+		<br><%-- 
+		<div class="pagingArea1" align="center">
+			<button
+				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><</button>
+			<%
+				if (currentPage <= 1) {
+			%>
+			<button disabled><</button>
+			<%
+				} else {
+			%>
+			<button
+				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage - 1%>'"><</button>
+			<%
+				}
+			%>
+			<%
+				for (int p = startPage; p <= endPage; p++) {
+					if (currentPage == p) {
+			%>
+			<button disabled><%=p%></button>
+			<%
+				} else {
+			%>
+			<button
+				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=p%>'"><%=p%></button>
+			<%
+				}
+				}
+			%>
+
+
+			<%
+				if (currentPage >= maxPage) {
+			%>
+			<button disabled>></button>
+			<%
+				} else {
+			%>
+			<button
+				onclick="location.hreh='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage + 1%>'">></button>
+			<%
+				}
+			%>
+			<button
+				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
+			</div> --%>
+	</div>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>

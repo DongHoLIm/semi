@@ -16,7 +16,10 @@ import com.kh.bvengers.product.model.dao.ProductDao;
 import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.product.model.vo.Payment;
 import com.kh.bvengers.product.model.vo.Product;
+import com.kh.bvengers.product.model.vo.Refund;
 import com.kh.bvengers.user.member.model.vo.Member;
+import com.kh.bvengers.user.myPage.model.Dao.MyPageDao;
+import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class ProductService {
 	
@@ -239,6 +242,55 @@ public class ProductService {
 		}
 
 		
+
+		public int getRefundManagerListCount() {
+			Connection con = getConnection();
+			
+			int listCount = new ProductDao().getRefundManagerListCount(con);
+			
+			close(con);
+			
+			return listCount;
+		}
+
 		
+
+		public ArrayList<Refund> selectRefundManagerList(int currentPage, int limit) {
+			Connection con = getConnection();
+
+			ArrayList<Refund> rList = new ProductDao().selectRefundManagerList(con, currentPage, limit);
+
+			close(con);
+
+			return rList;
+
+		
+		}
+/*
+		public int passRefund(String pass, String ono) {
+			Connection con = getConnection();
+			int result = 0;
+			int result1 = 0;
+			int result2 = 0;
+			
+			result1 = new ProductDao().passRefund(con, pass, ono);
+			
+			result2 = new ProductDao().passAdjust(con, pass, ono);
+			
+			if(result1 > 0 && result2 > 0) {
+				commit(con);
+				result = 1;
+			}else {
+				rollback(con);
+			}
+			
+			
+			return result;
+		}*/
+
+		public int passRefund(String pass, String ono) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 		
 }
