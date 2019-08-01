@@ -101,7 +101,6 @@ a:visited {
 	<script>
 		$("ul").on("click", "li", function() {
 			var value = $(this).attr('value');
-			console.log(value);
 			location.href="<%=request.getContextPath()%>/list.pd?value="+value;
 		});
 	</script>

@@ -121,7 +121,6 @@ public class ChatDao {
 				ch.setChatDate(rset.getDate("CHAT_DATE"));
 
 				chList.add(ch);
-				System.out.println(chList);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

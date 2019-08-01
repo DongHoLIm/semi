@@ -25,7 +25,6 @@ public class ChatServlet extends HttpServlet {
 			request.setAttribute("no", no);
 			request.getRequestDispatcher("joinChat.ch").forward(request, response);
 		} else {
-			System.out.println("채팅의 길은 멀고도 험한 법.");
 		}
 	}
 

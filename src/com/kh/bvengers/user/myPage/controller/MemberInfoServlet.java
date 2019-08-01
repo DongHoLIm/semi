@@ -17,7 +17,7 @@ import com.kh.bvengers.wrapper.LoginWrapper;
 @WebServlet("/memberInfo.me")
 public class MemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public MemberInfoServlet() {
         super();
     }
@@ -26,24 +26,21 @@ public class MemberInfoServlet extends HttpServlet {
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 	PrintWriter out = response.getWriter();
-	
+
 	HttpSession session = request.getSession();
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	String memberNo = loginUser.getMemberNo();
 	/*String password = new LoginWrapper(request).getParameter(request.getParameter("password"));*/
 	String password = request.getParameter("password");
 	Member checkPwd = new MemberService().checkPwd(memberNo, password);
-	
+
 	if(checkPwd != null) {
 		session.setAttribute("checkPwd", checkPwd);
 		response.sendRedirect("/sp/views/user/mypage/changeInfo.jsp");
 	}else {
-		out.println("<script>");
-		out.println("alert('비밀번호가 맞지 않습니다.');");
-		out.println("history.back();");
-		out.println("</script>");
+
 	}
-	
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

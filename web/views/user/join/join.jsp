@@ -12,7 +12,7 @@ function checkjoin(index){
 	var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	var buf = new Array(13);
-	
+
 	if($("#memberId").val() == ""){
 		alert("아이디를 입력하세요");
 		$("#memberId").focus();
@@ -29,7 +29,7 @@ function checkjoin(index){
 		$("#password").focus();
 		return false;
 	}
-	
+
 	if($("#password").val() != ($("#password2").val())){
 		alert("비밀번호를 확인하세요");
 		$("#password").val("");
@@ -37,25 +37,24 @@ function checkjoin(index){
 		$("#password").focus();
 		return false;
 	}
-	
+
 /* 	if(($("#peoplejb").val()=="")||($("#peoplejb2").val()=="")){
 		alert("주민등록번호를 입력하세요");
 		$("#peoplejb").focus();
 		return false;
 	} */
-	
+
 if($("#password").val() == ($("#password2").val())){
 	$("form").submit();
-	
+
 }
 	}else if(index==2){
 		var email = $("#email").val();
 		var hc = $("#hiddencard").val();
-		console.log(email);
 		window.open('<%=request.getContextPath()%>/send.me?email='+hc+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
-		
+
 	}
-}	
+}
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -83,7 +82,7 @@ if($("#password").val() == ($("#password2").val())){
    height:32px;
 }
 .btn_join{
-   height:40px; 
+   height:40px;
    width:40%;
    margin:0 auto;
    border: 1px solid black;
@@ -112,16 +111,16 @@ if($("#password").val() == ($("#password2").val())){
 		<form action="<%=request.getContextPath() %>/insertMember.me" method="post">
 		<div class = "header" align="center">
 		<br><br>
-		
+
 		<br>
 	</div>
-	
+
 	<div class="box_join" align="center">
 		<h2>중고愛민족 회원가입</h2>
 	<div class="box_login" align="center">
 			<br><br>
 			<input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
-			
+
 			<input type="text" name="hiddencard" value="2" id="hiddencard" style="display:none">
 			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
 			<input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
@@ -198,13 +197,13 @@ if($("#password").val() == ($("#password2").val())){
       $(function(){
           $(".btn_overlap").click(function(){
              var memberId = $("#memberId").val();
-             
+
              $.ajax({
                 url:"/sp/memberIdCheck.me",
                 type:"post",
                 data:{memberId:memberId},
                 success:function(data){
-                   
+
                    if(data === "fail"){
                       alert("아이디가 중복됩니다.\n다른 아이디를 사용하세요.");
                       $("#memberId").val("").focus();
@@ -213,11 +212,10 @@ if($("#password").val() == ($("#password2").val())){
                    }
                 },
                 error:function(){
-                   console.log("실패!");
                 }
              });
           });
-       }); 
+       });
       </script>
       <br><br>
 </body>

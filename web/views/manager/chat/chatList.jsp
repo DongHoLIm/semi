@@ -4,7 +4,6 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Chat> chList = (ArrayList) request.getAttribute("chList");
-	System.out.println(chList);
 %>
 <!DOCTYPE html>
 <html>
