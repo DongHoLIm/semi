@@ -15,16 +15,16 @@ import com.kh.bvengers.board.model.vo.BoardPageInfo;
 import com.kh.bvengers.user.member.model.vo.Member;
 
 /**
- * Servlet implementation class SelectManagerQnAServlet
+ * Servlet implementation class SelectFrequentQuestionListSevlet
  */
-@WebServlet("/smqs.mq")
-public class SelectManagerQnAServlet extends HttpServlet {
+@WebServlet("/SelectFrequentQuestionList.fq")
+public class SelectFrequentQuestionListSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectManagerQnAServlet() {
+    public SelectFrequentQuestionListSevlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,21 +34,23 @@ public class SelectManagerQnAServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "";
-		String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
 		int currentPage;
 		int limit;
 		int maxPage;
 		int startPage;
 		int endPage;
 		
-		int num =5;
+		int num =4;
 		
-		currentPage = 1;
+		String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
+		//scurrentPage = 1;
 		
-		int listCount = new BoardService().getListQandACount(num,uno);
+		int listCount = new BoardService().getFrequentListCount(num);
 		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}else {
+			currentPage=1;
 		}
 		
 		limit =  10;
@@ -65,22 +67,19 @@ public class SelectManagerQnAServlet extends HttpServlet {
 		
 		BoardPageInfo pi = new BoardPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		 ArrayList<Board> list = new BoardService().selectManagerList(currentPage, limit, num);
+		 ArrayList<Board> list = new BoardService().selectFrequentList(currentPage, limit, num);
 
 	      if (list != null) {
 	         request.setAttribute("list", list);
-	         System.out.println("list" + list);
 	         request.setAttribute("pi", pi);
-	         System.out.println("pi"+pi);
-	     	page = "views/manager/board/qnaboardmenagement.jsp";
-	     	
+	     	page = "views/manager/board/FrequentQuestionList.jsp";
+	     	System.out.println(pi);
 	      } else {
 	         page= "views/common/errorPage.jsp";
 	         request.setAttribute("msg", "게시판 조회 실패!");
 	      }
 	      
 	      request.getRequestDispatcher(page).forward(request, response);
-		
 	
 	}
 

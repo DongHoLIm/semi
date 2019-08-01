@@ -497,8 +497,8 @@ public class BoardDao {
 		try {
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, uno);
-			pstmt.setInt(2, num);
+			//pstmt.setString(1, uno);
+			pstmt.setInt(1, num);
 			
 			rset = pstmt.executeQuery();
 
@@ -1721,7 +1721,7 @@ public class BoardDao {
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
-				b.setCount(rset.getString("COP"));
+				b.setCount(rset.getString("HI"));
 
 				list.add(b);
 			}
@@ -1736,6 +1736,52 @@ public class BoardDao {
 		}
 		return list;
 	}
+
+	public ArrayList<Board> selectFrequentList(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+
+		String query = prop.getProperty("selectFrequentQuestionPaging");
+	
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<Board>();
+
+			while (rset.next()) {
+				Board b = new Board();
+
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+
+				list.add(b);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	
 
 	
 	}

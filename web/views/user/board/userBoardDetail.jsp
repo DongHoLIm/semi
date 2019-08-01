@@ -163,8 +163,7 @@ td{
 		    	data:{"writer":writer, "content":content, "postId":postId},
 		    	type:"post",
 		    	success:function(data) 	 {
-		    	
-		
+		    		location.reload();
 					$("#replySelectTable tfoot").show();
 		    	
 		    	
