@@ -485,6 +485,37 @@ public class BoardDao {
 		return listCount2;
 	}
 
+
+	public int getListQnACount(Connection con, int num, String uno) {
+
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectQnAListCount");
+
+		try {
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, uno);
+			pstmt.setInt(2, num);
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return listCount;
+		
+	}
 	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -651,6 +682,7 @@ public class BoardDao {
 
 		return list;
 	}
+
 
 	public HashMap<String, Object> selectOneNotice(Connection con, int num) {
 		PreparedStatement pstmt = null;
@@ -854,7 +886,7 @@ public class BoardDao {
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
 				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
-				b.setCount(rset.getString("COP"));
+				b.setCount(rset.getString("HI"));
 
 				list.add(b);
 			}
@@ -1567,7 +1599,74 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Board>();
-			System.out.println("내가 뭘");
+			while(rset.next()) {
+				b = new Board();
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_ID"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+
+				list.add(b);
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+	
+		return list;
+	}
+
+	public int getManagerQnAtitleCount(Connection con, String input) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int listCount =0;
+		String query = prop.getProperty("SelectBoardNameCount");
+		String in = "%"+ input +"%";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, in);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+	
+	}
+
+	public ArrayList<Board> searchQnAListTitle(Connection con, String input, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board>list = null;
+		Board b = null;
+		String in = "%"+ input +"%";
+		String query = prop.getProperty("searchQnATitle");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, in);
+			pstmt.setInt(2, currentPage);
+			pstmt.setInt(3, limit);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Board>();
 			while(rset.next()) {
 				b = new Board();
 				b.setPostsId(rset.getInt("POSTS_ID"));
@@ -1591,8 +1690,55 @@ public class BoardDao {
 	
 		return list;
 	}
-}
 
+	public ArrayList<Board> selectManagerQnAList(Connection con, int currentPage, int limit, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+
+		String query = prop.getProperty("selectManagerQandAListWithPaging");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (currentPage - 1) * limit + 1;
+
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<Board>();
+
+			while (rset.next()) {
+				Board b = new Board();
+
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+				b.setCount(rset.getString("COP"));
+
+				list.add(b);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	
+	}
 
 
 

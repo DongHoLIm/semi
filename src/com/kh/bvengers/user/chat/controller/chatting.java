@@ -14,6 +14,7 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/chatting")
 public class chatting {
+	
 	private static Map<String, Session> client = Collections.synchronizedMap(new HashMap<String, Session>());
 	private static Map<String, Session> admin = Collections.synchronizedMap(new HashMap<String, Session>());
 
@@ -22,6 +23,17 @@ public class chatting {
 
 	@OnMessage
 	public void onMessage(String message, Session session) {
+		String hapche = session.getQueryString();
+		System.out.println(hapche);
+		int idx = hapche.indexOf("$");
+		String jd = hapche.substring(0, idx);
+		String no = hapche.substring(idx+1);
+		
+		System.out.println(jd);
+		System.out.println(no);
+		
+		
+		
 		String[] cId = message.split(":");
 		String id = cId[0];
 		synchronized (admin) {
@@ -30,6 +42,7 @@ public class chatting {
 				while (keySetIterator.hasNext()) {
 					String key = keySetIterator.next();
 					client.get(key).getBasicRemote().sendText(message);
+					
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

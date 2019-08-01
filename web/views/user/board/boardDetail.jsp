@@ -75,11 +75,10 @@ td{
 					<td><button id = "addReply">댓글 등록</button></td>
 				</tr>
 			</table>
+		<br>
+	
 		</div>
-		<div>
-			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
-
-		</div>
+	
 		<div>
 		<button id= "report" align = "left" onclick = "report();">신고하기</button>
 		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
@@ -96,7 +95,11 @@ td{
 		$("#replySelectTable").on("click", function(){
 			$(this).val = "";
 		});
-	}));
+	});
+	
+	
+	
+	
 	function report(){
 	  var writer = <%= b.getMemberNo()%>;
 	  console.log(writer);

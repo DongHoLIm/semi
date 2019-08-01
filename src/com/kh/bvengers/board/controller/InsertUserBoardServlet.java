@@ -19,16 +19,16 @@ import com.kh.bvengers.user.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class InsertQuestionServlet
+ * Servlet implementation class InsertUserBoardServlet
  */
-@WebServlet(name = "InsertUserQuestionServlet", urlPatterns = { "/iuqs.qo" })
-public class InsertQuestionServlet extends HttpServlet {
+@WebServlet("/inbs.bo")
+public class InsertUserBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertQuestionServlet() {
+    public InsertUserBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,10 +58,7 @@ public class InsertQuestionServlet extends HttpServlet {
 
 
 				String name = files.nextElement();
-
-				if(!name.equals("files")) {
-
-
+				if(!name.equals("files")&&name!=null) {
 				saveFiles.add(multiRequest.getFilesystemName(name));
 				originFiles.add(multiRequest.getOriginalFileName(name));
 
@@ -81,7 +78,6 @@ public class InsertQuestionServlet extends HttpServlet {
 			b.setMemberNo(Integer.parseInt(uno));
 			b.setPostsCode(postCode);
 
-
 			ArrayList<Attachment>fileList = new ArrayList<Attachment>();
 
 			for(int i = originFiles.size() -1; i>=0; i--) {
@@ -96,7 +92,7 @@ public class InsertQuestionServlet extends HttpServlet {
 			int result = new com.kh.bvengers.board.model.service.BoardService().insertNotice(b,fileList);
 
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath()+"/sfqs.qo");
+				response.sendRedirect(request.getContextPath()+"/selectNotice.no");
 			}else {
 				//실패시 저장된 사진 삭제
 				for(int i = 0; i < saveFiles.size(); i++) {
@@ -110,6 +106,7 @@ public class InsertQuestionServlet extends HttpServlet {
 
 
 		}
+	
 	}
 
 	/**

@@ -57,6 +57,7 @@ public class ReportSearchSevlet extends HttpServlet {
 		if(list!=null) {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
+			
 			page = "views/manager/member/reportlist.jsp";
 		}else {
 			request.setAttribute("msg", "실패");

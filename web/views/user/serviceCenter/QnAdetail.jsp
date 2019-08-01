@@ -61,8 +61,8 @@ td{
 		</div>
 				<br><br><br>
 		</form>
-				<div class = "replyArea">
-		<div class = "replayWriterArea">
+	<div class = "replyArea">
+			<div class = "replayWriterArea">
 			<table align = "center">
 				<tr>
 					<td>댓글 작성</td>
@@ -70,10 +70,22 @@ td{
 					<td><button id = "addReply">댓글 등록</button></td>
 				</tr>
 			</table>
-		</div>
-		<div>
-			<table id = "replySelectTable" border = "1" align = "center"><tbody></tbody></table>
-		<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
+				<br><br>
+			<table id="replySelectTable" class="commentTables" border="1" align="center">
+			<tr>
+				<th colspan="7" style = "width:800px">댓글 리스트</th>
+			</tr>
+			<tbody>
+			<tr>
+				<td colspan="2" class="tWriter">작성자</td>
+				<td colspan="3" class="tContent">내용</td>
+				<td class="tDate">작성일</td>				
+			</tr>			
+			</tbody>
+			<tfoot>
+			
+			</tfoot>
+		</table>
 		</div>
 	</div>
 	<br>
@@ -83,41 +95,66 @@ td{
 	<script>
 	
 	$(function(){
+		var postsId = <%= b.getPostsId()%>;
+		$(document).ready(function(){
+			$.ajax({
+				url:"selectComment.pd",
+				data:{postsId:postsId},
+				type:"post",
+				success:function(data){
+					var $replySelectTable = $("#replySelectTable tfoot");
+					$replySelectTable.html("");
+						for(var key in data){
+							var $tr = $("<tr>");
+							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
+							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							
+						$tr.append($writeTd);
+						$tr.append($contentTd);
+						$tr.append($dateTd);
+						$replySelectTable.append($tr);
+					}
+				},
+				error:function(){
+					alert("댓글 입력 실패");
+				}
+				
+			});
+		});
+	
+	});
+		
+	
+	$(function(){
 		$("#addReply").click(function(){
+			<% if(loginUser!=null){%>
 			var writer =  <%= loginUser.getMemberNo()%>;
 		    var postId = <%= b.getPostsId()%>;
 		    var content = $("#replyContent").val();
 		    
 		    $.ajax({
 		    	url:"iwc.bo",
-		    	data:{writer:writer, content:content, postId:postId},
+		    	data:{"writer":writer, "content":content, "postId":postId},
 		    	type:"post",
 		    	success:function(data) 	 {
-		    		console.log(data);
-		    		
-		    	 var $replySelectTable = $ ("#replySelectTable tbody");
-		    	$replySelectTable.html("");
 		    	
-		    	for(var key in data){
-		    		var $tr = $("<tr>");
-					var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
-					var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
-					var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
-								
-					$tr.append($writeTd);
-					$tr.append($contentTd);
-					$tr.append($dateTd);
-					$replySelectTable.append($tr);
-		    	} 
+		
+					$("#replySelectTable tfoot").show();
+		    	
 		    	
 		    	},
 		    	error:function(){
 		    		console.log("실패!");
 		    	}
 		    });
+		<%}else{ %>
+			alert("로그인이 필요합니다!");
+			location.href="views/user/login/login.jsp";
+
+			<%}%>
 		});
 	});
-	
 	
 	
 	</script>

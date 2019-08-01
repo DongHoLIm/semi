@@ -22,7 +22,8 @@
 	var textarea = document.getElementById("messageWindow");
 	var id = "<%=loginUser.getMemberId()%>";
 	var no = <%=ch.getMemberNo()%>;
-	var webSocket = new WebSocket('ws://localhost:8001/sp/chatting?id='+id);
+	var hapche = id +"$"+no;
+	var webSocket = new WebSocket('ws://localhost:8001/sp/chatting?hapche='+hapche);
 	var inputMessage = document.getElementById('inputMessage');
 
 	webSocket.onerror = function(event) {

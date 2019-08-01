@@ -77,7 +77,7 @@ int endPage = pi.getEndPage();
 			<thead>
 				<th>번호</th>
 				<th>제목</th>
-				<th>작성자</th>
+				<!-- <th>작성자</th> -->
 				<th>작성날짜</th>
 			</thead>
 			</tr>
@@ -85,7 +85,7 @@ int endPage = pi.getEndPage();
 				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
-				<td><%= b.getMemberId() %></td>
+				<%-- <td><%= b.getMemberId() %></td> --%>
 				<td><%= b.getCreateDate() %></td>
 			<%} %>
 		</table>
@@ -95,11 +95,11 @@ int endPage = pi.getEndPage();
 
 			<br><br><br><br>
 		  <div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>
+		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><</button>
 		<%if(currentPage <= 1) {%>
 		<button disabled><</button>
 		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage-1%>'"><</button>
+	<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
 		%>
 			<%for (int p = startPage; p <= endPage; p++) {
@@ -107,7 +107,7 @@ int endPage = pi.getEndPage();
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=p%>'"><%=p%></button>
 			<% }
 			}
 			%>
@@ -116,9 +116,9 @@ int endPage = pi.getEndPage();
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick ="location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage+1%>'">></button>
 			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage%>'">>></button>
+			<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=maxPage%>'">>></button>
 
       </div>
 		<br>

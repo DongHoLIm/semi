@@ -81,12 +81,15 @@ int endPage = pi.getEndPage();
 		<br> <br>
 		<hr>
 		<h2 id="board">Q&A</h2>
-		<form action="/suqs.mq" method="post" align="right">
-			<select>
+		<form method="post" align="right">
+			 <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
 				<option value="title">제목</option>
 				<option value="writer">작성자</option>
-				<option value="wdate">날짜</option>
-			</select> <input type="text"> <input type="submit" value="검색">
+				<option value="wdate">답변여부</option>
+			</select> 
+		<input type="search" name="searchValue" id = "inputSearch" >
+		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
+
 		</form>
 		<table class="table" id="messageArea">
 			<thead>
@@ -95,16 +98,24 @@ int endPage = pi.getEndPage();
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성날짜</th>
+					<th>답변여부</th>
 
 				</tr>
 			</thead>
 			<tbody>
 				<%for (Board b : list) {%>
-				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
+				<tr class = "row1"> 
+				<input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
-				<td><%= b.getMemberId() %></td>
+				<td><%= b.getMemberName() %></td>
 				<td><%= b.getCreateDate() %></td>
+				<% int count = Integer.parseInt(b.getCount());
+			if( count % 2 == 0){ %>
+				<td>N</td>
+			<%}else{ %>
+				<td>Y</td>
+			<%} %>
 			<%} %>
 			</tbody>
 
@@ -112,11 +123,11 @@ int endPage = pi.getEndPage();
 
 			<br><br><br><br>
 		  <div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><<</button>
+		<button onclick = "location.href = '<%=request.getContextPath()%>/smqs.mq?currentPage=1'"><<</button>
 		<%if(currentPage <= 1) {%>
 		<button disabled> <</button>
 		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage-1%>'"><</button>
+	<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
 		%>
 			<%for (int p = startPage; p <= endPage; p++) {
@@ -124,7 +135,7 @@ int endPage = pi.getEndPage();
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -133,11 +144,12 @@ int endPage = pi.getEndPage();
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick ="location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage=<%=maxPage%>'">>></button>
+			<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=maxPage%>'">>></button>
 
       </div>
+      
 	</div>
 
 <script>
@@ -153,6 +165,64 @@ int endPage = pi.getEndPage();
 			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
 		});
 	});
+	
+	 function search(){
+   	  $(function(){
+   		  var id = $("select[id = 'select']").val();
+   		  console.log(id);
+   		  var input = $("input[id = 'inputSearch']").val();
+   		  console.log(input);
+   		  $.ajax({
+   			url:"/sp/smql.li",
+   			data:{"selectid":id,"input":input},
+   			type:"post",
+   			success:function(data){
+   				var $Tbody = $("#messageArea tbody");
+   				var $pagingDiv = ("#pagingArea div");
+   				$Tbody.html("");
+   				$pagingDiv = ("");
+					console.log(data);
+					var i = 1;
+					for(var i = 0; i < data["list"].length; i++){
+						var $tr = $("<tr>");
+						var $hiddenPostsId=$("<input hidden>");
+						var $postsId = $("<td><label>").text(data["list"][i].postsId);
+						var $postsTitle = $("<td><label>").text(data["list"][i].postsTitle);
+						var $postsViews = $("<td><label>").text(data["list"][i].postsViews);
+						var $memberName = $("<td><label>").text(data["list"][i].memberName);
+						var $createDate = $("<td><label>").text(data["list"][i].createDate);
+						$hiddenPostsId.attr("value",data['list'][i].postsId);
+						$tr.append($hiddenPostsId);
+						$tr.append($postsId);
+						$tr.append($postsTitle);
+						$tr.append($memberName);
+						$tr.append($createDate);
+						$tr.append($postsViews);
+						$Tbody.append($tr);
+					}
+					$("#messageArea tbody td").mouseenter(function(){
+
+			            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			         }).mouseout(function(){
+			               $(this).parent().css({"background":"white"});
+			         }).click(function(){
+			            var num = $(this).parent().children("input").val();;
+			            console.log(num);
+			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
+			         });
+					
+						
+					
+   			}
+   			
+   			
+   		  })
+   		  
+   		  
+   		  
+   	  });
+   	  
+     }
 
 	</script>
 </body>
