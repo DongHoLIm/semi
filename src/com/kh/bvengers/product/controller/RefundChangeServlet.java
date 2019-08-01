@@ -24,11 +24,12 @@ public class RefundChangeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pass = request.getParameter("pass");
-		String ono = request.getParameter("ono");
+		String pno = request.getParameter("pno");
+		String pcode = request.getParameter("pcode");
 	
 		
 		
-		int result = new ProductService().passRefund(pass, ono);
+		int result = new ProductService().passRefund(pass, pno, pcode);
 
 		if(result > 0) {
 			
