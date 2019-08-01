@@ -374,7 +374,8 @@ tr > th, tr>td{
 			</table>
 		</div></div>
 <%-- 페이징처리 --%>
-		<div id="pagingArea" align="center">
+<div id="pagingArea">
+		<div class="pagingArea" align="center">
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=1'"><<</button>
 
 			<% if(currentPage <= 1){ %>
@@ -400,6 +401,7 @@ tr > th, tr>td{
 			<% } %>
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=maxPage%>'">>></button>
 		</div>
+		</div>
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 
@@ -421,8 +423,9 @@ tr > th, tr>td{
     			data:{"start":start,"end":end},
     			success:function(data){
     				var $dateTbody = $(".dateBoard tbody");
-    				var $pagingDiv1 = $("#pagingArea");
-    				$dateTbody.html("");
+
+    				var $pagingDiv1 = $("#pagingArea div");
+    				$dateTbody.html(""); 
     				$pagingDiv1.html("");
     				for(var i = 0; i < data["dateList"].length; i++){
     					var $tr = $("<tr class='od'>");
@@ -444,56 +447,138 @@ tr > th, tr>td{
     				}
 
     				var currentPage = data["pi"].currentPage;
-    				var endPage = data["pi"].endPage;
-    				var limit = data["pi"].limit;
-    				var listCount = data["pi"].listCount;
-    				var maxPage = data["pi"].maxPage;
-    				var startPage = data["pi"].startPage;
+					var endPage = data["pi"].endPage;
+					var limit = data["pi"].limit;
+					var listCount = data["pi"].listCount;
+					var maxPage = data["pi"].maxPage;
+					var startPage = data["pi"].startPage;
+					
+					var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+					var $firstBtn = $("<button>").text('<<');
+					var $preBtn = $("<button>").text('<');
+					
+					var $nextBtn =$("<button>").text('>');
+					var $lastBtn =$("<button>").text('>>');
+    				
 
-    				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
-    				var $firstBtn = $("<button>").text('<<');
-    				var $preBtn = $("<button>").text('<');
-    				var $numBtn = $("<button>");
-    				var $nextBtn =$("<button>").text('>');
-    				var $lastBtn =$("<button>").text('>>');
+					$pagingDiv2.append($firstBtn);
+					$pagingDiv2.append($preBtn);
+					$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+					if(currentPage <= 1){
+						$preBtn.attr('disabled',true);							
+					}else{
+						$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+					}
+					for(var i = startPage ; i <= endPage ;i++){		
+						var $numBtn = $("<button>");
+						if(currentPage == i){
+							$numBtn.attr('disabled',true);																
+						}else{
+							$numBtn.attr('onclick',"newPage("+i+")");																
+						}
+						$numBtn.text(i);
+						$pagingDiv2.append($numBtn);
+					}
+					if(currentPage >= maxPage){
+						$nextBtn.attr('disabled',true);							
+					}else{
+						$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+					}
+					$lastBtn.attr('onclick','newPage('+maxPage+')');						
+					
+					$pagingDiv2.append($nextBtn);
+					$pagingDiv2.append($lastBtn);
+					
+					$pagingDiv1.append($pagingDiv2);							
+					}		
+			});
+		});
 
-
-    				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=1"');
-    				if(currentPage <= 1){
-    					$preBtn.attr('disabled',true);
-    				}else{
-    					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage - 1"');
-    				}
-    				for(var i = startPage ; i <= endPage ;i++){
-    					if(currentPage == i){
-    						$numBtn.attr('disabled',true);
-    					}else{
-    						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=i"');
-    					}
-    					$numBtn.text(i);
-
-    				}
-    				if(currentPage >= maxPage){
-    					$nextBtn.attr('disabled',true);
-    				}else{
-    					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage + 1 "');
-    				}
-    				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=maxPage"');
-
-    				$pagingDiv2.append($firstBtn);
-    				$pagingDiv2.append($preBtn);
-    				$pagingDiv2.append($numBtn);
-    				$pagingDiv2.append($nextBtn);
-    				$pagingDiv2.append($lastBtn);
-
-    				$pagingDiv1.append($pagingDiv2);
-    			},
-    		});
-    	});
     }
     function searchDate(ono){
     	location.href='<%=request.getContextPath()%>/orderDetail.mp?ono='+ono;
     }
+    
+
+	function newPage(page){
+		var start =$("input[id='searchStartDate']").val();
+		var end = $("input[id='searchEndDate']").val();
+		var currentPage = page;
+		$.ajax({
+			url:"orderDate.mp",
+			type:"post",
+			data:{"start":start,"end":end},
+			success:function(data){
+				var $dateTbody = $(".dateBoard tbody");
+				var $pagingDiv1 = $("#pagingArea div");
+				$dateTbody.html(""); 
+				$pagingDiv1.html("");
+				for(var i = 0; i < data["dateList"].length; i++){
+					var $tr = $("<tr class='od'>");
+					var $ono = $("<td>").text(data["dateList"][i].ono);							
+					var $oDate = $("<td>").text(data["dateList"][i].oDate);
+					var $pname = $("<td>").text(data["dateList"][i].pname);
+					var $br = $("</br>");
+					var $btn_od = $("<button class='btn_od'>").text("주문상세");
+					var $pstatus = $("<td>").text(data["dateList"][i].pstatus);
+					var ono1 = data["dateList"][i].ono;    					
+					 $btn_od.attr("onclick",'searchDate('+ono1+')');
+					$tr.append($ono);
+					$tr.append($oDate);
+					$tr.append($pname);
+					$pname.append($br);
+					$pname.append($btn_od);
+					$tr.append($pstatus);						
+					$dateTbody.append($tr);
+				}
+				
+				var currentPage = data["pi"].currentPage;
+				var endPage = data["pi"].endPage;
+				var limit = data["pi"].limit;
+				var listCount = data["pi"].listCount;
+				var maxPage = data["pi"].maxPage;
+				var startPage = data["pi"].startPage;
+				
+				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+				var $firstBtn = $("<button>").text('<<');
+				var $preBtn = $("<button>").text('<');
+				
+				var $nextBtn =$("<button>").text('>');
+				var $lastBtn =$("<button>").text('>>');
+				
+				
+				$pagingDiv2.append($firstBtn);
+				$pagingDiv2.append($preBtn);
+				$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+				if(currentPage <= 1){
+					$preBtn.attr('disabled',true);							
+				}else{
+					$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+				}
+				for(var i = startPage ; i <= endPage ;i++){		
+					var $numBtn = $("<button>");
+					if(currentPage == i){
+						$numBtn.attr('disabled',true);																
+					}else{
+						$numBtn.attr('onclick',"newPage("+i+")");																
+					}
+					$numBtn.text(i);
+					$pagingDiv2.append($numBtn);
+				}
+				if(currentPage >= maxPage){
+					$nextBtn.attr('disabled',true);							
+				}else{
+					$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+				}
+				$lastBtn.attr('onclick','newPage('+maxPage+')');						
+				
+				$pagingDiv2.append($nextBtn);
+				$pagingDiv2.append($lastBtn);
+				
+				$pagingDiv1.append($pagingDiv2);							
+				}		
+		});
+	}
 </script>
 
 

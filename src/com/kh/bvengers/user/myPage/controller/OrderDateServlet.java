@@ -43,13 +43,20 @@ public class OrderDateServlet extends HttpServlet {
 		String memberNo = loginUser.getMemberNo();
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
+		String currentPage1 = request.getParameter("currentPage");
 
 		currentPage = 1;
 
-		if(request.getParameter("currentPage") != null) {
+		if(currentPage1==null) {		
+			currentPage=1;						
+		}else {
+			currentPage = Integer.parseInt(currentPage1);
+		}
+		
+/*		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-
+*/
 		limit = 5;
 
 		int listCount = new MyPageService().getOrderDateCount(memberNo, start, end);

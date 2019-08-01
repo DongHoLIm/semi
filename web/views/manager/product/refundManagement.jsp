@@ -81,9 +81,10 @@ border:1px solid white;
 		<div id="table Area">
 			<table id="refundMain" align="center">
 				<tr>
-		<th class="th">No.</th>
+		<th class="th">주문번호</th>
 		<th class="th">신청날짜</th>
 		<th class="th">회원번호</th>
+		<th class="th">상품코드</th>
 		<th class="th">검수여부</th>
 		<th class="th">환불상태</th>
 	</tr>
@@ -92,6 +93,7 @@ border:1px solid white;
 					<td><%=r.getOno() %></td>
 					<td><%=r.getrDate() %></td>
 					<td><%=r.getMno() %></td>
+					<td><%=r.getPno() %></td>
 					<td><button class="btn_1" value="1">통과</button>
 					<button class="btn_2" value="2">미통과</button></td>
 					<td><%=r.getrStatus() %></td>

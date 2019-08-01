@@ -266,16 +266,22 @@ public class ProductService {
 
 		
 		}
-/*
-		public int passRefund(String pass, String ono) {
+
+		public int passRefund(String pass, String pno, String pcode) {
 			Connection con = getConnection();
 			int result = 0;
 			int result1 = 0;
 			int result2 = 0;
 			
-			result1 = new ProductDao().passRefund(con, pass, ono);
 			
-			result2 = new ProductDao().passAdjust(con, pass, ono);
+			if(pass.equals("1")) {
+				result1 = new ProductDao().passRefund1(con, pass, pno);
+				result2 = new ProductDao().passAdjust1(con, pass, pcode);
+				
+			}else if(pass.equals("2")) {
+				result1 = new ProductDao().passRefund2(con, pass, pno);
+				result2 = new ProductDao().passAdjust2(con, pass, pcode);
+			}
 			
 			if(result1 > 0 && result2 > 0) {
 				commit(con);
@@ -286,11 +292,7 @@ public class ProductService {
 			
 			
 			return result;
-		}*/
-
-		public int passRefund(String pass, String ono, String pcode) {
-			// TODO Auto-generated method stub
-			return 0;
 		}
+
 		
 }
