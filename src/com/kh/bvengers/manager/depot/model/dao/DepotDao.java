@@ -75,8 +75,6 @@ public class DepotDao {
 			pstmt.setString(2,d.getProductCode());
 			result =pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
@@ -435,10 +433,12 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListL");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, location);
-			pstmt.setInt(2, currentPage);
-			pstmt.setInt(3, limit);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -493,10 +493,12 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListId");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, insertDate);
-			pstmt.setInt(2, currentPage);
-			pstmt.setInt(3, limit);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -551,10 +553,12 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListRd");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, releaseDate);
-			pstmt.setInt(2, currentPage);
-			pstmt.setInt(3, limit);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -609,10 +613,12 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListP");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, productCode);
-			pstmt.setInt(2, currentPage);
-			pstmt.setInt(3, limit);
+			pstmt.setInt(2, startRow );
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -669,11 +675,13 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListLId");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, location);
 			pstmt.setString(2, insertDate);
-			pstmt.setInt(3, currentPage);
-			pstmt.setInt(4, limit);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow );
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -730,11 +738,13 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListLRd");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, location);
 			pstmt.setString(2, releaseDate);
-			pstmt.setInt(3, currentPage);
-			pstmt.setInt(4, limit);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -791,11 +801,13 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListLP");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, location);
 			pstmt.setString(2, productCode);
-			pstmt.setInt(3, currentPage);
-			pstmt.setInt(4, limit);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -852,11 +864,13 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListIdRd");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, insertDate);
 			pstmt.setString(2, releaseDate);
-			pstmt.setInt(3, currentPage);
-			pstmt.setInt(4, limit);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -913,11 +927,13 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListIdp");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, productCode);
 			pstmt.setString(2, insertDate);
-			pstmt.setInt(3, currentPage);
-			pstmt.setInt(4, limit);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -974,11 +990,13 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListIdp");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, productCode);
 			pstmt.setString(2, releaseDate);
-			pstmt.setInt(3, currentPage);
-			pstmt.setInt(4, limit);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -1036,12 +1054,14 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListLIdRd");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, location);
 			pstmt.setString(2, releaseDate);
 			pstmt.setString(3, insertDate);
-			pstmt.setInt(4, currentPage);
-			pstmt.setInt(5, limit);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -1099,12 +1119,14 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListLIdP");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, productCode);
 			pstmt.setString(2, insertDate);
 			pstmt.setString(3, location);
-			pstmt.setInt(4, currentPage);
-			pstmt.setInt(5, limit);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -1162,12 +1184,14 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListLRdP");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, productCode);
 			pstmt.setString(2, releaseDate);
 			pstmt.setString(3, location);
-			pstmt.setInt(4, currentPage);
-			pstmt.setInt(5, limit);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -1225,12 +1249,14 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListIdRdP");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, productCode);
 			pstmt.setString(2, insertDate);
 			pstmt.setString(3, releaseDate);
-			pstmt.setInt(4, currentPage);
-			pstmt.setInt(5, limit);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -1289,13 +1315,15 @@ public class DepotDao {
 		int i = 1;
 		String query = prop.getProperty("searchListTotal");
 		try {
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, productCode);
 			pstmt.setString(2, insertDate);
 			pstmt.setString(3, releaseDate);
 			pstmt.setString(4, location);
-			pstmt.setInt(5, currentPage);
-			pstmt.setInt(6, limit);
+			pstmt.setInt(5, startRow);
+			pstmt.setInt(6, endRow);
 			rset = pstmt.executeQuery();
 			list =new ArrayList<Depot> ();
 			while(rset.next()) {
@@ -1319,6 +1347,24 @@ public class DepotDao {
 		}
 		
 		return list;
+	}
+	public int updateOpen(Connection con, String ProductCode) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		String query = prop.getProperty("updateOpen");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, ProductCode);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 }

@@ -30,18 +30,18 @@ public class DepotSearchServlet extends HttpServlet {
 		String insertDate = request.getParameter("insertDate");
 		String releaseDate = request.getParameter("releaseDate");
 		String productCode = request.getParameter("productCode");
-		
+		String currentPage1 = request.getParameter("currentPage");
 		
 		int currentPage;		
 		int limit;				
 		int maxPage;			
 		int startPage;			
 		int endPage;			
-		
-		currentPage = 1;
-		
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	
+		if(currentPage1==null) {		
+			currentPage=1;						
+		}else {
+			currentPage = Integer.parseInt(currentPage1);
 		}
 		
 		limit = 10;
@@ -56,15 +56,15 @@ public class DepotSearchServlet extends HttpServlet {
 		if(location!=null&&insertDate.equals("")&&releaseDate.equals("")&&productCode.equals("")) {
 			listCount = new DepotService().searchL(location);
 			
-			maxPage = (int)((double)listCount/limit+0.9);
-			
 			startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
 			
 			endPage = startPage + 10 - 1;
+			maxPage = (int)((double)listCount/limit+0.9);			
 			
 			if(maxPage < endPage) {
 				endPage = maxPage;
 			}
+			
 			hmap =new HashMap<String,Object>();
 			pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 			list = new DepotService().searchListL(location,currentPage,limit);
