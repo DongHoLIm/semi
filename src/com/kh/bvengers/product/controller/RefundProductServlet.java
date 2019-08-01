@@ -68,9 +68,9 @@ public class RefundProductServlet extends HttpServlet {
 					m.setrStatus("환불 대기");
 				}else if(m.getrStatus().equals("2")) {
 					m.setrStatus("환불 완료");
-				
+				}else if(m.getrStatus().equals("3")) {
+					m.setrStatus("환불 취소");
 				}
-			
 
 	}
 
