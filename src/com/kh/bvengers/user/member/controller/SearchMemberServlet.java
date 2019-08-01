@@ -23,7 +23,6 @@ public class SearchMemberServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		int currentPage;
 		int limit;
 		int maxPage;
@@ -41,6 +40,8 @@ public class SearchMemberServlet extends HttpServlet {
 		startPage = (((int)((double)currentPage/limit+0.9))-1)*10+1;
 		
 		endPage = startPage + 10 -1;
+		System.out.println("endPage : "+endPage);
+		System.out.println("maxPage : "+maxPage);
 		
 		if(maxPage<endPage) {
 			endPage = maxPage;
@@ -48,9 +49,6 @@ public class SearchMemberServlet extends HttpServlet {
 		
 		MemberPageInfo pi = new MemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 		
-		/*String selecthowsearch = (String)request.getParameter("howselect");
-		String searchValue = (String)request.getParameter("value");
-		*/
 		String send = (String) request.getParameter("send");
 		
 		int idx = send.indexOf("$");
@@ -67,12 +65,11 @@ public class SearchMemberServlet extends HttpServlet {
 			request.setAttribute("list1", list);
 			request.setAttribute("pi1", pi);
 			page = "views/manager/member/membermanagement.jsp";
-			request.getRequestDispatcher(page).forward(request, response);
 		}else {
 			request.setAttribute("msg", "목록조회실패!");
 			page="/views/common/errorPagePrompt.jsp";
-			request.getRequestDispatcher(page).forward(request, response);
 		}
+		request.getRequestDispatcher(page).forward(request, response);
 		/*out.flush();
 		out.close();*/
 	}

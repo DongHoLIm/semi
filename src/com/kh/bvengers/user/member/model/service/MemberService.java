@@ -153,4 +153,16 @@ public class MemberService {
 		return result;
 	}
 
+	public int kakaojoin(String id, String nickname) {
+		Connection con = getConnection();
+		int result = new MemberDao().kakaojoin(con,id,nickname);
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
 }

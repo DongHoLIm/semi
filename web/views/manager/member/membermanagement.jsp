@@ -164,12 +164,12 @@ input-align:center;
 	});
 </script>
 <div class="pagingArea" align="center">
-	<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=1'"><<</button>
+	<button onclick="location.href='<%=request.getContextPath()%>/searchMember.me?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>
 			<% }else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage - 1%>'"> < </button>
+			<button onclick="location.href='<%=request.getContextPath()%>/searchMember.me?currentPage=<%=currentPage - 1%>'"> < </button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
@@ -177,7 +177,7 @@ input-align:center;
 			%>
 					<button disabled><%= p %></button>
 			<% } else { %>
-					<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick="location.href='<%=request.getContextPath()%>/searchMember.me?currentPage=<%=p%>'"><%= p %></button>
 			<% 
 				}
 			   } 
@@ -187,10 +187,10 @@ input-align:center;
 			<% if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<% }else{ %>
-			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=currentPage + 1 %>'">></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/searchMember.me?currentPage=<%=currentPage + 1 %>'">></button>
 			<% } %>
 
-			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=maxPage%>'">>></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/searchMember.me?currentPage=<%=maxPage%>'">>></button>
 </div>
 </body>
 </html>

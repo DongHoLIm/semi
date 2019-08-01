@@ -79,5 +79,12 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$("#chatListTable td").onclick(function(){
+			window.open('<%=request.getContextPath()%>/send.me?email='+hc+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
+		});
+	});
+	</script>
 </body>
 </html>
