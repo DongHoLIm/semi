@@ -23,8 +23,10 @@ public class DepotService {
 		
 		int result = new DepotDao().insertLocation(con,d);
 		int result1= new DepotDao().updateStatus(con,d);
+		int result2 = new DepotDao().updateOpen(con,d.getProductCode());
+				
 		int lastNum =0;
-		if(result>0&&result1>0) {
+		if(result>0||result1>0||result2>0) {
 			commit(con);
 			lastNum=1;
 		}else {

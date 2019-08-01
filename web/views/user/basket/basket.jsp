@@ -138,6 +138,9 @@
 			});
 		});
 	}
+	function selectAll(){
+		
+	}
 </script>
 <footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>

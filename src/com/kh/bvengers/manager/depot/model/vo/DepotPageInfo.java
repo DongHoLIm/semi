@@ -1,6 +1,6 @@
 package com.kh.bvengers.manager.depot.model.vo;
 
-public class DepotPageInfo {
+public class DepotPageInfo implements java.io.Serializable {
 	private int currentPage;
 	private int listCount;
 	private int limit;
