@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.bvengers.board.model.service.BoardService;
 import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.BoardPageInfo;
+import com.kh.bvengers.user.member.model.vo.Member;
 
 /**
  * Servlet implementation class SelectManagerQnAServlet
@@ -34,6 +35,8 @@ public class SelectManagerQnAServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "";
 
+		String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
+
 		int currentPage;
 		int limit;
 		int maxPage;
@@ -43,8 +46,9 @@ public class SelectManagerQnAServlet extends HttpServlet {
 		int num =5;
 
 		currentPage = 1;
-
-		int listCount = new BoardService().getListQandACount(num);
+		
+		int listCount = new BoardService().getListQandACount(num,uno);
+		
 
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));

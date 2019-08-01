@@ -81,16 +81,6 @@ int endPage = pi.getEndPage();
 		<br> <br>
 		<hr>
 		<h2 id="board">Q&A</h2>
-		<form method="post" align="right">
-			 <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
-				<option value="title">제목</option>
-				<option value="writer">작성자</option>
-				<option value="wdate">답변여부</option>
-			</select>
-		<input type="search" name="searchValue" id = "inputSearch" >
-		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
-
-		</form>
 		<table class="table" id="messageArea">
 			<thead>
 				<tr>
@@ -170,7 +160,7 @@ int endPage = pi.getEndPage();
    		  var id = $("select[id = 'select']").val();
    		  var input = $("input[id = 'inputSearch']").val();
    		  $.ajax({
-   			url:"/sp/smql.li",
+   			url:"/sp/SearchManagerQnAServelt.qna",
    			data:{"selectid":id,"input":input},
    			type:"post",
    			success:function(data){
