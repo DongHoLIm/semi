@@ -657,7 +657,7 @@ public class MemberDao {
 		
 		return result;
 	}
-	public int kakaojoin(Connection con, String id, String nickname) {
+	public int kakaojoin(Connection con, String id, String nickname, String token) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -667,7 +667,8 @@ public class MemberDao {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, id);
-			pstmt.setString(2, nickname);
+			pstmt.setString(2, token);
+			pstmt.setString(3, nickname);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -675,6 +676,48 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+	public Member kakaologin(Connection con, String id) {
+		PreparedStatement pstmt = null;
+		Member loginUser = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("loginSelect");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);			
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				loginUser = new Member();
+
+				loginUser.setMemberNo(rset.getString("MEMBER_NO"));
+				loginUser.setMemberId(rset.getString("MEMBER_ID"));
+				loginUser.setMemberPassword(rset.getString("MEMBER_PASSWORD"));
+				loginUser.setMemberName(rset.getString("MEMBER_NAME"));
+				loginUser.setEmail(rset.getString("EMAIL"));
+				loginUser.setAddress(rset.getString("ADDRESS"));
+				loginUser.setPhone(rset.getString("PHONE"));
+				loginUser.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				loginUser.setRetireDate(rset.getDate("RETIRE_DATE"));
+				loginUser.setRetire(rset.getString("RETIRE"));
+				loginUser.setMemberDiv(rset.getString("MEMBER_DIV"));
+				loginUser.setAccountHolder(rset.getString("ACCOUNT_HOLDER"));
+				loginUser.setBankCode(rset.getString("BANK_CODE"));
+				loginUser.setAccountNo(rset.getString("ACCOUNT_NO"));
+				loginUser.setGradeCode(rset.getString("GRADE_CODE"));
+				loginUser.setSellCount(rset.getInt("SELL_COUNT"));
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return loginUser;
 	}
 
 }

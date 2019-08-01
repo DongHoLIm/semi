@@ -153,9 +153,9 @@ public class MemberService {
 		return result;
 	}
 
-	public int kakaojoin(String id, String nickname) {
+	public int kakaojoin(String id, String nickname, String token) {
 		Connection con = getConnection();
-		int result = new MemberDao().kakaojoin(con,id,nickname);
+		int result = new MemberDao().kakaojoin(con,id,nickname,token);
 		if(result>0) {
 			commit(con);
 		}else {
@@ -163,6 +163,13 @@ public class MemberService {
 		}
 		close(con);
 		return result;
+	}
+
+	public Member kakaologin(String id) {
+		Connection con = getConnection();
+		Member loginUser = new MemberDao().kakaologin(con,id);
+		close(con);
+		return loginUser;
 	}
 
 }

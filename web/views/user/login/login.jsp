@@ -83,17 +83,17 @@ a {
 					console.log(authObj.access_token);
 					var nickname = res.properties['nickname'];
 					var id = res.id;
-					console.log(nickname);
-					console.log(id);
-					
-					$.ajax({
+					var token = authObj.access_token;
+					var array = id+","+nickname+"/"+token;					
+					location.href="<%=request.getContextPath()%>/kakaojoin.me?array="+array;
+					/* $.ajax({
 						url:"/sp/kakaojoin.me",
 						type:"post",
 						data:{nickname:nickname,id:id},
 						success:function(data){
 							
 						}
-					});
+					}); */
 					
 				}
 					});
