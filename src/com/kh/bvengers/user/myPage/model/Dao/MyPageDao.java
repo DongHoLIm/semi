@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class MyPageDao {
@@ -202,13 +203,14 @@ public class MyPageDao {
 				m.setoDate(rset.getDate("ORDER_DATE"));
 				m.setOno(rset.getString("ORDER_NO"));
 				m.setPname(rset.getString("PRODUCT_NAME"));
-				m.setPayStatus(rset.getString("REFUND_STATUS"));
+				m.setRefundStatus(rset.getString("REFUND_STATUS"));
 				m.setDstatus(rset.getString("DELIVERY_STATUS"));
 				m.setInNo(rset.getString("INVOICE_NO"));
 				m.setrName(rset.getString("RECIEVER_NAME"));
 				m.setdSite(rset.getString("DELIVERY_SITE"));
 				m.setrPhone(rset.getString("RECIEVER_PHONE"));
-				m.setMno(rset.getString("MEMBER_NO"));	
+				m.setMno(rset.getString("MEMBER_NO"));
+				
 				
 				odList.add(m);
 			}	
@@ -411,7 +413,7 @@ public class MyPageDao {
 			while(rset.next()) {
 				myPage m = new myPage();
 				m.setOno(rset.getString("ORDER_NO"));
-				m.setoDate(rset.getDate("ORDER_DATE"));
+				m.setrDate(rset.getDate("REFUND_DATE"));
 				m.setPname(rset.getString("PRODUCT_NAME"));
 				m.setDtPay(rset.getInt("PRODUCT_DTPAY"));
 				m.setRefundStatus(rset.getString("REFUND_STATUS"));
@@ -474,6 +476,309 @@ public class MyPageDao {
 		
 		
 		return cList;
+	}
+
+
+	public int getRefundDateCount(Connection con, String memberNo, String start, String end) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectRefundDateCount");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+
+	public ArrayList<myPage> selectRefundDateList(Connection con, String memberNo, String start, String end,
+			int currentPage, int limit) {
+		ArrayList<myPage> rList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectRefundDate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+		
+			pstmt.setString(1, memberNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
+			
+			rset = pstmt.executeQuery();
+			rList = new ArrayList<myPage>();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				m.setOno(rset.getString("ORDER_NO"));
+				m.setrDate(rset.getDate("REFUND_DATE"));
+				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setDtPay(rset.getInt("PRODUCT_DTPAY"));
+				m.setRefundStatus(rset.getString("REFUND_STATUS"));
+				
+				rList.add(m);
+			}	
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		return rList;
+	}
+
+
+	public int getCalculateDateCount(Connection con, String memberNo, String start, String end) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectCalculateDateCount");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+
+	public ArrayList<myPage> selectCalculateDateList(Connection con, String memberNo, String start, String end,
+			int currentPage, int limit) {
+		ArrayList<myPage> cList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectCalculateDate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+		
+			pstmt.setString(1, memberNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
+			
+			rset = pstmt.executeQuery();
+			cList = new ArrayList<myPage>();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				m.setAno(rset.getString("ADJUST_NO"));
+				m.setaDate(rset.getDate("ADJUST_DATE"));
+				m.setaStatus(rset.getString("ADJUST_DIV"));
+				m.setaPrice(rset.getInt("PRICE"));
+				m.setAname(rset.getString("ACCOUNT_HOLDER"));
+				m.setbCode(rset.getString("BANK_CODE"));
+				m.setAccountNo(rset.getString("ACCOUNT_NO"));
+				
+				cList.add(m);
+			}	
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		return cList;
+	}
+
+
+	public String selectPayNo(Connection con, String ono, String memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String pno = "";
+		
+
+		String query = prop.getProperty("selectPayNo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, ono);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				pno = rset.getString("PAY_NO");
+				
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		
+		
+		return pno;
+	}
+
+
+	public int passRefund(Connection con, String pno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("updateRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, pno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
+
+	public String selectPcode(Connection con, String ono) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String pcode = "";
+		
+
+		String query = prop.getProperty("selectProduct");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, ono);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				pcode = rset.getString("PRODUCT_CODE");
+				
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		
+		
+		return pcode;
+	}
+
+
+	public int passProduct(Connection con, String pcode) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("updateProduct");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, pcode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public String selectOno(Connection con, String memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String ono = "";
+		
+
+		String query = prop.getProperty("selectOrderNo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ono = rset.getString("ORDER_NO");
+				
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		
+		}
+		
+		
+		return ono;
 	}
 
 

@@ -98,7 +98,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public int changeMember(Connection con, Member m) {
+	public int changeMember(Connection con, Member loginUser) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 
@@ -106,11 +106,11 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, m.getMemberPassword());
-			pstmt.setString(2, m.getEmail());
-			pstmt.setString(3, m.getAddress());
-			pstmt.setString(4, m.getPhone());
-			pstmt.setString(5, m.getMemberId());
+			pstmt.setString(1, loginUser.getMemberPassword());
+			pstmt.setString(2, loginUser.getEmail());
+			pstmt.setString(3, loginUser.getAddress());
+			pstmt.setString(4, loginUser.getPhone());
+			pstmt.setString(5, loginUser.getMemberId());
 
 			result = pstmt.executeUpdate();
 

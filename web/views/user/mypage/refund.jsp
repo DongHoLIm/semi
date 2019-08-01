@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
 <%@page import="com.kh.bvengers.user.myPage.model.vo.myPage"%>
 <%@page import="java.util.ArrayList"%>
@@ -21,6 +22,7 @@
    int startPage1 = pi1.getStartPage();
    int endPage1 = pi1.getEndPage();
 
+   DecimalFormat dc = new DecimalFormat("###,###,###,###");
 
 
 %>	
@@ -316,7 +318,7 @@ $(document).ready(function() {
 }
 
 .searchdiv {
-   width: 90%;
+   width: 85%;
    height:70%;
    padding: 2%;
    margin: 0 auto;
@@ -344,30 +346,7 @@ input[type=button] {
 .th_refund {
 	text-align:center;
 }
-tr {
-	text-align:center;
-}
 
-/* .searchBox {
-	width: 100%;
-	height: 100%;
-	padding-right: 20%;
-	padding-left: 20%;
-	margin: auto;
-}
-
- .searchdiv {
-	margin-top:5%;
-	margin-left:auto;
-	margin-right:auto;
-	width: 80%;
-	height:70%;
-	padding: 2%;
-	margin: 0 auto;
-	text-align: center;
-	background-color:#FFF;
-	border:1px solid black;
-}  */
 
 .tt_div { 
 	width:60%;
@@ -385,29 +364,14 @@ tr {
 	
 }
 
-
-#deliTable {
-	align: center;
-}
-
-#deliTable tr {
-	align: center;
-}
-
-#deliTable tr td {
-	align: center;
-}
-
-#deliTable tr td img {
-	width: 30%;
-	align: center;
-}
-
-.board {
+.board1 {
 	width: 80%;
 	margin: auto;
 	align: center;
 	border-spacing: 10px;
+}
+.board1 td {
+	text-align:center;
 }
 
 .board2 {
@@ -415,6 +379,13 @@ tr {
 	margin: auto;
 	align: center;
 	border-spacing: 10px;
+}
+.board2 td {
+	text-align:center;
+}
+
+.rl2 {
+	text-align:center;
 }
 .pageNo {
 	margin: auto;
@@ -488,129 +459,148 @@ tr {
 		</div> -->
 	<br>
 		<div align=center>
-			<table border="1" class = "board">
-				<tr>
+			<table border="1" class = "board1">
+				<thead>
+				<tr class="rl">
 					<th class="th_refund">주문번호</th>
-					<th class="th_refund">주문날짜</th>
+					<th class="th_refund">환불신청일</th>
 					<th class="th_refund">상품명</th>
 					<th class="th_refund">환불금액</th>
 					<th class="th_refund">상태</th>
 				</tr>
+				</thead>
+				<tbody>
 				<% for(myPage m : rList) {%>
 				<tr>
 				<td><%=m.getOno() %></td>
-				<td><%=m.getoDate() %></td>
+				<td><%=m.getrDate() %></td>
 				<td><%=m.getPname() %></td>
-				<td><%=m.getDtPay() %></td>
+				<% String price = dc.format(m.getDtPay());%>
+				<td><%=price %>원</td>
 				<td><%=m.getRefundStatus() %></td>
 			</tr>
 			<% } %>
+			</tbody>
 			</table>			
 			</div>
-			
-			<div class = "pagingArea" align ="center" >
-      <button onclick = "location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><</button>
-      <%if(currentPage <= 1) {%>
-      <button disabled><</button>
-      <%} else{%>
-   <button onclick = "location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage-1%>'"><</button>
-      <%}
+		<br>
+		<div class="pagingArea1" align="center">
+			<button
+				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><</button>
+			<%
+				if (currentPage <= 1) {
+			%>
+			<button disabled><</button>
+			<%
+				} else {
+			%>
+			<button
+				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage - 1%>'"><</button>
+			<%
+				}
+			%>
+			<%
+				for (int p = startPage; p <= endPage; p++) {
+					if (currentPage == p) {
+			%>
+			<button disabled><%=p%></button>
+			<%
+				} else {
+			%>
+			<button
+				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=p%>'"><%=p%></button>
+			<%
+				}
+				}
+			%>
 
-      %>
-         <%for (int p = startPage; p <= endPage; p++) {
-            if(currentPage == p){
-         %>
-            <button disabled><%= p %></button>
-         <%} else{ %>
-               <button onclick = "location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=p%>'"><%= p %></button>
-         <% }
-         }
-         %>
 
-
-         <%if(currentPage >= maxPage){ %>
-         <button disabled>></button>
-         <%}else{ %>
-         <button onclick ="location.hreh='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage + 1%>'">></button>
-         <%} %>
-         <button onclick = "location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
-
-      </div>
-      
-      
-		</div>
+			<%
+				if (currentPage >= maxPage) {
+			%>
+			<button disabled>></button>
+			<%
+				} else {
+			%>
+			<button
+				onclick="location.hreh='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage + 1%>'">></button>
+			<%
+				}
+			%>
+			<button
+				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
+			</div>
+	</div>
 		<br><br><br><br>
-		
-		
-		<div class="tt_div">
-<div class="searchdiv">
-  <table class="searchBox">
-                   <!-- <caption style="font-size:20px;">주문조회</caption> -->
-     <colgroup>
-         <col width="123px">
-         <col width="*">
-     </colgroup>
-     <h3>정산조회</h3>
-     <tbody>
-         <tr>
-             <th class="th_select">기간별 조회</th>
-             <td class="td_select">
-                <span class="chkbox21">
-                       <input type="button" name="dateType" id="dateType7" value="1주일" onclick="setSearchDate1('1w')"/>
-                       <label for="dateType7"></label>
-                   </span>
-                   <span class="chkbox21">
-                       <input type="button" name="dateType" id="dateType8" value="2주일" onclick="setSearchDate1('2w')"/>
-                       <label for="dateType8"></label>
-                   </span>
-                   <span class="chkbox21">
-                       <input type="button" name="dateType" id="dateType9" value="1개월" onclick="setSearchDate1('1m')"/>
-                       <label for="dateType9"></label>
-                   </span>
-                   
-          
-           <!-- <div class="clearfix">
-               시작일 -->
-               <span class="dset">
-                   <input type="text" class="datepicker inpType" name="startdate1" id="searchStartDate1" value="${adminBuildEnergyVo.startdate1 }" >               </span>
-               <span class="demi">~</span>
-               <!-- 종료일 -->
-               <span class="dset">
-                 <input type="text" class="datepicker inpType" name="enddate1" id="searchEndDate1" value="${adminBuildEnergyVo.enddate1 }" >
-               </span>
-               <span>
-                   	<input type="button" name="selectDate1" id="selectDate1"  onclick="search2();" value="조회">
-                   </span>
-                   </td>
-               </tr>
-           <tbody>
-       </table>
-</div>
+
+
+	<div class="tt_div">
+		<div class="searchdiv">
+			<table class="searchBox">
+				<!-- <caption style="font-size:20px;">주문조회</caption> -->
+				<colgroup>
+					<col width="123px">
+					<col width="*">
+				</colgroup>
+				<h3>정산조회</h3>
+				<tbody>
+					<tr>
+						<th class="th_select">기간별 조회</th>
+						<td class="td_select"><span class="chkbox21"> <input
+								type="button" name="dateType" id="dateType7" value="1주일"
+								onclick="setSearchDate1('1w')" /> <label for="dateType7"></label>
+						</span> <span class="chkbox21"> <input type="button"
+								name="dateType" id="dateType8" value="2주일"
+								onclick="setSearchDate1('2w')" /> <label for="dateType8"></label>
+						</span> <span class="chkbox21"> <input type="button"
+								name="dateType" id="dateType9" value="1개월"
+								onclick="setSearchDate1('1m')" /> <label for="dateType9"></label>
+						</span> <!-- <div class="clearfix">
+               시작일 --> <span class="dset"> <input type="text"
+								class="datepicker inpType" name="startdate1"
+								id="searchStartDate1" value="${adminBuildEnergyVo.startdate1 }">
+						</span> <span class="demi">~</span> <!-- 종료일 --> <span class="dset">
+								<input type="text" class="datepicker inpType" name="enddate1"
+								id="searchEndDate1" value="${adminBuildEnergyVo.enddate1 }">
+						</span> <span> <input type="button" name="selectDate1"
+								id="selectDate1" onclick="search2();" value="조회">
+						</span></td>
+					</tr>
+				<tbody>
+			</table>
+		</div>
 
 		<br>
 		<div align=center>
-				<table border="1" class = "board2"> 
-			<tr>
-				<th class="th_refund">정산번호</th>
-				<th class="th_refund">정산날짜</th>
-				<th class="th_refund">정산상태</th>
-				<th class="th_refund">정산금액</th>
-				<th class="th_refund">회원 정보</th>
-			</tr>
-			<% for(myPage m : cList) { %>
-			<tr>
-				<td><%=m.getAno() %></td>
-				<td><%=m.getaDate() %></td>
-				<td><%=m.getaStatus() %></td>
-				<td><%=m.getaPrice() %></td>
-				<td>은행명 : <%=m.getbCode()%><br> 계좌번호 : <%=m.getAccountNo() %><br> 예금주 : <%=m.getAname() %></td>
-			</tr>
-			<% } %>
-		</table>
-		</div></div>
-		
-		
-   <div class = "pagingArea" align ="center" >
+			<table border="1" class="board2">
+			<thead>
+				<tr class="rl2">
+					<th class="th_refund">정산번호</th>
+					<th class="th_refund">정산날짜</th>
+					<th class="th_refund">정산상태</th>
+					<th class="th_refund">정산금액</th>
+					<th class="th_refund">회원 정보</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% for(myPage m : cList) { %>
+				<tr>
+					<td><%=m.getAno() %></td>
+					<td><%=m.getaDate() %></td>
+					<td><%=m.getaStatus() %></td>
+					<% String price = dc.format(m.getaPrice());%>
+					<td><%=price %>원</td>
+					<td>은행명 : <%=m.getbCode()%><br> 계좌번호 : <%=m.getAccountNo() %><br>
+						예금주 : <%=m.getAname() %></td>
+				</tr>
+				<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<br>
+
+	<div class = "pagingArea2" align ="center" >
       <button onclick = "location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage1=1'"><</button>
       <%if(currentPage1 <= 1) {%>
       <button disabled><</button>
@@ -639,5 +629,169 @@ tr {
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+	
+	<script>
+    function search1(){
+    	$(function(){
+    		var start =$("input[id='searchStartDate']").val();
+    		var end = $("input[id='searchEndDate']").val();
+    		console.log(start);
+    		console.log(end);
+    		$.ajax({
+    			url:"refundDate.mp",
+    			type:"post",
+    			data:{"start":start,"end":end},
+    			success:function(data){
+    				var $boardTbody1 = $(".board1 tbody");
+    				var $pagingDiv1 =$(".pagingArea1");
+    				$boardTbody1.html(""); 
+    				$pagingDiv1.html("");
+    				for(var i = 0; i < data["rList"].length; i++){
+    					var $tr = $("<tr class='rl'>");
+    					var $ono = $("<td>").text(data["rList"][i].ono);							
+    					var $rDate = $("<td>").text(data["rList"][i].rDate);
+    					var $pname = $("<td>").text(data["rList"][i].pname);
+    					var $dtPay = $("<td>").text(data["rList"][i].dtPay);
+    					var $rStatus = $("<td>").text(data["rList"][i].refundStatus);
+						var $price = $("<td>").text(numeral(data["rList"][i].dtPay).format('0,0')+"원");
+    					
+    					$tr.append($ono);
+    					$tr.append($rDate);
+    					$tr.append($pname);
+    					$tr.append($price);
+    					$tr.append($rStatus);						
+    					$boardTbody1.append($tr);
+    				}
+    				var currentPage = data["pi"].currentPage;
+    				var endPage = data["pi"].endPage;
+    				var limit = data["pi"].limit;
+    				var listCount = data["pi"].listCount;
+    				var maxPage = data["pi"].maxPage;
+    				var startPage = data["pi"].startPage;
+    				
+    				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+    				var $firstBtn = $("<button>").text('<<');
+    				var $preBtn = $("<button>").text('<');
+    				var $numBtn = $("<button>");
+    				var $nextBtn =$("<button>").text('>');
+    				var $lastBtn =$("<button>").text('>>');
+    				
+
+    				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=1"');						
+    				if(currentPage <= 1){
+    					$preBtn.attr('disabled',true);							
+    				}else{
+    					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage - 1"');						
+    				}
+    				for(var i = startPage ; i <= endPage ;i++){		
+    					if(currentPage == i){
+    						$numBtn.attr('disabled',true);																
+    					}else{
+    						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=i"');																
+    					}
+    					$numBtn.text(i);
+    					
+    				}
+    				if(currentPage >= maxPage){
+    					$nextBtn.attr('disabled',true);							
+    				}else{
+    					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage + 1 "');							
+    				}
+    				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=maxPage"');
+    				
+    				$pagingDiv2.append($firstBtn);
+    				$pagingDiv2.append($preBtn);
+    				$pagingDiv2.append($numBtn);
+    				$pagingDiv2.append($nextBtn);
+    				$pagingDiv2.append($lastBtn);
+    				
+    				$pagingDiv1.append($pagingDiv2);  
+    			},			
+    		});
+    	});
+    }
+    
+    
+    function search2(){
+    	$(function(){
+    		var start =$("input[id='searchStartDate1']").val();
+    		var end = $("input[id='searchEndDate1']").val();
+    		console.log(start);
+    		console.log(end);
+    		$.ajax({
+    			url:"calculateDate.mp",
+    			type:"post",
+    			data:{"start":start,"end":end},
+    			success:function(data){
+    				var $boardTbody2 = $(".board2 tbody");
+    				var $pagingDiv2 =$(".pagingArea2");
+    				$boardTbody2.html(""); 
+    				$pagingDiv2.html("");
+    				for(var i = 0; i < data["cList"].length; i++){
+    					var $tr = $("<tr class='rl2'>");
+    					var $ano = $("<td>").text(data["cList"][i].ano);							
+    					var $aDate = $("<td>").text(data["cList"][i].aDate);
+    					var $aStatus = $("<td>").text(data["cList"][i].aStatus);
+						var $price = $("<td>").text(numeral(data["cList"][i].aPrice).format('0,0')+"원");
+    					var $br = $("</br>");
+    					var $bCode = $("<td>").html("은행명 : "+data["cList"][i].bCode+"<br/>"+"계좌번호 : "+data["cList"][i].accountNo+"<br/>"+"예금주 : "+data["cList"][i].aname);
+    					
+    					
+    					$tr.append($ano);
+    					$tr.append($aDate);
+    					$tr.append($aStatus);
+    					$tr.append($price);
+    					$tr.append($bCode);    					
+    					$boardTbody2.append($tr);
+    				}
+    				var currentPage = data["pi"].currentPage;
+    				var endPage = data["pi"].endPage;
+    				var limit = data["pi"].limit;
+    				var listCount = data["pi"].listCount;
+    				var maxPage = data["pi"].maxPage;
+    				var startPage = data["pi"].startPage;
+    				
+    				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+    				var $firstBtn = $("<button>").text('<<');
+    				var $preBtn = $("<button>").text('<');
+    				var $numBtn = $("<button>");
+    				var $nextBtn =$("<button>").text('>');
+    				var $lastBtn =$("<button>").text('>>');
+    				
+
+    				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=1"');						
+    				if(currentPage <= 1){
+    					$preBtn.attr('disabled',true);							
+    				}else{
+    					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage - 1"');						
+    				}
+    				for(var i = startPage ; i <= endPage ;i++){		
+    					if(currentPage == i){
+    						$numBtn.attr('disabled',true);																
+    					}else{
+    						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=i"');																
+    					}
+    					$numBtn.text(i);
+    					
+    				}
+    				if(currentPage >= maxPage){
+    					$nextBtn.attr('disabled',true);							
+    				}else{
+    					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage + 1 "');							
+    				}
+    				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=maxPage"');
+    				
+    				$pagingDiv2.append($firstBtn);
+    				$pagingDiv2.append($preBtn);
+    				$pagingDiv2.append($numBtn);
+    				$pagingDiv2.append($nextBtn);
+    				$pagingDiv2.append($lastBtn);
+    				
+    				$pagingDiv1.append($pagingDiv2);  
+    			},			
+    		});
+    	});
+    }
+</script>
 </body>
 </html>
