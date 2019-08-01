@@ -28,8 +28,6 @@ public class SelectProductListServlet extends HttpServlet {
 			page = "/views/user/product/productList.jsp";
 			request.setAttribute("list", list);
 		} else {
-			page = "views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "사진 게시판 조회 실패!!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 
