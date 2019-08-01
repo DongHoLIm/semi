@@ -14,19 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.manager.statistic.model.service.StatisticService;
-import com.kh.bvengers.manager.statistic.model.vo.AdjustmentPay;
 
 /**
- * Servlet implementation class MemberStatisticsServlet
+ * Servlet implementation class SalesStatisticsServlet
  */
-@WebServlet("/memberStatistics")
-public class MemberStatisticsServlet extends HttpServlet {
+@WebServlet("/salesStatistics.st")
+public class SalesStatisticsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberStatisticsServlet() {
+    public SalesStatisticsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,27 +34,19 @@ public class MemberStatisticsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat format = new SimpleDateFormat ( "yyMMdd");
-		Date dTime = new Date();
-		String time = format.format(dTime);
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-
-		Calendar calender = Calendar.getInstance();
-		
-		calender.setTime(dTime);
-		list = new StatisticService().memberStatistic(calender);
-		
-		
+		  
+		ArrayList<ArrayList<HashMap<String, Object>>> datalist = new StatisticService().salesStatistics();
 		
 		String page = null;
-		if(list != null) {
-			page = "/views/manager/statistics/memberStatistics.jsp";
-			request.setAttribute("dataList", list);
+		if(datalist != null) {
+			page = "views/manager/statistics/salesStatistics.jsp";
+			request.setAttribute("dataList", datalist);
 		}else {
-			page="/views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "상품 등록 실패!");
+			page = "/views/common/errorPagePrompt.jsp";
+			request.setAttribute("msg", "통계를 불러오는데 실패하였습니다.");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**
@@ -67,3 +58,17 @@ public class MemberStatisticsServlet extends HttpServlet {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

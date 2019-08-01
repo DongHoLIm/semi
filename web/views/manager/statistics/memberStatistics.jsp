@@ -5,7 +5,6 @@
 <%
 	ArrayList<HashMap<String, Object>> dataList = (ArrayList<HashMap<String, Object>>) request.getAttribute("dataList");
 	
-//HashMap<String, Object> productPay = (HashMap<String, Object>) request.getAttribute("productPay");
 %>
 <!DOCTYPE html>
 <html>

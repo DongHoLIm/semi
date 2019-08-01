@@ -44,7 +44,7 @@
            <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 통계 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/memberStatistics">고객현황</a></li>
-               <li><a href="<%=request.getContextPath()%>/views/manager/statistics/salesStatistics.jsp">매출현황</a></li>
+               <li><a href="<%=request.getContextPath()%>/salesStatistics.st">매출현황</a></li>
             </ul>
            </li>
            <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 게시글관리 <span class="caret"></span></a>
