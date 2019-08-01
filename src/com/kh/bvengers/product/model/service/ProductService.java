@@ -34,6 +34,7 @@ public class ProductService {
 			int result4 = 0;
 			int result5 = 0;
 			int result6 = 0;
+			
 			result1 = new ProductDao().insertProductPost(con, posts);
 			
 			if(result1 > 0) {

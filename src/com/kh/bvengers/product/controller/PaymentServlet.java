@@ -30,10 +30,12 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String postsId = request.getParameter("postsId");
+		String productCode = request.getParameter("code");
+		
 		
 		HashMap<String, Object> productPay = new ProductService().productPay(postsId);
-		
 		
 		String page = "";
 		
