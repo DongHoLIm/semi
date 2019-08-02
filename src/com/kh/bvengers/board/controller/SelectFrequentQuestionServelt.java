@@ -48,7 +48,6 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 
 		String page = "";
 		String uno = ((Member)(request.getSession().getAttribute("loginUser"))).getMemberNo();
-		
 		currentPage1 = 1;
 		
 		limit1 = 10;

@@ -43,6 +43,7 @@
         var elem = document.getElementById('messageWindow');
         elem.scrollTop = elem.scrollHeight;
     }, 0);
+
 	function onMessage(event) {
 		var message = event.data;
 		var idx = message.indexOf(":");
@@ -68,8 +69,7 @@
 			inputMessage.value = "";
 		} else {
 			inputMessage.value = "";
-		}
-		;
+		};
 	};
 </script>
 </html>

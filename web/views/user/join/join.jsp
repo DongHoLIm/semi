@@ -8,50 +8,89 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function checkjoin(index){
-	if(index == 1){
-	var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
-	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-	var buf = new Array(13);
+   if(index == 1){
+   var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+   var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+   var buf = new Array(13);
+	var num1 = document.getElementById("peoplejb");
+    var num2 = document.getElementById("peoplejb2");
 
-	if($("#memberId").val() == ""){
-		alert("아이디를 입력하세요");
-		$("#memberId").focus();
-		$("#memberId").val("");
-		return false;
-	}
-	if($("#email").val() == ""){
-		alert("이메일 인증을 해주세요");
-		return false;
-	}
-	if(!getCheck.test($("#password").val())){
-		alert("비밀번호를 다시 설정하세요");
-		$("#password").val("");
-		$("#password").focus();
-		return false;
-	}
+    var arrNum1 = new Array();
+    var arrNum2 = new Array();
 
-	if($("#password").val() != ($("#password2").val())){
-		alert("비밀번호를 확인하세요");
-		$("#password").val("");
-		$("#password2").val("");
-		$("#password").focus();
-		return false;
-	}
+    for (var i=0; i<num1.value.length; i++) {
+        arrNum1[i] = num1.value.charAt(i);
+    }
 
-/* 	if(($("#peoplejb").val()=="")||($("#peoplejb2").val()=="")){
-		alert("주민등록번호를 입력하세요");
-		$("#peoplejb").focus();
-		return false;
-	} */
+    for (var i=0; i<num2.value.length; i++) {
+        arrNum2[i] = num2.value.charAt(i);
+    }
+
+    var tempSum=0;
+
+    for (var i=0; i<num1.value.length; i++) {
+        tempSum += arrNum1[i] * (2+i);
+    }
+
+    for (var i=0; i<num2.value.length-1; i++) {
+        if(i>=2) {
+            tempSum += arrNum2[i] * i;
+        }
+        else {
+            tempSum += arrNum2[i] * (8+i);
+        }
+    }
+
+    if((11-(tempSum%11))%10!=arrNum2[6]) {
+        alert("올바른 주민번호가 아닙니다.");
+        num1.value = "";
+        num2.value = "";
+        num1.focus();
+        return false;
+    }
+   if($("#memberId").val() == ""){
+      alert("아이디를 입력하세요");
+      $("#memberId").focus();
+      $("#memberId").val("");
+      return false;
+   }
+   if($("#email").val() == ""){
+      alert("이메일 인증을 해주세요");
+      return false;
+   }
+   if($("#sample6_address").val == ""){
+		alert("주소를 입력해주세요");
+		$("#sample6_address").focus();
+	}
+   if(!getCheck.test($("#password").val())){
+      alert("비밀번호를 다시 설정하세요");
+      $("#password").val("");
+      $("#password").focus();
+      return false;
+   }
+
+   if($("#password").val() != ($("#password2").val())){
+      alert("비밀번호를 확인하세요");
+      $("#password").val("");
+      $("#password2").val("");
+      $("#password").focus();
+      return false;
+   }
+
+/*    if(($("#peoplejb").val()=="")||($("#peoplejb2").val()=="")){
+      alert("주민등록번호를 입력하세요");
+      $("#peoplejb").focus();
+      return false;
+   } */
 
 if($("#password").val() == ($("#password2").val())){
-	$("form").submit();
-
+   $("form").submit();
 }
-	}else if(index==2){
-		var email = $("#email").val();
-		var hc = $("#hiddencard").val();
-		window.open('<%=request.getContextPath()%>/send.me?email='+hc+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
+
+   }else if(index==2){
+      var email = $("#email").val();
+      var hc = $("#hiddencard").val();
+      window.open('<%=request.getContextPath()%>/send.me?email=' + hc + email, '인증번호', 'width=430,height=450,status=no,scrollbars=yes');
 
 	}
 }
@@ -108,41 +147,41 @@ if($("#password").val() == ($("#password2").val())){
 </head>
 <header><%@ include file="../hfl/header.jsp" %></header>
 <body>
-		<form action="<%=request.getContextPath() %>/insertMember.me" method="post">
-		<div class = "header" align="center">
-		<br><br>
+      <form action="<%=request.getContextPath() %>/insertMember.me" method="post">
+      <div class = "header" align="center">
+      <br><br>
 
-		<br>
-	</div>
+      <br>
+   </div>
 
-	<div class="box_join" align="center">
-		<h2>중고愛민족 회원가입</h2>
-	<div class="box_login" align="center">
-			<br><br>
-			<input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
+   <div class="box_join" align="center">
+      <h2>중고愛민족 회원가입</h2>
+   <div class="box_login" align="center">
+         <br><br>
+         <input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
 
-			<input type="text" name="hiddencard" value="2" id="hiddencard" style="display:none">
-			<button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
-			<input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
-			<input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
-			<input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
-			<input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
-			<input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
-			<input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
-			<button type="button" class="btn_overla" style="width:10%;" onclick="checkjoin(2);">이메일확인</button><br><br>
-			<input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
-			<input type="text" id="sample6_postcode" name = "address1" placeholder="우편번호" style="width:30%;">
-			<input type="button" name="zipCode"class="btn_overlap1" onclick="sample6_execDaumPostcode()" style="width:10%;" value="우편번호 찾기"><br><br>
-			<input type="text"  id="sample6_address" name="address2" placeholder="  주소" style="width:40%;"><br><br>
-			<input type="text"  id="sample6_detailAddress" name="address3" placeholder="  상세주소" style="width:40%;"><br><br>
-			<input type="text"  id ="sample6_extraAddress" name="address4" placeholder="  참고항목" style="width:40%;"><br><br>
-		<br><br>
-		<input type="button" value="가입" class="btn_join"  onclick="checkjoin(1);"><br><br>
-		<input type="reset" value="취소" class="btn_join" onclick="goMain();">
-		<br><br>
-	</div>
-	</div>
-		</form>
+         <input type="text" name="hiddencard" value="2" id="hiddencard" style="display:none">
+         <button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
+         <input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
+         <input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
+         <input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
+         <input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
+         <input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
+         <input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
+         <button type="button" class="btn_overla" style="width:10%;" onclick="checkjoin(2);">이메일확인</button><br><br>
+         <input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
+         <input type="text" id="sample6_postcode" name = "address1" placeholder="우편번호" style="width:30%;">
+         <input type="button" name="zipCode"class="btn_overlap1" onclick="sample6_execDaumPostcode()" style="width:10%;" value="우편번호 찾기"><br><br>
+         <input type="text"  id="sample6_address" name="address2" placeholder="  주소" style="width:40%;"><br><br>
+         <input type="text"  id="sample6_detailAddress" name="address3" placeholder="  상세주소" style="width:40%;"><br><br>
+         <input type="text"  id ="sample6_extraAddress" name="address4" placeholder="  참고항목" style="width:40%;"><br><br>
+      <br><br>
+      <input type="button" value="가입" class="btn_join"  onclick="checkjoin(1);"><br><br>
+      <input type="reset" value="취소" class="btn_join" onclick="goMain();">
+      <br><br>
+   </div>
+   </div>
+      </form>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
       <script>
       function sample6_execDaumPostcode(){
