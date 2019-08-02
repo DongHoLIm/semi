@@ -212,8 +212,9 @@ public class ProductDao {
 			
 			rset = pstmt.executeQuery();
 			
-			hmap = new HashMap<String, Object>();
+			productPay = new ArrayList<HashMap<String, Object>>();
 			while(rset.next()) {
+				hmap = new HashMap<String, Object>();
 				hmap.put("postsId", postsId);
 				hmap.put("productCode", rset.getString("PRODUCT_CODE"));
 				hmap.put("productName", rset.getString("PRODUCT_NAME"));
@@ -226,6 +227,7 @@ public class ProductDao {
 				hmap.put("categoryDiv", rset.getString("SUBCATE"));
 				hmap.put("mainCateDiv", rset.getString("MAINCATE"));
 				
+				productPay.add(hmap);
 			}
 			
 		} catch (SQLException e) {
