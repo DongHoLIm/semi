@@ -117,26 +117,7 @@ function okok(){
 
 
 
- <%-- 	$(function(){
-		$(".okok").click(function(){
-		var status="<%=check%>";
-		var checkuser = $("#userinput").val();
 
-		$.ajax({
-			url:"checkmail.me",
-			type:"post",
-			data:{mailcheck:status,checkuser:checkuser},
-			success:function(data){
-				if(data=="success"){
-				alert("인증이 완료되었습니다.");
-				}else if(data=="fail"){
-					alert("인증 실패!\n 다시 설정해주세요");
-
-				}
-			}
-		});
-	});
-		}); --%>
 }
 </script>
 	<br><br><br><br><br><br><br>

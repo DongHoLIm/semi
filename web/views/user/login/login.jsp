@@ -91,7 +91,13 @@ a {
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 	<script>
 		function login() {
-			$("#loginForm").submit();
+			if($("#loginId").val()=="" || $("#loginPw").val()==""){
+				alert("아이디와 비밀번호를 확인해주세요");
+				return false;
+			}else if($("#loginId").val()!=null && $("#loginPw").val()!=null){
+			$("form").submit();
+				
+			}
 
 			$("#loginForm").submit(function(){
 				if(msg != null){

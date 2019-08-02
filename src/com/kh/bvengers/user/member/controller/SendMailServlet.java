@@ -113,9 +113,9 @@ public class SendMailServlet extends HttpServlet {
 			Transport.send(message);
 
 			HttpSession ss = request.getSession();
-			ss.setAttribute("mailkey", key);
+			ss.setAttribute("password", key);
 			if(hc.equals("1")) {
-				page="views/user/join/searchPwd.jsp";
+				page="views/user/login/searchPwdPage.jsp";
 			}else{
 				page="views/user/join/checkMail.jsp";
 			}
