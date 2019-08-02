@@ -71,18 +71,37 @@
 				    <th id="th3"></th>
 				</tr>
 				<tr>
-					<td><select name="" id="depotLocation" style="width: 200px;">
-							<option value="">--창고위치--</option>
-							<option value="A1">A1</option>
-							<option value="A2">A2</option>
-							<option value="A3">A3</option>
-							<option value="B1">B1</option>
-							<option value="B2">B2</option>
-							<option value="B3">B3</option>
-							<option value="C1">C1</option>
-							<option value="C2">C2</option>
-							<option value="C3">C3</option>
-						</select>
+					<td>
+					<select name="root" id="">
+						<option value="">--물품--</option>
+						<option value="PC">PC</option>
+						<option value="NOTE">노트북</option>
+						<option value="PRO">생활가전</option>
+					</select>
+					물품명
+					<select name="session" id="">
+						<option value="">--세션--</option>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+					</select>
+					세션명
+					<select name="floor" id="">
+						<option value="">--층--</option>
+						<option value="a">a</option>
+						<option value="b">b</option>
+						<option value="c">c</option>
+					</select>
+					층
+					<select name="room" id="">
+						<option value="">--호--</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+					호
 					</td>
 					<td><input type="date" style="width: 200px;" id="insertDate"/></td>
 					<td><input type="date" style="width: 200px;" id="releaseDate"/></td>
@@ -97,13 +116,18 @@
 	<script>
 		function search(){
 			$(function(){
-				var location = $("select[id='depotLocation']").val();
+				var root = $("select[name='root']").val();
+				var session = $("select[name='session']").val();
+				var floor = $("select[name='floor']").val();
+				var room = $("select[name='room']").val();
 				var insertDate = $("input[id='insertDate']").val();
 				var releaseDate = $("input[id='releaseDate']").val();
 				var productCode =$("input[id='productCode']").val();
+				
+				
 				$.ajax({
 					url:"search.dp",
-					data:{"location":location,"insertDate":insertDate,"releaseDate":releaseDate,"productCode":productCode},
+					data:{"root":root,"session":session,"floor":floor,"room":room,"insertDate":insertDate,"releaseDate":releaseDate,"productCode":productCode},
 					type:"post",
 					success:function(data){
 						var $depotTbody = $("#depotMain tbody");
@@ -118,7 +142,12 @@
 							var $location=$("<td><label>").text(data["list"][i].locationCode);
 							var $name = $("<td><label>").text(data["list"][i].productName);
 							var $checkd = $("<td><label>").text(data["list"][i].checkDate);
-							var $released = $("<td><label>").text(data["list"][i].releaseDate);
+							var $released = $("<td><label>");
+							if(data["list"][i].releaseDate==null){
+								$released.text("미출고");
+							}else{
+								$released.text(data["list"][i].releaseDate);
+							}
 							$tr.append($num);
 							$tr.append($code);
 							$tr.append($name);
@@ -282,7 +311,12 @@
 				<td><label for=""><%=d.getProductName() %></label></td>
 				<td><label for=""><%=d.getLocationCode() %></label></td>
 				<td><label for=""><%=d.getCheckDate() %></label></td>
-				<td><label for=""><%=d.getReleaseDate() %></label></td>
+				<td><%if(d.getReleaseDate()==null){ %>
+					<label for="">미출고</label>
+				<%}else{ %>
+					<label for=""><%=d.getReleaseDate() %></label>	
+				<%}%>
+				</td>
 			</tr>
 			<%} %>
 			</tbody>

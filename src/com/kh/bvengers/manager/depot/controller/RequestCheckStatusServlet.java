@@ -20,14 +20,18 @@ public class RequestCheckStatusServlet extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String productCode = request.getParameter("productCode");
+		String depotCate = request.getParameter("root");
 		String location =  request.getParameter("location");
 		String session = request.getParameter("session");
+		String room = request.getParameter("room");
 		String checkStatus=request.getParameter("request");
 		String completStatus=request.getParameter("status");
 		String checkPassContent=request.getParameter("checkPassContent");
+		 
+		
 		
 		Depot d = new Depot();
-		String locationCode = location+session;
+		String locationCode = depotCate+"-"+location+"-"+session+"-"+room;
 		if(completStatus==null&&checkStatus==null) {
 			completStatus="2";
 			checkStatus="1";
@@ -52,8 +56,6 @@ public class RequestCheckStatusServlet extends HttpServlet {
 		d.setCheckPassContent(checkPassContent);
 		d.setProductCode(productCode);
 		d.setLocationCode(locationCode);
-		d.setSession(session);
-		d.setLocation(location);			
 		int result = new DepotService().requsetCheck(d);
 		
 		

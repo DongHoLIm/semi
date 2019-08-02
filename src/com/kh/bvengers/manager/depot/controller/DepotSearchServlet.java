@@ -26,11 +26,48 @@ public class DepotSearchServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String location = request.getParameter("location");
+		String root = request.getParameter("root");
+		String session= request.getParameter("session");
+		String floor = request.getParameter("floor");
+		String room = request.getParameter("room");
 		String insertDate = request.getParameter("insertDate");
 		String releaseDate = request.getParameter("releaseDate");
 		String productCode = request.getParameter("productCode");
 		String currentPage1 = request.getParameter("currentPage");
+		
+		String location = "";
+		
+		if(root!=null&&session.equals("")&&floor.equals("")&&room.equals("")) {
+			location = root;
+		}else if(root.equals("")&&session!=null&&floor.equals("")&&room.equals("")) {
+			location = session;
+		}else if(root.equals("")&&session.equals("")&&floor!=null&& room.equals("")) {
+			location = floor;
+		}else if(root.equals("")&&session.equals("")&&floor.equals("")&&room!=null){
+			location = room;
+		}else if(root!=null&&session!=null&&floor.equals("")&&room.equals("")) {
+			location = root+"-"+session;
+		}else if(root!=null&&session.equals("")&&floor!=null&& room.equals("")) {
+			location = root+"-_-"+floor;
+		}else if (root!=null&&session.equals("")&&floor.equals("")&&room!=null) {
+			location = root +"-_-_-"+room;
+		}else if(root.equals("")&&session!=null&&floor!=null&& room.equals("")) {
+			location = "__-"+session+"-"+floor+"-_";
+		}else if(root.equals("")&&session!=null&&floor.equals("")&&room!=null) {
+			location = "__-"+session+"-_-"+room;
+		}else if (root.equals("")&&session.equals("")&&floor!=null&&room!=null) {
+			location = "__-_"+floor+room;
+		}else if (root!=null&&session!=null&&floor!=null&&room.equals("")) {
+			location = root+"-"+session+"-"+floor+"-_";
+		}else if(root!=null&&session!=null&&floor.equals("")&&room!=null){
+			location = root+"-"+session+"-_-"+room;
+		}else if(root!=null&&session.equals("")&&floor!=null&&room!=null) {
+			location = root+"-_-"+floor+"-"+room;
+		}else if(root.equals("")&&session!=null&&floor!=null&&room!=null) {
+			location = "__-"+session+"-"+floor+"-"+room;
+		}else if(!root.equals("")&&!session.equals("")&&!floor.equals("")&&!room.equals("")) {
+			location =root+"-"+session+"-"+floor+"-"+room;
+		}
 		
 		int currentPage;		
 		int limit;				
