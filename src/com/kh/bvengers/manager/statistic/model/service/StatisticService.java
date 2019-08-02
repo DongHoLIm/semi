@@ -26,25 +26,25 @@ public class StatisticService {
 	}
 
 	public ArrayList<ArrayList<HashMap<String, Object>>> salesStatistics() {
-		Connection con = getConnection();
-		ArrayList<ArrayList<HashMap<String, Object>>> allList = new ArrayList<ArrayList<HashMap<String, Object>>>();
-		
-		ArrayList<HashMap<String, Object>>  allDatalist = null;
-		ArrayList<HashMap<String, Object>>  calculateDatalist = null;
-		ArrayList<HashMap<String, Object>>  refundDatalist = null;
-		
-		ArrayList<String> dateList = new StatisticDao().salesCountDate(con);
+	      Connection con = getConnection();
+	      ArrayList<ArrayList<HashMap<String, Object>>> allList = new ArrayList<ArrayList<HashMap<String, Object>>>();
+	      
+	      ArrayList<HashMap<String, Object>>  allDatalist = null;
+	      ArrayList<HashMap<String, Object>>  calculateDatalist = null;
+	      ArrayList<HashMap<String, Object>>  refundDatalist = null;
+	      
+	      ArrayList<String> dateList = new StatisticDao().salesCountDate(con);
 
-		allDatalist = new StatisticDao().allDatalist(con, dateList);
-		calculateDatalist = new StatisticDao().calculateDatalist(con, dateList);
-		refundDatalist = new StatisticDao().refundDatalist(con, dateList);
-		
-		allList.add(allDatalist);
-		allList.add(calculateDatalist);
-		allList.add(refundDatalist);
-		
-		close(con);
-		return allList;
-	}
+	      allDatalist = new StatisticDao().allDatalist(con, dateList);
+	      calculateDatalist = new StatisticDao().calculateDatalist(con, dateList);
+	      refundDatalist = new StatisticDao().refundDatalist(con, dateList);
+	      
+	      allList.add(allDatalist);
+	      allList.add(calculateDatalist);
+	      allList.add(refundDatalist);
+	      
+	      close(con);
+	      return allList;
+	   }
 
 }

@@ -22,7 +22,7 @@
 	<button type ="submit" value="확인" class="postbtn" onclick="postbtn();">신고하기</button> 
 	</form>
 
-
+	
 
 </body>
 <script>

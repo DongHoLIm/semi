@@ -71,9 +71,10 @@
       </div>
       <div id="collapse2" class="panel-collapse collapse">
         <div class="mypage">
-        	<ul><br>
-        		<li onclick="changeInfo();">회원정보 변경</li>
-        		<li onclick="deleteMember();">회원 탈퇴</li>
+        	<ul>
+        		<li><br /></li>
+        		<li><a href="/sp/views/user/mypage/memberSignOut.jsp">회원정보 변경</a></li>
+        		<li><a href="/sp/views/user/mypage/memberInfo.jsp">회원 탈퇴</a></li>
         	</ul>
         </div>
       </div>
@@ -82,19 +83,6 @@
 </div>
 <br>
 </body>
-<!-- footer 영역 -->
-<script>
-		function deleteMember(){
-			location.href="/sp/views/user/mypage/memberSignOut.jsp";
-
-		}
-		function changeInfo(){
-			location.href="/sp/views/user/mypage/memberInfo.jsp";
-
-		}
-
-	</script>
-
 </html>
 
 

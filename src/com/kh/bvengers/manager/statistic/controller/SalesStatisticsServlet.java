@@ -20,7 +20,7 @@ import com.kh.bvengers.manager.statistic.model.service.StatisticService;
  */
 @WebServlet("/salesStatistics.st")
 public class SalesStatisticsServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,35 +30,34 @@ public class SalesStatisticsServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  
-		ArrayList<ArrayList<HashMap<String, Object>>> datalist = new StatisticService().salesStatistics();
-		
-		String page = null;
-		if(datalist != null) {
-			page = "views/manager/statistics/salesStatistics.jsp";
-			request.setAttribute("dataList", datalist);
-		}else {
-			page = "/views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "통계를 불러오는데 실패하였습니다.");
-		}
-		request.getRequestDispatcher(page).forward(request, response);
-		
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+      ArrayList<ArrayList<HashMap<String, Object>>> datalist = new StatisticService().salesStatistics();
+      
+      String page = null;
+      if(datalist != null) {
+         page = "views/manager/statistics/salesStatistics.jsp";
+         request.setAttribute("dataList", datalist);
+      }else {
+         page = "views/common/errorPagePrompt.jsp";
+         request.setAttribute("msg", "통계를 불러오는데 실패하였습니다.");
+      }
+      request.getRequestDispatcher(page).forward(request, response);
+      
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }
-
 
 
 

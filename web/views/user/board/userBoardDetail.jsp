@@ -74,7 +74,7 @@ td{
 				<tr>
 					<td>댓글 작성</td>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
-					<td><button id = "addReply">댓글 등록</button></td>
+					<td><button id = "addReply" onclick="insertReply();">댓글 등록</button></td>
 				</tr>
 			</table>
 				<br><br>
@@ -89,9 +89,10 @@ td{
 				<td class="tDate">작성일</td>
 			</tr>
 			</tbody>
-			<tfoot>
-
-			</tfoot>
+		</table>
+		<table id="commentSelectTable" class="commentTables" border="1" align="center">
+			<tbody>
+			</tbody>
 		</table>
 		</div>
 		<div>
@@ -106,7 +107,8 @@ td{
  <footer><%@ include file="../hfl/footer.jsp" %></footer>
 	</div>
 	<script>
-	$(function(){
+	
+	function insertReply(){
 		var postsId = <%= b.getPostsId()%>;
 		$(document).ready(function(){
 			$.ajax({
@@ -114,19 +116,26 @@ td{
 				data:{postsId:postsId},
 				type:"post",
 				success:function(data){
-					var $replySelectTable = $("#replySelectTable tfoot");
-					$replySelectTable.html("");
+					var $commentSelectTable = $("#commentSelectTable tbody");
+					$commentSelectTable.html("");
 						for(var key in data){
 							var $tr = $("<tr>");
-							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
-							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
-							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							var $writeTd = $("<td>").text(data[key].memberId).addClass("tWriter");
+							var $contentTd = $("<td>").text(data[key].commentContents).addClass("tContent");
+							var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
 
 						$tr.append($writeTd);
 						$tr.append($contentTd);
 						$tr.append($dateTd);
-						$replySelectTable.append($tr);
+						$commentSelectTable.append($tr);
+						$(".tWriter").css({"width":"100px", "height":"50px"});
+						$(".tContent").css("width", "500px");
+						$(".tDate").css("width", "200px");
+						$(".tRecommend").css("width","100px");
+						$commentSelectTable.css({"text-align":"center", "width":"1000px","margin":"auto"});
+						/* $(".commentTables").hide(); */
 					}
+						
 				},
 				error:function(){
 					alert("댓글 입력 실패");
@@ -135,7 +144,7 @@ td{
 			});
 		});
 
-	});
+	};
 
 	function report(){
 	  var writer = <%= b.getMemberNo()%>;
