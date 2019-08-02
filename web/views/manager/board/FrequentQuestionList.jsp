@@ -68,16 +68,15 @@ int endPage = pi.getEndPage();
 	<header><%@ include file="../hfl/managerHeader.jsp" %></header>
 	<br />
 	<br />
-	<button type="button" onclick="location.href='<%=request.getContextPath()%>/chatList.ch'">채팅 테스트</button>
 	<section id="sec1">
-		<h2 align="center">공지사항</h2>
+		<h2 align="center">자주찾는 질문</h2>
 
 		<table class="board" id = "listArea">
 			<tr class="row0">
 			<thead>
 				<th>번호</th>
 				<th>제목</th>
-				<!-- <th>작성자</th> -->
+				<th>작성자</th>
 				<th>작성날짜</th>
 			</thead>
 			</tr>
@@ -85,12 +84,12 @@ int endPage = pi.getEndPage();
 				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
-				<%-- <td><%= b.getMemberId() %></td> --%>
+				<td><%= b.getMemberName() %></td>
 				<td><%= b.getCreateDate() %></td>
 			<%} %>
 		</table>
 		<div align = "center">
-      <button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
+      <button onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
       </div>
 
 			<br><br><br><br>
