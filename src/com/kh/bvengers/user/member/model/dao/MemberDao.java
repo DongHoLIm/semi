@@ -39,7 +39,7 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, memberId);			
+			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
@@ -61,7 +61,7 @@ public class MemberDao {
 				loginUser.setAccountNo(rset.getString("ACCOUNT_NO"));
 				loginUser.setGradeCode(rset.getString("GRADE_CODE"));
 				loginUser.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 			}
 
 		} catch (SQLException e) {
@@ -174,12 +174,12 @@ public class MemberDao {
 		String query = prop.getProperty("searchId");
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			
+
+
 			pstmt.setString(1, searchValue);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
-			
+
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
@@ -223,14 +223,14 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage-1)*limit +1;
 			int endRow = startRow + limit-1;
-			
+
 			pstmt.setString(1, searchValue);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
-			
+
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
@@ -274,14 +274,14 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage-1)*limit +1;
 			int endRow = startRow + limit-1;
-			
+
 			pstmt.setString(1, searchValue);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
-			
+
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Member>();
 			while(rset.next()) {
@@ -532,23 +532,23 @@ public class MemberDao {
 	}
 
 
- 
+
 	public int upblack(Connection con, Member m) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("upblack");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 		return result;
   }
 	public Seller searchInfo(Connection con, String userId) {
@@ -587,14 +587,14 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("memberidCk");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
@@ -604,24 +604,24 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
+
 		return result;
 	}
 	public int checkuser(Connection con, String memberId, String memberName, String email) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("checkuser");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, memberName);
 			pstmt.setString(3, email);
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
@@ -636,43 +636,43 @@ public class MemberDao {
 	public int changePwd(Connection con, String memberId, String memberPwd) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
+
 		String query = prop.getProperty("changePwd");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberPwd);
 			pstmt.setString(2, memberId);
 			result = pstmt.executeUpdate();
-			
-			
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
-		
+
+
 		return result;
 	}
 	public int kakaojoin(Connection con, String id, String nickname, String token) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("kakaojoin");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			pstmt.setString(1, id);
 			pstmt.setString(2, token);
 			pstmt.setString(3, nickname);
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	public Member kakaologin(Connection con, String id) {
@@ -684,7 +684,7 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, id);			
+			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
@@ -706,7 +706,7 @@ public class MemberDao {
 				loginUser.setAccountNo(rset.getString("ACCOUNT_NO"));
 				loginUser.setGradeCode(rset.getString("GRADE_CODE"));
 				loginUser.setSellCount(rset.getInt("SELL_COUNT"));
-				
+
 			}
 
 		} catch (SQLException e) {
@@ -716,6 +716,45 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return loginUser;
+	}
+	public int kakaoidCk(Connection con, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("kakaoidCk");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int temporaryPwd(Connection con, String memberId, String newPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("temporaryPwd");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, memberId);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

@@ -132,7 +132,7 @@
             </tr>
             <tr>
                 <th>가격 </th>
-                <td colspan="3"><input type="text" name="productMoney" class="form-control"></td>
+                <td colspan="3"><input type="number" name="productMoney" class="form-control"></td>
             </tr>
             <tr>
                 <th>상품 이미지</th>

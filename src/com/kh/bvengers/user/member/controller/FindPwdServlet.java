@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.bvengers.user.member.model.service.MemberService;
 
@@ -19,16 +20,26 @@ public class FindPwdServlet extends HttpServlet {
     }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String newPwd = (String) request.getSession().getAttribute("mailkey");
+		request.getSession().invalidate();
       String memberId = (String) request.getParameter("userId");
-      //int result = new MemberService().changePwd(newPwd, memberId);
-
-      //String page = "";
-      //if(result>0) {
-         //page="views/user/join/searchPwdResult.jsp";
-      //}
-      request.setAttribute("memberId", memberId);
-      request.getRequestDispatcher("views/user/join/searchPwdResult.jsp").forward(request, response);
+     String newPwd = (String) request.getParameter("password");
+     
+      System.out.println(newPwd);
+      
+      int result = new MemberService().temporaryPwd(memberId,newPwd);
+      String page = "";
+      
+      if(result>0) {
+      request.getSession().invalidate();
+      
+      HttpSession ss = request.getSession();
+      ss.setAttribute("sessionId", memberId);
+      page = "/index.jsp";
+      }else {
+    	  request.setAttribute("msg", "비밀번호 변경 실패");
+      page = "views/common/errorPagePrompt.jsp";
+      }
+      request.getRequestDispatcher(page).forward(request, response);
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

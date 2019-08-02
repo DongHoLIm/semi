@@ -23,7 +23,7 @@ public class CheckConfirmServlet extends HttpServlet {
 		String memberId = request.getParameter("userId");
 		String memberName = request.getParameter("userName");
 		String email = request.getParameter("email");
-
+		String password = (String) request.getSession().getAttribute("password");
 		String status = (String)request.getAttribute("status");
 
 		PrintWriter out = response.getWriter();
@@ -31,6 +31,7 @@ public class CheckConfirmServlet extends HttpServlet {
 		if(result>0) {
 			out.append(status);
 			request.setAttribute("hc", "1");
+			request.setAttribute("password", password);
 			request.setAttribute("email", email);
 			request.getRequestDispatcher("/send.me").forward(request, response);
 		}else {

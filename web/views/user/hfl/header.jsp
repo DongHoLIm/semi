@@ -38,8 +38,19 @@
              <li><a href="<%=request.getContextPath() %>/views/user/product/productEnroll.jsp"> 상품등록 </a></li>
            <li><a href="<%=request.getContextPath()%>/basketAllList.bk"> 장바구니 </a></li>
            <li><a href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
+           <% if(loginUser != null) {%>
            <li><a href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
-       <li><a href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
+           <%} else {%>
+           <li onclick="myPage();"><a>마이페이지</a></li>
+           <script>
+				function myPage(){
+					if(confirm("로그인 후 이용해주시기 바랍니다.")){
+						location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
+					}
+				}
+           </script>
+           <%} %>
+       	   <li><a href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
          </ul>
       <% if(loginUser == null) {%>
       <ul class="nav navbar-nav navbar-right">
@@ -60,12 +71,6 @@
 
     </div>
   </div>
-  <script>
-  	function goMyPage(){
-		location.href="<%=request.getContextPath()%>/listMyPage.mp";
-	}
-
-  </script>
 </nav>
 </body>
 </html>

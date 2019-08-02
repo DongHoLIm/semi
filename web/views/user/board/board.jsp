@@ -158,14 +158,7 @@
    <br>
    <hr>
   <h2 id="board">게시판</h2>
-  <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
-			<option value="">--조회할목록선택--</option>
-			<option value="findId" >아이디로 조회</option>
-			<option value="findName" >제목으로 조회</option>
-		</select>
-		<input type="search" name="searchValue" id = "inputSearch" >
-		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
-  <table class="table" id = "messageArea">
+    <table class="table" id = "messageArea">
       <thead>
       <tr>
         <th>번호</th>
@@ -223,7 +216,16 @@
          <button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=maxPage1%>'">>></button>
 
       </div>
-
+      	<br><br>
+      <div align = "center">
+ <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
+			<option value="">--조회할목록선택--</option>
+			<option value="findId" >아이디로 조회</option>
+			<option value="findName" >제목으로 조회</option>
+		</select>
+		<input type="search" name="searchValue" id = "inputSearch" >
+		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
+	</div>
 </div>
 
    <script>

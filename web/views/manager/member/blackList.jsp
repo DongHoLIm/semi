@@ -58,7 +58,7 @@ border:1px solid white;
 <body>
 	<%@ include file="../hfl/managerHeader.jsp"%>
 	<br />
-	<h2 align="center">bad회원
+	<h2 align="center">경고회원
 	 관리</h2>
 	<form action="<%=request.getContextPath()%>/badsearch.me" method="post">
 	<div id="inOutMain"><br><br>

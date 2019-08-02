@@ -173,4 +173,23 @@ public class MemberService {
 		return loginUser;
 	}
 
+	public int kakaoidCk(String id) {
+		Connection con = getConnection();
+		int result = new MemberDao().kakaoidCk(con,id);
+		close(con);
+		return result;
+	}
+
+	public int temporaryPwd(String memberId, String newPwd) {
+		Connection con = getConnection();
+		int result = new MemberDao().temporaryPwd(con,memberId,newPwd);
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
 }

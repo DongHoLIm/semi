@@ -29,7 +29,9 @@
 .menu {
 	padding: 10px;
 }
-
+.container {
+	min-height: 1000px;
+}
 .carousel-inner>.item>img {
 	top: 0;
 	left: 0;
@@ -37,6 +39,9 @@
 }
 #powerLink td{
 	padding: 10px;
+}
+.powerLinkForm {
+	margin-top: 20px;
 }
 </style>
 
@@ -47,7 +52,6 @@
 	<div class="container">
 		<br>
 		<br>
-		<h3 align="center">광고배너</h3>
 		<form action="<%=request.getContextPath()%>/select.pd" method=post
 			encType=multipart/form-data>
 		</form>
@@ -84,7 +88,6 @@
 				class="sr-only">Next</span>
 			</a>
 		</div>
-	</div>
 
 
 	<br>
@@ -98,6 +101,7 @@
 		</tbody>
 	</table>
 	</form>
+	</div>
 	<!-- footer 영역 -->
 	<script>
 		$(function(){

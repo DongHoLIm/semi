@@ -30,7 +30,7 @@ public class FindIdServlet extends HttpServlet {
 			page = "views/user/join/searchIdResult.jsp";
 			request.setAttribute("id", m.getMemberId());
 		}else {
-			request.setAttribute("msg", "목록조회실패!");
+			request.setAttribute("msg", "입력하신 정보롤 확인하세요!");
 			page="/views/common/errorPagePrompt.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);
