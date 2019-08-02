@@ -35,8 +35,15 @@ public class OkPayServlet extends HttpServlet {
 		String paymentPrice = request.getParameter("paymentPrice");
 		paymentPrice = paymentPrice.substring(0, paymentPrice.length()-1);
 		String userName = request.getParameter("userName");
+		int count = Integer.parseInt(request.getParameter("count"));
 		
 		String productCode = request.getParameter("productCode");
+		String[] codeList = productCode.split(",");
+		
+		String priceSplit = request.getParameter("priceSplit");
+		String[] priceList = priceSplit.split(",");
+		
+		
 		
 		String addNum = request.getParameter("addNum");
 		String address = request.getParameter("address");
@@ -53,16 +60,16 @@ public class OkPayServlet extends HttpServlet {
 		
 		Payment pay = new Payment();
 		
-		pay.setProductCode(productCode);
+		//pay.setProductCode(productCode);
 		pay.setMemberNo(memberNo);
-		pay.setPayMoney(Integer.parseInt(paymentPrice));
+		//pay.setPayMoney(Integer.parseInt(paymentPrice));
 		pay.setRecieverName(userName);
 		pay.setSubDeliverySite(subAdd);
 		pay.setDeliverySite(add);
 		pay.setRecieverPhone(phone);
 		pay.setMail(mail);
 		
-		int result = new ProductService().okPay(pay);
+		int result = new ProductService().okPay(pay, count, codeList, priceList);
 		
 		if(result >0) {
 			response.sendRedirect("index.jsp");

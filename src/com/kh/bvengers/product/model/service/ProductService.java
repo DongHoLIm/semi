@@ -78,7 +78,7 @@ public class ProductService {
 			return productPay;
 		}
 
-		public int okPay(Payment pay) {
+		public int okPay(Payment pay, int count, String[] codeList, String[] priceList) {
 			Connection con = getConnection();
 			int result = 0;
 			int result1 = 0;
@@ -88,30 +88,39 @@ public class ProductService {
 			String siteCheck = null;
 			String orderNo = "";
 			
-			result1 = new ProductDao().insertPayOrder(con, pay);
-			
-			orderNo = new ProductDao().selectOrderCurr(con);
-			pay.setOrderNo(orderNo);
-			
-			siteCheck = new ProductDao().selectSite(con, pay);
-			
-			if(siteCheck == null) {	//테이블에 주소 등록이 안되있을 시
-				result2 = new ProductDao().insertSite(con, pay);
+			int check = 0;
+			for(int i = 0; i < count; i++) {
+				pay.setProductCode(codeList[i]);
+				pay.setPayMoney(Integer.parseInt(priceList[i]));
 				
-				siteCheck = new ProductDao().siteCurr(con);
+				result1 = new ProductDao().insertPayOrder(con, pay);
 				
-			}else {
-				result2 = 1; 
+				orderNo = new ProductDao().selectOrderCurr(con);
+				pay.setOrderNo(orderNo);
+				
+				siteCheck = new ProductDao().selectSite(con, pay);
+				
+				if(siteCheck == null) {	//테이블에 주소 등록이 안되있을 시
+					result2 = new ProductDao().insertSite(con, pay);
+					
+					siteCheck = new ProductDao().siteCurr(con);
+					
+				}else {
+					result2 = 1; 
+				}
+				
+				pay.setDeliverySiteCode(siteCheck);
+				
+				result3 = new ProductDao().insertDelivery(con, pay);
+				
+				result4 = new ProductDao().disabledPostOpen(con, pay);
+				
+				if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
+					check += 1;
+				}
 			}
 			
-			pay.setDeliverySiteCode(siteCheck);
-			
-			result3 = new ProductDao().insertDelivery(con, pay);
-			
-			result4 = new ProductDao().disabledPostOpen(con, pay);
-			
-			
-			if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
+			if(check == count) {
 				commit(con);
 				result = 1;
 			}else {

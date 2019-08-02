@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.bvengers.product.model.vo.Category"%>
 <%@page import="com.kh.bvengers.board.model.vo.Attachment"%>
 <%@page import="com.kh.bvengers.board.model.vo.Posts"%>
@@ -10,8 +11,8 @@
 	Posts po = (Posts) request.getAttribute("po");
 	Attachment att = (Attachment) request.getAttribute("att");
 	Category cate = (Category) request.getAttribute("cate");
-
-	HashMap<String, Object> productPay = (HashMap<String, Object>) request.getAttribute("productPay");
+	ArrayList<HashMap<String, Object>> productPay = (ArrayList<HashMap<String, Object>>) request.getAttribute("productPay");
+	//HashMap<String, Object> productPay = (HashMap<String, Object>) request.getAttribute("productPay");
 
 %>
 <!DOCTYPE html>
@@ -195,21 +196,34 @@
 			<!-- 장바구니 목록(상품테이블) -->
 			<table class="pt">
 				<tr>
+				<%  
+					String productCode = "";
+					String priceSplit = "";
+					int count = productPay.size();
+					int totalPrice = 2500;
+					for(int i = 0; i < productPay.size(); i++){ %>
 					<!-- 장바구니에 등록한 상품 사진, 제목, 카테고리, 품명, 가격,  -->
 					<td id="productImg" rowspan="3" width="20%">
-						<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%=productPay.get("newFileName") %>" width=95% hright=100%>
+						<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%=productPay.get(i).get("newFileName") %>" width=95% hright=100%>
 					</td>
 
-					<td class="postsTitle" colspan="3" width="70%" height="30%"><label><%= productPay.get("postsTitle") %></label></td> <!-- 게시글 -제목: 제거 -->
+					<td class="postsTitle" colspan="3" width="70%" height="30%"><label><%= productPay.get(i).get("postsTitle") %></label></td> <!-- 게시글 -제목: 제거 -->
 				</tr>
 				<tr>
-					<td id="Detail"><label>제품명 | <%= productPay.get("productName") %></label></td>
-					<td id="Detail"><label>카테고리 | <%= productPay.get("mainCateDiv") %>><%= productPay.get("categoryDiv") %></label></td>
-					<td id="Detail"><label>판매자 | <%= productPay.get("memberId") %></label></td>
+					<td id="Detail"><label>제품명 | <%= productPay.get(i).get("productName") %></label></td>
+					<td id="Detail"><label>카테고리 | <%= productPay.get(i).get("mainCateDiv") %>><%= productPay.get(i).get("categoryDiv") %></label></td>
+					<td id="Detail"><label>판매자 | <%= productPay.get(i).get("memberId") %></label></td>
 				</tr>
 				<tr>
-					<td colspan="3" id="price" ><label><%= productPay.get("productMoney") %>원</label></td>
+					<td colspan="3" id="price" ><label><%= productPay.get(i).get("productMoney") %>원</label></td>
+										
 				</tr>
+					<input type="hidden" value="<%=totalPrice += Integer.parseInt(productPay.get(i).get("productMoney")+"") %>"/>
+					<input type="hidden" value="<% productCode += productPay.get(i).get("productCode") + ","; %>"/>
+					<input type="hidden" value="<% priceSplit += productPay.get(i).get("productMoney") + ","; %>"/>
+					
+				
+				<%} %>
 			</table>
 
 			<hr width="80%"/>
@@ -219,7 +233,7 @@
 					<tr>
 						<th><label>총 결제금액</label></th>
 						<td><input type="text" name="paymentPrice" id="paymentPrice"
-							value="<%= productPay.get("productMoney") %>원" readonly></td>
+							value="<%= totalPrice %>원" readonly></td>
 					</tr>
 					<tr>
 						<th><label>택배 수령자 </label></th>
@@ -245,8 +259,10 @@
 							<input type="number" name="phone1" id="phone1" style="width:30%" maxlength="3" oninput="phoneNum(this);">-
 							<input type="number" name="phone2" id="phone2" style="width:30%" maxlength="4" oninput="phoneNum(this);">-
 							<input type="number" name="phone3" id="phone3" style="width:30%" maxlength="4" oninput="phoneNum(this);">
-							<input type="hidden" name="productCode" value="<%=productPay.get("productCode") %>"/>
-
+							<input type="hidden" name="productCode" value="<%= productCode %>"/>
+							<input type="hidden" name="priceSplit" value="<%= priceSplit %>"/>
+							
+							<input type="hidden" name="count" value="<%=count %>" />
 						</td>
 					</tr>
 					<tr>
@@ -276,6 +292,15 @@
 	    }
 
 	 	function addFind(){
+	 			var list = new Array();
+	 			
+	 			$("#select:checked").each(function(index, item){
+	 			   list.push($(item).val());
+	 			});
+	 				
+	 			var code = list.join(',');
+	 			console.log(code);
+	 			
 			new daum.Postcode({
 		           oncomplete: function(data) {
 
@@ -326,20 +351,20 @@
 			var mail = document.getElementById('mail').value;
 
 			BootPay.request({
-				price: '<%= productPay.get("productMoney") %>', //실제 결제되는 가격
+				price: '<%= productPay.get(0).get("productMoney") %>', //실제 결제되는 가격
 				application_id: "5d2fec7c396fa61e224d5730",
-				name: '<%= productPay.get("postsTitle") %>', //결제창에서 보여질 이름
+				name: '<%= productPay.get(0).get("postsTitle") %>', //결제창에서 보여질 이름
 				pg: '',
 				method: '', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
 				show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
 				items: [
 					{
-						item_name: '<%= 	productPay.get("productName") %>', //상품명
+						item_name: '<%= 	productPay.get(0).get("productName") %>', //상품명
 						qty: 1, //수량
-						unique: '<%=productPay.get("postsId") %>', //해당 상품을 구분짓는 primary key
-						price: '<%=productPay.get("productMoney") %>', //상품 단가
-						cat1: '<%= productPay.get("mainCateDiv") %>', // 대표 상품의 카테고리 상, 50글자 이내
-						cat2: '<%= productPay.get("categoryDiv") %>', // 대표 상품의 카테고리 중, 50글자 이내
+						unique: '<%=productPay.get(0).get("postsId") %>', //해당 상품을 구분짓는 primary key
+						price: '<%=productPay.get(0).get("productMoney") %>', //상품 단가
+						cat1: '<%= productPay.get(0).get("mainCateDiv") %>', // 대표 상품의 카테고리 상, 50글자 이내
+						cat2: '<%= productPay.get(0).get("categoryDiv") %>', // 대표 상품의 카테고리 중, 50글자 이내
 					}
 				],
 				user_info: {
@@ -348,7 +373,7 @@
 					addr: addr,
 					phone: phoneNum
 				},
-				order_id: '<%=productPay.get("postsId") %>', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+				order_id: '<%=productPay.get(0).get("postsId") %>', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 				params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
 				//account_expire_at: '2018-05-25', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
 				extra: {
