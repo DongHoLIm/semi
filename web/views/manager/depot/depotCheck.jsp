@@ -69,6 +69,12 @@
 			<tr>
 				<td>창고 위치</td>
 				<td align="left">
+					<select name="root" id="">
+						<option value="PC">PC</option>
+						<option value="NOTE">노트북</option>
+						<option value="PRO">가전제품</option>
+					</select>
+					종류 
 					<select name="location" id="">
 						<option value="A">A</option>
 						<option value="B">B</option>
@@ -76,11 +82,19 @@
 					</select>
 					섹션
 					<select name="session" id="" >
+						<option value="a">a</option>
+						<option value="b">b</option>
+						<option value="c">c</option>
+					</select>
+					층
+					<select name="room" id="">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
 					</select>
-					층
+					호
 				</td>
 			</tr>
 			<tr>

@@ -61,12 +61,7 @@
                <td><%=d.getLocationCode() %></td>
                <td><%=d.getCompletStatus() %></td>
                <td><%=d.getCheckDate() %></td>
-               <td><%if(d.getReleaseDate()==null){ %>
-                     <button id="relesDate" onclick="relesDate(<%=d.getProductCode()%>)">출고 요청</button>
-                  <%}else{ %>
-                     <label for=""><%=d.getReleaseDate() %></label>
-                  <%} %>
-               </td>
+               <td><%=d.getReleaseDate() %></td>
             </tr>
          <%} %>
          </table>
