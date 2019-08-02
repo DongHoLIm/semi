@@ -24,6 +24,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
+.pagingArea > button {
+	background:#FFF;
+	border: 1px solid black;
+
+}
+
 #refundMain {
 	width: 95%;
 	height: 80%;
@@ -99,8 +105,6 @@ border:1px solid white;
 					<td><%=r.getrStatus() %></td>
 					<input type="hidden" id="pno"value="<%=r.getPno()%>">
 					<input type="hidden" id="pcode" value="<%=r.getpCode()%>">
-				
-					
 				</tr>
 		<% } %>
 			</table><br><br>
@@ -108,7 +112,7 @@ border:1px solid white;
 		
 		
 	<div class = "pagingArea" align ="center" >
-      <button onclick = "location.href = '<%=request.getContextPath()%>/refundProduct.mp?currentPage1=1'"><</button>
+      <button onclick = "location.href = '<%=request.getContextPath()%>/refundProduct.mp?currentPage1=1'"><<</button>
       <%if(currentPage <= 1) {%>
       <button disabled><</button>
       <%} else{%>

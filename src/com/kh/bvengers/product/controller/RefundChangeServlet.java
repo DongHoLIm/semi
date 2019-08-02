@@ -30,6 +30,8 @@ public class RefundChangeServlet extends HttpServlet {
 		
 		result = new ProductService().passRefund(pass, pno, pcode);
 		
+		
+		
 		if(result > 0) {
 			/*response.sendRedirect("views/manager/product/refundManagement.jsp");*/
 			//page = "views/manager/product/refundManagement.jsp";

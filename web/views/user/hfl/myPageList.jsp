@@ -25,10 +25,10 @@
     	list-style: none;
 
     }
-    /* a{
+   a{
     	color:black;
     	text-decoration: none;
-    } */
+
      a:link {
      color: white;
      }
@@ -73,8 +73,8 @@
         <div class="mypage">
         	<ul>
         		<li><br /></li>
-        		<li><a href="/sp/views/user/mypage/memberSignOut.jsp">회원정보 변경</a></li>
-        		<li><a href="/sp/views/user/mypage/memberInfo.jsp">회원 탈퇴</a></li>
+        		<li><a href="/sp/views/user/mypage/memberInfo.jsp">회원정보 변경</a></li>
+        		<li><a href="/sp/views/user/mypage/memberSignOut.jsp">회원 탈퇴</a></li>
         	</ul>
         </div>
       </div>

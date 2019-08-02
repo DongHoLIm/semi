@@ -306,6 +306,26 @@ $(document).ready(function() {
 
 </script>
 <style>
+
+#pagingArea {
+	width:60%;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.pagingArea1 > button {
+	background:#FFF;
+	border: 1px solid black;
+
+}
+
+.pagingArea2 > button {
+	background:#FFF;
+	border: 1px solid black;
+
+}
+
 .td_select {
 	width:87%;
 }
@@ -484,9 +504,10 @@ input[type=button] {
 			</table>
 			</div>
 		<br>
+		<div id="pagingArea">
 		<div class="pagingArea1" align="center">
 			<button
-				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><</button>
+				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><<</button>
 			<%
 				if (currentPage <= 1) {
 			%>
@@ -530,7 +551,7 @@ input[type=button] {
 			<button
 				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
 			</div>
-	</div>
+	</div></div>
 		<br><br><br><br>
 
 
@@ -599,9 +620,9 @@ input[type=button] {
 		</div>
 	</div>
 	<br>
-
+<div id="pagingArea">
 	<div class = "pagingArea2" align ="center" >
-      <button onclick = "location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage1=1'"><</button>
+      <button onclick = "location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage1=1'"><<</button>
       <%if(currentPage1 <= 1) {%>
       <button disabled><</button>
       <%} else{%>
@@ -625,7 +646,7 @@ input[type=button] {
          <%} %>
          <button onclick = "location.href='<%=request.getContextPath()%>/refundList.mp?currentPage1=<%=maxPage1%>'">>></button>
 
-      </div>
+      </div></div>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
