@@ -17,36 +17,47 @@ import com.kh.bvengers.user.member.model.vo.Member;
 @WebServlet("/kakaojoin.me")
 public class KakaoJoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public KakaoJoinServlet() {
-        super();
-    }
+
+	public KakaoJoinServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String array =(String)request.getParameter("array");
 		int idx = array.indexOf(",");
 		int idx1 = array.indexOf("/");
-		
+
 		String id = array.substring(0, idx);
 		String nickname = array.substring(idx+1,idx1);
 		String token = array.substring(idx1+1);
-		
-		System.out.println(id);
-		System.out.println(nickname);
-		System.out.println(token);
-		int result = new MemberService().kakaojoin(id,nickname,token);
+		Member loginUser = null;
+
 		PrintWriter out = response.getWriter();
-		if(result>0) {
-			Member loginUser = new MemberService().kakaologin(id);
-			if(loginUser!=null) {
-				HttpSession session = request.getSession();
+		int checkId = new MemberService().kakaoidCk(id);
+		
+		HttpSession session = request.getSession();
+		if(checkId>0) {//가입이미 했을때
+			
+			loginUser = new MemberService().kakaologin(id);
+			if(loginUser != null) {
 				session.setAttribute("loginUser", loginUser);
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
 			}
-		}else {
-			out.append("fail");
-			request.setAttribute("msg", "로그인실패!");
-			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
+			
+		}else {//신규고객일때
+
+			int result = new MemberService().kakaojoin(id,nickname,token);
+			if(result>0) {
+				loginUser = new MemberService().kakaologin(id);
+				if(loginUser!=null) {
+					session.setAttribute("loginUser", loginUser);
+					response.sendRedirect(request.getContextPath()+"/index.jsp");
+				}
+			}else {
+				out.append("fail");
+				request.setAttribute("msg", "로그인실패!");
+				request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
+			}
 		}
 	}
 

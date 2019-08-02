@@ -28,7 +28,6 @@ text-align:center;
 					<td><%=m.getAddress() %></td>
 					<td><%=m.getEnrollDate() %></td>
 					<td><%=m.getSellCount() %></td>
-					<td>시발이라고 욕을 하였읍니다...</td>
 				</tr>
 				<%} %>
 </body>

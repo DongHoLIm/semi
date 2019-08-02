@@ -719,5 +719,44 @@ public class MemberDao {
 		}
 		return loginUser;
 	}
+	public int kakaoidCk(Connection con, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("kakaoidCk");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int temporaryPwd(Connection con, String memberId, String newPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("temporaryPwd");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, memberId);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

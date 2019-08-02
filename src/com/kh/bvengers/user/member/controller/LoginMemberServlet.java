@@ -23,12 +23,16 @@ public class LoginMemberServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
+		String sessionId = (String) request.getSession().getAttribute("sessionId");
 		String memberId = request.getParameter("loginId");
 		String memberPwd = request.getParameter("password");
 		Member loginUser = new MemberService().loginCheck(memberId,memberPwd);
-
+		
 		if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
+			if(loginUser.getMemberId().equals(sessionId)) {
+				request.getRequestDispatcher("views/user/join/searchPwdResult.jsp").forward(request, response);
+				
+			}
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect(request.getContextPath()+"/index.jsp");

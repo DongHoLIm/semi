@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String check = (String) request.getSession().getAttribute("mailkey");
+String password = (String) request.getSession().getAttribute("password");
 %>
 <!DOCTYPE html>
 <html>
@@ -84,7 +84,7 @@ String check = (String) request.getSession().getAttribute("mailkey");
 			<br>
 			
 			<input type="text" placeholder="아이디" name="userId" id="userId" size=30><br>
-			
+			<input type="text" name="password" id="password"  value="<%=password%>">
 			<input type="text" placeholder="이름" name="userName" id="userName" size=30><br>
 			<input type="text" name="hiddencard" value="1" id="hiddencard" style="display:none">
 			<input type="text" name="hiddenvalue" value="0" id="hiddenvalue" style="display:none">
@@ -92,7 +92,7 @@ String check = (String) request.getSession().getAttribute("mailkey");
 			<button type="button" class="btn_searchPwd" onclick="send_pwd(2);" >인증번호</button><br>
 			<br><br>
 			
-			<input type="button" value="변경하러 가기" class="btn_pwd" id="ok" onclick="send_pwd(1);"> &nbsp; &nbsp;
+			<input type="button" value="로그인하러가기" class="btn_pwd" id="ok" onclick="send_pwd(1);"> &nbsp; &nbsp;
 			<input type="reset" value="취소" class="btn_pwd">
 			<br><br>
 	</form>
@@ -102,8 +102,6 @@ String check = (String) request.getSession().getAttribute("mailkey");
 		
 		if(index == 1){
 			if($("#hiddenvalue").val()=="1"){
-				//var userId = ("#userId").val();
-				//location.href="views/user/join/searchPwdResult.jsp?userId"+userId;
 			 $(function(){
 				$("form").submit();
 			}); 
@@ -121,6 +119,7 @@ String check = (String) request.getSession().getAttribute("mailkey");
 				success:function(data){
 					if(data==="fail"){
 						alert("존재하지 않는 회원입니다.");
+						$("#password").val("<%=password%>");
 					}else{
 						alert("존재하는 회원입니다.\n이메일로 임시 비밀번호를 보내드렸습니다.\n임시 비밀번호로 로그인 하세요")
 						$("#hiddenvalue").val("1");
