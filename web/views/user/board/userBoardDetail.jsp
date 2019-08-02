@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
- <% Board b = (Board)request.getAttribute("b");
+ <% Board b = (Board)request.getAttribute("b"); 
  	Attachment a = (Attachment)request.getAttribute("fileList");
-
+	
  	String member =  b.getMemberId();
  %>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ td{
 		width:800px;
 		height:100%;
 		margin:0 auto;
-}
+} 
 #content{
 		height:230px;
 	}
@@ -49,7 +49,7 @@ td{
 					<td>작성일</td>
 					<td align = "center"><span><%= b.getCreateDate() %></span></td>
 				</tr>
-
+				
 				<tr>
 				<% if(!(a.getNewFileName().equals("사진없음"))){%>
 				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
@@ -60,13 +60,13 @@ td{
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
-
+				
 			</table>
 		</div>
-
+		
 				<br><br><br>
 		</form>
-
+			
 
 	<div class = "replyArea">
 		<div class = "replayWriterArea">
@@ -74,7 +74,7 @@ td{
 				<tr>
 					<td>댓글 작성</td>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
-					<td><button id = "addReply" onclick="insertReply();">댓글 등록</button></td>
+					<td><button id = "addReply">댓글 등록</button></td>
 				</tr>
 			</table>
 				<br><br>
@@ -86,29 +86,28 @@ td{
 			<tr>
 				<td colspan="2" class="tWriter">작성자</td>
 				<td colspan="3" class="tContent">내용</td>
-				<td class="tDate">작성일</td>
-			</tr>
+				<td class="tDate">작성일</td>				
+			</tr>			
 			</tbody>
-		</table>
-		<table id="commentSelectTable" class="commentTables" border="1" align="center">
-			<tbody>
-			</tbody>
+			<tfoot>
+			
+			</tfoot>
 		</table>
 		</div>
 		<div>
 		<button id= "report" align = "left" onclick = "report();">신고하기</button>
 		<% if (loginUser != null && (loginUser.getMemberId().equals(b.getMemberId()))){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
+			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
 		<%} %>
-
+			
 		</div>
 	<br>
 	<br>
- <footer><%@ include file="../hfl/footer.jsp" %></footer>
-	</div>
+ <footer><%@ include file="../hfl/footer.jsp" %></footer> 
+	</div>	
 	<script>
-	
-	function insertReply(){
+	$(function(){
 		var postsId = <%= b.getPostsId()%>;
 		$(document).ready(function(){
 			$.ajax({
@@ -116,43 +115,39 @@ td{
 				data:{postsId:postsId},
 				type:"post",
 				success:function(data){
-					var $commentSelectTable = $("#commentSelectTable tbody");
-					$commentSelectTable.html("");
+					var $replySelectTable = $("#replySelectTable tfoot");
+					$replySelectTable.html("");
 						for(var key in data){
 							var $tr = $("<tr>");
-							var $writeTd = $("<td>").text(data[key].memberId).addClass("tWriter");
-							var $contentTd = $("<td>").text(data[key].commentContents).addClass("tContent");
-							var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
-
+							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
+							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							
 						$tr.append($writeTd);
 						$tr.append($contentTd);
 						$tr.append($dateTd);
-						$commentSelectTable.append($tr);
-						$(".tWriter").css({"width":"100px", "height":"50px"});
-						$(".tContent").css("width", "500px");
-						$(".tDate").css("width", "200px");
-						$(".tRecommend").css("width","100px");
-						$commentSelectTable.css({"text-align":"center", "width":"1000px","margin":"auto"});
-						/* $(".commentTables").hide(); */
+						$replySelectTable.append($tr);
 					}
-						
 				},
 				error:function(){
 					alert("댓글 입력 실패");
 				}
-
+				
 			});
 		});
-
-	};
-
+	
+	});
+		
 	function report(){
 	  var writer = <%= b.getMemberNo()%>;
+	  console.log(writer);
 	  var postId =<%= b.getPostsId()%>;
-	  var array = writer+"/"+postId;
-
+	  console.log(postId);
+	  var array = writer+"/"+postId;	
+      console.log(array);
+      
       var url = "views/user/board/report.jsp?array="+array;
-
+    	    
       window.open(url,'신고하기','width=430,height=450,status=no,scrollbars=yes');
 	};
 
@@ -163,18 +158,19 @@ td{
 			var writer =  <%= loginUser.getMemberNo()%>;
 		    var postId = <%= b.getPostsId()%>;
 		    var content = $("#replyContent").val();
-
+		    
 		    $.ajax({
 		    	url:"iwc.bo",
 		    	data:{"writer":writer, "content":content, "postId":postId},
 		    	type:"post",
 		    	success:function(data) 	 {
-		    		location.reload;
+		    		location.reload();
 					$("#replySelectTable tfoot").show();
-
-
+		    	
+		    	
 		    	},
 		    	error:function(){
+		    		console.log("실패!");
 		    	}
 		    });
 		<%}else{ %>
