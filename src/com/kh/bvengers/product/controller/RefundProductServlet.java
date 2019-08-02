@@ -64,11 +64,11 @@ public class RefundProductServlet extends HttpServlet {
 			
 			for(Refund m : rList) {
 				
-				if(m.getrStatus().equals("1")) {
+				if(m.getrStatus()!=null&&m.getrStatus().equals("1")) {
 					m.setrStatus("환불 대기");
-				}else if(m.getrStatus().equals("2")) {
+				}else if(m.getrStatus()!=null&&m.getrStatus().equals("2")) {
 					m.setrStatus("환불 완료");
-				}else if(m.getrStatus().equals("3")) {
+				}else if(m.getrStatus()!=null&&m.getrStatus().equals("3")) {
 					m.setrStatus("환불 취소");
 				}
 

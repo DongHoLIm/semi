@@ -28,7 +28,6 @@
              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 상품관리<span class="caret"></span> </a>
                <ul class="dropdown-menu">
                <li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li>
-               <li><a href="/sp/views/manager/product/powerProductPage.jsp">파워 상품 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/selectCalculate.cal">정산 내역 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/productManagement">구매 내역 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/refundProduct.mp">환불 내역 관리</a></li>
@@ -64,17 +63,6 @@
             </ul>
               </li>
          </ul>
-
-      <form class="navbar-form navbar-right" role="search">
-        <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Search..">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-        </div>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a onclick="logout();"><span class="glyphicon glyphicon-user"></span>관리자</a></li>
       </ul>

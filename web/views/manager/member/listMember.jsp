@@ -129,7 +129,7 @@ input-align:center;
 <script>
 
  	  $(".mbdetail").click(function(){
-			var mi = $(this).parent().siblings().eq(1).text();
+			var mi = $(this).parent().siblings().eq(0).text();
 		 location.href='<%=request.getContextPath()%>/mbdetail.me?mi='+mi;
 		 });
 	$(".chk").on("click",function(){

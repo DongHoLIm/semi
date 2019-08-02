@@ -88,7 +88,7 @@
 
 
 	<br>
-	<h3 align="center">파워 링크</h3>
+	<h3 align="center">최신상품</h3>
 	<form action="" id="powerLinkForm">
 	<table align="center" id="powerLink">
 		<tbody>
@@ -118,7 +118,7 @@
 						var $num = $("<td>&nbsp;").text(data[key].postsId);
 						var $imgTd = $("<td>")
 						var $imageLabel = $("<label>");
-						var $image = $("<img>").attr("src",src+file).css({"width":"250px", "height":"300px"}).css({"margin":"0 auto"}).addClass("powerProduct"+key);
+						var $image = $("<img>").attr("src",src+file).css({"width":"200px", "height":"250px"}).css({"margin":"0 auto"}).addClass("powerProduct"+key);
 						var $titleTd = $("<td>").text(data[key].title);
 						var $priceTd = $("<td>").text(numeral(data[key].price).format('0,0')+"원");
 

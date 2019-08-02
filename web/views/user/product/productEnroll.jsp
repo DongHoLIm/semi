@@ -93,7 +93,6 @@
 	<%if(loginUser!=null) {%>
 <br><br><br><br>
 <div class="productContainer">
-		<caption class="title"><b>상품 등록</b></caption>
 		<form action="<%=request.getContextPath()%>/insert.po" method="post" encType="multipart/form-data">
 		<table class="table table-bordered" align="center" style="width:60%;">
 			<tr>

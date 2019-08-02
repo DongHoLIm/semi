@@ -129,10 +129,10 @@ if($("#password").val() == ($("#password2").val())){
 			<input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
 			<input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
 			<input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
-			<button type="button" class="btn_overla" style="width:10%;" onclick="checkjoin(2);">중복확인</button><br><br>
+			<button type="button" class="btn_overla" style="width:10%;" onclick="checkjoin(2);">이메일확인</button><br><br>
 			<input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
 			<input type="text" id="sample6_postcode" name = "address1" placeholder="우편번호" style="width:30%;">
-			<input type="button" name="zipCode"class="btn_overlap" onclick="sample6_execDaumPostcode()" style="width:10%;" value="우편번호 찾기"><br><br>
+			<input type="button" name="zipCode"class="btn_overlap1" onclick="sample6_execDaumPostcode()" style="width:10%;" value="우편번호 찾기"><br><br>
 			<input type="text"  id="sample6_address" name="address2" placeholder="  주소" style="width:40%;"><br><br>
 			<input type="text"  id="sample6_detailAddress" name="address3" placeholder="  상세주소" style="width:40%;"><br><br>
 			<input type="text"  id ="sample6_extraAddress" name="address4" placeholder="  참고항목" style="width:40%;"><br><br>
@@ -201,7 +201,7 @@ if($("#password").val() == ($("#password2").val())){
              $.ajax({
                 url:"/sp/memberIdCheck.me",
                 type:"post",
-                data:{memberId:memberId},
+                data:{"memberId":memberId},
                 success:function(data){
 
                    if(data === "fail"){

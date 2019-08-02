@@ -64,8 +64,8 @@ td{
 
 				<br><br><br>
 		</form>
-
-
+</div>
+</div>
 	<div class = "replyArea">
 		<div class = "replayWriterArea">
 			<table align = "center">
@@ -73,9 +73,12 @@ td{
 					<td>댓글 작성</td>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
 					<td><button id = "addReply">댓글 등록</button></td>
-				</tr>
+				</tr>			
 			</table>
-		<br>
+			<table id="commentSelectTable" class="commentTables" border="1" align="center">
+				<tbody>
+				</tbody>
+			</table>
 
 		</div>
 
@@ -120,22 +123,27 @@ td{
 		    	data:{writer:writer, content:content, postId:postId},
 		    	type:"post",
 		    	success:function(data) 	 {
-
-		    	var $replySelectTable = $ ("#replySelectTable tbody");
-		    	$replySelectTable.html("");
+				console.log(data);
+		    	var $commentSelectTable = $ ("#commentSelectTable tbody");
+		    	$commentSelectTable.html("");
 
 		    	for(var key in data){
 		    		var $tr = $("<tr>");
-					var $writeTd = $("<td>").text(data[key].memberId).css("width", "100px");
-					var $contentTd = $("<td>").text(data[key].commentContents).css("width","400px");
-					var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+					var $writeTd = $("<td>").text(data[key].memberId).addClass("tWriter");
+					var $contentTd = $("<td>").text(data[key].commentContents).addClass("tContent");
+					var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
 
 					$tr.append($writeTd);
 					$tr.append($contentTd);
 					$tr.append($dateTd);
-					$replySelectTable.append($tr);
+					$commentSelectTable.append($tr);
+					$(".tWriter").css({"width":"100px", "height":"50px"});
+					$(".tContent").css("width", "500px");
+					$(".tDate").css("width", "200px");
+					$(".tRecommend").css("width","100px");
+					$commentSelectTable.css({"text-align":"center", "width":"1000px","margin":"auto"});
 		    	}
-
+		    		
 		    	},
 		    	error:function(){
 		    	}
