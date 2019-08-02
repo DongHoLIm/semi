@@ -68,10 +68,10 @@ public class ProductService {
 			return result;
 		}
 
-		public HashMap<String, Object> productPay(String postsId) {
+		public ArrayList<HashMap<String, Object>> productPay(String postsId) {
 			Connection con = getConnection();
 			
-			HashMap<String, Object> productPay = new ProductDao().productPay(con, postsId);
+			ArrayList<HashMap<String, Object>> productPay = new ProductDao().productPay(con, postsId);
 			
 			close(con);
 			
@@ -293,6 +293,16 @@ public class ProductService {
 			
 			
 			return result;
+		}
+
+		public ArrayList<HashMap<String, Object>> productPay(String[] list) {
+			Connection con = getConnection();
+			
+			ArrayList<HashMap<String, Object>> productPay = new ProductDao().productPay(con, list);
+			
+			close(con);
+			
+			return productPay;
 		}
 
 		
