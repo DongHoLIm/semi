@@ -229,8 +229,11 @@ input[type=button] {
 
 }
 
-.pagingArea {
+#pagingArea {
+	width:60%;
 	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .pagingArea > button {
@@ -238,6 +241,7 @@ input[type=button] {
 	border: 1px solid black;
 
 }
+
 .btn_od {
 	border:1px solid black;
 	background:#FFF;
@@ -379,7 +383,7 @@ tr > th, tr>td{
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=1'"><<</button>
 
 			<% if(currentPage <= 1){ %>
-			<button class="btn_paging" disabled><</button>
+			<button disabled><</button>
 			<% }else { %>
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/orderLook.mp?currentPage=<%=currentPage - 1%>'"><</button>
 			<% } %>

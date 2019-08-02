@@ -57,6 +57,7 @@ public class MyPageDao {
 			m.setPname(rset.getString("PRODUCT_NAME"));
 			m.setDstatus(rset.getString("DELIVERY_STATUS"));
 			m.setoDate(rset.getDate("ORDER_DATE"));
+			m.setRefundStatus(rset.getString("REFUND_STATUS"));
 			
 			
 			mplist.add(m);

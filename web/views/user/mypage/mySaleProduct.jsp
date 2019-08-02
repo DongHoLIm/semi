@@ -30,20 +30,6 @@
 	border-spacing: 10px;
 }
 
-.row0 {
-	background: #eee;
-	margin: auto;
-}
-
-.row1 {
-	border-top: 2px solid #555;
-}
-
-.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
 .pageNo {
 	margin: auto;
 }
@@ -75,8 +61,8 @@
 					<td id="Notd">0005</td>
 					<td>진수의 핑크핑크한 노트북쿨러</td>
 					<td>검수단계</td>
-					<td>19/07/26</td>
-					<td></td>
+					<td>Y</td>
+					<td>22/06/10</td>
 				</tr>
 			</table>
 		</div>

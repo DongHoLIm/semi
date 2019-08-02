@@ -23,35 +23,41 @@ public class ChangeInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String memberId = request.getParameter("memberId");
-		String memberPassword = request.getParameter("memberpassword");
+		String MemberPassword = request.getParameter("password");
 		String memberName = request.getParameter("memberName");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String add1 = request.getParameter("address1");
 		String add2 = request.getParameter("address2");
 		String add3 = request.getParameter("address3");
-		String address = add1 + " " + add2 + add3;
+		String address = add1+"$"+add2+"$"+add3;
 
-		Member loginUser = new Member();
-		loginUser.setMemberId(memberId);
-		loginUser.setMemberPassword(memberPassword);
-		loginUser.setMemberName(memberName);
-		loginUser.setEmail(email);
-		loginUser.setAddress(address);
-		loginUser.setPhone(phone);
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setMemberPassword(MemberPassword);
+		m.setMemberName(memberName);
+		m.setEmail(email);
+		m.setAddress(address);
+		m.setPhone(phone);
 		
-		int result = new MemberService().changeMember(loginUser);
+		int result = new MemberService().changeMember(m);
+		
+		String page = "";
+		
 		if(result > 0) {
 
-			request.setAttribute("loginUser", loginUser);
-			response.sendRedirect("/sp/views/user/mypage/changeInfo.jsp");
+			request.setAttribute("m", m);
+			//response.sendRedirect("/sp/views/user/mypage/changeInfo2.jsp");
 			
-			//page = "views/user/mypage/changeInfo.jsp";
+			page = "views/user/mypage/changeInfo2.jsp";
 			
 		}else {
 			request.setAttribute("msg","회원정보변경 실패!");
 			request.getRequestDispatcher("/views/common/errorPagePrompt.jsp").forward(request, response);
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
 
 	}
 

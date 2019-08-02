@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.bvengers.user.member.model.vo.Member"%>
+    <%
+    Member checkPwd = (Member) session.getAttribute("checkPwd");
+    %>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +73,7 @@ input {
 			</tr>
 			<tr>
 				<td><label>비밀번호&nbsp;</label></td>
-				<td><input type="password" name="memberpassword" size=35%></td>
+				<td><input type="password" name="password" size=35%></td>
 			</tr>
 			<tr>
 				<td><label>이름</label></td>

@@ -57,6 +57,8 @@
 
 .pagingArea {
 	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .pagingArea > button {
@@ -184,7 +186,7 @@
 				<tr class="">
 					<td><%=m.getOno() %></td>
 					<td><%=m.getPname()%></td>
-					<td><%=m.getDstatus()%></td>
+					<td><%=m.getPstatus()%></td>
 					<td><%=m.getoDate()%></td>
 				</tr>
 				<%}%>
