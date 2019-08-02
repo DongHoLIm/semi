@@ -107,7 +107,9 @@ input-align:center;
 					<th class="th">회원 상세 조회</th>
 				</tr>
 				</thead>
-				<%for(Member m : list){ %>
+				<%for(Member m : list){
+					String grade = m.getGradeCode();
+				%>
 				<tr>
 					<!-- <td><input type="checkbox" class="chk"></td> -->
 					<td><%=m.getMemberId() %></td>
@@ -130,7 +132,8 @@ input-align:center;
 
  	  $(".mbdetail").click(function(){
 			var mi = $(this).parent().siblings().eq(0).text();
-		 location.href='<%=request.getContextPath()%>/mbdetail.me?mi='+mi;
+			var option = "width = 450px, height = 600px";
+		 window.open('<%=request.getContextPath()%>/mbdetail.me?mi='+mi, "회원정보", option);
 		 });
 	$(".chk").on("click",function(){
 		var chkid = $(this).parent().siblings().eq(0).text();

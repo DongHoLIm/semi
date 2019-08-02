@@ -72,18 +72,7 @@
    background: black;
    color: white;
 }
-#commentHeaderTable .tWriter{
-   width: 100px;
-}
-#commentHeaderTable .tContent{
-   width: 500px;
-}
-#commentHeaderTable .tDate{
-   width: 200px;
-}
-#commentHeaderTable .tRecommend{
-   width: 100px;
-}
+
 #btnArea {
    width: 30%;
    align:center;
@@ -147,16 +136,20 @@
       <div id="btnArea">
       <button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
       <button id="showBtn" type="button" class="btns" align="center">댓글 보기</button>
+      <%if(loginUser.getMemberId().equals(b.getWriter())) {%>
+      <button id="editBtn" type="button" class="btns" align="center">수정 요청</button>
+      <%} %>
       </div>
       <table id="commentHeaderTable" class="commentTables" border="1" align="center">
          <tr>
-            <th colspan="7">댓글 리스트</th>
+            <th colspan="8">댓글 리스트</th>
          </tr>
          <tr>
             <td colspan="2" class="tWriter">작성자</td>
             <td colspan="3" class="tContent">내용</td>
             <td class="tDate">작성일</td>
             <td class="tRecommend">추천수</td>
+            <td class="tRecommendBtn">추천하기</td>
          </tr>
       </table>
       <table id="commentSelectTable" class="commentTables" border="1" align="center">
@@ -167,6 +160,7 @@
    </div>
    <footer><%@ include file="../hfl/footer.jsp"%></footer>
    <script>
+
       $(function(){
          var postsId = <%= b.getPostsId()%>;
          $(document).ready(function(){
@@ -183,17 +177,21 @@
                      var $contentTd = $("<td>").text(data[key].commentContents).addClass("tContent");
                      var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
                      var $recommend = $("<td>").text(data[key].recommendCount).addClass("tRecommend");
+
+                     var $recommendBtn = $("<td><button>").attr('value','추천').addClass("tRecommendBtn");
+
                      $tr.append($writeTd);
                      $tr.append($contentTd);
                      $tr.append($dateTd);
                      $tr.append($recommend);
+                     $tr.append($recommendBtn);
                      $commentSelectTable.append($tr);
                      $(".tWriter").css({"width":"100px", "height":"50px"});
                      $(".tContent").css("width", "400px");
                      $(".tDate").css("width", "100px");
                      $(".tRecommend").css("width","100px");
+                     $(".tRecommendBtn").css("width", "100px");
                      $commentSelectTable.css({"text-align":"center", "width":"100%","margin":"auto"});
-                     $(".commentTables").hide();
                   }
                },
                error:function(){
@@ -249,17 +247,21 @@
                   if(data==null){
                      alert("해당상품은 이미 장바구니에 있습니다.");
                   }else{
-                  if(confirm("장바구니로 이동하시겠습니까?")==true){
-                     location.href = "<%=request.getContextPath()%>/basketAllList.bk";
-                  }else{
+	                  if(confirm("장바구니로 이동하시겠습니까?")==true){
+	                     location.href = "<%=request.getContextPath()%>/basketAllList.bk";
+	                  }else{
 
-                  }
+	                  }
                   }
                }
 
             })
           });
       });
+       $("#editBtn").click(function(){
+			alert("상품 수정 요청 페이지로 이동합니다.");
+			location.href="<%=request.getContextPath()%>/";
+       });
    </script>
 </body>
 </html>

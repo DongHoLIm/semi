@@ -48,7 +48,7 @@ a {
 					<br>
 				</div>
 			</div>
-			<button id="loginBtn" class="btn_login" onclick="login();"
+			<button id="loginBtn" class="btn_login" type="button" onclick="login();"
 				value="로그인">로그인</button>
 		</div>
 	</form>
@@ -63,19 +63,19 @@ a {
 		<a id="kakao-login-btn"></a> <a
 			href="http://developers.kakao.com/logout"></a>
 		<script type='text/javascript'>
-			
+
 			Kakao.init('f96020a12441dbfb7b9174b8e19d971c');
-			
+
 			Kakao.Auth.createLoginButton({
 				container : '#kakao-login-btn',
 				success : function(authObj) {
 					Kakao.API.request({
 					url:'/v1/user/me',
-				success:function(res){				
+				success:function(res){
 					var nickname = res.properties['nickname'];
 					var id = res.id;
 					var token = authObj.access_token;
-					var array = id+","+nickname+"/"+token;					
+					var array = id+","+nickname+"/"+token;
 					location.href="<%=request.getContextPath()%>/kakaojoin.me?array="+array;
 				}
 					});
@@ -91,15 +91,22 @@ a {
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 	<script>
 		function login() {
-			$("#loginForm").submit();
+			$pwd = $("#loginPw").val();
 
-			$("#loginForm").submit(function(){
-				if(msg != null){
-					alert("떙~!");
+			if($("#loginId").val() == ""){
+				alert("아이디를 입력해주세요");
+				$("#loginId").focus();
 
-				}
-			});
+				return false;
+			}
+			else if($("#loginPw").val() == ""){
+				alert("비밀번호를 입력해주세요");
+				$("#loginPw").focus();
 
+				return false;
+			} else if ($("#loginId").val() != "" && $("#loginPwd").val() != ""){
+				$("#loginForm").submit();
+			}
 
 		}
 

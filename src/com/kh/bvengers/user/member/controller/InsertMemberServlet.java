@@ -28,7 +28,7 @@ public class InsertMemberServlet extends HttpServlet {
 		String address2 = request.getParameter("address2");
 		String address3 = request.getParameter("address3");
 		String address4 = request.getParameter("address4");
-		String address = address1 +"$"+ address2 +"$"+ address3 +"$"+ address4;
+		String address = address1 +" "+ address2 +" "+ address3 +" "+ address4;
 		String phone = request.getParameter("phone");
 		String emailstatus = (String) request.getSession().getAttribute("emailstatus");
 
