@@ -91,7 +91,7 @@
         <td id="td1"><h4 id="productName"><%=bk.getProductName() %></h4></td>
         <td id="td1"><p id="info"><%=bk.getPrice() %></p></td>
         <td id="td1"><p id="info1"><%=delieryPrice %></p></td>
-        <td id="td1"><p id="info"><%=bk.getPrice()+delieryPrice %></p></td>
+        <td id="td1"><p id="info"><%=bk.getPrice() %></p></td>
         <td hidden><%=totalPrice+=bk.getPrice() %></td>
       </tr>
       <%} %>
@@ -153,6 +153,24 @@
 			
 		});
 	}
+	
+	function choiceProduct(){
+		$(function(){
+			   var list = new Array();
+			   $("#select:checked").each(function(index, item){
+			      list.push($(item).val());
+			   });
+			
+			var code = list.join(',');
+			console.log(code);
+			
+			location.href="<%= request.getContextPath()%>/payment.pa?code="+code;
+			
+			
+		});
+	}
+	
+	
 </script>
 <footer><%@ include file="../hfl/footer.jsp"%></footer>
 </body>

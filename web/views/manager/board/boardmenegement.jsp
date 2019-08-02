@@ -81,10 +81,10 @@ border:1px solid white;
 	</thead>
 		<%for (Board b : list) {%>
 			<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
-			<td><%= b.getPostsId() %></td>
-			<td><%= b.getPostsTitle() %></td>
-			<td><%= b.getMemberId() %></td>
-			<td><%= b.getCreateDate() %></td>
+			<td align = "center"  style = "margin:0 auto"><%= b.getPostsId() %></td>
+			<td align = "center"  style = "margin:0 auto"><%= b.getPostsTitle() %></td>
+			<td align = "center"  style = "margin:0 auto"><%= b.getMemberName() %></td>
+			<td align = "center"  style = "margin:0 auto"><%= b.getCreateDate() %></td>
 			<%} %>
 
 			</table>
