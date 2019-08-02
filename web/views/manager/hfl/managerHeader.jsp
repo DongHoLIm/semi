@@ -50,7 +50,7 @@
                <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/smbs.mb">게시판 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/smqs.mq">고객센터 관리</a></li>
-               <li><a href="<%=request.getContextPath()%>/SelectFrequentQuestionList.fq">자주찾는 질문 관리</a></li>
+               <li><a href="<%=request.getContextPath()%>/sfqs.qo">자주찾는 질문 관리</a></li>
                </ul>
            </li>
               <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" > 창고관리 <span class="caret"></span></a>

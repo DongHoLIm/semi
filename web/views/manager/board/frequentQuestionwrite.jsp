@@ -8,7 +8,7 @@
 	<h2 align="center">자주찾는 질문 작성</h2>
 
 	<div class="container" style = "width:80%; height:150%">
-	 	<form action = "<%= request.getContextPath()%>/fqs.qb" method = "post"">
+	 	<form action = "<%= request.getContextPath()%>/fqs.qb" method = "post">
 	<table class="table table-bordered" >
  		<tr hidden>
 			<td><input name="hiddenCode" value="2"></td>

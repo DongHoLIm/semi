@@ -1765,6 +1765,81 @@ public class BoardDao {
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 
 				list.add(b);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getListFrequentCount(Connection con, int num) {
+
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectFrequentCount");
+
+		try {
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+
+				listCount = rset.getInt(1);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return listCount;
+	}
+
+	public ArrayList<Board> selectFrequentQuestionList(Connection con, int currentPage1, int limit, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+
+		String query = prop.getProperty("selectFrequentWithPaging");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (currentPage1 - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<Board>();
+
+			while (rset.next()) {
+				Board b = new Board();
+				
+				b.setPostsId(rset.getInt("POSTS_ID"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setPostsTitle(rset.getString("POSTS_TITLE"));
+				b.setCreateDate(rset.getDate("CREATEDATE"));
+
+				list.add(b);
+				System.out.println("여기는 dao야"+list);
 
 			}
 
@@ -1776,6 +1851,30 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int updateBoardStatus(Connection con, String status,int num) {
+		PreparedStatement pstmt = null;
+
+		String query = prop.getProperty("updateBoardStatus");
+
+		int result = 0;
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1,num);
+			pstmt.setString(2, status);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 }
 

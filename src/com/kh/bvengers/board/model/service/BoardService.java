@@ -515,6 +515,38 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 		return list;
 	}
 
+	public int getListFrequentCount(int num) {
+		Connection con = getConnection();
+		
+		int listCount = new BoardDao().getListFrequentCount(con, num);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> selectFrequentQuestionList(int currentPage1, int limit, int num) {
+
+		Connection con = getConnection();
+
+		ArrayList<Board>list = new BoardDao().selectFrequentQuestionList(con,currentPage1,limit,num);
+
+		close(con);
+
+		return list;
+		
+		
+	}
+
+	public int updateBoardStatus(String status, int num) {
+			Connection con = getConnection();	
+			
+	      int result = new BoardDao().updateBoardStatus(con,status,num);
+	      
+	      close(con);
+	      return result;
+
+	}
+
+
 
 
 
