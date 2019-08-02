@@ -198,9 +198,10 @@ public class ProductDao {
 		return postsId;
 	}
 
-	public HashMap<String, Object> productPay(Connection con, String postsId) {
+	public ArrayList<HashMap<String, Object>> productPay(Connection con, String postsId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> productPay = null;
 		HashMap<String, Object> hmap = null;
 		
 		String query = prop.getProperty("productPay");
@@ -235,7 +236,7 @@ public class ProductDao {
 			close(rset);
 		}
 		
-		return hmap;
+		return productPay;
 	}
 
 	
@@ -931,6 +932,49 @@ public class ProductDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<HashMap<String, Object>> productPay(Connection con, String[] list) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> productPay = null;
+		HashMap<String, Object> hmap = null;
+		
+		//쿼리문 다시 짤 것!
+		String query = prop.getProperty("basketPay");
+		
+		try {
+			productPay = new ArrayList<HashMap<String, Object>>();
+			for(int i = 0; i < list.length; i++) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, list[i]);
+				
+				rset = pstmt.executeQuery();
+				hmap = new HashMap<String, Object>();
+				while(rset.next()) {
+					hmap.put("postsId", rset.getString("POSTS_ID"));
+					hmap.put("productCode", rset.getString("PRODUCT_CODE"));
+					hmap.put("productName", rset.getString("PRODUCT_NAME"));
+					hmap.put("productMoney", rset.getInt("PRODUCT_MONEY"));
+					hmap.put("productCate", rset.getString("PRODUCT_CATE"));
+					hmap.put("memberId", rset.getString("MEMBER_ID"));
+					hmap.put("postsTitle", rset.getString("POSTS_TITLE"));
+					hmap.put("newFileName", rset.getString("NEW_FILE_NAME"));
+					hmap.put("categoryCode", rset.getString("CATEGORY_CODE"));
+					hmap.put("categoryDiv", rset.getString("SUBCATE"));
+					hmap.put("mainCateDiv", rset.getString("MAINCATE"));
+					
+					productPay.add(hmap);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return productPay;
 	}
 
 	

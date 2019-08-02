@@ -1,6 +1,7 @@
 package com.kh.bvengers.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -30,12 +31,19 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<HashMap<String, Object>> productPay = null;
 		
+		if(request.getParameter("postsId") != null) {
 		String postsId = request.getParameter("postsId");
+			productPay = new ProductService().productPay(postsId);
+		}else {
 		String productCode = request.getParameter("code");
+			String[] list = productCode.split(",");
+			productPay = new ProductService().productPay(list);
+		}
 		
 		
-		HashMap<String, Object> productPay = new ProductService().productPay(postsId);
+		
 		
 		String page = "";
 		
