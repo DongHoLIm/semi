@@ -228,7 +228,7 @@ public class DepotDao {
 				d.setCompletStatus(rset.getString("COMPLETE_STATUS"));
 				d.setCheckDate(rset.getDate("CHECK_DATE"));
 				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
-				
+				d.setPayStatus(rset.getString("ORDER_NO"));				
 				i++;
 				list.add(d);
 			}

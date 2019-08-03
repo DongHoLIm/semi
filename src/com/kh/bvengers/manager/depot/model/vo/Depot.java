@@ -19,12 +19,15 @@ public class Depot implements java.io.Serializable{
 	private String fileName;
 	private String root;
 	private String room;
+	private String payStatus;
 	
 	public Depot() {}
-
+	
+	
 	public Depot(int productNumber, String productCode, String productCate, String productName, Date checkDate,
 			String checkStatus, String locationCode, String session, String location, String completStatus,
-			String checkPassContent, Date releaseDate, String selerId, String fileName, String root, String room) {
+			String checkPassContent, Date releaseDate, String selerId, String fileName, String root, String room,
+			String payStatus) {
 		super();
 		this.productNumber = productNumber;
 		this.productCode = productCode;
@@ -42,10 +45,21 @@ public class Depot implements java.io.Serializable{
 		this.fileName = fileName;
 		this.root = root;
 		this.room = room;
+		this.payStatus = payStatus;
 	}
 
 	
 	
+	public String getPayStatus() {
+		return payStatus;
+	}
+
+
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+
+
 	public String getRoot() {
 		return root;
 	}
@@ -196,6 +210,7 @@ public class Depot implements java.io.Serializable{
 		this.checkStatus = checkStatus;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Depot [productNumber=" + productNumber + ", productCode=" + productCode + ", productCate=" + productCate
@@ -203,10 +218,11 @@ public class Depot implements java.io.Serializable{
 				+ ", locationCode=" + locationCode + ", session=" + session + ", location=" + location
 				+ ", completStatus=" + completStatus + ", checkPassContent=" + checkPassContent + ", releaseDate="
 				+ releaseDate + ", selerId=" + selerId + ", fileName=" + fileName + ", root=" + root + ", room=" + room
-				+ "]";
+				+ ", payStatus=" + payStatus + "]";
 	}
 
 
+	
 	
 	
 	
