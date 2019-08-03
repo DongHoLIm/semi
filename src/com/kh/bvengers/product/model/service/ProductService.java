@@ -118,7 +118,7 @@ public class ProductService {
 				
 				result5 = new ProductDao().deleteBacket(con, codeList[i]);
 				
-				if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
+				if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
 					check += 1;
 				}
 			}
