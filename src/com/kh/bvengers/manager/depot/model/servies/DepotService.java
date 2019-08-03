@@ -333,4 +333,11 @@ public class DepotService {
 			return list;
 	}
 
+	public ArrayList<Depot> excelPrint(String[] productCode) {
+		Connection con = getConnection();
+		ArrayList <Depot> list = new DepotDao().excelPrint(con,productCode);
+		close(con);
+		return list;
+	}
+
 }
