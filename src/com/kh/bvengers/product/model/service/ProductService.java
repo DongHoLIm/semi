@@ -85,6 +85,7 @@ public class ProductService {
 			int result2 = 0;
 			int result3 = 0;
 			int result4 = 0;
+			int result5 = 0;
 			String siteCheck = null;
 			String orderNo = "";
 			
@@ -115,7 +116,9 @@ public class ProductService {
 				
 				result4 = new ProductDao().disabledPostOpen(con, pay);
 				
-				if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
+				result5 = new ProductDao().deleteBacket(con, codeList[i]);
+				
+				if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
 					check += 1;
 				}
 			}

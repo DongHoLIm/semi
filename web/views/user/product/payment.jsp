@@ -231,7 +231,7 @@
 			<form id="payForm" action="<%=request.getContextPath()%>/okPay.pa" method="post" align="center">
 				<table align="center" class="payInfo">
 					<tr>
-						<th><label>총 결제금액</label></th>
+						<th width="20%"><label>총 결제금액</label></th>
 						<td><input type="text" name="paymentPrice" id="paymentPrice"
 							value="<%= totalPrice %>원" readonly></td>
 					</tr>
@@ -290,6 +290,7 @@
 	            e.value = e.value.slice(0, e.maxLength);
 	        }
 	    }
+	 	
 
 	 	function addFind(){
 	 			var list = new Array();
@@ -349,17 +350,30 @@
 
 			var message = document.getElementById('message').value;
 			var mail = document.getElementById('mail').value;
-
+			
+			var length = <%= productPay.size()%>-1;
+			var postTitle = '';
+			var productName = '';
+			if(length > 0){
+				postTitle = '<%= productPay.get(0).get("postsTitle") %>외' + length + '개 상품';
+				productName = '<%= productPay.get(0).get("productName") %>외' + length + '개 상품';
+			}else{
+				postTitle = '<%= productPay.get(0).get("postsTitle") %>';
+				productName = '<%= productPay.get(0).get("productName") %>';
+			}
+			
+			
+			
 			BootPay.request({
-				price: '<%= productPay.get(0).get("productMoney") %>', //실제 결제되는 가격
+				price: '<%= totalPrice %>', //실제 결제되는 가격
 				application_id: "5d2fec7c396fa61e224d5730",
-				name: '<%= productPay.get(0).get("postsTitle") %>', //결제창에서 보여질 이름
+				name: postTitle, //결제창에서 보여질 이름
 				pg: '',
 				method: '', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
 				show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
 				items: [
 					{
-						item_name: '<%= 	productPay.get(0).get("productName") %>', //상품명
+						item_name: productName, //상품명
 						qty: 1, //수량
 						unique: '<%=productPay.get(0).get("postsId") %>', //해당 상품을 구분짓는 primary key
 						price: '<%=productPay.get(0).get("productMoney") %>', //상품 단가
@@ -400,6 +414,7 @@
 			}).close(function (data) {
 			    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
 			}).done(function (data) {
+				document.getElementById('payForm').submit();
 				//결제가 정상적으로 완료되면 수행됩니다
 				//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			});

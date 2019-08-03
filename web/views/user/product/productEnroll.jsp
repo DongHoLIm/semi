@@ -47,6 +47,20 @@
 
 }
 
+#searchLabel{
+	display: inline-block;
+	padding: .5em .75em;
+	color: #fff;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #7799dd;
+	cursor: pointer;
+	border: 1px solid #7090d0;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
 .pullRight{
 	position: absolute;
 	width: 1px;
@@ -76,7 +90,9 @@
 
 }
 
-#accountNo::-webkit-outer-spin-button, #accountNo::-webkit-inner-spin-button{
+#accountNo::-webkit-outer-spin-button, #accountNo::-webkit-inner-spin-button,
+#productMoney::-webkit-outer-spin-button, #productMoney::-webkit-inner-spin-button
+{
     -webkit-appearance: none;
 }
 
@@ -97,7 +113,7 @@
 		<table class="table table-bordered" align="center" style="width:60%;">
 			<tr>
 				<th>제목 </th>
-				<td colspan="3"><input type="text" size=30 name="postsTitle" class="form-control"/></td>
+				<td colspan="4"><input type="text" size=30 name="postsTitle" class="form-control"/></td>
 			</tr>
 			<tr>
 				<th width="25%">카테고리</th>
@@ -108,8 +124,8 @@
 						<option id="digital" value="digital">가전제품
 					</select>
 				</td>
-				<th width="25%">상세카테고리</th>
-				<td width="25%">
+				<th width="10%">상세카테고리</th>
+				<td width="25%" colspan="2">
 					<select id="sub_cate" class="sub_cate sub_cate1" name="subCate1" style="width:80%;">
 							<option id="desktop" value="desktop">데스크탑
 							<option id="pcEtc" value="pcEtc">PC 주변기기
@@ -128,15 +144,15 @@
             </tr>
             <tr>
                 <th>상품명 </th>
-                <td colspan="3"><input cols="10" size=30 name="productName" class="form-control" style="resize:none"></td>
+                <td colspan="4"><input cols="10" size=30 name="productName" class="form-control" style="resize:none"></td>
             </tr>
             <tr>
                 <th>가격 </th>
-                <td colspan="3"><input type="number" name="productMoney" class="form-control"></td>
+                <td colspan="4"><input type="number" name="productMoney" id="productMoney" class="form-control"></td>
             </tr>
             <tr>
                 <th>상품 이미지</th>
-                <td colspan="3">
+                <td colspan="4">
                 	<div>
 	                	<label for="file1" id="fileLabel">이미지 업로드</label>
 	                	<input class="fileName" value="파일선택" disabled="disabled">
@@ -162,7 +178,7 @@
             </tr>
             <tr>
                 <th>상품 설명 </th>
-                <td colspan="3">
+                <td colspan="4">
                 	<textarea cols="10" rows="10" name="contents" class="form-control" style="resize:none"></textarea>
                 	<!-- <input type="text" class=""/> -->
                 </td>
@@ -172,17 +188,21 @@
             	<td><input type="text" name="accountHolder" id="accountHolder" class="form-control"/></td>
             	<td>은행명</td>
             	<td><input type="text" name="bankCode" id="bankCode" class="form-control"/></td>
+            	<td width="10%" style="vertical-align: center;">
+            		<label for="searchBtn" id="searchLabel">계좌조회</label>
+            		<button type="button" onclick="searchBank();" name="searchBtn" id="searchBtn" hidden>계좌조회</button>
+            	</td>
             </tr>
             <tr>
 	            <td>입금될 계좌번호</td>
-	            <td colspan="3"><input type="number" placeholder="-제외한 계좌번호를 입력해주세요" name="accountNo" id="accountNo" class="form-control"/></td>
+	            <td colspan="4"><input type="number" placeholder="-제외한 계좌번호를 입력해주세요" name="accountNo" id="accountNo" class="form-control"/></td>
             </tr>
             <tr>
                 <th>상품 보관일자 </th>
-                <td colspan="3"><input type="date" name="keepDate" style="width:40%;" class="form-control" id="keepDate"/></td>
+                <td colspan="4"><input type="date" name="keepDate" style="width:40%;" class="form-control" id="keepDate"/></td>
             </tr>
             <tr>
-                <td colspan="5">
+                <td colspan="6">
                 	<input type="hidden" name="loginId"/>
                     <input type="submit" value="등록" id="btn_enroll" class="pull-right"/>
                     <input type="button" value="홈으로" id="btn_enroll" class="pull-left" onclick="javascript:location.href='index.jsp'"/>
@@ -191,6 +211,9 @@
 </table>
         </form>
         <script>
+        function searchBank(){
+        	window.open('/sp/views/user/product/searchBank.jsp', "", "width=600, height=300, top=50, left=50");
+        }
         	$(function(){
 	        			$(".sub_cate1").show();
 	        			$(".sub_cate2").hide();
