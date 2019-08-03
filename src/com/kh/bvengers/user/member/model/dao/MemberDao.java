@@ -40,6 +40,7 @@ public class MemberDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPwd);
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
@@ -62,6 +63,7 @@ public class MemberDao {
 				loginUser.setGradeCode(rset.getString("GRADE_CODE"));
 				loginUser.setSellCount(rset.getInt("SELL_COUNT"));
 
+				System.out.println(loginUser);
 			}
 
 		} catch (SQLException e) {
@@ -726,7 +728,7 @@ public class MemberDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
@@ -747,13 +749,13 @@ public class MemberDao {
 			pstmt.setString(1, newPwd);
 			pstmt.setString(2, memberId);
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 

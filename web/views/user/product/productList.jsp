@@ -17,14 +17,14 @@
    width: 100%;
    margin-top: 50px;
    min-height: 1000px;
-  
+
 }
 
 .thumbnailArea {
    width: 80%;
    margin-left: 20%;
    margin-top: 6%;
-  
+
 }
 
 .thumb-list {
@@ -99,7 +99,7 @@
 }
 
 .productImg:hover figcaption, .productImg.hover figcaption {
-   top: 20%;
+   top: 30%;
 }
 
 .searchArea button {
