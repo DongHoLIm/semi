@@ -35,6 +35,15 @@
    #inOutButton{
       padding-left:73%;
    }
+   #requestRelease{
+   	width: 80%;   	
+   	 margin: 0 auto;
+   	border:1px solid black;
+   	text-align: center;
+   }
+   #requestProduct{
+   	width: 80%;
+   }
 </style>
 <body>
 <%@ include file = "../hfl/managerHeader.jsp" %>
@@ -42,6 +51,10 @@
    <h3 align="center">입고 관리</h3>
    <br />
    <div id="inOutMain">
+   		<div id="requestRelease">   			
+   			<input type="text" id="requestProduct"	value="" width="100%" />   				
+   			<input type="button" onclick="relesDate();" value="출고요청"/>   			
+   		</div>
       <div id="table Area">
          <table id="depotMain" align="center">
          <tr>
@@ -56,12 +69,17 @@
          <%for(Depot d :list){ %>
             <tr>
                <td><%=d.getProductNumber() %></td>
-               <td><%=d.getProductCode() %></td>
+               <td><%=d.getProductCode() %><input type="hidden" id="productCode" value="<%=d.getProductCode()%>"/></td>
                <td><%=d.getSelerId() %></td>
                <td><%=d.getLocationCode() %></td>
                <td><%=d.getCompletStatus() %></td>
                <td><%=d.getCheckDate() %></td>
-               <td><%=d.getReleaseDate() %></td>
+               <td><%if(d.getPayStatus()==null){
+            		d.getReleaseDate();
+            	}else{%> 
+					 <input type="checkBox" value="<%=d.getProductCode()%>" onclick="appendText();" id="checkStatus"/>
+            	<%} %>
+            	</td>
             </tr>
          <%} %>
          </table>
@@ -98,24 +116,44 @@
 			<button onclick="location.href='<%=request.getContextPath()%>/inDepot.dp?currentPage=<%=maxPage%>'">>></button>
 		</div>
    <script>
-     function relesDate(code){
-    	 var incode = window.prompt("상품코드 입력하세요");
-    	 if(incode==code){
-    		 $(function (){
-    			 var aCode = code;
+     function relesDate(){
+    	 var productCode = $("input[id='requestProduct']").val();
+    	 var allProCode = $("input[id='productCode']");
+    	 var check = $("input[id='checkStatus']");
+    	 var allListProductCode = "";
+    	 var checkAllList= "";
+    	 allProCode.each(function(index){
+    		allListProductCode+=$(this).val()+","; 
+    	 });
+    	 check.each(function(index){
+    		checkAllList+=$(this).val()+","; 
+    	 });
+    		$(function (){
+    			 var aCode = productCode;
     			 $.ajax({
         			 url:"outProduct.do",
         			 type:"post",
-        			 data:{"productCode":aCode},
+        			 data:{"productCode":aCode,"listProductCode":allListProductCode,"checkList":checkAllList},
         			 success:function(data){
         				 window.location.reload();
         			 }
         		 });
     		 });
-    	 }else{
-    		 alert("잘못입력하셨습니다.");
-    	 }
      }
+   /*   $("#dynamicUL").on("click", 'input:checkbox', function() {
+         $("#log").prepend( $(this).val() + " / " + $(this).is(":checked") + " 체크박스가 클릭되었습니다.<br/>"); */
+     function appendText(){
+         var text = $("input[id='requestProduct']");
+         text.val("");
+    	 var code="";
+    	 $("#checkStatus:checked").each(function(index){
+				code+=$(this).val()+","
+			});
+    	 text.val(code);
+    	 
+    	}
+    	
+     
    </script>
 
 </body>

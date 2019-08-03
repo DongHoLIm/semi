@@ -1,12 +1,15 @@
 package com.kh.bvengers.manager.depot.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.bvengers.manager.depot.model.servies.DepotService;
 
 /**
@@ -29,17 +32,28 @@ public class OutProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String productCode = request.getParameter("productCode");
-		
-		int result = new DepotService().updateRelesDate(productCode);
-		
-		String page ="";
-		if(result>0) {
-			page = request.getContextPath()+"/inDepot.dp";
-			response.sendRedirect(page);
-		}else {
-			page = "views/common/errorPrompt.jsp";
-			request.getRequestDispatcher(page).forward(request, response);
+		String allListProductCode = request.getParameter("listProductCode");
+		String checkListProductCode = request.getParameter("checkList");
+		String [] checkedList = productCode.split(",");
+		String [] allList = allListProductCode.split(",");
+		String [] checkList = checkListProductCode.split(",");
+		ArrayList list =new ArrayList();
+		for(int i =0;i<allList.length;i++) {
+			int count =0;
+			for(int j=0;j<checkList.length;j++) {
+				if(allList[i].equals(checkList[j])) {
+					count++;
+				}
+			}
 		}
+		/*System.out.println(list.size());*/
+		int result=0;
+		/*for(int i =0;i<str.length;i++) {
+			result = new DepotService().updateRelesDate(str[i]);
+		}	*/
+		/*response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(result,response.getWriter());*/
 	}
 
 	/**
