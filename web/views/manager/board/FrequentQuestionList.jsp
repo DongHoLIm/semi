@@ -70,24 +70,30 @@ int endPage = pi.getEndPage();
 	<br />
 	<section id="sec1">
 		<h2 align="center">자주찾는 질문</h2>
-
 		<table class="board" id = "listArea">
-			<tr class="row0">
 			<thead>
+			<tr class="row0">
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성날짜</th>
-			</thead>
 			</tr>
+			</thead>
+			
 			<%for (Board b : list) {%>
-				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
-				<td><%= b.getPostsId() %></td>
-				<td><%= b.getPostsTitle() %></td>
-				<td><%= b.getMemberName() %></td>
-				<td><%= b.getCreateDate() %></td>
+			<tr class="row1">
+			<input type = "hidden" id="postId" value = "<%=b.getPostsId() %>">
+					<td><%= b.getPostsId() %></td>
+					<td><%= b.getPostsTitle() %></td>
+					<td><%= b.getMemberName()%></td>
+					<td><%= b.getCreateDate()%></td>
+			</tr>		
 			<%} %>
+			<tr>
+			</tr>
+			
 		</table>
+		
 		<div align = "center">
       <button onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
       </div>
@@ -128,19 +134,16 @@ int endPage = pi.getEndPage();
 	<footer><%@ include file="../../user/hfl/footer.jsp" %></footer>
 
 	<script>
-	$(function(){
-		$("#listArea td").mouseenter(function(){
-
-			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
-		}).mouseout(function(){
-				$(this).parent().css({"background":"white"});
-		}).click(function(){
-			var num = $(this).parent().children("input").val();
-			console.log(num);
-			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
-		});
-	});
-
+	  $(function(){
+	      $("#listArea td").mouseenter(function(){
+	         $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+	      }).mouseout(function(){
+	            $(this).parent().css({"background":"white"});
+	      }).click(function(){
+	         var num = $(this).parent().children("input").val();
+	          location.href="<%=request.getContextPath()%>/soqa.qo?num=" + num;
+	      });
+	   });
 	</script>
 
 </body>

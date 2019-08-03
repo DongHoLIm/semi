@@ -1,7 +1,6 @@
 package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.bvengers.board.model.service.BoardService;
 
 /**
- * Servlet implementation class UpdateBoardDeleteServlet
+ * Servlet implementation class UpdateMemberQnAStatusServlet
  */
-@WebServlet("/ubds.up")
-public class UpdateBoardDeleteServlet extends HttpServlet {
+@WebServlet("/umqs.up")
+public class UpdateMemberQnAStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateBoardDeleteServlet() {
+    public UpdateMemberQnAStatusServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,8 +36,9 @@ public class UpdateBoardDeleteServlet extends HttpServlet {
 		int result = new BoardService().updateBoardStatus(status,num);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath()+"/selectNotice.no");
+			response.sendRedirect(request.getContextPath()+"/sfqs.qo");
 		}
+	
 	}
 
 	/**

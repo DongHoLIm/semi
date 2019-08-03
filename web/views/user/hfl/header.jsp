@@ -50,7 +50,11 @@
 				}
            </script>
            <%} %>
-       	   <li><a  style="color:white" href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
+          <% if(loginUser != null) {%>
+       	   <li><a href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
+           <%} else {%>
+            <li><a href="<%=request.getContextPath()%>/noUserService.nu"> 고객센터</a></li>
+           <%} %>
          </ul>
       <% if(loginUser == null) {%>
       <ul class="nav navbar-nav navbar-right">

@@ -508,7 +508,7 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 	public ArrayList<Board> selectFrequentList(int currentPage, int limit, int num) {
 		Connection con = getConnection();
 
-		ArrayList<Board>list = new BoardDao().selectFrequentList(con,currentPage,limit);
+		ArrayList<Board>list = new BoardDao().selectFrequentList(con,currentPage,limit,num);
 
 		close(con);
 
@@ -540,6 +540,8 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 			Connection con = getConnection();	
 			
 	      int result = new BoardDao().updateBoardStatus(con,status,num);
+	      
+	      System.out.println(num);
 	      
 	      close(con);
 	      return result;

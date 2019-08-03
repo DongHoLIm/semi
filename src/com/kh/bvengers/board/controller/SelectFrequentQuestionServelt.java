@@ -70,7 +70,6 @@ public class SelectFrequentQuestionServelt extends HttpServlet {
 		}
 		
 		BoardPageInfo pi = new BoardPageInfo(currentPage1, listCount, limit1, maxPage1, startPage1, endPage1);
-		System.out.println("여기는"+pi);
 	      ArrayList<Board> list = new BoardService().selectQandAList(currentPage1, limit, num,uno);
 	      
 	      

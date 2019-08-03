@@ -49,7 +49,7 @@ public class frequentQuestionServlet extends HttpServlet {
 				
 		if(result > 0) {
 			page = "";
-			response.sendRedirect(request.getContextPath()+"/sfqs.qo");
+			response.sendRedirect(request.getContextPath()+"/SelectFrequentQuestionList.fq");
 		}else {
 			request.setAttribute("msg", "자주 찾는 질문 등록 실패삼");
 			request.getRequestDispatcher("views/common/errorpage.jsp").forward(request, response);

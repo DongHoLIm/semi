@@ -39,6 +39,7 @@ public class SelectOneNotice extends HttpServlet {
 			page = "views/user/board/boardDetail.jsp";
 			request.setAttribute("b", b);
 			request.setAttribute("fileList", fileList);
+			System.out.println("b"+b);
 		}else {
 			page = "views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "사진 게시판 상세보기 실패!");

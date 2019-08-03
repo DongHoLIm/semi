@@ -1,6 +1,7 @@
 package com.kh.bvengers.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.board.model.service.BoardService;
+import com.kh.bvengers.board.model.vo.Board;
 
 /**
- * Servlet implementation class UpdateBoardDeleteServlet
+ * Servlet implementation class NoUserServiceCenterServelt
  */
-@WebServlet("/ubds.up")
-public class UpdateBoardDeleteServlet extends HttpServlet {
+@WebServlet("/noUserService.nu")
+public class NoUserServiceCenterServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateBoardDeleteServlet() {
+    public NoUserServiceCenterServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +31,16 @@ public class UpdateBoardDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		int limit = 5;
 		
-		String status = "N";
+		String page = "";
 		
-		
-		int result = new BoardService().updateBoardStatus(status,num);
-		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath()+"/selectNotice.no");
-		}
+		ArrayList<Board>List = new BoardService().selectQuestionList(limit);
+		System.out.println("자주찾는"+List);
+		page = "views/user/serviceCenter/noUserCustomerCenter.jsp";
+		request.setAttribute("List", List);
+		request.getRequestDispatcher(page).forward(request, response);
+	
 	}
 
 	/**

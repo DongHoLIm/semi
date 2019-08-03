@@ -87,6 +87,14 @@ td{
 			</tfoot>
 		</table>
 		</div>
+		<div>
+			<% 
+				 String writer = b.getMemberId(); 
+				System.out.print("작성자는"+ writer);
+				if (loginUser != null && loginUser.getMemberId().equals(writer)){ %>
+			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/umqs.up?num=<%=b.getPostsId() %>'">삭제하기</button>
+				<%} %>
+		</div>
 	</div>
 	<br>
 	<br>
