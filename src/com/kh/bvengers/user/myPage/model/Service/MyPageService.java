@@ -206,6 +206,25 @@ public class MyPageService {
 		return result;
 	}
 
+
+	public int getSaleListCount(String memberNo) {
+		Connection con = getConnection();
+		int listCount = new MyPageDao().getSaleListCount(con, memberNo);
+		close(con);
+		
+		return listCount;
+	
 	}
 
 
+	public ArrayList<myPage> selectSaleList(String memberNo, int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<myPage> sList = new MyPageDao().selectSaleList(con, memberNo, currentPage, limit);
+		
+		close(con);
+		
+		return sList;
+	}
+
+	}

@@ -246,32 +246,11 @@ input[type=button] {
 	border:1px solid black;
 	background:#FFF;
 }
-#ip_status {
-	border:none;
-	text-align:center;
-}
 
 .th_orderLook {
 	text-align:center;
 }
 
-
-#deliTable {
-	align: center;
-}
-
-#deliTable tr {
-	text-align:center;
-}
-
-#deliTable tr td {
-	text-align:center;
-}
-
-#deliTable tr td img {
-	width: 30%;
-	align: center;
-}
 
 .dateBoard {
 	width: 80%;
@@ -281,18 +260,11 @@ input[type=button] {
 }
 
 
-.pageNo {
-	margin: auto;
-}
-
 tr > th, tr>td{
 	width: 25%;
 	margin: auto;
 	text-align:center;
 	border-spacing: 10px;
-}
-.page-control {
-	margin-top:10%;
 }
 
 
@@ -363,14 +335,6 @@ tr > th, tr>td{
 					<td><%=p.getOno() %></td>
 					<td><%=p.getoDate() %></td>
 					<td><%=p.getPname()%><br><button class="btn_od">주문상세</button></td>
-
-				<%-- <% if(p.getRefundStatus() != "" && p.getRefundStatus() != "1" && p.getRefundStatus() != "2"){
-				   	status = p.getRefundStatus();
-					if(p.getDstatus() != "" && p.getDstatus() != "1" && p.getDstatus() != "2" && p.getDstatus() != "3"){
-				 	status = p.getDstatus();
-					if(p.getPayStatus() != "" && p.getPayStatus() != "1" && p.getPayStatus() != "2"){
-				   	status = p.getPayStatus();
-					}}}%> --%>
 					<td><%=p.getPstatus() %></td>
 				</tr>
 				<%}%>

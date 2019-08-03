@@ -140,15 +140,15 @@ button{
      });
 	});
 	
+	$(function(){
+		
+		$(".btn_cancel").click(function(){
+			var ono - $(this).parent().siblings().eq(0).text();
+			window.open('<%=request.getContextPath()%>/views/user/mypage/cancelPopUp.jsp?ono='+ono,'window_name','width=600,height=400,location=yes,status=no,scrollbars=yes')
+		});
+	});
 	
-	/* $(function(){
-  	$('#btn_confirm').click(function(){
-   		 if($(this).html() == '구매확정' ) {
-   	   		$(this).html('구매확정 완료');
-   		 }
-  	})
-}); */
-
+	
 </script>
 
 

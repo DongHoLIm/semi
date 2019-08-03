@@ -783,5 +783,96 @@ public class MyPageDao {
 	}
 
 
-	
+	public int getSaleListCount(Connection con, String memberNo) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectSaleListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1,  memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+
+	}
+
+
+	public ArrayList<myPage> selectSaleList(Connection con, String memberNo, int currentPage, int limit) {
+		ArrayList<myPage> sList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectSaleList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setString(1,  memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			sList = new ArrayList<myPage>();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				
+				m.setPid(rset.getString("POSTS_ID"));
+				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setPstatus(rset.getString("PAY_STATUS"));
+				m.setaStatus(rset.getString("ADJUST_DIV"));
+				m.setkDate(rset.getInt("KEEP_DATE"));
+
+				sList.add(m);
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return sList;
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

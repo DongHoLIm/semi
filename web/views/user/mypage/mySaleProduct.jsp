@@ -1,11 +1,51 @@
+<%@page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
+<%@page import="com.kh.bvengers.user.myPage.model.vo.myPage"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<myPage> sList = (ArrayList<myPage>) request.getAttribute("sList");
+	MyPagePageInfo pi = (MyPagePageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+input[type=button] {
+   border:1px solid black;
+   background:#FFF;
+}
+
+.t_div {
+	width:60%;
+	height:100%;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+#pagingArea {
+	width:60%;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.pagingArea > button {
+	background:#FFF;
+	border: 1px solid black;
+
+}
+
 
 #sec1 {
 	width: 100%;
@@ -15,26 +55,49 @@
 	margin:0 auto;
 }
 
-#outer{
-	width: 100%;
-	padding: 2%;
-	margin: 0 auto;
-	text-align: center;
-}
 
 
 .board {
 	width: 80%;
 	margin: auto;
 	align: center;
-	border-spacing: 10px;
+	
+	border:1px solid #f3f6f7;
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
 }
 
-.pageNo {
-	margin: auto;
+.board th {
+
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
 }
+
+.board td {
+
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+.board thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+}
+
 
 .th1 {
+	text-align:center;
+	
+}
+.od {
 	text-align:center;
 }
 </style>
@@ -43,33 +106,63 @@
 	<!-- header 영역 -->
 	<header><%@ include file="../hfl/header.jsp" %></header>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
-	<section id="sec1">
-		<div id="outer">
-			<div>
-				<h2>판매상품 현황</h2>
-				<table class="board">
-				<tr class="row0">
+	
+	
+		<div class="t_div">
+			<br />
+			<h2 align="center">나의 판매현황</h2><br><br>
+			<table class="board">
 				<thead>
-					<th class="th1">주문번호</th>
+				<tr>
+					<th class="th1">게시글 번호</th>
 					<th class="th1">상품명</th>
 					<th class="th1">판매여부</th>
 					<th class="th1">정산여부</th>
-					<th class="th1">보관일자</th>
+					<th class="th1">남은 보관일</th>
+				</tr>
 				</thead>
+				<tbody>
+				<% for(myPage m : sList){%>
+				<tr class="od">
+					<td><%=m.getPid() %></td>
+					<td><%=m.getPname() %></td>
+					<td><%=m.getPayStatus()%></td>
+					<td><%=m.getaStatus() %></td>
+					<td><%=m.getkDate() %>일</td>
 				</tr>
-				<tr class="row1">
-					<td id="Notd">0005</td>
-					<td>진수의 핑크핑크한 노트북쿨러</td>
-					<td>검수단계</td>
-					<td>Y</td>
-					<td>22/06/10</td>
-				</tr>
+				<%}%>
+				</tbody>
 			</table>
 		</div>
-			</div>
-			
-		
-	</section>
+<%-- 페이징처리 --%>
+<div id="pagingArea">
+		<div class="pagingArea" align="center">
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/mySaleProduct.mp?currentPage=1'"><<</button>
+
+			<% if(currentPage <= 1){ %>
+			<button disabled><</button>
+			<% }else { %>
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/mySaleProduct.mp?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+
+			<% for(int p = startPage; p <= endPage; p++){
+				if(currentPage == p){ %>
+					<button class="btn_paging" disabled><%= p %></button>
+			<% } else { %>
+					<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/mySaleProduct.mp?currentPage=<%=p%>'"><%= p %></button>
+			<%
+				}
+			   }
+			%>
+
+			<% if(currentPage >= maxPage){ %>
+			<button class="btn_paging" disabled>></button>
+			<% }else{ %>
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/mySaleProduct.mp?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/mySaleProduct.mp?currentPage=<%=maxPage%>'">>></button>
+		</div>
+		</div>
 		
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 </body>

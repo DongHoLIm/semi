@@ -95,12 +95,12 @@ input {
 			</tr>
 			<tr>
 				<td><label>주소</label></td>
-				<td><input type="text" size=35% id="sample6_address" name="address2" value="<%=add[1]%>&nbsp;<%=add[2]%>"></td>
+				<td><input type="text" size=35% id="sample6_address" name="address2" value="<%=add[1]%>"></td>
 				<td></td>
 			</tr>
 			<tr>
 			<td><label>상세주소</label></td>
-			<td><input type="text" size=35% id="sample6_detailAddress" name="address3" value="<%=add[3]%>"></td>
+			<td><input type="text" size=35% id="sample6_detailAddress" name="address3" value="<%=add[2]%>"></td>
 			</tr>
 			<tr align="center">
 				<td colspan="2">

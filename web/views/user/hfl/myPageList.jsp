@@ -42,6 +42,7 @@
 <body>
 	<!-- header 영역 -->
 <body>
+
  <div class="container" style="float: left; width: 20%; padding-top: 10%; ">
   <div class="panel-group" id="accordion" >
     <div class="panel panel-default">
@@ -55,8 +56,8 @@
         	<div class="panel-body">
 	        	<ul class = "myPage">
 	        		<li><a href="<%=request.getContextPath()%>/orderLook.mp">주문조회</a></li>
-	        		<li><a href="/sp/views/user/mypage/mySaleProduct.jsp">My판매현황</a></li>
-	        		<li><a href="/sp/views/user/mypage/cancelLook.jsp">주문취소조회</a></li>
+	        		<li><a href="<%=request.getContextPath()%>/mySaleProduct.mp">My판매현황</a></li>
+	        		<li><a href="<%=request.getContextPath()%>/cancelLook.mp">주문취소조회</a></li>
 	        		<li><a href="<%=request.getContextPath()%>/refundList.mp">환불/정산내역</a></li>
 	        	</ul>
         	</div>
