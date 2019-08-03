@@ -78,6 +78,14 @@
    align:center;
    margin : 20px auto;
 }
+.detail #writer {
+	font-size : 1.2em;
+	cursor : pointer;
+}
+.detail #writer a:hover,  .detail #writer a{
+	text-decoration : none;
+	color: white;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -89,7 +97,7 @@
          <table class="detail" align="center">
             <tr>
                <th>판매자</th>
-               <th colspan="3"><label id="writer"><%= b.getWriter() %></label></th>
+               <th colspan="3"><label id="writer"><a href="#" data-toggle="tooltip" data-placement="top" title="판매자 정보보기"><%= b.getWriter() %></a></label></th>
             </tr>
             <tr>
                <th rowspan="3">상품</th>
@@ -136,7 +144,7 @@
       <div id="btnArea">
       <button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
       <button id="showBtn" type="button" class="btns" align="center">댓글 보기</button>
-      <%if(loginUser.getMemberId().equals(b.getWriter())) {%>
+      <%if( loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
       <button id="editBtn" type="button" class="btns" align="center">수정 요청</button>
       <%} %>
       </div>
@@ -164,6 +172,7 @@
       $(function(){
          var postsId = <%= b.getPostsId()%>;
          $(document).ready(function(){
+        	$('[data-toggle="tooltip"]').tooltip();
             $.ajax({
                url:"selectComment.pd",
                data:{postsId:postsId},
@@ -178,7 +187,7 @@
                      var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
                      var $recommend = $("<td>").text(data[key].recommendCount).addClass("tRecommend");
 
-                     var $recommendBtn = $("<td><button>").attr('value','추천').addClass("tRecommendBtn");
+                     var $recommendBtn = $("<td><button>").html('추천').addClass("tRecommendBtn");
 
                      $tr.append($writeTd);
                      $tr.append($contentTd);
@@ -187,10 +196,10 @@
                      $tr.append($recommendBtn);
                      $commentSelectTable.append($tr);
                      $(".tWriter").css({"width":"100px", "height":"50px"});
-                     $(".tContent").css("width", "400px");
+                     $(".tContent").css("width", "550px");
                      $(".tDate").css("width", "100px");
                      $(".tRecommend").css("width","100px");
-                     $(".tRecommendBtn").css("width", "100px");
+                     $(".tRecommendBtn").css({"width":"100px", "cursor":"pointer"});
                      $commentSelectTable.css({"text-align":"center", "width":"100%","margin":"auto"});
                   }
                },
