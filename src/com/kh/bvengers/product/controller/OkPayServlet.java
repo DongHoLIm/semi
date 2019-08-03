@@ -75,7 +75,7 @@ public class OkPayServlet extends HttpServlet {
 			response.sendRedirect("index.jsp");
 		}else {
 			request.setAttribute("msg", "구매 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/common/errorPagePrompt.jsp").forward(request, response);
 		}
 
 	}
