@@ -27,7 +27,7 @@ public class LoginMemberServlet extends HttpServlet {
 		String memberId = request.getParameter("loginId");
 		String memberPwd = request.getParameter("password");
 		Member loginUser = new MemberService().loginCheck(memberId,memberPwd);
-		
+		System.out.println(loginUser);
 		if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
 			if(loginUser.getMemberId().equals(sessionId)) {
 				request.getRequestDispatcher("views/user/join/searchPwdResult.jsp").forward(request, response);

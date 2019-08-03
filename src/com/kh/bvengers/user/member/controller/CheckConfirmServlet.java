@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 import com.kh.bvengers.user.member.model.service.MemberService;
 
 @WebServlet("/checkuser.me")
@@ -35,12 +35,17 @@ public class CheckConfirmServlet extends HttpServlet {
 			request.setAttribute("hc", "1");
 			request.setAttribute("email", email);
 			request.getRequestDispatcher("/send.me").forward(request, response);
+			
 			String password = request.getSession().getAttribute("password").toString();
 			System.out.println("checkuser password : "+password);
-			request.setAttribute("password", password);
-			out.append(password);
+			//request.setAttribute("password", password);
+			//request.getRequestDispatcher("/views/user/join/searchPwdPage.jsp").forward(request, response);
+			/*response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");*/
+			new Gson().toJson(password,response.getWriter());
+			//out.append(password);
+			
 		}else {
-			String password1 = (String) request.getSession().getAttribute("password");
 			
 			out.append("fail");
 		}
