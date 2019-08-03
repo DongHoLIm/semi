@@ -6,7 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- <script>
+$(function(){
+	$("#password").keyup(function(){
+		$("#ckNotice").html('');
+		alert("빼액!!");
+	});
+	$("#password2").keyup(function(){
+		if($("#password").val()!=$("#password2").val()){
+			$("#ckNotice").html('비밀번호 일치하지 않음<br><br>');
+			$("#ckNotice").attr('color','#f82a2aa3');
+		}else{
+			$("#ckNotice").html('비밀번호 일치함<br><br>');
+			$("#ckNotice").attr('color','#199894b3');
+		}
+	});
+});
+</script> -->
 <script type="text/javascript">
+
 function checkjoin(index){
    if(index == 1){
    var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
@@ -62,20 +80,22 @@ function checkjoin(index){
 		alert("주소를 입력해주세요");
 		$("#sample6_address").focus();
 	}
-   if(!getCheck.test($("#password").val())){
+    if(!getCheck.test($("#password").val())){
       alert("비밀번호를 다시 설정하세요");
       $("#password").val("");
       $("#password").focus();
       return false;
    }
-
+	
+    
    if($("#password").val() != ($("#password2").val())){
-      alert("비밀번호를 확인하세요");
       $("#password").val("");
       $("#password2").val("");
+      $("#ckNotice").html("비밀번호가 일치하지않음");
+      $("#ckNotice").attr('color','#f82a2aa3');
       $("#password").focus();
       return false;
-   }
+   } 
 
 /*    if(($("#peoplejb").val()=="")||($("#peoplejb2").val()=="")){
       alert("주민등록번호를 입력하세요");
@@ -94,6 +114,7 @@ if($("#password").val() == ($("#password2").val())){
 
 	}
 }
+
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -164,6 +185,8 @@ if($("#password").val() == ($("#password2").val())){
          <button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
          <input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
          <input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
+         <font id = "ckNotice" ></font>
+         
          <input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
          <input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
          <input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>

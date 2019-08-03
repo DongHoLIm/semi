@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String msg = (String) request.getAttribute("msg");
-	String check = (String) request.getSession().getAttribute("mailkey");
+	String check = (String) request.getSession().getAttribute("password");
 %>
 <!DOCTYPE html >
 <html>
@@ -22,7 +22,7 @@ function ckbtn(){
 			success:function(data){
 				if(data=="Success"){
 					alert("인증이완료되었습니다.");
-
+					
 					window.close();
 				}else if(data=="fail"){
 					alert("인증번호가 틀렸습니다.\n다시 시도해주세요");
