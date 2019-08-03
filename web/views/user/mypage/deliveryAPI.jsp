@@ -1,15 +1,22 @@
 <%@page import="com.kh.bvengers.user.myPage.model.vo.myPage"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <style>
+.div_deli {
+	width:50%;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+
+}
 #tekbeCompnayList {
     width: 250px;
     height: 30px;
@@ -44,7 +51,7 @@
 }
 
 #myButton1 {
-  margin-left:15%;
+  margin-left:30%;
   background: #FFF;
   background-image: -webkit-linear-gradient(top, #FFF, #FFF);
   background-image: -moz-linear-gradient(top, #FFF, #FFF);
@@ -56,7 +63,7 @@
   border-radius: 0px;
   color: black;
   font-size: 16px;
-  padding: 10px 10px 10px 10px;
+  padding: 5px 5px 5px 5px;
   text-decoration: none;
 }
 
@@ -73,7 +80,7 @@ td, th {
 }
 
 tr:nth-child(even) {
-    background-color:black;
+    background-color:#f3f6f7;
 }
 
 </style>
@@ -85,20 +92,20 @@ tr:nth-child(even) {
 <script>
 
 $(document).ready(function(){
-	var myKey = "OVPc0EILBoWsYekipkJdaQ"; // sweet tracker¿¡¼­ ¹ß±Ş¹ŞÀº ÀÚ½ÅÀÇ Å° ³Ö´Â´Ù.
+	var myKey = "OVPc0EILBoWsYekipkJdaQ"; // sweet trackerì—ì„œ ë°œê¸‰ë°›ì€ ìì‹ ì˜ í‚¤ ë„£ëŠ”ë‹¤.
 
-		// ÅÃ¹è»ç ¸ñ·Ï Á¶È¸ company-api
+		// íƒë°°ì‚¬ ëª©ë¡ ì¡°íšŒ company-api
         $.ajax({
             type:"GET",
             dataType : "json",
             url:"https://info.sweettracker.co.kr/api/v1/companylist?t_key="+myKey,
             success:function(data){
 
-            		// ¹æ¹ı 1. JSON.parse ÀÌ¿ëÇÏ±â
+            		// ë°©ë²• 1. JSON.parse ì´ìš©í•˜ê¸°
             		var parseData = JSON.parse(JSON.stringify(data));
 
-            		// ¹æ¹ı 2. JsonÀ¸·Î °¡Á®¿Â µ¥ÀÌÅÍ¿¡ Array·Î ¹Ù·Î Á¢±ÙÇÏ±â
-            		var CompanyArray = data.Company; // Json Array¿¡ Á¢±ÙÇÏ±â À§ÇØ Array¸í Company ÀÔ·Â
+            		// ë°©ë²• 2. Jsonìœ¼ë¡œ ê°€ì ¸ì˜¨ ë°ì´í„°ì— Arrayë¡œ ë°”ë¡œ ì ‘ê·¼í•˜ê¸°
+            		var CompanyArray = data.Company; // Json Arrayì— ì ‘ê·¼í•˜ê¸° ìœ„í•´ Arrayëª… Company ì…ë ¥
 
             		var myData="";
             		$.each(CompanyArray,function(key,value) {
@@ -108,7 +115,7 @@ $(document).ready(function(){
             }
         });
 
-		// ¹è¼ÛÁ¤º¸¿Í ¹è¼ÛÃßÀû tracking-api
+		// ë°°ì†¡ì •ë³´ì™€ ë°°ì†¡ì¶”ì  tracking-api
         $("#myButton1").click(function() {
         	var t_code = $('#tekbeCompnayList option:selected').attr('value');
         	var t_invoice = $('#invoiceNumberText').val();
@@ -122,19 +129,19 @@ $(document).ready(function(){
                 		myInvoiceData += ('<p>'+data.msg+'<p>');
                 	}else{
 	            		myInvoiceData += ('<tr>');
-	            		myInvoiceData += ('<th>'+"º¸³»´Â»ç¶÷"+'</td>');
+	            		myInvoiceData += ('<th>'+"ë³´ë‚´ëŠ”ì‚¬ëŒ"+'</td>');
 	            		myInvoiceData += ('<th>'+data.senderName+'</td>');
 	            		myInvoiceData += ('</tr>');
 	            		myInvoiceData += ('<tr>');
-	            		myInvoiceData += ('<th>'+"Á¦Ç°Á¤º¸"+'</td>');
+	            		myInvoiceData += ('<th>'+"ì œí’ˆì •ë³´"+'</td>');
 	            		myInvoiceData += ('<th>'+data.itemName+'</td>');
 	            		myInvoiceData += ('</tr>');
 	            		myInvoiceData += ('<tr>');
-	            		myInvoiceData += ('<th>'+"¼ÛÀå¹øÈ£"+'</td>');
+	            		myInvoiceData += ('<th>'+"ì†¡ì¥ë²ˆí˜¸"+'</td>');
 	            		myInvoiceData += ('<th>'+data.invoiceNo+'</td>');
 	            		myInvoiceData += ('</tr>');
 	            		myInvoiceData += ('<tr>');
-	            		myInvoiceData += ('<th>'+"¼ÛÀå¹øÈ£"+'</td>');
+	            		myInvoiceData += ('<th>'+"ì†¡ì¥ë²ˆí˜¸"+'</td>');
 	            		myInvoiceData += ('<th>'+data.receiverAddr+'</td>');
 	            		myInvoiceData += ('</tr>');
                 	}
@@ -148,10 +155,10 @@ $(document).ready(function(){
             		var myTracking="";
             		var header ="";
             		header += ('<tr>');
-            		header += ('<th>'+"½Ã°£"+'</th>');
-            		header += ('<th>'+"Àå¼Ò"+'</th>');
-            		header += ('<th>'+"À¯Çü"+'</th>');
-            		header += ('<th>'+"ÀüÈ­¹øÈ£"+'</th>');
+            		header += ('<th>'+"ì‹œê°„"+'</th>');
+            		header += ('<th>'+"ì¥ì†Œ"+'</th>');
+            		header += ('<th>'+"ìœ í˜•"+'</th>');
+            		header += ('<th>'+"ì „í™”ë²ˆí˜¸"+'</th>');
         			header += ('</tr>');
 
             		$.each(trackingDetails,function(key,value) {
@@ -174,11 +181,13 @@ $(document).ready(function(){
 
 </script>
 <body>
-<span id="tekbeCompnayName" size=20>ÅÃ¹èÈ¸»ç¸í: </span>
+<div class="div_deli">
+<span id="tekbeCompnayName" size=20>íƒë°°íšŒì‚¬ëª…: </span>
 <select id="tekbeCompnayList" name="tekbeCompnayList"></select><br/><br/>
-<span id="invoiceNumber">¿î¼ÛÀå¹øÈ£: </span>
+<span id="invoiceNumber">ìš´ì†¡ì¥ë²ˆí˜¸: </span>
 <input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
-<button id="myButton1">ÅÃ¹è Á¶È¸ÇÏ±â </button>
+<button id="myButton1">íƒë°° ì¡°íšŒí•˜ê¸° </button>
+</div>
 <br/>
 <br/>
 <div>

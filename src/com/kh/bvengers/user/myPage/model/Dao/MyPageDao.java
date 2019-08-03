@@ -855,11 +855,112 @@ public class MyPageDao {
 		return sList;
 		
 	}
+
+
+	public int getCancelLookCount(Connection con, String memberNo) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("cancelLookCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		return listCount;
+	}
+
+
+	public ArrayList<myPage> getCancelLookList(Connection con, String memberNo, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ArrayList<myPage> cList = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("cancelLookList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setString(1, memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+		
+			rset = pstmt.executeQuery();
+			cList = new ArrayList<myPage>();
+			
+			while(rset.next()) {
+				myPage m = new myPage();
+				
+				m.setOno(rset.getString("ORDER_NO"));
+				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setDtPay(rset.getInt("PRODUCT_DTPAY"));
+				m.setPayStatus(rset.getString("PAY_STATUS"));
+				
+				cList.add(m);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
+
+	public int getCancelDateLookCount(Connection con, String memberNo, String start, String end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		
+		String query = prop.getProperty("selectCancelDateCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+	return listCount;
 }
 
-
-
-
+}
 
 
 
