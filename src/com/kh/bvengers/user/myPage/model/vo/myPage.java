@@ -24,9 +24,42 @@ public class myPage {
 	private String aname;	//예금주
 	private String bCode;	//은행명
 	private String accountNo; //계좌번호
-
+	private String pid;		//게시글번호
+	private int kDate;		//보관일자
+	
 	
 	public myPage() {}
+
+
+	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, String payStatus,
+			String refundStatus, int dtPay, String inNo, String rName, String dSite, String rPhone, String pstatus,
+			Date rDate, String ano, Date aDate, String aStatus, int aPrice, String aname, String bCode,
+			String accountNo, String pid, int kDate) {
+		super();
+		this.ono = ono;
+		this.pname = pname;
+		this.dstatus = dstatus;
+		this.oDate = oDate;
+		this.mno = mno;
+		this.payStatus = payStatus;
+		this.refundStatus = refundStatus;
+		this.dtPay = dtPay;
+		this.inNo = inNo;
+		this.rName = rName;
+		this.dSite = dSite;
+		this.rPhone = rPhone;
+		this.pstatus = pstatus;
+		this.rDate = rDate;
+		this.ano = ano;
+		this.aDate = aDate;
+		this.aStatus = aStatus;
+		this.aPrice = aPrice;
+		this.aname = aname;
+		this.bCode = bCode;
+		this.accountNo = accountNo;
+		this.pid = pid;
+		this.kDate = kDate;
+	}
 
 
 	public String getOno() {
@@ -239,17 +272,36 @@ public class myPage {
 	}
 
 
+	public String getPid() {
+		return pid;
+	}
+
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
+
+	public int getkDate() {
+		return kDate;
+	}
+
+
+	public void setkDate(int kDate) {
+		this.kDate = kDate;
+	}
+
+
 	@Override
 	public String toString() {
 		return "myPage [ono=" + ono + ", pname=" + pname + ", dstatus=" + dstatus + ", oDate=" + oDate + ", mno=" + mno
 				+ ", payStatus=" + payStatus + ", refundStatus=" + refundStatus + ", dtPay=" + dtPay + ", inNo=" + inNo
 				+ ", rName=" + rName + ", dSite=" + dSite + ", rPhone=" + rPhone + ", pstatus=" + pstatus + ", rDate="
 				+ rDate + ", ano=" + ano + ", aDate=" + aDate + ", aStatus=" + aStatus + ", aPrice=" + aPrice
-				+ ", aname=" + aname + ", bCode=" + bCode + ", accountNo=" + accountNo + "]";
+				+ ", aname=" + aname + ", bCode=" + bCode + ", accountNo=" + accountNo + ", pid=" + pid + ", kDate="
+				+ kDate + "]";
 	}
-	
-	
-	
-	
+
+
 	
 }
