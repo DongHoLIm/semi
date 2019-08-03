@@ -491,7 +491,6 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
-
 		String query = prop.getProperty("selectQnAListCount");
 
 		try {
@@ -506,6 +505,7 @@ public class BoardDao {
 
 				listCount = rset.getInt(1);
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -549,6 +549,8 @@ public class BoardDao {
 
 			}
 
+			
+			System.out.println("lists는"+list);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -611,7 +613,7 @@ public class BoardDao {
 		int num = 4;
 
 		String query = prop.getProperty("selectQuestionList");
-
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
@@ -628,7 +630,7 @@ public class BoardDao {
 
 				list.add(b);
 			}
-
+				System.out.println("자주찾는 질문"+list);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

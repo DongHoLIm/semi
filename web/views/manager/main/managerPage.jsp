@@ -81,13 +81,12 @@ int endPage = pi.getEndPage();
 				<th>작성날짜</th>
 			</thead>
 			</tr>
-			<%for (Board b : list) {%>
+			<%  for (Board b : list) { %>
 				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
-				<%-- <td><%= b.getMemberId() %></td> --%>
 				<td><%= b.getCreateDate() %></td>
-			<%} %>
+			<%}%>
 		</table>
 		<div align = "center">
       <button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
@@ -122,7 +121,8 @@ int endPage = pi.getEndPage();
 
       </div>
 		<br>
-
+		
+	
 	</section>
 	<br />
 
