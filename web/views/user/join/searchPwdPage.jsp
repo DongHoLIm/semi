@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-String password = (String) request.getSession().getAttribute("password");
-%>
+    <%@ page import="com.google.gson.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +82,7 @@ String password = (String) request.getSession().getAttribute("password");
 			<br>
 			
 			<input type="text" placeholder="아이디" name="userId" id="userId" size=30><br>
-			<input type="text" name="password" id="password"  value="<%=password%>">
+			<input type="text" name="password" id="password"  value="">
 			<input type="text" placeholder="이름" name="userName" id="userName" size=30><br>
 			<input type="text" name="hiddencard" value="1" id="hiddencard" style="display:none">
 			<input type="text" name="hiddenvalue" value="0" id="hiddenvalue" style="display:none">
@@ -115,14 +113,23 @@ String password = (String) request.getSession().getAttribute("password");
 			$.ajax({
 				url:"/sp/checkuser.me",
 				type:"post",
+				async:false,
+				dataType:"text",
 				data:{userId:userId,userName:userName,email:email},
 				success:function(data){
 					if(data==="fail"){
 						alert("존재하지 않는 회원입니다.");
-						$("#password").val("<%=password%>");
 					}else{
 						alert("존재하는 회원입니다.\n이메일로 임시 비밀번호를 보내드렸습니다.\n임시 비밀번호로 로그인 하세요")
 						$("#hiddenvalue").val("1");
+						for(var i in data){
+						var status = data[i]+data[i+1]+data[i+2]+data[i+3]+data[i+4]+data[i+5];
+						var sta = status.text();
+						if(sta=="status"){
+							console.log(status);
+						}
+					}
+						alert(data);
 					}
 				}
 				});

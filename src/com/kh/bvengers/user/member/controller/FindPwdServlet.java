@@ -1,6 +1,7 @@
 package com.kh.bvengers.user.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,26 +21,24 @@ public class FindPwdServlet extends HttpServlet {
     }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().invalidate();
       String memberId = (String) request.getParameter("userId");
      String newPwd = (String) request.getParameter("password");
      
-      System.out.println(newPwd);
       
       int result = new MemberService().temporaryPwd(memberId,newPwd);
       String page = "";
       
+      PrintWriter out = response.getWriter();
       if(result>0) {
+    	  
       request.getSession().invalidate();
-      
       HttpSession ss = request.getSession();
       ss.setAttribute("sessionId", memberId);
-      page = "/index.jsp";
-      }else {
-    	  request.setAttribute("msg", "비밀번호 변경 실패");
-      page = "views/common/errorPagePrompt.jsp";
-      }
+      page = "views/user/login/login.jsp";
       request.getRequestDispatcher(page).forward(request, response);
+      }else {
+    	 out.append("fail");
+      }
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
