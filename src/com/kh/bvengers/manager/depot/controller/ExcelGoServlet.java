@@ -32,34 +32,10 @@ public class ExcelGoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage;		
-		int limit;				
-		int maxPage;			
-		int startPage;			
-		int endPage;			
+		String code = request.getParameter("value");
+		String [] productCode = code.split(",");
 		
-		currentPage = 1;
-		
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		limit = 10;
-		
-		int listCount = new DepotService().getAllListCount();
-		
-		maxPage = (int)((double)listCount/limit+0.9);
-		
-		startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
-		
-		endPage = startPage + 10 - 1;
-		
-		if(maxPage < endPage) {
-			endPage = maxPage;
-		}
-		
-		DepotPageInfo pi = new DepotPageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		ArrayList <Depot> list = new DepotService().selectAllList(currentPage,limit);
+		ArrayList<Depot> list = new DepotService().excelPrint(productCode);
 		
 		String page ="";
 		if(list!=null) {

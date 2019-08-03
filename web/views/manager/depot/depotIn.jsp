@@ -43,6 +43,7 @@
    }
    #requestProduct{
    	width: 80%;
+   	
    }
 </style>
 <body>
@@ -52,12 +53,13 @@
    <br />
    <div id="inOutMain">
    		<div id="requestRelease">   			
-   			<input type="text" id="requestProduct"	value="" width="100%" />   				
+   			<input type="text" id="requestProduct"	value="" width="100%" onkeypress="if(event.keyCode==13){enterEvent();}" />   				
    			<input type="button" onclick="relesDate();" value="출고요청"/>   			
    		</div>
       <div id="table Area">
          <table id="depotMain" align="center">
          <tr>
+         	<th id="th"></th>
             <th id="th">번호</th>
             <th id="th">상품코드</th>
             <th id="th">회원아이디</th>
@@ -68,6 +70,7 @@
          </tr>
          <%for(Depot d :list){ %>
             <tr>
+            	<td><input type="checkBox" value="<%=d.getProductCode()%>" onclick="appendText();" id="checkStatus"/></td>
                <td><%=d.getProductNumber() %></td>
                <td><%=d.getProductCode() %><input type="hidden" id="productCode" value="<%=d.getProductCode()%>"/></td>
                <td><%=d.getSelerId() %></td>
@@ -77,7 +80,7 @@
                <td><%if(d.getPayStatus()==null){
             		d.getReleaseDate();
             	}else{%> 
-					 <input type="checkBox" value="<%=d.getProductCode()%>" onclick="appendText();" id="checkStatus"/>
+					결제완료
             	<%} %>
             	</td>
             </tr>
@@ -118,30 +121,18 @@
    <script>
      function relesDate(){
     	 var productCode = $("input[id='requestProduct']").val();
-    	 var allProCode = $("input[id='productCode']");
-    	 var check = $("input[id='checkStatus']");
-    	 var allListProductCode = "";
-    	 var checkAllList= "";
-    	 allProCode.each(function(index){
-    		allListProductCode+=$(this).val()+","; 
-    	 });
-    	 check.each(function(index){
-    		checkAllList+=$(this).val()+","; 
-    	 });
     		$(function (){
     			 var aCode = productCode;
     			 $.ajax({
         			 url:"outProduct.do",
         			 type:"post",
-        			 data:{"productCode":aCode,"listProductCode":allListProductCode,"checkList":checkAllList},
+        			 data:{"productCode":aCode},
         			 success:function(data){
         				 window.location.reload();
         			 }
         		 });
     		 });
      }
-   /*   $("#dynamicUL").on("click", 'input:checkbox', function() {
-         $("#log").prepend( $(this).val() + " / " + $(this).is(":checked") + " 체크박스가 클릭되었습니다.<br/>"); */
      function appendText(){
          var text = $("input[id='requestProduct']");
          text.val("");
@@ -152,8 +143,14 @@
     	 text.val(code);
     	 
     	}
-    	
-     
+    function enterEvent(){
+    	 var text = $("input[id='requestProduct']");
+    	var code ="";	
+    	 text.each(function(index){
+    			code=$(this).val()+","
+    		});
+    	 text.val(code);
+    }     
    </script>
 
 </body>

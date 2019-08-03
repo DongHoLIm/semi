@@ -32,28 +32,14 @@ public class OutProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String productCode = request.getParameter("productCode");
-		String allListProductCode = request.getParameter("listProductCode");
-		String checkListProductCode = request.getParameter("checkList");
 		String [] checkedList = productCode.split(",");
-		String [] allList = allListProductCode.split(",");
-		String [] checkList = checkListProductCode.split(",");
-		ArrayList list =new ArrayList();
-		for(int i =0;i<allList.length;i++) {
-			int count =0;
-			for(int j=0;j<checkList.length;j++) {
-				if(allList[i].equals(checkList[j])) {
-					count++;
-				}
-			}
+		int result = 0;
+		for(int i =0;i<checkedList.length;i++) {
+			result = new DepotService().updateRelesDate(checkedList[i]);
 		}
-		/*System.out.println(list.size());*/
-		int result=0;
-		/*for(int i =0;i<str.length;i++) {
-			result = new DepotService().updateRelesDate(str[i]);
-		}	*/
-		/*response.setContentType("application/json");
+		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(result,response.getWriter());*/
+		new Gson().toJson(result,response.getWriter());
 	}
 
 	/**
