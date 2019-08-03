@@ -114,7 +114,6 @@
 				url:"/sp/checkuser.me",
 				type:"post",
 				async:false,
-				dataType:"text",
 				data:{userId:userId,userName:userName,email:email},
 				success:function(data){
 					if(data==="fail"){
@@ -122,19 +121,21 @@
 					}else{
 						alert("존재하는 회원입니다.\n이메일로 임시 비밀번호를 보내드렸습니다.\n임시 비밀번호로 로그인 하세요")
 						$("#hiddenvalue").val("1");
-						for(var i in data){
-						var status = data[i]+data[i+1]+data[i+2]+data[i+3]+data[i+4]+data[i+5];
-						var sta = status.text();
-						if(sta=="status"){
-							console.log(status);
+						/* for(var key in data){
+						var password = $("#password").text(data[key].password).addClass("password");	
+						}console.log(password);
+						console.log(data[key].password);
+						console.log(data.password);
+						console.log(data[key].status);
 						}
+						 */
+						 var password = data["password"];
+						 console.log(password); 
 					}
-						alert(data);
-					}
-				}
+			}
 				});
 			}
-		
+
 		
 	}
 	
