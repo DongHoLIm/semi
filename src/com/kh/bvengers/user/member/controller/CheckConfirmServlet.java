@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
 import com.kh.bvengers.user.member.model.service.MemberService;
 
 @WebServlet("/checkuser.me")
@@ -23,18 +24,24 @@ public class CheckConfirmServlet extends HttpServlet {
 		String memberId = request.getParameter("userId");
 		String memberName = request.getParameter("userName");
 		String email = request.getParameter("email");
-		String password = (String) request.getSession().getAttribute("password");
+		
 		String status = (String)request.getAttribute("status");
-
 		PrintWriter out = response.getWriter();
+		
+		
 		int result = new MemberService().checkuser(memberId,memberName,email);
 		if(result>0) {
-			out.append(status);
+			
 			request.setAttribute("hc", "1");
-			request.setAttribute("password", password);
 			request.setAttribute("email", email);
 			request.getRequestDispatcher("/send.me").forward(request, response);
+			String password = request.getSession().getAttribute("password").toString();
+			System.out.println("checkuser password : "+password);
+			request.setAttribute("password", password);
+			out.append(password);
 		}else {
+			String password1 = (String) request.getSession().getAttribute("password");
+			
 			out.append("fail");
 		}
 		out.flush();

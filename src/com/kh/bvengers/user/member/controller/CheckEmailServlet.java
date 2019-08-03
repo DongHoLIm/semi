@@ -23,7 +23,7 @@ public class CheckEmailServlet extends HttpServlet {
 			String checkuser= request.getParameter("checkuser");		
 					
 			PrintWriter out = response.getWriter();
-			
+			System.out.println("아아 이곳은 체크메일서블렛");
 			if(!status.equals(checkuser)) {// 실패시
 				out.append("fail");
 				HttpSession session = request.getSession();

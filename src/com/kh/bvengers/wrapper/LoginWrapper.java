@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 public class LoginWrapper extends HttpServletRequestWrapper {
-    
+
 	public LoginWrapper(HttpServletRequest request) {
 		super(request);
 	}
@@ -19,8 +19,8 @@ public class LoginWrapper extends HttpServletRequestWrapper {
 		String value = "";
 		if (key != null && key.equals("password")) {
 			value = getSha512(super.getParameter("password"));
-		}else {
-		
+			
+		} else {
 
 			value = super.getParameter(key);
 		}
