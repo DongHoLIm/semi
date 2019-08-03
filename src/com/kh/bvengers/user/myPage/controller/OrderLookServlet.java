@@ -97,7 +97,6 @@ public class OrderLookServlet extends HttpServlet {
 
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
 			request.setAttribute("olList", olList);
-			//request.setAttribute("dateList", dateList);
 			request.setAttribute("pi", pi);
 		}else {
 			page="views/common/errorPagePrompt.jsp";

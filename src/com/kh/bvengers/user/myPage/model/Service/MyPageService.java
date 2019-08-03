@@ -227,4 +227,40 @@ public class MyPageService {
 		return sList;
 	}
 
+
+	public int getCancelLookCount(String memberNo) {
+		Connection con = getConnection();
+
+		int listCount = new MyPageDao().getCancelLookCount(con, memberNo);
+		
+		close(con);
+		
+		return listCount;
+	
+	
 	}
+
+
+	public ArrayList<myPage> selectCancelLook(String memberNo, String ono, int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<myPage> cList = new MyPageDao().getCancelLookList(con, memberNo, currentPage, limit);
+		
+		close(con);
+		
+		return cList;
+	}
+
+
+	public int getCancelDateLookCount(String memberNo, String start, String end) {
+		Connection con = getConnection();
+		
+		int listCount = new MyPageDao().getCancelDateLookCount(con, memberNo, start, end);
+		
+		close(con);
+		
+		return listCount;
+		
+		
+	}
+
+}

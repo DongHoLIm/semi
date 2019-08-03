@@ -4,8 +4,6 @@
 <%
 
 	ArrayList<myPage> olList = (ArrayList<myPage>) request.getAttribute("olList");
-	String status = "";
-	String page2 = "";
 	ArrayList<myPage> dateList = (ArrayList<myPage>) request.getAttribute("dateList");
 	MyPagePageInfo pi  = (MyPagePageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
