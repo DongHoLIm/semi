@@ -744,7 +744,6 @@ public class BoardDao {
 		ResultSet rset = null;
 		Board b = null;
 		String query = prop.getProperty("selectContent");
-
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
@@ -760,6 +759,7 @@ public class BoardDao {
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 				b.setContents(rset.getString("CONTENTS"));
 				b.setMemberNo(rset.getInt("MEMBER_NO"));
+			
 			}
 
 		} catch (SQLException e) {
@@ -770,7 +770,9 @@ public class BoardDao {
 			close(pstmt);
 		}
 
-
+		System.out.println("여기는 다오"+b);
+		
+		
 
 		return b;
 	}
@@ -1734,7 +1736,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public ArrayList<Board> selectFrequentList(Connection con, int currentPage, int limit) {
+	public ArrayList<Board> selectFrequentList(Connection con, int currentPage, int limit, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
@@ -1747,9 +1749,10 @@ public class BoardDao {
 
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit - 1;
-
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset = pstmt.executeQuery();
 
@@ -1761,7 +1764,6 @@ public class BoardDao {
 				b.setPostsId(rset.getInt("POSTS_ID"));
 				b.setMemberName(rset.getString("MEMBER_NAME"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
-				b.setPostsViews(rset.getInt("POSTS_VIEWS"));
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 
 				list.add(b);
@@ -1857,13 +1859,13 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 
 		String query = prop.getProperty("updateBoardStatus");
-
+		
 		int result = 0;
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1,num);
-			pstmt.setString(2, status);
+			pstmt.setString(1, status);
+			pstmt.setInt(2,num);
 
 			result = pstmt.executeUpdate();
 
