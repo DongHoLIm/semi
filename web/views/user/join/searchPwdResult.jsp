@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String check = (String) request.getSession().getAttribute("mailkey");
 String memberId = (String) request.getAttribute("memberId");
-
+String check = (String) request.getAttribute("pass");
 %>
 <!DOCTYPE html>
 <html>
@@ -74,7 +73,7 @@ String memberId = (String) request.getAttribute("memberId");
 		<br><br><br><br><br><br><br>
 <form action="<%=request.getContextPath()%>/changePwd.me" method="post">
 	<h1>비밀번호 재설정</h1>
-	<input type="text" id="userinput" name="userinput" placeholder="비밀번호를 입력해주세요" style="width:50%;">
+	<input type="password" id="userinput" name="userinput" placeholder="비밀번호를 입력해주세요" style="width:50%;">
 	<input type="password" id="password" name="password" placeholder="바꿀 비밀번호를 입력하세요" style="width:50%">
 	<input type="password" id="password2" name="password2" placeholder="한번 더 입력하세요" style="width:50%"><br><br>
 	<input type="button" value="확인" class="okok" onclick="okok();"><br><br>
@@ -105,14 +104,12 @@ function okok(){
 	if(($("#password").val() == $("#password2").val())){
 		alert("비밀번호가 변경되었습니다!");
 		$("form").submit();
+		
 
 
 
 
 
-	}else{
-		alert("비밀번호를 다시 설정하세요");
-		return false;
 	}
 
 

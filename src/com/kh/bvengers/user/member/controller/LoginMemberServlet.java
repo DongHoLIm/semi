@@ -26,16 +26,26 @@ public class LoginMemberServlet extends HttpServlet {
 		String sessionId = (String) request.getSession().getAttribute("sessionId");
 		String memberId = request.getParameter("loginId");
 		String memberPwd = request.getParameter("password");
-		Member loginUser = new MemberService().loginCheck(memberId,memberPwd);
+		System.out.println("sessionID: "+sessionId);
+		String sessionID="";
+		Member loginUser = null;
+		if(sessionId==null) {
+		loginUser = new MemberService().loginCheck(memberId,memberPwd);
+		}else {
+			sessionID = request.getParameter("sessionId");
+			System.out.println("파라미터 sessionId"+sessionID);
+		loginUser = new MemberService().loginCheck(sessionID,memberPwd);
+		}
 		System.out.println(loginUser);
-		if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
-			if(loginUser.getMemberId().equals(sessionId)) {
-				request.getRequestDispatcher("views/user/join/searchPwdResult.jsp").forward(request, response);
-				
-			}
+		if(loginUser.getMemberId().equals(sessionID) &&loginUser.getMemberPassword().equals(memberPwd) &&!loginUser.getMemberId().equals("admin")) {
+			
+			request.getRequestDispatcher("views/user/join/searchPwdResult.jsp").forward(request, response);
+			request.getSession().invalidate();
+		}else if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
+			
 		}else if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && loginUser.getMemberId().equals("admin")){
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);

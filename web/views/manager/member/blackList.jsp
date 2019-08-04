@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.member.model.vo.*,com.kh.bvengers.user.member.model.vo.*"%>
 	<%
 	ArrayList<SANCTION> list = (ArrayList<SANCTION>)request.getAttribute("list");
-	Member loginUser = (Member) session.getAttribute("loginUser");
+	//Member loginUser = (Member) session.getAttribute("loginUser");
 	MMemberPageInfo pi = (MMemberPageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
