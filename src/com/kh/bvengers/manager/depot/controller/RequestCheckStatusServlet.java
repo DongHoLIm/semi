@@ -27,7 +27,7 @@ public class RequestCheckStatusServlet extends HttpServlet {
 		String checkStatus=request.getParameter("request");
 		String completStatus=request.getParameter("status");
 		String checkPassContent=request.getParameter("checkPassContent");
-		 
+		int deliveryPrice =Integer.parseInt(request.getParameter("deliveryPrice")); 
 		
 		
 		Depot d = new Depot();
@@ -56,6 +56,7 @@ public class RequestCheckStatusServlet extends HttpServlet {
 		d.setCheckPassContent(checkPassContent);
 		d.setProductCode(productCode);
 		d.setLocationCode(locationCode);
+		d.setDeliveryPrice(deliveryPrice);
 		int result = new DepotService().requsetCheck(d);
 		
 		

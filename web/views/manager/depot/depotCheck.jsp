@@ -48,7 +48,7 @@
 		<form action="<%=request.getContextPath()%>/requestCheck.dp" method="post">
 		<table>
 			<tr>
-				<td rowspan="4" width="200px" height="300px">
+				<td rowspan="5" width="200px" height="300px">
 				<img alt="" src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%=str[3] %>" width="200px" height="300px">
 				</td>
 
@@ -95,6 +95,18 @@
 						<option value="5">5</option>
 					</select>
 					호
+				</td>
+			</tr>
+			<tr>
+				<td>상품무게</td>
+				<td>
+					<select name="deliveryPrice">
+						<option value="2500">500G이하</option>
+						<option value="3500">500G~1KG이하</option>
+						<option value="4000">1KG~10KG이하</option>
+						<option value="5000">10KG~20KG이하</option>
+						<option value="6000">20KG~30KG이하</option>
+					</select>
 				</td>
 			</tr>
 			<tr>

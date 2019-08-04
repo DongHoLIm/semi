@@ -92,7 +92,8 @@ public class DepotDao {
 			pstmt.setString(1, d.getCheckStatus());
 			pstmt.setString(2, d.getCompletStatus());
 			pstmt.setString(3, d.getCheckPassContent());
-			pstmt.setString(4, d.getProductCode());
+			pstmt.setInt(4, d.getDeliveryPrice());
+			pstmt.setString(5, d.getProductCode());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

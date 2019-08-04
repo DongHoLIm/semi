@@ -93,6 +93,7 @@ public class BasketDao {
 				bk.setFileName(rset.getString("NEW_FILE_NAME"));
 				bk.setPrice(rset.getInt("PRODUCT_MONEY"));
 				bk.setContent(rset.getString("CONTENTS"));
+				bk.setDeliveryPrice(rset.getInt("DELIVERY_PAY"));
 				list.add(bk);
 			}
 		} catch (SQLException e) {
