@@ -5,13 +5,13 @@ import static com.kh.bvengers.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class MyPageDao {
@@ -58,6 +58,7 @@ public class MyPageDao {
 			m.setDstatus(rset.getString("DELIVERY_STATUS"));
 			m.setoDate(rset.getDate("ORDER_DATE"));
 			m.setRefundStatus(rset.getString("REFUND_STATUS"));
+			m.setPayStatus(rset.getString("PAY_STATUS"));
 			
 			
 			mplist.add(m);
@@ -204,6 +205,7 @@ public class MyPageDao {
 				m.setoDate(rset.getDate("ORDER_DATE"));
 				m.setOno(rset.getString("ORDER_NO"));
 				m.setPname(rset.getString("PRODUCT_NAME"));
+				m.setPayStatus(rset.getString("PAY_STATUS"));
 				m.setRefundStatus(rset.getString("REFUND_STATUS"));
 				m.setDstatus(rset.getString("DELIVERY_STATUS"));
 				m.setInNo(rset.getString("INVOICE_NO"));
@@ -211,6 +213,9 @@ public class MyPageDao {
 				m.setdSite(rset.getString("DELIVERY_SITE"));
 				m.setrPhone(rset.getString("RECIEVER_PHONE"));
 				m.setMno(rset.getString("MEMBER_NO"));
+				m.setdPay(rset.getInt("DELIVERY_PAY"));
+				m.setDname(rset.getString("COURIER_NAME"));
+				m.setrDate(rset.getDate("REFUND_DATE"));
 				
 				
 				odList.add(m);
@@ -912,6 +917,7 @@ public class MyPageDao {
 				myPage m = new myPage();
 				
 				m.setOno(rset.getString("ORDER_NO"));
+				m.setrDate(rset.getDate("REFUND_DATE"));
 				m.setPname(rset.getString("PRODUCT_NAME"));
 				m.setDtPay(rset.getInt("PRODUCT_DTPAY"));
 				m.setPayStatus(rset.getString("PAY_STATUS"));
@@ -926,11 +932,11 @@ public class MyPageDao {
 		}
 		
 		
-		return null;
+		return cList;
 	}
 
 
-	public int getCancelDateLookCount(Connection con, String memberNo, String start, String end) {
+	public int getCancelDateLookCount(Connection con, String memberNo, String start, String end, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int listCount = 0;
@@ -939,6 +945,7 @@ public class MyPageDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
+			
 			pstmt.setString(1, memberNo);
 			pstmt.setString(2, start);
 			pstmt.setString(3, end);
@@ -960,13 +967,112 @@ public class MyPageDao {
 	return listCount;
 }
 
+
+	public ArrayList<myPage> selectCancelDateList(Connection con, String memberNo, String start, String end,
+			int currentPage, int limit) {
+		ArrayList<myPage> dateList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectCancelDate");
+	
+	try {
+		
+		pstmt = con.prepareStatement(query);
+		
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		
+		pstmt.setString(1, memberNo);
+		pstmt.setInt(2, startRow);
+		pstmt.setInt(3, endRow);
+		pstmt.setString(4, start);
+		pstmt.setString(5, end);
+		
+		rset = pstmt.executeQuery();
+		dateList = new ArrayList<myPage>();
+		
+		while(rset.next()) {
+			myPage m = new myPage();
+			m.setOno(rset.getString("ORDER_NO"));
+			m.setrDate(rset.getDate("REFUND_DATE"));
+			m.setPname(rset.getString("PRODUCT_NAME"));
+			m.setDtPay(rset.getInt("PRODUCT_DTPAY"));
+			m.setPayStatus(rset.getString("PAY_STATUS"));
+		
+			dateList.add(m);
+	}
+		
+		System.out.println("dao" + dateList);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return dateList;
+
 }
 
 
+	public int cancelOrder(Connection con, String pno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("updatePay");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, pno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 
+	public ArrayList<myPage> selectRefundDate(Connection con, String memberNo, String ono) {
+		ArrayList<myPage> refundDate = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectRefundDate");
+	
+	try {
+		
+		pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, memberNo);
+		pstmt.setString(2, ono);
+		
+		rset = pstmt.executeQuery();
+		refundDate = new ArrayList<myPage>();
+		
+		while(rset.next()) {
+			myPage m = new myPage();
+			m.setrDate(rset.getDate("REFUND_DATE"));;
+		
+			refundDate.add(m);
+	}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return refundDate;
 
+	}
 
+}
 
 
 

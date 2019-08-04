@@ -1,12 +1,14 @@
 package com.kh.bvengers.user.myPage.model.Service;
 
-import static com.kh.bvengers.common.JDBCTemplate.*;
+import static com.kh.bvengers.common.JDBCTemplate.close;
+import static com.kh.bvengers.common.JDBCTemplate.commit;
+import static com.kh.bvengers.common.JDBCTemplate.getConnection;
+import static com.kh.bvengers.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 
-import com.kh.bvengers.board.model.dao.BoardDao;
-import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.user.myPage.model.Dao.MyPageDao;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
@@ -244,17 +246,16 @@ public class MyPageService {
 	public ArrayList<myPage> selectCancelLook(String memberNo, String ono, int currentPage, int limit) {
 		Connection con = getConnection();
 		ArrayList<myPage> cList = new MyPageDao().getCancelLookList(con, memberNo, currentPage, limit);
-		
 		close(con);
 		
 		return cList;
 	}
 
 
-	public int getCancelDateLookCount(String memberNo, String start, String end) {
+	public int getCancelDateLookCount(String memberNo, String start, String end, int currentPage, int limit) {
 		Connection con = getConnection();
 		
-		int listCount = new MyPageDao().getCancelDateLookCount(con, memberNo, start, end);
+		int listCount = new MyPageDao().getCancelDateLookCount(con, memberNo, start, end, currentPage, limit);
 		
 		close(con);
 		
@@ -263,4 +264,48 @@ public class MyPageService {
 		
 	}
 
+
+	public ArrayList<myPage> cancelDateList(String memberNo, String start, String end, int currentPage, int limit) {
+		Connection con = getConnection();
+		ArrayList<myPage> dateList = new MyPageDao().selectCancelDateList(con, memberNo, start, end, currentPage, limit);
+		
+		
+		close(con);
+		
+		return dateList;
+	}
+
+
+	public int cancelApply(String ono, String memberNo) {
+		Connection con = getConnection();
+		int result = 0;
+		
+		String pno = new MyPageDao().selectPayNo(con, ono, memberNo);
+		
+		result = new MyPageDao().cancelOrder(con, pno);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		return result;
+		
+	}
+
+
+	public ArrayList<myPage> selectRefundDate(String memberNo, String ono) {
+		Connection con = getConnection();
+		ArrayList<myPage> refundDate = null;
+		
+		refundDate = new MyPageDao().selectRefundDate(con, memberNo, ono);
+		
+		close(con);
+		
+		return refundDate;
+	}
+
 }
+
+
+

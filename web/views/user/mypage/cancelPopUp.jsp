@@ -15,6 +15,7 @@
 	width:100%;
 	height:100%;
 	margin-top:40px;
+	padding-left:5px;
 }
 .r2 {
 	margin-top:50px;
@@ -72,6 +73,7 @@
 						var ono =  $("#hiddenvalue").val();
 						window.opener.location.href='<%=request.getContextPath()%>/cancelApply.mp?ono='+ono;
 						window.close();
+						//parent.success();
 					});
 		</script>
 </body>
