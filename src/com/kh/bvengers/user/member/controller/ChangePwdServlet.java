@@ -26,6 +26,7 @@ public class ChangePwdServlet extends HttpServlet {
 		if(result>0) {
 			page = "/index.jsp";
 		}else {
+			request.setAttribute("msg", "비밀번호 바꾸기 실패");
 			page="views/common/errorPagePrompt.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);

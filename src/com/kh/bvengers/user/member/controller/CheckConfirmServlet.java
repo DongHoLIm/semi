@@ -36,14 +36,6 @@ public class CheckConfirmServlet extends HttpServlet {
 			request.setAttribute("email", email);
 			request.getRequestDispatcher("/send.me").forward(request, response);
 			
-			String password = request.getSession().getAttribute("password").toString();
-			System.out.println("checkuser password : "+password);
-			//request.setAttribute("password", password);
-			//request.getRequestDispatcher("/views/user/join/searchPwdPage.jsp").forward(request, response);
-			/*response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");*/
-			new Gson().toJson(password,response.getWriter());
-			//out.append(password);
 			
 		}else {
 			

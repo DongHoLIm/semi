@@ -45,7 +45,7 @@ public class SendMailServlet extends HttpServlet {
 		}
 		}
 		final String sender = "thddl7364@naver.com";//네이버아이디쓰삼(test@naver.com)
-		final String password = "";//네이버비밀번호
+		final String password = "dhsidhsi0";//네이버비밀번호
 
 
 		//인증 번호 생성기
@@ -114,7 +114,6 @@ public class SendMailServlet extends HttpServlet {
 			HttpSession ss = request.getSession();
 			ss.setAttribute("password", key);
 			
-			System.out.println("sendmailServlet password : "+key);
 			if(hc.equals("1")) {
 				page="/sp/checkuser.me";
 			}else{

@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%
 String msg = (String)request.getParameter("msg");
+String pass = (String)request.getAttribute("pass");
+String sessionId = (String) request.getSession().getAttribute("sessionId");
 %>
 <!DOCTYPE html>
 <html>
@@ -37,6 +39,7 @@ a {
 		<div align="center">
 			<div class="box_login">
 				<div class="inp_text">
+				<input type="text" id="sessionId" name="sessionId" value="<%=sessionId%>">
 					<input type="text" id="loginId" name="loginId" placeholder="Id"
 						style="height: 40px; width: 380px; box-sizing: border-box; padding: 0 30px;"><br>
 					<br>
