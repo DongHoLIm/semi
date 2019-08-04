@@ -7,10 +7,14 @@ public class Basket implements java.io.Serializable {
 	private int price;
 	private String count;
 	private String content;
+	private int deliveryPrice;
 	
 	public Basket() {}
 
-	public Basket(String productCode, String fileName, String productName, int price, String count, String content) {
+	
+
+	public Basket(String productCode, String fileName, String productName, int price, String count, String content,
+			int deliveryPrice) {
 		super();
 		this.productCode = productCode;
 		this.fileName = fileName;
@@ -18,7 +22,22 @@ public class Basket implements java.io.Serializable {
 		this.price = price;
 		this.count = count;
 		this.content = content;
+		this.deliveryPrice = deliveryPrice;
 	}
+
+	
+
+	public int getDeliveryPrice() {
+		return deliveryPrice;
+	}
+
+
+
+	public void setDeliveryPrice(int deliveryPrice) {
+		this.deliveryPrice = deliveryPrice;
+	}
+
+
 
 	public String getProductCode() {
 		return productCode;
@@ -71,9 +90,8 @@ public class Basket implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Basket [productCode=" + productCode + ", fileName=" + fileName + ", productName=" + productName
-				+ ", price=" + price + ", count=" + count + ", content=" + content + "]";
+				+ ", price=" + price + ", count=" + count + ", content=" + content + ", deliveryPrice=" + deliveryPrice
+				+ "]";
 	}
-	
-	
 	
 }

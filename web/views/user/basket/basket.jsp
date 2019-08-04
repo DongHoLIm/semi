@@ -3,8 +3,8 @@
     pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.basket.model.vo.*"%>
     <%
     	ArrayList <Basket> list = (ArrayList <Basket>) request.getAttribute("list");
-    	int delieryPrice =2500;
     	int totalPrice =0;
+    	int totalDP =0;
     	DecimalFormat dc = new DecimalFormat("###,###,###,###");
     %>
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
   #productName{
   	margin-top:25%;
   }
-  #info{
+  #info ,#info2{
   	margin-top:90%;
   }
   #info1{
@@ -88,32 +88,37 @@
     <tbody>
     <%for(Basket bk : list){ %>
       <tr>
-        <td id="td1"><input type="checkbox" id="select" value="<%=bk.getProductCode() %>"/></td>
+        <td id="td1"><input type="checkbox" id="select" value="<%=bk.getProductCode() %>" onclick="changeTotal();"/></td>
         <td id="td1"><img src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=bk.getFileName() %>" alt=""  id="fileImage"/></td>
         <td id="td1"><h4 id="productName"><%=bk.getProductName() %></h4></td>
-        <td id="td1"><p id="info"><%=dc.format(bk.getPrice()) %>원</p></td>
-        <td id="td1"><p id="info1"><%=dc.format(delieryPrice) %>원</p></td>
-        <td id="td1"><p id="info"><%=dc.format(bk.getPrice()+delieryPrice) %>원</p></td>
+        <td id="td1"><p id="info2"><%=dc.format(bk.getPrice()) %>원</p></td>
+        <td id="td1"><p id="info1"><%=dc.format(bk.getDeliveryPrice()) %>원</p></td>
+        <td id="td1"><p id="info"><%=dc.format(bk.getPrice()+bk.getDeliveryPrice()) %>원</p></td>
         <td hidden><%=dc.format(totalPrice+=bk.getPrice()) %></td>
+        <td hidden><%=dc.format(totalDP+=bk.getDeliveryPrice()) %></td>
       </tr>
       <%} %>
     </tbody>
   </table>
   <table id="totalInfo" align="center">
-  	<tr>
-  		<th id="th3">주문금액&nbsp;&nbsp;</th>
-  		<th></th>
-  		<th id="th3">배송비&nbsp;&nbsp;</th>
-  		<th></th>
-  		<th id="th3">결제 예정 금액&nbsp;&nbsp;</th>
-  	</tr>
-  	<tr>
-  		<td><%=dc.format(totalPrice)%>원 &nbsp;&nbsp;</td>
-  		<td>+ &nbsp;&nbsp;</td>
-  		<td><%=dc.format(delieryPrice)%>원 &nbsp;&nbsp;</td>
-  		<td>= &nbsp;&nbsp;</td>
-  		<td><%=dc.format(totalPrice+delieryPrice) %>원</td>
-  	</tr>
+  <thead>
+	  	<tr>
+	  		<th id="th3">총 주문금액&nbsp;&nbsp;</th>
+	  		<th></th>
+	  		<th id="th3">총 배송비&nbsp;&nbsp;</th>
+	  		<th></th>
+	  		<th id="th3">총 결제 예정 금액&nbsp;&nbsp;</th>
+	  	</tr>
+  	</thead>
+  	<tbody>
+	  	<tr>
+	  		<td><%=dc.format(totalPrice)%>원 &nbsp;&nbsp;</td>
+	  		<td>+ &nbsp;&nbsp;</td>
+	  		<td><%=dc.format(totalDP)%>원 &nbsp;&nbsp;</td>
+	  		<td>= &nbsp;&nbsp;</td>
+	  		<td><%=dc.format(totalPrice+totalDP) %>원</td>
+	  	</tr>
+  	</tbody>
   </table>
   <div id="total">
   	<button onclick="choiceProduct();">선택 상품 주문</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -128,8 +133,7 @@
 			$("#select:checked").each(function(index){
 				code+=$(this).val()+","
 			});
-			var deliveryPrice = 2500;
-			var total =0;
+			
 			$.ajax({
 				url:"deleteList.bk",
 				type:"post",
@@ -171,7 +175,15 @@
 			
 		});
 	}
-	
+	/* function changeTotal(){
+		var $table = $("table[id='totalInfo'] tbody");
+		$table.html("");
+		$("input[id='select']:checked").each(function(){
+			var $ = $("<td>");
+			var 
+			
+		});
+	} */
 	
 </script>
 <footer><%@ include file="../hfl/footer.jsp"%></footer>
