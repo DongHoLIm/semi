@@ -74,9 +74,12 @@
 }
 
 #btnArea {
-   width: 30%;
+   width:16.5%;
    align:center;
    margin : 20px auto;
+}
+#btnArea * {
+	margin: 0 auto;
 }
 .detail #writer {
 	font-size : 1.2em;
@@ -143,7 +146,7 @@
       <form id="comments">
       <div id="btnArea">
       <button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
-      <button id="showBtn" type="button" class="btns" align="center">댓글 보기</button>
+      <button id="showBtn" type="button" class="btns" align="center">댓글 닫기</button>
       <%if( loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
       <button id="editBtn" type="button" class="btns" align="center">수정 요청</button>
       <%} %>
@@ -153,7 +156,8 @@
             <th colspan="8">댓글 리스트</th>
          </tr>
          <tr>
-            <td colspan="2" class="tWriter">작성자</td>
+            <td class="tCommentNo">댓글번호</td>
+            <td colspan="1" class="tWriter">작성자</td>
             <td colspan="3" class="tContent">내용</td>
             <td class="tDate">작성일</td>
             <td class="tRecommend">추천수</td>
@@ -171,6 +175,7 @@
 
       $(function(){
          var postsId = <%= b.getPostsId()%>;
+
          $(document).ready(function(){
         	$('[data-toggle="tooltip"]').tooltip();
             $.ajax({
@@ -182,21 +187,43 @@
                   $commentSelectTable.html("");
                   for(var key in data){
                      var $tr = $("<tr>");
+                     var $commentNo = $("<td>").text(data[key].commentNo).addClass("tCommentNo");
                      var $writeTd = $("<td>").text(data[key].memberId).addClass("tWriter");
                      var $contentTd = $("<td>").text(data[key].commentContents).addClass("tContent");
                      var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
                      var $recommend = $("<td>").text(data[key].recommendCount).addClass("tRecommend");
-
-                     var $recommendBtn = $("<td><button>").html('추천').addClass("tRecommendBtn");
-
+                     var $recommendBtn = $("<td>").text('추천').addClass("tRecommendBtn").on("click", function(){
+						<%if(loginUser!=null){%>
+							var writer = $(this).siblings().eq(1).text();
+                        	if(confirm("추천하시겠습니까?")){
+	                         	var num = $(this).siblings().eq(0).html();
+	                         	var writer = $(this).siblings().eq(1).html();
+	                         	$.ajax({
+									url:"recommend.cm",
+	                            	data:{num:num, writer:writer},
+	                            	type:"post",
+	                            	success:function(data){
+										alert(data);
+										location.reload();
+	                                }, error:function(){
+										alert("추천에 실패했습니다.");
+	                                }
+	                            });
+                     		}
+						<%} else {%>
+							alert("로그인이 필요한 기능입니다");
+                     	<%}%>
+                     });
+					 $tr.append($commentNo);
                      $tr.append($writeTd);
                      $tr.append($contentTd);
                      $tr.append($dateTd);
                      $tr.append($recommend);
                      $tr.append($recommendBtn);
                      $commentSelectTable.append($tr);
+                     $(".tCommentNo").css("width", "100px");
                      $(".tWriter").css({"width":"100px", "height":"50px"});
-                     $(".tContent").css("width", "550px");
+                     $(".tContent").css("width", "440px");
                      $(".tDate").css("width", "100px");
                      $(".tRecommend").css("width","100px");
                      $(".tRecommendBtn").css({"width":"100px", "cursor":"pointer"});
@@ -209,6 +236,7 @@
             });
          });
       });
+
       $("#writer").on("click", function(){
          window.open("<%= request.getContextPath()%>/myInfo.me?userId=<%=b.getWriter()%>", '<%= b.getWriter()%>', 'width=400, height=600, location=no, toolbar=no, fullscreen=no');
       });
@@ -216,8 +244,8 @@
          var price = numeral($("#priceInput").attr('value')).format( '0,0' );
 
          $("#price").text(price+"원");
-         <% if(loginUser!=null){%>
          $("#addBtn").click(function(){
+         <% if(loginUser!=null){%>
             var writer = <%=loginUser.getMemberNo()%>;
             var content = $("#commentContent").val();
             var postsId = <%=b.getPostsId()%>;
@@ -234,8 +262,10 @@
                   alert("댓글 입력 실패");
                }
             });
-         });
+         <%} else {%>
+         	alert("로그인이 필요한 기능입니다.");
          <%}%>
+         });
          $("#showBtn").click(function(){
             $(".commentTables").toggle();
             if($(this).html()=="댓글 보기"){
@@ -258,8 +288,6 @@
                   }else{
 	                  if(confirm("장바구니로 이동하시겠습니까?")==true){
 	                     location.href = "<%=request.getContextPath()%>/basketAllList.bk";
-	                  }else{
-
 	                  }
                   }
                }

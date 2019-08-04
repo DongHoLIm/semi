@@ -108,7 +108,7 @@
 					<td><input type="text" style="width: 200px;" id="productCode"/></td>
 					<td>
 					<button type="button" onclick="search();">검색</button>
-					<button id="excelGo"onclick="goExcel();">엑셀다운로드</button>
+					<button id="excelGo">엑셀다운로드</button>
 					</td>
 				</tr>
 			</table>
@@ -137,17 +137,20 @@
 						var i = 1;
 						for(var i = 0; i < data["list"].length; i++){
 							var $tr = $("<tr>");
-							var $num = $("<td><label>").text(data["list"][i].productNumber);
-							var $code = $("<td><label>").text(data["list"][i].productCode);
-							var $location=$("<td><label>").text(data["list"][i].locationCode);
-							var $name = $("<td><label>").text(data["list"][i].productName);
-							var $checkd = $("<td><label>").text(data["list"][i].checkDate);
-							var $released = $("<td><label>");
+							var $num = $("<td>").text(data["list"][i].productNumber);
+							var $code = $("<td>").text(data["list"][i].productCode);
+							var $location=$("<td>").text(data["list"][i].locationCode);
+							var $name = $("<td>").text(data["list"][i].productName);
+							var $checkd = $("<td>").text(data["list"][i].checkDate);
+							var $released = $("<td>");
+							var $hidden = $("<input type='hidden' id='productCode1'>");
+							$hidden.attr('value',data["list"][i].productCode);
 							if(data["list"][i].releaseDate==null){
 								$released.text("미출고");
 							}else{
 								$released.text(data["list"][i].releaseDate);
 							}
+							$code.append($hidden);
 							$tr.append($num);
 							$tr.append($code);
 							$tr.append($name);
@@ -206,7 +209,12 @@
 		}
 		$(function(){
 			$("#excelGo").click(function(){
-				location.href="<%=request.getContextPath()%>/excelGo.dp";
+				var productCode = $("input[id='productCode1']");
+				var code = "";
+				productCode.each(function(){
+					code += $(this).val()+",";
+				});
+				 location.href="<%=request.getContextPath()%>/excelGo.dp?value="+code; 
 			});
 		});
 
@@ -228,12 +236,15 @@
 					var i = 1;
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
-						var $num = $("<td><label>").text(data["list"][i].productNumber);
-						var $code = $("<td><label>").text(data["list"][i].productCode);
-						var $location=$("<td><label>").text(data["list"][i].locationCode);
-						var $name = $("<td><label>").text(data["list"][i].productName);
-						var $checkd = $("<td><label>").text(data["list"][i].checkDate);
-						var $released = $("<td><label>").text(data["list"][i].releaseDate);
+						var $num = $("<td>").text(data["list"][i].productNumber);
+						var $code = $("<td>").text(data["list"][i].productCode);
+						var $location=$("<td>").text(data["list"][i].locationCode);
+						var $name = $("<td>").text(data["list"][i].productName);
+						var $checkd = $("<td>").text(data["list"][i].checkDate);
+						var $released = $("<td>").text(data["list"][i].releaseDate);
+						var $hidden = $("<input type='hidden' id='productCode1'>");
+						$hidden.attr('value',data["list"][i].productCode);
+						$code.append($hidden);
 						$tr.append($num);
 						$tr.append($code);
 						$tr.append($name);
@@ -306,15 +317,15 @@
 			<tbody>
 			<%for(Depot d :list) {%>
 			<tr id="list">
-				<td><label for=""><%=d.getProductNumber() %></label></td>
-				<td><label for=""><%=d.getProductCode() %></label></td>
-				<td><label for=""><%=d.getProductName() %></label></td>
-				<td><label for=""><%=d.getLocationCode() %></label></td>
-				<td><label for=""><%=d.getCheckDate() %></label></td>
+				<td><%=d.getProductNumber() %></td>
+				<td><%=d.getProductCode() %><input type="hidden" value="<%=d.getProductCode()%>" id='productCode1'/></td>
+				<td><%=d.getProductName() %></td>
+				<td><%=d.getLocationCode() %></td>
+				<td><%=d.getCheckDate() %></td>
 				<td><%if(d.getReleaseDate()==null){ %>
-					<label for="">미출고</label>
+					미출고
 				<%}else{ %>
-					<label for=""><%=d.getReleaseDate() %></label>	
+					<%=d.getReleaseDate() %>	
 				<%}%>
 				</td>
 			</tr>

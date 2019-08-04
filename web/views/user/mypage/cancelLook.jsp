@@ -1,5 +1,18 @@
+<%@page import="com.kh.bvengers.user.myPage.model.vo.MyPagePageInfo"%>
+<%@page import="com.kh.bvengers.user.myPage.model.vo.myPage"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<myPage> cList = (ArrayList<myPage>) request.getAttribute("cList");
+	MyPagePageInfo pi = (MyPagePageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,6 +175,18 @@ $(document).ready(function() {
 </script>
 <style>
 
+#pagingArea {
+	width:60%;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.pagingArea > button {
+	background:#FFF;
+	border: 1px solid black;
+
+}
 .td_select {
 	width:87%;
 }
@@ -266,7 +291,7 @@ input[type=button] {
                  <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
                </span>
                <span>
-                   	<input type="button" name="selectDate" id="selectDate"  onclick="search1();" value="조회">
+                   	<input type="button" name="selectDate" id="selectDate"  onclick="search();" value="조회">
                    </span>
                    </td>
                </tr>
@@ -285,30 +310,23 @@ input[type=button] {
 				</tr>
 				</thead>
 				<tbody>
+				<% for(myPage m : cList) {%>
 				<tr class="rl">
-				<td>dd</td>
-				<td>dd</td>
-				<td>dd</td>
-				<td>dd</td>
-<%-- 				<% for(myPage m : rList) {%>
-				<tr>
 				<td><%=m.getOno() %></td>
-				<td><%=m.getrDate() %></td>
 				<td><%=m.getPname() %></td>
-				<% String price = dc.format(m.getDtPay());%>
-				<td><%=price %>원</td>
-				<td><%=m.getRefundStatus() %></td>
+				<td><%=m.getDtPay() %></td>
+				<td><%=m.getPayStatus()%></td>
 			</tr>
-			<% } %> --%>
-			</tr>
+			<% } %>
 			</tbody>
 			</table>			
 			</div>
-		<br><%-- 
-		<div class="pagingArea1" align="center">
+		<br>
+		<div id="paginArea">
+		<div class="pagingArea" align="center">
 			<button
 				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><</button>
-			<%
+			<% 
 				if (currentPage <= 1) {
 			%>
 			<button disabled><</button>
@@ -350,10 +368,170 @@ input[type=button] {
 			%>
 			<button
 				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
-			</div> --%>
-	</div>
+			</div>
+	</div></div>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+	<script>
+
+    function search(){
+    	$(function(){
+    		var start =$("input[id='searchStartDate']").val();
+    		var end = $("input[id='searchEndDate']").val();
+    		$.ajax({
+    			url:"cancelDate.mp",
+    			type:"post",
+    			data:{"start":start,"end":end},
+    			success:function(data){
+    				var $dateTbody = $(".board1 tbody");
+
+    				var $pagingDiv1 = $("#pagingArea div");
+    				$dateTbody.html(""); 
+    				$pagingDiv1.html("");
+    				for(var i = 0; i < data["dateList"].length; i++){
+    					var $tr = $("<tr class='rl'>");
+    					var $ono = $("<td>").text(data["dateList"][i].ono);
+    					var $pname = $("<td>").text(data["dateList"][i].pname);
+    					var $dtPay = $("<td>").text(data["dateList"][i].dtPay);
+    					var $payStatus = $("<td>").text(data["dateList"][i].payStatus);
+    					 
+    					$tr.append($ono);
+    					$tr.append($pname);
+    					$tr.append($dtPay);
+    					$tr.append($payStatus);
+    					$dateTbody.append($tr);
+    				}
+
+    				var currentPage = data["pi"].currentPage;
+					var endPage = data["pi"].endPage;
+					var limit = data["pi"].limit;
+					var listCount = data["pi"].listCount;
+					var maxPage = data["pi"].maxPage;
+					var startPage = data["pi"].startPage;
+					
+					var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+					var $firstBtn = $("<button>").text('<<');
+					var $preBtn = $("<button>").text('<');
+					
+					var $nextBtn =$("<button>").text('>');
+					var $lastBtn =$("<button>").text('>>');
+    				
+
+					$pagingDiv2.append($firstBtn);
+					$pagingDiv2.append($preBtn);
+					$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+					if(currentPage <= 1){
+						$preBtn.attr('disabled',true);							
+					}else{
+						$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+					}
+					for(var i = startPage ; i <= endPage ;i++){		
+						var $numBtn = $("<button>");
+						if(currentPage == i){
+							$numBtn.attr('disabled',true);																
+						}else{
+							$numBtn.attr('onclick',"newPage("+i+")");																
+						}
+						$numBtn.text(i);
+						$pagingDiv2.append($numBtn);
+					}
+					if(currentPage >= maxPage){
+						$nextBtn.attr('disabled',true);							
+					}else{
+						$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+					}
+					$lastBtn.attr('onclick','newPage('+maxPage+')');						
+					
+					$pagingDiv2.append($nextBtn);
+					$pagingDiv2.append($lastBtn);
+					
+					$pagingDiv1.append($pagingDiv2);							
+					}		
+			});
+		});
+
+    }
+	function newPage(page){
+		var start =$("input[id='searchStartDate']").val();
+		var end = $("input[id='searchEndDate']").val();
+		var currentPage = page;
+		$.ajax({
+			url:"orderDate.mp",
+			type:"post",
+			data:{"start":start,"end":end},
+			success:function(data){
+				var $dateTbody = $(".dateBoard tbody");
+				var $pagingDiv1 = $("#pagingArea div");
+				$dateTbody.html(""); 
+				$pagingDiv1.html("");
+				for(var i = 0; i < data["dateList"].length; i++){
+					var $tr = $("<tr class='od'>");
+					var $ono = $("<td>").text(data["dateList"][i].ono);							
+					var $oDate = $("<td>").text(data["dateList"][i].oDate);
+					var $pname = $("<td>").text(data["dateList"][i].pname);
+					var $br = $("</br>");
+					var $btn_od = $("<button class='btn_od'>").text("주문상세");
+					var $pstatus = $("<td>").text(data["dateList"][i].pstatus);
+					var ono1 = data["dateList"][i].ono;    					
+					 $btn_od.attr("onclick",'searchDate('+ono1+')');
+					$tr.append($ono);
+					$tr.append($oDate);
+					$tr.append($pname);
+					$pname.append($br);
+					$pname.append($btn_od);
+					$tr.append($pstatus);						
+					$dateTbody.append($tr);
+				}
+				
+				var currentPage = data["pi"].currentPage;
+				var endPage = data["pi"].endPage;
+				var limit = data["pi"].limit;
+				var listCount = data["pi"].listCount;
+				var maxPage = data["pi"].maxPage;
+				var startPage = data["pi"].startPage;
+				
+				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+				var $firstBtn = $("<button>").text('<<');
+				var $preBtn = $("<button>").text('<');
+				
+				var $nextBtn =$("<button>").text('>');
+				var $lastBtn =$("<button>").text('>>');
+				
+				
+				$pagingDiv2.append($firstBtn);
+				$pagingDiv2.append($preBtn);
+				$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+				if(currentPage <= 1){
+					$preBtn.attr('disabled',true);							
+				}else{
+					$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+				}
+				for(var i = startPage ; i <= endPage ;i++){		
+					var $numBtn = $("<button>");
+					if(currentPage == i){
+						$numBtn.attr('disabled',true);																
+					}else{
+						$numBtn.attr('onclick',"newPage("+i+")");																
+					}
+					$numBtn.text(i);
+					$pagingDiv2.append($numBtn);
+				}
+				if(currentPage >= maxPage){
+					$nextBtn.attr('disabled',true);							
+				}else{
+					$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+				}
+				$lastBtn.attr('onclick','newPage('+maxPage+')');						
+				
+				$pagingDiv2.append($nextBtn);
+				$pagingDiv2.append($lastBtn);
+				
+				$pagingDiv1.append($pagingDiv2);							
+				}		
+		});
+	}
+</script>
+	
 </body>
 </html>

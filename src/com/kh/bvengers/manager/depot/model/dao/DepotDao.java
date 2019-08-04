@@ -1366,5 +1366,40 @@ public class DepotDao {
 		
 		return result;
 	}
+	public ArrayList<Depot> excelPrint(Connection con, String[] productCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Depot> list = null;
+		Depot d = null;
+		int j = 1;
+		String query = prop.getProperty("excelPrint");
+		try {
+			list = new ArrayList<Depot>();
+			for(int i =0;i<productCode.length;i++) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, productCode[i]);
+				rset = pstmt.executeQuery();
+				while(rset.next()) {
+					d=new Depot();
+					d.setProductNumber(j);
+					d.setProductCode(rset.getString("PRODUCT_CODE"));
+					d.setProductName(rset.getString("PRODUCT_NAME"));
+					d.setLocationCode(rset.getString("LOCATION"));
+					d.setCheckDate(rset.getDate("MAX_DEPOT_DATE"));
+					d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+					j++;
+					
+					list.add(d);					
+				}				
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 
 }

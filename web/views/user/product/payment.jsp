@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	ArrayList<String> myAdd = (ArrayList<String>) request.getAttribute("myAdd");
 	Product pr = (Product) request.getAttribute("pr");
 	Posts po = (Posts) request.getAttribute("po");
 	Attachment att = (Attachment) request.getAttribute("att");
@@ -128,7 +129,7 @@
  	width:100%;
 }
 
-.addressNum{
+.addressNum, .myAddress{
 	display: inline-block;
 	padding: .5em .75em;
 	color: #fff;
@@ -228,7 +229,7 @@
 
 			<hr width="80%"/>
 			<!-- 정보 입력창 -->
-			<form id="payForm" action="<%=request.getContextPath()%>/okPay.pa" method="post" align="center">
+			<form id="payForm" action="<%=request.getContextPath()%>/okPay.pa" name="payForm" method="post" align="center">
 				<table align="center" class="payInfo">
 					<tr>
 						<th width="20%"><label>총 결제금액</label></th>
@@ -242,8 +243,11 @@
 					</tr>
 					<tr>
 						<th><label>우편번호 </label></th>
-						<td><input type="text" placeholder="우편번호" name="addNum" id="addNum" style="width:75%"  readonly>
-						<input type="button" name="addressNum" class="addressNum" value="우편번호찾기" onclick="addFind();" style="width:23%;"></td>
+						<td>
+							<input type="text" placeholder="우편번호" name="addNum" id="addNum" style="width:62%"  readonly>
+							<input type="button" name="addressNum" class="addressNum" value="우편번호찾기" onclick="addFind();" style="width:18%;">
+							<input type="button" name="myAddress" class="myAddress" value="나의 집주소로" onclick="myAdd();" style="width:18%;">
+						</td>
 					</tr>
 					<tr>
 						<th><label>주소 </label></th>
@@ -256,9 +260,9 @@
 					<tr>
 						<th><label>연락처 </label></th>
 						<td>
-							<input type="number" name="phone1" id="phone1" style="width:30%" maxlength="3" oninput="phoneNum(this);">-
-							<input type="number" name="phone2" id="phone2" style="width:30%" maxlength="4" oninput="phoneNum(this);">-
-							<input type="number" name="phone3" id="phone3" style="width:30%" maxlength="4" oninput="phoneNum(this);">
+							<input type="number" name="phone1" id="phone1" style="width:31%" maxlength="3" oninput="phoneNum(this);"> -
+							<input type="number" name="phone2" id="phone2" style="width:31%" maxlength="4" oninput="phoneNum(this);"> -
+							<input type="number" name="phone3" id="phone3" style="width:31%" maxlength="4" oninput="phoneNum(this);">
 							<input type="hidden" name="productCode" value="<%= productCode %>"/>
 							<input type="hidden" name="priceSplit" value="<%= priceSplit %>"/>
 							
@@ -291,6 +295,15 @@
 	        }
 	    }
 	 	
+	 	function myAdd(){
+	 		var add1 = "<%=myAdd.get(0)%>";
+	 		var add2 = "<%=myAdd.get(1)%>";
+	 		var add3 = "<%=myAdd.get(2)%>";
+	 		document.getElementById('addNum').value = add1;
+	 		document.getElementById('address').value = add2;
+	 		document.getElementById('subAddress').value = add3;
+	 		
+	 	}
 
 	 	function addFind(){
 	 			var list = new Array();
@@ -420,6 +433,52 @@
 			});
 		}
 
+		
+		$(document).ready(function(){
+			$('form[name="payForm"]').bind('submit', function(){
+				if(($('input[name="userName"]').val()==''){
+					alert('수령자 성함을 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="addressNum"]').val()==''){
+					alert('주소를 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="myAddress"]').val()==''){
+					alert('주소를 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="address"]').val()==''){
+					alert('주소를 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="subaddress"]').val()==''){
+					alert('주소를 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="phone1"]').val()==''){
+					alert('핸드폰 번호를 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="phone2"]').val()==''){
+					alert('핸드폰 번호를 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="phone3"]').val()==''){
+					alert('핸드폰 번호를 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="mail"]').val()==''){
+					alert('메일을 입력해주세요');
+					$(this).focus();
+					return false;
+				}else if($('input[name="message"]').val()==''){
+					alert('요구사항을 입력해주세요');
+					$(this).focus();
+					return false;
+				}
+			});
+		});
 
 	</script>
 

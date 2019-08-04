@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.member.model.vo.*,com.kh.bvengers.user.member.model.vo.*"%>
 	<%
 	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
-	Member loginUser = (Member) session.getAttribute("loginUser");
 	MMemberPageInfo pi = (MMemberPageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -61,7 +60,7 @@ border:1px solid white;
 	<form action="<%=request.getContextPath()%>/reportsearch.me" method="post">
 	<div id="inOutMain"><br><br>
 		<div id="inOutButton" align="center">
-			
+
 		<select name="selecthowsearch" style="width:20%;">
 			<option value="before">처리전</option>
 			<option value="after">처리완료</option>
@@ -99,7 +98,7 @@ border:1px solid white;
 	<input type="button" class="mstop" value="정지"></td>
 	</tr>
 	<%} %>
- 	
+
 <%-- 			<%@ include file="rearchMemberResult.jsp" %>
  --%>			</table><br>
 		</div><br>
@@ -108,24 +107,24 @@ border:1px solid white;
 
 <div class="pagingArea" align="center">
 	<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=1'"><<</button>
-			
+
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>
 			<% }else { %>
 			<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=<%=currentPage - 1%>'"> < </button>
 			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++){ 
+
+			<% for(int p = startPage; p <= endPage; p++){
 				if(currentPage == p){
 			%>
 					<button disabled><%= p %></button>
 			<% } else { %>
 					<button onclick="location.href='<%=request.getContextPath()%>/reportList.me?currentPage=<%=p%>'"><%= p %></button>
-			<% 
+			<%
 				}
-			   } 
+			   }
 			%>
-			
+
 			<% if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<% }else{ %>
@@ -175,7 +174,7 @@ $(function(){
 			}
 		}
 	});
-	}); 
+	});
 });
 </script>
 </body>

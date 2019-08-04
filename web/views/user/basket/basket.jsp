@@ -1,9 +1,11 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.user.basket.model.vo.*"%>
     <%
     	ArrayList <Basket> list = (ArrayList <Basket>) request.getAttribute("list");
     	int delieryPrice =2500;
     	int totalPrice =0;
+    	DecimalFormat dc = new DecimalFormat("###,###,###,###");
     %>
 <!DOCTYPE html>
 <html>
@@ -89,10 +91,10 @@
         <td id="td1"><input type="checkbox" id="select" value="<%=bk.getProductCode() %>"/></td>
         <td id="td1"><img src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=bk.getFileName() %>" alt=""  id="fileImage"/></td>
         <td id="td1"><h4 id="productName"><%=bk.getProductName() %></h4></td>
-        <td id="td1"><p id="info"><%=bk.getPrice() %></p></td>
-        <td id="td1"><p id="info1"><%=delieryPrice %></p></td>
-        <td id="td1"><p id="info"><%=bk.getPrice() %></p></td>
-        <td hidden><%=totalPrice+=bk.getPrice() %></td>
+        <td id="td1"><p id="info"><%=dc.format(bk.getPrice()) %>원</p></td>
+        <td id="td1"><p id="info1"><%=dc.format(delieryPrice) %>원</p></td>
+        <td id="td1"><p id="info"><%=dc.format(bk.getPrice()+delieryPrice) %>원</p></td>
+        <td hidden><%=dc.format(totalPrice+=bk.getPrice()) %></td>
       </tr>
       <%} %>
     </tbody>
@@ -106,11 +108,11 @@
   		<th id="th3">결제 예정 금액&nbsp;&nbsp;</th>
   	</tr>
   	<tr>
-  		<td><%=totalPrice %> &nbsp;&nbsp;</td>
+  		<td><%=dc.format(totalPrice)%>원 &nbsp;&nbsp;</td>
   		<td>+ &nbsp;&nbsp;</td>
-  		<td><%=delieryPrice %> &nbsp;&nbsp;</td>
+  		<td><%=dc.format(delieryPrice)%>원 &nbsp;&nbsp;</td>
   		<td>= &nbsp;&nbsp;</td>
-  		<td><%=totalPrice+delieryPrice %></td>
+  		<td><%=dc.format(totalPrice+delieryPrice) %>원</td>
   	</tr>
   </table>
   <div id="total">

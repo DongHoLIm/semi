@@ -855,6 +855,7 @@ public class ProductDao {
 	public int passRefund1(Connection con, String pass, String pno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
+		System.out.println("버튼1의 pay_no : " + pno);
 		
 		String query = prop.getProperty("passRefund1");
 		
@@ -876,7 +877,7 @@ public class ProductDao {
 	public int passRefund2(Connection con, String pass, String pno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+		System.out.println("버튼2의 pay_no : " + pno);
 		String query = prop.getProperty("passRefund2");
 		
 		try {
@@ -897,7 +898,7 @@ public class ProductDao {
 	public int passAdjust1(Connection con, String pass, String pcode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+		System.out.println("버튼1의 product_code : " + pcode);
 		String query = prop.getProperty("passAdjust1");
 		
 		try {
@@ -918,7 +919,7 @@ public class ProductDao {
 	public int passAdjust2(Connection con, String pass, String pcode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+		System.out.println("버튼2의 product_code : " + pcode);
 		String query = prop.getProperty("passAdjust2");
 		
 		try {
@@ -998,6 +999,41 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<String> searchMyAdd(Connection con, String memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> searchMyAdd = new ArrayList();
+		
+		String address = null;
+		
+		String query = prop.getProperty("searchMyAdd");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				address = rset.getString("ADDRESS");
+			}
+			
+			String[] addressArr = address.split("\\$");
+			
+			for(int i = 0; i < addressArr.length; i++) {
+				searchMyAdd.add(addressArr[i]);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return searchMyAdd;
 	}
 
 	

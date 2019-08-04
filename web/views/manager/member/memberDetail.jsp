@@ -11,7 +11,6 @@
 </head>
 <body>
 	<%@ include file="../hfl/managerHeader.jsp"%>
-	
 	<form>
 		<div id="table Area">
 			<table id="depotMain" align="center">

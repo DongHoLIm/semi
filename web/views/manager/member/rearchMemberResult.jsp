@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="java.util.* , com.kh.bvengers.user.member.model.vo.*"%>
     <%
 	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
-    Member loginUser = (Member) session.getAttribute("loginUser");
 	%>
 <!DOCTYPE html>
 <html>
@@ -18,8 +17,8 @@ text-align:center;
 </head>
 <body>
 					<div style="display:none;"><%@ include file="../hfl/managerHeader.jsp"%></div>
-				
-				<% for(Member m : list){ %> 
+
+				<% for(Member m : list){ %>
 				<tr>
 					<td><%=m.getMemberId() %></td>
 					<td><%=m.getMemberName() %></td>

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8" import="java.util.*,com.kh.bvengers.manager.member.model.vo.*,com.kh.bvengers.user.member.model.vo.*"%>
 	<%
 	ArrayList<SANCTION> list = (ArrayList<SANCTION>)request.getAttribute("list");
-	//Member loginUser = (Member) session.getAttribute("loginUser");
 	MMemberPageInfo pi = (MMemberPageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -63,7 +62,7 @@ border:1px solid white;
 	<form action="<%=request.getContextPath()%>/badsearch.me" method="post">
 	<div id="inOutMain"><br><br>
 		<div id="inOutButton" align="center">
-			
+
 		<select name="selecthowsearch" style="width:20%;">
 			<option value="stopbadman" id="howsearch" >정지회원조회 조회</option>
 			<option value="badblackman" id="howsearch" >블랙리스트조회 조회</option>
@@ -98,7 +97,7 @@ border:1px solid white;
 	<td align="center"><%=s.getStopTerm() %></td>
 	</tr>
 	<%} %>
- 	
+
 <%-- 			<%@ include file="rearchMemberResult.jsp" %>
  --%>			</table><br>
 		</div><br>
@@ -107,24 +106,24 @@ border:1px solid white;
 
 <div class="pagingArea" align="center">
 	<button onclick="location.href='<%=request.getContextPath()%>/badmanlist.me?currentPage=1'"><<</button>
-			
+
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>
 			<% }else { %>
 			<button onclick="location.href='<%=request.getContextPath()%>/badmanlist.me?currentPage=<%=currentPage - 1%>'"> < </button>
 			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++){ 
+
+			<% for(int p = startPage; p <= endPage; p++){
 				if(currentPage == p){
 			%>
 					<button disabled><%= p %></button>
 			<% } else { %>
 					<button onclick="location.href='<%=request.getContextPath()%>/badmanlist.me?currentPage=<%=p%>'"><%= p %></button>
-			<% 
+			<%
 				}
-			   } 
+			   }
 			%>
-			
+
 			<% if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<% }else{ %>

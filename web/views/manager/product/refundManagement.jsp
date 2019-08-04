@@ -96,15 +96,14 @@ border:1px solid white;
 	</tr>
 		<% for(Refund r : rList) {%>
 			<tr class="od">
+					<input type="hidden" id="pno" value="<%=r.getPno()%>">
+					<input type="hidden" id="pcode" value="<%=r.getpCode()%>">
 					<td><%=r.getOno() %></td>
 					<td><%=r.getrDate() %></td>
 					<td><%=r.getMno() %></td>
 					<td><%=r.getPno() %></td>
-					<td><button class="btn_1" value="1">통과</button>
-					<button class="btn_2" value="2">미통과</button></td>
+					<td><button class="btn_1" value="1">통과</button><button class="btn_2" value="2">미통과</button></td>
 					<td><%=r.getrStatus() %></td>
-					<input type="hidden" id="pno"value="<%=r.getPno()%>">
-					<input type="hidden" id="pcode" value="<%=r.getpCode()%>">
 				</tr>
 		<% } %>
 			</table><br><br>
@@ -146,12 +145,19 @@ $(".btn_1").click(function(){
 	var pno = $("#pno").val();
 	var pcode = $("#pcode").val();
  	location.href='<%=request.getContextPath()%>/refundChange.mp?pass='+pass+'&&pno='+pno+'&&pcode='+pcode;
+ 	console.log(pass);
+ 	console.log(pno);
+ 	console.log(pcode);
+ 	
  });
  
 $(".btn_2").click(function(){ 
 	var pass = $(this).val();
 	var pno = $("#pno").val();
 	var pcode = $("#pcode").val();
+	console.log(pass);
+	console.log(pno);
+	console.log(pcode);
 	location.href='<%=request.getContextPath()%>/refundChange.mp?pass='+pass+'&&pno='+pno+'&&pcode='+pcode;
  });
  

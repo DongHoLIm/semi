@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8"  import="com.kh.bvengers.user.member.model.vo.Member"%>
+
+    <%
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +13,14 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script><meta charset="UTF-8">
 <title>메인메뉴</title>
+<style>
+#chatLi{
+	cursor: pointer;
+}
+.dropdwn-toggle{
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 <%-- <% if(loginUser != null && loginUser.getMemberId().equals("admin")) {%> --%>
@@ -21,11 +32,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<%=request.getContextPath()%>/smnl.mm">중고 愛 민족</a>
+      <a class="navbar-brand" href="<%=request.getContextPath()%>/smnl.mm" style="color:white" >중고 愛 민족</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-             <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 상품관리<span class="caret"></span> </a>
+             <li class="dropdown"><a style="color:white" class="dropdwn-toggle" data-toggle="dropdown"> 상품관리<span class="caret"></span> </a>
                <ul class="dropdown-menu">
                <li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li>
                <li><a href="<%=request.getContextPath()%>/selectCalculate.cal">정산 내역 관리</a></li>
@@ -33,38 +44,39 @@
                <li><a href="<%=request.getContextPath()%>/refundProduct.mp">환불 내역 관리</a></li>
                </ul>
             </li>
-             <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 회원관리<span class="caret"></span> </a>
+             <li class="dropdown"><a style="color:white" class="dropdwn-toggle" data-toggle="dropdown"> 회원관리<span class="caret"></span> </a>
                 <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/memberList.me">고객정보</a></li>
                <li><a href="<%=request.getContextPath()%>/badmanlist.me">경고회원 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/reportList.me">신고정보</a></li>
             </ul>
              </li>
-           <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 통계 <span class="caret"></span></a>
+           <li class="dropdown"><a style="color:white" class="dropdwn-toggle" data-toggle="dropdown"> 통계 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/memberStatistics">고객현황</a></li>
                <li><a href="<%=request.getContextPath()%>/salesStatistics.st">매출현황</a></li>
             </ul>
            </li>
-           <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown"> 게시글관리 <span class="caret"></span></a>
+           <li class="dropdown"><a style="color:white" class="dropdwn-toggle" data-toggle="dropdown"> 게시글관리 <span class="caret"></span></a>
                <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath()%>/smbs.mb">게시판 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/smqs.mq">고객센터 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/SelectFrequentQuestionList.fq">자주찾는 질문 관리</a></li>
                </ul>
            </li>
-              <li class="dropdown"><a class="dropdwn-toggle" data-toggle="dropdown" > 창고관리 <span class="caret"></span></a>
+              <li class="dropdown"><a style="color:white" class="dropdwn-toggle" data-toggle="dropdown" > 창고관리 <span class="caret"></span></a>
                <ul class="dropdown-menu">
                <li><a href="<%=request.getContextPath() %>/listall.dp">창고 전체 현황</a></li>
                <li><a href="<%=request.getContextPath() %>/list.dp">검수요청관리</a></li>
                <li><a href="<%=request.getContextPath()%>/barcode.dp">바코드 출력</a></li>
                <li><a href="<%=request.getContextPath()%>/inDepot.dp">입고 관리</a></li>
-               <li><a href="<%=request.getContextPath()%>/outProductList.dp">출고 관리</a></li>               
+               <li><a href="<%=request.getContextPath()%>/outProductList.dp">출고 관리</a></li>
             </ul>
               </li>
          </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a onclick="logout();"><span class="glyphicon glyphicon-user"></span>관리자</a></li>
+        <li><a style="color:white" onclick="logout();"><span class="glyphicon glyphicon-user" style="color:white" ></span> 관리자</a></li>
+        <li id="chatLi"><a style="color:white" onclick="location.href='<%=request.getContextPath()%>/chatList.ch'">채팅 문의</a></li>
       </ul>
     </div>
     <script>

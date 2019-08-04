@@ -5,7 +5,7 @@
 <style>
 .footer {
 	font-family: 'Nanum Gothic', sans-serif;
-	background-color: #ece5f4;
+	background-color: black;
 	padding: 10px;
 	text-align: center;
 	color: white;

@@ -1,8 +1,9 @@
-package com.kh.bvengers.board.controller;
+package com.kh.bvengers.manager.board;
 
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +15,16 @@ import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
 
 /**
- * Servlet implementation class SelectUserBoardServlet
+ * Servlet implementation class SelectManagerOneQnAServlet
  */
-@WebServlet("/sub.bo")
-public class SelectUserBoardServlet extends HttpServlet {
+@WebServlet("/smoq.mm")
+public class SelectManagerOneQnAServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectUserBoardServlet() {
+    public SelectManagerOneQnAServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,26 +35,27 @@ public class SelectUserBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-		
 		HashMap<String, Object> hmap = new BoardService().selectOneNotice(num);
 
 		Board b = (Board)hmap.get("board");
 		Attachment fileList = (Attachment)hmap.get("attachment");
 
-
 		String page = "";
-		
+
 		if(hmap != null) {
-			page = "views/user/board/userBoardDetail.jsp";
+			page = "views/manager/board/ManagerQuestionDetail.jsp";
 			request.setAttribute("b", b);
 			request.setAttribute("fileList", fileList);
 		}else {
 			page = "views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "게시판 상세보기 실패!");
+			request.setAttribute("msg", "Q&A 상세보기 실패!");
 		}
-		
+
 		request.getRequestDispatcher(page).forward(request, response);
+
 	}
+	
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b");
  	Attachment a = (Attachment)request.getAttribute("fileList");
+ 	
+ 		
  %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +14,7 @@
 <style>
 
 td{
-	border:1px solid lightgray;
+	/* border:1px solid lightgray; */
 	}
 .tableArea{
 		border:1px solid white;
@@ -23,6 +25,10 @@ td{
 #content{
 		height:230px;
 	}
+	
+#buttonArea{
+	padding-left:70%;
+}	
 
 </style>
 </head>
@@ -37,17 +43,19 @@ td{
 			<hr>
 			<table align = "center" width = "800px">
 				<tr>
-					<td align = "center" colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
+					<td colspan = "7"  style = "height:50px"><h1><%= b.getPostsTitle() %></h1></td>
 				</tr>
 				<tr>
-					<td>작성자</td>
-					<td align = "center" id = "writer"><span><%= b.getMemberId() %></span></td>
-					<td>조회수</td>
-					<td align = "center"><span><%= b.getPostsViews() %></span></td>
-					<td>작성일</td>
-					<td align = "center"><span><%= b.getCreateDate() %></span></td>
+					<td align = "right">작성자 :</td>
+					<td align = "left" id = "writer"><span><%= b.getMemberId() %></span></td>
+					<td align = "right">조회수 :</td>
+					<td align = "left"><span><%= b.getPostsViews() %></span></td>
+					<td align = "right">작성일 :</td>
+					<td align = "left"><span><%= b.getCreateDate() %></span></td>
 				</tr>
-
+				</table>
+				<hr>
+				<table align = "center" width = "800px">
 				<tr>
 				<% if(!(a.getNewFileName().equals("사진없음"))){%>
 				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
@@ -64,27 +72,43 @@ td{
 
 				<br><br><br>
 		</form>
+	<hr>
 </div>
 </div>
+
 	<div class = "replyArea">
-		<div class = "replayWriterArea">
+	
+	<div >
+		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
 				<table align = "center">
 				<tr>
-					<td>댓글 작성</td>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
-					<td><button id = "addReply">댓글 등록</button></td>
+					<td>&nbsp;&nbsp;</td>
+					<td><button id = "addReply" style = "height:60px">댓글 등록</button></td>
 				</tr>
 			</table>
-				<br><br>
-			<table id="replySelectTable" class="commentTables" border="1" align="center">
+				<div >
+				<h5>&nbsp;</h5>
+			</div>
+			</div>
+				<br>
+				
+		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
+		</table>
+		
+		<br>
+			
+		<br>
+		
+		<table id="replySelectTable" class="commentTables" align="center">
 			<tbody>
 			<tr>
-				<td colspan="2" class="tWriter">작성자</td>
-				<td colspan="3" class="tContent">내용</td>
-				<td class="tDate">작성일</td>				
+<!-- 			<td colspan="2" class="tWriter"><span></span></td>
+				<td colspan="3" class="tContent"></td>
+				<td class="tDate"></td> -->				
 			</tr>			
 			</tbody>
 			<tfoot>
@@ -92,8 +116,8 @@ td{
 			</tfoot>
 		</table>
 		</div>
-
-		<div>
+			<br><br>
+		<div id = "buttonArea">
 		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
@@ -121,16 +145,24 @@ td{
 				type:"post",
 				success:function(data){
 					var $replySelectTable = $("#replySelectTable tfoot");
+					var $replyWriter = $("#replyWriter span")
 					$replySelectTable.html("");
 						for(var key in data){
 							var $tr = $("<tr>");
+							var $tr2  = $("<tr>");
+							var $hr = $("<hr>");
+							var $writer = $("<td>").text("작성자 : ").css({'width':'60px','font-weight':'bold'});
 							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
-							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
-							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							var $contentTd = $("<td colspan='2'>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css({'width':'200px','color':'lightgray','font-size':'10xpx'});
 							
-						$tr.append($writeTd);
+						$tr2.append($writer);	
+						$tr2.append($writeTd);	
 						$tr.append($contentTd);
 						$tr.append($dateTd);
+						
+						$replySelectTable.append($hr);
+						$replySelectTable.append($tr2);
 						$replySelectTable.append($tr);
 					}
 				},

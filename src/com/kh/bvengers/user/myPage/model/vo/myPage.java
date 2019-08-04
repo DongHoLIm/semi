@@ -26,6 +26,8 @@ public class myPage {
 	private String accountNo; //계좌번호
 	private String pid;		//게시글번호
 	private int kDate;		//보관일자
+	private int dPay;		//배송비
+	private String dname;	//택배사 이름
 	
 	
 	public myPage() {}
@@ -34,7 +36,7 @@ public class myPage {
 	public myPage(String ono, String pname, String dstatus, Date oDate, String mno, String payStatus,
 			String refundStatus, int dtPay, String inNo, String rName, String dSite, String rPhone, String pstatus,
 			Date rDate, String ano, Date aDate, String aStatus, int aPrice, String aname, String bCode,
-			String accountNo, String pid, int kDate) {
+			String accountNo, String pid, int kDate, int dPay, String dname) {
 		super();
 		this.ono = ono;
 		this.pname = pname;
@@ -59,6 +61,8 @@ public class myPage {
 		this.accountNo = accountNo;
 		this.pid = pid;
 		this.kDate = kDate;
+		this.dPay = dPay;
+		this.dname = dname;
 	}
 
 
@@ -292,6 +296,26 @@ public class myPage {
 	}
 
 
+	public int getdPay() {
+		return dPay;
+	}
+
+
+	public void setdPay(int dPay) {
+		this.dPay = dPay;
+	}
+
+
+	public String getDname() {
+		return dname;
+	}
+
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
+
 	@Override
 	public String toString() {
 		return "myPage [ono=" + ono + ", pname=" + pname + ", dstatus=" + dstatus + ", oDate=" + oDate + ", mno=" + mno
@@ -299,7 +323,7 @@ public class myPage {
 				+ ", rName=" + rName + ", dSite=" + dSite + ", rPhone=" + rPhone + ", pstatus=" + pstatus + ", rDate="
 				+ rDate + ", ano=" + ano + ", aDate=" + aDate + ", aStatus=" + aStatus + ", aPrice=" + aPrice
 				+ ", aname=" + aname + ", bCode=" + bCode + ", accountNo=" + accountNo + ", pid=" + pid + ", kDate="
-				+ kDate + "]";
+				+ kDate + ", dPay=" + dPay + ", dname=" + dname + "]";
 	}
 
 

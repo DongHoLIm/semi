@@ -5,8 +5,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<myPage> odList = (ArrayList<myPage>) request.getAttribute("odList");
+	String msg = (String)request.getAttribute("msg");
 	DecimalFormat dc = new DecimalFormat("###,###,###,###");
-	String status = "";
 %>
 
 <!DOCTYPE html>
@@ -65,10 +65,10 @@ button{
 				%>
 				<th class="th3">주문금액</th>
 				<% String price = dc.format(m.getDtPay());
-			 	   String total = dc.format(m.getDtPay()+2500);
+			 	   String total = dc.format(m.getDtPay()+m.getdPay());
 				%>
 				<td class="th3"><%=total%>원</td>
-				<td class="th3">상품금액 <%=price%> + 배송비 2,500원</td>
+				<td class="th3">상품금액 <%=price%> + 배송비 <%=m.getdPay() %>원</td>
 			</tr>
 			<tr>
 				<th class="th3">총 결제금액</th>
@@ -98,7 +98,7 @@ button{
 				<td class="th3"><%=m.getPname()%></td>
 				<td class="th3"><%=price%>원</td>
 				<td class="th3"><%=m.getPstatus() %></td>
-				<td><%=m.getInNo()%>&nbsp;<button onclick="window.open('<%=request.getContextPath()%>/views/user/mypage/deliveryAPI.jsp','window_name','width=800,height=500,location=yes,status=no,scrollbars=yes');">배송조회</button></td>
+				<td><%=m.getDname()%>&nbsp;<%=m.getInNo()%>&nbsp;<button onclick="window.open('<%=request.getContextPath()%>/views/user/mypage/deliveryAPI.jsp','window_name','width=800,height=500,location=yes,status=no,scrollbars=yes');">배송조회</button></td>
 				<% if(m.getPstatus().equals("배송 완료")) { %>
 				<td class="th3"><button class="returnPopUp">환불신청</button><br>
 				<button class="btn_cancel"style="display:none;">주문취소</button></td>
@@ -109,6 +109,7 @@ button{
 				<td class="th3"><button class="btn_cancel"style="display:none;">주문취소</button><br>
 				<button class="returnPopUp" style="display:none;">환불신청</button></td>
 				<% } %>
+				<input type="hidden" value="<%=m.getrDate() %>">
 			</tr>
 		</tbody>
 	</table>
@@ -143,10 +144,34 @@ button{
 	$(function(){
 		
 		$(".btn_cancel").click(function(){
-			var ono - $(this).parent().siblings().eq(0).text();
-			window.open('<%=request.getContextPath()%>/views/user/mypage/cancelPopUp.jsp?ono='+ono,'window_name','width=600,height=400,location=yes,status=no,scrollbars=yes')
+			var ono = $(this).parent().siblings().eq(0).text();
+			window.open('<%=request.getContextPath()%>/views/user/mypage/cancelPopUp.jsp?ono='+ono,'window_name','width=700,height=400,location=yes,status=no,scrollbars=yes')
 		});
 	});
+	
+/* 	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	
+	if((day+"").length < 2){
+		day = "0" + day;
+	}
+	
+	var today = year + month + day;
+	
+	SimpleDateFormat today = new SimpleDateFormat("YYYY-MM-DD");
+	System.out.println(today);
+	
+	if((eval(today) - 7)) */
+
+	var today = new Date();
+	var week = today.setDate(today.getDate() - 7);
+	
+	document.write(today);
+	
+	
+	
 	
 	
 </script>

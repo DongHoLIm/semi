@@ -119,6 +119,7 @@ public class ChatDao {
 				ch.setMemberId(rset.getString("MEMBER_ID"));
 				ch.setChat(rset.getString("CHAT"));
 				ch.setChatDate(rset.getDate("CHAT_DATE"));
+				ch.setAnswer(rset.getString("ANSWER_YN"));
 
 				chList.add(ch);
 			}
@@ -133,4 +134,23 @@ public class ChatDao {
 		return chList;
 	}
 
+	public int updateChat(Connection con, String no, String content) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("updateChat");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, no);
+			pstmt.setString(2, content);
+			pstmt.setString(3, no);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

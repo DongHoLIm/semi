@@ -17,6 +17,7 @@
 #chatListTable td,  #chatListTable th{
 	border: 1px solid black;
 	text-align: center;
+	font-size: 1.1em;
 }
 #chatListTable th {
 	font-size: 1.2em;
@@ -25,11 +26,11 @@
 	color: white;
 	background: black;
 	border: 1px solid white;
-	height: 50px;
+	height: 30px;
 }
 
 #chatListTable tbody td {
-	height: 80px;
+	height: 50px;
 }
 
 #chatListTable .memberNo {
@@ -43,6 +44,18 @@
 #chatListTable .chatDate {
 	width: 100px;
 }
+#chatListTable .answerBtn {
+	background: white;
+	color: black;
+	border: none;
+}
+#chatListTable .chatStatus{
+	width: 150px;
+}
+#chatListTable .answerBtn:hover {
+	font-size: 1.3em;
+	font-weight: bolder;
+}
 </style>
 </head>
 <body>
@@ -53,27 +66,36 @@
 				<table id="chatListTable">
 					<thead>
 						<tr>
-							<th class="tableHeader" colspan="4">회원 문의 내역</th>
+							<th class="tableHeader" colspan="5">회원 문의 내역</th>
 						</tr>
 						<tr>
 							<td class="memberNo">회원번호</td>
 							<td class="memberId">회원ID</td>
 							<td class="chatDate">문의일</td>
-							<td class="chatStatus">완료 여부</td>
+							<td colspan="2" class="chatStatus">완료 여부</td>
 						</tr>
 					</thead>
 					<tbody>
 						<%
-							for (Chat ch : chList) {
+						for (Chat ch : chList) {
+							if(ch.getMemberNo().equals("1")){
+								continue;
+							}
 						%>
+
 						<tr>
 							<td class="memberNo"><%=ch.getMemberNo()%></td>
 							<td class="memberId"><%=ch.getMemberId()%></td>
 							<td class="chatDate"><%=ch.getChatDate()%></td>
-							<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/joinChat.ch?no='+<%=ch.getMemberNo() %>">답변하기</button></td>
+							<%if(ch.getAnswer().equals("1")){ %>
+							<td class="chatStatus">답변 완료</td>
+							<%} else {%>
+							<td class="chatStatus" style="color:red">답변 대기</td>
+							<td><button type="button" class="answerBtn chatStatus" onclick="location.href='<%=request.getContextPath()%>/joinChat.ch?no='+<%=ch.getMemberNo() %>">답변하기</button></td>
+							<%} %>
 						</tr>
 						<%
-							}
+						}
 						%>
 					</tbody>
 				</table>

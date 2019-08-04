@@ -29,16 +29,23 @@ public class OrderLookServlet extends HttpServlet {
 		int maxPage;			//전체 페이지에서 가장 마지막 페이지
 		int startPage;			//한 번에 표시될 페이징 버튼이 시작할 번호
 		int endPage;			//한 번에 표시될 페이징 버튼이 끝나는 번호
-
+		String currentPage1 = request.getParameter("currentPage");
+		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String memberNo = loginUser.getMemberNo();
 		//게시판은 1페이지부터 시작함
 		currentPage = 1;
 
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		if(currentPage1 == null) {		
+			currentPage = 1;						
+		}else {
+			currentPage = Integer.parseInt(currentPage1);
 		}
+		
+		/*if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}*/
 
 		//한 페이지에 보여질 목록 갯수
 		limit = 5;
@@ -68,15 +75,14 @@ public class OrderLookServlet extends HttpServlet {
 
 					if(m.getRefundStatus() == null){
 						if(m.getDstatus() != null) {
-							if(m.getDstatus().equals("1")) {
+							if(m.getPayStatus().equals("2")) {
+								m.setPstatus("결제 취소");
+							}else if(m.getDstatus().equals("1")) {
 								m.setPstatus("배송 준비중");
 							}else if(m.getDstatus().equals("2")) {
 								m.setPstatus("배송 중");
 							}else if(m.getDstatus().equals("3")){
 								m.setPstatus("배송 완료");
-
-							}else if(m.getPayStatus().equals("2")) {
-								m.setPstatus("결제 취소");
 							}
 						}
 
@@ -97,7 +103,6 @@ public class OrderLookServlet extends HttpServlet {
 
 			page = "views/user/mypage/orderLook.jsp";//회원리스트나올페이지
 			request.setAttribute("olList", olList);
-			//request.setAttribute("dateList", dateList);
 			request.setAttribute("pi", pi);
 		}else {
 			page="views/common/errorPagePrompt.jsp";

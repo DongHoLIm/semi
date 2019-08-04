@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b");
- Attachment a = (Attachment)request.getAttribute("fileList");
-
+ 	Attachment a = (Attachment)request.getAttribute("fileList");
  %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +12,7 @@
 <style>
 
 td{
-	border:1px solid lightgray;
+	/* border:1px solid lightgray; */
 	}
 .tableArea{
 		border:1px solid white;
@@ -38,69 +37,95 @@ td{
 			<hr>
 			<table align = "center" width = "800px">
 				<tr>
-					<td align = "center" colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
+					<td colspan = "7"  style = "height:50px"><h1><%= b.getPostsTitle() %></h1></td>
 				</tr>
 				<tr>
-					<td>작성자</td>
-					<td align = "center"><span><%= b.getMemberId() %></span></td>
-					<td>조회수</td>
-					<td align = "center"><span><%= b.getPostsViews() %></span></td>
-					<td>작성일</td>
-					<td align = "center"><span><%= b.getCreateDate() %></span></td>
+					<td align = "right">작성자 :</td>
+					<td align = "left" id = "writer"><span><%= b.getMemberId() %></span></td>
+					<td align = "right">조회수 :</td>
+					<td align = "left"><span><%= b.getPostsViews() %></span></td>
+					<td align = "right">작성일 :</td>
+					<td align = "left"><span><%= b.getCreateDate() %></span></td>
 				</tr>
+				</table>
+				<hr>
+				<table align = "center" width = "800px">
 				<tr>
 				<% if(!(a.getNewFileName().equals("사진없음"))){%>
 				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
 				<%}else{%>
 				<td colspan = "6"></td><%}%>
 				</tr>
+
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
+
 			</table>
 		</div>
+
 				<br><br><br>
 		</form>
+	<hr>
+</div>
+</div>
+
 	<div class = "replyArea">
-			<div class = "replayWriterArea">
-			<table align = "center">
+	
+	<div >
+		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
+				<table align = "center">
 				<tr>
-					<td>댓글 작성</td>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
-					<td><button id = "addReply">댓글 등록</button></td>
+					<td>&nbsp;&nbsp;</td>
+					<td><button id = "addReply" style = "height:60px">댓글 등록</button></td>
 				</tr>
 			</table>
-				<br><br>
-			<table id="replySelectTable" class="commentTables" border="1" align="center">
+				<div >
+				<h5>&nbsp;</h5>
+			</div>
+			</div>
+				<br>
+				
+		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
+		</table>
+		
+		<br>
+			<table id="replySelectTable" class="commentTables" border="1" align="center">
 			<tbody>
 			<tr>
 				<td colspan="2" class="tWriter">작성자</td>
 				<td colspan="3" class="tContent">내용</td>
-				<td class="tDate">작성일</td>
-			</tr>
+				<td class="tDate">작성일</td>				
+			</tr>			
 			</tbody>
 			<tfoot>
-
+			
 			</tfoot>
 		</table>
 		</div>
+
 		<div>
-			<% 
-				 String writer = b.getMemberId(); 
-				System.out.print("작성자는"+ writer);
-				if (loginUser != null && loginUser.getMemberId().equals(writer)){ %>
-			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/umqs.up?num=<%=b.getPostsId() %>'">삭제하기</button>
-				<%} %>
+		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
+			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
+			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
+		<%} %>
+
 		</div>
-	</div>
 	<br>
 	<br>
  <footer><%@ include file="../hfl/footer.jsp" %></footer>
 	</div>
 	<script>
+	$(function(){
+		$("#replySelectTable").on("click", function(){
+			$(this).val = "";
+		});
+	});
+
 
 	$(function(){
 		var postsId = <%= b.getPostsId()%>;
@@ -117,7 +142,7 @@ td{
 							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
 							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
 							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
-
+							
 						$tr.append($writeTd);
 						$tr.append($contentTd);
 						$tr.append($dateTd);
@@ -127,12 +152,13 @@ td{
 				error:function(){
 					alert("댓글 입력 실패");
 				}
-
+				
 			});
 		});
-
+	
 	});
-
+	
+	
 
 	$(function(){
 		$("#addReply").click(function(){
@@ -140,7 +166,7 @@ td{
 			var writer =  <%= loginUser.getMemberNo()%>;
 		    var postId = <%= b.getPostsId()%>;
 		    var content = $("#replyContent").val();
-
+		    
 		    $.ajax({
 		    	url:"iwc.bo",
 		    	data:{"writer":writer, "content":content, "postId":postId},
@@ -148,10 +174,11 @@ td{
 		    	success:function(data) 	 {
 		    		location.reload();
 					$("#replySelectTable tfoot").show();
-
-
+		    	
+		    	
 		    	},
 		    	error:function(){
+		    		console.log("실패!");
 		    	}
 		    });
 		<%}else{ %>
@@ -161,9 +188,8 @@ td{
 			<%}%>
 		});
 	});
-
-
 	</script>
+
 </body>
 </html>
 

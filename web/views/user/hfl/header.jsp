@@ -18,6 +18,9 @@
 <meta charset="UTF-8">
 <title>메인메뉴</title>
 <style>
+#chatLi:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -34,10 +37,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-            <li><a  style="color:white" href="<%=request.getContextPath()%>/select.pd"> 구매 </a></li>
-             <li><a  style="color:white" href="<%=request.getContextPath() %>/views/user/product/productEnroll.jsp"> 상품등록 </a></li>
-           <li><a  style="color:white" href="<%=request.getContextPath()%>/basketAllList.bk"> 장바구니 </a></li>
-           <li><a  style="color:white" href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
+            <li><a style="color:white" href="<%=request.getContextPath()%>/select.pd"> 구매 </a></li>
+             <li><a style="color:white" href="<%=request.getContextPath() %>/views/user/product/productEnroll.jsp"> 상품등록 </a></li>
+           <li><a style="color:white" href="<%=request.getContextPath()%>/basketAllList.bk"> 장바구니 </a></li>
+           <li><a style="color:white" href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
            <% if(loginUser != null) {%>
            <li><a  style="color:white" href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
            <%} else {%>
@@ -51,19 +54,19 @@
            </script>
            <%} %>
           <% if(loginUser != null) {%>
-       	   <li><a href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
+       	   <li><a style="color:white" href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
            <%} else {%>
-            <li><a href="<%=request.getContextPath()%>/noUserService.nu"> 고객센터</a></li>
+            <li><a style="color:white" href="<%=request.getContextPath()%>/noUserService.nu"> 고객센터</a></li>
            <%} %>
          </ul>
       <% if(loginUser == null) {%>
       <ul class="nav navbar-nav navbar-right">
-        <li><a  style="color:white" href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
+        <li><a style="color:white" href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
       </ul>
       <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
        <ul class="nav navbar-nav navbar-right">
-        <li><a  style="color:white" href="<%=request.getContextPath()%>/logout.me"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
-      	<li style="color:white"  onclick="submit();"> <a><span class="glyphicon glyphicon-user" ></span>채팅 문의 </a></li>
+        <li><a style="color:white" href="<%=request.getContextPath()%>/logout.me"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
+      	<li id="chatLi" onclick="submit();"> <a style="color:white">채팅 문의 </a></li>
       </ul>
 		<script>
 		function submit(){
