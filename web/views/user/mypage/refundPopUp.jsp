@@ -18,6 +18,7 @@
 	width:100%;
 	height:100%;
 	margin-top:40px;
+	padding-left:5px;
 }
 .r2 {
 	margin-top:50px;

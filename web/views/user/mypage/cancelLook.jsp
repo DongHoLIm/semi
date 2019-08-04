@@ -175,6 +175,18 @@ $(document).ready(function() {
 </script>
 <style>
 
+#pagingArea {
+	width:60%;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.pagingArea > button {
+	background:#FFF;
+	border: 1px solid black;
+
+}
 .td_select {
 	width:87%;
 }
@@ -310,6 +322,7 @@ input[type=button] {
 			</table>			
 			</div>
 		<br>
+		<div id="paginArea">
 		<div class="pagingArea" align="center">
 			<button
 				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><</button>
@@ -356,7 +369,7 @@ input[type=button] {
 			<button
 				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
 			</div>
-	</div>
+	</div></div>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
@@ -377,21 +390,16 @@ input[type=button] {
     				$dateTbody.html(""); 
     				$pagingDiv1.html("");
     				for(var i = 0; i < data["dateList"].length; i++){
-    					var $tr = $("<tr class='od'>");
+    					var $tr = $("<tr class='rl'>");
     					var $ono = $("<td>").text(data["dateList"][i].ono);
-    					var $oDate = $("<td>").text(data["dateList"][i].oDate);
     					var $pname = $("<td>").text(data["dateList"][i].pname);
-    					var $br = $("</br>");
-    					var $btn_od = $("<button class='btn_od'>").text("주문상세");
-    					var $pstatus = $("<td>").text(data["dateList"][i].pstatus);
-    					var ono1 = data["dateList"][i].ono;
-    					 $btn_od.attr("onclick",'searchDate('+ono1+')');
+    					var $dtPay = $("<td>").text(data["dateList"][i].dtPay);
+    					var $payStatus = $("<td>").text(data["dateList"][i].payStatus);
+    					 
     					$tr.append($ono);
-    					$tr.append($oDate);
     					$tr.append($pname);
-    					$pname.append($br);
-    					$pname.append($btn_od);
-    					$tr.append($pstatus);
+    					$tr.append($dtPay);
+    					$tr.append($payStatus);
     					$dateTbody.append($tr);
     				}
 
