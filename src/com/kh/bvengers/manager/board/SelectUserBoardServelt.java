@@ -1,4 +1,4 @@
-package com.kh.bvengers.board.controller;
+package com.kh.bvengers.manager.board;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,16 +14,16 @@ import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Board;
 
 /**
- * Servlet implementation class SelectUserBoardServlet
+ * Servlet implementation class SelectUserBoardServelt
  */
-@WebServlet("/sub.bo")
-public class SelectUserBoardServlet extends HttpServlet {
+@WebServlet("/SelectUserBoardServelt.ma")
+public class SelectUserBoardServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectUserBoardServlet() {
+    public SelectUserBoardServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,7 +44,7 @@ public class SelectUserBoardServlet extends HttpServlet {
 		String page = "";
 		
 		if(hmap != null) {
-			page = "views/user/board/userBoardDetail.jsp";
+			page = "views/manager/board/BoardManager.jsp";
 			request.setAttribute("b", b);
 			request.setAttribute("fileList", fileList);
 		}else {

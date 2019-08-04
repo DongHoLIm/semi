@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
- <% Board b = (Board)request.getAttribute("b"); 
+ <% Board b = (Board)request.getAttribute("b");
  	Attachment a = (Attachment)request.getAttribute("fileList");
-	
- 	String member =  b.getMemberId();
+
  %>
 <!DOCTYPE html>
 <html>
@@ -13,19 +12,28 @@
 <title>Insert title here</title>
 <style>
 
-td{
-	border:1px solid lightgray;
-	}
+
 .tableArea{
 		border:1px solid white;
 		width:800px;
 		height:100%;
 		margin:0 auto;
-} 
+}
 #content{
 		height:230px;
 	}
+	
+#buttonArea{
+	padding-left:70%;
+}	
 
+#right{
+ 	align:right;
+ 	}
+ 	
+#writer,#view,#date{
+ 		align:left;
+ 	} 
 </style>
 </head>
 <head><%@include file ="../hfl/header.jsp" %></head>
@@ -37,19 +45,21 @@ td{
 	 	<form action = "<%= request.getContextPath()%>/son.no" method = "post" encType="multipart/form-data">
 	<div class = "tableArea">
 			<hr>
-			<table align = "center" width = "800px">
-				<tr>
-					<td align = "center" colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
-				</tr>
-				<tr>
-					<td>작성자</td>
-					<td align = "center" id = "writer"><span><%= b.getMemberId() %></span></td>
-					<td>조회수</td>
-					<td align = "center"><span><%= b.getPostsViews() %></span></td>
-					<td>작성일</td>
-					<td align = "center"><span><%= b.getCreateDate() %></span></td>
-				</tr>
-				
+		<table align = "center" width = "800px">
+	<tr>
+		<td colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
+		</tr>
+	<tr>
+			<td id="right">작성자 : </td>
+			<td id="writer"><span><%= b.getMemberId() %></span></td>
+			<td id="right">조회수 : </td>
+			<td id="view"><span><%= b.getPostsViews() %></span></td>
+			<td id="right">작성일 : </td>
+			<td id="date"><span><%= b.getCreateDate() %></span></td>
+		</tr>
+		</table>
+				<hr>
+				<table align = "center" width = "800px">
 				<tr>
 				<% if(!(a.getNewFileName().equals("사진없음"))){%>
 				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
@@ -60,33 +70,49 @@ td{
 				<tr>
 					<td colspan = "6" align = "center"><h3><%= (b.getContents()).replace("\r\n","<br>") %></h3></td>
 				</tr>
-				
+
 			</table>
 		</div>
-		
+
 				<br><br><br>
 		</form>
-			
+	<hr>
+</div>
+</div>
 
 	<div class = "replyArea">
-		<div class = "replayWriterArea">
-			<table align = "center">
+	
+	<div >
+		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
+				<table align = "center">
 				<tr>
-					<td>댓글 작성</td>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
-					<td><button id = "addReply">댓글 등록</button></td>
+					<td>&nbsp;&nbsp;</td>
+					<td><button id = "addReply" style = "height:60px">댓글 등록</button></td>
 				</tr>
 			</table>
-				<br><br>
-			<table id="replySelectTable" class="commentTables" border="1" align="center">
+				<div >
+				<h5>&nbsp;</h5>
+			</div>
+			</div>
+				<br>
+				
+		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
+		</table>
+		
+		<br>
+			
+		<br>
+		
+		<table id="replySelectTable" class="commentTables" align="center">
 			<tbody>
 			<tr>
-				<td colspan="2" class="tWriter">작성자</td>
-				<td colspan="3" class="tContent">내용</td>
-				<td class="tDate">작성일</td>				
+<!-- 			<td colspan="2" class="tWriter"><span></span></td>
+				<td colspan="3" class="tContent"></td>
+				<td class="tDate"></td> -->				
 			</tr>			
 			</tbody>
 			<tfoot>
@@ -94,19 +120,26 @@ td{
 			</tfoot>
 		</table>
 		</div>
-		<div>
-		<button id= "report" align = "left" onclick = "report();">신고하기</button>
-		<% if (loginUser != null && (loginUser.getMemberId().equals(b.getMemberId()))){ %>
+			<br><br>
+		<div id = "buttonArea">
+		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
 		<%} %>
-			
+
 		</div>
 	<br>
 	<br>
- <footer><%@ include file="../hfl/footer.jsp" %></footer> 
-	</div>	
+ <footer><%@ include file="../hfl/footer.jsp" %></footer>
+	</div>
 	<script>
+	$(function(){
+		$("#replySelectTable").on("click", function(){
+			$(this).val = "";
+		});
+	});
+
+
 	$(function(){
 		var postsId = <%= b.getPostsId()%>;
 		$(document).ready(function(){
@@ -116,16 +149,24 @@ td{
 				type:"post",
 				success:function(data){
 					var $replySelectTable = $("#replySelectTable tfoot");
+					var $replyWriter = $("#replyWriter span")
 					$replySelectTable.html("");
 						for(var key in data){
 							var $tr = $("<tr>");
+							var $tr2  = $("<tr>");
+							var $hr = $("<hr>");
+							var $writer = $("<td>").text("작성자 : ").css({'width':'60px','font-weight':'bold'});
 							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
-							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
-							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							var $contentTd = $("<td colspan='2'>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css({'width':'200px','color':'lightgray','font-size':'10xpx'});
 							
-						$tr.append($writeTd);
+						$tr2.append($writer);	
+						$tr2.append($writeTd);	
 						$tr.append($contentTd);
 						$tr.append($dateTd);
+						
+						$replySelectTable.append($hr);
+						$replySelectTable.append($tr2);
 						$replySelectTable.append($tr);
 					}
 				},
@@ -137,20 +178,8 @@ td{
 		});
 	
 	});
-		
-	function report(){
-	  var writer = <%= b.getMemberNo()%>;
-	  console.log(writer);
-	  var postId =<%= b.getPostsId()%>;
-	  console.log(postId);
-	  var array = writer+"/"+postId;	
-      console.log(array);
-      
-      var url = "views/user/board/report.jsp?array="+array;
-    	    
-      window.open(url,'신고하기','width=430,height=450,status=no,scrollbars=yes');
-	};
-
+	
+	
 
 	$(function(){
 		$("#addReply").click(function(){

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*" %>
+	pageEncoding="UTF-8"  import = "java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
 ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 BoardPageInfo pi = (BoardPageInfo)request.getAttribute("pi");
@@ -8,101 +8,109 @@ int currentPage = pi.getCurrentPage();
 int maxPage = pi.getMaxPage();
 int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
-
  %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/d3js/5.9.0/d3.min.js"></script>
 <title>Insert title here</title>
 <style>
-	#sec1 {
-		width:100%;
-		height:100%;
-		padding-right:10%;
-		padding-left:10%;
+#board {
+	text-align: center;
+}
 
-		margin:auto;
-	}
-	thead{
-			background:#eee;
+#wirte {
+	position: absolute;
+	right: 30px;
+}
 
-	}
-	.board{
-		width:80%;
-		margin:auto;
-		align:center;
-        border-spacing: 10px;
+.spot {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
 
-	}
+.svg-wrapper {
+	margin-top: 0;
+	position: relative;
+	width: 150px;
+	/*make sure to use same height/width as in the html*/
+	height: 40px;
+	display: inline-block;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px
+}
 
-	.row0{
-		background:black;
-		color:white;
-		margin:auto;
-	}
-	th{
-		background:black;
-		color:white;
-	}
-	.row1{
-		border-top: 2px solid #555;
-	}
-	.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10{
-		border-top: 1px solid #ccc;
-		border-bottom: 1px solid #ccc;
-	}
+#shape {
+	stroke-width: 6px;
+	fill: transparent;
+	stroke: #009FFD;
+	stroke-dasharray: 85 400;
+	stroke-dashoffset: -220;
+	transition: 1s all ease;
+}
 
-	.pageNo{
-		margin:auto;
+#text {
+	margin-top: -35px;
+	text-align: center;
+}
 
-	}
+#text a {
+	color: white;
+	text-decoration: none;
+	font-weight: 100;
+	font-size: 1.1em;
+}
 
-
-
+.svg-wrapper:hover #shape {
+	stroke-dasharray: 50 0;
+	stroke-width: 3px;
+	stroke-dashoffset: 0;
+	stroke: #06D6A0;
+}
 </style>
 </head>
 <body>
+	<%@ include file="../hfl/managerHeader.jsp"%>
 
-	<!-- header 영역 -->
-	<header><%@ include file="../hfl/managerHeader.jsp" %></header>
-	<br />
-	<br />
-	<section id="sec1">
-		<h2 align="center">자주찾는 질문</h2>
-		<table class="board" id = "listArea">
+	<div class="container">
+		<br> <br>
+		<hr>
+		<h2 id="board">자주찾는 질문</h2>
+		<table class="table" id="listArea">
 			<thead>
-			<tr class="row0">
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성날짜</th>
-			</tr>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성날짜</th>
+
+
+				</tr>
 			</thead>
-			
-			<%for (Board b : list) {%>
-			<tr class="row1">
-			<input type = "hidden" id="postId" value = "<%=b.getPostsId() %>">
-					<td><%= b.getPostsId() %></td>
-					<td><%= b.getPostsTitle() %></td>
-					<td><%= b.getMemberName()%></td>
-					<td><%= b.getCreateDate()%></td>
-			</tr>		
+			<tbody>
+				<%for (Board b : list) {%>
+				<tr class = "row1">
+				<input type = "hidden" value = "<%=b.getPostsId() %>">
+				<td><%= b.getPostsId() %></td>
+				<td><%= b.getPostsTitle() %></td>
+				<td><%= b.getMemberName() %></td>
+				<td><%= b.getCreateDate() %></td>
+
 			<%} %>
-			<tr>
-			</tr>
-			
+			</tbody>
+
 		</table>
-		
-		<div align = "center">
-      <button onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
-      </div>
 
 			<br><br><br><br>
-		  <div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><</button>
+		  <div class = "pageingArea" align ="center" class="pagination" >
+		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><<</button>
 		<%if(currentPage <= 1) {%>
-		<button disabled><</button>
+		<button disabled> <</button>
 		<%} else{%>
 	<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
@@ -112,7 +120,7 @@ int endPage = pi.getEndPage();
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=p%>'"><%=p%></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -121,49 +129,32 @@ int endPage = pi.getEndPage();
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage+1%>'">></button>
+			<button onclick ="location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
 			<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=maxPage%>'">>></button>
 
       </div>
-		<br>
+      	<div align = "right">
+      <button onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
+      </div>
 
-	</section>
-	<br />
+	</div>
 
-	<footer><%@ include file="../../user/hfl/footer.jsp" %></footer>
+<script>
+	$(function(){
+		$("#listArea td").mouseenter(function(){
 
-	<script>
-	  $(function(){
-	      $("#listArea td").mouseenter(function(){
-	         $(this).parent().css({"background":"darkgray","cursor":"pointer"});
-	      }).mouseout(function(){
-	            $(this).parent().css({"background":"white"});
-	      }).click(function(){
-	         var num = $(this).parent().children("input").val();
-	          location.href="<%=request.getContextPath()%>/soqa.qo?num=" + num;
-	      });
-	   });
+			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+		}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+		}).click(function(){
+			var num = $(this).parent().children("input").val();
+			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
+		});
+	});
+
+	
+
 	</script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

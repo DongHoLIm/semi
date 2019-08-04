@@ -91,9 +91,6 @@ public class SelectNoticeListServlet extends HttpServlet {
 		ArrayList<Board> list = new BoardService().selectList(currentPage, limit);
 		ArrayList<Board> list1 = new BoardService().selectList1(currentPage1, limit1);
 
-		Collections.reverse(list1);
-		Collections.reverse(list);
-
 		String page = "";
 		String page1 = "";
 

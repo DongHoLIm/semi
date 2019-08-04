@@ -498,7 +498,6 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 		Connection con = getConnection();
 		
 		int listCount = new BoardDao().getListCount(con, num);
-		System.out.println("listCount");
 
 
 		close(con);
@@ -541,7 +540,6 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 			
 	      int result = new BoardDao().updateBoardStatus(con,status,num);
 	      
-	      System.out.println(num);
 	      
 	      close(con);
 	      return result;

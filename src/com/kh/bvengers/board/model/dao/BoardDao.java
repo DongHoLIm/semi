@@ -548,9 +548,10 @@ public class BoardDao {
 				list.add(b);
 
 			}
+			
+		
 
 			
-			System.out.println("lists는"+list);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -630,7 +631,6 @@ public class BoardDao {
 
 				list.add(b);
 			}
-				System.out.println("자주찾는 질문"+list);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -772,7 +772,6 @@ public class BoardDao {
 			close(pstmt);
 		}
 
-		System.out.println("여기는 다오"+b);
 		
 		
 
@@ -1843,7 +1842,6 @@ public class BoardDao {
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 
 				list.add(b);
-				System.out.println("여기는 dao야"+list);
 
 			}
 

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
-
+	pageEncoding="UTF-8"  import = "java.util.*,com.kh.bvengers.board.model.vo.*,com.kh.bvengers.user.myPage.model.vo.*"%>
 <%
 ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 BoardPageInfo pi = (BoardPageInfo)request.getAttribute("pi");
@@ -10,91 +9,108 @@ int maxPage = pi.getMaxPage();
 int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
  %>
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/d3js/5.9.0/d3.min.js"></script>
 <title>Insert title here</title>
 <style>
-#depotMain {
-	width: 80%;
-	height: 80%;
-	border :2px solid black;
-}
-
-tr {
-	border: 1px solid black;
-}
-
-#th {
-	border: 1px solid white;
-	background: black;
-	color: white;
+#board {
 	text-align: center;
 }
 
-#inOutButton {
-	padding-left:8%;
+#wirte {
+	position: absolute;
+	right: 30px;
 }
-#inOutMain {
-	border :2px solid black;
-	width:80%;
-	margin:0 auto;
+
+.spot {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
 }
-#table Area{
-align:center;
-width:80%;
+
+.svg-wrapper {
+	margin-top: 0;
+	position: relative;
+	width: 150px;
+	/*make sure to use same height/width as in the html*/
+	height: 40px;
+	display: inline-block;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px
 }
-.th{
-background:black;
-color:white;
-text-align:center;
-border:1px solid white;
+
+#shape {
+	stroke-width: 6px;
+	fill: transparent;
+	stroke: #009FFD;
+	stroke-dasharray: 85 400;
+	stroke-dashoffset: -220;
+	transition: 1s all ease;
+}
+
+#text {
+	margin-top: -35px;
+	text-align: center;
+}
+
+#text a {
+	color: white;
+	text-decoration: none;
+	font-weight: 100;
+	font-size: 1.1em;
+}
+
+.svg-wrapper:hover #shape {
+	stroke-dasharray: 50 0;
+	stroke-width: 3px;
+	stroke-dashoffset: 0;
+	stroke: #06D6A0;
 }
 </style>
+</head>
 <body>
 	<%@ include file="../hfl/managerHeader.jsp"%>
-	<br />
-	<h2 align="center">게시물 관리</h2>
-	<div id="inOutMain"><br><br>
-		<div id="inOutButton" align="center">
-		  <select name="selecthowsearch" id = "select" name = "select" style="width:20%;">
-			<option value="">--조회할목록선택--</option>
-			<option value="findId" >아이디로 조회</option>
-			<option value="findName" >제목으로 조회</option>
-		</select>
-		<input type="search" name="searchValue" id = "inputSearch" >
-		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
-		</div><br><br>
-	  <div style="align :center">
-	</div>
-		<div id="table Area">
-			<table id="depotMain" align="center">
-		<thead>
-		<tr>
-		<th class="th">No.</th>
-		<th class="th">ID</th>
-		<th class="th">게시글 제목</th>
-		<th class="th">작성날짜</th>
-	</tr>
-	</thead>
-		<%for (Board b : list) {%>
-			<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
-			<td align = "center"  style = "margin:0 auto"><%= b.getPostsId() %></td>
-			<td align = "center"  style = "margin:0 auto"><%= b.getPostsTitle() %></td>
-			<td align = "center"  style = "margin:0 auto"><%= b.getMemberName() %></td>
-			<td align = "center"  style = "margin:0 auto"><%= b.getCreateDate() %></td>
-			<%} %>
 
-			</table>
+	<div class="container">
+		<br> <br>
+		<hr>
+		<h2 id="board">게시물 관리</h2>
+		<table class="table" id="messageArea">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성날짜</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<%for (Board b : list) {%>
+				<tr class = "row1">
+				<input type = "hidden" value = "<%=b.getPostsId() %>">
+				<td><%= b.getPostsId() %></td>
+				<td><%= b.getPostsTitle() %></td>
+				<td><%= b.getMemberName() %></td>
+				<td><%= b.getCreateDate() %></td>
+			<%} %>
+			</tbody>
+
+		</table>
+
 			<br><br><br><br>
 		  <div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/smbs.mb?currentPage=1'"><</button>
+		<button onclick = "location.href = '<%=request.getContextPath()%>/smqs.mq?currentPage=1'"><<</button>
 		<%if(currentPage <= 1) {%>
-		<button disabled><</button>
+		<button disabled> <</button>
 		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=currentPage-1%>'"><</button>
+	<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
 		%>
 			<%for (int p = startPage; p <= endPage; p++) {
@@ -102,7 +118,7 @@ border:1px solid white;
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -111,39 +127,40 @@ border:1px solid white;
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.hreh='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick ="location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=maxPage%>'">>></button>
+			<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=maxPage%>'">>></button>
 
       </div>
-		</div>
+
 	</div>
+
 <script>
 	$(function(){
-		$("#depotMain td").mouseenter(function(){
+		$("#messageArea td").mouseenter(function(){
 
 			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
 		}).mouseout(function(){
 				$(this).parent().css({"background":"white"});
 		}).click(function(){
 			var num = $(this).parent().children("input").val();
-			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
+			 location.href="<%=request.getContextPath()%>/SelectUserBoardServelt.ma?num=" + num;
 		});
 	});
 
-	  function search(){
-    	  $(function(){
-    		  var id = $("select[id = 'select']").val();
-    		  var input = $("input[id = 'inputSearch']").val();
-    		  $.ajax({
-    			url:"/sp/sbl.sh",
-    			data:{"selectid":id,"input":input},
-    			type:"post",
-    			success:function(data){
-    				var $Tbody = $("#depotMain tbody ");
-    				var $pagingDiv = ("#pagingArea div");
-    				$Tbody.html("");
-    				$pagingDiv = ("");
+	 function search(){
+   	  $(function(){
+   		  var id = $("select[id = 'select']").val();
+   		  var input = $("input[id = 'inputSearch']").val();
+   		  $.ajax({
+   			url:"/sp/SearchManagerQnAServelt.qna",
+   			data:{"selectid":id,"input":input},
+   			type:"post",
+   			success:function(data){
+   				var $Tbody = $("#messageArea tbody");
+   				var $pagingDiv = ("#pagingArea div");
+   				$Tbody.html("");
+   				$pagingDiv = ("");
 					var i = 1;
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
@@ -162,7 +179,7 @@ border:1px solid white;
 						$tr.append($postsViews);
 						$Tbody.append($tr);
 					}
-					$("#depotMain tbody td").mouseenter(function(){
+					$("#messageArea tbody td").mouseenter(function(){
 
 			            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
 			         }).mouseout(function(){
@@ -174,17 +191,17 @@ border:1px solid white;
 
 
 
-    			}
+   			}
 
 
-    		  })
+   		  })
 
 
 
-    	  });
+   	  });
 
-      }
+     }
+
 	</script>
-
 </body>
 </html>
