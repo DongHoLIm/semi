@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.bvengers.product.model.service.ProductService;
+import com.kh.bvengers.user.member.model.vo.Member;
 
 /**
  * Servlet implementation class PaymentServlet
@@ -31,7 +32,9 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String memberNo =  ((Member) (request.getSession().getAttribute("loginUser"))).getMemberNo();
 		ArrayList<HashMap<String, Object>> productPay = null;
+		ArrayList<String> myAdd = null;
 		
 		if(request.getParameter("postsId") != null) {
 		String postsId = request.getParameter("postsId");
@@ -41,15 +44,16 @@ public class PaymentServlet extends HttpServlet {
 			String[] list = productCode.split(",");
 			productPay = new ProductService().productPay(list);
 		}
-		
+		myAdd = new ProductService().searchMyAdd(memberNo);
 		
 		
 		
 		String page = "";
 		
-		if(productPay != null) {
+		if(productPay != null && myAdd != null) {
 			page = "/views/user/product/payment.jsp";
 			request.setAttribute("productPay", productPay);
+			request.setAttribute("myAdd", myAdd);
 		}else {
 			page="/views/common/errorPagePrompt.jsp";
 			request.setAttribute("msg", "상품 등록 실패!");

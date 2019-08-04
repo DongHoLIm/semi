@@ -681,6 +681,7 @@ input[type=button] {
     					$tr.append($rStatus);
     					$boardTbody1.append($tr);
     				}
+    				
     				var currentPage = data["pi"].currentPage;
     				var endPage = data["pi"].endPage;
     				var limit = data["pi"].limit;
@@ -688,7 +689,7 @@ input[type=button] {
     				var maxPage = data["pi"].maxPage;
     				var startPage = data["pi"].startPage;
 
-    				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+    				var $pagingDiv2 =$("<div class='pagingArea1' align='center'>");
     				var $firstBtn = $("<button>").text('<<');
     				var $preBtn = $("<button>").text('<');
     				var $numBtn = $("<button>");
@@ -696,17 +697,17 @@ input[type=button] {
     				var $lastBtn =$("<button>").text('>>');
 
 
-    				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=1"');
+    				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=1"');
     				if(currentPage <= 1){
     					$preBtn.attr('disabled',true);
     				}else{
-    					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage - 1"');
+    					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=currentPage - 1"');
     				}
     				for(var i = startPage ; i <= endPage ;i++){
     					if(currentPage == i){
     						$numBtn.attr('disabled',true);
     					}else{
-    						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=i"');
+    						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=i"');
     					}
     					$numBtn.text(i);
 
@@ -714,9 +715,9 @@ input[type=button] {
     				if(currentPage >= maxPage){
     					$nextBtn.attr('disabled',true);
     				}else{
-    					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage + 1 "');
+    					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=currentPage + 1 "');
     				}
-    				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=maxPage"');
+    				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=maxPage"');
 
     				$pagingDiv2.append($firstBtn);
     				$pagingDiv2.append($preBtn);
@@ -729,7 +730,83 @@ input[type=button] {
     		});
     	});
     }
+	function newPage1(page){
+		var start =$("input[id='searchStartDate']").val();
+		var end = $("input[id='searchEndDate']").val();
+		var currentPage = page;
+		$.ajax({
+			url:"refundDate.mp",
+			type:"post",
+			data:{"start":start,"end":end},
+			success:function(data){
+				var $boardTbody1 = $(".board1 tbody");
+				var $pagingDiv1 =$(".pagingArea1");
+				$boardTbody1.html("");
+				$pagingDiv1.html("");
+				for(var i = 0; i < data["rList"].length; i++){
+					var $tr = $("<tr class='rl'>");
+					var $ono = $("<td>").text(data["rList"][i].ono);
+					var $rDate = $("<td>").text(data["rList"][i].rDate);
+					var $pname = $("<td>").text(data["rList"][i].pname);
+					var $dtPay = $("<td>").text(data["rList"][i].dtPay);
+					var $rStatus = $("<td>").text(data["rList"][i].refundStatus);
+					var $price = $("<td>").text(numeral(data["rList"][i].dtPay).format('0,0')+"원");
 
+					$tr.append($ono);
+					$tr.append($rDate);
+					$tr.append($pname);
+					$tr.append($price);
+					$tr.append($rStatus);
+					$boardTbody1.append($tr);
+				}
+				
+				var currentPage = data["pi"].currentPage;
+				var endPage = data["pi"].endPage;
+				var limit = data["pi"].limit;
+				var listCount = data["pi"].listCount;
+				var maxPage = data["pi"].maxPage;
+				var startPage = data["pi"].startPage;
+				
+				var $pagingDiv2 =$("<div class='pagingArea1' align='center'>");
+				var $firstBtn = $("<button>").text('<<');
+				var $preBtn = $("<button>").text('<');
+				
+				var $nextBtn =$("<button>").text('>');
+				var $lastBtn =$("<button>").text('>>');
+				
+				
+				$pagingDiv2.append($firstBtn);
+				$pagingDiv2.append($preBtn);
+				$firstBtn.attr('onclick',"newPage1("+currentPage+")");						
+				if(currentPage <= 1){
+					$preBtn.attr('disabled',true);							
+				}else{
+					$preBtn.attr('onclick',"newPage1("+(currentPage-1)+")");						
+				}
+				for(var i = startPage ; i <= endPage ;i++){		
+					var $numBtn = $("<button>");
+					if(currentPage == i){
+						$numBtn.attr('disabled',true);																
+					}else{
+						$numBtn.attr('onclick',"newPage1("+i+")");																
+					}
+					$numBtn.text(i);
+					$pagingDiv2.append($numBtn);
+				}
+				if(currentPage >= maxPage){
+					$nextBtn.attr('disabled',true);							
+				}else{
+					$nextBtn.attr('onclick','newPage1('+(currentPage+1)+')');							
+				}
+				$lastBtn.attr('onclick','newPage1('+maxPage+')');						
+				
+				$pagingDiv2.append($nextBtn);
+				$pagingDiv2.append($lastBtn);
+				
+				$pagingDiv1.append($pagingDiv2);							
+				}		
+		});
+	}
 
     function search2(){
     	$(function(){
@@ -768,7 +845,7 @@ input[type=button] {
     				var maxPage = data["pi"].maxPage;
     				var startPage = data["pi"].startPage;
 
-    				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
+    				var $pagingDiv2 =$("<div class='pagingArea2' align='center'>");
     				var $firstBtn = $("<button>").text('<<');
     				var $preBtn = $("<button>").text('<');
     				var $numBtn = $("<button>");
@@ -776,17 +853,17 @@ input[type=button] {
     				var $lastBtn =$("<button>").text('>>');
 
 
-    				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=1"');
+    				$firstBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=1"');
     				if(currentPage <= 1){
     					$preBtn.attr('disabled',true);
     				}else{
-    					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage - 1"');
+    					$preBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=currentPage - 1"');
     				}
     				for(var i = startPage ; i <= endPage ;i++){
     					if(currentPage == i){
     						$numBtn.attr('disabled',true);
     					}else{
-    						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=i"');
+    						$numBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=i"');
     					}
     					$numBtn.text(i);
 
@@ -794,9 +871,9 @@ input[type=button] {
     				if(currentPage >= maxPage){
     					$nextBtn.attr('disabled',true);
     				}else{
-    					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=currentPage + 1 "');
+    					$nextBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=currentPage + 1 "');
     				}
-    				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/orderDate.mp?currentPage=maxPage"');
+    				$lastBtn.attr('onclick','location.href="<%=request.getContextPath()%>/refundList.mp?currentPage=maxPage"');
 
     				$pagingDiv2.append($firstBtn);
     				$pagingDiv2.append($preBtn);
@@ -809,6 +886,85 @@ input[type=button] {
     		});
     	});
     }
+    
+
+	function newPage2(page){
+		var start =$("input[id='searchStartDate1']").val();
+		var end = $("input[id='searchEndDate1']").val();
+		$.ajax({
+			url:"calculateDate.mp",
+			type:"post",
+			data:{"start":start,"end":end},
+			success:function(data){
+				var $boardTbody2 = $(".board2 tbody");
+				var $pagingDiv2 =$(".pagingArea2");
+				$boardTbody2.html("");
+				$pagingDiv2.html("");
+				for(var i = 0; i < data["cList"].length; i++){
+					var $tr = $("<tr class='rl2'>");
+					var $ano = $("<td>").text(data["cList"][i].ano);
+					var $aDate = $("<td>").text(data["cList"][i].aDate);
+					var $aStatus = $("<td>").text(data["cList"][i].aStatus);
+					var $price = $("<td>").text(numeral(data["cList"][i].aPrice).format('0,0')+"원");
+					var $br = $("</br>");
+					var $bCode = $("<td>").html("은행명 : "+data["cList"][i].bCode+"<br/>"+"계좌번호 : "+data["cList"][i].accountNo+"<br/>"+"예금주 : "+data["cList"][i].aname);
+
+
+					$tr.append($ano);
+					$tr.append($aDate);
+					$tr.append($aStatus);
+					$tr.append($price);
+					$tr.append($bCode);
+					$boardTbody2.append($tr);
+				}
+				
+				var currentPage = data["pi"].currentPage;
+				var endPage = data["pi"].endPage;
+				var limit = data["pi"].limit;
+				var listCount = data["pi"].listCount;
+				var maxPage = data["pi"].maxPage;
+				var startPage = data["pi"].startPage;
+				
+				var $pagingDiv2 =$("<div class='pagingArea2' align='center'>");
+				var $firstBtn = $("<button>").text('<<');
+				var $preBtn = $("<button>").text('<');
+				
+				var $nextBtn =$("<button>").text('>');
+				var $lastBtn =$("<button>").text('>>');
+				
+				
+				$pagingDiv2.append($firstBtn);
+				$pagingDiv2.append($preBtn);
+				$firstBtn.attr('onclick',"newPage2("+currentPage+")");						
+				if(currentPage <= 1){
+					$preBtn.attr('disabled',true);							
+				}else{
+					$preBtn.attr('onclick',"newPage2("+(currentPage-1)+")");						
+				}
+				for(var i = startPage ; i <= endPage ;i++){		
+					var $numBtn = $("<button>");
+					if(currentPage == i){
+						$numBtn.attr('disabled',true);																
+					}else{
+						$numBtn.attr('onclick',"newPage2("+i+")");																
+					}
+					$numBtn.text(i);
+					$pagingDiv2.append($numBtn);
+				}
+				if(currentPage >= maxPage){
+					$nextBtn.attr('disabled',true);							
+				}else{
+					$nextBtn.attr('onclick','newPage2('+(currentPage+1)+')');							
+				}
+				$lastBtn.attr('onclick','newPage2('+maxPage+')');						
+				
+				$pagingDiv2.append($nextBtn);
+				$pagingDiv2.append($lastBtn);
+				
+				$pagingDiv1.append($pagingDiv2);							
+				}		
+		});
+	}
 </script>
 </body>
 </html>

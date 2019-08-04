@@ -385,11 +385,10 @@ tr > th, tr>td{
     		var end = $("input[id='searchEndDate']").val();
     		$.ajax({
     			url:"orderDate.mp",
-    			type:"post",
     			data:{"start":start,"end":end},
+    			type:"post",
     			success:function(data){
     				var $dateTbody = $(".dateBoard tbody");
-
     				var $pagingDiv1 = $("#pagingArea div");
     				$dateTbody.html(""); 
     				$pagingDiv1.html("");
@@ -435,7 +434,7 @@ tr > th, tr>td{
 					}else{
 						$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
 					}
-					for(var i = startPage ; i <= endPage ;i++){		
+					for(var i = startPage; i <= endPage; i++){		
 						var $numBtn = $("<button>");
 						if(currentPage == i){
 							$numBtn.attr('disabled',true);																
@@ -472,8 +471,8 @@ tr > th, tr>td{
 		var currentPage = page;
 		$.ajax({
 			url:"orderDate.mp",
-			type:"post",
 			data:{"start":start,"end":end},
+			type:"post",
 			success:function(data){
 				var $dateTbody = $(".dateBoard tbody");
 				var $pagingDiv1 = $("#pagingArea div");
@@ -521,7 +520,7 @@ tr > th, tr>td{
 				}else{
 					$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
 				}
-				for(var i = startPage ; i <= endPage ;i++){		
+				for(var i = startPage; i <= endPage; i++){		
 					var $numBtn = $("<button>");
 					if(currentPage == i){
 						$numBtn.attr('disabled',true);																

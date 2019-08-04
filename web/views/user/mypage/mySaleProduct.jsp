@@ -22,7 +22,7 @@
 <style>
 
 input[type=button] {
-   border:1px solid black;
+   border:1px solid #ccc;
    background:#FFF;
 }
 
@@ -62,7 +62,6 @@ input[type=button] {
 	margin: auto;
 	align: center;
 	
-	border:1px solid #f3f6f7;
 	border-radius:5px;
 	border-collapse: collapse;
     line-height: 1.5;
@@ -74,7 +73,7 @@ input[type=button] {
     font-weight: bold;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
-    background: #f3f6f7;
+    background: #FFF;
 }
 
 .board td {
@@ -88,7 +87,7 @@ input[type=button] {
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
-    color: #369;
+    color: #036;/* #369; */
     border-bottom: 3px solid #036;
 }
 

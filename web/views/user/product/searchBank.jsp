@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,9 +22,9 @@
 			<tr>
 				<td style="width: 20%; font-size: 0.7em;">거래 은행 / 예금주</td>
 				<td style="width: 80%;">
-					<div
-						style="border: 1px solid #ddd; background: #f8f8f8; height: 50px;">
-						은행명 &nbsp; <select name="bankcode" id="bankcode">
+					<div style="border: 1px solid #ddd; background: #f8f8f8; height: 50px;">
+						은행명 &nbsp;
+						<select name="bankcode" id="bankcode">
 							<option value=''>선택하세요
 							<option value='003'>기업은행
 							<option value='004'>국민은행
@@ -303,17 +304,28 @@
 		}
 		
 		function using(){
-			var bankcode = document.getElementById("bankcode").value;
-			$("#bankcode",opener.document).val(bankcode);
+			var bankcode = document.getElementById("bankcode");
+			var bankName = bankcode.options[bankcode.selectedIndex].text;
 			
-			/* opner.document.getElementById("bankCode").value = bankcode;
+			var accpnm = document.getElementById("accpnm");
+			var sellerName = accpnm.value;
+			var accnum = document.getElementById("accnum");
+			var accnumber = accnum.value;
+			
+			$("#bankCode",opener.document).val(bankName);
+			$("#accountHolder",opener.document).val(sellerName);
+			$("#accountNo",opener.document).val(accnumber);
+			
+			window.close();
+	 		/* opener.document.getElementById('bankCode').value = bankName; */
+			
+			/* opener.document.getElementById("bankCode").value = bankCode;
 			$("bankCode", opener.document).value(bankCode); */
 		}
 	</script>
 
 </body>
 </html>
-
 
 
 

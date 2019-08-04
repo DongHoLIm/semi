@@ -73,10 +73,12 @@ public class ListMyPageServlet extends HttpServlet {
 		if(mplist != null) {
 
 			for(myPage m : mplist) {
-	
-				if(m.getRefundStatus()==null){
+
+				if(m.getRefundStatus() == null){
 					if(m.getDstatus() != null) {
-						if(m.getDstatus().equals("1")) {
+						if(m.getPayStatus().equals("2")) {
+							m.setPstatus("결제 취소");
+						}else if(m.getDstatus().equals("1")) {
 							m.setPstatus("배송 준비중");
 							ready += 1;
 						}else if(m.getDstatus().equals("2")) {
@@ -85,20 +87,19 @@ public class ListMyPageServlet extends HttpServlet {
 						}else if(m.getDstatus().equals("3")){
 							m.setPstatus("배송 완료");
 							success += 1;
-						}else if(m.getDstatus() != null && m.getPayStatus().equals("2")) {
-							m.setPstatus("결제 취소");
 						}
 					}
-				}else {
+			}else {
 
-					if(m.getRefundStatus().equals("1")) {
-						m.setPstatus("환불 대기");
-					}else if(m.getRefundStatus().equals("2")) {
-						m.setPstatus("환불 완료");
-					}else if(m.getRefundStatus().equals("3")) {
-						m.setPstatus("환불 취소");
-					}
+				if(m.getRefundStatus().equals("1")) {
+					m.setPstatus("환불 대기");
+				}else if(m.getRefundStatus().equals("2")) {
+					m.setPstatus("환불 완료");
+				}else if(m.getRefundStatus().equals("3")) {
+					m.setPstatus("환불 취소");
 				}
+			}
+
 
 			}
 			request.setAttribute("ready", ready+"");

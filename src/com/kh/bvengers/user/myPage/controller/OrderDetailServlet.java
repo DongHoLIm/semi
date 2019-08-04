@@ -1,6 +1,7 @@
 package com.kh.bvengers.user.myPage.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -28,27 +29,26 @@ public class OrderDetailServlet extends HttpServlet {
 		String memberNo = loginUser.getMemberNo();
 		String ono = request.getParameter("ono");
 
-
 		ArrayList<myPage> odList = new MyPageService().selectOrderDetailList(memberNo, ono);
-		//myPage orderCheck = new MyPageService().orderCheck(ono);
 		String page = "";
+		
 
 		if(odList != null) {
 			
 			for(myPage m : odList) {
 				
-			if(m.getRefundStatus()==null){
-				if(m.getDstatus() != null) {
-					if(m.getDstatus().equals("1")) {
-						m.setPstatus("배송 준비중");
-					}else if(m.getDstatus().equals("2")) {
-						m.setPstatus("배송 중");
-					}else if(m.getDstatus().equals("3")){
-						m.setPstatus("배송 완료");
-					}else if(m.getDstatus() != null && m.getPayStatus().equals("2")) {
-						m.setPstatus("결제 취소");
+				if(m.getRefundStatus() == null){
+					if(m.getDstatus() != null) {
+						if(m.getPayStatus().equals("2")) {
+							m.setPstatus("결제 취소");
+						}else if(m.getDstatus().equals("1")) {
+							m.setPstatus("배송 준비중");
+						}else if(m.getDstatus().equals("2")) {
+							m.setPstatus("배송 중");
+						}else if(m.getDstatus().equals("3")){
+							m.setPstatus("배송 완료");
+						}
 					}
-				}
 			}else {
 
 				if(m.getRefundStatus().equals("1")) {
@@ -63,7 +63,6 @@ public class OrderDetailServlet extends HttpServlet {
 	}
 				page = "views/user/mypage/orderDetails.jsp";
 				request.setAttribute("odList", odList);
-
 
 			}else {
 
