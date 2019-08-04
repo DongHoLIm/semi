@@ -18,6 +18,9 @@
 <meta charset="UTF-8">
 <title>메인메뉴</title>
 <style>
+#chatLi:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -63,7 +66,7 @@
       <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
        <ul class="nav navbar-nav navbar-right">
         <li><a style="color:white" href="<%=request.getContextPath()%>/logout.me"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
-      	<li style="color:white"  onclick="submit();"> <a><span class="glyphicon glyphicon-user" ></span>채팅 문의 </a></li>
+      	<li id="chatLi" onclick="submit();"> <a style="color:white">채팅 문의 </a></li>
       </ul>
 		<script>
 		function submit(){

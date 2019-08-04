@@ -7,15 +7,17 @@ public class Chat {
 	private String chat;
 	private Date chatDate;
 	private String memberId;
+	private String answer;
 	public Chat() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Chat(String memberNo, String chat, Date chatDate, String memberId) {
+	public Chat(String memberNo, String chat, Date chatDate, String memberId, String answer) {
 		this.memberNo = memberNo;
 		this.chat = chat;
 		this.chatDate = chatDate;
 		this.memberId = memberId;
+		this.answer = answer;
 	}
 	public String getMemberNo() {
 		return memberNo;
@@ -41,10 +43,16 @@ public class Chat {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	@Override
 	public String toString() {
 		return "Chat [memberNo=" + memberNo + ", chat=" + chat + ", chatDate=" + chatDate + ", memberId=" + memberId
-				+ "]";
+				+ ", answer=" + answer + "]";
 	}
 
 }

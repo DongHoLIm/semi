@@ -58,18 +58,9 @@
 	border-spacing: 10px;
 }
 
-.row0 {
+board .row0 {
 	background: #eee;
 	margin: auto;
-}
-
-.row1 {
-	border-top: 2px solid #555;
-}
-
-.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
 }
 
 .pageNo {
@@ -85,9 +76,9 @@ align:center;
 </head>
 <body>
 <%@ include file="../hfl/managerHeader.jsp" %>
+
 	<section id="sec1">
 		<br />
-	
 		<h3 align="center">구매내역 조회</h3>
 		<table class="board">
 			<tr class="row0">
@@ -127,24 +118,24 @@ align:center;
 							<button type="button" name="statusss"
 										onclick="location.href='<%=request.getContextPath()%>/deliSucess?deliNo=<%=c.getDeliveryNo()%>'">상태변경</button>
 						</td>
-						
+
 					</tr>
 				<% 	rowCount++;
-					} 
+					}
 				%>
 			</tbody>
 		</table>
-			
+
 		<div class="pagingArea" align="center">
 			<button type="button" onclick="location.href='<%=request.getContextPath()%>/productManagement?currentPage=1'"><<</button>
-			
+
 			<%if(currentPage <= 1){%>
 				<button disabled><</button>
 			<%}else{ %>
 				<button type="button" onclick="location.href='<%=request.getContextPath()%>/productManagement?currentPage=<%=currentPage -1%>'"><</button>
 			<%} %>
-			
-			<%for(int p = startPage; p <= endPage; p++){ 
+
+			<%for(int p = startPage; p <= endPage; p++){
 				if(currentPage == p){
 			%>
 					<button type="button" disabled><%= p %></button>
@@ -154,8 +145,8 @@ align:center;
 				}
 			}
 			%>
-		
-			
+
+
 			<%if(currentPage >= maxPage){ %>
 				<button type="button" disabled>></button>
 			<%}else{ %>
@@ -163,8 +154,8 @@ align:center;
 			<%} %>
 			<button type="button" onclick="location.href='<%=request.getContextPath()%>/productManagement?currentPage=<%= maxPage%>'">>></button>
 		</div>
-			
-			
+
+
 				<%-- <div id="numberBox"><%@ include file="../hfl/pagination.jsp" %></div> --%>
 		<div id="area">
 			<h3 align="center">배송상태</h3>
@@ -173,30 +164,22 @@ align:center;
 				   <td class="deliReady"><img src="/sp/images/gumsu.png" alt="" />
 						<br />
 						<p>
-							검수중(<%
-							int gumsu = 0;
-						%><%=gumsu%>)
+							검수중(<%int gumsu = 0;%><%=gumsu%>)
 						</p></td>
 					<td class="deliReady"><img src="/sp/images/box.png" alt="" />
 						<br />
 						<p>
-							배송 준비중(<%
-							int ready = 0;
-						%><%=ready%>)
+							배송 준비중(<%int ready = 0;%><%=ready%>)
 						</p></td>
 					<td class="deliStart"><img src="/sp/images/delivery-truck.png"
 						alt="" /> <br />
 						<p>
-							배송 시작(<%
-							int start = 0;
-						%><%=start%>)
+							배송 시작(<%int start = 0;%><%=start%>)
 						</p></td>
 					<td class="deliSuccess"><img src="/sp/images/order.png" alt="" />
 						<br />
 						<p>
-							배송 완료(<%
-							int success = 0;
-						%><%=success%>)
+							배송 완료(<%int success = 0;%><%=success%>)
 						</p></td>
 				</tr>
 			</table>
@@ -204,11 +187,11 @@ align:center;
 
 		<div>
 			<br />
-			
+
 			<h3 align="center">상품 조회</h3>
 			<table class="board">
-				<tr class="row0">
 				<thead>
+				<tr class="row0">
 					<th>번호</th>
 					<th>판매자 아이디</th>
 					<th>판매 상품</th>
@@ -216,17 +199,17 @@ align:center;
 					<th>검수 유무</th><!-- 체크박스로 넣으면 되삼. -->
 					<th>주문날짜</th>
 					<th>진행 상태</th>
-				</thead>
 				</tr>
-				
+				</thead>
+
 			</table>
 		</div>
-		
-				<div id="numberBox"><%@ include file="../hfl/pagination.jsp" %></div>
+
+	<div id="numberBox"><%@ include file="../hfl/pagination.jsp" %></div>
 	</section>
 
 	<br>
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
-	
+
 </body>
 </html>

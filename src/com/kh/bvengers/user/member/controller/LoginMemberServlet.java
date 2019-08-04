@@ -31,10 +31,13 @@ public class LoginMemberServlet extends HttpServlet {
 		if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
 			if(loginUser.getMemberId().equals(sessionId)) {
 				request.getRequestDispatcher("views/user/join/searchPwdResult.jsp").forward(request, response);
-				
+
 			}
 			HttpSession session = request.getSession();
+
 			session.setAttribute("loginUser", loginUser);
+			session.setMaxInactiveInterval(60*60); // 세션 시간 1시간 지정
+
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && loginUser.getMemberId().equals("admin")){
 			HttpSession session = request.getSession();

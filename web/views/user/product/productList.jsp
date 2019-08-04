@@ -82,7 +82,7 @@
    left: 0;
    width: 100%;
    height: 50px;
-   opcity: 1;
+   opacity: 1;
    background-image: -webkit-linear-gradient(top, transparent 0%, #ffffff 100%);
    background-image: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
 }

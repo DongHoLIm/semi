@@ -40,6 +40,17 @@ public class ChatService {
 		return chList;
 	}
 
+	public int updateChat(String no, String content) {
+		Connection con = getConnection();
+		int result = new ChatDao().updateChat(con, no, content);
 
+		if (result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
 
 }

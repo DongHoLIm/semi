@@ -2,16 +2,12 @@
 	pageEncoding="UTF-8" import="java.util.* , com.kh.bvengers.user.member.model.vo.*"%>
 	<%
 	ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list1");
-    Member loginUser = (Member) session.getAttribute("loginUser");
 	MemberPageInfo pi = (MemberPageInfo) request.getAttribute("pi1");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-
-
-
 	%>
 <!DOCTYPE html>
 <html>
