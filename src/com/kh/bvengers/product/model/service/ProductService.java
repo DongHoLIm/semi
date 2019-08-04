@@ -317,5 +317,14 @@ public class ProductService {
 			return productPay;
 		}
 
+		public ArrayList<String> searchMyAdd(String memberNo) {
+			Connection con = getConnection();
+			ArrayList<String> searchMyAdd = new ProductDao().searchMyAdd(con, memberNo);
+			
+			close(con);
+			
+			return searchMyAdd;
+		}
+
 		
 }
