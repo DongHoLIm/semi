@@ -14,7 +14,7 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/chatting")
 public class chatting {
-	
+
 	private static Map<String, Session> client = Collections.synchronizedMap(new HashMap<String, Session>());
 	private static Map<String, Session> admin = Collections.synchronizedMap(new HashMap<String, Session>());
 
@@ -33,10 +33,13 @@ public class chatting {
 				Iterator<String> keySetIterator = client.keySet().iterator();
 				while (keySetIterator.hasNext()) {
 					String key = keySetIterator.next();
-
-
 					if (key.equals(id)) {
-						admin.get(key).getBasicRemote().sendText(mId+":"+messages);
+						try {
+							admin.get(key).getBasicRemote().sendText(mId+":"+messages);
+						} catch (Exception e) {
+							admin.get(key).getBasicRemote().sendText("고객과 연결되지 않았습니다");
+						}
+					} else {
 					}
 				}
 			} catch (IOException e) {
@@ -49,7 +52,13 @@ public class chatting {
 				while (keySetIterator.hasNext()) {
 					String key = keySetIterator.next();
 					if (key.equals(id)) {
-						client.get(key).getBasicRemote().sendText(mId+":"+messages);
+						try {
+							client.get(key).getBasicRemote().sendText(mId+":"+messages);
+						} catch (Exception e) {
+							client.get(key).getBasicRemote().sendText("상담원과 아직 연결되지 않았습니다");
+						}
+					} else {
+
 					}
 				}
 			} catch (IOException e) {

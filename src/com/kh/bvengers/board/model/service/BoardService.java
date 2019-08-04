@@ -496,7 +496,7 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 	public int getFrequentListCount(int num) {
 
 		Connection con = getConnection();
-		
+
 		int listCount = new BoardDao().getListCount(con, num);
 
 
@@ -516,9 +516,9 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 
 	public int getListFrequentCount(int num) {
 		Connection con = getConnection();
-		
+
 		int listCount = new BoardDao().getListFrequentCount(con, num);
-		
+
 		return listCount;
 	}
 
@@ -531,25 +531,31 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 		close(con);
 
 		return list;
-		
-		
+
+
 	}
 
 	public int updateBoardStatus(String status, int num) {
-			Connection con = getConnection();	
-			
+			Connection con = getConnection();
+
 	      int result = new BoardDao().updateBoardStatus(con,status,num);
-	      
-	      
 	      close(con);
 	      return result;
 
 	}
 
+	public int recommendComment(String num) {
+		Connection con = getConnection();
+		int result = new BoardDao().recommendComment(con, num);
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
 
-
-
-
+		return result;
+	}
 }
 
 

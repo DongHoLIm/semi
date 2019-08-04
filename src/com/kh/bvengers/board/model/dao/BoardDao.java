@@ -498,14 +498,14 @@ public class BoardDao {
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setInt(1, num);
-		
+
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
 
 				listCount = rset.getInt(1);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -548,10 +548,6 @@ public class BoardDao {
 				list.add(b);
 
 			}
-			
-		
-
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -614,7 +610,7 @@ public class BoardDao {
 		int num = 4;
 
 		String query = prop.getProperty("selectQuestionList");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
@@ -761,7 +757,7 @@ public class BoardDao {
 				b.setCreateDate(rset.getDate("CREATEDATE"));
 				b.setContents(rset.getString("CONTENTS"));
 				b.setMemberNo(rset.getInt("MEMBER_NO"));
-			
+
 			}
 
 		} catch (SQLException e) {
@@ -771,10 +767,6 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-
-		
-		
-
 		return b;
 	}
 
@@ -1743,14 +1735,14 @@ public class BoardDao {
 		ArrayList<Board> list = null;
 
 		String query = prop.getProperty("selectFrequentQuestionPaging");
-	
+
 
 		try {
 			pstmt = con.prepareStatement(query);
 
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit - 1;
-			
+
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
@@ -1798,10 +1790,10 @@ public class BoardDao {
 			if (rset.next()) {
 
 				listCount = rset.getInt(1);
-				
+
 			}
-			
-			
+
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1835,7 +1827,7 @@ public class BoardDao {
 
 			while (rset.next()) {
 				Board b = new Board();
-				
+
 				b.setPostsId(rset.getInt("POSTS_ID"));
 				b.setMemberName(rset.getString("MEMBER_NAME"));
 				b.setPostsTitle(rset.getString("POSTS_TITLE"));
@@ -1859,7 +1851,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 
 		String query = prop.getProperty("updateBoardStatus");
-		
+
 		int result = 0;
 
 		try {
@@ -1874,6 +1866,27 @@ public class BoardDao {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int recommendComment(Connection con, String num) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("recommendComment");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, num);
+			pstmt.setString(2, num);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return result;
