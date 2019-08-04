@@ -185,9 +185,9 @@
             </tr>
             <tr>
             	<td>예금주</td>
-            	<td><input type="text" name="accountHolder" id="accountHolder" class="form-control"/></td>
+            	<td><input type="text" name="accountHolder" id="accountHolder" class="form-control" readonly/></td>
             	<td>은행명</td>
-            	<td><input type="text" name="bankCode" id="bankCode" class="form-control"/></td>
+            	<td><input type="text" name="bankCode" id="bankCode" class="form-control" readonly/></td>
             	<td width="10%" style="vertical-align: center;">
             		<label for="searchBtn" id="searchLabel">계좌조회</label>
             		<button type="button" onclick="searchBank();" name="searchBtn" id="searchBtn" hidden>계좌조회</button>
@@ -195,7 +195,7 @@
             </tr>
             <tr>
 	            <td>입금될 계좌번호</td>
-	            <td colspan="4"><input type="number" placeholder="-제외한 계좌번호를 입력해주세요" name="accountNo" id="accountNo" class="form-control"/></td>
+	            <td colspan="4"><input type="text" placeholder="-제외한 계좌번호를 입력해주세요" name="accountNo" id="accountNo" class="form-control" readonly/></td>
             </tr>
             <tr>
                 <th>상품 보관일자 </th>

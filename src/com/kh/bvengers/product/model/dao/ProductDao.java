@@ -1000,6 +1000,41 @@ public class ProductDao {
 		return result;
 	}
 
+	public ArrayList<String> searchMyAdd(Connection con, String memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> searchMyAdd = new ArrayList();
+		
+		String address = null;
+		
+		String query = prop.getProperty("searchMyAdd");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				address = rset.getString("ADDRESS");
+			}
+			
+			String[] addressArr = address.split("\\$");
+			
+			for(int i = 0; i < addressArr.length; i++) {
+				searchMyAdd.add(addressArr[i]);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return searchMyAdd;
+	}
+
 	
 }
 
