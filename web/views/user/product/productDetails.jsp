@@ -39,8 +39,11 @@
 #titleContentArea{
    height : 500px;
 }
-#price{
-   font-size:2em;
+#price, #delivery {
+	width: 100%;
+	text-align:right;
+	padding-right: 30px;
+	letter-spacing: 0.2em;
 }
 .detailBtn{
    background: black;
@@ -48,8 +51,12 @@
    width: 100px;
    height: 50px;
 }
+#priceTd {
+	height: 100px;
+}
 #contents {
    text-align:left;
+   padding : 10px;
 }
 .btns{
    background: black;
@@ -59,27 +66,31 @@
    height: 50px;
    margin-bottom:10%;
 }
-#commentHeaderTable{
-   text-align:center;
-}
 #comments{
    width: 100%;
 }
 #commentHeaderTable th {
-   text-align:center;
    font-weight: bold;
    height: 50px;
-   background: black;
-   color: white;
 }
-
+.commentTables {
+	border: 1px solid white;
+	margin: 0 auto;
+}
 #btnArea {
-   width:25%;
+   width:35%;
    align:center;
    margin : 20px auto;
+   text-align:center;
 }
 #btnArea * {
 	margin: 0 auto;
+}
+#totalPrice {
+	font-size: 1.2em;
+	letter-spacing: 0.3em;
+	margin-top: 15px;
+	color: red;
 }
 .detail #writer {
 	font-size : 1.2em;
@@ -88,6 +99,9 @@
 .detail #writer a:hover,  .detail #writer a{
 	text-decoration : none;
 	color: white;
+}
+#productStatus{
+	width: 70px;
 }
 </style>
 <meta charset="UTF-8">
@@ -103,7 +117,11 @@
                <th colspan="3"><label id="writer"><a href="#" data-toggle="tooltip" data-placement="top" title="판매자 정보보기"><%= b.getWriter() %></a></label></th>
             </tr>
             <tr>
+               <% if(p.getCompleteStatus().equals("3")) { %>
+               <th id="productStatus"rowspan="3">조건부 통과 상품</th>
+               <%} else {%>
                <th rowspan="3">상품</th>
+               <%} %>
                <td rowspan="3" width="150px">
                   <div id="titleImgArea" align="center">
                      <input type="hidden" value="<%= b.getPostsId() %>" name="postsId" />
@@ -114,9 +132,12 @@
                <td id="titleContent"><label><%= b.getPostsTitle() %></label></td>
             </tr>
             <tr>
-               <td colspan="2">
+               <td id="priceTd" colspan="2">
                   <input type="hidden" id="priceInput" value="<%=p.getProductMoney() %>"/>
-                  <label id="price">원</label>
+                  <label id="price">원</label><br />
+                  <input type="hidden" id="deliveryPay" value="<%=p.getDeliveryPay() %>"/>
+                  <label id="delivery">원</label><br />
+				  <label id="totalPrice"></label>
                </td>
             </tr>
             <tr>
@@ -129,39 +150,39 @@
             </tr>
             <tr>
                <th>상품 설명</th>
+
                <td colspan="3">
                   <div id="titleContentArea">
                      <p id="contents"><%= (b.getContents()).replace("\r\n","<br>") %></p>
                   </div>
                </td>
             </tr>
+            <%if(p.getCompleteStatus().equals("3")) { %>
+           	<tr>
+           		<th>조건부 통과 사유</th>
+           		<td colspan="3"><p id="reason"><%= (p.getReason()).replace("\r\n", "<br>") %></p></td>
+           	</tr>
+            <%} %>
             <tr>
                <th colspan="4" id="commentHeader">댓글 작성</th>
             </tr>
             <tr>
-               <td colspan="4" ><textarea id="commentContent" rows="15" cols="130" style="resize:no"></textarea></td>
+               <td colspan="4" ><textarea id="commentContent" rows="5" cols="130" style="resize:no"></textarea></td>
             </tr>
          </table>
       </form>
       <form id="comments">
-      <div id="btnArea">
-      <button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
-      <button id="showBtn" type="button" class="btns" align="center">댓글 닫기</button>
-   <%if( loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
-   <button type = button class="btns" onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
-      <%} %>
-      </div>
-      <table id="commentHeaderTable" class="commentTables" border="1" align="center">
-         <tr> 
-            <th colspan="8">댓글 리스트</th>
-         </tr>
+      	<div id="btnArea">
+	      <button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
+	      <button id="showBtn" type="button" class="btns" align="center">댓글 닫기</button>
+	      <%if( loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
+	      <button id="editBtn" type="button" class="btns" align="center">수정 요청</button>
+      	  <%} %>
+      	</div>
+      <hr />
+      <table id="commentHeaderTable" class="commentTables" border="1">
          <tr>
-            <td class="tCommentNo">댓글번호</td>
-            <td colspan="1" class="tWriter">작성자</td>
-            <td colspan="3" class="tContent">내용</td>
-            <td class="tDate">작성일</td>
-            <td class="tRecommend">추천수</td>
-            <td class="tRecommendBtn">추천하기</td>
+            <th colspan="7" style = "width:800px">댓글 리스트</th>
          </tr>
       </table>
       <table id="commentSelectTable" class="commentTables" border="1" align="center">
@@ -187,11 +208,16 @@
                   $commentSelectTable.html("");
                   for(var key in data){
                      var $tr = $("<tr>");
+                     var $tr2 = $("<tr>");
+                     var $hr = $("<hr>");
                      var $commentNo = $("<td>").text(data[key].commentNo).addClass("tCommentNo");
-                     var $writeTd = $("<td>").text(data[key].memberId).addClass("tWriter");
-                     var $contentTd = $("<td>").text(data[key].commentContents).addClass("tContent");
-                     var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate");
-                     var $recommend = $("<td>").text(data[key].recommendCount).addClass("tRecommend");
+
+                     var $writer = $("<td>").text("작성자 : ").css({'width':'60px','font-weight':'bold'});
+                     var $writeTd = $("<td colspan='4'>").text(data[key].memberId).addClass("tWriter").css("width", "100px");
+                     var $contentTd = $("<td colspan='2'>").text(data[key].commentContents).addClass("tContent").css({"width":"400px","height":"50px"});
+                     var $dateTd = $("<td>").text(data[key].commentDate).addClass("tDate").css({'width':'200px','color':'lightgray','font-size':'10xpx'});
+
+                     var $recommend = $("<td>").text("추천수 : " + data[key].recommendCount).addClass("tRecommend");
                      var $recommendBtn = $("<td>").text('추천').addClass("tRecommendBtn").on("click", function(){
 						<%if(loginUser!=null){%>
 							var writer = $(this).siblings().eq(1).text();
@@ -214,20 +240,20 @@
 							alert("로그인이 필요한 기능입니다");
                      	<%}%>
                      });
-					 $tr.append($commentNo);
-                     $tr.append($writeTd);
+                     $tr2.append($writer);
+                     $tr2.append($writeTd);
+
                      $tr.append($contentTd);
                      $tr.append($dateTd);
                      $tr.append($recommend);
                      $tr.append($recommendBtn);
+
+                     $commentSelectTable.append($hr);
+                     $commentSelectTable.append($tr2);
                      $commentSelectTable.append($tr);
-                     $(".tCommentNo").css("width", "100px");
-                     $(".tWriter").css({"width":"100px", "height":"50px"});
-                     $(".tContent").css("width", "440px");
-                     $(".tDate").css("width", "100px");
                      $(".tRecommend").css("width","100px");
                      $(".tRecommendBtn").css({"width":"100px", "cursor":"pointer"});
-                     $commentSelectTable.css({"text-align":"center", "width":"100%","margin":"auto"});
+                     $commentSelectTable.css({"width":"100%","margin":"auto"});
                   }
                },
                error:function(){
@@ -242,8 +268,15 @@
       });
       $(function(){
          var price = numeral($("#priceInput").attr('value')).format( '0,0' );
+		 var delivey = numeral($("#deliveryPay").attr('value')).format( '0,0' );
+		 var total = numeral(price + delivey).format( '0,0' );
+         $("#price").text("상품 금액 : " + price+"원");
+         $("#delivery").text("배송비 : " + delivey+"원");
+		 $("#totalPrice").text("합계 금액 : " + total + "원");
 
-         $("#price").text(price+"원");
+
+
+
          $("#addBtn").click(function(){
          <% if(loginUser!=null){%>
             var writer = <%=loginUser.getMemberNo()%>;
@@ -291,7 +324,6 @@
 	                  }
                   }
                }
-
             })
           });
       });

@@ -37,7 +37,7 @@ public class chatting {
 						try {
 							admin.get(key).getBasicRemote().sendText(mId+":"+messages);
 						} catch (Exception e) {
-							admin.get(key).getBasicRemote().sendText("고객과 연결되지 않았습니다");
+							client.get(key).getBasicRemote().sendText("상담원과 연결되지 않았습니다");
 						}
 					} else {
 					}
@@ -55,7 +55,7 @@ public class chatting {
 						try {
 							client.get(key).getBasicRemote().sendText(mId+":"+messages);
 						} catch (Exception e) {
-							client.get(key).getBasicRemote().sendText("상담원과 아직 연결되지 않았습니다");
+							admin.get(key).getBasicRemote().sendText("고객과 연결되지 않았습니다");
 						}
 					} else {
 

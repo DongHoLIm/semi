@@ -1,19 +1,21 @@
 package com.kh.bvengers.product.model.vo;
 
-public class Payment {
-	
+import java.io.Serializable;
+
+public class Payment implements Serializable{
+
 	private String memberNo;
 	private String productCode;
 	private int productDtpay;
 	private int payMoney;
 	private String subDeliverySite;
 	private String deliverySite;
-	private String recieverName;	
+	private String recieverName;
 	private String recieverPhone;
 	private String mail;
 	private String deliverySiteCode;
 	private String orderNo;
-	
+
 	public Payment() {}
 
 	public Payment(String memberNo, String productCode, int productDtpay, int payMoney, String subDeliverySite,
@@ -128,6 +130,6 @@ public class Payment {
 				+ ", recieverName=" + recieverName + ", recieverPhone=" + recieverPhone + ", mail=" + mail
 				+ ", deliverySiteCode=" + deliverySiteCode + ", orderNo=" + orderNo + "]";
 	};
-	
-	
+
+
 }

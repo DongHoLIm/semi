@@ -177,6 +177,9 @@ public class BoardDao {
 
 				p = new Product();
 				p.setProductMoney(rset.getInt("PRODUCT_MONEY"));
+				p.setCompleteStatus(rset.getString("COMPLETE_STATUS"));
+				p.setReason(rset.getString("REASON"));
+				p.setDeliveryPay(rset.getInt("DELIVERY_PAY"));
 				list.add(at);
 			}
 			hmap = new HashMap<String, Object>();

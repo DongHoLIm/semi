@@ -1,8 +1,9 @@
 package com.kh.bvengers.product.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Refund {
+public class Refund implements Serializable{
 	private String ono;
 	private Date rDate;
 	private String mno;
@@ -10,7 +11,7 @@ public class Refund {
 	private String rStatus; //환불상태
 	private String pCode;	//상품코드
 	private String pno;		//결제번호
-	
+
 	public Refund() {}
 
 	public Refund(String ono, Date rDate, String mno, String cStatus, String rStatus, String pCode, String pno) {
@@ -85,8 +86,8 @@ public class Refund {
 		return "Refund [ono=" + ono + ", rDate=" + rDate + ", mno=" + mno + ", cStatus=" + cStatus + ", rStatus="
 				+ rStatus + ", pCode=" + pCode + ", pno=" + pno + "]";
 	}
-	
-	
-	
+
+
+
 
 }

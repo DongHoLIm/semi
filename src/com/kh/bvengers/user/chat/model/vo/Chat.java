@@ -1,8 +1,9 @@
 package com.kh.bvengers.user.chat.model.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Chat {
+public class Chat implements Serializable{
 	private String memberNo;
 	private String chat;
 	private Date chatDate;
