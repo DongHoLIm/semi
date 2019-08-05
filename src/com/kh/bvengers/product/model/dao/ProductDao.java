@@ -282,6 +282,7 @@ public class ProductDao {
 			pstmt.setString(3, pay.getPayMoney()+"");
 			pstmt.setString(4, pay.getMemberNo());
 			pstmt.setString(5, pay.getPayMoney()+"");
+			pstmt.setString(6, pay.getReceipt());
 			
 			result = pstmt.executeUpdate();
 			

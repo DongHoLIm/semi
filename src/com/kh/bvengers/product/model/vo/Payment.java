@@ -15,12 +15,15 @@ public class Payment implements Serializable{
 	private String mail;
 	private String deliverySiteCode;
 	private String orderNo;
-
+	private String receipt;
+	
 	public Payment() {}
+
+	
 
 	public Payment(String memberNo, String productCode, int productDtpay, int payMoney, String subDeliverySite,
 			String deliverySite, String recieverName, String recieverPhone, String mail, String deliverySiteCode,
-			String orderNo) {
+			String orderNo, String receipt) {
 		super();
 		this.memberNo = memberNo;
 		this.productCode = productCode;
@@ -33,7 +36,10 @@ public class Payment implements Serializable{
 		this.mail = mail;
 		this.deliverySiteCode = deliverySiteCode;
 		this.orderNo = orderNo;
+		this.receipt = receipt;
 	}
+
+
 
 	public String getMemberNo() {
 		return memberNo;
@@ -123,13 +129,29 @@ public class Payment implements Serializable{
 		this.orderNo = orderNo;
 	}
 
+
+
+	public String getReceipt() {
+		return receipt;
+	}
+
+
+
+	public void setReceipt(String receipt) {
+		this.receipt = receipt;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Payment [memberNo=" + memberNo + ", productCode=" + productCode + ", productDtpay=" + productDtpay
 				+ ", payMoney=" + payMoney + ", subDeliverySite=" + subDeliverySite + ", deliverySite=" + deliverySite
 				+ ", recieverName=" + recieverName + ", recieverPhone=" + recieverPhone + ", mail=" + mail
-				+ ", deliverySiteCode=" + deliverySiteCode + ", orderNo=" + orderNo + "]";
-	};
+				+ ", deliverySiteCode=" + deliverySiteCode + ", orderNo=" + orderNo + ", receipt=" + receipt + "]";
+	}
+
+	
 
 
 }

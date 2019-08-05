@@ -56,7 +56,7 @@ public class PaymentServlet extends HttpServlet {
 			request.setAttribute("myAdd", myAdd);
 		}else {
 			page="/views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "상품 등록 실패!");
+			request.setAttribute("msg", "상품 조회 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
