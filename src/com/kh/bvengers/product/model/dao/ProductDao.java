@@ -805,6 +805,7 @@ public class ProductDao {
 	
 	
 
+
 	public ArrayList<Refund> selectRefundManagerList(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -855,7 +856,6 @@ public class ProductDao {
 	public int passRefund1(Connection con, String pass, String pno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println("버튼1의 pay_no : " + pno);
 		
 		String query = prop.getProperty("passRefund1");
 		
@@ -877,7 +877,6 @@ public class ProductDao {
 	public int passRefund2(Connection con, String pass, String pno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println("버튼2의 pay_no : " + pno);
 		String query = prop.getProperty("passRefund2");
 		
 		try {
@@ -898,7 +897,6 @@ public class ProductDao {
 	public int passAdjust1(Connection con, String pass, String pcode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println("버튼1의 product_code : " + pcode);
 		String query = prop.getProperty("passAdjust1");
 		
 		try {
@@ -919,7 +917,6 @@ public class ProductDao {
 	public int passAdjust2(Connection con, String pass, String pcode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println("버튼2의 product_code : " + pcode);
 		String query = prop.getProperty("passAdjust2");
 		
 		try {
