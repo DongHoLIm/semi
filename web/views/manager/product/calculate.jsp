@@ -88,8 +88,8 @@ tr {
 		<br>
 		<br>
 		<div id="table Area">
-			<button onclick="disposeFail();" style="float: right; margin-right: 2.5%">환불처리</button>
-			<button onclick="disposeSuccess();" style="float: right; margin-right: 5px;">정산처리</button>
+			
+			
 			
 			<table id="depotMain" align="center">
 				<thead>
@@ -100,7 +100,8 @@ tr {
 						<th class="th">회원번호</th>
 						<th class="th">정산여부</th><!-- 1 : 정산 대기, 2: 정산완료, 3.환불처리 -->
 						<th class="th">이력발생일자</th>
-						<th class="th">선택</th>
+						<th class="th">정산</th>
+						<th class="th">환불</th>
 					</tr>
 				</thead>
 				<tbody align="center">
@@ -124,9 +125,10 @@ tr {
 						<td><%= c.getAdjustDate() %></td>
 						<td>
 						<%if(c.getAdjustDiv().equals("1")){ %>
-						<input type="checkbox" id="check" value="<%= c.getAdjustNo()%>"/>
+							<td><button onclick="disposeSuccess();" style="float: right; margin-right: 5px;">정산처리</button></td>
+							<td><button onclick="disposeFail();" style="float: right; margin-right: 2.5%">환불처리</button></td>
 						<%}else{ %>
-						처리완료
+							<td colspan="2">처리완료</td>
 						<%} %>
 						</td>
 						
@@ -209,6 +211,28 @@ tr {
 			        success:function(data){
 			        	console.log(data["data"]["token"]);
 			        	var token = data["data"]["token"];
+			        	$.ajax({
+			        		url:"https://api.bootpay.co.kr/cancel.json",
+			        		type:"post",
+			        		dataType:'json',
+			        		data:{"receipt_id": ""},
+			        		beforeSend:function(xhr){
+			        			xhr.setRequestHeader("Content-Type","application/json");
+	                            xhr.setRequestHeader("Authorization", token);
+                            },
+			        		success:function(data){
+			        			console.log(data);
+			        		}
+			        	});
+			        	
+			        	/* $.ajax({
+							url:"disposeFail.cal",
+							type:"post",
+							data:{"code":code, "currentPage":currentPage, "limit":limit},
+							success:function(data){
+									window.location.reload();	
+							}
+						}); */
 			        }
 				});
 			});
