@@ -18,7 +18,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 <style>
 
 input[type=button] {
@@ -66,10 +72,9 @@ input[type=button] {
 	border-collapse: collapse;
     line-height: 1.5;
 }
+ .board th {
 
-.board th {
-
-    padding: 10px;
+    padding: 5px;
     font-weight: bold;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
@@ -78,19 +83,19 @@ input[type=button] {
 
 .board td {
 
-    padding: 10px;
+    padding: 5px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
 
 .board thead th {
-    padding: 10px;
+    padding: 5px;
     font-weight: bold;
     vertical-align: top;
-    color: #036;/* #369; */
-    border-bottom: 3px solid #036;
+    color: black;
+    border-bottom: 2px solid #ccc;
 }
-
+ 
 
 .th1 {
 	text-align:center;
@@ -100,16 +105,15 @@ input[type=button] {
 	text-align:center;
 }
 </style>
+
 </head>
 <body>
 	<!-- header 영역 -->
 	<header><%@ include file="../hfl/header.jsp" %></header>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 	
-	
 		<div class="t_div">
-			<br />
-			<h2 align="center">나의 판매현황</h2><br><br>
+			<h2 align="center">나의 판매현황</h2>
 			<table class="board">
 				<thead>
 				<tr>
@@ -120,8 +124,8 @@ input[type=button] {
 					<th class="th1">남은 보관일</th>
 				</tr>
 				</thead>
-				<tbody>
 				<% for(myPage m : sList){%>
+				<tbody>
 				<tr class="od">
 					<td><%=m.getPid() %></td>
 					<td><%=m.getPname() %></td>
@@ -129,8 +133,8 @@ input[type=button] {
 					<td><%=m.getaStatus() %></td>
 					<td><%=m.getkDate() %>일</td>
 				</tr>
-				<%}%>
 				</tbody>
+				<%}%>
 			</table>
 		</div>
 <%-- 페이징처리 --%>
@@ -164,6 +168,19 @@ input[type=button] {
 		</div>
 		
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
+	
+	<script>
+	$(function(){
+        $(".board td").mouseenter(function(){
+
+           $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+        }).mouseout(function(){
+              $(this).parent().css({"background":"white"});
+        })
+     });
+
+	
+	</script>
 </body>
 </html>
 

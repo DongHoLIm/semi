@@ -17,42 +17,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
- <script>
-/* 	$(function(){
-
-		$("#deliReady").click(function(){ //이벤트 사용하고 싶을 시 .click 대신 on("click", '#td', function(){}
-			$.ajax({
-				url:"deliReady.mp",
-				type:"post",
-				success:function(data){
-					$tableBody = $("#tdeliReady tbody");
-					$tableBody.html(""); //요청 시마다 tableBody가 누적되지 않도록 비워줌
-
-					$.each(data, function(index, value){ //index 회차, value값
-						var $tr = $("<tr>");
-						var $OnoTd = $("<td>").text(value.Ono);
-						var $pNameTd = $("<td>").text(decodeURIComponent(value.pName));
-						var $dstatusTd = $("<td>").text(value.dstatus);
-						var $oDateTd = $("<td>").text(vaule.oDate)
-
-						$tr.append($OnoTd);
-						$tr.append($pNameTd);
-						$tr.append($dstatusTd);
-						$tr.append($oDateTd);
-
-						$tableBody.append($tr);
-					});
-
-				},
-				error:function(data){
-				}
-			});
-		});
-
-	});
- */
-</script>
 <style>
 
 .pagingArea {
@@ -120,24 +84,7 @@
 	text-align:center;
 	border:1px solid black;
 }
-.row0 {
-	background: black;
-	text-align:center;
-	color:white;
-}
 
-.row1 {
-	border-top: 2px solid #555;
-}
-
-.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
-.pageNo {
-	margin: auto;
-}
 </style>
 </head>
 <body>

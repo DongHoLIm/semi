@@ -27,8 +27,6 @@
 }
 *{ 
 font-family: 'Poor Story', cursive; 
-
-
 }
 </style>
 </head>
