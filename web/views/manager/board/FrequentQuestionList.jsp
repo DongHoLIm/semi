@@ -149,7 +149,7 @@ int endPage = pi.getEndPage();
 				$(this).parent().css({"background":"white"});
 		}).click(function(){
 			var num = $(this).parent().children("input").val();
-			 location.href="<%=request.getContextPath()%>/son.no?num=" + num;
+			 location.href="<%=request.getContextPath()%>/sofq.mm?num=" + num;
 		});
 	});
 

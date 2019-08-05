@@ -61,6 +61,7 @@
   	width: 60%;
   	margin: 0 auto;
   	margin-top:5%;
+  	min-height: 500px;
   }
   #basketTitle{
   	text-align: center;

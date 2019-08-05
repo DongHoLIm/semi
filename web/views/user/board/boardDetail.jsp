@@ -122,7 +122,7 @@ td{
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
 		<%} %>
-
+			<button id= "report" align = "left" onclick = "report();">신고하기</button>
 		</div>
 	<br>
 	<br>

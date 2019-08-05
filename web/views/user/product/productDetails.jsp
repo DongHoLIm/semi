@@ -74,7 +74,7 @@
 }
 
 #btnArea {
-   width:16.5%;
+   width:25%;
    align:center;
    margin : 20px auto;
 }
@@ -147,12 +147,12 @@
       <div id="btnArea">
       <button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
       <button id="showBtn" type="button" class="btns" align="center">댓글 닫기</button>
-      <%if( loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
-      <button id="editBtn" type="button" class="btns" align="center">수정 요청</button>
+   <%if( loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
+   <button type = button class="btns" onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
       <%} %>
       </div>
       <table id="commentHeaderTable" class="commentTables" border="1" align="center">
-         <tr>
+         <tr> 
             <th colspan="8">댓글 리스트</th>
          </tr>
          <tr>
