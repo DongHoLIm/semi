@@ -3,12 +3,11 @@
     <%
     Member m = (Member) request.getAttribute("m");
     %>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
@@ -33,7 +32,7 @@ input {
 	margin-top:15%;
 	margin-left:auto;
 	matgin-right:auto;
-	height:30px; 
+	height:30px;
 	width:25%;
 	border: 1px solid black;
 	font-size: 15px;
@@ -44,7 +43,7 @@ input {
 }
 
 .btn_overlap {
-	height:30px; 
+	height:30px;
 	border: 1px solid black;
 	border-radius: 5px;
 	background-color: #FFF;
@@ -89,7 +88,7 @@ input {
 				<td><label>우편번호</label></td>
 				<td><input type="text" id="sample6_postcode" size=21% name="address1" value="<%=add[0]%>">
 				<input type="button" name="zipCode"class="btn_overlap" size=10% onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
-				
+
 			</tr>
 			<tr>
 				<td><label>주소</label></td>
@@ -146,7 +145,7 @@ input {
 	                    }
 	                    // 조합된 참고항목을 해당 필드에 넣는다.
 	                    document.getElementById("sample6_detailAddress").value = extraAddr;
-	                
+
 	                } else {
 	                    document.getElementById("sample6_detailAddress").value = '';
 	                }

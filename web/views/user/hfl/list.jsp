@@ -28,21 +28,22 @@ a {
 }
 
 a:link {
-	color: white;
+	color: black;
 }
 
 a:visited {
 	color: black;
 	text-decoration: none;
 }
+
 .container {
-	position : fixed;
-	left : 0;
-	margin-top:auto;
-	margin-bottom:auto;
+	position: fixed;
+	left: 0;
+	top: 200px;
 }
+
 .panel-collapse {
-	margin : 3%;
+	margin: 3%;
 }
 </style>
 </head>
@@ -50,7 +51,7 @@ a:visited {
  <div class="container" style="float: left; width: 20%; padding-top: 10%; ">
   <div class="panel-group" id="accordion" >
     <div class="panel panel-default">
-      <div class="panel-heading" style="background: black; color:white">
+      <div class="panel-heading" style="background:#fffec2;">
         <h4 class="panel-title" >
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">PC</a>
         </h4>
@@ -65,7 +66,7 @@ a:visited {
       </div>
     </div>
     <div class="panel panel-default" >
-      <div class="panel-heading" style="background: black; color:white">
+      <div class="panel-heading" style="background: #fffec2;">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">노트북</a>
         </h4>
@@ -81,7 +82,7 @@ a:visited {
       </div>
     </div>
     <div class="panel panel-default">
-      <div class="panel-heading" style="background: black; color:white">
+      <div class="panel-heading" style="background: #fffec2;">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">가전제품</a>
         </h4>

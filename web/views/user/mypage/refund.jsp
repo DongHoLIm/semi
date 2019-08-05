@@ -31,7 +31,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -338,12 +337,11 @@ $(document).ready(function() {
 }
 
 .searchdiv {
-   width: 85%;
+   width: 100%;
    height:70%;
    padding: 2%;
    margin: 0 auto;
    text-align: center;
-   border:1px solid black;
 }
 
 .th_select {
@@ -354,7 +352,6 @@ $(document).ready(function() {
 }
 
 #selectDate {
-	border:1px solid black;
    background:#FFF;
 }
 
@@ -384,24 +381,72 @@ input[type=button] {
 
 }
 
+
 .board1 {
 	width: 80%;
 	margin: auto;
 	align: center;
-	border-spacing: 10px;
+	
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
 }
+ .board1 th {
+
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #FFF;
+}
+
 .board1 td {
-	text-align:center;
+
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
 }
+
+.board1 thead th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 2px solid #ccc;
+}
+
 
 .board2 {
 	width: 80%;
 	margin: auto;
 	align: center;
-	border-spacing: 10px;
+	
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
 }
+ .board2 th {
+
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #FFF;
+}
+
 .board2 td {
-	text-align:center;
+
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+.board2 thead th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 2px solid #ccc;
 }
 
 .rl2 {
@@ -445,14 +490,9 @@ input[type=button] {
                        <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
                        <label for="dateType5"></label>
                    </span>
-
-
-           <!-- <div class="clearfix">
-               시작일 -->
                <span class="dset">
                    <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >               </span>
                <span class="demi">~</span>
-               <!-- 종료일 -->
                <span class="dset">
                  <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
                </span>
@@ -465,21 +505,9 @@ input[type=button] {
        </table>
 </div>
 
-	<!-- <section id="sec1">
-		<div id="area">
-			<h3 style="font-weight: bold">환불 내역</h3>
-
-		<div class="date-select" align="center">
-			<br> <span style="font-weight: bold">기간별조회</span> <span>&nbsp;&nbsp;&nbsp;<input
-				type="button" value="1주일">&nbsp;
-			</span> &nbsp;<input type="button" value="15일">&nbsp; &nbsp;<input
-				type="button" value="1개월">&nbsp; <input type="date">
-			- <input type="date"><br>
-		</div>
-		</div> -->
 	<br>
 		<div align=center>
-			<table border="1" class = "board1">
+			<table class = "board1">
 				<thead>
 				<tr class="rl">
 					<th class="th_refund">주문번호</th>
@@ -504,7 +532,7 @@ input[type=button] {
 			</table>
 			</div>
 		<br>
-		<div id="pagingArea">
+		<div id="pagingArea1">
 		<div class="pagingArea1" align="center">
 			<button
 				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><<</button>
@@ -593,7 +621,7 @@ input[type=button] {
 
 		<br>
 		<div align=center>
-			<table border="1" class="board2">
+			<table class="board2">
 			<thead>
 				<tr class="rl2">
 					<th class="th_refund">정산번호</th>

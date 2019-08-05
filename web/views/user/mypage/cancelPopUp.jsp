@@ -7,10 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>취소 신청</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
+
 <style>
+
 .r1 {
 	width:100%;
 	height:100%;
@@ -45,7 +46,7 @@
 			<h3>주문 취소 신청</h3>
 			<br>
 			<p>
-				주문 취소 신청은 배송 전에만 가능합니다.<br> 
+				주문 취소 신청은 배송 전에만 가능합니다.<br>
 				취소 신청 시 카드 취소 처리까지는 카드 회사에 따라 1~3영업일이 추가로 소요 됩니다.
 			</p>
 			<input type="text" id="hiddenvalue" value="<%=ono %>" style="display:none;">
@@ -61,7 +62,7 @@
 			$(function(){
 				$(".cancel_check").change(function(){
 					if($(".cancel_check").is(":checked")){
-						
+
 					$("#check").prop("disabled", false);
 				}else{
 					$("#check").attr("disabled", "disabled");

@@ -105,11 +105,10 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
    <header><%@ include file="../hfl/header.jsp"%></header>
-   <div class="outer">
+   <div class="outer" align="center">
       <form action="<%=request.getContextPath()%>/payment.pa" method="post" id="productDetail">
          <table class="detail" align="center">
             <tr>
@@ -142,11 +141,29 @@
             </tr>
             <tr>
                <td width="150px" style="border-right:0">
-                  <input type="button" value="장바구니" id="basketBtn" class="detailBtn"/>
-               </td>
-               <td width="150px" style="border-left:0">
-                  <input type="submit" value="구매하기" id="orderBtn" class="detailBtn"/>
-               </td>
+					<div class="position">
+						<div class="svg-wrapper">
+							<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+   								<rect id="shape" height="40" width="150" />
+						        <div id="text">
+						          <a id="basketBtn" style="color:black" href=""><span class="spot"></span>장바구니</a>
+						        </div>
+							</svg>
+						</div>
+					</div>
+				</td>
+				<td width="150px" style="border-left:0">
+					<div class="position">
+						<div class="svg-wrapper">
+							<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+   								<rect id="shape" height="40" width="150" />
+						        <div id="text">
+						          <a id="orderBtn" style="color:black"><span class="spot"></span>구매하기</a>
+						        </div>
+							</svg>
+						</div>
+					</div>
+				</td>
             </tr>
             <tr>
                <th>상품 설명</th>
@@ -197,6 +214,9 @@
       $(function(){
          var postsId = <%= b.getPostsId()%>;
 
+         $("#orderBtn").click(function(){
+			$("#productDetail").submit();
+         });
          $(document).ready(function(){
         	$('[data-toggle="tooltip"]').tooltip();
             $.ajax({
@@ -269,13 +289,12 @@
       $(function(){
          var price = numeral($("#priceInput").attr('value')).format( '0,0' );
 		 var delivey = numeral($("#deliveryPay").attr('value')).format( '0,0' );
-		 var total = numeral(price + delivey).format( '0,0' );
+		 var iPrice = Number($("#priceInput").attr('value'));
+		 var iDelivey = Number($("#deliveryPay").attr('value'));
+		 var total = numeral(iPrice + iDelivey).format( '0,0' );
          $("#price").text("상품 금액 : " + price+"원");
          $("#delivery").text("배송비 : " + delivey+"원");
 		 $("#totalPrice").text("합계 금액 : " + total + "원");
-
-
-
 
          $("#addBtn").click(function(){
          <% if(loginUser!=null){%>

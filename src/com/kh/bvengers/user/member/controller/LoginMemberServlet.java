@@ -17,9 +17,9 @@ import com.kh.bvengers.user.member.model.vo.Member;
 public class LoginMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public LoginMemberServlet() {
-        super();
-    }
+	public LoginMemberServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -27,21 +27,29 @@ public class LoginMemberServlet extends HttpServlet {
 		String memberId = request.getParameter("loginId");
 		String memberPwd = request.getParameter("password");
 		System.out.println("sessionID: "+sessionId);
+		String sessionPass = (String) request.getSession().getAttribute("pass");
+		System.out.println(sessionPass);
 		String sessionID="";
 		Member loginUser = null;
 		if(sessionId==null) {
-		loginUser = new MemberService().loginCheck(memberId,memberPwd);
+			loginUser = new MemberService().loginCheck(memberId,memberPwd);
+			
+			
+			
+			
 		}else {
 			sessionID = request.getParameter("sessionId");
 			System.out.println("파라미터 sessionId"+sessionID);
-		loginUser = new MemberService().loginCheck(sessionID,memberPwd);
+			loginUser = new MemberService().loginCheck(sessionID,memberPwd);
+			
+			
+			
 		}
 		System.out.println(loginUser);
 
 		if(loginUser.getMemberId().equals(sessionID) &&loginUser.getMemberPassword().equals(memberPwd) &&!loginUser.getMemberId().equals("admin")) {
-			
+
 			request.getRequestDispatcher("views/user/join/searchPwdResult.jsp").forward(request, response);
-			request.getSession().invalidate();
 		}else if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && !loginUser.getMemberId().equals("admin")) {
 
 			HttpSession session = request.getSession();
@@ -50,7 +58,7 @@ public class LoginMemberServlet extends HttpServlet {
 			session.setMaxInactiveInterval(60*60); // 세션 시간 1시간 지정
 
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
-			
+
 		}else if(loginUser.getMemberPassword().equals(memberPwd)&&loginUser.getMemberId().equals(memberId) && loginUser.getMemberId().equals("admin")){
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);

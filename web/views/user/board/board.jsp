@@ -139,8 +139,6 @@
          <% }
          }
          %>
-
-
          <%if(currentPage >= maxPage){ %>
          <button disabled>></button>
          <%}else{ %>
@@ -251,7 +249,6 @@
              location.href="<%=request.getContextPath()%>/sub.bo?num=" + num;
          });
       });
-
       function search(){
     	  $(function(){
     		  var id = $("select[id = 'select']").val();
@@ -284,7 +281,6 @@
 						$Tbody.append($tr);
 					}
 					$("#messageArea tbody td").mouseenter(function(){
-
 			            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
 			         }).mouseout(function(){
 			               $(this).parent().css({"background":"white"});
@@ -292,20 +288,10 @@
 			            var num = $(this).parent().children("input").val();;
 			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
 			         });
-
-
-
     			}
-
-
     		  })
-
-
-
     	  });
-
       }
-
    </script>
 
 </body>
