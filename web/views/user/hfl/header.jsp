@@ -14,6 +14,7 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
+
 <!-- include summernote-ko-KR -->
 <!-- <script src="lang/summernote-ko-KR.js"></script> -->
 <meta charset="UTF-8">
@@ -67,7 +68,7 @@ html, css {
 #shape {
    stroke-width: 3px;
    fill: transparent;
-   stroke: red;
+   stroke: #009FFD;
    stroke-dasharray: 85 400;
    stroke-dashoffset: -220;
    transition: 1s all ease;
@@ -89,7 +90,7 @@ html, css {
    stroke-dasharray: 50 0;
    stroke-width: 3px;
    stroke-dashoffset: 0;
-   stroke: red;
+   stroke: #06D6A0;
 }
 
 #chatLi:hover {
@@ -113,6 +114,7 @@ html, css {
    -o-transition: transform .35s;
    -moz-transition: transform .35s;
    -webkit-transition: transform .35s;
+   background: white;
 }
 
 #logoImg {
@@ -128,6 +130,10 @@ html, css {
    -moz-transition: transform .35s;
    -webkit-transition: transform .35s;
 }
+#logoDiv {
+  animation-duration: 1s;
+  animation-name: slidein;
+}
 li:hover, button:hover {
    -webkit-transform: scale(1.2); /*  크롬 */
    -moz-transform: scale(1.2); /* FireFox */
@@ -141,10 +147,31 @@ li:hover, button:hover {
 .navbar{
    border-right : 3px solid #ffe6e6;
    border-bottom: 3px solid #ffe6e6;
+
 }
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
-   .navbar-inverse .navbar-nav>.open>a:focus {
-   background: white;
+
+@keyframes slidein {
+  from {
+  	opacity: 0;
+  }
+
+  to {
+  	opacity: 100;
+  }
+  }
+li:hover{
+   -webkit-transform: scale(1.2); /*  크롬 */
+   -moz-transform: scale(1.2); /* FireFox */
+   -o-transform: scale(1.2); /* Opera */
+   transform: scale(1.2);
+   transition: transform .35s;
+   -o-transition: transform .35s;
+   -moz-transition: transform .35s;
+   -webkit-transition: transform .35s;
+}
+.navbar{
+   border-right : 3px solid #ffe6e6;
+   border-bottom: 3px solid #ffe6e6;
 }
 .pagingArea button{
 		width:2%;
@@ -157,21 +184,16 @@ li:hover, button:hover {
 		background: black;
 		border-radius: 10px;
 	}
+
 </style>
 </head>
 <body>
 <div align="center" id="logoDiv">
-   <a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
+   <a href="<%= request.getContextPath()%>/index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
-<nav class="navbar" style="background:white  ">
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" style="color:black" href="<%=request.getContextPath()%>/index.jsp">중고 愛 민족</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -184,13 +206,6 @@ li:hover, button:hover {
            <li><a style="color:black" href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
            <%} else {%>
            <li class="byPageBtn"><a class="myPageBtn" style="color:black" onclick="myPage();" >마이페이지</a></li>
-           <script>
-            function myPage(){
-               if(confirm("로그인 후 이용해주시기 바랍니다.")){
-                  location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
-               }
-            }
-           </script>
            <%} %>
           <% if(loginUser != null) {%>
              <li><a style="color:black" href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
@@ -203,8 +218,8 @@ li:hover, button:hover {
         <li><a style="color:black" href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
       </ul>
       <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
-       <ul class="nav navbar-nafv navbar-right"style="color:black">
-        <li><a style="color:black"><span class="glyphicon glyphicon-user" ></span> <%= loginUser.getMemberId() %> 님 환영합니다.</a> </li>
+       <ul class="nav navbar-nav navbar-right"style="color:black">
+        <li><a onclick="location.href='<%=request.getContextPath()%>/views/user/mypage/memberInfo.jsp'" style="color:black"><span class="glyphicon glyphicon-user" ></span> <%= loginUser.getMemberId() %> 님 환영합니다.</a> </li>
         <li><a style="color:black" href="<%=request.getContextPath()%>/logout.me">logOut</a></li>
          <li id="chatLi" onclick="submit();"> <a style="color:black">채팅 문의 </a></li>
       </ul>
@@ -219,5 +234,12 @@ li:hover, button:hover {
     </div>
   </div>
 </nav>
+<script>
+function myPage(){
+   if(confirm("로그인 후 이용해주시기 바랍니다.")){
+      location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
+   }
+}
+</script>
 </body>
 </html>
