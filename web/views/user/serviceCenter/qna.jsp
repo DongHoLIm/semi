@@ -143,6 +143,9 @@
 	 	width: 100px;
 	 	height: 50px;
 	 }
+	 dt:hover {
+	 	background: #eee6ff;
+	 }
 </style>
 </head>
 <body>
@@ -150,12 +153,12 @@
 	<header><%@ include file="../hfl/header.jsp" %></header>
 
 	<section id="sec1">
-	<div id="accordionArea">
-	<h2 align="left"> 자주 찾는 질문</h2>
+	<div id="accordionArea" style = " border: 5px solid red; border-color: white ;">
+	<h2 align="left" > 자주 찾는 질문</h2>
 	<%for (Board b : list) {%>
-	<dl>
-		<dt><span></span><%=b.getPostsTitle()%></dt>
-		<dt><span></span><%=b.getContents() %></dt>
+	<dl >
+		<dt style = " border: 2px solid; border-color:	 #ccccff;" ><span></span><%=b.getPostsTitle()%></dt>
+		<dt style = " border: 2px solid; border-color:	 #ccccff;"><span></span><%=b.getContents() %></dt>
 	</dl>
 	<% }%>
 	</div>
@@ -179,10 +182,11 @@
 	</script>
 
 	<br><br><br><br>
-	<p align="center">내가 쓴 질문</p>
+	<div style = "height:150px">
+	<h3><p align="center" style = "border: 4px dotted #d9b3ff; width:150px">내가 쓴 질문</p></h3>
 		<table class="board" id = "messageArea">
 			<thead>
-			<tr class="row0">
+			<tr class="row0" style = "background:#f2e6ff"> 
 				<th>글 번호</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -210,6 +214,7 @@
 
 			<button id="writer" align="right" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>
 		</table>
+		</div>
 
 		<br><br>
 		 <div class = "pagingArea" align ="center" >
@@ -243,7 +248,7 @@
 
    $(function(){
       $("#messageArea td").mouseenter(function(){
-         $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+         $(this).parent().css({"background-color":"#e6f7ff","cursor":"pointer"});
       }).mouseout(function(){
             $(this).parent().css({"background":"white"});
       }).click(function(){
