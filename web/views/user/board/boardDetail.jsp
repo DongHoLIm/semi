@@ -11,6 +11,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
+.report{
+	width:150px;
+}
 
 td{
 	/* border:1px solid lightgray; */
@@ -27,6 +30,48 @@ td{
 
 #buttonArea{
 	padding-left:70%;
+	width:100%;
+}
+
+#replyA{
+	margin-left: 30%;
+}
+
+button{
+  background:#f7e6ff;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color: #ffb3b3;
+}
+:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:  #ffb3b3;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }
 
 </style>
@@ -57,7 +102,7 @@ td{
 				<table align = "center" width = "800px">
 				<tr>
 				<% if(!(a.getNewFileName().equals("사진없음"))){%>
-				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:100%; height:150%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
+				<td colspan = "6"><img id="titleImg" style=" align:center; margin:0 auto; width:80%; height:50%;"src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%= a.getNewFileName()%>"></td>
 				<%}else{%>
 				<td colspan = "6"></td><%}%>
 				</tr>
@@ -77,13 +122,13 @@ td{
 
 	<div class = "replyArea">
 
-	<div >
-		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
+	<div style = "margin-right:250px">
+		<div class = "replayWriterArea" style = " width:800px; height:100%; margin-left:30%; align:center">
 				<table align = "center">
 				<tr>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
 					<td>&nbsp;&nbsp;</td>
-					<td><button id = "addReply" style = "height:60px">댓글 등록</button></td>
+					<td><button class = "enroll" id = "addReply" style = "height:60px; maring-left:34%">댓글 등록</button>	</td>
 				</tr>
 			</table>
 				<div >
@@ -91,8 +136,8 @@ td{
 			</div>
 			</div>
 				<br>
-
-		<table id="replySelectTable" class="commentTables" align="center">
+	<div id="replyA">
+		<table id="replySelectTable" class="commentTables"  >
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
@@ -115,13 +160,18 @@ td{
 			</tfoot>
 		</table>
 		</div>
+		</div>
 			<br><br>
 		<div id = "buttonArea">
 		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
 		<%} %>
-			<button id= "report" align = "left" onclick = "report();">신고하기</button>
+	<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| !(loginUser.getMemberId().equals(b.getMemberId())))){ %>
+		<button id= "report" class="report" align = "left" onclick = "report();">신고하기
+		<img src="<%= request.getContextPath()%>/images/alert.png" style="width:20%;"/>
+		</button>
+			<%} %> 
 		</div>
 	<br>
 	<br>

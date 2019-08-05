@@ -92,7 +92,6 @@ html, css {
    stroke-dashoffset: 0;
    stroke: #06D6A0;
 }
-
 #chatLi:hover {
    cursor: pointer;
 }
@@ -114,7 +113,6 @@ html, css {
    -o-transition: transform .35s;
    -moz-transition: transform .35s;
    -webkit-transition: transform .35s;
-   background: white;
 }
 
 #logoImg {
@@ -147,6 +145,11 @@ li:hover, button:hover {
 .navbar{
    border-right : 3px solid #ffe6e6;
    border-bottom: 3px solid #ffe6e6;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+   .navbar-inverse .navbar-nav>.open>a:focus {
+   background: white;
+}
 
 }
 
