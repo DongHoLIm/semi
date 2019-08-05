@@ -99,6 +99,7 @@ html, css {
 .myPageBtn:hover {
 	cursor: pointer;
 }
+
 #logoDiv {
 	margin-bottom: 10px;
 }
@@ -142,9 +143,9 @@ li:hover, button:hover {
 </head>
 <body>
 <div align="center" id="logoDiv">
-   <a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" style="width:25%;" /></a>
+	<a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" style="background:#fffec2">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -166,11 +167,11 @@ li:hover, button:hover {
            <%} else {%>
            <li class="byPageBtn"><a class="myPageBtn" style="color:black" onclick="myPage();" >마이페이지</a></li>
            <script>
-            function myPage(){
-               if(confirm("로그인 후 이용해주시기 바랍니다.")){
-                  location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
-               }
-            }
+				function myPage(){
+					if(confirm("로그인 후 이용해주시기 바랍니다.")){
+						location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
+					}
+				}
            </script>
            <%} %>
           <% if(loginUser != null) {%>
@@ -184,17 +185,17 @@ li:hover, button:hover {
         <li><a style="color:black" href="/sp/views/user/login/login.jsp"><span class="glyphicon glyphicon-user"></span> login</a></li>
       </ul>
       <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
-       <ul class="nav navbar-nav navbar-right">
+       <ul class="nav navbar-nav navbar-right"style="color:black">
         <li><a style="color:black"><span class="glyphicon glyphicon-user" ></span> <%= loginUser.getMemberId() %> 님 환영합니다.</a> </li>
         <li><a style="color:black" href="<%=request.getContextPath()%>/logout.me">logOut</a></li>
       	<li id="chatLi" onclick="submit();"> <a style="color:black">채팅 문의 </a></li>
       </ul>
-      <script>
-      function submit(){
-         var no = <%=loginUser.getMemberNo()%>;
-         location.href="<%=request.getContextPath()%>/chat.ch?no="+no;
-      }
-      </script>
+		<script>
+		function submit(){
+			var no = <%=loginUser.getMemberNo()%>;
+			location.href="<%=request.getContextPath()%>/chat.ch?no="+no;
+		}
+		</script>
       <%}%>
 
     </div>

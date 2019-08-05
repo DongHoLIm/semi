@@ -22,14 +22,13 @@
 
 #sellerInfoTable th {
 	width: 30%;
-	background: black;
-	color: white;
-	border : 1px solid white;
+	border : 1px solid black;
 }
 #closeBtn{
-	background: black;
-	color: white;
+	color: red;
+	background: white;
 	width: 20%;
+	border: 1px solid black;
 	height: 50px;
 }
 </style>
@@ -56,7 +55,11 @@
 			</tr>
 			<tr>
 				<th>판매 등급 :</th>
-				<td class="tableCells"><%=s.getGrade()%></td>
+				<%if((s.getGrade().equals(" ")) ||(s.getGrade() == null)){%>
+				<td class="tableCells">없음</td>
+				<%} else {%>
+				<td class="tableCells"><%=s.getGrade() %></td>
+				<%} %>
 			</tr>
 			<tr>
 				<td colspan="2" id="closeTd"><input type="button" value="닫기"
