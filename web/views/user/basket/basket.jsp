@@ -88,7 +88,7 @@
     <tbody>
     <%for(Basket bk : list){ %>
       <tr>
-        <td id="td1"><input type="checkbox" id="select" value="<%=bk.getProductCode() %>" onclick="changeTotal();"/></td>
+        <td id="td1"><input type="checkbox" id="select" value="<%=bk.getProductCode() %>" onclick="changeTotal();" checked/></td>
         <td id="td1"><img src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=bk.getFileName() %>" alt=""  id="fileImage"/></td>
         <td id="td1"><h4 id="productName"><%=bk.getProductName() %></h4></td>
         <td id="td1"><p id="info2"><%=dc.format(bk.getPrice()) %>원</p></td>
@@ -175,15 +175,44 @@
 			
 		});
 	}
-	/* function changeTotal(){
-		var $table = $("table[id='totalInfo'] tbody");
-		$table.html("");
-		$("input[id='select']:checked").each(function(){
-			var $ = $("<td>");
-			var 
-			
+	function changeTotal(){
+		var code = "";
+		
+		$("#select:checked").each(function(index){
+			code+=$(this).val()+","
 		});
-	} */
+		$.ajax({
+			url:"changeTotal.bk",
+			type:"post",
+			data:{"code":code},
+			success:function (data){
+				
+				console.log(data);
+				var totalPrice=0;
+				var totaldelivery=0;
+				
+				for(var i = 0; i < data.length; i++){
+					totalPrice+=data[i].price;
+					totaldelivery+=data[i].deliveryPrice;
+				}
+				 var $total = $("#totalInfo tbody");
+					$total.html("");
+					var $tr = $("<tr>");
+					var $totalP = $("<td>").text(totalPrice);
+					var $plus = $("<td>").text("+");
+					var $deliveryP = $("<td>").text(totaldelivery);
+					var $equal = $("<td>").text("=");
+					var $price= $("<td>").text(totalPrice+totaldelivery);
+					
+					$tr.append($totalP);
+					$tr.append($plus);
+					$tr.append($deliveryP);
+					$tr.append($equal);
+					$tr.append($price);
+					$total.append($tr);				
+			}
+		});
+	} 
 	
 </script>
 <footer><%@ include file="../hfl/footer.jsp"%></footer>

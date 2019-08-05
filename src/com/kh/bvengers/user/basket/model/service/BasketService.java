@@ -50,4 +50,10 @@ public class BasketService {
 		return list;
 	}
 
+	public ArrayList<Basket> changeTotal(String[] productCode) {
+		Connection con = getConnection();
+		ArrayList <Basket> list = new BasketDao().changeTotal(con,productCode);		
+		return list;
+	}
+
 }
