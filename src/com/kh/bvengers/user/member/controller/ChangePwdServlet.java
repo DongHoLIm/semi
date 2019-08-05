@@ -18,12 +18,16 @@ public class ChangePwdServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = (String) request.getParameter("memberId");
 		String memberPwd = (String) request.getParameter("password");
+		String memberId = (String) request.getSession().getAttribute("sessionId");
+
+		System.out.println(memberId);
+		System.out.println(memberPwd);
 		
 		int result = new MemberService().changePwd(memberId,memberPwd);
 		String page ="";
 		if(result>0) {
+			request.getSession().invalidate();
 			page = "/index.jsp";
 		}else {
 			request.setAttribute("msg", "비밀번호 바꾸기 실패");
