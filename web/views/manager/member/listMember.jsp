@@ -15,11 +15,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 <style>
+<style>
+h2 {
+	font-family: 'Poor Story', cursive;
+	margin: 0;
+	padding: 0;
+}
 #depotMain {
 	width: 80%;
 	height: 80%;
-	border: 2px solid black;
+	margin:auto;
 }
 
 tr {
@@ -28,8 +35,8 @@ tr {
 
 #th {
 	border: 1px solid white;
-	background: black;
-	color: white;
+	background: lightgray;
+	color: black;
 	text-align: center;
 }
 
@@ -48,17 +55,28 @@ tr {
 	width: 80%;
 }
 
+.mbdetail{
+background:lightyellow;
+border-radius:10px;
+}
+.mbdetail:hover{
+background:white;
+border:1px solid yellow;
+}
+
 .th {
-	background: black;
-	color: white;
+	background: lightgray;
+	color: black;
 	text-align: center;
 	border: 1px solid white;
 }
 table th{
 text-align:center;
+height:50px;
 }
 table td{
 text-align:center;
+height:30px;
 }
 .btns{
 margin-left:13%;
@@ -125,6 +143,12 @@ input-align:center;
 	</div>
 <br><br>
 <script>
+
+$("#depotMain td").mouseenter(function(){
+	$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+}).mouseout(function(){
+	$(this).parent().css({"background":"white"});
+});
 
  	  $(".mbdetail").click(function(){
 			var mi = $(this).parent().siblings().eq(0).text();

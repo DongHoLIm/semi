@@ -13,16 +13,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 <title>Insert title here</title>
 <style>
+<style>
+h2 {
+	font-family: 'Poor Story', cursive;
+	margin: 0;
+	padding: 0;
+}
 #depotMain {
 	width: 95%;
 	height: 80%;
-	border :2px solid black;
+	margin:auto;
 }
 
 tr {
 	border: 1px solid black;
+}
+table td{
+height:30px;
 }
 
 #th {
@@ -47,10 +57,16 @@ width:90%;
 }
 
 .th{
-background:black;
-color:white;
+background:lightgray;
+color:black;
 text-align:center;
 border:1px solid white;
+height:50px;
+}
+.mstop,.blacklist{
+background:red;
+border:1px solid lightyellow;
+color:white;
 }
 </style>
 <body>
@@ -137,6 +153,12 @@ border:1px solid white;
 $(".detail").click(function(){
 	var num = $(this).text();
 	location.href='<%=request.getContextPath()%>/son.no?num='+num;
+});
+
+$("#depotMain td").mouseenter(function(){
+	$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+}).mouseout(function(){
+	$(this).parent().css({"background":"white"});
 });
 
 $(function(){

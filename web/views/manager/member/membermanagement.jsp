@@ -19,17 +19,20 @@
 #depotMain {
 	width: 80%;
 	height: 80%;
+	margin:auto;
 	border: 2px solid black;
 }
 
 tr {
-	border: 1px solid black;
+	border: 1px solid white;
 }
-
+table td{
+height:30px;
+}
 #th {
 	border: 1px solid white;
-	background: black;
-	color: white;
+	background: lightgray;
+	color: black;
 	text-align: center;
 }
 
@@ -49,8 +52,9 @@ tr {
 }
 
 .th {
-	background: black;
-	color: white;
+	background: lightgray;
+	height:50px;
+	color: black;
 	text-align: center;
 	border: 1px solid white;
 }
@@ -132,6 +136,12 @@ input-align:center;
 	</div>
 <br><br>
 <script>
+	$("#depotMain td").mouseenter(function(){
+		$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+	}).mouseout(function(){
+		$(this).parent().css({"background":"white"});
+	});
+
 
  	  $(".mbdetail").click(function(){
 			var mi = $(this).parent().siblings().eq(1).text();
@@ -141,6 +151,7 @@ input-align:center;
 		var chkid = $(this).parent().siblings().eq(0).text();
 	location.href='<%=request.getContextPath()%>/updateBL.me?chkid='+chkid;
 	})
+	
 
 	$("#chkAll").on("click", function() {
 	      var chkAll = $(this).is(":checked");
