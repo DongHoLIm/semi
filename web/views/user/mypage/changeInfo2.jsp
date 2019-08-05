@@ -10,8 +10,7 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<style>
-h4 {
+<style>h4 {
 	text-align:center;
 }
 input {
@@ -26,7 +25,7 @@ input {
 	margin-left:auto;
 	padding-top:20px;
 	padding-bottom:20px;
-	border:2px solid black;
+	border:5px double #ffe6e6;
 }
 .btn_update {
 	margin-top:15%;
@@ -36,18 +35,17 @@ input {
 	width:25%;
 	border: 1px solid black;
 	font-size: 15px;
-	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
 	background-color: #FFF;
 }
 
 .btn_overlap {
+	width:86px;
 	height:30px;
 	border: 1px solid black;
 	border-radius: 5px;
 	background-color: #FFF;
-	font-family:'Nanum Gothic', sans-serif;
 }
 </style>
 </head>
@@ -86,9 +84,8 @@ input {
 			</tr>
 			<tr>
 				<td><label>우편번호</label></td>
-				<td><input type="text" id="sample6_postcode" size=21% name="address1" value="<%=add[0]%>">
-				<input type="button" name="zipCode"class="btn_overlap" size=10% onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
-
+				<td><input type="text" id="sample6_postcode" size=20 name="address1" value="<%=add[0]%>">
+				<input type="button" name="zipCode"class="btn_overlap" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
 			</tr>
 			<tr>
 				<td><label>주소</label></td>

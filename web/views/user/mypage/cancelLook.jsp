@@ -174,7 +174,6 @@ $(document).ready(function() {
 </script>
 <style>
 
-
 .board1 {
 	width: 80%;
 	margin: auto;
@@ -217,7 +216,10 @@ $(document).ready(function() {
 
 .pagingArea > button {
 	background:#FFF;
-	border: 1px solid black;
+	border:none;
+	color:#ffb3b3;
+	font-weight:bold;
+	width:20px;
 
 }
 .td_select {
@@ -248,8 +250,10 @@ $(document).ready(function() {
 
 
 input[type=button] {
-   border:1px solid black;
+   border:1px solid #ccc;
    background:#FFF;
+   width:50px;
+   border-radius:5px;
 }
 
 .tt_div {
@@ -294,7 +298,7 @@ input[type=button] {
          <col width="123px">
          <col width="*">
      </colgroup>
-     <h3>주문 취소 조회</h3>
+     <h3>주문 취소 조회</h3><br>
      <tbody>
          <tr>
              <th class="th_select">기간별 조회</th>
@@ -316,11 +320,11 @@ input[type=button] {
            <!-- <div class="clearfix">
                시작일 -->
                <span class="dset">
-                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >               </span>
+                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.startdate }" >               </span>
                <span class="demi">~</span>
                <!-- 종료일 -->
                <span class="dset">
-                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
+                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.enddate }" >
                </span>
                <span>
                    	<input type="button" name="selectDate" id="selectDate"  onclick="search();" value="조회">
@@ -491,7 +495,7 @@ input[type=button] {
 		$.ajax({
 			url:"cancelDate.mp",
 			type:"post",
-			data:{"start":start,"end":end},
+			data:{"start":start,"end":end,"currentPage":page},
 			success:function(data){
 				var $dateTbody = $(".board1 tbody");
 

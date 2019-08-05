@@ -20,6 +20,11 @@
       .row.content {height:auto;}  */
 }
 
+.navbar {
+   border-right : 3px solid #ffe6e6;
+   border-bottom: 3px solid #ffe6e6;
+}
+
 li {
 	list-style: none;
 }
@@ -48,7 +53,7 @@ a:visited {
  <div class="container" style="float: left; width: 20%; padding-top: 10%; ">
   <div class="panel-group" id="accordion" >
     <div class="panel panel-default">
-      <div class="panel-heading" style="background: #fffec2; color:black">
+      <div class="panel-heading" style="background:#ffe6e6; color:black">
         <h4 class="panel-title" >
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">쇼핑내역</a>
         </h4>
@@ -67,7 +72,7 @@ a:visited {
       </div>
     </div>
     <div class="panel panel-default" >
-      <div class="panel-heading" style="background: #fffec2; color:black">
+      <div class="panel-heading" style="background: #ffe6e6; color:black">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">회원정보</a>
         </h4>

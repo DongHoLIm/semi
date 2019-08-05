@@ -189,7 +189,7 @@ $(document).ready(function() {
     padding: 5px;
     font-weight: bold;
     vertical-align: top;
-    border-bottom: 1px solid #e6ccff;
+    border-bottom: 1px solid #ccc;
     background: #FFF;
 }
 
@@ -197,7 +197,7 @@ $(document).ready(function() {
 
     padding: 5px;
     vertical-align: top;
-    border-bottom: 1px solid #e6ccff;
+    border-bottom: 1px solid #ccc;
 }
 
 .dateBoard thead th {
@@ -205,7 +205,7 @@ $(document).ready(function() {
     font-weight: bold;
     vertical-align: top;
     color: black;
-    border-bottom: 2px solid #e6ccff;
+    border-bottom: 2px solid #ccc;
 }
 
 .td_select {
@@ -240,7 +240,7 @@ $(document).ready(function() {
 }
 
 input[type=button] {
-   border:1px solid #e6ccff;
+   border:1px solid #ccc;
    background:#FFF;
    width:50px;
    border-radius:5px;
@@ -248,7 +248,6 @@ input[type=button] {
 
 .tt_div {
 	width:60%;
-	height:100%;
 	margin-left:auto;
 	margin-right:auto;
 
@@ -264,7 +263,7 @@ input[type=button] {
 
 #pagingArea {
 	width:60%;
-	margin-top:50px;
+	margin-top:25px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -272,7 +271,7 @@ input[type=button] {
 .pagingArea > button {
 	background:#FFF;
 	border:none;
-	color:#e6ccff;
+	color:#ffb3b3;
 	font-weight:bold;
 	width:20px;
 	
@@ -318,7 +317,7 @@ tr > th, tr> td{
          <col width="123px">
          <col width="*">
      </colgroup>
-     <h3>주문조회</h3>
+     <h3>주문조회</h3><br>
      <tbody>
          <tr>
              <th class="th_select">기간별 조회</th>
@@ -340,11 +339,11 @@ tr > th, tr> td{
            <!-- <div class="clearfix">
                시작일 -->
                <span class="dset">
-                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" style="border: 1px solid #e6ccff;" value="${adminBuildEnergyVo.startdate }" >               </span>
+                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.startdate }" >               </span>
                <span class="demi">~</span>
                <!-- 종료일 -->
                <span class="dset">
-                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" style="border: 1px solid #e6ccff;" value="${adminBuildEnergyVo.enddate }" >
+                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.enddate }" >
                </span>
                <span>
                    	<input type="button" name="selectDate" id="selectDate"  onclick="search();" value="조회">
@@ -510,7 +509,7 @@ tr > th, tr> td{
 		var currentPage = page;
 		$.ajax({
 			url:"orderDate.mp",
-			data:{"start":start,"end":end},
+			data:{"start":start,"end":end,"currentPage":page},
 			type:"post",
 			success:function(data){
 				var $dateTbody = $(".dateBoard tbody");

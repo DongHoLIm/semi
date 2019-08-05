@@ -28,7 +28,7 @@ input {
 	margin-left:auto;
 	padding-top:20px;
 	padding-bottom:20px;
-	border:2px solid black;
+	border:5px double #ffe6e6;
 }
 .btn_update {
 	margin-top:15%;
@@ -44,6 +44,7 @@ input {
 }
 
 .btn_overlap {
+	width:86px;
 	height:30px;
 	border: 1px solid black;
 	border-radius: 5px;
@@ -86,8 +87,8 @@ input {
 			</tr>
 			<tr>
 				<td><label>우편번호</label></td>
-				<td><input type="text" id="sample6_postcode" size=21% name="address1" value="<%=add[0]%>">
-				<input type="button" name="zipCode"class="btn_overlap" size=9% onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
+				<td><input type="text" id="sample6_postcode" size=20 name="address1" value="<%=add[0]%>">
+				<input type="button" name="zipCode"class="btn_overlap" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
 			</tr>
 			<tr>
 				<td><label>주소</label></td>

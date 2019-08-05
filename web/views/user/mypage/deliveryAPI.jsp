@@ -7,8 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 </head>
 <style>
+* {
+   font-family: 'Poor Story', cursive;
+   margin: 0;
+   padding: 0;
+}
 .div_deli {
 	width:50%;
 	margin-top:50px;
@@ -180,13 +186,13 @@ $(document).ready(function(){
 
 </script>
 <body>
-<div class="div_deli">
+<img src="<%=request.getContextPath()%>/images/delivery-truck1.png" style="float:left;">
+<div class="div_d"style="width:100%; margin:0 auto;"><br><br>
 <span id="tekbeCompnayName" size=20>택배회사명: </span>
 <select id="tekbeCompnayList" name="tekbeCompnayList"></select><br/><br/>
 <span id="invoiceNumber">운송장번호: </span>
 <input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
-<button id="myButton1">택배 조회하기 </button>
-</div>
+<button id="myButton1">택배 조회하기 </button></div>
 <br/>
 <br/>
 <div>

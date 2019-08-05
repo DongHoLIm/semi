@@ -28,6 +28,7 @@
 .pagingArea > button {
 	background:#FFF;
 	border: 1px solid black;
+	width:20px;
 
 }
 #sec1 {
