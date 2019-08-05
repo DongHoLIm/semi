@@ -75,10 +75,7 @@ public class StatisticDao {
 		String query = prop.getProperty("memberStatistic");
 		try {
 			list = new ArrayList<HashMap<String, Object>>();
-			int dateLength = dateList.size();
-			if(dateLength > 6) {
-				dateLength = 6;
-			}
+			int dateLength = 7;
 			
 			for(int i = 0; i < dateLength; i++) {
 				Date date = calender.getTime();
@@ -101,47 +98,14 @@ public class StatisticDao {
 					int dpay = 0;
 					if(rset.getString("SUM(PAY_MONEY)") != null) {
 						dpay = Integer.parseInt(rset.getString("SUM(PAY_MONEY)"))/10000;
-					}else {
-						count++;
 					}
-					
 					hmap.put("allPay", dpay+"");
 					list.add(hmap);
+					
 				}
 				calender.add(Calendar.DATE, -1);
 			}
 			
-			if(count > 0) {
-				
-				for(int i = 0; i < count; i++) {
-					Date date = calender.getTime();
-					String time = format.format(date);
-					
-					pstmt = con.prepareStatement(query);
-					pstmt.setString(1, time);
-					rset = pstmt.executeQuery();
-					
-					while(rset.next()) {
-						hmap = new HashMap<String, Object>();
-						
-						String yy = time.substring(0,2);
-						String MM = time.substring(2,4);
-						String dd = time.substring(4);
-						hmap.put("payDate", MM+"월"+dd+"일");
-						hmap.put("row", rset.getString("COUNT(*)"));
-						
-						int dpay = 0;
-						if(rset.getString("SUM(PAY_MONEY)") != null) {
-							dpay = Integer.parseInt(rset.getString("SUM(PAY_MONEY)"))/10000;
-						}
-						
-						hmap.put("allPay", dpay+"");
-						list.add(hmap);
-					}
-					calender.add(Calendar.DATE, -1);
-				}
-				
-			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -198,10 +162,7 @@ public class StatisticDao {
 		try {
 			
 			list = new ArrayList<HashMap<String, Object>>();
-			int dateLength = dateList.size();
-			if(dateLength > 6) {
-				dateLength = 6;
-			}
+			int dateLength = 7;
 			
 			
 			for(int i = 0; i < dateLength; i++) {
@@ -226,8 +187,6 @@ public class StatisticDao {
 					int allPrice = 0;
 					if(rset.getString("SUM(PRICE)") != null) {
 						allPrice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
-					}else {
-						count++;
 					}
 					
 					hmap.put("allPrice", allPrice+"");
@@ -236,37 +195,6 @@ public class StatisticDao {
 				calender.add(Calendar.DATE, -1);
 			}
 			
-			if(count > 0) {
-				
-				for(int i = 0; i < count; i++) {
-					Date date = calender.getTime();
-					String time = format.format(date);
-					
-					pstmt = con.prepareStatement(query);
-					pstmt.setString(1, time);
-
-					rset = pstmt.executeQuery();
-					
-					while(rset.next()) {
-						hmap = new HashMap<String, Object>();
-						
-						String yy = time.substring(0,2);
-						String MM = time.substring(2,4);
-						String dd = time.substring(4);
-						hmap.put("payDate", MM+"월"+dd+"일");
-						
-						int allPrice = 0;
-						if(rset.getString("SUM(PRICE)") != null) {
-							allPrice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
-						}
-						
-						hmap.put("allPrice", allPrice+"");
-						list.add(hmap);
-					}
-					calender.add(Calendar.DATE, -1);
-				}
-				
-			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -294,10 +222,7 @@ public class StatisticDao {
 		String query = prop.getProperty("salesStatistics");
 		try {
 			list = new ArrayList<HashMap<String, Object>>();
-			int dateLength = dateList.size();
-			if(dateLength > 6) {
-				dateLength = 6;
-			}
+			int dateLength = 7;
 			
 			for(int i = 0; i < dateLength; i++) {
 				Date date = calender.getTime();
@@ -319,8 +244,6 @@ public class StatisticDao {
 					int calParice = 0;
 					if(rset.getString("SUM(PRICE)") != null) {
 						calParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
-					}else {
-						count++;
 					}
 					
 					hmap.put("calParice", calParice+"");
@@ -329,38 +252,6 @@ public class StatisticDao {
 				calender.add(Calendar.DATE, -1);
 			}
 			
-			if(count > 0) {
-				
-				for(int i = 0; i < count; i++) {
-					Date date = calender.getTime();
-					String time = format.format(date);
-					
-					pstmt = con.prepareStatement(query);
-					pstmt.setString(1, time);
-					pstmt.setString(2, "2");
-					
-					rset = pstmt.executeQuery();
-					
-					while(rset.next()) {
-						hmap = new HashMap<String, Object>();
-						
-						String yy = time.substring(0,2);
-						String MM = time.substring(2,4);
-						String dd = time.substring(4);
-						hmap.put("payDate", MM+"월"+dd+"일");
-						
-						int calParice = 0;
-						if(rset.getString("SUM(PRICE)") != null) {
-							calParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
-							hmap.put("calParice", calParice+"");
-							list.add(hmap);
-						}
-						
-					}
-					calender.add(Calendar.DATE, -1);
-				}
-				
-			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -388,10 +279,7 @@ public class StatisticDao {
 		String query = prop.getProperty("salesStatistics");
 		try {
 			list = new ArrayList<HashMap<String, Object>>();
-			int dateLength = dateList.size();
-			if(dateLength > 6) {
-				dateLength = 6;
-			}
+			int dateLength = 7;
 			
 			for(int i = 0; i < dateLength; i++) {
 				Date date = calender.getTime();
@@ -413,8 +301,6 @@ public class StatisticDao {
 					int refundParice = 0;
 					if(rset.getString("SUM(PRICE)") != null) {
 						refundParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
-					}else {
-						count++;
 					}
 					
 					hmap.put("refundParice", refundParice+"");
@@ -423,38 +309,6 @@ public class StatisticDao {
 				calender.add(Calendar.DATE, -1);
 			}
 			
-			if(count > 0) {
-				
-				for(int i = 0; i < count; i++) {
-					Date date = calender.getTime();
-					String time = format.format(date);
-					
-					pstmt = con.prepareStatement(query);
-					pstmt.setString(1, time);
-					pstmt.setString(2, "3");
-					
-					rset = pstmt.executeQuery();
-					
-					while(rset.next()) {
-						hmap = new HashMap<String, Object>();
-						
-						String yy = time.substring(0,2);
-						String MM = time.substring(2,4);
-						String dd = time.substring(4);
-						hmap.put("payDate", MM+"월"+dd+"일");
-						
-						int refundParice = 0;
-						if(rset.getString("SUM(PRICE)") != null) {
-							refundParice = Integer.parseInt(rset.getString("SUM(PRICE)"))/10000;
-							hmap.put("refundParice", refundParice+"");
-							list.add(hmap);
-						}
-						
-					}
-					calender.add(Calendar.DATE, -1);
-				}
-				
-			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

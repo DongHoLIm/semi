@@ -88,8 +88,8 @@ tr {
 		<br>
 		<br>
 		<div id="table Area">
-			<button onclick="disposeSuccess();">정산처리</button>
-			<button onclick="disposeFail();">환불처리</button>
+			<button onclick="disposeFail();" style="float: right; margin-right: 2.5%">환불처리</button>
+			<button onclick="disposeSuccess();" style="float: right; margin-right: 5px;">정산처리</button>
 			
 			<table id="depotMain" align="center">
 				<thead>

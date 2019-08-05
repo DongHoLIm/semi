@@ -226,6 +226,8 @@ public class ProductDao {
 				hmap.put("categoryCode", rset.getString("CATEGORY_CODE"));
 				hmap.put("categoryDiv", rset.getString("SUBCATE"));
 				hmap.put("mainCateDiv", rset.getString("MAINCATE"));
+				hmap.put("deliPay",  rset.getString("DELIVERY_PAY"));
+				
 				
 				productPay.add(hmap);
 			}
@@ -943,7 +945,6 @@ public class ProductDao {
 		ArrayList<HashMap<String, Object>> productPay = null;
 		HashMap<String, Object> hmap = null;
 		
-		//쿼리문 다시 짤 것!
 		String query = prop.getProperty("basketPay");
 		
 		try {
@@ -966,6 +967,7 @@ public class ProductDao {
 					hmap.put("categoryCode", rset.getString("CATEGORY_CODE"));
 					hmap.put("categoryDiv", rset.getString("SUBCATE"));
 					hmap.put("mainCateDiv", rset.getString("MAINCATE"));
+					hmap.put("deliPay",  rset.getString("DELIVERY_PAY"));
 					
 					productPay.add(hmap);
 				}
@@ -1035,6 +1037,53 @@ public class ProductDao {
 		
 		return searchMyAdd;
 	}
+
+	public String searchSeller(Connection con, String code) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String seller = null;
+		
+		String query = prop.getProperty("searchSeller");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, code);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				seller = rset.getString("MEMBER_NO");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return seller;
+	}
+
+	public int updateSellerInfo(Connection con, String seller) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateSellerInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, seller);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 
 	
 }
