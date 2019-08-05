@@ -9,7 +9,6 @@ String sessionId = (String) request.getSession().getAttribute("sessionId");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
@@ -22,6 +21,9 @@ a {
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
+}
+#loginBtn {
+
 }
 </style>
 </head>
