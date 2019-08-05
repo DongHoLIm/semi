@@ -17,7 +17,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
@@ -174,6 +173,41 @@ $(document).ready(function() {
 
 </script>
 <style>
+
+
+.dateBoard {
+	width: 80%;
+	margin: auto;
+	align: center;
+	
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
+}
+ .dateBoard th {
+
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #FFF;
+}
+
+.dateBoard td {
+
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+.dateBoard thead th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 2px solid #ccc;
+}
+
 .td_select {
 	width:87%;
 }
@@ -186,12 +220,11 @@ $(document).ready(function() {
 }
 
 .searchdiv {
-   width: 90%;
+   width: 100%;
    height:70%;
    padding: 2%;
    margin: 0 auto;
    text-align: center;
-   border:1px solid black;
 }
 
 .th_select {
@@ -202,7 +235,6 @@ $(document).ready(function() {
 }
 
 #selectDate {
-	border:1px solid black;
    background:#FFF;
 }
 
@@ -258,7 +290,7 @@ input[type=button] {
 }
 
 
-tr > th, tr>td{
+tr > th, tr> td{
 	width: 25%;
 	margin: auto;
 	text-align:center;
@@ -318,7 +350,7 @@ tr > th, tr>td{
 
 		<div class="t_div">
 			<br />
-			<table border="1" align = "center" class = "dateBoard">
+			<table align = "center" class = "dateBoard">
 				<thead>
 				<tr>
 					<th class="th_orderLook">주문번호</th>

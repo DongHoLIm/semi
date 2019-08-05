@@ -38,7 +38,6 @@ input {
 	width:25%;
 	border: 1px solid black;
 	font-size: 15px;
-	font-family:'Nanum Gothic', sans-serif;
 	font-weight:550;
 	border-radius: 5px;
 	background-color: #FFF;
@@ -49,7 +48,6 @@ input {
 	border: 1px solid black;
 	border-radius: 5px;
 	background-color: #FFF;
-	font-family:'Nanum Gothic', sans-serif;
 }
 </style>
 </head>
@@ -89,8 +87,7 @@ input {
 			<tr>
 				<td><label>우편번호</label></td>
 				<td><input type="text" id="sample6_postcode" size=21% name="address1" value="<%=add[0]%>">
-				<input type="button" name="zipCode"class="btn_overlap" size=10% onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
-
+				<input type="button" name="zipCode"class="btn_overlap" size=9% onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
 			</tr>
 			<tr>
 				<td><label>주소</label></td>

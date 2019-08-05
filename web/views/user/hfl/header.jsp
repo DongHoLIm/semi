@@ -99,7 +99,6 @@ html, css {
 .myPageBtn:hover {
 	cursor: pointer;
 }
-
 #logoDiv {
 	margin-bottom: 10px;
 }
@@ -117,6 +116,7 @@ html, css {
 
 #logoImg {
 	width: 25%;
+
 }
 #logoImg:hover, input[type=button]:hover {
 	-webkit-transform: scale(1.1); /*  크롬 */
