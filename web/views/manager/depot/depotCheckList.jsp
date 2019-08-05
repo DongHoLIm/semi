@@ -24,9 +24,11 @@
 		width:80%;
 		height: 80%;
 		border:2px solid black;
+		margin: 0px auto;
 	}
 	tr{
 		border:1px solid black;
+		text-align: center;
 	}
 	#th3{
 		border:1px solid white;
@@ -55,7 +57,7 @@
 <body>
 <%@ include file = "../hfl/managerHeader.jsp" %>
 	<br />
-	<h3 align="center">검수요청 관리</h3>
+	<h3 align="center"><label for="">검수요청 관리</label></h3>
 		<br />
 	<div id="checkMain">
 		<div id="table Area">

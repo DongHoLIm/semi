@@ -146,13 +146,23 @@ li:hover, button:hover {
    .navbar-inverse .navbar-nav>.open>a:focus {
    background: white;
 }
+.pagingArea button{
+		width:2%;
+		color: black;
+		background: white;
+		border-radius: 50px;
+	}
+	.pagingArea button:hover{
+		color: white;
+		background: black;
+		border-radius: 10px;
+	}
 </style>
 </head>
 <body>
 <div align="center" id="logoDiv">
 	<a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
-<nav class="navbar" style="background:white  ">
 <nav class="navbar navbar-inverse" style="background:#E8F5FF  ">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -173,8 +183,7 @@ li:hover, button:hover {
            <% if(loginUser != null) {%>
            <li><a style="color:black" href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
            <%} else {%>
-           <li class="byPageBtn"><a class="myPageBtn" style="color:black" onclick="myPage();" >마이페이지</a></li>
-          	<hr>	
+           <li class="byPageBtn"><a class="myPageBtn" style="color:black" onclick="myPage();" >마이페이지</a></li>	
            <script>
 				function myPage(){
 					if(confirm("로그인 후 이용해주시기 바랍니다.")){

@@ -189,6 +189,7 @@
     </div>
   </table>
    <div id = "pagingArea" align ="center" >
+   	<div>
       <button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage1=1'"><</button>
       <%if(currentPage1 <= 1) {%>
       <button disabled><</button>
@@ -212,7 +213,7 @@
          <button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=currentPage1 + 1%>'">></button>
          <%} %>
          <button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=maxPage1%>'">>></button>
-
+			</div>
       </div>
       	<br><br>
       <div align = "center">
