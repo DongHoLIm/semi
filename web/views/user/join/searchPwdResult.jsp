@@ -92,17 +92,9 @@ function okok(){
 		alert("비밀번호를 다시 설정하세요");
 		return false;
 	}
-
-
 	if(($("#password").val() == $("#password2").val())){
 		alert("비밀번호가 변경되었습니다!");
 		$("form").submit();
-		
-
-
-
-
-
 	}
 
 

@@ -46,8 +46,6 @@ public class SendMailServlet extends HttpServlet {
 		}
 		final String sender = "thddl7364@naver.com";//네이버아이디쓰삼(test@naver.com)
 		final String password = "song080808";//네이버비밀번호
-
-
 		//인증 번호 생성기
 		StringBuffer temp = new StringBuffer();
 		Random rnd = new Random();

@@ -10,7 +10,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .outer {
@@ -103,21 +102,22 @@
 }
 
 .searchArea button {
-   border: 1px solid white;
-   color: white;
-   background: black;
+   border: 1px solid black;
+   color: black;
+   background: white;
    float: right;
-   margin-right: 30px;
    width: 35%;
    height: 20px;
 }
 
 .searchArea {
    margin-left: auto;
-   margin-right: auto;
+   margin-right: 10px;
    width: 400px;
    position: absolute;
    right: 10px;
+   float: right;
+   text-align:right;
 }
 
 .searchArea>a {
@@ -132,11 +132,9 @@
 
 .searchArea>ul {
    position: absolute;
-   width: 50%;
-   background: #fff;
+   width: 40%;
    display: none;
-   background: black;
-   color: white;
+   color: black;
 }
 
 .searchArea>ul>li {
@@ -151,7 +149,8 @@
    content: '▲';
 }
 .searchEtc{
-   width: 245px;
+   width: 240px;
+   margin-bottom: 10px;
 }
 </style>
 </head>
@@ -161,7 +160,7 @@
    <div class="outer">
       <form action="<%=request.getContextPath()%>/search.pd" id="searchForm">
          <div class="searchArea">
-            <a href="#">검색 옵션 선택</a>
+            <a href="#" style="color:black">검색 옵션 선택</a>
             <ul>
                <li value="title">제목으로 검색</li>
                <li value="content">내용으로 검색</li>
@@ -172,15 +171,8 @@
             <button type="submit" onclick="searchData();">검색하기</button>
          </div>
 
-
-         <!-- <div class="searchArea">
-            <select name="search" id="search">
-               <option value="title">제목</option>
-               <option value="category">카테고리</option>
-               <option value="content">내용</option>
-            </select>
-         </div> -->
       </form>
+      <br />
       <br />
       <div class="thumbnailArea">
          <% for(int i = 0; i < list.size(); i++) {

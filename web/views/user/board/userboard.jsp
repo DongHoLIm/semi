@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
 .table {
 	width:60%;
@@ -33,7 +32,7 @@
   </select>
   <input type="text">
   <input type="submit" value="검색">
-  </form>             
+  </form>
   <table class="table">
       <thead>
       <tr>
@@ -103,7 +102,7 @@
         <td>title</td>
         <td>writer</td>
         <td>2019-07-06</td>
-      </tr>      
+      </tr>
     </tbody>
   </table>
 </div>
@@ -116,7 +115,7 @@
 	  <li class="page-item"><a class="page-link" href="#">다음</a></li>
 	  <li><input type="button" id="wirte" value="글작성" onclick="location.href='userBoardWriter.jsp'"></li>
 	</ul>
-	
+
 </center>
 </body>
 <footer><%@ include file="../hfl/footer.jsp" %></footer>

@@ -45,6 +45,41 @@
    	width: 80%;
    	
    }
+   .wrap {
+	    text-align: center;
+	}
+   #reles{
+	    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	    display: block;
+	    margin: 20px auto;
+	    text-decoration: none;
+	    border-radius: 4px;
+	    padding: 20px 30px;
+	}
+	
+	a.button {
+	    color: black;
+	    box-shadow: black 0 0px 0px 2px inset;
+	}
+	
+	a.button:hover {
+	    color: white;
+	    box-shadow: black 0 0px 0px 40px inset;
+	}
+	
+	a.button2 {
+	    color: black;
+	    box-shadow: black 0 0px 0px 2px inset;
+	}
+	
+	a.button2:hover {
+	    color: white;
+	    box-shadow: black 0 80px 0px 2px inset;
+	}
 </style>
 <body>
 <%@ include file = "../hfl/managerHeader.jsp" %>
@@ -52,9 +87,9 @@
    <h3 align="center">입고 관리</h3>
    <br />
    <div id="inOutMain">
-   		<div id="requestRelease">   			
-   			<input type="text" id="requestProduct"	value="" width="100%" onkeypress="if(event.keyCode==13){enterEvent();}" />   				
-   			<input type="button" onclick="relesDate();" value="출고요청"/>   			
+   		<div class="wrap">  			
+   			<input type="text" id="requestProduct"	value="" width="50%" onkeypress="if(event.keyCode==13){enterEvent();}" />   				
+   			 <a class="button" onclick="search();" >출고요청</a>		
    		</div>
       <div id="table Area">
          <table id="depotMain" align="center">
