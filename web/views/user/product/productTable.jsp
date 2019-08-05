@@ -4,45 +4,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
-	
+
 	#pt{
 		font-family: 'Nanum Gothic', sans-serif;
 		font-weight:bord;
-		
+
 	}
-	
+
 	#productImg{
 		border:2px solid black;
-		
+
 	}
-	
+
 	#title{
 		font-size:2vw;
 		padding:1%;
 	}
-	
+
 	#Detail{
 		font-size:1vw;
 		vertical-align: top;
 		padding:1%;
 	}
-	
+
 	#price{
 		font-size:2vw;
 	}
-	
+
 	#quantity{
 		font-size:2vw;
 	}
-	
+
 	#priceAll{
 		font-size:2vw;
 	}
-	
+
 </style>
 </head>
 
@@ -53,7 +51,7 @@
 			<!-- 장바구니에 등록한 상품 사진, 품명, 상세설명 -->
 			<td id="productImg" rowspan="2">
 				<img src="/sp/images/flower2.PNG" width=100% hright=100%>
-			
+
 			</td>
 			<!--  -->
 			<td id="title" colspan="2" width="70%" height="30%">

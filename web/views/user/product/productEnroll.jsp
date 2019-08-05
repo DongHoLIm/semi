@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>글 등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -13,25 +12,27 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 .title {
-	font-size:20px;
-	margin:0 auto;
+	font-size: 20px;
+	margin: 0 auto;
 }
+
 #btn_enroll {
 	border: 1px solid #ffd8d9;
 	font-size: 14px;
-	width:10%;
-	font-family:'Nanum Gothic', sans-serif;
-	font-weight:550;
+	width: 10%;
+	font-family: 'Nanum Gothic', sans-serif;
+	font-weight: 550;
 	border-radius: 5px;
 	background-color: #ffd8d9;
 	color: black;
 }
-.danger{
-	color:red;
-	font-size:5px;
+
+.danger {
+	color: red;
+	font-size: 5px;
 }
 
-#fileLabel{
+#fileLabel {
 	display: inline-block;
 	padding: .5em .75em;
 	color: #fff;
@@ -43,11 +44,10 @@
 	border: 1px solid #7090d0;
 	border-bottom-color: #e2e2e2;
 	border-radius: .25em;
-	width:25%;
-
+	width: 25%;
 }
 
-#searchLabel{
+#searchLabel {
 	display: inline-block;
 	padding: .5em .75em;
 	color: #fff;
@@ -61,19 +61,19 @@
 	border-radius: .25em;
 }
 
-.pullRight{
+.pullRight {
 	position: absolute;
 	width: 1px;
 	height: 1px;
 	padding: 0;
 	margin: -1px;
 	overflow: hidden;
-	clip:rect(0,0,0,0);
+	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
 
-.fileName{
-	width:70%;
+.fileName {
+	width: 70%;
 	display: inline-block;
 	padding: .5em .75em;
 	font-size: inherit;
@@ -87,18 +87,17 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-
 }
 
 #accountNo::-webkit-outer-spin-button, #accountNo::-webkit-inner-spin-button,
-#productMoney::-webkit-outer-spin-button, #productMoney::-webkit-inner-spin-button
-{
-    -webkit-appearance: none;
+	#productMoney::-webkit-outer-spin-button, #productMoney::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
 }
 
-.productContainer{
-	align:center;
-	margin:0 auto;
+.productContainer {
+	align: center;
+	margin: 0 auto;
 }
 </style>
 </head>
