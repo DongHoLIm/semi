@@ -87,7 +87,23 @@
   stroke: #06D6A0;
 }
 
+.pagingArea > button {
+   background:#FFF;
+   border:none;
+   color: #ff9999;
+   font-weight:bold;
+   width:20px;
+   
+}
 
+#pagingArea > button {
+   background:#FFF;
+   border:none;
+   color: #ff9999;
+   font-weight:bold;
+   width:20px;
+   
+}
 
 </style>
 </head>
@@ -122,7 +138,7 @@
     </tbody>
   </table>
      <div class = "pagingArea" align ="center" >
-      <button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><</button>
+      <button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage=1'"><<</button>
       <%if(currentPage <= 1) {%>
       <button disabled><</button>
       <%} else{%>
@@ -189,7 +205,7 @@
     </div>
   </table>
    <div id = "pagingArea" align ="center" >
-      <button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage1=1'"><</button>
+      <button onclick = "location.href = '<%=request.getContextPath()%>/selectNotice.no?currentPage1=1'"><<</button>
       <%if(currentPage1 <= 1) {%>
       <button disabled><</button>
       <%} else{%>
