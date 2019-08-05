@@ -45,6 +45,10 @@ a:visited {
 .panel-collapse {
 	margin: 3%;
 }
+
+.panel-group .panel {
+	width: 80%;
+}
 </style>
 </head>
 <body>
@@ -58,10 +62,12 @@ a:visited {
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="w3-dropdown-content w3-bar-block w3-border">
+        	<div class="panel-body">
         	<ul id="pc">
         		<li value="desktop"><a class="w3-button">본체</a></li>
         		<li value="pc_etc"><a>주변기기</a></li>
         	</ul>
+        	</div>
         </div>
       </div>
     </div>
