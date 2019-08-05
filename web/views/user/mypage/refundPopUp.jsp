@@ -10,17 +10,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 <style>
 .r1 {
 	width:100%;
 	height:100%;
 	margin-top:40px;
-	padding-left:5px;
 }
 .r2 {
-	margin-top:50px;
+	margin-top:80px;
 	margin-right:10%;
 }
 .btn_refund1 {
@@ -39,11 +37,16 @@
 	text-align:center;
 	margin-top:20px;
 }
+* {
+   font-family: 'Poor Story', cursive;
+   margin: 0;
+   padding: 0;
+}
 </style>
 </head>
 <body>
 		<div class="r1">
-			<h3>반품/환불 신청</h3>
+			<div><img src="<%=request.getContextPath()%>/images/refund.png" style="float:left; margin-right:20px; margin-left:30px;"><h3>반품/환불 신청</h3></div>
 			<br>
 			<p>
 				반품/환불 신청은 배송완료 후 7일 이내에만 가능합니다.<br> 단순변심 반품은 불가능하며 상품 파손의 경우에만

@@ -308,20 +308,26 @@ $(document).ready(function() {
 
 #pagingArea {
 	width:60%;
-	margin-top:50px;
+	margin-top:25px;
 	margin-left:auto;
 	margin-right:auto;
 }
 
 .pagingArea1 > button {
 	background:#FFF;
-	border: 1px solid black;
+	border:none;
+	color:#ffb3b3;
+	font-weight:bold;
+	width:20px;
 
 }
 
 .pagingArea2 > button {
 	background:#FFF;
-	border: 1px solid black;
+	border:none;
+	color:#ffb3b3;
+	font-weight:bold;
+	width:20px;
 
 }
 
@@ -356,8 +362,10 @@ $(document).ready(function() {
 }
 
 input[type=button] {
-   border:1px solid black;
+   border:1px solid #ccc;
    background:#FFF;
+   width:50px;
+   border-radius:5px;
 }
 
 .th_refund {
@@ -449,6 +457,9 @@ input[type=button] {
     border-bottom: 2px solid #ccc;
 }
 
+.rl {
+	text-align:center;
+}
 .rl2 {
 	text-align:center;
 }
@@ -491,10 +502,10 @@ input[type=button] {
                        <label for="dateType5"></label>
                    </span>
                <span class="dset">
-                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >               </span>
+                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.startdate }" >               </span>
                <span class="demi">~</span>
                <span class="dset">
-                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
+                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.enddate }" >
                </span>
                <span>
                    	<input type="button" name="selectDate" id="selectDate"  onclick="search1();" value="조회">
@@ -509,7 +520,7 @@ input[type=button] {
 		<div align=center>
 			<table class = "board1">
 				<thead>
-				<tr class="rl">
+				<tr >
 					<th class="th_refund">주문번호</th>
 					<th class="th_refund">환불신청일</th>
 					<th class="th_refund">상품명</th>
@@ -519,7 +530,7 @@ input[type=button] {
 				</thead>
 				<tbody>
 				<% for(myPage m : rList) {%>
-				<tr>
+				<tr class="rl">
 				<td><%=m.getOno() %></td>
 				<td><%=m.getrDate() %></td>
 				<td><%=m.getPname() %></td>
@@ -530,8 +541,7 @@ input[type=button] {
 			<% } %>
 			</tbody>
 			</table>
-			</div>
-		<br>
+			</div><br>
 		<div id="pagingArea1">
 		<div class="pagingArea1" align="center">
 			<button
@@ -580,9 +590,6 @@ input[type=button] {
 				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
 			</div>
 	</div></div>
-		<br><br><br><br>
-
-
 	<div class="tt_div">
 		<div class="searchdiv">
 			<table class="searchBox">
@@ -607,10 +614,10 @@ input[type=button] {
 						</span> <!-- <div class="clearfix">
                시작일 --> <span class="dset"> <input type="text"
 								class="datepicker inpType" name="startdate1"
-								id="searchStartDate1" value="${adminBuildEnergyVo.startdate1 }">
+								id="searchStartDate1" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.startdate1 }">
 						</span> <span class="demi">~</span> <!-- 종료일 --> <span class="dset">
 								<input type="text" class="datepicker inpType" name="enddate1"
-								id="searchEndDate1" value="${adminBuildEnergyVo.enddate1 }">
+								id="searchEndDate1" style="border:1px solid #ccc;" value="${adminBuildEnergyVo.enddate1 }">
 						</span> <span> <input type="button" name="selectDate1"
 								id="selectDate1" onclick="search2();" value="조회">
 						</span></td>
@@ -623,7 +630,7 @@ input[type=button] {
 		<div align=center>
 			<table class="board2">
 			<thead>
-				<tr class="rl2">
+				<tr>
 					<th class="th_refund">정산번호</th>
 					<th class="th_refund">정산날짜</th>
 					<th class="th_refund">정산상태</th>
@@ -633,7 +640,7 @@ input[type=button] {
 				</thead>
 				<tbody>
 				<% for(myPage m : cList) { %>
-				<tr>
+				<tr class="rl2">
 					<td><%=m.getAno() %></td>
 					<td><%=m.getaDate() %></td>
 					<td><%=m.getaStatus() %></td>
@@ -647,7 +654,6 @@ input[type=button] {
 			</table>
 		</div>
 	</div>
-	<br>
 <div id="pagingArea">
 	<div class = "pagingArea2" align ="center" >
       <button onclick = "location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage1=1'"><<</button>
@@ -676,7 +682,6 @@ input[type=button] {
 
       </div></div>
 
-	<br>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
 
 	<script>
@@ -690,7 +695,7 @@ input[type=button] {
     			data:{"start":start,"end":end},
     			success:function(data){
     				var $boardTbody1 = $(".board1 tbody");
-    				var $pagingDiv1 =$(".pagingArea1");
+    				var $pagingDiv1 = $(".pagingArea1");
     				$boardTbody1.html("");
     				$pagingDiv1.html("");
     				for(var i = 0; i < data["rList"].length; i++){
@@ -765,7 +770,7 @@ input[type=button] {
 		$.ajax({
 			url:"refundDate.mp",
 			type:"post",
-			data:{"start":start,"end":end},
+			data:{"start":start,"end":end,"currentPage":page},
 			success:function(data){
 				var $boardTbody1 = $(".board1 tbody");
 				var $pagingDiv1 =$(".pagingArea1");
@@ -922,7 +927,7 @@ input[type=button] {
 		$.ajax({
 			url:"calculateDate.mp",
 			type:"post",
-			data:{"start":start,"end":end},
+			data:{"start":start,"end":end,"currentPage":page},
 			success:function(data){
 				var $boardTbody2 = $(".board2 tbody");
 				var $pagingDiv2 =$(".pagingArea2");

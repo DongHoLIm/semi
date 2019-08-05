@@ -27,29 +27,25 @@
 <link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 <style>
 
-input[type=button] {
-   border:1px solid #ccc;
-   background:#FFF;
-}
-
 .t_div {
-	width:60%;
+	width:70%;
 	height:100%;
 	margin-left:auto;
 	margin-right:auto;
 
 }
 #pagingArea {
-	width:60%;
-	margin-top:50px;
-	margin-left:auto;
-	margin-right:auto;
+	width:100%;
+	margin-top:25px;
+	margin-left:60px;
 }
 
 .pagingArea > button {
 	background:#FFF;
-	border: 1px solid black;
-
+	border:none;
+	color:#ffb3b3;
+	font-weight:bold;
+	width:20px;
 }
 
 
@@ -61,10 +57,8 @@ input[type=button] {
 	margin:0 auto;
 }
 
-
-
 .board {
-	width: 80%;
+	width: 90%;
 	margin: auto;
 	align: center;
 	
@@ -112,8 +106,8 @@ input[type=button] {
 	<header><%@ include file="../hfl/header.jsp" %></header>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
 	
-		<div class="t_div">
-			<h2 align="center">나의 판매현황</h2>
+		<div class="t_div" style="margin-right:10%;"><br>
+			<h3 align="center">나의 판매현황</h3>
 			<table class="board">
 				<thead>
 				<tr>

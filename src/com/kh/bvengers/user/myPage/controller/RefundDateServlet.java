@@ -75,6 +75,8 @@ public class RefundDateServlet extends HttpServlet {
 						m.setRefundStatus("환불 대기");
 					}else if(m.getRefundStatus().equals("2")) {
 						m.setRefundStatus("환불 완료");
+					}else if(m.getRefundStatus().equals("3")) {
+						m.setRefundStatus("환불 취소");
 					}
 				
 

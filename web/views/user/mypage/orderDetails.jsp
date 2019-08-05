@@ -16,19 +16,20 @@
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 <style>
 .d1 {
-	height:70%;
+	height:80%;
 }
 
 button{
-	border:1px solid black;
+	border:1px solid #bcbcbc;
 	background:#FFF;
+	width:70px;
 }
 
 .t1 {
 	margin-left:30%;
 	border: 1px solid #bcbcbc;
 	text-align:center;
-	width: 50%;
+	width:60%;
 }
 
 .t1 > td {
@@ -108,7 +109,7 @@ button{
 				<td class="th3"><button class="btn_cancel"style="display:none;">주문취소</button><br>
 				<button class="returnPopUp" style="display:none;">환불신청</button></td>
 				<% } %>
-				<input type="hidden" value="<%=m.getrDate() %>">
+				<input type="hidden" value="<%=m.getrDate() %>" style="display:none;">
 			</tr>
 		</tbody>
 	</table>
@@ -136,7 +137,7 @@ button{
 		
 	$(".returnPopUp").click(function(){ 
     	var ono = $(this).parent().siblings().eq(0).text();
-    	window.open('<%=request.getContextPath()%>/views/user/mypage/refundPopUp.jsp?ono='+ono,'window_name','width=600,height=400,location=yes,status=no,scrollbars=yes')
+    	window.open('<%=request.getContextPath()%>/views/user/mypage/refundPopUp.jsp?ono='+ono,'window_name','width=700,height=400,location=yes,status=no,scrollbars=no')
      });
 	});
 	

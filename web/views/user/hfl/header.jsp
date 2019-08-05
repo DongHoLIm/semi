@@ -64,7 +64,6 @@ html, css {
    margin-left: 5px;
    margin-right: 5px
 }
-
 #shape {
    stroke-width: 3px;
    fill: transparent;
@@ -131,6 +130,7 @@ html, css {
 #logoDiv {
   animation-duration: 1s;
   animation-name: slidein;
+
 }
 li:hover, button:hover {
    -webkit-transform: scale(1.2); /*  크롬 */
@@ -187,7 +187,6 @@ li:hover{
 		background: black;
 		border-radius: 10px;
 	}
-
 </style>
 </head>
 <body>
