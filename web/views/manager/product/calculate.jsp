@@ -18,6 +18,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js" type="application/javascript"></script>
 <style>
 #depotMain {
 	width: 95%;
@@ -110,7 +111,7 @@ tr {
 				%>
 					<tr>
 						<input type="hidden" value="<%=rowCount%>" name="rowCount" id="rowCount" />
-						<td><%= c.getAdjustNo() %></td>
+						<td class="adjCode"><%= c.getAdjustNo() %></td>
 						<td><%= c.getPayDtno() %></td>
 						<td><%= c.getPrice() %></td>
 						<td><%= c.getMemberNo() %></td>
@@ -123,14 +124,12 @@ tr {
 						<%} %>
 						
 						<td><%= c.getAdjustDate() %></td>
-						<td>
 						<%if(c.getAdjustDiv().equals("1")){ %>
-							<td><button onclick="disposeSuccess();" style="float: right; margin-right: 5px;">정산처리</button></td>
-							<td><button onclick="disposeFail();" style="float: right; margin-right: 2.5%">환불처리</button></td>
+							<td><button class="success" value="<%= c.getAdjustNo() %>" style="float: center; margin-right: 5px;">정산처리</button></td>
+							<td><button class="fail" value="<%= c.getReceipt() %>" style="float: center; margin-right: 2.5%">환불처리</button></td>
 						<%}else{ %>
 							<td colspan="2">처리완료</td>
 						<%} %>
-						</td>
 						
 					</tr>
 				<% 	rowCount++;
@@ -173,14 +172,10 @@ tr {
 		</div>
 	</div>
 	<script>
-		function disposeSuccess(){
-			$(function(){
-				var code = "";
+		$(".success").click(function(){
+				var code = $(this).attr('value');
 				var limit = <%=limit%>;
 				var currentPage = $("#nowPage").val();
-				$("#check:checked").each(function(index){
-					code+=$(this).val()+","
-				});
 				
 				$.ajax({
 					url:"disposeSuccess.cal",
@@ -190,53 +185,63 @@ tr {
 							window.location.reload();	
 					}
 				});
-			});
-		};
+		});
+			
 		
-		function disposeFail(){
-			$(function(){
-				var code = "";
-				var limit = <%=limit%>;
-				var currentPage = $("#nowPage").val();
-				$("#check:checked").each(function(index){
-					code+=$(this).val()+","
-				});
-				var application_id = "5d2fec7c396fa61e224d5733";
-				var private_key = "ejl6AnJUiKPi72RjxiJd578NY7KzMSiq4p5FxWXmC6U=";
-				$.ajax({
-					url:"https://api.bootpay.co.kr/request/token",
-			        type:"post",
-			        dataType:'json',
-			        data:{application_id:application_id, private_key:private_key},
-			        success:function(data){
-			        	console.log(data["data"]["token"]);
-			        	var token = data["data"]["token"];
-			        	$.ajax({
-			        		url:"https://api.bootpay.co.kr/cancel.json",
-			        		type:"post",
-			        		dataType:'json',
-			        		data:{"receipt_id": ""},
-			        		beforeSend:function(xhr){
-			        			xhr.setRequestHeader("Content-Type","application/json");
-	                            xhr.setRequestHeader("Authorization", token);
-                            },
-			        		success:function(data){
-			        			console.log(data);
-			        		}
-			        	});
-			        	
-			        	/* $.ajax({
-							url:"disposeFail.cal",
-							type:"post",
-							data:{"code":code, "currentPage":currentPage, "limit":limit},
-							success:function(data){
-									window.location.reload();	
-							}
-						}); */
-			        }
-				});
+		$(".fail").click(function(){
+			var codeTd = $(this).parents().parents().children().eq(1)[0].innerHTML;
+			
+			var code = codeTd;
+			var limit = <%=limit%>;
+			console.log(code);
+			var currentPage = $("#nowPage").val();
+			
+			var receipt_id = $(this).attr('value');
+			console.log("나와라"+receipt_id);
+			var application_id = "5d2fec7c396fa61e224d5733";
+			var private_key = "ejl6AnJUiKPi72RjxiJd578NY7KzMSiq4p5FxWXmC6U=";
+			$.ajax({
+				url:"https://api.bootpay.co.kr/request/token",
+		        type:"post",
+		        dataType:'json',
+		        data:{application_id:application_id, private_key:private_key},
+		        success:function(data){
+		        	console.log(data["data"]["token"]);
+		        	var token = data["data"]["token"];
+		        	$.ajax({
+		        		url:"https://api.bootpay.co.kr/cancel",
+		        		type:"post",
+		        		beforeSend:function(xhr){
+                            xhr.setRequestHeader("Authorization", token);
+                        },
+		        		success:function(data){
+		        			$.ajax({
+				        		url:"https://api.bootpay.co.kr/cancel.json",
+				        		type:"post",
+				        		dataType:'json',
+				        		data:{"receipt_id":receipt_id},
+				        		beforeSend:function(xhr){
+				        			xhr.setRequestHeader("Content-Type","application/json");
+		                            xhr.setRequestHeader("Authorization", token);
+		                        },
+				        		success:function(data){
+				        			console.log(data);
+				        		}
+				        	});
+		        		}
+		        	});
+		        	
+		        	/* $.ajax({
+						url:"disposeFail.cal",
+						type:"post",
+						data:{"code":code, "currentPage":currentPage, "limit":limit},
+						success:function(data){
+								window.location.reload();	
+						}
+					}); */
+		        }
 			});
-		};
+		});
 	</script>
 
 </body>
