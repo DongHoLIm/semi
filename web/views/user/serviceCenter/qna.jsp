@@ -103,152 +103,175 @@
 
     }
 
-	dd {
-		background:	 -webkit-linear-gradient(#fff, #eee);
-		background:	 -moz-linear-gradient(#fff, #eee);
-		background:	 -o-linear-gradient(#fff, #eee);
-		background:	 -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
-		background:	 linear-gradient(#fff, #eee);
+   dd {
+      background:    -webkit-linear-gradient(#fff, #eee);
+      background:    -moz-linear-gradient(#fff, #eee);
+      background:    -o-linear-gradient(#fff, #eee);
+      background:    -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
+      background:    linear-gradient(#fff, #eee);
 
-		margin-bottom: 5px;
-		display: none;
-		-webkit-border-radius: 10px;
-		-moz-border-radius: 10px;
-		border-radius: 10px;
-	 }
-	 #accordionArea{
-	 	padding-right:2%;
-	 	padding-left:2%;
-	 	width:80%;
-	 	margin:0 auto;
-	 	border:1px solid #ddd;
+      margin-bottom: 5px;
+      display: none;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+    #accordionArea{
+       padding-right:2%;
+       padding-left:2%;
+       width:80%;
+       margin:0 auto;
+       border:1px solid #ddd;
 
-	 }
-	 #map {
-	 	margin: 0 auto;
-	 }
-	 #mapOuter{
-	 	text-align: center;
-	 }
-	 #mapOuter label{
-	 	font-size: 1.5em;
-		margin-bottom: 50px;
-	 	margin-top: 50px;
-	 	font-weight: bold;
-	 }
-	 #findRoad{
-	 margin-top: 10px;
-	 	background: black;
-	 	color: white;
-	 	width: 100px;
-	 	height: 50px;
-	 }
-	 dt:hover {
-	 	background: #eee6ff;
-	 }
+    }
+    #map {
+       margin: 0 auto;
+    }
+    #mapOuter{
+       text-align: center;
+    }
+    #mapOuter label{
+       font-size: 1.5em;
+      margin-bottom: 50px;
+       margin-top: 50px;
+       font-weight: bold;
+    }
+    #findRoad{
+    margin-top: 10px;
+       color: white;
+       width: 100px;
+       height: 50px;
+    }
+    dt:hover {
+       background: #eee6ff;
+    }
+    .btn-success{
+    	color:black;
+    }
+    
+    .pagingArea > button {
+   background:#FFF;
+   border:none;
+   color:#aaa;
+   font-weight:bold;
+   width:20px;
+   
+}
+
+.question{
+	width:100%;
+}
 </style>
 </head>
 <body>
-	<!-- header 영역 -->
-	<header><%@ include file="../hfl/header.jsp" %></header>
+   <!-- header 영역 -->
+   <header><%@ include file="../hfl/header.jsp" %></header>
 
-	<section id="sec1">
-	<div id="accordionArea" style = " border: 5px solid red; border-color: white ;">
-	<h2 align="left" > 자주 찾는 질문</h2>
-	<%for (Board b : list) {%>
-	<dl >
-		<dt style = " border: 2px solid; border-color:	 #ccccff;" ><span></span><%=b.getPostsTitle()%></dt>
-		<dt style = " border: 2px solid; border-color:	 #ccccff;"><span></span><%=b.getContents() %></dt>
-	</dl>
-	<% }%>
-	</div>
-	<script>
-	$(document).ready(function(){
-		$('dt').removeClass('on').next().slideUp();
-	})
-	$('dt').on('click', function () {
+   <section id="sec1">
+   <div id="accordionArea" style = " border: 5px solid red; border-color: white ;">
+   <h2 align="left" > 자주 찾는 질문</h2>
+   <%for (Board b : list) {%>
+   <dl >
+      <dt style = " border: 2px solid; border-color:    #ccccff;" ><span></span><%=b.getPostsTitle()%></dt>
+      <dt style = " border: 2px solid; border-color:    #ccccff;"><span></span><%=b.getContents() %></dt>
+   </dl>
+   <% }%>
+   </div>
+   <script>
+   $(document).ready(function(){
+      $('dt').removeClass('on').next().slideUp();
+   })
+   $('dt').on('click', function () {
 
-	    if ($(this).hasClass('on')) {
-	        slideUp();
-	    } else {
-	        slideUp();
-	        $(this).addClass('on').next().slideDown();
-	    }
-	    function slideUp() {
-	        $('dt').removeClass('on').next().slideUp();
-	    };
+       if ($(this).hasClass('on')) {
+           slideUp();
+       } else {
+           slideUp();
+           $(this).addClass('on').next().slideDown();
+       }
+       function slideUp() {
+           $('dt').removeClass('on').next().slideUp();
+       };
 
-	})
-	</script>
+   })
+   </script>
 
-	<br><br><br><br>
-	<div style = "height:150px">
-	<h3><p align="center" style = "border: 4px dotted #d9b3ff; width:150px">내가 쓴 질문</p></h3>
-		<table class="board" id = "messageArea">
-			<thead>
-			<tr class="row0" style = "background:#f2e6ff"> 
-				<th>글 번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일자</th>
-				<th>답변여부</th>
-			</tr>
-			</thead>
-			<%for(Board b :List){ %>
-			<tr class="row1">
-			<input type = "hidden" id="postId" value = "<%=b.getPostsId() %>">
-					<td><%= b.getPostsId() %></td>
-					<td><%= b.getPostsTitle() %></td>
-					<td><%= b.getMemberName()%></td>
-					<td><%= b.getCreateDate()%></td>
-			<% int count = Integer.parseInt(b.getCount());
-			if( count % 2 == 0){ %>
-				<td>N</td>
-			<%}else{ %>
-				<td>Y</td>
-			<%} %>
-			</tr>
-		<% }%>
-			<tr>
-			</tr>
+   <br><br><br><br>
+   <div style = "height:150px">  
+ <button id="writer" class="btn btn-success" style = "margin-right:10%; margin-top:5%;margin-bottom:1%; color:black; border-color:#ccccff;" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>  
+  <div class = "question">
+  <h3><p align="center" style = "width:180px; margin-left:7%; margin-top:5%;">
+  	내가 쓴 질문
+  <img src="<%= request.getContextPath()%>/images/question.png" style="width:20%;"/>		
+  	</p>
+  	</h3>
+  	</div>
+      <table class="board" id = "messageArea">
+         <thead>
+         <tr class="row0" style = "background:#f2e6ff"> 
+            <th>글 번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일자</th>
+            <th>답변여부</th>
+         </tr>
+         </thead>
+         <%for(Board b :List){ %>
+         <tr class="row1">
+         <input type = "hidden" id="postId" value = "<%=b.getPostsId() %>">
+               <td><%= b.getPostsId() %></td>
+               <td><%= b.getPostsTitle() %></td>
+               <td><%= b.getMemberName()%></td>
+               <td><%= b.getCreateDate()%></td>
+         <% int count = Integer.parseInt(b.getCount());
+         if( count % 2 == 0){ %>
+            <td>N</td>
+         <%}else{ %>
+            <td>Y</td>
+         <%} %>
+         </tr>
+      <% }%>
+         <tr>
+         </tr>
 
-			<button id="writer" align="right" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>
-		</table>
-		</div>
-
-		<br><br>
-		 <div class = "pagingArea" align ="center" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/sfqs.qo?currentPage=1'"><</button>
-		<%if(currentPage1 <= 1) {%>
-		<button disabled><</button>
-		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=currentPage1-1%>'"><</button>
-		<%}
-		%>
-			<%for (int p = startPage1; p <= endPage1; p++) {
-				if(currentPage1 == p){
-			%>
-				<button disabled><%= p %></button>
-			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=p%>'"><%= p %></button>
-			<% }
-			}
-			%>
-
-
-			<%if(currentPage1 >= maxPage1){ %>
-			<button disabled>></button>
-			<%}else{ %>
-			<button onclick ="location.hreh='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=currentPage1 + 1%>'">></button>
-			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=maxPage1%>'">>></button>
+      </table>
       </div>
+
+    </div>
+      <br><br>
+       <div class = "pagingArea" align ="center" >
+      <button onclick = "location.href = '<%=request.getContextPath()%>/sfqs.qo?currentPage=1'"><</button>
+      <%if(currentPage1 <= 1) {%>
+      <button disabled><</button>
+      <%} else{%>
+   <button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=currentPage1-1%>'"><</button>
+      <%}
+      %>
+         <%for (int p = startPage1; p <= endPage1; p++) {
+            if(currentPage1 == p){
+         %>
+            <button disabled><%= p %></button>
+         <%} else{ %>
+               <button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=p%>'"><%= p %></button>
+         <% }
+         }
+         %>
+
+
+         <%if(currentPage1 >= maxPage1){ %>
+         <button disabled>></button>
+         <%}else{ %>
+         <button onclick ="location.hreh='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=currentPage1 + 1%>'">></button>
+         <%} %>
+         <button onclick = "location.href='<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=maxPage1%>'">>></button>
+      </div>
+      
    </section>
    <script>
 
    $(function(){
       $("#messageArea td").mouseenter(function(){
-         $(this).parent().css({"background-color":"#e6f7ff","cursor":"pointer"});
+         $(this).parent().css({"background-color":"#eee6ff","cursor":"pointer"});
       }).mouseout(function(){
             $(this).parent().css({"background":"white"});
       }).click(function(){
@@ -261,15 +284,25 @@
    <br />
    <div id="mapOuter">
    <label>찾아오시는 길</label>
-   <%@ include file="../serviceCenter/aboutCompany.jsp" %>
-   <button type="button" id="findRoad">길찾기</button>
-   </div>
+   <%@ include file="../serviceCenter/aboutCompany.jsp" %><br>
+  <!--  <button class="btn btn-success" type="button" id="findRoad">길찾기</button>  -->
+    <div class="svg-wrapper" align ="center">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" align = "center"/>
+        <div id="text" align ="center" >
+          <a style="color:black;align:center" id="findRoad">
+          <span class="spot" align ="center" ></span>길찾기</a>
+        </div>
+      </svg>
+    </div>
+     </div>
+
    <!-- footer 영역 -->
    <footer><%@ include file="../hfl/footer.jsp" %></footer>
    <script>
-   		$("#findRoad").click(function(){
-   	   		window.open("https://map.kakao.com/link/to/kh정보교육원,37.499117,127.032882");
-   	   	});
+         $("#findRoad").click(function(){
+               window.open("https://map.kakao.com/link/to/kh정보교육원,37.499117,127.032882");
+            });
    </script>
 </body>
 </html>

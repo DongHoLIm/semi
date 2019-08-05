@@ -10,7 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-
+.report{
+	width:150px;
+}
 
 .tableArea{
 		border:1px solid white;
@@ -24,6 +26,7 @@
 	}
 
 #buttonArea{
+	width:100%;
 	padding-left:70%;
 }
 
@@ -33,6 +36,43 @@
 .writer,.view,.date{
  	align:left;
  	} 
+button{
+  background:#f7e6ff;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color: #ffb3b3;
+}
+:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:  #ffb3b3;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+ 	
 </style>
 </head>
 <head><%@include file ="../hfl/header.jsp" %></head>
@@ -49,7 +89,7 @@
 		<td colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
 		</tr>
 	<tr>
-			<td class="right">작성자 : </td>
+			<td class="right">작성자zz : </td>
 			<td class="writer"><span><%= b.getMemberId() %></span></td>
 			<td class="right">조회수 : </td>
 			<td class="view"><span><%= b.getPostsViews() %></span></td>
@@ -87,7 +127,7 @@
 				<tr>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
 					<td>&nbsp;&nbsp;</td>
-					<td><button id = "addReply" style = "height:60px; maring-left:34%">댓글 등록</button></td>
+					<td><button class = "enroll" id = "addReply" style = "height:60px; maring-left:34%">댓글 등록</button>	</td>
 				</tr>
 			</table>
 				<div >
@@ -128,7 +168,10 @@
 		<%} %>
 
 	<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| !(loginUser.getMemberId().equals(b.getMemberId())))){ %>
-		<button id= "report" align = "left" onclick = "report();">신고하기</button>
+		<button id= "report" class="report" align = "left" onclick = "report();">
+		신고하기
+		<img src="<%= request.getContextPath()%>/images/alert.png" style="width:18px;"/>
+		</button>
 			<%} %> 
 		</div>
 	<br>

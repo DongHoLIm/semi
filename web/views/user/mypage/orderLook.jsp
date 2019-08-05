@@ -509,7 +509,7 @@ tr > th, tr> td{
 		var currentPage = page;
 		$.ajax({
 			url:"orderDate.mp",
-			data:{"start":start,"end":end,"currentPage":page},
+			data:{"start":start,"end":end,"currentPage":currentPage},
 			type:"post",
 			success:function(data){
 				var $dateTbody = $(".dateBoard tbody");

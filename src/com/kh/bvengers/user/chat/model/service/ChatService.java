@@ -67,4 +67,11 @@ public class ChatService {
 		close(con);
 	}
 
+	public ArrayList<Chat> chatCount() {
+		Connection con = getConnection();
+		ArrayList<Chat> list = new ChatDao().chatCount(con);
+
+		return list;
+	}
+
 }

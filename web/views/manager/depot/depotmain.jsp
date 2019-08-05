@@ -22,6 +22,7 @@
 		width:80%;
 		height: 80%;
 		border:2px solid black;
+		margin: 0px auto;
 	}
 	tr{
 		border:1px solid white;
@@ -105,16 +106,21 @@
 	  border: 1px solid #999;
 	  border-radius: 0px;
 	}
+	select option{
+		background: black;
+		color:white;
+		margin: 0 auto;
+	}
 	
 </style>
 <body>
 	<%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
 	<br>
-	<h2 align="center">창고현황</h2>
+	<h2 align="center"><label for="">창고현황</label></h2>
 	<br />
 
 	<div id="selectSearch" align="center">
-			<table id="depotSearch" >
+			<table id="depotSearch">
 				<tr>
 					<td rowspan="6" width="30%"><img src="<%=request.getContextPath() %>/images/searchProduct.PNG" id="searchImg"/></td>
 					<th id="th3">창고 위치</th>
@@ -166,8 +172,8 @@
 				<tr>
 					<td colspan="8">
 					<div class="wrap">
-				        <a class="button" id="search" >Search</a>
-				        <a class="button2" id="excelGo" >ExcelDown</a>
+				        <a class="button" id="search" ><label for="">Search</label></a>
+				        <a class="button2" id="excelGo" ><label for="">ExcelDown</label></a>
 				    </div>
 					</td>
 				</tr>
@@ -364,7 +370,7 @@
 	</script>
 	<br>
 	<br><br>
-		<table id="depotMain" align="center">
+		<table id="depotMain">
 			<thead>
 			<tr >
 				<th id="th3">번호</th>
