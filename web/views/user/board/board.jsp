@@ -20,13 +20,12 @@
 
 
 
-%>
+%>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.9.0/d3.min.js"></script>
-<title>Insert title here</title>
 <style>
 #board{
    text-align:center;
@@ -185,7 +184,8 @@
       <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
         <rect id="shape" height="40" width="150" align = "center"/>
         <div id="text" align ="center" >
-          <a onclick="location.href='<%=request.getContextPath()%>/views/user/board/messageBoard.jsp'" style="color:black;align:center"><span class="spot" align ="center" ></span>글작성</a>
+          <a onclick="location.href='<%=request.getContextPath()%>/views/user/board/messageBoard.jsp'" style="color:black;align:center">
+          <span class="spot" align ="center" ></span>글작성</a>
         </div>
       </svg>
     </div>

@@ -19,20 +19,92 @@
 <meta charset="UTF-8">
 <title>메인메뉴</title>
 <style>
+* {
+  font-family: 'Poor Story', cursive;
+  margin: 0;
+  padding: 0;
+}
+html, css {
+  width: 100%;
+  height: 100%;
+}
+.position {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 15%;
+}
+#workarea {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #1e1a3e;
+  font-family: Raleway;
+}
+#personal {
+  color:white;
+  text-decoration:none;
+  position:absolute;
+  bottom:15px;
+  right:2%;
+}
+.spot {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.svg-wrapper {
+  margin-top: 0;
+  position: relative;
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 3px;
+  margin-left: 5px;
+  margin-right: 5px
+}
+#shape {
+  stroke-width: 3px;
+  fill: transparent;
+  stroke: red;
+  stroke-dasharray: 85 400;
+  stroke-dashoffset: -220;
+  transition: 1s all ease;
+}
+#text {
+  margin-top: -35px;
+  text-align: center;
+}
+
+#text a {
+  color: white;
+  text-decoration: none;
+  font-weight: 100;
+  font-size: 1.1em;
+}
+.svg-wrapper:hover #shape {
+  stroke-dasharray: 50 0;
+  stroke-width: 3px;
+  stroke-dashoffset: 0;
+  stroke: red;
+}
 #chatLi:hover{
-	cursor: pointer;
+   cursor: pointer;
 }
 .myPageBtn:hover{
-	cursor: pointer;
+   cursor: pointer;
 }
-*{ 
-font-family: 'Poor Story', cursive; 
-
-
+#logoDiv {
+   margin-bottom: 10px;
 }
 </style>
 </head>
 <body>
+<div align="center" id="logoDiv">
+   <a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" style="width:25%;" /></a>
+</div>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -55,15 +127,15 @@ font-family: 'Poor Story', cursive;
            <%} else {%>
            <li class="byPageBtn"><a class="myPageBtn" style="color:white" onclick="myPage();" >마이페이지</a></li>
            <script>
-				function myPage(){
-					if(confirm("로그인 후 이용해주시기 바랍니다.")){
-						location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
-					}
-				}
+            function myPage(){
+               if(confirm("로그인 후 이용해주시기 바랍니다.")){
+                  location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
+               }
+            }
            </script>
            <%} %>
           <% if(loginUser != null) {%>
-       	   <li><a style="color:white" href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
+             <li><a style="color:white" href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>
            <%} else {%>
             <li><a style="color:white" href="<%=request.getContextPath()%>/noUserService.nu"> 고객센터</a></li>
            <%} %>
@@ -74,15 +146,16 @@ font-family: 'Poor Story', cursive;
       </ul>
       <%}else if(loginUser!=null && !loginUser.getMemberId().equals("admins")){ %>
        <ul class="nav navbar-nav navbar-right">
-        <li><a style="color:white" href="<%=request.getContextPath()%>/logout.me"><span class="glyphicon glyphicon-user" ></span> logOut</a></li>
-      	<li id="chatLi" onclick="submit();"> <a style="color:white">채팅 문의 </a></li>
+        <li><a style="color:white"><span class="glyphicon glyphicon-user" ></span> <%= loginUser.getMemberId() %> 님 환영합니다.</a> </li>
+        <li><a style="color:white" href="<%=request.getContextPath()%>/logout.me">logOut</a></li>
+         <li id="chatLi" onclick="submit();"> <a style="color:white">채팅 문의 </a></li>
       </ul>
-		<script>
-		function submit(){
-			var no = <%=loginUser.getMemberNo()%>;
-			location.href="<%=request.getContextPath()%>/chat.ch?no="+no;
-		}
-		</script>
+      <script>
+      function submit(){
+         var no = <%=loginUser.getMemberNo()%>;
+         location.href="<%=request.getContextPath()%>/chat.ch?no="+no;
+      }
+      </script>
       <%}%>
 
     </div>
