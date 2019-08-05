@@ -188,4 +188,28 @@ public class ChatDao {
 
 		return result;
 	}
+
+	public ArrayList<Chat> chatCount(Connection con) {
+		Statement stmt = null;
+		ArrayList<Chat> list = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("chatCount");
+		Chat ch = null;
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			list = new ArrayList<Chat>();
+			while(rset.next()) {
+				ch = new Chat();
+				ch.setMemberNo(rset.getString("MEMBER_NO"));
+				list.add(ch);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		return list;
+	}
 }

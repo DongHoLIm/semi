@@ -208,15 +208,15 @@ textarea {
    </div>
    <footer><%@ include file="../hfl/footer.jsp"%></footer>
    <script>
-
+	   $(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		});
       $(function(){
          var postsId = <%= b.getPostsId()%>;
-
          $("#orderBtn").click(function(){
 			$("#productDetail").submit();
          });
          $(document).ready(function(){
-        	$('[data-toggle="tooltip"]').tooltip();
             $.ajax({
                url:"selectComment.pd",
                data:{postsId:postsId},
