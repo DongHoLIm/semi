@@ -69,14 +69,16 @@ li:hover, button:hover {
 	-webkit-transition: transform .35s;
 }
 .pagingArea button{
+		width:5%;
 		color: black;
 		background: white;
 		border-radius: 50px;
+
 	}
 	.pagingArea button:hover{
 		color: white;
 		background: black;
-		border-radius: 50px;
+		border-radius: 10px;
 	}
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
 	.navbar-inverse .navbar-nav>.open>a:focus {
@@ -103,7 +105,7 @@ li:hover, button:hover {
       <ul class="nav navbar-nav">
              <li class="dropdown"><a style="color:black" class="dropdwn-toggle" data-toggle="dropdown"> 상품관리<span class="caret"></span> </a>
                <ul class="dropdown-menu">
-               <li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/수정/등록</a></li>
+               <li><a href="/sp/views/manager/product/productmanagement.jsp">상품조회/삭제</a></li>
                <li><a href="<%=request.getContextPath()%>/selectCalculate.cal">정산 내역 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/productManagement">구매 내역 관리</a></li>
                <li><a href="<%=request.getContextPath()%>/refundProduct.mp">환불 내역 관리</a></li>

@@ -120,7 +120,7 @@ html, css {
 #logoImg {
    width: 25%;
 }
-input[type=button]:hover, button:hover  {
+#logoImg:hover, input[type=button]:hover {
    -webkit-transform: scale(1.1); /*  크롬 */
    -moz-transform: scale(1.1); /* FireFox */
    -o-transform: scale(1.1); /* Opera */
@@ -134,6 +134,21 @@ input[type=button]:hover, button:hover  {
   animation-duration: 1s;
   animation-name: slidein;
 }
+li:hover, button:hover {
+   -webkit-transform: scale(1.2); /*  크롬 */
+   -moz-transform: scale(1.2); /* FireFox */
+   -o-transform: scale(1.2); /* Opera */
+   transform: scale(1.2);
+   transition: transform .35s;
+   -o-transition: transform .35s;
+   -moz-transition: transform .35s;
+   -webkit-transition: transform .35s;
+}
+.navbar{
+   border-right : 3px solid #ffe6e6;
+   border-bottom: 3px solid #ffe6e6;
+
+}
 
 @keyframes slidein {
   from {
@@ -143,7 +158,7 @@ input[type=button]:hover, button:hover  {
   to {
   	opacity: 100;
   }
-}
+  }
 li:hover{
    -webkit-transform: scale(1.2); /*  크롬 */
    -moz-transform: scale(1.2); /* FireFox */
@@ -158,6 +173,17 @@ li:hover{
    border-right : 3px solid #ffe6e6;
    border-bottom: 3px solid #ffe6e6;
 }
+.pagingArea button{
+		width:2%;
+		color: black;
+		background: white;
+		border-radius: 50px;
+	}
+	.pagingArea button:hover{
+		color: white;
+		background: black;
+		border-radius: 10px;
+	}
 
 </style>
 </head>
@@ -180,7 +206,6 @@ li:hover{
            <li><a style="color:black" href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
            <%} else {%>
            <li class="byPageBtn"><a class="myPageBtn" style="color:black" onclick="myPage();" >마이페이지</a></li>
-
            <%} %>
           <% if(loginUser != null) {%>
              <li><a style="color:black" href="<%=request.getContextPath()%>/sfqs.qo"> 고객센터</a></li>

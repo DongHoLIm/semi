@@ -18,6 +18,7 @@
       width:80%;
       height: 80%;
       border:2px solid black;
+      margin: 0px auto;
    }
    tr{
       border:1px solid black;
