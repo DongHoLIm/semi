@@ -67,17 +67,19 @@ li:hover, button:hover {
 	-o-transition: transform .35s;
 	-moz-transition: transform .35s;
 	-webkit-transition: transform .35s;
-	border: 1px solid black;
+	border:none;
 }
 .pagingArea button{
 		color: black;
 		background: white;
 		border-radius: 50px;
+
 	}
 	.pagingArea button:hover{
 		color: white;
 		background: black;
 		border-radius: 50px;
+		
 	}
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
 	.navbar-inverse .navbar-nav>.open>a:focus {
