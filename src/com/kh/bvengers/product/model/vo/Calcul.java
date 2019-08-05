@@ -7,11 +7,13 @@ public class Calcul implements java.io.Serializable{
 	private String adjustDiv;
 	private String price;
 	private String payDtno;
-	
+	private String receipt;
 	public Calcul() {}
 
-	public Calcul(String memberNo, String adjustNo, String adjustDate, String adjustDiv, String price,
-			String payDtno) {
+	
+
+	public Calcul(String memberNo, String adjustNo, String adjustDate, String adjustDiv, String price, String payDtno,
+			String receipt) {
 		super();
 		this.memberNo = memberNo;
 		this.adjustNo = adjustNo;
@@ -19,7 +21,10 @@ public class Calcul implements java.io.Serializable{
 		this.adjustDiv = adjustDiv;
 		this.price = price;
 		this.payDtno = payDtno;
+		this.receipt = receipt;
 	}
+
+
 
 	public String getMemberNo() {
 		return memberNo;
@@ -68,14 +73,28 @@ public class Calcul implements java.io.Serializable{
 	public void setPayDtno(String payDtno) {
 		this.payDtno = payDtno;
 	}
+	
+	
+	public String getReceipt() {
+		return receipt;
+	}
+
+
+
+	public void setReceipt(String receipt) {
+		this.receipt = receipt;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Calculate [memberNo=" + memberNo + ", adjustNo=" + adjustNo + ", adjustDate=" + adjustDate
-				+ ", adjustDiv=" + adjustDiv + ", price=" + price + ", payDtno=" + payDtno + "]";
+		return "Calcul [memberNo=" + memberNo + ", adjustNo=" + adjustNo + ", adjustDate=" + adjustDate + ", adjustDiv="
+				+ adjustDiv + ", price=" + price + ", payDtno=" + payDtno + ", receipt=" + receipt + "]";
 	}
-	
-	
+
+
+
 	
 	
 }
