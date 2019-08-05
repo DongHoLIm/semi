@@ -17,21 +17,23 @@ String sessionId = (String) request.getSession().getAttribute("sessionId");
 	height: 40px;
 	width: 380px;
 }
-
-a {
-	text-decoration: none;
-	color: black;
+input{
+border-radius:5px;
+}
+label {
+	color: red;
 	font-weight: bold;
 }
+
 </style>
 </head>
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
 	<div class="header" align="center">
+	<br>
 		<h1>
-			<a href="../index.jsp">중고 愛 민족</a>
+			<label>PRE-OWNED♥NATION LOGIN</label>
 		</h1>
-		<br>
 		<br>
 	</div>
 	<form action="<%=request.getContextPath()%>/login.me" method="post"
