@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <script>
-	$(function(){
+/* 	$(function(){
 
 		$("#deliReady").click(function(){ //이벤트 사용하고 싶을 시 .click 대신 on("click", '#td', function(){}
 			$.ajax({
@@ -51,7 +51,7 @@
 		});
 
 	});
-
+ */
 </script>
 <style>
 

@@ -93,9 +93,14 @@
 	border:1px solid #aabfde;
 }
 
-#price {
+#price{
 	font-size: 1.5vw;
 	text-align:right;
+	padding:1%;
+}
+
+#deliPay{
+	font-size: 1vw;
 	padding:1%;
 }
 
@@ -193,7 +198,6 @@
 		<div id="area">
 
 
-
 			<!-- 장바구니 목록(상품테이블) -->
 			<table class="pt">
 				<tr>
@@ -201,7 +205,7 @@
 					String productCode = "";
 					String priceSplit = "";
 					int count = productPay.size();
-					int totalPrice = 2500;
+					int totalPrice = 0;
 					for(int i = 0; i < productPay.size(); i++){ %>
 					<!-- 장바구니에 등록한 상품 사진, 제목, 카테고리, 품명, 가격,  -->
 					<td id="productImg" rowspan="3" width="20%">
@@ -216,10 +220,11 @@
 					<td id="Detail"><label>판매자 | <%= productPay.get(i).get("memberId") %></label></td>
 				</tr>
 				<tr>
-					<td colspan="3" id="price" ><label><%= productPay.get(i).get("productMoney") %>원</label></td>
+					<td id="deliPay" style="border:1px solid #aabfde;"><label>택배비 : <%= productPay.get(i).get("deliPay") %>원</label></td>
+					<td colspan="2" id="price" ><label><%= productPay.get(i).get("productMoney") %>원</label></td>
 										
 				</tr>
-					<input type="hidden" value="<%=totalPrice += Integer.parseInt(productPay.get(i).get("productMoney")+"") %>"/>
+					<input type="hidden" value="<%=totalPrice += Integer.parseInt(productPay.get(i).get("deliPay")+"") + Integer.parseInt(productPay.get(i).get("productMoney")+"") %>"/>
 					<input type="hidden" value="<% productCode += productPay.get(i).get("productCode") + ","; %>"/>
 					<input type="hidden" value="<% priceSplit += productPay.get(i).get("productMoney") + ","; %>"/>
 					
@@ -235,8 +240,8 @@
 						<th width="20%"><label>총 결제금액</label></th>
 						<td><input type="text" name="paymentPrice" id="paymentPrice"
 							value="<%= totalPrice %>원" readonly></td>
-					</tr>
 					<tr>
+					</tr>
 						<th><label>택배 수령자 </label></th>
 						<td><input type="text" placeholder="수령자 이름을 입력하세요"
 							name="userName" id="userName"></td>
@@ -436,7 +441,7 @@
 		
 		$(document).ready(function(){
 			$('form[name="payForm"]').bind('submit', function(){
-				if(($('input[name="userName"]').val()==''){
+				if($('input[name="userName"]').val()==''){
 					alert('수령자 성함을 입력해주세요');
 					$(this).focus();
 					return false;

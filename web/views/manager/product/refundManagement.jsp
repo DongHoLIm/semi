@@ -33,7 +33,6 @@
 #refundMain {
 	width: 95%;
 	height: 80%;
-	border :2px solid black;
 }
 
 tr {
@@ -51,7 +50,6 @@ tr {
 	padding-left:8%;
 }
 #inOutMain {
-	border :2px solid black;
 	width:80%;
 	margin:0 auto;
 }
@@ -96,8 +94,8 @@ border:1px solid white;
 	</tr>
 		<% for(Refund r : rList) {%>
 			<tr class="od">
-					<input type="hidden" id="pno" value="<%=r.getPno()%>">
-					<input type="hidden" id="pcode" value="<%=r.getpCode()%>">
+					<td id="pno" style="display:none;"><%=r.getPno() %></td>
+					<td id="pcode" style="display:none;"><%=r.getpCode() %></td>
 					<td><%=r.getOno() %></td>
 					<td><%=r.getrDate() %></td>
 					<td><%=r.getMno() %></td>
@@ -142,22 +140,15 @@ border:1px solid white;
 
 $(".btn_1").click(function(){ 
 	var pass = $(this).val();
-	var pno = $("#pno").val();
-	var pcode = $("#pcode").val();
+	var pno = $(this).parent().siblings().eq(0).text();
+	var pcode = $(this).parent().siblings().eq(1).text();
  	location.href='<%=request.getContextPath()%>/refundChange.mp?pass='+pass+'&&pno='+pno+'&&pcode='+pcode;
- 	console.log(pass);
- 	console.log(pno);
- 	console.log(pcode);
- 	
  });
  
 $(".btn_2").click(function(){ 
 	var pass = $(this).val();
-	var pno = $("#pno").val();
-	var pcode = $("#pcode").val();
-	console.log(pass);
-	console.log(pno);
-	console.log(pcode);
+	var pno = $(this).parent().siblings().eq(0).text();
+	var pcode = $(this).parent().siblings().eq(1).text();
 	location.href='<%=request.getContextPath()%>/refundChange.mp?pass='+pass+'&&pno='+pno+'&&pcode='+pcode;
  });
  

@@ -122,11 +122,14 @@
 		</div>
 			<br><br>
 		<div id = "buttonArea">
-		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
+		<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| loginUser.getMemberId().equals(b.getMemberId()))){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
 		<%} %>
-
+		
+		<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| !(loginUser.getMemberId().equals(b.getMemberId())))){ %>
+		<button id= "report" align = "left" onclick = "report();">신고하기</button>
+			<%} %>
 		</div>
 	<br>
 	<br>
@@ -209,6 +212,20 @@
 			<%}%>
 		});
 	});
+	
+	function report(){
+		  var writer = <%= b.getMemberNo()%>;
+		  console.log(writer);
+		  var postId =<%= b.getPostsId()%>;
+		  console.log(postId);
+		  var array = writer+"/"+postId;
+	      console.log(array);
+
+	      var url = "views/user/board/report.jsp?array="+array;
+
+	      window.open(url,'신고하기','width=430,height=450,status=no,scrollbars=yes');
+		};
+
 	</script>
 
 </body>

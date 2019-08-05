@@ -123,5 +123,39 @@ public class BasketDao {
 		}		
 		return result;
 	}
+	public ArrayList<Basket> changeTotal(Connection con, String[] productCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset =null;
+		ArrayList<Basket> list = null;
+		Basket bk = null;
+		String query = prop.getProperty("changeTotal");
+		try {
+			list = new ArrayList<Basket>();
+			for(int i =0;i<productCode.length;i++) {
+				pstmt=con.prepareStatement(query);
+				pstmt.setString(1, productCode[i]);
+				rset = pstmt.executeQuery();
+				while(rset.next()) {
+					bk=new Basket();
+					bk.setProductCode(rset.getString("PRODUCT_CODE"));
+					bk.setProductName(rset.getString("PRODUCT_NAME"));
+					bk.setFileName(rset.getString("NEW_FILE_NAME"));
+					bk.setPrice(rset.getInt("PRODUCT_MONEY"));
+					bk.setContent(rset.getString("CONTENTS"));
+					bk.setDeliveryPrice(rset.getInt("DELIVERY_PAY"));
+					list.add(bk);
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
 }
