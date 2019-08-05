@@ -116,7 +116,6 @@ html, css {
 
 #logoImg {
 	width: 25%;
-
 }
 #logoImg:hover, input[type=button]:hover {
 	-webkit-transform: scale(1.1); /*  크롬 */
@@ -143,9 +142,9 @@ li:hover, button:hover {
 </head>
 <body>
 <div align="center" id="logoDiv">
-	<a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
+   <a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" style="width:25%;" /></a>
 </div>
-<nav class="navbar navbar-inverse" style="background:#fffec2">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -167,11 +166,11 @@ li:hover, button:hover {
            <%} else {%>
            <li class="byPageBtn"><a class="myPageBtn" style="color:black" onclick="myPage();" >마이페이지</a></li>
            <script>
-				function myPage(){
-					if(confirm("로그인 후 이용해주시기 바랍니다.")){
-						location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
-					}
-				}
+            function myPage(){
+               if(confirm("로그인 후 이용해주시기 바랍니다.")){
+                  location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
+               }
+            }
            </script>
            <%} %>
           <% if(loginUser != null) {%>
@@ -190,12 +189,12 @@ li:hover, button:hover {
         <li><a style="color:black" href="<%=request.getContextPath()%>/logout.me">logOut</a></li>
       	<li id="chatLi" onclick="submit();"> <a style="color:black">채팅 문의 </a></li>
       </ul>
-		<script>
-		function submit(){
-			var no = <%=loginUser.getMemberNo()%>;
-			location.href="<%=request.getContextPath()%>/chat.ch?no="+no;
-		}
-		</script>
+      <script>
+      function submit(){
+         var no = <%=loginUser.getMemberNo()%>;
+         location.href="<%=request.getContextPath()%>/chat.ch?no="+no;
+      }
+      </script>
       <%}%>
 
     </div>

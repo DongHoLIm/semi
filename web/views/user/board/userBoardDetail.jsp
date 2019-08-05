@@ -18,6 +18,7 @@
 		height:100%;
 		margin:0 auto;
 }
+
 #content{
 		height:230px;
 	}
@@ -26,13 +27,12 @@
 	padding-left:70%;
 }
 
-#right{
- 	align:right;
+.right{
+ 	text-align:right;
  	}
-
-#writer,#view,#date{
- 		align:left;
- 	}
+.writer,.view,.date{
+ 	align:left;
+ 	} 
 </style>
 </head>
 <head><%@include file ="../hfl/header.jsp" %></head>
@@ -49,12 +49,12 @@
 		<td colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
 		</tr>
 	<tr>
-			<td id="right">작성자 : </td>
-			<td id="writer"><span><%= b.getMemberId() %></span></td>
-			<td id="right">조회수 : </td>
-			<td id="view"><span><%= b.getPostsViews() %></span></td>
-			<td id="right">작성일 : </td>
-			<td id="date"><span><%= b.getCreateDate() %></span></td>
+			<td class="right">작성자 : </td>
+			<td class="writer"><span><%= b.getMemberId() %></span></td>
+			<td class="right">조회수 : </td>
+			<td class="view"><span><%= b.getPostsViews() %></span></td>
+			<td class="right">작성일 : </td>
+			<td class="date"><span><%= b.getCreateDate() %></span></td>
 		</tr>
 		</table>
 				<hr>
@@ -82,20 +82,20 @@
 	<div class = "replyArea">
 
 	<div >
-		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
+		<div class = "replayWriterArea" style = " width:800px; height:100%; margin-left:30%; align:center">
 				<table align = "center">
 				<tr>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
 					<td>&nbsp;&nbsp;</td>
-					<td><button id = "addReply" style = "height:60px">댓글 등록</button></td>
+					<td><button id = "addReply" style = "height:60px; maring-left:34%">댓글 등록</button></td>
 				</tr>
 			</table>
 				<div >
 				<h5>&nbsp;</h5>
 			</div>
 			</div>
-				<br>
-
+				<br>		
+		<div style = "margin-left:30%">			
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
@@ -119,16 +119,17 @@
 			</tfoot>
 		</table>
 		</div>
+		</div>
 			<br><br>
 		<div id = "buttonArea">
-		<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| loginUser.getMemberId().equals(b.getMemberId()))){ %>
+		<% if (loginUser != null && loginUser.getMemberId().equals("admin")|| loginUser.getMemberId().equals(b.getMemberId())){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
 		<%} %>
 
-		<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| !(loginUser.getMemberId().equals(b.getMemberId())))){ %>
+	<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| !(loginUser.getMemberId().equals(b.getMemberId())))){ %>
 		<button id= "report" align = "left" onclick = "report();">신고하기</button>
-			<%} %>
+			<%} %> 
 		</div>
 	<br>
 	<br>
