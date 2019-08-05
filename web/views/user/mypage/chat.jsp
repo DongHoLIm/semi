@@ -20,8 +20,8 @@
 	}
 	.chatBtn{
 		width: 10%;
-		color: white;
-		background: black;
+		color: red;
+		background: #fffec2;
 	}
 </style>
 <body>
@@ -35,7 +35,6 @@
 		</div>
 		<div id="exit">
 			<input type="button" value="상담 종료" id="endChat" class="chatBtn" onclick="endChat();"/>
-			<input type="button" value="상담 내역" id="preChat" class="chatBtn" onclick="preChat();"/>
 		</div>
 	</fieldset>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>

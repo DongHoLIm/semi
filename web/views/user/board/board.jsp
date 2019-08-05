@@ -26,7 +26,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.9.0/d3.min.js"></script>
-<title>Insert title here</title>
 <style>
 #board{
    text-align:center;
@@ -140,8 +139,6 @@
          <% }
          }
          %>
-
-
          <%if(currentPage >= maxPage){ %>
          <button disabled>></button>
          <%}else{ %>
@@ -251,7 +248,6 @@
              location.href="<%=request.getContextPath()%>/sub.bo?num=" + num;
          });
       });
-
       function search(){
     	  $(function(){
     		  var id = $("select[id = 'select']").val();
@@ -284,7 +280,6 @@
 						$Tbody.append($tr);
 					}
 					$("#messageArea tbody td").mouseenter(function(){
-
 			            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
 			         }).mouseout(function(){
 			               $(this).parent().css({"background":"white"});
@@ -292,20 +287,10 @@
 			            var num = $(this).parent().children("input").val();;
 			             location.href="<%=request.getContextPath()%>/son.no?num="+num;
 			         });
-
-
-
     			}
-
-
     		  })
-
-
-
     	  });
-
       }
-
    </script>
 
 </body>

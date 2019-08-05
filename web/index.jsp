@@ -21,7 +21,6 @@
 	text-align: right;
 	padding-right: 20px;
 }
-
 .container-fluid {
 	text-align: center;
 }
@@ -88,18 +87,16 @@
 				class="sr-only">Next</span>
 			</a>
 		</div>
-
-
 	<br>
 	<h3 align="center">최신상품</h3>
 	<form action="" id="powerLinkForm">
-	<table align="center" id="powerLink">
-		<tbody>
-			<tr id="imgTable"></tr>
-			<tr id="titleTable"></tr>
-			<tr id="priceTable"></tr>
-		</tbody>
-	</table>
+		<table align="center" id="powerLink">
+			<tbody>
+				<tr id="imgTable"></tr>
+				<tr id="titleTable"></tr>
+				<tr id="priceTable"></tr>
+			</tbody>
+		</table>
 	</form>
 	</div>
 	<!-- footer 영역 -->
