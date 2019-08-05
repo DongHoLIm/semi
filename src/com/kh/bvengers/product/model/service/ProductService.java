@@ -157,11 +157,14 @@ public class ProductService {
 		public ArrayList<Calcul> disposeSuccess(String[] code, int currentPage, int limit) {
 			Connection con = getConnection();
 			ArrayList<Calcul> list = null;
-			int result = 0;
-			
+			int result1 = 0;
+			int result2 = 0;
+			String seller = "";
 			for(int i = 0; i < code.length; i++) {
-				result = new ProductDao().disposeSuccess(con, code[i]);
-				if(result > 0 ) {
+				result1 = new ProductDao().disposeSuccess(con, code[i]);
+				seller = new ProductDao().searchSeller(con, code[i]);
+				result2 = new ProductDao().updateSellerInfo(con, seller);
+				if(result1 > 0 &&result2 > 0) {
 					commit(con);
 				}else {
 					rollback(con);

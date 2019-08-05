@@ -82,10 +82,10 @@
                </tr>
             </thead>
             <tbody>
-               <tr><th>총 판매금액</th>
-                  <%for(int i = 0; i < calculateDatalist.size(); i++){ %>
+               <tr><th>매출이익</th>
+                  <%for(int i = 0; i < allDatalist.size(); i++){ %>
                      <td>
-                        <%=calculateDatalist.get(calculateDatalist.size()-i-1).get("calParice") %>
+                        <%=allDatalist.get(allDatalist.size()-i-1).get("allPrice") %>
                      </td>
                   <%} %>
                </tr>
@@ -96,10 +96,11 @@
                      </td>
                   <%} %>
                </tr>
-               <tr><th>매출이익</th>
-                  <%for(int i = 0; i < allDatalist.size(); i++){ %>
+               
+               <tr><th>총 판매금액</th>
+                  <%for(int i = 0; i < calculateDatalist.size(); i++){ %>
                      <td>
-                        <%=allDatalist.get(allDatalist.size()-i-1).get("allPrice") %>
+                        <%=calculateDatalist.get(calculateDatalist.size()-i-1).get("calParice") %>
                      </td>
                   <%} %>
                </tr>

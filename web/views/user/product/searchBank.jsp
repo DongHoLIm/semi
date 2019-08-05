@@ -127,7 +127,7 @@
 						</th>
 						<td><span><input type="hidden" id="client_id"
 								name="client_id" style="width: 200px"
-								value="l7xx9b86ff96a0fe4664add4f200aba973c4"></span>
+								value="l7xx61fc229f6dd040f1894a729558258a72"></span>
 					</tr>
 				</form>
 				<tr>
@@ -136,7 +136,7 @@
 					</th>
 					<td><span><input type="hidden" id="client_secret"
 							name="client_secret" style="width: 200px"
-							value="87c4352200da44cb935dbdf9ce497987"></span></td>
+							value="6f763a14fddd48f39bb4a0e76e43e71a"></span></td>
 				</tr>
 				<tr>
 					<th>
