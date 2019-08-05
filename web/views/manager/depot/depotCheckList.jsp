@@ -41,9 +41,15 @@
 	#searchButton{
 		padding-left:73%;
 	}
-	button{
-	background:black;
-	
+	#depotMain button{
+		border-radius: 20px;
+		background: black;
+		color: white;
+	}
+	#depotMain button:hover{
+		border-radius:20px;
+		background: ligthgray;
+		color:white;
 	}
 </style>
 <body>

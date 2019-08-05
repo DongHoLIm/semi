@@ -60,7 +60,16 @@ li:hover, button:hover {
 	-moz-transition: transform .35s;
 	-webkit-transition: transform .35s;
 }
-
+.pagingArea button{
+		color: black;
+		background: white;
+		border-radius: 50px;
+	}
+	.pagingArea button:hover{
+		color: white;
+		background: black;
+		border-radius: 50px;
+	}
 </style>
 </head>
 <body>
