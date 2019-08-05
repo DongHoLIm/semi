@@ -153,4 +153,39 @@ public class ChatDao {
 		}
 		return result;
 	}
+
+	public int endChat(Connection con, String no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("endChat");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, no);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int newChat(Connection con, String no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("newChat");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, no);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 }

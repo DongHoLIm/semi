@@ -2,8 +2,8 @@
     pageEncoding="UTF-8" import = "java.util.*,com.kh.bvengers.board.model.vo.*,java.util.HashMap"%>
  <% Board b = (Board)request.getAttribute("b");
  	Attachment a = (Attachment)request.getAttribute("fileList");
- 	
- 		
+
+
  %>
 <!DOCTYPE html>
 <html>
@@ -25,10 +25,10 @@ td{
 #content{
 		height:230px;
 	}
-	
+
 #buttonArea{
 	padding-left:70%;
-}	
+}
 
 </style>
 </head>
@@ -77,7 +77,7 @@ td{
 </div>
 
 	<div class = "replyArea">
-	
+
 	<div >
 		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
 				<table align = "center">
@@ -92,27 +92,27 @@ td{
 			</div>
 			</div>
 				<br>
-				
+
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
 		</table>
-		
+
 		<br>
-			
+
 		<br>
-		
+
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tbody>
 			<tr>
 <!-- 			<td colspan="2" class="tWriter"><span></span></td>
 				<td colspan="3" class="tContent"></td>
-				<td class="tDate"></td> -->				
-			</tr>			
+				<td class="tDate"></td> -->
+			</tr>
 			</tbody>
 			<tfoot>
-			
+
 			</tfoot>
 		</table>
 		</div>
@@ -145,7 +145,6 @@ td{
 				type:"post",
 				success:function(data){
 					var $replySelectTable = $("#replySelectTable tfoot");
-					var $replyWriter = $("#replyWriter span")
 					$replySelectTable.html("");
 						for(var key in data){
 							var $tr = $("<tr>");
@@ -155,12 +154,13 @@ td{
 							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
 							var $contentTd = $("<td colspan='2'>").text(data[key].commentContents).css("width","400px");
 							var $dateTd = $("<td>").text(data[key].commentDate).css({'width':'200px','color':'lightgray','font-size':'10xpx'});
-							
-						$tr2.append($writer);	
-						$tr2.append($writeTd);	
+
+						$tr2.append($writer);
+						$tr2.append($writeTd);
+
 						$tr.append($contentTd);
 						$tr.append($dateTd);
-						
+
 						$replySelectTable.append($hr);
 						$replySelectTable.append($tr2);
 						$replySelectTable.append($tr);
@@ -169,13 +169,13 @@ td{
 				error:function(){
 					alert("댓글 입력 실패");
 				}
-				
+
 			});
 		});
-	
+
 	});
-	
-	
+
+
 
 	$(function(){
 		$("#addReply").click(function(){
@@ -183,7 +183,7 @@ td{
 			var writer =  <%= loginUser.getMemberNo()%>;
 		    var postId = <%= b.getPostsId()%>;
 		    var content = $("#replyContent").val();
-		    
+
 		    $.ajax({
 		    	url:"iwc.bo",
 		    	data:{"writer":writer, "content":content, "postId":postId},
@@ -191,8 +191,8 @@ td{
 		    	success:function(data) 	 {
 		    		location.reload();
 					$("#replySelectTable tfoot").show();
-		    	
-		    	
+
+
 		    	},
 		    	error:function(){
 		    		console.log("실패!");

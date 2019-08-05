@@ -19,7 +19,7 @@
 		width: 60%;
 		margin: 10px auto;
 	}
-	#sendDiv #sendBtn{
+	.chatBtn{
 		width: 10%;
 		color: white;
 		background: black;
@@ -32,10 +32,11 @@
 		<br />
 		<div id=sendDiv>
 			<input type="text" id="inputMessage" />
-			<input type="button" value="보내기" id="sendBtn" onclick="send();" />
+			<input type="button" value="보내기" id="sendBtn" class="chatBtn" onclick="send();" />
 		</div>
 		<div id="exit">
-			<input type="button" value="상담 종료" id="endChat" onclick="endChat();"/>
+			<input type="button" value="상담 종료" id="endChat" class="chatBtn" onclick="endChat();"/>
+			<input type="button" value="상담 내역" id="preChat" class="chatBtn" onclick="preChat();"/>
 		</div>
 	</fieldset>
 	<footer><%@ include file="../hfl/footer.jsp"%></footer>
@@ -48,8 +49,6 @@
 	var inputMessage = document.getElementById('inputMessage');
 	var date = new Date();
 	var time = " ["+ (date.getMonth()+1) +"월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() +"분" +"]";
-
-
 	webSocket.onerror = function(event) {
 		onError(event);
 	};
@@ -59,15 +58,24 @@
 	webSocket.onmessage = function(event) {
 		onMessage(event);
 	};
+   function preChat(){
+	   textarea += document.getElementById("pre").value;
+	   console.log($("#pre").val());
+	};
    function enterkey() {
         if (window.event.keyCode == 13) {
             send();
         }
     }
-    window.setInterval(function() {
+    /* window.setInterval(function() {
         var elem = document.getElementById('messageWindow');
         elem.scrollTop = elem.scrollHeight;
-    }, 0);
+    }, 0); */
+
+    $(document).ready(function(){
+    	var elem = document.getElementById('messageWindow');
+        elem.scrollTop = elem.scrollHeight;
+    });
 
 	function onMessage(event) {
 		var message = event.data;
@@ -81,11 +89,12 @@
 		}
 	};
 	function onOpen(event) {
-		textarea.value += time;
+		textarea.value += "\n" + time;
 		<%if (!loginUser.getMemberId().equals("admin")){%>
 			textarea.value += "\n 중고愛 민족 1:1 문의입니다. \n 상담원과 연결될때 까지 기다려주세요 \n";
 		<%} else {%>
 			textarea.value += "\n 중고愛 민족 1:1 문의입니다. \n";
+			webSocket.send(id + "*" + no + ": " + "상담원과 연결되었습니다.");
 		<%}%>
 	};
 	function onError(event) {
@@ -115,17 +124,17 @@
 			alert("메세지를 입력해주세요");
 		};
 	};
-
-
 	function endChat(){
 		if(confirm("상담을 종료하시겠습니까?")){
-			textarea.value += "\n 상담이 종료되었습니다. \n";
-			alert("상담이 종료되었습니다.");
-			console.log("종료");
-
-			
-			history.go(-1);
-			
+			alert("상담을 종료합니다.");
+			$.ajax({
+				url:"endChat.ch",
+				data:{no:no},
+				type:"post",
+				success:function(){
+					history.go(-1);
+				}
+			});
 		};
 	};
 </script>

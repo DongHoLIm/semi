@@ -1,8 +1,9 @@
 package com.kh.bvengers.user.myPage.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class myPage {
+public class myPage implements Serializable{
 	private String ono;		//주문번호
 	private String pname;	 //상품명
 	private String dstatus; //배송상태
@@ -28,8 +29,8 @@ public class myPage {
 	private int kDate;		//보관일자
 	private int dPay;		//배송비
 	private String dname;	//택배사 이름
-	
-	
+
+
 	public myPage() {}
 
 
@@ -327,5 +328,5 @@ public class myPage {
 	}
 
 
-	
+
 }

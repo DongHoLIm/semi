@@ -1,13 +1,15 @@
 package com.kh.bvengers.user.member.model.vo;
 
-public class MemberPageInfo {
+import java.io.Serializable;
+
+public class MemberPageInfo implements Serializable{
 	private int currentPage;
 	private int listCount;
 	private int limit;
 	private int maxPage;
 	private int startPage;
 	private int endPage;
-	
+
 	public MemberPageInfo() {}
 
 	public MemberPageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
@@ -73,7 +75,7 @@ public class MemberPageInfo {
 		return "PageInfo [currentPage=" + currentPage + ", listCount=" + listCount + ", limit=" + limit + ", maxPage="
 				+ maxPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
 	}
-	
-	
+
+
 }
 

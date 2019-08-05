@@ -14,7 +14,9 @@ public class ChatService {
 
 		int result = new ChatDao().selectChat(con, no);
 
-		if(result == 0) {
+		if(result > 0) {
+			result = new ChatDao().newChat(con, no);
+		} else if(result == 0) {
 			result = new ChatDao().createChat(con, no);
 			commit(con);
 		}
@@ -51,6 +53,18 @@ public class ChatService {
 		}
 		close(con);
 		return result;
+	}
+
+	public void endChat(String no) {
+		Connection con = getConnection();
+		int result = new ChatDao().endChat(con, no);
+
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
 	}
 
 }

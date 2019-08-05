@@ -21,6 +21,9 @@
 #chatLi:hover{
 	cursor: pointer;
 }
+.myPageBtn:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -42,9 +45,9 @@
            <li><a style="color:white" href="<%=request.getContextPath()%>/basketAllList.bk"> 장바구니 </a></li>
            <li><a style="color:white" href="<%= request.getContextPath()%>/selectNotice.no"> 게시판</a></li>
            <% if(loginUser != null) {%>
-           <li><a  style="color:white" href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
+           <li><a style="color:white" href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
            <%} else {%>
-           <li onclick="myPage();"><a style="color:white" >마이페이지</a></li>
+           <li class="byPageBtn"><a class="myPageBtn" style="color:white" onclick="myPage();" >마이페이지</a></li>
            <script>
 				function myPage(){
 					if(confirm("로그인 후 이용해주시기 바랍니다.")){

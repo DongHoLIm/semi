@@ -89,6 +89,7 @@
 							<td class="chatDate"><%=ch.getChatDate()%></td>
 							<%if(ch.getAnswer().equals("1")){ %>
 							<td class="chatStatus">답변 완료</td>
+							<td></td>
 							<%} else {%>
 							<td class="chatStatus" style="color:red">답변 대기</td>
 							<td><button type="button" class="answerBtn chatStatus" onclick="location.href='<%=request.getContextPath()%>/joinChat.ch?no='+<%=ch.getMemberNo() %>">답변하기</button></td>
@@ -102,12 +103,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	$(function(){
-		$("#chatListTable td").onclick(function(){
-			window.open('<%=request.getContextPath()%>/send.me?email='+hc+email,'인증번호','width=430,height=450,status=no,scrollbars=yes');
-		});
-	});
-	</script>
 </body>
 </html>
