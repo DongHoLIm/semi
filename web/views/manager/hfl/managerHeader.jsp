@@ -12,13 +12,19 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script><meta charset="UTF-8">
-
+<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 <title>메인메뉴</title>
 <style>
-#chatLi{
+* {
+	font-family: 'Poor Story', cursive;
+	margin: 0;
+	padding: 0;
+}
+#chatLi {
 	cursor: pointer;
 }
-.dropdwn-toggle{
+
+.dropdwn-toggle {
 	cursor: pointer;
 }
 
@@ -40,6 +46,7 @@
 #logoImg {
 	width: 25%;
 }
+
 #logoImg:hover, input[type=button]:hover {
 	-webkit-transform: scale(1.1); /*  크롬 */
 	-moz-transform: scale(1.1); /* FireFox */
@@ -50,6 +57,7 @@
 	-moz-transition: transform .35s;
 	-webkit-transition: transform .35s;
 }
+
 li:hover, button:hover {
 	-webkit-transform: scale(1.2); /*  크롬 */
 	-moz-transform: scale(1.2); /* FireFox */
@@ -59,6 +67,7 @@ li:hover, button:hover {
 	-o-transition: transform .35s;
 	-moz-transition: transform .35s;
 	-webkit-transition: transform .35s;
+	border: 1px solid black;
 }
 .pagingArea button{
 		color: black;
@@ -70,6 +79,11 @@ li:hover, button:hover {
 		background: black;
 		border-radius: 50px;
 	}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+	.navbar-inverse .navbar-nav>.open>a:focus {
+	background: #fffec2;
+}
+
 </style>
 </head>
 <body>
@@ -77,7 +91,7 @@ li:hover, button:hover {
 	<a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg" style="width:25%" /></a>
 </div>
 <%-- <% if(loginUser != null && loginUser.getMemberId().equals("admin")) {%> --%>
-<nav class="navbar navbar-inverse" style="background:#fffec2">
+<nav class="navbar navbar-inverse" style="background:#FF5675">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">

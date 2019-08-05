@@ -8,7 +8,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<header><%@ include file="../hfl/managerHeader.jsp"%></header>
@@ -50,7 +49,7 @@
 		var msg = message.substring(idx+1);
 
 		if(sender!="admin"){
-			textarea.value += sender : " + msg + "\n";
+			textarea.value += sender " : " + msg + "\n";
 		}
 	};
 	function onOpen(event) {

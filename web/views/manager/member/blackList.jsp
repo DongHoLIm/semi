@@ -131,6 +131,9 @@ border:1px solid white;
 			<% } %>
 
 			<button onclick="location.href='<%=request.getContextPath()%>/badmanlist.me?currentPage=<%=maxPage%>'">>></button>
+			<br><br><br>
+				<footer><%@ include file="../hfl/footer.jsp"%></footer>
+			
 </div>
 </body>
 </html>

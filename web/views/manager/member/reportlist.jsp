@@ -177,5 +177,8 @@ $(function(){
 	});
 });
 </script>
+<br><br>
+	<footer><%@ include file="../hfl/footer.jsp"%></footer>
+
 </body>
 </html>

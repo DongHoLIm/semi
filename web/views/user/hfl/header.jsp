@@ -67,7 +67,7 @@ html, css {
 #shape {
 	stroke-width: 3px;
 	fill: transparent;
-	stroke: red;
+	stroke: #009FFD;
 	stroke-dasharray: 85 400;
 	stroke-dashoffset: -220;
 	transition: 1s all ease;
@@ -118,7 +118,7 @@ html, css {
 #logoImg {
 	width: 25%;
 }
-#logoImg:hover, input[type=button]:hover {
+#logoImg:hover, input[type=button]:hover, input[type=submit]:hover {
 	-webkit-transform: scale(1.1); /*  크롬 */
 	-moz-transform: scale(1.1); /* FireFox */
 	-o-transform: scale(1.1); /* Opera */
@@ -138,14 +138,13 @@ li:hover, button:hover {
 	-moz-transition: transform .35s;
 	-webkit-transition: transform .35s;
 }
-
 </style>
 </head>
 <body>
 <div align="center" id="logoDiv">
 	<a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
-<nav class="navbar navbar-inverse" style="background:#fffec2">
+<nav class="navbar navbar-inverse" style="background:#E8F5FF  ">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
