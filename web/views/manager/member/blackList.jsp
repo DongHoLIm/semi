@@ -20,11 +20,14 @@
 #depotMain {
 	width: 95%;
 	height: 80%;
-	border :2px solid black;
+	margin:auto;
 }
 
 tr {
 	border: 1px solid black;
+}
+table td{
+height:30px;
 }
 
 #th {
@@ -48,10 +51,11 @@ width:90%;
 
 }
 .th{
-background:black;
-color:white;
+background:lightgray;
+color:black;
 text-align:center;
 border:1px solid white;
+height:50px;
 }
 </style>
 <body>
@@ -75,7 +79,7 @@ border:1px solid white;
 	 $("form").submit();
 }); */
 	</script>
-		<div id="table Area">
+		<div id="table">
 			<table id="depotMain" align="center">
 				<tr>
 		<th class="th">제재번호</th>
@@ -135,5 +139,12 @@ border:1px solid white;
 				<footer><%@ include file="../hfl/footer.jsp"%></footer>
 			
 </div>
+<script>
+$("#depotMain td").mouseenter(function(){
+	$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+}).mouseout(function(){
+	$(this).parent().css({"background":"white"});
+});
+</script>
 </body>
 </html>
