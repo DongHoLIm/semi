@@ -16,50 +16,42 @@ int endPage = pi.getEndPage();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#sec1 {
-		width:100%;
-		height:100%;
-		padding-right:10%;
-		padding-left:10%;
-
-		margin:auto;
-	}
-	thead{
-			background:#eee;
-
-	}
-	.board{
-		width:80%;
-		margin:auto;
-		align:center;
-        border-spacing: 10px;
-
-	}
-
-	.row0{
-		background:black;
-		color:white;
-		margin:auto;
-	}
-	th{
-		background:black;
-		color:white;
-	}
-	.row1{
-		border-top: 2px solid #555;
-	}
-	.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10{
-		border-top: 1px solid #ccc;
-		border-bottom: 1px solid #ccc;
-	}
-
-	.pageNo{
-		margin:auto;
-
-	}
-
-
-
+#sec1 {
+	width: 100%;
+	height: 100%;
+	padding-right: 10%;
+	padding-left: 10%;
+	margin: auto;
+	min-height: 500px;
+}
+thead {
+	background: #eee;
+}
+.board {
+	width: 80%;
+	margin: auto;
+	align: center;
+	border-spacing: 10px;
+}
+.row0 {
+	background: black;
+	color: white;
+	margin: auto;
+}
+th {
+	background: black;
+	color: white;
+}
+.row1 {
+	border-top: 2px solid #555;
+}
+.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.pageNo {
+	margin: auto;
+}
 </style>
 </head>
 <body>
@@ -67,20 +59,18 @@ int endPage = pi.getEndPage();
 	<!-- header 영역 -->
 	<header><%@ include file="../hfl/managerHeader.jsp" %></header>
 	<br />
-	<br />
-	<button type="button" onclick="location.href='<%=request.getContextPath()%>/chatList.ch'">채팅 테스트</button>
 	<section id="sec1">
 		<h2 align="center">공지사항</h2>
 
 		<table class="board" id = "listArea">
-			<tr class="row0">
 			<thead>
+			<tr class="row0">
 				<th>번호</th>
 				<th>제목</th>
 				<!-- <th>작성자</th> -->
 				<th>작성날짜</th>
-			</thead>
 			</tr>
+			</thead>
 			<%  for (Board b : list) { %>
 				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
@@ -92,8 +82,7 @@ int endPage = pi.getEndPage();
       <button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
       </div>
 
-			<br><br><br><br>
-		  <div class = "pagingArea" align ="center" class="pagination" >
+		<div class = "pagingArea" align ="center" class="pagination" >
 		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><</button>
 		<%if(currentPage <= 1) {%>
 		<button disabled><</button>
@@ -121,8 +110,8 @@ int endPage = pi.getEndPage();
 
       </div>
 		<br>
-		
-	
+
+
 	</section>
 	<br />
 

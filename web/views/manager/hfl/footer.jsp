@@ -5,10 +5,10 @@
 <style>
 .footer {
 	font-family: 'Nanum Gothic', sans-serif;
-	background-color: black;
+	background-color: #fffec2;
 	padding: 10px;
 	text-align: center;
-	color: white;
+	color: black;
 	position: relative;
 	bottom : 0px;
 	width : 100%;

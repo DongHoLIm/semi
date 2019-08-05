@@ -29,5 +29,8 @@ text-align:center;
 					<td><%=m.getSellCount() %></td>
 				</tr>
 				<%} %>
+				<br><br>
+					<footer><%@ include file="../hfl/footer.jsp"%></footer>
+				
 </body>
 </html>

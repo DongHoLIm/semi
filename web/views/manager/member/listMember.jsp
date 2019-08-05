@@ -123,7 +123,7 @@ input-align:center;
 			<br>
 		</div>
 	</div>
-
+<br><br>
 <script>
 
  	  $(".mbdetail").click(function(){
@@ -179,6 +179,9 @@ input-align:center;
 			<% } %>
 
 			<button onclick="location.href='<%=request.getContextPath()%>/memberList.me?currentPage=<%=maxPage%>'">>></button>
+			<br><br>
+				<footer><%@ include file="../hfl/footer.jsp"%></footer>
+			
 </div>
 </body>
 </html>

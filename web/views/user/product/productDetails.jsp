@@ -26,9 +26,7 @@
 .detail th {
    font-weight: bold;
    width : 50px;
-   background: black;
-   color: white;
-   border: 1px solid white;
+   border: 1px solid black;
 }
 
 #titleImg {
@@ -46,7 +44,6 @@
 	letter-spacing: 0.2em;
 }
 .detailBtn{
-   background: black;
    color: white;
    width: 100px;
    height: 50px;
@@ -59,9 +56,8 @@
    padding : 10px;
 }
 .btns{
-   background: black;
-   color: white;
-   border: 1px solid white;
+   background: white;
+   border: 1px solid black;
    width: 100px;
    height: 50px;
    margin-bottom:10%;
@@ -74,7 +70,6 @@
    height: 50px;
 }
 .commentTables {
-	border: 1px solid white;
 	margin: 0 auto;
 }
 #btnArea {
@@ -98,10 +93,13 @@
 }
 .detail #writer a:hover,  .detail #writer a{
 	text-decoration : none;
-	color: white;
+	color: black;
 }
 #productStatus{
 	width: 70px;
+}
+textarea {
+	border: 0;
 }
 </style>
 <meta charset="UTF-8">
@@ -197,12 +195,12 @@
       	  <%} %>
       	</div>
       <hr />
-      <table id="commentHeaderTable" class="commentTables" border="1">
+      <table id="commentHeaderTable" class="commentTables">
          <tr>
             <th colspan="7" style = "width:800px">댓글 리스트</th>
          </tr>
       </table>
-      <table id="commentSelectTable" class="commentTables" border="1" align="center">
+      <table id="commentSelectTable" class="commentTables" align="center">
          <tbody>
          </tbody>
       </table>

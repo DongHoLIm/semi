@@ -53,7 +53,7 @@ form {
 
 .btn_pwd {
 	margin: 0 auto;
-	width: 10%;
+	width: 15%;
 	height: 30px;
 	border: 1px solid black;
 	font-size: 13px;
@@ -99,7 +99,7 @@ form {
 			<input type="text" name="hiddencard" value="1" id="hiddencard"
 				style="display: none"> <input type="text" name="hiddenvalue"
 				value="0" id="hiddenvalue" style="display: none"> <input
-				type="email" placeholder="이메일" name="email" id="email" size=19>
+				type="email" placeholder="이메일" name="email" id="email" size=18>
 			<button type="button" class="btn_searchPwd" onclick="send_pwd(2);">인증번호</button>
 			<br> <br>
 			<br> <input type="button" value="로그인하러가기" class="btn_pwd"

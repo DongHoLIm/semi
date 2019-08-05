@@ -497,7 +497,7 @@ public class ProductDao {
 				c.setMemberNo(rset.getString("memberNo"));
 				c.setAdjustDiv(rset.getString("div"));
 				c.setAdjustDate(rset.getString("aDate"));
-				
+				c.setReceipt(rset.getString("receipt"));
 				list.add(c);
 			}
 			

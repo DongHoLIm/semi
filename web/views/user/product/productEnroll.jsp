@@ -96,118 +96,118 @@
 }
 
 .productContainer {
-	align: center;
-	margin: 0 auto;
+	margin-left: 200px;
+	width: 100%;
 }
 </style>
 </head>
 <body>
 
-	<header><%@ include file="../hfl/header.jsp" %></header>
-	<div><%@ include file="../hfl/list.jsp" %></div>
-	<%if(loginUser!=null) {%>
+<%@ include file="../hfl/header.jsp" %>
+<%@ include file="../hfl/list.jsp" %>
+<%if(loginUser!=null) {%>
 <br><br><br><br>
-<div class="productContainer">
+	<div class="productContainer">
 		<form action="<%=request.getContextPath()%>/insert.po" method="post" encType="multipart/form-data">
-		<table class="table table-bordered" align="center" style="width:60%;">
-			<tr>
-				<th>제목 </th>
-				<td colspan="4"><input type="text" size=30 name="postsTitle" class="form-control"/></td>
-			</tr>
-			<tr>
-				<th width="25%">카테고리</th>
-				<td width="25%">
-					<select class="cate_enroll" name="mainCate" style="width:70%;">
-						<option id="pc" value="pc">PC
-						<option id="laptop" value="laptop">노트북
-						<option id="digital" value="digital">가전제품
-					</select>
-				</td>
-				<th width="10%">상세카테고리</th>
-				<td width="25%" colspan="2">
-					<select id="sub_cate" class="sub_cate sub_cate1" name="subCate1" style="width:80%;">
-							<option id="desktop" value="desktop">데스크탑
-							<option id="pcEtc" value="pcEtc">PC 주변기기
-					</select>
-					<select id="sub_cate" class="sub_cate sub_cate2" name="subCate2" style="width:80%;">
-							<option id="case" value="case">노트북 가방
-							<option id="notebook" value="notebook">노트북
-							<option id="notebookEtc" value="notebookEtc">노트북 주변기기
-					</select>
-					<select id="sub_cate" class="sub_cate sub_cate3" name="subCate3" style="width:80%;">
-						<option id="ha" value="ha">생활가전
-						<option id="ka" value="ka">주방가전
-						<option id="camera" value="camera">카메라
-					</select>
-				</td>
-            </tr>
-            <tr>
-                <th>상품명 </th>
-                <td colspan="4"><input cols="10" size=30 name="productName" class="form-control" style="resize:none"></td>
-            </tr>
-            <tr>
-                <th>가격 </th>
-                <td colspan="4"><input type="number" name="productMoney" id="productMoney" class="form-control"></td>
-            </tr>
-            <tr>
-                <th>상품 이미지</th>
-                <td colspan="4">
-                	<div>
-	                	<label for="file1" id="fileLabel">이미지 업로드</label>
-	                	<input class="fileName" value="파일선택" disabled="disabled">
-	                	<input type="file" name="file1" class="pullRight" id="file1" style="width:50%;"/><br />
-	                	<p class="danger">*첫번째 업로드 사진이 메인 이미지가 됩니다.</p>
-					</div>
-                	<div>
-	                	<label for="file2" id="fileLabel">이미지 업로드</label>
-	                	<input class="fileName" value="파일선택" disabled="disabled">
-	                	<input type="file" name="file2" class="pullRight" id="file2" style="width:50%;"/><br />
-                	</div>
-                	<div>
-						<label for="file3" id="fileLabel">이미지 업로드</label>
-	                	<input class="fileName" value="파일선택" disabled="disabled">
-	                	<input type="file" name="file3" class="pullRight" id="file3" style="width:50%;"/><br />
-					</div>
-					<div>
-						<label for="file4" id="fileLabel">이미지 업로드</label>
-	                	<input class="fileName" value="파일선택" disabled="disabled">
-						<input type="file" name="file4" class="pullRight" id="file4" style="width:50%;"/><br />
-                	</div>
-                </td>
-            </tr>
-            <tr>
-                <th>상품 설명 </th>
-                <td colspan="4">
-                	<textarea cols="10" rows="10" name="contents" class="form-control" style="resize:none"></textarea>
-                	<!-- <input type="text" class=""/> -->
-                </td>
-            </tr>
-            <tr>
-            	<td>예금주</td>
-            	<td><input type="text" name="accountHolder" id="accountHolder" class="form-control" readonly/></td>
-            	<td>은행명</td>
-            	<td><input type="text" name="bankCode" id="bankCode" class="form-control" readonly/></td>
-            	<td width="10%" style="vertical-align: center;">
-            		<label for="searchBtn" id="searchLabel">계좌조회</label>
-            		<button type="button" onclick="searchBank();" name="searchBtn" id="searchBtn" hidden>계좌조회</button>
-            	</td>
-            </tr>
-            <tr>
-	            <td>입금될 계좌번호</td>
-	            <td colspan="4"><input type="text" placeholder="-제외한 계좌번호를 입력해주세요" name="accountNo" id="accountNo" class="form-control" readonly/></td>
-            </tr>
-            <tr>
-                <th>상품 보관일자 </th>
-                <td colspan="4"><input type="date" name="keepDate" style="width:40%;" class="form-control" id="keepDate"/></td>
-            </tr>
-            <tr>
-                <td colspan="6">
-                	<input type="hidden" name="loginId"/>
-                    <input type="submit" value="등록" id="btn_enroll" class="pull-right"/>
-                    <input type="button" value="홈으로" id="btn_enroll" class="pull-left" onclick="javascript:location.href='index.jsp'"/>
-                </td>
-            </tr>
-</table>
+			<table class="table table-bordered" align="center" style="width:60%;">
+				<tr>
+					<th>제목 </th>
+					<td colspan="4"><input type="text" size=30 name="postsTitle" class="form-control"/></td>
+				</tr>
+				<tr>
+					<th width="25%">카테고리</th>
+					<td width="25%">
+						<select class="cate_enroll" name="mainCate" style="width:70%;">
+							<option id="pc" value="pc">PC
+							<option id="laptop" value="laptop">노트북
+							<option id="digital" value="digital">가전제품
+						</select>
+					</td>
+					<th width="10%">상세카테고리</th>
+					<td width="25%" colspan="2">
+						<select id="sub_cate" class="sub_cate sub_cate1" name="subCate1" style="width:80%;">
+								<option id="desktop" value="desktop">데스크탑
+								<option id="pcEtc" value="pcEtc">PC 주변기기
+						</select>
+						<select id="sub_cate" class="sub_cate sub_cate2" name="subCate2" style="width:80%;">
+								<option id="case" value="case">노트북 가방
+								<option id="notebook" value="notebook">노트북
+								<option id="notebookEtc" value="notebookEtc">노트북 주변기기
+						</select>
+						<select id="sub_cate" class="sub_cate sub_cate3" name="subCate3" style="width:80%;">
+							<option id="ha" value="ha">생활가전
+							<option id="ka" value="ka">주방가전
+							<option id="camera" value="camera">카메라
+						</select>
+					</td>
+	            </tr>
+	            <tr>
+	                <th>상품명 </th>
+	                <td colspan="4"><input cols="10" size=30 name="productName" class="form-control" style="resize:none"></td>
+	            </tr>
+	            <tr>
+	                <th>가격 </th>
+	                <td colspan="4"><input type="number" name="productMoney" id="productMoney" class="form-control"></td>
+	            </tr>
+	            <tr>
+	                <th>상품 이미지</th>
+	                <td colspan="4">
+	                	<div>
+		                	<label for="file1" id="fileLabel">이미지 업로드</label>
+		                	<input class="fileName" value="파일선택" disabled="disabled">
+		                	<input type="file" name="file1" class="pullRight" id="file1" style="width:50%;"/><br />
+		                	<p class="danger">*첫번째 업로드 사진이 메인 이미지가 됩니다.</p>
+						</div>
+	                	<div>
+		                	<label for="file2" id="fileLabel">이미지 업로드</label>
+		                	<input class="fileName" value="파일선택" disabled="disabled">
+		                	<input type="file" name="file2" class="pullRight" id="file2" style="width:50%;"/><br />
+	                	</div>
+	                	<div>
+							<label for="file3" id="fileLabel">이미지 업로드</label>
+		                	<input class="fileName" value="파일선택" disabled="disabled">
+		                	<input type="file" name="file3" class="pullRight" id="file3" style="width:50%;"/><br />
+						</div>
+						<div>
+							<label for="file4" id="fileLabel">이미지 업로드</label>
+		                	<input class="fileName" value="파일선택" disabled="disabled">
+							<input type="file" name="file4" class="pullRight" id="file4" style="width:50%;"/><br />
+	                	</div>
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>상품 설명 </th>
+	                <td colspan="4">
+	                	<textarea cols="10" rows="10" name="contents" class="form-control" style="resize:none"></textarea>
+	                	<!-- <input type="text" class=""/> -->
+	                </td>
+	            </tr>
+	            <tr>
+	            	<td>예금주</td>
+	            	<td><input type="text" name="accountHolder" id="accountHolder" class="form-control" readonly/></td>
+	            	<td>은행명</td>
+	            	<td><input type="text" name="bankCode" id="bankCode" class="form-control" readonly/></td>
+	            	<td width="10%" style="vertical-align: center;">
+	            		<label for="searchBtn" id="searchLabel">계좌조회</label>
+	            		<button type="button" onclick="searchBank();" name="searchBtn" id="searchBtn" hidden>계좌조회</button>
+	            	</td>
+	            </tr>
+	            <tr>
+		            <td>입금될 계좌번호</td>
+		            <td colspan="4"><input type="text" placeholder="-제외한 계좌번호를 입력해주세요" name="accountNo" id="accountNo" class="form-control" readonly/></td>
+	            </tr>
+	            <tr>
+	                <th>상품 보관일자 </th>
+	                <td colspan="4"><input type="date" name="keepDate" style="width:40%;" class="form-control" id="keepDate"/></td>
+	            </tr>
+	            <tr>
+	                <td colspan="6">
+	                	<input type="hidden" name="loginId"/>
+	                    <input type="submit" value="등록" id="btn_enroll" class="pull-right"/>
+	                    <input type="button" value="홈으로" id="btn_enroll" class="pull-left" onclick="javascript:location.href='index.jsp'"/>
+	                </td>
+	            </tr>
+			</table>
         </form>
         <script>
         function searchBank(){

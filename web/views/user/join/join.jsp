@@ -125,6 +125,14 @@ if($("#password").val() == ($("#password2").val())){
    margin:0 auto;
    border-radius: 5px;
 }
+input{
+border-right:none; 
+border-top:0px; 
+boder-left:none; 
+boder-bottom:5px;
+-webkit-border-radius:0;
+
+}
 .input_join {
    width:40%;
    margin:0 auto;
@@ -153,7 +161,7 @@ if($("#password").val() == ($("#password2").val())){
    background-color: black;
    color: white;
    }
-.btn_overlap,.btn_overla {
+.btn_overlap,.btn_overla,.btn_overlap1 {
    margin:0 auto;
    border: 1px solid black;
    font-size: 14px;
@@ -176,7 +184,7 @@ if($("#password").val() == ($("#password2").val())){
    </div>
 
    <div class="box_join" align="center">
-      <h2>중고愛민족 회원가입</h2>
+      <h2>PRE-OWNED♥NATION SIGN UP</h2>
    <div class="box_login" align="center">
          <br><br>
          <input type="text" id="memberId" name="memberId" placeholder="4~12자의 영문+숫자" maxlength="12" style="width:30%;">
@@ -188,8 +196,8 @@ if($("#password").val() == ($("#password2").val())){
          <font id = "ckNotice" ></font>
          
          <input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
-         <input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:20%;">-
-         <input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:20%;"><br><br>
+         <input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:19.5%;">-
+         <input type="password" id="peoplejb2" name="peoplejb2" placeholder=" 주민등록번호" maxlength="7"style="width:19.5%;"><br><br>
          <input type="email" id="email" name="email" placeholder="  이메일" style="width:30%;">
          <button type="button" class="btn_overla" style="width:10%;" onclick="checkjoin(2);">이메일확인</button><br><br>
          <input type="tel" id="phone" name="phone" placeholder="  phone" style="width:40%;"><br><br>
