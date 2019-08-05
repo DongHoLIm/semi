@@ -13,6 +13,7 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 <!-- include summernote-ko-KR -->
 <!-- <script src="lang/summernote-ko-KR.js"></script> -->
 <meta charset="UTF-8">
@@ -21,6 +22,12 @@
 #chatLi:hover{
 	cursor: pointer;
 }
+*{ 
+font-family: 'Poor Story', cursive; 
+
+
+}
+ 
 </style>
 </head>
 <body>
