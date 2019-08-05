@@ -13,7 +13,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
    #depotMain{
       width:80%;
@@ -45,54 +44,58 @@
    	width: 80%;
    	
    }
-   .wrap {
-	    text-align: center;
-	}
-   #reles{
-	    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	    display: block;
-	    margin: 20px auto;
-	    text-decoration: none;
-	    border-radius: 4px;
-	    padding: 20px 30px;
-	}
-	
-	a.button {
-	    color: black;
-	    box-shadow: black 0 0px 0px 2px inset;
-	}
-	
-	a.button:hover {
-	    color: white;
-	    box-shadow: black 0 0px 0px 40px inset;
-	}
-	
-	a.button2 {
-	    color: black;
-	    box-shadow: black 0 0px 0px 2px inset;
-	}
-	
-	a.button2:hover {
-	    color: white;
-	    box-shadow: black 0 80px 0px 2px inset;
-	}
+   .button-7{
+   width:100%;
+  border:2px solid #34495e;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 auto;
+}
+.button-7 a{
+  font-family:arial;
+  font-size:16px;
+  color:#34495e;
+  text-decoration:none;
+  line-height:50px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+.eff-7{
+   width:100%;  
+  border:0px solid black;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+  box-sizing:border-box;
+}
+.button-7:hover .eff-7{
+  border:70px solid black;
+}
+.button-7:hover a{
+  color:#fff;
+}
 </style>
 <body>
 <%@ include file = "../hfl/managerHeader.jsp" %>
    <br />
    <h3 align="center">입고 관리</h3>
    <br />
-   <div id="inOutMain">
-   		<div class="wrap">  			
-   			<input type="text" id="requestProduct"	value="" width="50%" onkeypress="if(event.keyCode==13){enterEvent();}" />   				
-   			 <a class="button" onclick="search();" >출고요청</a>		
-   		</div>
+   <div id="inOutMain">   		
       <div id="table Area">
          <table id="depotMain" align="center">
+         <tr>
+         	<td colspan="6"><input type="text" id="requestProduct"	value="" width="50%" onkeypress="if(event.keyCode==13){enterEvent();}" /></td>
+        	<td colspan="2">
+        		<div class="button-7">
+				    <div class="eff-7"></div>
+				    <a id="request" onclick="request()"> 출고요청</a>
+			  </div>
+   			</td>
+         </tr>
          <tr>
          	<th id="th"></th>
             <th id="th">번호</th>
@@ -154,20 +157,22 @@
 			<button onclick="location.href='<%=request.getContextPath()%>/inDepot.dp?currentPage=<%=maxPage%>'">>></button>
 		</div>
    <script>
-     function relesDate(){
-    	 var productCode = $("input[id='requestProduct']").val();
-    		$(function (){
-    			 var aCode = productCode;
-    			 $.ajax({
-        			 url:"outProduct.do",
-        			 type:"post",
-        			 data:{"productCode":aCode},
-        			 success:function(data){
-        				 window.location.reload();
-        			 }
-        		 });
-    		 });
-     }
+   	$(".button-7").click(function(){
+   	 var productCode = $("input[id='requestProduct']").val();
+		$(function (){
+			 var aCode = productCode;
+			 $.ajax({
+			 url:"outProduct.do",
+			 type:"post",
+			 data:{"productCode":aCode},
+			 success:function(data){
+				 window.location.reload();
+			 }
+		 });
+		 });
+   	});
+  	
+  
      function appendText(){
          var text = $("input[id='requestProduct']");
          text.val("");

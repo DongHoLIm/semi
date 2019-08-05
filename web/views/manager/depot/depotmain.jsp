@@ -73,22 +73,22 @@
 	    padding: 20px 30px;
 	}
 	
-	a.button {
+	.button {
 	    color: black;
 	    box-shadow: black 0 0px 0px 2px inset;
 	}
 	
-	a.button:hover {
+	.button:hover {
 	    color: white;
 	    box-shadow: black 0 0px 0px 40px inset;
 	}
 	
-	a.button2 {
+	.button2 {
 	    color: black;
 	    box-shadow: black 0 0px 0px 2px inset;
 	}
 	
-	a.button2:hover {
+	.button2:hover {
 	    color: white;
 	    box-shadow: black 0 80px 0px 2px inset;
 	}
@@ -105,6 +105,7 @@
 	  border: 1px solid #999;
 	  border-radius: 0px;
 	}
+	
 </style>
 <body>
 	<%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
