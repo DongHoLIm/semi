@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
 .container {
 	margin-top:5%;
@@ -45,7 +44,7 @@
 					<input type="button" value="글 리스트로" onclick="location.href='userboard.jsp'">
 			</tr>
 		</form>
-	</table>	
+	</table>
 	</div>
 	<br>
 	<br>

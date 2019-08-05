@@ -9,35 +9,37 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style>
-  @media screen and (max-width: 767px) {
-     /*  .sidenav {
+@media screen and (max-width: 767px) { /*  .sidenav {
         height: auto;
         padding: 15px;
       }
       .row.content {height:auto;}  */
-    }
-    li { list-style: none; }
-    .myPage{
-    	list-style: none;
+}
 
-    }
-   a{
-    	color:black;
-    	text-decoration: none;
+li {
+	list-style: none;
+}
 
-     a:link {
+.myPage {
+	list-style: none;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	a: link{
      color: white;
-     }
-	 a:visited {
-	  color: black;
-	  text-decoration: none;
-	  }
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
 </style>
-<title>Insert title here</title>
 </head>
 <body>
 	<!-- header 영역 -->
@@ -46,7 +48,7 @@
  <div class="container" style="float: left; width: 20%; padding-top: 10%; ">
   <div class="panel-group" id="accordion" >
     <div class="panel panel-default">
-      <div class="panel-heading" style="background: black; color:white">
+      <div class="panel-heading" style="background: #fffec2; color:black">
         <h4 class="panel-title" >
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">쇼핑내역</a>
         </h4>
@@ -65,24 +67,24 @@
       </div>
     </div>
     <div class="panel panel-default" >
-      <div class="panel-heading" style="background: black; color:white">
+      <div class="panel-heading" style="background: #fffec2; color:black">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">회원정보</a>
         </h4>
       </div>
       <div id="collapse2" class="panel-collapse collapse">
-        <div class="mypage">
-        	<ul>
-        		<li><br /></li>
-        		<li><a href="/sp/views/user/mypage/memberInfo.jsp">회원정보 변경</a></li>
-        		<li><a href="/sp/views/user/mypage/memberSignOut.jsp">회원 탈퇴</a></li>
-        	</ul>
+        <div class="panel-body">
+	        <div class="mypage">
+	        	<ul>
+	        		<li><a href="/sp/views/user/mypage/memberInfo.jsp">회원정보 변경</a></li>
+	        		<li><a href="/sp/views/user/mypage/memberSignOut.jsp">회원 탈퇴</a></li>
+	        	</ul>
+	        </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<br>
 </body>
 </html>
 

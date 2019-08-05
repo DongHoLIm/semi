@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<title>Insert title here</title>
 <style>
 .input-form {
 	width: 80%;
@@ -175,9 +174,9 @@
 							class="txt" id="tran_dtime" title="요청일시 입력" name="tran_dtime" /></span>
 						<!-- <button type="button" onclick="fnSearchRealName()">계좌실명조회</button> --></td>
 				</tr>
-				<!-- <tr> 		
+				<!-- <tr>
 					<th><span>계좌실명조회결과</span></th>
-					<td> 				
+					<td>
 						<textarea style="height:220px;width:250px" id="real_name" name="real_name"></textarea>
 					</td>
 				</tr> -->
@@ -195,7 +194,7 @@
 		var hour = reqDate.getHours() > 9?reqDate.getHours() + "":"0" + reqDate.getHours();
 		var min = reqDate.getMinutes() > 10?reqDate.getMinutes() + "":"0" + reqDate.getMinutes();
 		var sec = reqDate.getSeconds() > 10?reqDate.getSeconds() + "":"0" + reqDate.getSeconds();
-		
+
 		var currentTime = year + month + date + hour + min + sec;
 		console.log(currentTime)
 		$("#tran_dtime").val(currentTime);
@@ -271,7 +270,7 @@
 								var accpnm = $('[name=accpnm]').val();
 								var accnum = $('[name=accnum]').val();
 
-								
+
 								alert('인증 성공!!!');
 								$("#confirmacc").hide();
 								$("#sbm-flag").attr("checked", true);
@@ -283,13 +282,13 @@
 												"readonly");
 								$("[name=bankcode]").not(":selected")
 												.attr("disabled", "disabled");
-								
-								
+
+
 								$("#question").show();
 								$("#no-btn").show();
 								$("#ok-btn").show();
-								
-								
+
+
 							} else {
 								alert('인증 실패');
 								$("#sbm-flag").attr("checked", false);
@@ -302,23 +301,23 @@
 						}
 					});
 		}
-		
+
 		function using(){
 			var bankcode = document.getElementById("bankcode");
 			var bankName = bankcode.options[bankcode.selectedIndex].text;
-			
+
 			var accpnm = document.getElementById("accpnm");
 			var sellerName = accpnm.value;
 			var accnum = document.getElementById("accnum");
 			var accnumber = accnum.value;
-			
+
 			$("#bankCode",opener.document).val(bankName);
 			$("#accountHolder",opener.document).val(sellerName);
 			$("#accountNo",opener.document).val(accnumber);
-			
+
 			window.close();
 	 		/* opener.document.getElementById('bankCode').value = bankName; */
-			
+
 			/* opener.document.getElementById("bankCode").value = bankCode;
 			$("bankCode", opener.document).value(bankCode); */
 		}

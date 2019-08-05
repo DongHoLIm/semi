@@ -9,7 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<title>Insert title here</title>
 <style>
 
 
@@ -19,20 +18,20 @@
 		height:100%;
 		margin:0 auto;
 }
+
 #content{
 		height:230px;
 	}
-	
+
 #buttonArea{
 	padding-left:70%;
-}	
+}
 
-#right{
- 	align:right;
+.right{
+ 	text-align:right;
  	}
- 	
-#writer,#view,#date{
- 		align:left;
+.writer,.view,.date{
+ 	align:left;
  	} 
 </style>
 </head>
@@ -50,12 +49,12 @@
 		<td colspan = "7"><h2><%= b.getPostsTitle() %></h2></td>
 		</tr>
 	<tr>
-			<td id="right">작성자 : </td>
-			<td id="writer"><span><%= b.getMemberId() %></span></td>
-			<td id="right">조회수 : </td>
-			<td id="view"><span><%= b.getPostsViews() %></span></td>
-			<td id="right">작성일 : </td>
-			<td id="date"><span><%= b.getCreateDate() %></span></td>
+			<td class="right">작성자 : </td>
+			<td class="writer"><span><%= b.getMemberId() %></span></td>
+			<td class="right">조회수 : </td>
+			<td class="view"><span><%= b.getPostsViews() %></span></td>
+			<td class="right">작성일 : </td>
+			<td class="date"><span><%= b.getCreateDate() %></span></td>
 		</tr>
 		</table>
 				<hr>
@@ -81,55 +80,56 @@
 </div>
 
 	<div class = "replyArea">
-	
+
 	<div >
-		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
+		<div class = "replayWriterArea" style = " width:800px; height:100%; margin-left:30%; align:center">
 				<table align = "center">
 				<tr>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
 					<td>&nbsp;&nbsp;</td>
-					<td><button id = "addReply" style = "height:60px">댓글 등록</button></td>
+					<td><button id = "addReply" style = "height:60px; maring-left:34%">댓글 등록</button></td>
 				</tr>
 			</table>
 				<div >
 				<h5>&nbsp;</h5>
 			</div>
 			</div>
-				<br>
-				
+				<br>		
+		<div style = "margin-left:30%">			
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
 		</table>
-		
+
 		<br>
-			
+
 		<br>
-		
+
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tbody>
 			<tr>
 <!-- 			<td colspan="2" class="tWriter"><span></span></td>
 				<td colspan="3" class="tContent"></td>
-				<td class="tDate"></td> -->				
-			</tr>			
+				<td class="tDate"></td> -->
+			</tr>
 			</tbody>
 			<tfoot>
-			
+
 			</tfoot>
 		</table>
 		</div>
+		</div>
 			<br><br>
 		<div id = "buttonArea">
-		<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| loginUser.getMemberId().equals(b.getMemberId()))){ %>
+		<% if (loginUser != null && loginUser.getMemberId().equals("admin")|| loginUser.getMemberId().equals(b.getMemberId())){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
 		<%} %>
-		
-		<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| !(loginUser.getMemberId().equals(b.getMemberId())))){ %>
+
+	<% if (loginUser != null && (loginUser.getMemberId().equals("admin")|| !(loginUser.getMemberId().equals(b.getMemberId())))){ %>
 		<button id= "report" align = "left" onclick = "report();">신고하기</button>
-			<%} %>
+			<%} %> 
 		</div>
 	<br>
 	<br>
@@ -162,12 +162,12 @@
 							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
 							var $contentTd = $("<td colspan='2'>").text(data[key].commentContents).css("width","400px");
 							var $dateTd = $("<td>").text(data[key].commentDate).css({'width':'200px','color':'lightgray','font-size':'10xpx'});
-							
-						$tr2.append($writer);	
-						$tr2.append($writeTd);	
+
+						$tr2.append($writer);
+						$tr2.append($writeTd);
 						$tr.append($contentTd);
 						$tr.append($dateTd);
-						
+
 						$replySelectTable.append($hr);
 						$replySelectTable.append($tr2);
 						$replySelectTable.append($tr);
@@ -176,13 +176,13 @@
 				error:function(){
 					alert("댓글 입력 실패");
 				}
-				
+
 			});
 		});
-	
+
 	});
-	
-	
+
+
 
 	$(function(){
 		$("#addReply").click(function(){
@@ -190,7 +190,7 @@
 			var writer =  <%= loginUser.getMemberNo()%>;
 		    var postId = <%= b.getPostsId()%>;
 		    var content = $("#replyContent").val();
-		    
+
 		    $.ajax({
 		    	url:"iwc.bo",
 		    	data:{"writer":writer, "content":content, "postId":postId},
@@ -198,8 +198,8 @@
 		    	success:function(data) 	 {
 		    		location.reload();
 					$("#replySelectTable tfoot").show();
-		    	
-		    	
+
+
 		    	},
 		    	error:function(){
 		    		console.log("실패!");
@@ -212,7 +212,7 @@
 			<%}%>
 		});
 	});
-	
+
 	function report(){
 		  var writer = <%= b.getMemberNo()%>;
 		  console.log(writer);

@@ -17,7 +17,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
@@ -175,9 +174,43 @@ $(document).ready(function() {
 </script>
 <style>
 
+
+.board1 {
+	width: 80%;
+	margin: auto;
+	align: center;
+	
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
+}
+ .board1 th {
+
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #FFF;
+}
+
+.board1 td {
+
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+.board1 thead th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 2px solid #ccc;
+}
+
 #pagingArea {
 	width:60%;
-	margin-top:50px;
+	margin-top:10px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -192,26 +225,25 @@ $(document).ready(function() {
 }
 .searchBox {
    width: 100%;
-   height:70%;
+   height:60%;
    padding: 2%;
    margin: 0 auto;
    text-align: center;
 }
 
 .searchdiv {
-   width: 85%;
-   height:70%;
+   width: 100%;
+   height:60%;
    padding: 2%;
    margin: 0 auto;
    text-align: center;
-   border:1px solid black;
 }
 
 .th_select {
 	width:13%;
 	margin-left:auto;
 	margin-right:auto;
-	
+
 }
 
 
@@ -220,7 +252,7 @@ input[type=button] {
    background:#FFF;
 }
 
-.tt_div { 
+.tt_div {
 	width:60%;
 	height:100%;
 	margin-left:auto;
@@ -279,8 +311,8 @@ input[type=button] {
                        <input type="button" name="dateType" id="dateType5" value="1개월" onclick="setSearchDate('1m')"/>
                        <label for="dateType5"></label>
                    </span>
-                   
-          
+
+
            <!-- <div class="clearfix">
                시작일 -->
                <span class="dset">
@@ -300,7 +332,7 @@ input[type=button] {
 </div>
 	<br>
 		<div align=center>
-			<table border="1" class="board1">
+			<table class="board1">
 				<thead>
 				<tr class="rl">
 					<th class="th_refund">주문번호</th>
@@ -319,14 +351,15 @@ input[type=button] {
 			</tr>
 			<% } %>
 			</tbody>
-			</table>			
+			</table>
 			</div>
 		<br>
 		<div id="paginArea">
 		<div class="pagingArea" align="center">
 			<button
-				onclick="location.href = '<%=request.getContextPath()%>/refundList.mp?currentPage=1'"><</button>
+				onclick="location.href = '<%=request.getContextPath()%>/cancelLook.mp?currentPage=1'"><</button>
 			<% 
+
 				if (currentPage <= 1) {
 			%>
 			<button disabled><</button>
@@ -334,7 +367,7 @@ input[type=button] {
 				} else {
 			%>
 			<button
-				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage - 1%>'"><</button>
+				onclick="location.href='<%=request.getContextPath()%>/cancelLook.mp?currentPage=<%=currentPage - 1%>'"><</button>
 			<%
 				}
 			%>
@@ -347,7 +380,7 @@ input[type=button] {
 				} else {
 			%>
 			<button
-				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=p%>'"><%=p%></button>
+				onclick="location.href='<%=request.getContextPath()%>/cancelLook.mp?currentPage=<%=p%>'"><%=p%></button>
 			<%
 				}
 				}
@@ -362,12 +395,12 @@ input[type=button] {
 				} else {
 			%>
 			<button
-				onclick="location.hreh='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=currentPage + 1%>'">></button>
+				onclick="location.hreh='<%=request.getContextPath()%>/cancelLook.mp?currentPage=<%=currentPage + 1%>'">></button>
 			<%
 				}
 			%>
 			<button
-				onclick="location.href='<%=request.getContextPath()%>/refundList.mp?currentPage=<%=maxPage%>'">>></button>
+				onclick="location.href='<%=request.getContextPath()%>/cancelLook.mp?currentPage=<%=maxPage%>'">>></button>
 			</div>
 	</div></div>
 
@@ -387,14 +420,14 @@ input[type=button] {
     				var $dateTbody = $(".board1 tbody");
 
     				var $pagingDiv1 = $("#pagingArea div");
-    				$dateTbody.html(""); 
+    				$dateTbody.html("");
     				$pagingDiv1.html("");
-    				for(var i = 0; i < data["dateList"].length; i++){
+    				for(var i = 0; i < data["cList"].length; i++){
     					var $tr = $("<tr class='rl'>");
-    					var $ono = $("<td>").text(data["dateList"][i].ono);
-    					var $pname = $("<td>").text(data["dateList"][i].pname);
-    					var $dtPay = $("<td>").text(data["dateList"][i].dtPay);
-    					var $payStatus = $("<td>").text(data["dateList"][i].payStatus);
+    					var $ono = $("<td>").text(data["cList"][i].ono);
+    					var $pname = $("<td>").text(data["cList"][i].pname);
+    					var $dtPay = $("<td>").text(data["cList"][i].dtPay);
+    					var $payStatus = $("<td>").text(data["cList"][i].payStatus);
     					 
     					$tr.append($ono);
     					$tr.append($pname);
@@ -409,45 +442,45 @@ input[type=button] {
 					var listCount = data["pi"].listCount;
 					var maxPage = data["pi"].maxPage;
 					var startPage = data["pi"].startPage;
-					
+
 					var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
 					var $firstBtn = $("<button>").text('<<');
 					var $preBtn = $("<button>").text('<');
-					
+
 					var $nextBtn =$("<button>").text('>');
 					var $lastBtn =$("<button>").text('>>');
-    				
+
 
 					$pagingDiv2.append($firstBtn);
 					$pagingDiv2.append($preBtn);
-					$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+					$firstBtn.attr('onclick',"newPage("+currentPage+")");
 					if(currentPage <= 1){
-						$preBtn.attr('disabled',true);							
+						$preBtn.attr('disabled',true);
 					}else{
-						$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+						$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");
 					}
-					for(var i = startPage ; i <= endPage ;i++){		
+					for(var i = startPage ; i <= endPage ;i++){
 						var $numBtn = $("<button>");
 						if(currentPage == i){
-							$numBtn.attr('disabled',true);																
+							$numBtn.attr('disabled',true);
 						}else{
-							$numBtn.attr('onclick',"newPage("+i+")");																
+							$numBtn.attr('onclick',"newPage("+i+")");
 						}
 						$numBtn.text(i);
 						$pagingDiv2.append($numBtn);
 					}
 					if(currentPage >= maxPage){
-						$nextBtn.attr('disabled',true);							
+						$nextBtn.attr('disabled',true);
 					}else{
-						$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+						$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');
 					}
-					$lastBtn.attr('onclick','newPage('+maxPage+')');						
-					
+					$lastBtn.attr('onclick','newPage('+maxPage+')');
+
 					$pagingDiv2.append($nextBtn);
 					$pagingDiv2.append($lastBtn);
-					
-					$pagingDiv1.append($pagingDiv2);							
-					}		
+
+					$pagingDiv1.append($pagingDiv2);
+					}
 			});
 		});
 
@@ -455,83 +488,76 @@ input[type=button] {
 	function newPage(page){
 		var start =$("input[id='searchStartDate']").val();
 		var end = $("input[id='searchEndDate']").val();
-		var currentPage = page;
 		$.ajax({
-			url:"orderDate.mp",
+			url:"cancelDate.mp",
 			type:"post",
 			data:{"start":start,"end":end},
 			success:function(data){
-				var $dateTbody = $(".dateBoard tbody");
+				var $dateTbody = $(".board1 tbody");
+
 				var $pagingDiv1 = $("#pagingArea div");
-				$dateTbody.html(""); 
+				$dateTbody.html("");
 				$pagingDiv1.html("");
-				for(var i = 0; i < data["dateList"].length; i++){
-					var $tr = $("<tr class='od'>");
-					var $ono = $("<td>").text(data["dateList"][i].ono);							
-					var $oDate = $("<td>").text(data["dateList"][i].oDate);
-					var $pname = $("<td>").text(data["dateList"][i].pname);
-					var $br = $("</br>");
-					var $btn_od = $("<button class='btn_od'>").text("주문상세");
-					var $pstatus = $("<td>").text(data["dateList"][i].pstatus);
-					var ono1 = data["dateList"][i].ono;    					
-					 $btn_od.attr("onclick",'searchDate('+ono1+')');
+				for(var i = 0; i < data["cList"].length; i++){
+					var $tr = $("<tr class='rl'>");
+					var $ono = $("<td>").text(data["cList"][i].ono);
+					var $pname = $("<td>").text(data["cList"][i].pname);
+					var $dtPay = $("<td>").text(data["cList"][i].dtPay);
+					var $payStatus = $("<td>").text(data["cList"][i].payStatus);
 					$tr.append($ono);
-					$tr.append($oDate);
 					$tr.append($pname);
-					$pname.append($br);
-					$pname.append($btn_od);
-					$tr.append($pstatus);						
+					$tr.append($dtPay);
+					$tr.append($payStatus);
 					$dateTbody.append($tr);
 				}
-				
 				var currentPage = data["pi"].currentPage;
 				var endPage = data["pi"].endPage;
 				var limit = data["pi"].limit;
 				var listCount = data["pi"].listCount;
 				var maxPage = data["pi"].maxPage;
 				var startPage = data["pi"].startPage;
-				
+
 				var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
 				var $firstBtn = $("<button>").text('<<');
 				var $preBtn = $("<button>").text('<');
-				
+
 				var $nextBtn =$("<button>").text('>');
 				var $lastBtn =$("<button>").text('>>');
-				
-				
+
+
 				$pagingDiv2.append($firstBtn);
 				$pagingDiv2.append($preBtn);
-				$firstBtn.attr('onclick',"newPage("+currentPage+")");						
+				$firstBtn.attr('onclick',"newPage("+currentPage+")");
 				if(currentPage <= 1){
-					$preBtn.attr('disabled',true);							
+					$preBtn.attr('disabled',true);
 				}else{
-					$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");						
+					$preBtn.attr('onclick',"newPage("+(currentPage-1)+")");
 				}
-				for(var i = startPage ; i <= endPage ;i++){		
+				for(var i = startPage ; i <= endPage ;i++){
 					var $numBtn = $("<button>");
 					if(currentPage == i){
-						$numBtn.attr('disabled',true);																
+						$numBtn.attr('disabled',true);
 					}else{
-						$numBtn.attr('onclick',"newPage("+i+")");																
+						$numBtn.attr('onclick',"newPage("+i+")");
 					}
 					$numBtn.text(i);
 					$pagingDiv2.append($numBtn);
 				}
 				if(currentPage >= maxPage){
-					$nextBtn.attr('disabled',true);							
+					$nextBtn.attr('disabled',true);
 				}else{
-					$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');							
+					$nextBtn.attr('onclick','newPage('+(currentPage+1)+')');
 				}
-				$lastBtn.attr('onclick','newPage('+maxPage+')');						
-				
+				$lastBtn.attr('onclick','newPage('+maxPage+')');
+
 				$pagingDiv2.append($nextBtn);
 				$pagingDiv2.append($lastBtn);
-				
-				$pagingDiv1.append($pagingDiv2);							
-				}		
+
+				$pagingDiv1.append($pagingDiv2);
+				}
 		});
 	}
 </script>
-	
+
 </body>
 </html>
