@@ -189,7 +189,7 @@ $(document).ready(function() {
     padding: 5px;
     font-weight: bold;
     vertical-align: top;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e6ccff;
     background: #FFF;
 }
 
@@ -197,7 +197,7 @@ $(document).ready(function() {
 
     padding: 5px;
     vertical-align: top;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e6ccff;
 }
 
 .dateBoard thead th {
@@ -205,7 +205,7 @@ $(document).ready(function() {
     font-weight: bold;
     vertical-align: top;
     color: black;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 2px solid #e6ccff;
 }
 
 .td_select {
@@ -236,11 +236,14 @@ $(document).ready(function() {
 
 #selectDate {
    background:#FFF;
+   
 }
 
 input[type=button] {
-   border:1px solid black;
+   border:1px solid #e6ccff;
    background:#FFF;
+   width:50px;
+   border-radius:5px;
 }
 
 .tt_div {
@@ -268,13 +271,17 @@ input[type=button] {
 
 .pagingArea > button {
 	background:#FFF;
-	border: 1px solid black;
-
+	border:none;
+	color:#e6ccff;
+	font-weight:bold;
+	width:20px;
+	
 }
 
 .btn_od {
-	border:1px solid black;
+	border:1px solid #ccc;
 	background:#FFF;
+	width:60px;
 }
 
 .th_orderLook {
@@ -311,7 +318,7 @@ tr > th, tr> td{
          <col width="123px">
          <col width="*">
      </colgroup>
-     <h2>주문조회</h2>
+     <h3>주문조회</h3>
      <tbody>
          <tr>
              <th class="th_select">기간별 조회</th>
@@ -333,11 +340,11 @@ tr > th, tr> td{
            <!-- <div class="clearfix">
                시작일 -->
                <span class="dset">
-                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" value="${adminBuildEnergyVo.startdate }" >               </span>
+                   <input type="text" class="datepicker inpType" name="startdate" id="searchStartDate" style="border: 1px solid #e6ccff;" value="${adminBuildEnergyVo.startdate }" >               </span>
                <span class="demi">~</span>
                <!-- 종료일 -->
                <span class="dset">
-                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" value="${adminBuildEnergyVo.enddate }" >
+                 <input type="text" class="datepicker inpType" name="enddate" id="searchEndDate" style="border: 1px solid #e6ccff;" value="${adminBuildEnergyVo.enddate }" >
                </span>
                <span>
                    	<input type="button" name="selectDate" id="selectDate"  onclick="search();" value="조회">
