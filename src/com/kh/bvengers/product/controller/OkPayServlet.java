@@ -43,7 +43,7 @@ public class OkPayServlet extends HttpServlet {
 		String priceSplit = request.getParameter("priceSplit");
 		String[] priceList = priceSplit.split(",");
 		
-		
+		String receiptId = request.getParameter("receiptId");
 		
 		String addNum = request.getParameter("addNum");
 		String address = request.getParameter("address");
@@ -68,6 +68,7 @@ public class OkPayServlet extends HttpServlet {
 		pay.setDeliverySite(add);
 		pay.setRecieverPhone(phone);
 		pay.setMail(mail);
+		pay.setReceipt(receiptId);
 		
 		int result = new ProductService().okPay(pay, count, codeList, priceList);
 		

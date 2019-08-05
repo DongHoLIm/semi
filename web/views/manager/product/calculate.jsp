@@ -199,14 +199,17 @@ tr {
 				$("#check:checked").each(function(index){
 					code+=$(this).val()+","
 				});
-				
+				var application_id = "5d2fec7c396fa61e224d5733";
+				var private_key = "ejl6AnJUiKPi72RjxiJd578NY7KzMSiq4p5FxWXmC6U=";
 				$.ajax({
-					url:"disposeFail.cal",
-					type:"post",
-					data:{"code":code, "currentPage":currentPage, "limit":limit},
-					success:function(data){
-							window.location.reload();	
-					}
+					url:"https://api.bootpay.co.kr/request/token",
+			        type:"post",
+			        dataType:'json',
+			        data:{application_id:application_id, private_key:private_key},
+			        success:function(data){
+			        	console.log(data["data"]["token"]);
+			        	var token = data["data"]["token"];
+			        }
 				});
 			});
 		};

@@ -261,8 +261,10 @@
 							<input type="number" name="phone1" id="phone1" style="width:31%" maxlength="3" oninput="phoneNum(this);"> -
 							<input type="number" name="phone2" id="phone2" style="width:31%" maxlength="4" oninput="phoneNum(this);"> -
 							<input type="number" name="phone3" id="phone3" style="width:31%" maxlength="4" oninput="phoneNum(this);">
+							
 							<input type="hidden" name="productCode" value="<%= productCode %>"/>
 							<input type="hidden" name="priceSplit" value="<%= priceSplit %>"/>
+							<input type="hidden" name="receiptId" id="receiptId" value=""/>
 							<input type="hidden" name="count" value="<%=count %>" />
 						</td>
 					</tr>
@@ -291,7 +293,6 @@
 	            e.value = e.value.slice(0, e.maxLength);
 	        }
 	    }
-
 	 	function myAdd(){
 	 		var add1 = "<%=myAdd.get(0)%>";
 	 		var add2 = "<%=myAdd.get(1)%>";
@@ -424,8 +425,13 @@
 			}).close(function (data) {
 			    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
 			}).done(function (data) {
+				console.log(data);
+				var receiptId = data["receipt_id"];
+				$("#receiptId").val(receiptId);
+				console.log(receiptId);
 				document.getElementById('payForm').submit();
-				//결제가 정상적으로 완료되면 수행됩니다
+				
+				//결제가 정상적으로 완료되면 수행됩니다.
 				//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
 			});
 		}
