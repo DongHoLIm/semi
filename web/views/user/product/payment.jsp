@@ -20,7 +20,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js" type="application/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -115,6 +114,7 @@
 .payInfo{
 	width:80%;
 	border:1px solid #aabfde;
+	margin: 0 auto;
 }
 
 .payInfo th{
@@ -193,15 +193,11 @@
 
 	<div><%@ include file="../hfl/list.jsp"%></div>
 	<section id="sec1">
-
-
 		<div id="area">
-
-
 			<!-- 장바구니 목록(상품테이블) -->
 			<table class="pt">
 				<tr>
-				<%  
+				<%
 					String productCode = "";
 					String priceSplit = "";
 					int count = productPay.size();
@@ -222,16 +218,13 @@
 				<tr>
 					<td id="deliPay" style="border:1px solid #aabfde;"><label>택배비 : <%= productPay.get(i).get("deliPay") %>원</label></td>
 					<td colspan="2" id="price" ><label><%= productPay.get(i).get("productMoney") %>원</label></td>
-										
+
 				</tr>
 					<input type="hidden" value="<%=totalPrice += Integer.parseInt(productPay.get(i).get("deliPay")+"") + Integer.parseInt(productPay.get(i).get("productMoney")+"") %>"/>
 					<input type="hidden" value="<% productCode += productPay.get(i).get("productCode") + ","; %>"/>
 					<input type="hidden" value="<% priceSplit += productPay.get(i).get("productMoney") + ","; %>"/>
-					
-				
 				<%} %>
 			</table>
-
 			<hr width="80%"/>
 			<!-- 정보 입력창 -->
 			<form id="payForm" action="<%=request.getContextPath()%>/okPay.pa" name="payForm" method="post" align="center">
@@ -240,8 +233,8 @@
 						<th width="20%"><label>총 결제금액</label></th>
 						<td><input type="text" name="paymentPrice" id="paymentPrice"
 							value="<%= totalPrice %>원" readonly></td>
-					<tr>
 					</tr>
+					<tr>
 						<th><label>택배 수령자 </label></th>
 						<td><input type="text" placeholder="수령자 이름을 입력하세요"
 							name="userName" id="userName"></td>
@@ -270,7 +263,6 @@
 							<input type="number" name="phone3" id="phone3" style="width:31%" maxlength="4" oninput="phoneNum(this);">
 							<input type="hidden" name="productCode" value="<%= productCode %>"/>
 							<input type="hidden" name="priceSplit" value="<%= priceSplit %>"/>
-							
 							<input type="hidden" name="count" value="<%=count %>" />
 						</td>
 					</tr>
@@ -299,7 +291,7 @@
 	            e.value = e.value.slice(0, e.maxLength);
 	        }
 	    }
-	 	
+
 	 	function myAdd(){
 	 		var add1 = "<%=myAdd.get(0)%>";
 	 		var add2 = "<%=myAdd.get(1)%>";
@@ -307,19 +299,19 @@
 	 		document.getElementById('addNum').value = add1;
 	 		document.getElementById('address').value = add2;
 	 		document.getElementById('subAddress').value = add3;
-	 		
+
 	 	}
 
 	 	function addFind(){
 	 			var list = new Array();
-	 			
+
 	 			$("#select:checked").each(function(index, item){
 	 			   list.push($(item).val());
 	 			});
-	 				
+
 	 			var code = list.join(',');
 	 			console.log(code);
-	 			
+
 			new daum.Postcode({
 		           oncomplete: function(data) {
 
@@ -368,7 +360,7 @@
 
 			var message = document.getElementById('message').value;
 			var mail = document.getElementById('mail').value;
-			
+
 			var length = <%= productPay.size()%>-1;
 			var postTitle = '';
 			var productName = '';
@@ -379,9 +371,9 @@
 				postTitle = '<%= productPay.get(0).get("postsTitle") %>';
 				productName = '<%= productPay.get(0).get("productName") %>';
 			}
-			
-			
-			
+
+
+
 			BootPay.request({
 				price: '<%= totalPrice %>', //실제 결제되는 가격
 				application_id: "5d2fec7c396fa61e224d5730",
@@ -438,7 +430,7 @@
 			});
 		}
 
-		
+
 		$(document).ready(function(){
 			$('form[name="payForm"]').bind('submit', function(){
 				if($('input[name="userName"]').val()==''){

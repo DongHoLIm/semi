@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<body>
 <%@include file ="../hfl/header.jsp" %>
 	<br>
 	<br>
@@ -12,7 +13,7 @@
 	<table class="table table-bordered">
  		<tr hidden>
 			<td><input name="hiddenCode" value="1"></td>
- 		</tr> 
+ 		</tr>
  		<tr>
 			<th>제목:</th>
 			<td><input type="text" name="title" class="form-control"></td>

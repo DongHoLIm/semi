@@ -6,10 +6,10 @@
 	footer {
 	  width:100%;
 	  font-family: 'Nanum Gothic', sans-serif;
-	  background-color: black;
+	  background-color: #fffec2;
 	  padding: 10px;
 	  text-align: center;
-	  color: white;
+	  color: black;
 	  margin-top: 10%;
 	  position : relative;
 	  bottom : 0;
