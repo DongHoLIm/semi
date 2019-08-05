@@ -17,9 +17,10 @@
 	#productImage{
 		width:45%;
 	}
-	table{
+	#checkList{
 		text-align: center;
 		margin:0 auto ;
+		border-radius: 3px;
 	}
 	tr{
 		border:1px solid black;
@@ -29,9 +30,44 @@
 		border:1px solid black;
 		width:724px;
 		height:40px;
+		border-radius: 5px;
 	}
-	button{
-		background:black;
+	#checked{
+		margin: 0 auto;
+		text-align: center;
+	}
+	#checked button{
+		border: 2px solid gray;
+		background: black;
+		border-radius: 10px;
+		width: 14%;
+	}
+	#checked button:hover{
+		border:2px solid white;
+		background: gray;	
+	}
+	#depotLocation{
+		width: 15%;
+	  font-family: inherit;
+	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;  
+	  -webkit-appearance: none;
+	     -moz-appearance: none;
+	          appearance: none;
+	}
+	#depotLocation option{
+		background: black;
+		color:white;
+	}
+	#productWeight {
+	  width: 45%;
+	  font-family: inherit;
+	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;  
+	  -webkit-appearance: none;
+	     -moz-appearance: none;
+	          appearance: none;	  
+	}
+	#productWeight option{
+		background: black;
 		color:white;
 	}
 </style>
@@ -40,13 +76,13 @@
 <%@ include file = "/views/manager/hfl/managerHeader.jsp" %>
 	<br />
 	<br />
-	<h3 align="center">검수 상태변경</h3>
+	<h3 align="center"><label for="">검수 상태변경</label></h3>
 	<br />
 	<hr />
 	<br />
 	<div id="checkInsert">
 		<form action="<%=request.getContextPath()%>/requestCheck.dp" method="post">
-		<table>
+		<table id="checked">
 			<tr>
 				<td rowspan="5" width="200px" height="300px">
 				<img alt="" src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%=str[3] %>" width="200px" height="300px">
@@ -67,40 +103,40 @@
 				<td hidden><input type="text" value="<%=str[2] %>" name="productCate" /></td>
 			</tr>
 			<tr>
-				<td>창고 위치</td>
-				<td align="left">
-					<select name="root" id="">
+				<td><label for="">창고 위치</label></td>
+				<td align="center">
+					<select name="root" id="depotLocation">
 						<option value="PC">PC</option>
 						<option value="NOTE">노트북</option>
 						<option value="PRO">가전제품</option>
 					</select>
-					종류 
-					<select name="location" id="">
+					<label for="">종류</label> 
+					<select name="location" id="depotLocation">
 						<option value="A">A</option>
 						<option value="B">B</option>
 						<option value="C">C</option>
 					</select>
-					섹션
-					<select name="session" id="" >
+					<label for="">섹션</label>
+					<select name="session" id="depotLocation" >
 						<option value="a">a</option>
 						<option value="b">b</option>
 						<option value="c">c</option>
 					</select>
-					층
-					<select name="room" id="">
+					<label for="">층</label>
+					<select name="room" id="depotLocation">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
 					</select>
-					호
+					<label for="">호</label>
 				</td>
 			</tr>
 			<tr>
-				<td>상품무게</td>
+				<td><label for="">상품무게</label></td>
 				<td>
-					<select name="deliveryPrice">
+					<select name="deliveryPrice" id="productWeight">
 						<option value="2500">500G이하</option>
 						<option value="3500">500G~1KG이하</option>
 						<option value="4000">1KG~10KG이하</option>
@@ -110,13 +146,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3"><h4>검수진행상태</h4></td>
+				<td colspan="3"><h4><label for="">검수진행상태</label></h4></td>
 			</tr>
 			<tr>
 				<td colspan="3">
-					<input type="radio" value="requestCheck" name="request" id="request" checked/>검수 요청&nbsp;&nbsp;&nbsp;
-					<input type="radio" value="checking" name="request" id="checking"/>검수중 &nbsp;&nbsp;&nbsp;
-					<input type="radio" value="complete" name="request" id="complete"/>검수완료 &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="requestCheck" name="request" id="request" checked/><label for="">검수 요청</label>&nbsp;&nbsp;&nbsp;
+					<input type="radio" value="checking" name="request" id="checking"/><label for="">검수중</label> &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="complete" name="request" id="complete"/><label for="">검수완료</label> &nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -124,13 +160,13 @@
 			</tr>
 			<tr>
 				<td colspan="3" id="complteStatus">
-					<input type="radio" value="pass" name="status" id="pass"/>통과 &nbsp;&nbsp;&nbsp;
-					<input type="radio" value="fail" name="status" id="notpass"/>미통과 &nbsp;&nbsp;&nbsp;
-					<input type="radio" value="checkPass" name="status" id="reasonPass"/>조건부통과 &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="pass" name="status" id="pass"/><label for="">통과</label> &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="fail" name="status" id="notpass"/><label for="">미통과</label> &nbsp;&nbsp;&nbsp;
+					<input type="radio" value="checkPass" name="status" id="reasonPass"/><label for="">조건부통과</label> &nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" id="reasonTitle"><h4>조건부 통과 사유</h4></td>
+				<td colspan="3" id="reasonTitle"><h4><label for="">조건부 통과 사유</label></h4></td>
 			</tr>
 			<tr>
 				<td colspan="3" id="reason">

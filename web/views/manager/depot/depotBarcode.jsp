@@ -35,23 +35,30 @@
 		width:80%;
 		height: 80%;
 		border:2px solid black;
+		margin: 0 auto;
 	}
 	#createBarcode{
 		float:right;
-		margin-right: 140px;
+		margin-right: 10%;
+		width: 15%;
+		background: black;
+		color:white;
+		border-radius: 15px;
+	}
+	#createBarcode:hover{
+		background: gray;
+		color:white;
 	}
 </style>
 </head>
 <body>
 <%@ include file ="/views/manager/hfl/managerHeader.jsp" %>
 <br />
-	<h2 align="center">바코드 생성</h2>
+	<h2 align="center"><label for="">바코드 생성</label></h2>
 	<form action="">
 	<div id ="barcodeMain">
 		<div id="barCreate">
-		<button onclick="barcodePrint();" id="createBarcode"
-		style="color:white;background:black;">
-		바코드생성</button>
+		<button onclick="barcodePrint();" id="createBarcode">바코드생성</button>
 		</div>
 		<br />
 		<br />	
@@ -70,11 +77,11 @@
 			<tr>
 				<td><input type="checkBox" id="check" value="<%=d.getProductCode() %>"/></td>
 				<td><label for=""><%=d.getProductNumber() %></label></td>
-				<td><a href="" id="productCode"><%=d.getProductCode() %></a></td>
-				<td><a href=""><%=d.getProductName() %></a></td>
-				<td><a href=""><%=d.getLocationCode() %></a></td>
-				<td><a href=""><%=d.getCheckDate() %></a></td>
-				<td><a href=""><%=d.getReleaseDate() %></a></td>
+				<td><label for=""><%=d.getProductCode() %></label></td>
+				<td><label for=""><%=d.getProductName() %></label></td>
+				<td><label for=""><%=d.getLocationCode() %></label></td>
+				<td><label for=""><%=d.getCheckDate() %></label></td>
+				<td><label for=""><%=d.getReleaseDate() %></label></td>
 			</tr>
 			<%} %>
 		</table>

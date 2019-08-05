@@ -67,6 +67,39 @@
   	text-align: center;
   	margin-bottom: 6%;
   }
+  #listremove{
+  	border-radius:15px;
+  	border:1px solid purple;
+  	background: white;
+  	color: purple;
+  	width: 15%; 
+  }
+  #listremove:hover{
+  	background: purple;
+  	color:white;
+  }
+  #choiceOrder{
+  	border-radius:15px;
+  	border:1px solid purple;
+  	background: white;
+  	color: purple;
+  	width: 15%; 
+  }
+  #choiceOrder:hover{
+  	background: purple;
+  	color:white;
+  }
+  #orderProduct{
+  	border-radius:15px;
+  	border:1px solid purple;
+  	background: white;
+  	color: purple;
+  	width: 15%; 
+  }
+  #orderProduct:hover{
+  	background: purple;
+  	color:white;
+  }
   </style>
 </head>
 <body>
@@ -74,7 +107,7 @@
 <%@ include file="../hfl/list.jsp"%>
 <div id="basketList">
 	<h2 id="basketTitle">장바구니</h2>
-	<button onclick="removeList();">리스트제거</button>
+	<button onclick="removeList();" id="listremove">리스트제거</button>
   <table class="table">
     <thead>
       <tr>
@@ -122,8 +155,8 @@
   	</tbody>
   </table>
   <div id="total">
-  	<button onclick="choiceProduct();">선택 상품 주문</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  	<button onclick="selectAll();">전체 상품 주문</button>
+  	<button onclick="choiceProduct();" id="choiceOrder">선택 상품 주문</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	<button onclick="selectAll();" id="orderProduct">전체 상품 주문</button>
   </div>
 </div>
 <script>

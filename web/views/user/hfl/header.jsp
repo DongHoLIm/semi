@@ -146,7 +146,17 @@ li:hover, button:hover {
    .navbar-inverse .navbar-nav>.open>a:focus {
    background: white;
 }
-
+.pagingArea button{
+		width:2%;
+		color: black;
+		background: white;
+		border-radius: 50px;
+	}
+	.pagingArea button:hover{
+		color: white;
+		background: black;
+		border-radius: 10px;
+	}
 </style>
 </head>
 <body>

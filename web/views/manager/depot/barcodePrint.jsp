@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="/sp/js/jquery-barcode.js"></script>
 <style>
@@ -32,21 +31,25 @@
 		width:100%;
 		background: black;
 		color:white;
+		border-radius: 50px;
 	}
 	#create{
 		width:100%;
 		background: black;
 		color:white;
+		border-radius: 50px;
 	}
 </style>
 </head>
 <body>
 	<table id="depotMain" align="center">
 		<caption>출력 내용 </caption>
-		<tr>
-		<td><button onclick="createBarCode();" id="create">생성</button></td>
-		<td colspan="5"><button id="print-button" onclick="javaScript:window.print();">인쇄하기</button></td>
-		</tr>	
+		<thead>
+			<tr id="btnArea">
+			<td><button onclick="createBarCode();" id="create">생성</button></td>
+			<td colspan="5"><button id="print-button" onclick="javaScript:window.print(); printBarcode();">인쇄하기</button></td>
+			</tr>
+		</thead>	
 			<tr>
 				<th>번호</th>
 				<th>상품코드</th>
@@ -76,9 +79,8 @@
 			 $("#bcTarget8").barcode($("#productCode8").text(), "codabar");
 			 $("#bcTarget9").barcode($("#productCode9").text(), "codabar");
 			
-		}
-	}
-		
+		}		
+	}		
 </script>
 	
 </body>
