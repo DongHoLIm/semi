@@ -138,6 +138,14 @@ li:hover, button:hover {
 	-moz-transition: transform .35s;
 	-webkit-transition: transform .35s;
 }
+.navbar{
+	border-right : 3px solid #ffe6e6;
+	border-bottom: 3px solid #ffe6e6;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+   .navbar-inverse .navbar-nav>.open>a:focus {
+   background: white;
+}
 
 </style>
 </head>
@@ -145,7 +153,7 @@ li:hover, button:hover {
 <div align="center" id="logoDiv">
 	<a href="index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
-<nav class="navbar navbar-inverse" style="background:#fffec2">
+<nav class="navbar" style="background:white  ">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -166,6 +174,7 @@ li:hover, button:hover {
            <li><a style="color:black" href="<%=request.getContextPath()%>/listMyPage.mp">마이페이지</a></li>
            <%} else {%>
            <li class="byPageBtn"><a class="myPageBtn" style="color:black" onclick="myPage();" >마이페이지</a></li>
+          	<hr>	
            <script>
 				function myPage(){
 					if(confirm("로그인 후 이용해주시기 바랍니다.")){
