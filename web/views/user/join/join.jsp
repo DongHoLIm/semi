@@ -121,7 +121,7 @@ if($("#password").val() == ($("#password2").val())){
 <style>
 .box_join {
    width:55%;
-   border:2px solid black;
+   border:2px solid lightpink;
    margin:0 auto;
    border-radius: 5px;
 }
@@ -134,7 +134,7 @@ boder-bottom:5px;
 
 }
 .input_join {
-   width:40%;
+   width:60%;
    margin:0 auto;
    border-radius: 5px;
    height:32px;
@@ -153,23 +153,23 @@ boder-bottom:5px;
    height:40px;
    width:40%;
    margin:0 auto;
-   border: 1px solid black;
+   border: 1px solid #ffe6e6;
    font-size: 15px;
    font-family:'Nanum Gothic', sans-serif;
    font-weight:550;
    border-radius: 5px;
-   background-color: black;
-   color: white;
+   background-color: #ffe6e6;
+   color: hotpink;
    }
 .btn_overlap,.btn_overla,.btn_overlap1 {
    margin:0 auto;
-   border: 1px solid black;
+   border: 1px solid #ffe6e6;
    font-size: 14px;
    font-family:'Nanum Gothic', sans-serif;
    font-weight:550;
    border-radius: 5px;
-   background-color: black;
-   color: white;
+   background-color: #ffe6e6;
+   color: hotpink;
    }
 .btn_join:hover {color:white;}
 </style>

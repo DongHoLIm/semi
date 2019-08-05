@@ -228,7 +228,7 @@
          <button onclick ="location.hreh='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=currentPage1 + 1%>'">></button>
          <%} %>
          <button onclick = "location.href='<%=request.getContextPath()%>/selectNotice.no?currentPage1=<%=maxPage1%>'">>></button>
-
+			</div>
       </div>
       	<br><br>
       <div align = "center">

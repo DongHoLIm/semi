@@ -113,7 +113,7 @@
 .searchArea {
    margin-left: auto;
    margin-right: 10px;
-   width: 400px;
+   width: 350px;
    position: absolute;
    right: 10px;
    float: right;
