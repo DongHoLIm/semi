@@ -121,7 +121,7 @@ textarea {
                <%} %>
                <td rowspan="3" width="150px">
                   <div id="titleImgArea" align="center">
-                     <input type="hidden" value="<%= b.getPostsId() %>" name="postsId" />
+                     <input type="hidden" value="<%= b.getPostsId() %>" id="postsId" name="postsId" />
                      <img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= productImg.getNewFileName() %>" id="titleImg" />
                   </div>
                </td>
@@ -190,8 +190,10 @@ textarea {
       	<div id="btnArea">
 	      <button id="addBtn" type="button" class="btns"align="center">댓글 등록</button>
 	      <button id="showBtn" type="button" class="btns" align="center">댓글 닫기</button>
-	      <%if( loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
+	      <%if(loginUser != null && loginUser.getMemberId().equals(b.getWriter())) {%>
 	      <button id="editBtn" type="button" class="btns" align="center">수정 요청</button>
+      	  <%} else if(loginUser != null && loginUser.getMemberId().equals("admin")) {%>
+	      <button id="deleteBtn" type="button" class="btns" align="center">삭제</button>
       	  <%} %>
       	</div>
       <hr />
@@ -347,7 +349,13 @@ textarea {
       });
        $("#editBtn").click(function(){
 			alert("상품 수정 요청 페이지로 이동합니다.");
-			location.href="<%=request.getContextPath()%>/";
+			location.href="<%=request.getContextPath()%>/update.no?num="+postsId;
+       });
+       $("#deleteBtn").click(function(){
+          if(confirm("정말로 이 게시글을 삭제하시겠습니까?")){
+            var postsId = $("#postsId").val();
+            location.href="<%=request.getContextPath()%>/deleteProduct.pd?num="+postsId;
+          }
        });
    </script>
 </body>

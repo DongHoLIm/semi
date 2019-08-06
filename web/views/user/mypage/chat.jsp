@@ -21,7 +21,7 @@
 	.chatBtn{
 		width: 10%;
 		color: red;
-		background: #fffec2;
+		background: #ffe6e6;
 	}
 </style>
 <body>
@@ -60,11 +60,13 @@
 	   textarea += document.getElementById("pre").value;
 	   console.log($("#pre").val());
 	};
-   function enterkey() {
-        if (window.event.keyCode == 13) {
-            send();
-        }
-    }
+	 $(document).ready(function() {
+			$(document).bind('keydown', function(e) {
+				if (e.keyCode == 13) {
+		   			send();
+				}
+			});
+		});
     /* window.setInterval(function() {
         var elem = document.getElementById('messageWindow');
         elem.scrollTop = elem.scrollHeight;

@@ -24,55 +24,55 @@ import com.kh.bvengers.user.member.model.vo.Member;
 import com.kh.bvengers.user.myPage.model.vo.myPage;
 
 public class ProductDao {
-	
+
 	private Properties prop = new Properties();
-	
+
 	public ProductDao() {
 		String fileName = ProductDao.class.getResource("/sql/user/product/product-board-query.properties").getPath();
-		
+
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public int insertProductPost(Connection con, Posts posts) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertProductPost");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, posts.getPostsTitle());
 			pstmt.setString(2, posts.getMemberNo()+"");
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int insertPostContents(Connection con, PostsContents postsContents) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertPostContents");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, postsContents.getPostsId());
 			pstmt.setString(2, postsContents.getContents());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -80,16 +80,16 @@ public class ProductDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int insertProduct(Connection con, Product product) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertProduct");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, product.getProductCode());
@@ -99,7 +99,7 @@ public class ProductDao {
 			pstmt.setString(5, product.getMemberNo());
 			pstmt.setString(6, product.getKeepDate());
 			pstmt.setString(7, product.getPostId());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -107,40 +107,40 @@ public class ProductDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int insertProductCheck(Connection con, Product product) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertProductCheck");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, product.getProductCode());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
-	
-	
+
+
 
 	public int insertAttachments(Connection con, ArrayList<Attachment> fileList) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertAttachments");
-		
+
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
 				pstmt = con.prepareStatement(query);
@@ -156,7 +156,7 @@ public class ProductDao {
 					level = 1;
 				}
 				pstmt.setInt(6, level);
-				
+
 				result += pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
@@ -165,27 +165,27 @@ public class ProductDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
-	
-	
+
+
 	public int selectPostsCurrval(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
 		int postsId = 0;
-		
+
 		String query = prop.getProperty("selectPostsCurrval");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
-			
+
 			if(rset.next()) {
 				postsId = rset.getInt("currval");
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -193,8 +193,8 @@ public class ProductDao {
 			close(stmt);
 			close(rset);
 		}
-		
-		
+
+
 		return postsId;
 	}
 
@@ -203,15 +203,15 @@ public class ProductDao {
 		ResultSet rset = null;
 		ArrayList<HashMap<String, Object>> productPay = null;
 		HashMap<String, Object> hmap = null;
-		
+
 		String query = prop.getProperty("productPay");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, postsId);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			productPay = new ArrayList<HashMap<String, Object>>();
 			while(rset.next()) {
 				hmap = new HashMap<String, Object>();
@@ -227,11 +227,11 @@ public class ProductDao {
 				hmap.put("categoryDiv", rset.getString("SUBCATE"));
 				hmap.put("mainCateDiv", rset.getString("MAINCATE"));
 				hmap.put("deliPay",  rset.getString("DELIVERY_PAY"));
-				
-				
+
+
 				productPay.add(hmap);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -239,25 +239,25 @@ public class ProductDao {
 			close(pstmt);
 			close(rset);
 		}
-		
+
 		return productPay;
 	}
 
-	
+
 
 	public int updateMemberEtc(Connection con, Member member) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("updateMemberEtc");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, member.getAccountHolder());
 			pstmt.setString(2, member.getBankCode());
 			pstmt.setString(3, member.getAccountNo());
 			pstmt.setString(4, member.getMemberId());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -265,16 +265,16 @@ public class ProductDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int insertPayOrder(Connection con, Payment pay) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertPayOrder");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pay.getMemberNo());
@@ -283,16 +283,16 @@ public class ProductDao {
 			pstmt.setString(4, pay.getMemberNo());
 			pstmt.setString(5, pay.getPayMoney()+"");
 			pstmt.setString(6, pay.getReceipt());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -300,19 +300,19 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String siteNum = null;
-		
+
 		String query = prop.getProperty("selectSite");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pay.getSubDeliverySite());
 			pstmt.setString(2, pay.getMemberNo());
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				siteNum = rset.getString("DELIVERY_SITE_NO");
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,96 +320,96 @@ public class ProductDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return siteNum;
 	}
 
 	public int insertSite(Connection con, Payment pay) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertSite");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pay.getDeliverySite());
 			pstmt.setString(2, pay.getRecieverName());
 			pstmt.setString(3, pay.getRecieverPhone());
 			pstmt.setString(4, pay.getMemberNo());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
-	
+
 	public String selectOrderCurr(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String orderNo = "";
-		
+
 		String query = prop.getProperty("orderCurr");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
-			
+
 			if(rset.next()) {
 				orderNo = rset.getString("currval");
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(stmt);
 			close(rset);
 		}
-		
+
 		return orderNo;
 	}
-	
+
 	public String siteCurr(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String siteNo = "";
-		
+
 		String query = prop.getProperty("siteCurr");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
-			
+
 			if(rset.next()) {
 				siteNo = rset.getString("currval");
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(stmt);
 			close(rset);
 		}
-		
+
 		return siteNo;
 	}
 
 	public int insertDelivery(Connection con, Payment pay) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertDelivery");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pay.getDeliverySiteCode());
 			pstmt.setString(2, pay.getMemberNo());
 			pstmt.setString(3, pay.getOrderNo());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -417,27 +417,27 @@ public class ProductDao {
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int disabledPostOpen(Connection con, Payment pay) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("disabledPostOpen");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pay.getProductCode());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -472,25 +472,25 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Calcul> list = null;
-		
+
 		String query = prop.getProperty("selectCalculate");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
-			
+
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Calcul>();
-			
+
 			while(rset.next()) {
 				Calcul c = new Calcul();
-				
+
 				c.setAdjustNo(rset.getString("adNo"));
 				c.setPayDtno(rset.getString("pno"));
 				c.setPrice(rset.getString("money"));
@@ -500,7 +500,7 @@ public class ProductDao {
 				c.setReceipt(rset.getString("receipt"));
 				list.add(c);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -508,48 +508,48 @@ public class ProductDao {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
+
+
 		return list;
 	}
 
 	public int disposeSuccess(Connection con, String code) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("disposeSuccess");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, code);
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int disposeFail(Connection con, String code) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("disposeFail");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, code);
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -564,7 +564,7 @@ public class ProductDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, selOption);
 			pstmt.setString(2, selectDate);
-			
+
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
@@ -592,7 +592,7 @@ public class ProductDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, selOption);
-			
+
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
@@ -620,7 +620,7 @@ public class ProductDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, selectDate);
-			
+
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
@@ -643,36 +643,36 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Calcul> list = null;
-		
+
 		String query = prop.getProperty("selectCalculSearch");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
-			
+
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			pstmt.setString(3, selOption);
 			pstmt.setString(4, selectDate);
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Calcul>();
-			
+
 			while(rset.next()) {
 				Calcul c = new Calcul();
-				
+
 				c.setAdjustNo(rset.getString("adNo"));
 				c.setPayDtno(rset.getString("pno"));
 				c.setPrice(rset.getString("money"));
 				c.setMemberNo(rset.getString("memberNo"));
 				c.setAdjustDiv(rset.getString("div"));
 				c.setAdjustDate(rset.getString("aDate"));
-				
+
 				list.add(c);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -680,8 +680,8 @@ public class ProductDao {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
+
+
 		return list;
 	}
 
@@ -689,35 +689,35 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Calcul> list = null;
-		
+
 		String query = prop.getProperty("selectCalculSearchOp");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
-			
+
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			pstmt.setString(3, selOption);
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Calcul>();
-			
+
 			while(rset.next()) {
 				Calcul c = new Calcul();
-				
+
 				c.setAdjustNo(rset.getString("adNo"));
 				c.setPayDtno(rset.getString("pno"));
 				c.setPrice(rset.getString("money"));
 				c.setMemberNo(rset.getString("memberNo"));
 				c.setAdjustDiv(rset.getString("div"));
 				c.setAdjustDate(rset.getString("aDate"));
-				
+
 				list.add(c);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -725,8 +725,8 @@ public class ProductDao {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
+
+
 		return list;
 	}
 
@@ -734,35 +734,35 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Calcul> list = null;
-		
+
 		String query = prop.getProperty("selectCalculSearchDt");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
-			
+
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			pstmt.setString(3, selectDate);
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<Calcul>();
-			
+
 			while(rset.next()) {
 				Calcul c = new Calcul();
-				
+
 				c.setAdjustNo(rset.getString("adNo"));
 				c.setPayDtno(rset.getString("pno"));
 				c.setPrice(rset.getString("money"));
 				c.setMemberNo(rset.getString("memberNo"));
 				c.setAdjustDiv(rset.getString("div"));
 				c.setAdjustDate(rset.getString("aDate"));
-				
+
 				list.add(c);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -770,7 +770,7 @@ public class ProductDao {
 			close(pstmt);
 			close(rset);
 		}
-		
+
 		return list;
 	}
 
@@ -781,57 +781,57 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("selectRefundManagerCount");
-		
-		
+
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				listCount = rset.getInt(1);
 			}
-			
-			
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 			close(rset);
 		}
-		
+
 		return listCount;
 	}
 
-	
-	
+
+
 
 
 	public ArrayList<Refund> selectRefundManagerList(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Refund> rList = null;
-		
+
 		String query = prop.getProperty("selectRefundManagerList");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
-			
+
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			rList = new ArrayList<Refund>();
-			
+
 			while(rset.next()) {
 				Refund r = new Refund();
-				
+
 				r.setOno(rset.getString("ORDER_NO"));
 				r.setrDate(rset.getDate("REFUND_DATE"));
 				r.setMno(rset.getString("MEMBER_NO"));
@@ -839,41 +839,41 @@ public class ProductDao {
 				r.setrStatus(rset.getString("REFUND_STATUS"));
 				r.setPno(rset.getString("PAY_NO"));
 				r.setpCode(rset.getString("PRODUCT_CODE"));
-				
+
 				rList.add(r);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
+
+
 		return rList;
-		
+
 	}
 
 
 	public int passRefund1(Connection con, String pass, String pno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("passRefund1");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pno);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -881,19 +881,19 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = prop.getProperty("passRefund2");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pno);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -901,19 +901,19 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = prop.getProperty("passAdjust1");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pcode);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -921,19 +921,19 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = prop.getProperty("passAdjust2");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pcode);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -942,15 +942,15 @@ public class ProductDao {
 		ResultSet rset = null;
 		ArrayList<HashMap<String, Object>> productPay = null;
 		HashMap<String, Object> hmap = null;
-		
+
 		String query = prop.getProperty("basketPay");
-		
+
 		try {
 			productPay = new ArrayList<HashMap<String, Object>>();
 			for(int i = 0; i < list.length; i++) {
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, list[i]);
-				
+
 				rset = pstmt.executeQuery();
 				hmap = new HashMap<String, Object>();
 				while(rset.next()) {
@@ -966,7 +966,7 @@ public class ProductDao {
 					hmap.put("categoryDiv", rset.getString("SUBCATE"));
 					hmap.put("mainCateDiv", rset.getString("MAINCATE"));
 					hmap.put("deliPay",  rset.getString("DELIVERY_PAY"));
-					
+
 					productPay.add(hmap);
 				}
 			}
@@ -976,23 +976,23 @@ public class ProductDao {
 			close(pstmt);
 			close(rset);
 		}
-		
+
 		return productPay;
 	}
 
 	public int deleteBacket(Connection con, String codeList) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("deleteBacket");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, codeList);
-			
+
 			result = pstmt.executeUpdate();
-			
-			
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -1005,34 +1005,34 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<String> searchMyAdd = new ArrayList();
-		
+
 		String address = null;
-		
+
 		String query = prop.getProperty("searchMyAdd");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberNo);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				address = rset.getString("ADDRESS");
 			}
-			
+
 			String[] addressArr = address.split("\\$");
-			
+
 			for(int i = 0; i < addressArr.length; i++) {
 				searchMyAdd.add(addressArr[i]);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return searchMyAdd;
 	}
 
@@ -1040,13 +1040,13 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String seller = null;
-		
+
 		String query = prop.getProperty("searchSeller");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, code);
-			
+
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				seller = rset.getString("MEMBER_NO");
@@ -1058,20 +1058,20 @@ public class ProductDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return seller;
 	}
 
 	public int updateSellerInfo(Connection con, String seller) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("updateSellerInfo");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, seller);
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1086,25 +1086,25 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Refund> rList = null;
-		
+
 		String query = prop.getProperty("selectWait");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
 
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			rList = new ArrayList<Refund>();
-			
+
 			while(rset.next()) {
 				Refund r = new Refund();
-				
+
 				r.setOno(rset.getString("ORDER_NO"));
 				r.setrDate(rset.getDate("REFUND_DATE"));
 				r.setMno(rset.getString("MEMBER_NO"));
@@ -1112,20 +1112,20 @@ public class ProductDao {
 				r.setrStatus(rset.getString("REFUND_STATUS"));
 				r.setPno(rset.getString("PAY_NO"));
 				r.setpCode(rset.getString("PRODUCT_CODE"));
-				
+
 				rList.add(r);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
+
+
 		return rList;
-		
+
 	}
 
 
@@ -1133,25 +1133,25 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Refund> rList = null;
-		
+
 		String query = prop.getProperty("selectSuccess");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
 
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			rList = new ArrayList<Refund>();
-			
+
 			while(rset.next()) {
 				Refund r = new Refund();
-				
+
 				r.setOno(rset.getString("ORDER_NO"));
 				r.setrDate(rset.getDate("REFUND_DATE"));
 				r.setMno(rset.getString("MEMBER_NO"));
@@ -1159,18 +1159,18 @@ public class ProductDao {
 				r.setrStatus(rset.getString("REFUND_STATUS"));
 				r.setPno(rset.getString("PAY_NO"));
 				r.setpCode(rset.getString("PRODUCT_CODE"));
-				
+
 				rList.add(r);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
+
+
 		return rList;
 	}
 
@@ -1178,25 +1178,25 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Refund> rList = null;
-		
+
 		String query = prop.getProperty("selectCancel");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (currentPage - 1) * limit + 1;
 			int endRow = startRow + limit -1;
 
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			rList = new ArrayList<Refund>();
-			
+
 			while(rset.next()) {
 				Refund r = new Refund();
-				
+
 				r.setOno(rset.getString("ORDER_NO"));
 				r.setrDate(rset.getDate("REFUND_DATE"));
 				r.setMno(rset.getString("MEMBER_NO"));
@@ -1204,18 +1204,18 @@ public class ProductDao {
 				r.setrStatus(rset.getString("REFUND_STATUS"));
 				r.setPno(rset.getString("PAY_NO"));
 				r.setpCode(rset.getString("PRODUCT_CODE"));
-				
+
 				rList.add(r);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
+
+
 		return rList;
 	}
 
@@ -1223,29 +1223,50 @@ public class ProductDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		int listCount = 0;
-		
+
 		String query = prop.getProperty("rListCount");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
 			if(rset.next()) {
 				listCount=rset.getInt(1);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rset);
 			close(stmt);
 		}
-		
-		
+
+
 		return listCount;
 	}
-	
 
-	
+	public int deleteProduct(Connection con, String num) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("deleteProduct");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, num);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+
 }
 
 
