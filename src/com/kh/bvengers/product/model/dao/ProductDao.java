@@ -1081,6 +1081,168 @@ public class ProductDao {
 		}
 		return result;
 	}
+
+	public ArrayList<Refund> searchWait(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Refund> rList = null;
+		
+		String query = prop.getProperty("selectWait");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			rList = new ArrayList<Refund>();
+			
+			while(rset.next()) {
+				Refund r = new Refund();
+				
+				r.setOno(rset.getString("ORDER_NO"));
+				r.setrDate(rset.getDate("REFUND_DATE"));
+				r.setMno(rset.getString("MEMBER_NO"));
+				r.setcStatus(rset.getString("COMPLETE_STATUS"));
+				r.setrStatus(rset.getString("REFUND_STATUS"));
+				r.setPno(rset.getString("PAY_NO"));
+				r.setpCode(rset.getString("PRODUCT_CODE"));
+				
+				rList.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return rList;
+		
+	}
+
+
+	public ArrayList<Refund> searchSuccess(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Refund> rList = null;
+		
+		String query = prop.getProperty("selectSuccess");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			rList = new ArrayList<Refund>();
+			
+			while(rset.next()) {
+				Refund r = new Refund();
+				
+				r.setOno(rset.getString("ORDER_NO"));
+				r.setrDate(rset.getDate("REFUND_DATE"));
+				r.setMno(rset.getString("MEMBER_NO"));
+				r.setcStatus(rset.getString("COMPLETE_STATUS"));
+				r.setrStatus(rset.getString("REFUND_STATUS"));
+				r.setPno(rset.getString("PAY_NO"));
+				r.setpCode(rset.getString("PRODUCT_CODE"));
+				
+				rList.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return rList;
+	}
+
+	public ArrayList<Refund> searchCancel(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Refund> rList = null;
+		
+		String query = prop.getProperty("selectCancel");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			rList = new ArrayList<Refund>();
+			
+			while(rset.next()) {
+				Refund r = new Refund();
+				
+				r.setOno(rset.getString("ORDER_NO"));
+				r.setrDate(rset.getDate("REFUND_DATE"));
+				r.setMno(rset.getString("MEMBER_NO"));
+				r.setcStatus(rset.getString("COMPLETE_STATUS"));
+				r.setrStatus(rset.getString("REFUND_STATUS"));
+				r.setPno(rset.getString("PAY_NO"));
+				r.setpCode(rset.getString("PRODUCT_CODE"));
+				
+				rList.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return rList;
+	}
+
+	public int getrListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		
+		String query = prop.getProperty("rListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount=rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return listCount;
+	}
 	
 
 	

@@ -27,10 +27,18 @@
 
 .pagingArea > button {
 	background:#FFF;
-	border: 1px solid black;
-	width:20px;
+   border:none;
+   color:#ffb3b3;
+   font-weight:bold;
+   width:20px;
 
 }
+
+.pagingArea button:hover{
+		color: white;
+		background: #ffb3b3;
+		border-radius: 10px;
+	}
 #sec1 {
 	width: 100%;
 	height: 100%;
