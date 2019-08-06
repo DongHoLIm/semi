@@ -37,11 +37,11 @@
 	margin-top: 10px;
 }
 
-#area {
+.outerArea {
 	align: center;
 	width: 100%;
 	height: 100%;
-	margin-top: 30px;
+	margin-top: 70px;
 	padding-top: 2%;
 	border:5px solid #ddf;
 }
@@ -193,7 +193,7 @@
 
 	<div><%@ include file="../hfl/list.jsp"%></div>
 	<section id="sec1">
-		<div id="area">
+		<div id="area" class="outerArea">
 			<!-- 장바구니 목록(상품테이블) -->
 			<table class="pt">
 				<tr>
@@ -258,9 +258,9 @@
 					<tr>
 						<th><label>연락처 </label></th>
 						<td>
-							<input type="number" name="phone1" id="phone1" style="width:31%" maxlength="3" oninput="phoneNum(this);"> -
-							<input type="number" name="phone2" id="phone2" style="width:31%" maxlength="4" oninput="phoneNum(this);"> -
-							<input type="number" name="phone3" id="phone3" style="width:31%" maxlength="4" oninput="phoneNum(this);">
+							<input type="number" name="phone1" id="phone1" style="width:30%" maxlength="3" oninput="phoneNum(this);"> -
+							<input type="number" name="phone2" id="phone2" style="width:30%" maxlength="4" oninput="phoneNum(this);"> -
+							<input type="number" name="phone3" id="phone3" style="width:30%" maxlength="4" oninput="phoneNum(this);">
 							
 							<input type="hidden" name="productCode" value="<%= productCode %>"/>
 							<input type="hidden" name="priceSplit" value="<%= priceSplit %>"/>
@@ -282,7 +282,7 @@
 							</td>
 					</tr>
 				</table>
-				<input type="submit" class="paytestBtn" value="결제 성공 시  테스트"/>
+				<input type="submit" class="paytestBtn" value="결제 성공 시  테스트" hidden/>
 			</form>
 			<br />
 		</div>

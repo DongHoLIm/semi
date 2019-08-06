@@ -13,6 +13,14 @@
 	align: center;
 	margin: 0 auto;
 }
+.btn{
+	background:white;
+	border-top:1px solid #bbb;
+	border-right: 2px solid #aaa;
+	border-bottom: 2px solid #aaa;
+	border-left:1px solid #bbb;
+}
+
 </style>
 </head>
 <body>
@@ -21,7 +29,7 @@
 			<tr>
 				<td style="width: 20%; font-size: 0.7em;">거래 은행 / 예금주</td>
 				<td style="width: 80%;">
-					<div style="border: 1px solid #ddd; background: #f8f8f8; height: 50px;">
+					<div style="border: 1px solid #ddd; background: #f8f8f8; height:30px; padding-top:10px; padding-button:10px;text-align: center;">
 						은행명 &nbsp;
 						<select name="bankcode" id="bankcode">
 							<option value=''>선택하세요
@@ -63,8 +71,8 @@
 							<option value='287'>메리츠증권
 							<option value='291'>신영증권
 							<option value='238'>대우증권
-						</select> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 예금주 &nbsp; <input type="text"
-							size="10" name="accpnm" id="accpnm">
+						</select> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 예금주 &nbsp;
+						<input type="text" size="10" name="accpnm" id="accpnm">
 					</div>
 				</td>
 				<td>&nbsp;</td>
@@ -77,20 +85,24 @@
 			<tr>
 				<td style="font-size: 0.7em;">계좌번호<input type="hidden"></td>
 				<td>
-					<div
-						style="border: 1px solid #ddd; background: #f8f8f8; height: 50px;">
-						계좌번호 &nbsp;<input type="text" size="25"
-							placeholder="'-'를 제외하고 입력하세요." name="accnum" id="accnum">
+					<div style="border: 1px solid #ddd; background: #f8f8f8; height: 50px; padding-top:10px; align:center; text-align:center;">
+						계좌번호 &nbsp;
+						<input type="text" size="25" placeholder="'-'를 제외하고 입력하세요." name="accnum" id="accnum">
 						&nbsp; <input type="checkbox" id="sbm-flag" name="checkacc"
 							style="display: none"> <label id="sbm-no"
-							style="background: red; color: white; border-radius: 3px; padding: 3px;">미인증</label>
+							style="background: #f11; color: white; border-radius: 3px; padding: 3px;">미인증</label>
 						<label id="sbm-ok"
 							style="background: green; color: white; border-radius: 3px; padding: 3px; display: none">인증됨</label>
 					</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
 					<div align="center">
 						<br>
 						<button class="btn btn-primary btn-xs" id="confirmacc"
-							onclick="fnSearchAccessToken()">확인하기</button>
+							onclick="fnSearchAccessToken()">조회하기</button>
 						<label for="" style="display: none" id="question">해당 계좌를
 							사용하시겠습니까?</label><br />
 						<button class="btn btn-primary btn-xs" id="ok-btn"
@@ -202,8 +214,10 @@
 		function fnSearchAccessToken() {
 			$("#bank_code_std").val($("#bankcode").val());
 			$("#account_num").val($("#accnum").val());
-			var client_id = $("#client_id").val();
-			var client_secret = $("#client_secret").val();
+			/* var client_id = $("#client_id").val();
+			var client_secret = $("#client_secret").val(); */
+			var client_id = "l7xx61fc229f6dd040f1894a729558258a72";
+			var client_secret = "6f763a14fddd48f39bb4a0e76e43e71a";
 			var grant_type = "client_credentials";
 			var scope = "oob";
 			$.ajax({

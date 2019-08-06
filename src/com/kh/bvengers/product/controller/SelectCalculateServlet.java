@@ -46,7 +46,7 @@ public class SelectCalculateServlet extends HttpServlet {
 		}
 		
 		//작성 글 증가 시 5~10까지 추가
-		limit = 5;
+		limit = 10;
 		
 		int listCount = new ProductService().getListCount();
 		
@@ -54,7 +54,7 @@ public class SelectCalculateServlet extends HttpServlet {
 		
 		startPage = (((int)((double) currentPage / limit + 0.9))-1)*10+1;
 		
-		endPage = startPage + 5 -1;
+		endPage = startPage + 10 -1;
 		
 		if(maxPage < endPage) {
 			endPage = maxPage;
