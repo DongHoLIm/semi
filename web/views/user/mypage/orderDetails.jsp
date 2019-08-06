@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 <style>
-.d1 {
+.d123 {
 	height:80%;
 }
 
@@ -25,18 +25,18 @@ button{
 	width:70px;
 }
 
-.t1 {
+.t123 {
 	margin-left:30%;
 	border: 1px solid #bcbcbc;
 	text-align:center;
 	width:60%;
 }
 
-.t1 > td {
+.t123 > td {
 	border: 1px solid #bcbcbc;
 	margin:0 auto;
 }
-.t1 > tr {
+.t123 > tr {
 	border: 1px solid #bcbcbc;
 }
 
@@ -52,16 +52,16 @@ button{
 </style>
 </head>
 
+
 <body>
 	<header><%@ include file="../hfl/header.jsp"%></header>
 	<header><%@ include file="../hfl/myPageList.jsp"%></header>
-	<div class="d1">
-	<table class="t1">
+	<div class="d123">
+	<table class="t123">
 		<caption>결제 정보</caption>
 		<tbody>
 			<tr>
 			<% for(myPage m : odList){
-			     int num = m.getDtPay()+2500;
 				%>
 				<th class="th3">주문금액</th>
 				<% String price = dc.format(m.getDtPay());
@@ -80,7 +80,7 @@ button{
 	<br>
 	<br>
 	<br>
-	<table class="t1">
+	<table class="t123">
 		<caption>주문 상품 정보</caption>
 		<thead>
 			<tr>
@@ -109,14 +109,13 @@ button{
 				<td class="th3"><button class="btn_cancel"style="display:none;">주문취소</button><br>
 				<button class="returnPopUp" style="display:none;">환불신청</button></td>
 				<% } %>
-				<input type="hidden" value="<%=m.getrDate() %>" style="display:none;">
 			</tr>
 		</tbody>
 	</table>
 	<br>
 	<br>
 	<br>
-	<table class="t1">
+	<table class="t123">
 		<caption>배송지 정보</caption>
 		<tbody>
 			<tr>
@@ -148,32 +147,6 @@ button{
 			window.open('<%=request.getContextPath()%>/views/user/mypage/cancelPopUp.jsp?ono='+ono,'window_name','width=700,height=400,location=yes,status=no,scrollbars=yes')
 		});
 	});
-	
-/* 	var date = new Date();
-	var year = date.getFullYear();
-	var month = date.getMonth()+1;
-	var day = date.getDate();
-	
-	if((day+"").length < 2){
-		day = "0" + day;
-	}
-	
-	var today = year + month + day;
-	
-	SimpleDateFormat today = new SimpleDateFormat("YYYY-MM-DD");
-	System.out.println(today);
-	
-	if((eval(today) - 7)) */
-
-	var today = new Date();
-	var week = today.setDate(today.getDate() - 7);
-	
-	document.write(today);
-	
-	
-	
-	
-	
 </script>
 
 
