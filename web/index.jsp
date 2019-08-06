@@ -68,7 +68,7 @@
 				</div>
 
 				<div class="item">
-					<img src="images/flower1.PNG" alt="ad2">
+					<img src="images/coc.png" alt="ad2">
 				</div>
 
 				<div class="item">
