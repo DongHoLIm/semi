@@ -178,13 +178,26 @@ li:hover{
 }
 .pagingArea button{
 		width:2%;
-		color: black;
+		color: #ffb3b3;
 		background: white;
 		border-radius: 50px;
 	}
-	.pagingArea button:hover{
+
+.pagingArea button:hover{
 		color: white;
-		background: black;
+		background: #ffb3b3;
+		border-radius: 10px;
+	}
+#pagingArea button{
+		width:2%;
+		color: #ffb3b3;
+		background: white;
+		border-radius: 50px;
+	}
+
+#pagingArea button:hover{
+		color: white;
+		background: #ffb3b3;
 		border-radius: 10px;
 	}
 </style>

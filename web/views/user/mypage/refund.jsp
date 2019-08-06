@@ -318,18 +318,27 @@ $(document).ready(function() {
 	border:none;
 	color:#ffb3b3;
 	font-weight:bold;
-	width:20px;
+	width:2%;
 
 }
-
+.pagingArea1 button:hover{
+		color: white;
+		background: #ffb3b3;
+		border-radius: 10px;
+}
 .pagingArea2 > button {
 	background:#FFF;
 	border:none;
 	color:#ffb3b3;
 	font-weight:bold;
-	width:20px;
+	width:2%;
 
 }
+.pagingArea2 button:hover{
+		color: white;
+		background: #ffb3b3;
+		border-radius: 10px;
+	}
 
 .td_select {
 	width:87%;

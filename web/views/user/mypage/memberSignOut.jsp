@@ -11,6 +11,13 @@
 	width:60%;
 	margin-top:5%;
 	margin-bottom:3%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.t2 {
+	margin-left:auto;
+	margin-right:auto;
 }
 .d1 {
 	margin-bottom:10%;
@@ -32,6 +39,7 @@
 </head>
 <header><%@ include file="../hfl/header.jsp"%></header>
 <body>
+<div class="d1">
 	<table class="t1" align="center">
 		<tr>
 			<td>
@@ -67,6 +75,7 @@
 			
 		</table>
 	</table>
+	</div>
 	<br>
 	<br>
 	<div align="center" class="d1">
