@@ -9,6 +9,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+body{
+background:#ffe6e6;
+
+}
+button{
+background:lightyellow;
+border:none;
+width:80px;
+height:70px;
+}
+button:hover{
+background:white;
+color:black;
+}
+input{
+align:center;
+}
+h1{
+text-align:center;
+}
+div{
+width:100%;
+margin:auto;
+text-align:center;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 function ckbtn(){
@@ -37,9 +64,10 @@ function ckbtn(){
 </script>
 </head>
 <body>
+	<div>
 	<h1>인증번호 확인란</h1>
 	<input type="text" id="key" name="key" placeholder="인증번호 입력칸" style="width:50%;">
 	<button value="확인" class="chbtn" onclick="ckbtn();">인증하기</button>
-
+	</div>
 </body>
 </html>

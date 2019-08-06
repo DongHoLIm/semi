@@ -23,12 +23,46 @@
 	margin:auto;
 }
 
-tr {
-	border: 1px solid black;
-}
 table td{
 height:30px;
 }
+
+#depotMain {
+	width: 80%;
+	margin: auto;
+	align: center;
+	
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
+}
+ #depotMain th {
+
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #FFF;
+    text-align:center;
+}
+
+#depotMain td {
+	height:30%;
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+#depotMain thead th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 2px solid #ccc;
+    height:50px;
+    text-align:center;
+}
+
 
 #th {
 	border: 1px solid white;
@@ -94,7 +128,7 @@ height:50px;
 	<tr>
 	<td align="center"><%=s.getSanctionNo() %></td>
 	<td align="center"><%=s.getMemberNo() %></td>
-	<td align="center"><%=s.getReason() %></td>
+	<td align="center"><a class="detail"><%=s.getReason() %></a></td>
 	<td align="center"><%=s.getSanctionDate() %></td>
 	<td align="center"><%=s.getSanctionDiv() %></td>
 	<td align="center"><%=s.getSanctionStatus() %></td>
@@ -141,9 +175,13 @@ height:50px;
 </div>
 <script>
 $("#depotMain td").mouseenter(function(){
-	$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+	$(this).parent().css({"background":"lightgray","cursor":"pointer"});
 }).mouseout(function(){
 	$(this).parent().css({"background":"white"});
+});
+$(".detail").click(function(){
+	var num = $(this).text();
+	location.href='<%=request.getContextPath()%>/son.no?num='+num;
 });
 </script>
 </body>

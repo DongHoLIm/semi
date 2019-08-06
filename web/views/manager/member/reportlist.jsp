@@ -22,25 +22,46 @@ h2 {
 	margin: 0;
 	padding: 0;
 }
+
+
 #depotMain {
-	width: 95%;
-	height: 80%;
-	margin:auto;
+	width: 80%;
+	margin: auto;
+	align: center;
+	
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
+}
+ #depotMain th {
+
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #FFF;
+    text-align:center;
 }
 
-tr {
-	border: 1px solid black;
-}
-table td{
-height:30px;
+#depotMain td {
+	height:30%;
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
 }
 
-#th {
-	border: 1px solid white;
-	background: black;
-	color: white;
-	text-align: center;
+#depotMain thead th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 2px solid #ccc;
+    height:50px;
+    text-align:center;
 }
+
+
+
 
 #inOutButton {
 	padding-left:8%;
@@ -56,13 +77,7 @@ width:90%;
 
 }
 
-.th{
-background:lightgray;
-color:black;
-text-align:center;
-border:1px solid white;
-height:50px;
-}
+
 .mstop,.blacklist{
 background:red;
 border:1px solid lightyellow;
@@ -156,7 +171,7 @@ $(".detail").click(function(){
 });
 
 $("#depotMain td").mouseenter(function(){
-	$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+	$(this).parent().css({"background":"lightgray","cursor":"pointer"});
 }).mouseout(function(){
 	$(this).parent().css({"background":"white"});
 });
