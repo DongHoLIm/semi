@@ -91,26 +91,12 @@ if($("#password").val() == ($("#password2").val())){
    }else if(index==2){
       var email = $("#email").val();
       var hc = $("#hiddencard").val();
-      window.open('<%=request.getContextPath()%>/send.me?email=' + hc + email, '인증번호', 'width=430,height=450,status=no,scrollbars=yes');
+      window.open('<%=request.getContextPath()%>/send.me?email=' + hc + email, '인증번호', 'width=430,height=200,status=no,scrollbars=yes,left=300px');
 
 	}
 }
-$(function(){
-	$("#password").keyup(function(){
-		$("#ckNotice").html('');
-	});
-	$("#password2").keyup(function(){
-		if($("#password").val()!=$("#password2").val()){
-			$("#ckNotice").html('비밀번호 일치하지 않음<br><br>');
-			$("#ckNotice").attr('color','#f82a2aa3');
-			
-		}else{
-			$('#ckNotice').html('비밀번호 일치함 <br><br>');
-			$('#ckNotice').attr('color','#199894b3');
-		}
-	});
-});
 </script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
@@ -283,6 +269,26 @@ boder-bottom:5px;
        });
       </script>
       <br><br>
+      <script>
+$(function(){
+	$("#password").keyup(function(){
+		$("#ckNotice").html('');
+	});
+	$("#password2").keyup(function(){
+		if($("#password").val()!=$("#password2").val()){
+			$("#ckNotice").html('비밀번호 일치하지 않음<br><br>');
+			$("#ckNotice").attr('color','#f82a2aa3');
+			
+		}else{
+			$('#ckNotice').html('비밀번호 일치함 <br><br>');
+			$('#ckNotice').attr('color','#199894b3');
+		}
+	});
+	$("#memberName").click(function(){
+		$("#ckNotice").html('');
+	});
+});
+</script>
 </body>
       <footer><%@ include file="../hfl/footer.jsp" %></footer>
 </html>

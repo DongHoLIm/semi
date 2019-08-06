@@ -29,9 +29,43 @@ h2 {
 	margin:auto;
 }
 
-tr {
-	border: 1px solid black;
+
+#depotMain {
+	width: 80%;
+	margin: auto;
+	align: center;
+	
+	border-radius:5px;
+	border-collapse: collapse;
+    line-height: 1.5;
 }
+ #depotMain th {
+
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #FFF;
+    text-align:center;
+}
+
+#depotMain td {
+	height:30%;
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+#depotMain thead th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 2px solid #ccc;
+    height:50px;
+    text-align:center;
+}
+
 
 #th {
 	border: 1px solid white;
@@ -145,7 +179,7 @@ input-align:center;
 <script>
 
 $("#depotMain td").mouseenter(function(){
-	$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+	$(this).parent().css({"background":"lightgray","cursor":"pointer"});
 }).mouseout(function(){
 	$(this).parent().css({"background":"white"});
 });
