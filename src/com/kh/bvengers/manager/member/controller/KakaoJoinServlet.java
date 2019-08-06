@@ -31,7 +31,11 @@ public class KakaoJoinServlet extends HttpServlet {
 		String nickname = array.substring(idx+1,idx1);
 		String token = array.substring(idx1+1);
 		Member loginUser = null;
-
+		
+		System.out.println(id);
+		System.out.println(nickname);
+		System.out.println(token);
+		
 		PrintWriter out = response.getWriter();
 		int checkId = new MemberService().kakaoidCk(id);
 		
@@ -42,6 +46,7 @@ public class KakaoJoinServlet extends HttpServlet {
 			if(loginUser != null) {
 				session.setAttribute("loginUser", loginUser);
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
+				
 			}
 			
 		}else {//신규고객일때

@@ -682,7 +682,7 @@ public class MemberDao {
 		Member loginUser = null;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("loginSelect");
+		String query = prop.getProperty("kakaologin");
 
 		try {
 			pstmt = con.prepareStatement(query);
