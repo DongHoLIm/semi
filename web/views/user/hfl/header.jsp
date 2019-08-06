@@ -21,136 +21,105 @@
 <title>메인메뉴</title>
 <style>
 * {
-   font-family: 'Poor Story', cursive;
-   margin: 0;
-   padding: 0;
+	font-family: 'Poor Story', cursive;
+	margin: 0;
+	padding: 0;
 }
 
 html, css {
-   width: 100%;
-   height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .position {
-   margin-left: auto;
-   margin-right: auto;
-   text-align: center;
-   margin-top: 15%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 15%;
 }
 
 #personal {
-   color: white;
-   text-decoration: none;
-   position: absolute;
-   bottom: 15px;
-   right: 2%;
+	color: white;
+	text-decoration: none;
+	position: absolute;
+	bottom: 15px;
+	right: 2%;
 }
 
 .spot {
-   position: absolute;
-   width: 100%;
-   height: 100%;
-   top: 0;
-   left: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
 }
 
 .svg-wrapper {
-   margin-top: 0;
-   position: relative;
-   width: 150px;
-   height: 40px;
-   display: inline-block;
-   border-radius: 3px;
-   margin-left: 5px;
-   margin-right: 5px
+	margin-top: 0;
+	position: relative;
+	width: 150px;
+	height: 40px;
+	display: inline-block;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px
 }
+
 #shape {
-   stroke-width: 3px;
-   fill: transparent;
-   stroke: #009FFD;
-   stroke-dasharray: 85 400;
-   stroke-dashoffset: -220;
-   transition: 1s all ease;
+	stroke-width: 3px;
+	fill: transparent;
+	stroke: #009FFD;
+	stroke-dasharray: 85 400;
+	stroke-dashoffset: -220;
+	transition: 1s all ease;
 }
 
 #text {
-   margin-top: -35px;
-   text-align: center;
+	margin-top: -35px;
+	text-align: center;
 }
 
 #text a {
-   color: white;
-   text-decoration: none;
-   font-weight: 100;
-   font-size: 1.1em;
+	color: white;
+	text-decoration: none;
+	font-weight: 100;
+	font-size: 1.1em;
 }
 
 .svg-wrapper:hover #shape {
-   stroke-dasharray: 50 0;
-   stroke-width: 3px;
-   stroke-dashoffset: 0;
-   stroke: #06D6A0;
+	stroke-dasharray: 50 0;
+	stroke-width: 3px;
+	stroke-dashoffset: 0;
+	stroke: #06D6A0;
 }
+
 #chatLi:hover {
-   cursor: pointer;
+	cursor: pointer;
 }
 
 .myPageBtn:hover {
-   cursor: pointer;
+	cursor: pointer;
 }
 
 #logoDiv {
-   margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .navbar-brand:hover {
-   -webkit-transform: scale(1.1); /*  크롬 */
-   -moz-transform: scale(1.1); /* FireFox */
-   -o-transform: scale(1.1); /* Opera */
-   transform: scale(1.1);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
+	-webkit-transform: scale(1.1); /*  크롬 */
+	-moz-transform: scale(1.1); /* FireFox */
+	-o-transform: scale(1.1); /* Opera */
+	transform: scale(1.1);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
 }
 
 #logoImg {
-   width: 25%;
-}
-#logoImg:hover, input[type=button]:hover {
-   -webkit-transform: scale(1.1); /*  크롬 */
-   -moz-transform: scale(1.1); /* FireFox */
-   -o-transform: scale(1.1); /* Opera */
-   transform: scale(1.1);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
-}
-#logoDiv {
+  width: 25%;
   animation-duration: 1s;
   animation-name: slidein;
-
-}
-li:hover, button:hover {
-   -webkit-transform: scale(1.2); /*  크롬 */
-   -moz-transform: scale(1.2); /* FireFox */
-   -o-transform: scale(1.2); /* Opera */
-   transform: scale(1.2);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
-}
-.navbar{
-   border-right : 3px solid #ffe6e6;
-   border-bottom: 3px solid #ffe6e6;
-}
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
-   .navbar-inverse .navbar-nav>.open>a:focus {
-   background: white;
-}
-
 }
 
 @keyframes slidein {
@@ -161,37 +130,74 @@ li:hover, button:hover {
   to {
   	opacity: 100;
   }
-  }
-li:hover{
-   -webkit-transform: scale(1.2); /*  크롬 */
-   -moz-transform: scale(1.2); /* FireFox */
-   -o-transform: scale(1.2); /* Opera */
-   transform: scale(1.2);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
 }
-.navbar{
-   border-right : 3px solid #ffe6e6;
-   border-bottom: 3px solid #ffe6e6;
+
+#logoImg:hover, input[type=button]:hover {
+	-webkit-transform: scale(1.1); /*  크롬 */
+	-moz-transform: scale(1.1); /* FireFox */
+	-o-transform: scale(1.1); /* Opera */
+	transform: scale(1.1);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
 }
-.pagingArea button{
-		width:2%;
-		color: black;
-		background: white;
-		border-radius: 50px;
-	}
-	.pagingArea button:hover{
-		color: white;
-		background: black;
-		border-radius: 10px;
-	}
+
+li:hover, button:hover {
+	-webkit-transform: scale(1.2); /*  크롬 */
+	-moz-transform: scale(1.2); /* FireFox */
+	-o-transform: scale(1.2); /* Opera */
+	transform: scale(1.2);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
+}
+
+.navbar {
+	border-right: 3px solid #ffe6e6;
+	border-bottom: 3px solid #ffe6e6;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+	.navbar-inverse .navbar-nav>.open>a:focus {
+	background: white;
+}
+
+}
+li:hover {
+	-webkit-transform: scale(1.2); /*  크롬 */
+	-moz-transform: scale(1.2); /* FireFox */
+	-o-transform: scale(1.2); /* Opera */
+	transform: scale(1.2);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
+}
+
+.navbar {
+	border-right: 3px solid #ffe6e6;
+	border-bottom: 3px solid #ffe6e6;
+}
+
+.pagingArea button {
+	width: 2%;
+	color: black;
+	background: white;
+	border-radius: 50px;
+}
+
+.pagingArea button:hover {
+	color: white;
+	background: black;
+	border-radius: 10px;
+}
 </style>
 </head>
 <body>
 <div align="center" id="logoDiv">
-   <a href="<%= request.getContextPath()%>/index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
+   <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
 <nav class="navbar">
   <div class="container-fluid">

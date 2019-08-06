@@ -16,82 +16,104 @@
 <title>메인메뉴</title>
 <style>
 * {
-	font-family: 'Poor Story', cursive;
-	margin: 0;
-	padding: 0;
+   font-family: 'Poor Story', cursive;
+   margin: 0;
+   padding: 0;
 }
 #chatLi {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .dropdwn-toggle {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #logoDiv {
-	margin-bottom: 10px;
+   margin-bottom: 10px;
 }
 
 .navbar-brand:hover {
-	-webkit-transform: scale(1.1); /*  크롬 */
-	-moz-transform: scale(1.1); /* FireFox */
-	-o-transform: scale(1.1); /* Opera */
-	transform: scale(1.1);
-	transition: transform .35s;
-	-o-transition: transform .35s;
-	-moz-transition: transform .35s;
-	-webkit-transition: transform .35s;
+   -webkit-transform: scale(1.1); /*  크롬 */
+   -moz-transform: scale(1.1); /* FireFox */
+   -o-transform: scale(1.1); /* Opera */
+   transform: scale(1.1);
+   transition: transform .35s;
+   -o-transition: transform .35s;
+   -moz-transition: transform .35s;
+   -webkit-transition: transform .35s;
 }
-
-#logoImg {
-	width: 25%;
-}
-
 #logoImg:hover, input[type=button]:hover {
-	-webkit-transform: scale(1.1); /*  크롬 */
-	-moz-transform: scale(1.1); /* FireFox */
-	-o-transform: scale(1.1); /* Opera */
-	transform: scale(1.1);
-	transition: transform .35s;
-	-o-transition: transform .35s;
-	-moz-transition: transform .35s;
-	-webkit-transition: transform .35s;
+   -webkit-transform: scale(1.1); /*  크롬 */
+   -moz-transform: scale(1.1); /* FireFox */
+   -o-transform: scale(1.1); /* Opera */
+   transform: scale(1.1);
+   transition: transform .35s;
+   -o-transition: transform .35s;
+   -moz-transition: transform .35s;
+   -webkit-transition: transform .35s;
 }
 
 li:hover, button:hover {
-	-webkit-transform: scale(1.2); /*  크롬 */
-	-moz-transform: scale(1.2); /* FireFox */
-	-o-transform: scale(1.2); /* Opera */
-	transform: scale(1.2);
-	transition: transform .35s;
-	-o-transition: transform .35s;
-	-moz-transition: transform .35s;
-	-webkit-transition: transform .35s;
+   -webkit-transform: scale(1.2); /*  크롬 */
+   -moz-transform: scale(1.2); /* FireFox */
+   -o-transform: scale(1.2); /* Opera */
+   transform: scale(1.2);
+   transition: transform .35s;
+   -o-transition: transform .35s;
+   -moz-transition: transform .35s;
+   -webkit-transition: transform .35s;
+   background:white;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+   .navbar-inverse .navbar-nav>.open>a:focus {
+   background: white;
 }
 .pagingArea button{
-		width:5%;
-		color: black;
-		background: white;
-		border-radius: 50px;
+      width:5%;
+      color: black;
+      background: white;
+      border-radius: 50px;
 
-	}
-	.pagingArea button:hover{
-		color: white;
-		background: black;
-		border-radius: 10px;
-	}
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
-	.navbar-inverse .navbar-nav>.open>a:focus {
+   }
+   .pagingArea button:hover{
+      color: white;
+      background: black;
+      border-radius: 10px;
+   }
+
+
+.navbar{
+   border-right : 3px solid #ffe6e6;
+   border-bottom: 3px solid #ffe6e6;
+   border-top:none;
+   border-left:none;
+   background:white;
+}
+
+#logoImg {
+  width: 25%;
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+  	opacity: 0;
+  }
+
+  to {
+  	opacity: 100;
+  }
 }
 
 </style>
 </head>
 <body>
 <div align="center" id="logoDiv">
-	<a href="<%=request.getContextPath()%>/smnl.mm"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg" style="width:25%" /></a>
+   <a href="<%=request.getContextPath()%>/smnl.mm"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg" style="width:25%" /></a>
 </div>
 <%-- <% if(loginUser != null && loginUser.getMemberId().equals("admin")) {%> --%>
-<nav class="navbar navbar-inverse" style="background:#FF5675">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -148,19 +170,19 @@ li:hover, button:hover {
       </ul>
     </div>
     <script>
-    	function logout(){
-    		location.href="<%=request.getContextPath()%>/logout.me";
-    	}
-    	$(function(){
-			$.ajax({
-				url:"chatCount.ch",
-				type:"get",
-				success:function(data){
-					var count = "대기중인 상담 문의 : " + data + "건";
-					$("#chatCount").append(count);
-					console.log(data);
-				}
-			});
+       function logout(){
+          location.href="<%=request.getContextPath()%>/logout.me";
+       }
+       $(function(){
+         $.ajax({
+            url:"chatCount.ch",
+            type:"get",
+            success:function(data){
+               var count = "대기중인 상담 문의 : " + data + "건";
+               $("#chatCount").append(count);
+               console.log(data);
+            }
+         });
         });
 
     </script>
