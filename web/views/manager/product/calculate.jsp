@@ -205,11 +205,9 @@ tr {
 			
 			var code = codeTd;
 			var limit = <%=limit%>;
-			console.log(code);
 			var currentPage = $("#nowPage").val();
 			
 			var receipt_id = $(this).attr('value');
-			console.log("나와라"+receipt_id);
 			var application_id = "5d2fec7c396fa61e224d5733";
 			var private_key = "ejl6AnJUiKPi72RjxiJd578NY7KzMSiq4p5FxWXmC6U=";
 			$.ajax({
@@ -229,6 +227,7 @@ tr {
 		        			xhr.setRequestHeader("Content-Type","application/json");
                             xhr.setRequestHeader("Authorization", token);
                         },
+		        		
 		        		success:function(data){
 		        			console.log(data);
 		        		}
@@ -237,6 +236,7 @@ tr {
 		        	/* $.ajax({
 		        		url:"https://api.bootpay.co.kr/cancel",
 		        		type:"post",
+		        		headers: {"Authorization":token}, 
 		        		beforeSend:function(xhr){
                             xhr.setRequestHeader("Authorization", token);
                         },
@@ -245,14 +245,14 @@ tr {
 		        		}
 		        	}); */
 		        	
-		        	$.ajax({
+		        	/* $.ajax({
 						url:"disposeFail.cal",
 						type:"post",
 						data:{"code":code, "currentPage":currentPage, "limit":limit},
 						success:function(data){
 								window.location.reload();	
 						}
-					});
+					}); */
 		        }
 			});
 		});
