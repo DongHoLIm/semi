@@ -228,8 +228,8 @@ textarea {
                      var $tr = $("<tr>");
                      var $tr2 = $("<tr>");
                      var $hr = $("<hr>");
-                     var $commentNo = $("<td>").text(data[key].commentNo).addClass("tCommentNo");
 
+                     var $commentNo = $("<td>").text(data[key].commentNo).addClass("tCommentNo").css("display", "none");
                      var $writer = $("<td>").text("작성자 : ").css({'width':'60px','font-weight':'bold'});
                      var $writeTd = $("<td colspan='4'>").text(data[key].memberId).addClass("tWriter").css("width", "100px");
                      var $contentTd = $("<td colspan='2'>").text(data[key].commentContents).addClass("tContent").css({"width":"400px","height":"50px"});
@@ -261,6 +261,7 @@ textarea {
                      $tr2.append($writer);
                      $tr2.append($writeTd);
 
+                     $tr.append($commentNo);
                      $tr.append($contentTd);
                      $tr.append($dateTd);
                      $tr.append($recommend);
