@@ -75,7 +75,7 @@ li:hover, button:hover {
       background: white;
       border-radius: 50px;
 	}
-	.pagingArea button:hover{
+.pagingArea button:hover{
 		color: white;
 		background: black;
 		border-radius: 10px;

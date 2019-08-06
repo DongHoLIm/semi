@@ -198,9 +198,9 @@
 
    <br><br><br><br>
    <div style = "height:150px">  
- <button id="writer" class="btn btn-success" style = "margin-right:10%; margin-top:5%;margin-bottom:1%; color:black; border-color:#ccccff;" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>  
   <div class = "question">
-  <h3><p align="center" style = "width:180px; margin-left:7%; margin-top:5%;">
+  <h3><p align="center" style = "width:300px; margin-left:7%; margin-top:5%;">
+ <button id="writer" class="btn btn-success" style = "margin-right:10%; margin-top:5%;margin-bottom:1%; color:black; border-color:#ccccff;" onclick="location.href='<%=request.getContextPath()%>/views/user/serviceCenter/questionWriter.jsp'"> 글 작성</button>  
   	내가 쓴 질문
   <img src="<%= request.getContextPath()%>/images/question.png" style="width:20%;"/>		
   	</p>
@@ -238,9 +238,9 @@
       </div>
 
     </div>
-      <br><br>
+      <br><br> <br>
        <div class = "pagingArea" align ="center" >
-      <button onclick = "location.href = '<%=request.getContextPath()%>/sfqs.qo?currentPage=1'"><</button>
+      <button onclick = "location.href = '<%=request.getContextPath()%>/sfqs.qo?currentPage=<%=currentPage1%>'"><<</button>
       <%if(currentPage1 <= 1) {%>
       <button disabled><</button>
       <%} else{%>

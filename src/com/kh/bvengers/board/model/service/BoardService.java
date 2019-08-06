@@ -181,13 +181,6 @@ public class BoardService {
 
 		ArrayList<Board>list = new BoardDao().selectQandAList(con,currentPage1,limit,num,uno);
 
-/*		ArrayList<Board>countlist = new BoardDao().selectCount(con,num);
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
-		map.put("list", list);
-		map.put("countlist", countlist);
-		*/
 
 		close(con);
 

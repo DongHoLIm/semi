@@ -107,12 +107,12 @@ int endPage = pi.getEndPage();
 		</table>
 
 			<br><br><br><br>
-		  <div class = "pageingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><<</button>
+		  <div class = "pagingArea" align ="center">
+		<button onclick = "location.href = '<%=request.getContextPath()%>/SelectFrequentQuestionList.fq?currentPage=1'"><<</button>
 		<%if(currentPage <= 1) {%>
 		<button disabled> <</button>
 		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage-1%>'"><</button>
+	<button onclick = "location.href='<%=request.getContextPath()%>/SelectFrequentQuestionList.fq?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
 		%>
 			<%for (int p = startPage; p <= endPage; p++) {
@@ -120,7 +120,7 @@ int endPage = pi.getEndPage();
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/SelectFrequentQuestionList.fq?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -129,13 +129,13 @@ int endPage = pi.getEndPage();
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick ="location.href='<%=request.getContextPath()%>/SelectFrequentQuestionList.fq?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=maxPage%>'">>></button>
+			<button onclick = "location.href='<%=request.getContextPath()%>/SelectFrequentQuestionList.fq?currentPage=<%=maxPage%>'">>></button>
 
       </div>
       	<div align = "right">
-      <button onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
+      <button class="btn btn-outline-danger"  onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
       </div>
 
 	</div>
