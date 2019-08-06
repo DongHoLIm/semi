@@ -64,7 +64,7 @@ public class DepotListServlet extends HttpServlet {
 			request.setAttribute("pi", pi);			
 		}else {
 			page="views/common/errorPagePrompt.jsp";
-			request.setAttribute("msg", "fucking list");			
+			request.setAttribute("msg", "리스트출력실패");			
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}
