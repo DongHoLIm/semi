@@ -12,6 +12,8 @@ import java.util.HashMap;
 import com.kh.bvengers.board.model.vo.Attachment;
 import com.kh.bvengers.board.model.vo.Posts;
 import com.kh.bvengers.board.model.vo.PostsContents;
+import com.kh.bvengers.manager.member.model.dao.ManagerMemberDao;
+import com.kh.bvengers.manager.member.model.vo.Report;
 import com.kh.bvengers.product.model.dao.ProductDao;
 import com.kh.bvengers.product.model.vo.Calcul;
 import com.kh.bvengers.product.model.vo.Payment;
@@ -327,6 +329,35 @@ public class ProductService {
 			close(con);
 			
 			return searchMyAdd;
+		}
+
+		public ArrayList<Refund> searchWait(int currentPage, int limit) {
+			Connection con = getConnection();
+			ArrayList<Refund> rList = new ProductDao().searchWait(con, currentPage, limit);
+			close(con);
+			return rList;
+			
+		}
+
+		public ArrayList<Refund> searchSuccess(int currentPage, int limit) {
+			Connection con = getConnection();
+			ArrayList<Refund> rList = new ProductDao().searchSuccess(con, currentPage, limit);
+			close(con);
+			return rList;
+		}
+
+		public ArrayList<Refund> searchCancel(int currentPage, int limit) {
+			Connection con = getConnection();
+			ArrayList<Refund> rList = new ProductDao().searchCancel(con, currentPage, limit);
+			close(con);
+			return rList;
+		}
+
+		public int getrListCount() {
+			Connection con = getConnection();
+			int listCount = new ProductDao().getrListCount(con);
+			close(con);
+			return listCount;
 		}
 
 		

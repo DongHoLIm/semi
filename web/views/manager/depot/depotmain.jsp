@@ -97,7 +97,7 @@
 		width: 70%;
 	}
 	select{
-		width: 200px;
+		width: 90px;
 	  font-family: inherit;
 	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;  
 	  -webkit-appearance: none;
@@ -204,12 +204,15 @@
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
 						var $num = $("<td>").text(data["list"][i].productNumber);
-						var $code = $("<td>").text(data["list"][i].productCode);
+						var $code = $("<td>");
 						var $location=$("<td>").text(data["list"][i].locationCode);
 						var $name = $("<td>").text(data["list"][i].productName);
 						var $checkd = $("<td>").text(data["list"][i].checkDate);
 						var $released = $("<td>");
 						var $hidden = $("<input type='hidden' id='productCode1'>");
+						var $detail = $("<a>").text(data["list"][i].productCode);
+						
+						$detail.attr("onclick","productDetailPopup("+data["list"][i].productCode+")")
 						$hidden.attr('value',data["list"][i].productCode);
 						if(data["list"][i].releaseDate==null){
 							$released.text("미출고");
@@ -218,6 +221,7 @@
 						}
 						$code.append($hidden);
 						$tr.append($num);
+						$code.append($detail);
 						$tr.append($code);
 						$tr.append($name);
 						$tr.append($location);
@@ -233,7 +237,7 @@
 					var startPage = data["pi"].startPage;
 
 					var $pagingDiv2 =$("<div class='pagingArea' align='center'>");
-					var $firstBtn = $("<button>").text('<<');
+					var $firstBtn = $("<button>").text('<<'); 
 					var $preBtn = $("<button>").text('<');
 
 					var $nextBtn =$("<button>").text('>');
@@ -304,15 +308,18 @@
 					for(var i = 0; i < data["list"].length; i++){
 						var $tr = $("<tr>");
 						var $num = $("<td>").text(data["list"][i].productNumber);
-						var $code = $("<td>").text(data["list"][i].productCode);
+						var $code = $("<td>");
 						var $location=$("<td>").text(data["list"][i].locationCode);
 						var $name = $("<td>").text(data["list"][i].productName);
 						var $checkd = $("<td>").text(data["list"][i].checkDate);
 						var $released = $("<td>").text(data["list"][i].releaseDate);
 						var $hidden = $("<input type='hidden' id='productCode1'>");
+						var $detail = $("<a>").text(data["list"][i].productCode);						
+						$detail.attr("onclick","productDetailPopup("+data["list"][i].productCode+")")
 						$hidden.attr('value',data["list"][i].productCode);
 						$code.append($hidden);
 						$tr.append($num);
+						$code.append($detail);
 						$tr.append($code);
 						$tr.append($name);
 						$tr.append($location);
@@ -367,6 +374,10 @@
 					}
 			});
 		}
+		function productDetailPopup(productCode){			
+			window.open("productDetail.dp?code="+productCode,"상품상세","width=300px,height=400px");
+			
+		}
 	</script>
 	<br>
 	<br><br>
@@ -385,7 +396,7 @@
 			<%for(Depot d :list) {%>
 			<tr id="list">
 				<td><%=d.getProductNumber() %></td>
-				<td><%=d.getProductCode() %><input type="hidden" value="<%=d.getProductCode()%>" id='productCode1'/></td>
+				<td><a onclick="productDetailPopup(<%=d.getProductCode() %>);"><%=d.getProductCode() %></a><input type="hidden" value="<%=d.getProductCode()%>" id='productCode1'/></td>
 				<td><%=d.getProductName() %></td>
 				<td><%=d.getLocationCode() %></td>
 				<td><%=d.getCheckDate() %></td>

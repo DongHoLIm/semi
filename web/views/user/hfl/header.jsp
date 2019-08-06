@@ -130,69 +130,45 @@ html, css {
   to {
   	opacity: 100;
   }
+li:hover{
+   -webkit-transform: scale(1.2); /*  크롬 */
+   -moz-transform: scale(1.2); /* FireFox */
+   -o-transform: scale(1.2); /* Opera */
+   transform: scale(1.2);
+   transition: transform .35s;
+   -o-transition: transform .35s;
+   -moz-transition: transform .35s;
+   -webkit-transition: transform .35s;
 }
+.navbar{
+   border-right : 3px solid #ffe6e6;
+   border-bottom: 3px solid #ffe6e6;
+}
+.pagingArea button{
+		width:2%;
+		color: #ffb3b3;
+		background: white;
+		border-radius: 50px;
+	}
 
-#logoImg:hover, input[type=button]:hover {
-	-webkit-transform: scale(1.1); /*  크롬 */
-	-moz-transform: scale(1.1); /* FireFox */
-	-o-transform: scale(1.1); /* Opera */
-	transform: scale(1.1);
-	transition: transform .35s;
-	-o-transition: transform .35s;
-	-moz-transition: transform .35s;
-	-webkit-transition: transform .35s;
-}
+.pagingArea button:hover{
+		color: white;
+		background: #ffb3b3;
+		border-radius: 10px;
+	}
+#pagingArea button{
+		width:2%;
+		color: #ffb3b3;
+		background: white;
+		border-radius: 50px;
+	}
 
-li:hover, button:hover {
-	-webkit-transform: scale(1.2); /*  크롬 */
-	-moz-transform: scale(1.2); /* FireFox */
-	-o-transform: scale(1.2); /* Opera */
-	transform: scale(1.2);
-	transition: transform .35s;
-	-o-transition: transform .35s;
-	-moz-transition: transform .35s;
-	-webkit-transition: transform .35s;
-}
+#pagingArea button:hover{
+		color: white;
+		background: #ffb3b3;
+		border-radius: 10px;
+	}
 
-.navbar {
-	border-right: 3px solid #ffe6e6;
-	border-bottom: 3px solid #ffe6e6;
-}
-
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
-	.navbar-inverse .navbar-nav>.open>a:focus {
-	background: white;
-}
-
-}
-li:hover {
-	-webkit-transform: scale(1.2); /*  크롬 */
-	-moz-transform: scale(1.2); /* FireFox */
-	-o-transform: scale(1.2); /* Opera */
-	transform: scale(1.2);
-	transition: transform .35s;
-	-o-transition: transform .35s;
-	-moz-transition: transform .35s;
-	-webkit-transition: transform .35s;
-}
-
-.navbar {
-	border-right: 3px solid #ffe6e6;
-	border-bottom: 3px solid #ffe6e6;
-}
-
-.pagingArea button {
-	width: 2%;
-	color: black;
-	background: white;
-	border-radius: 50px;
-}
-
-.pagingArea button:hover {
-	color: white;
-	background: black;
-	border-radius: 10px;
-}
 </style>
 </head>
 <body>

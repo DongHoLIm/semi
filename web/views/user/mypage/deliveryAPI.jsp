@@ -10,6 +10,34 @@
 <link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
 </head>
 <style>
+
+#deli_img:hover {
+   -webkit-transform: scale(1.1); /*  크롬 */
+   -moz-transform: scale(1.1); /* FireFox */
+   -o-transform: scale(1.1); /* Opera */
+   transform: scale(1.1);
+   transition: transform .35s;
+   -o-transition: transform .35s;
+   -moz-transition: transform .35s;
+   -webkit-transition: transform .35s;
+}
+#deli_img {
+  animation-duration: 2s;
+  animation-name: moveRight;
+
+}
+
+@keyframes moveRight {
+  from {
+     margin-left:-20%;
+  }
+
+  to {
+     margin-left: 80%;
+    transform:rotate(360deg);
+  }
+}
+
 * {
    font-family: 'Poor Story', cursive;
    margin: 0;
@@ -186,8 +214,8 @@ $(document).ready(function(){
 
 </script>
 <body>
-<img src="<%=request.getContextPath()%>/images/delivery-truck1.png" style="float:left;">
-<div class="div_d"style="width:100%; margin:0 auto;"><br><br>
+<div class="deli_div" style="height:100px;"><img src="<%=request.getContextPath()%>/images/delivery-truck1.png" style="float:left; margin-top:10px;" id="deli_img"></div>
+<br><br><div class="div_d"style="width:100%;" align="center"><br><h3>배송 조회</h3>
 <span id="tekbeCompnayName" size=20>택배회사명: </span>
 <select id="tekbeCompnayList" name="tekbeCompnayList"></select><br/><br/>
 <span id="invoiceNumber">운송장번호: </span>

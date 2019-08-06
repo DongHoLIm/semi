@@ -13,7 +13,7 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script><meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
-<title>메인메뉴</title>
+<title>중고愛민족</title>
 <style>
 * {
    font-family: 'Poor Story', cursive;
