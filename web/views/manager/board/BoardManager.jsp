@@ -30,6 +30,44 @@ td{
 	padding-left:70%;
 }	
 
+button{
+  background:#f7e6ff;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color: #ffb3b3;
+}
+:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:  #ffb3b3;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+ 		
+
 </style>
 </head>
 <head><%@ include file="../hfl/managerHeader.jsp"%></head>
@@ -78,7 +116,7 @@ td{
 
 	<div class = "replyArea">
 	
-	<div >
+	<div align = "center">
 		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
 				<table align = "center">
 				<tr>
@@ -92,7 +130,7 @@ td{
 			</div>
 			</div>
 				<br>
-				
+	<div align="center">			
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
@@ -115,6 +153,7 @@ td{
 			
 			</tfoot>
 		</table>
+		</div>
 		</div>
 			<br><br>
 		<div id = "buttonArea">

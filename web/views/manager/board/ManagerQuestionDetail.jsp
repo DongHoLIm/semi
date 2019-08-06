@@ -23,6 +23,44 @@ td{
 #content{
 		height:230px;
 	}
+	
+button{
+  background:#f7e6ff;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color: #ffb3b3;
+}
+:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:  #ffb3b3;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+ 		
 
 </style>
 </head>
@@ -73,8 +111,8 @@ td{
 	<div class = "replyArea">
 	
 	<div >
-		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
-				<table align = "center">
+		<div class = "replayWriterArea" style = "margin-left:20%">
+			<table align = "center">
 				<tr>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
 					<td>&nbsp;&nbsp;</td>
@@ -86,25 +124,18 @@ td{
 			</div>
 			</div>
 				<br>
-				
-		<table id="replySelectTable" class="commentTables" align="center" style = "magin:0 auto">
+			<div align="center">
+		<table id="replySelectTable" class="commentTables"  style ="align:center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
 		</table>
-		
+		</div>
 		<br>
-			<table id="replySelectTable" class="commentTables" border="1" align="center">
-			<tbody>
 		
-			</tbody>
-			<tfoot>
-			
-			</tfoot>
-		</table>
 		</div>
 
-		<div>
+		<div align = "right" style = "margin-right:7%">
 		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/sonn.no?num=<%=b.getPostsId() %>'">수정하기</button>
 			<button type = button onclick = "location.href= '<%= request.getContextPath()%>/ubds.up?num=<%=b.getPostsId() %>'">삭제하기</button>
@@ -151,7 +182,7 @@ td{
 						$replySelectTable.append($hr);
 						$replySelectTable.append($tr2);
 						$replySelectTable.append($tr);
-						$replySelectTable.css({"width":"100%","margin":"auto"})
+						/* $replySelectTable.css({"width":"100%","margin":"auto"}) */
 					}
 				},
 				error:function(){
@@ -179,7 +210,7 @@ td{
 		    	type:"post",
 		    	success:function(data) 	 {
 		    		location.reload();
-					$("#replySelectTable tfoot").show();
+					$("#replySelectTable tbody").show();
 		    	
 		    	
 		    	},

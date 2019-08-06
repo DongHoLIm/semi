@@ -875,7 +875,7 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 
 			list = new ArrayList<Board>();
-
+			
 			while (rset.next()) {
 				Board b = new Board();
 
