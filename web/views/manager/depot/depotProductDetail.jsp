@@ -13,7 +13,7 @@
     	}else{
     		status= "조건부 통과";
     	}
-    
+    	System.out.print(d.getFileName());
     %>
 <!DOCTYPE html>
 <html>
@@ -59,7 +59,7 @@
 	<br />
 	<table>
 		<tr>
-			<td colspan="2" rowspan="2"><img src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=d.getFileName() %>>" alt="" /></td>
+			<td colspan="2" rowspan="2"><img src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=d.getFileName() %>" alt="" /></td>
 			<th><label for="">상품코드</label></th>
 			<td><label for=""><%=d.getProductCode() %></label></td>
 		</tr>
