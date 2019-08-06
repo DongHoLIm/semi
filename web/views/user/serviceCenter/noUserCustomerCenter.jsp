@@ -141,41 +141,49 @@
 	<header><%@ include file="../hfl/header.jsp" %></header>
 
 	<section id="sec1">
-	<div id="accordionArea">
-	<h2 align="left"> 자주 찾는 질문</h2>
-	<%for (Board b : list) {%>
-	<dl>
-		<dt><span></span><%=b.getPostsTitle()%></dt>
-		<dt><span></span><%=b.getContents() %></dt>
-	</dl>
-	<% }%>
-	</div>
-	<script>
-	$(document).ready(function(){
-		$('dt').removeClass('on').next().slideUp();
-	})
-	$('dt').on('click', function () {
+<div id="accordionArea" style = " border: 5px solid red; border-color: white ;">
+   <h2 align="left" > 자주 찾는 질문</h2>
+   <%for (Board b : list) {%>
+   <dl >
+      <dt style = " border: 2px solid; border-color: #ccccff;" ><span></span><%=b.getPostsTitle()%></dt>
+      <dt style = " border: 2px solid; border-color: #ccccff;"><span></span><%=b.getContents() %></dt>
+   </dl>
+   <% }%>
+   </div>
+   <script>
+   $(document).ready(function(){
+      $('dt').removeClass('on').next().slideUp();
+   })
+   $('dt').on('click', function () {
 
-	    if ($(this).hasClass('on')) {
-	        slideUp();
-	    } else {
-	        slideUp();
-	        $(this).addClass('on').next().slideDown();
-	    }
-	    function slideUp() {
-	        $('dt').removeClass('on').next().slideUp();
-	    };
+       if ($(this).hasClass('on')) {
+           slideUp();
+       } else {
+           slideUp();
+           $(this).addClass('on').next().slideDown();
+       }
+       function slideUp() {
+           $('dt').removeClass('on').next().slideUp();
+       };
 
-	})
-	</script>
+   })
+   </script>
 
    </section>
    <br />
    <div id="mapOuter">
    <label>찾아오시는 길</label>
-   <%@ include file="../serviceCenter/aboutCompany.jsp" %>
-   <button type="button" id="findRoad">길찾기</button>
-   </div>
+   <%@ include file="../serviceCenter/aboutCompany.jsp" %><br>
+       <div class="svg-wrapper" align ="center">
+      <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+        <rect id="shape" height="40" width="150" align = "center"/>
+        <div id="text" align ="center">
+          <a style="color:black; background:white;align:center" id="findRoad">
+          <span class="spot" align ="center" >길찾기</span></a>
+        </div>
+      </svg>
+    </div>
+     </div>
    <!-- footer 영역 -->
    <footer><%@ include file="../hfl/footer.jsp" %></footer>
    <script>

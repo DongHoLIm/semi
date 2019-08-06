@@ -16,41 +16,97 @@ int endPage = pi.getEndPage();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#sec1 {
+#board {
+	text-align: center;
+}
+
+#wirte {
+	position: absolute;
+	right: 30px;
+}
+
+.spot {
+	position: absolute;
 	width: 100%;
 	height: 100%;
-	padding-right: 10%;
-	padding-left: 10%;
-	margin: auto;
-	min-height: 500px;
+	top: 0;
+	left: 0;
 }
-thead {
-	background: #eee;
+
+.svg-wrapper {
+	margin-top: 0;
+	position: relative;
+	width: 150px;
+	/*make sure to use same height/width as in the html*/
+	height: 40px;
+	display: inline-block;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px
 }
-.board {
-	width: 80%;
-	margin: auto;
-	align: center;
-	border-spacing: 10px;
+
+#shape {
+	stroke-width: 6px;
+	fill: transparent;
+	stroke: #009FFD;
+	stroke-dasharray: 85 400;
+	stroke-dashoffset: -220;
+	transition: 1s all ease;
 }
-.row0 {
-	background: black;
+
+#text {
+	margin-top: -35px;
+	text-align: center;
+}
+
+#text a {
 	color: white;
-	margin: auto;
+	text-decoration: none;
+	font-weight: 100;
+	font-size: 1.1em;
 }
-th {
-	background: black;
-	color: white;
+
+.svg-wrapper:hover #shape {
+	stroke-dasharray: 50 0;
+	stroke-width: 3px;
+	stroke-dashoffset: 0;
+	stroke: #06D6A0;
 }
-.row1 {
-	border-top: 2px solid #555;
+button{
+  background:#ffe6e6;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
 }
-.row2, .row3, .row4, .row, .row6, .row7, .row8, .row9, .row10 {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+button:hover{
+  background:white;
+  color: #f0b3ff;
 }
-.pageNo {
-	margin: auto;
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:  #f0b3ff;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }
 </style>
 </head>
@@ -59,33 +115,40 @@ th {
 	<!-- header 영역 -->
 	<header><%@ include file="../hfl/managerHeader.jsp" %></header>
 	<br />
-	<section id="sec1">
+	<section id="sec1" style = "width:100%">
+	<div class="container">
 		<h2 align="center">공지사항</h2>
 
-		<table class="board" id = "listArea">
+		<table class="table" id="listArea">
 			<thead>
-			<tr class="row0">
-				<th>번호</th>
-				<th>제목</th>
-				<!-- <th>작성자</th> -->
-				<th>작성날짜</th>
-			</tr>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성날짜</th>
+
+
+				</tr>
 			</thead>
-			<%  for (Board b : list) { %>
-				<tr class = "row1"> <input type = "hidden" value = "<%=b.getPostsId() %>">
+			<tbody>
+				<%for (Board b : list) {%>
+				<tr class = "row1">
+				<input type = "hidden" value = "<%=b.getPostsId() %>">
 				<td><%= b.getPostsId() %></td>
 				<td><%= b.getPostsTitle() %></td>
+				<td><%= b.getMemberName() %></td>
 				<td><%= b.getCreateDate() %></td>
-			<%}%>
-		</table>
-		<div align = "center">
-      <button onclick="location.href='<%=request.getContextPath()%>/views/user/board/boarderwriter.jsp'">작성하기</button>
-      </div>
 
-		<div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><</button>
+			<%} %>
+			</tbody>
+
+		</table>
+
+			<br><br><br><br>
+		  <div class = "pageingArea" align ="center" class="pagination" >
+		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><<</button>
 		<%if(currentPage <= 1) {%>
-		<button disabled><</button>
+		<button disabled> <</button>
 		<%} else{%>
 	<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
@@ -95,7 +158,7 @@ th {
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=p%>'"><%=p%></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -104,15 +167,19 @@ th {
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage+1%>'">></button>
+			<button onclick ="location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
 			<button onclick = "location.href='<%=request.getContextPath()%>/smnl.mm?currentPage=<%=maxPage%>'">>></button>
 
       </div>
-		<br>
+      	<div align = "right">
+      <button onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
+      
+      </div>
 
-
+	</div>
 	</section>
+
 	<br />
 
 	<footer><%@ include file="../../user/hfl/footer.jsp" %></footer>
@@ -121,7 +188,7 @@ th {
 	$(function(){
 		$("#listArea td").mouseenter(function(){
 
-			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			$(this).parent().css({"background-color":"#ffe6e6","cursor":"pointer"});
 		}).mouseout(function(){
 				$(this).parent().css({"background":"white"});
 		}).click(function(){

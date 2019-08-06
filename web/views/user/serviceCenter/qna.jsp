@@ -172,8 +172,8 @@
    <h2 align="left" > 자주 찾는 질문</h2>
    <%for (Board b : list) {%>
    <dl >
-      <dt style = " border: 2px solid; border-color:    #ccccff;" ><span></span><%=b.getPostsTitle()%></dt>
-      <dt style = " border: 2px solid; border-color:    #ccccff;"><span></span><%=b.getContents() %></dt>
+      <dt style = " border: 2px solid; border-color: #ccccff;" ><span></span><%=b.getPostsTitle()%></dt>
+      <dt style = " border: 2px solid; border-color: #ccccff;"><span></span><%=b.getContents() %></dt>
    </dl>
    <% }%>
    </div>

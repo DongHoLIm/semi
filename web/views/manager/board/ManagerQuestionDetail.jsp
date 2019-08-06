@@ -87,7 +87,7 @@ td{
 			</div>
 				<br>
 				
-		<table id="replySelectTable" class="commentTables" align="center">
+		<table id="replySelectTable" class="commentTables" align="center" style = "magin:0 auto">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
 			</tr>
@@ -96,11 +96,7 @@ td{
 		<br>
 			<table id="replySelectTable" class="commentTables" border="1" align="center">
 			<tbody>
-			<tr>
-				<td colspan="2" class="tWriter">작성자</td>
-				<td colspan="3" class="tContent">내용</td>
-				<td class="tDate">작성일</td>				
-			</tr>			
+		
 			</tbody>
 			<tfoot>
 			
@@ -135,18 +131,27 @@ td{
 				data:{postsId:postsId},
 				type:"post",
 				success:function(data){
-					var $replySelectTable = $("#replySelectTable tfoot");
+					var $replySelectTable = $("#replySelectTable tbody");
+					var $replyWriter = $("#replyWriter span")
 					$replySelectTable.html("");
 						for(var key in data){
 							var $tr = $("<tr>");
+							var $tr2  = $("<tr>");
+							var $hr = $("<hr>");
+							var $writer = $("<td>").text("작성자 : ").css({'width':'60px','font-weight':'bold'});
 							var $writeTd = $("<td colspan='2'>").text(data[key].memberId).css("width", "100px");
-							var $contentTd = $("<td colspan='3'>").text(data[key].commentContents).css("width","400px");
-							var $dateTd = $("<td>").text(data[key].commentDate).css("width", "200px");
+							var $contentTd = $("<td colspan='2'>").text(data[key].commentContents).css("width","400px");
+							var $dateTd = $("<td>").text(data[key].commentDate).css({'width':'200px','color':'lightgray','font-size':'10xpx'});
 							
-						$tr.append($writeTd);
+						$tr2.append($writer);	
+						$tr2.append($writeTd);	
 						$tr.append($contentTd);
 						$tr.append($dateTd);
+						
+						$replySelectTable.append($hr);
+						$replySelectTable.append($tr2);
 						$replySelectTable.append($tr);
+						$replySelectTable.css({"width":"100%","margin":"auto"})
 					}
 				},
 				error:function(){
@@ -157,6 +162,7 @@ td{
 		});
 	
 	});
+	
 	
 	
 

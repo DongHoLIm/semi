@@ -141,17 +141,16 @@ li:hover, button:hover {
    -o-transition: transform .35s;
    -moz-transition: transform .35s;
    -webkit-transition: transform .35s;
+   background:white;
+   border-bottom:2px solid #ffe6e6;
+   
 }
-.navbar{
-   border-right : 3px solid #ffe6e6;
-   border-bottom: 3px solid #ffe6e6;
-}
+
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
    .navbar-inverse .navbar-nav>.open>a:focus {
    background: white;
 }
 
-}
 
 @keyframes slidein {
   from {
@@ -162,19 +161,13 @@ li:hover, button:hover {
   	opacity: 100;
   }
   }
-li:hover{
-   -webkit-transform: scale(1.2); /*  크롬 */
-   -moz-transform: scale(1.2); /* FireFox */
-   -o-transform: scale(1.2); /* Opera */
-   transform: scale(1.2);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
-}
+
 .navbar{
    border-right : 3px solid #ffe6e6;
    border-bottom: 3px solid #ffe6e6;
+     border-top:none;
+   border-left:none;
+   background:white;
 }
 .pagingArea button{
 		width:2%;
@@ -193,7 +186,7 @@ li:hover{
 <div align="center" id="logoDiv">
    <a href="<%= request.getContextPath()%>/index.jsp"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
-<nav class="navbar">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" style="color:black" href="<%=request.getContextPath()%>/index.jsp">중고 愛 민족</a>

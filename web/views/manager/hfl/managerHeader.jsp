@@ -67,6 +67,11 @@ li:hover, button:hover {
 	-o-transition: transform .35s;
 	-moz-transition: transform .35s;
 	-webkit-transition: transform .35s;
+	background:white;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+   .navbar-inverse .navbar-nav>.open>a:focus {
+   background: white;
 }
 .pagingArea button{
 		width:5%;
@@ -80,10 +85,15 @@ li:hover, button:hover {
 		background: black;
 		border-radius: 10px;
 	}
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
-	.navbar-inverse .navbar-nav>.open>a:focus {
-}
 
+
+.navbar{
+   border-right : 3px solid #ffe6e6;
+   border-bottom: 3px solid #ffe6e6;
+   border-top:none;
+   border-left:none;
+   background:white;
+}
 </style>
 </head>
 <body>
@@ -91,7 +101,7 @@ li:hover, button:hover {
 	<a href="<%=request.getContextPath()%>/smnl.mm"><img src="<%= request.getContextPath()%>/images/logo.jpg" id="logoImg" style="width:25%" /></a>
 </div>
 <%-- <% if(loginUser != null && loginUser.getMemberId().equals("admin")) {%> --%>
-<nav class="navbar navbar-inverse" style="background:#FF5675">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
