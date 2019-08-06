@@ -20,6 +20,16 @@
 <meta charset="UTF-8">
 <title>메인메뉴</title>
 <style>
+body {
+	-webkit-font-smoothing: subpixel-antialiased;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
 * {
 	font-family: 'Poor Story', cursive;
 	margin: 0;
@@ -102,9 +112,20 @@ html, css {
 }
 
 #logoDiv {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
+  animation-duration: 1s;
+  animation-name: slidein;
 }
 
+@keyframes slidein {
+  from {
+  	opacity: 0;
+  }
+
+  to {
+  	opacity: 100;
+  }
+}
 .navbar-brand:hover {
 	-webkit-transform: scale(1.1); /*  크롬 */
 	-moz-transform: scale(1.1); /* FireFox */
@@ -117,89 +138,81 @@ html, css {
 }
 
 #logoImg {
-  width: 25%;
-  animation-duration: 1s;
-  animation-name: slidein;
+	width: 25%;
+	animation-duration: 1s;
+	animation-name: slidein;
 }
+
+#logoImg:hover, input[type=button]:hover {
+	-webkit-transform: scale(1.1); /*  크롬 */
+	-moz-transform: scale(1.1); /* FireFox */
+	-o-transform: scale(1.1); /* Opera */
+	transform: scale(1.1);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
+}
+
 li:hover, button:hover {
-   -webkit-transform: scale(1.2); /*  크롬 */
-   -moz-transform: scale(1.2); /* FireFox */
-   -o-transform: scale(1.2); /* Opera */
-   transform: scale(1.2);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
-   background:white;
-   border-bottom:2px solid #ffe6e6;
-   
+	-webkit-transform: scale(1.2); /*  크롬 */
+	-moz-transform: scale(1.2); /* FireFox */
+	-o-transform: scale(1.2); /* Opera */
+	transform: scale(1.2);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
+	cursor: pointer;
+}
+
+.navbar {
+	border-right: 3px solid #ffe6e6;
+	border-bottom: 3px solid #ffe6e6;
 }
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
-   .navbar-inverse .navbar-nav>.open>a:focus {
-   background: white;
+	.navbar-inverse .navbar-nav>.open>a:focus {
+	background: white;
 }
 
-@keyframes slidein {
-  from {
-  	opacity: 0;
-  }
-
-  to {
-  	opacity: 100;
-  }
-
-  }
-
-li:hover{
-   -webkit-transform: scale(1.2); /*  크롬 */
-   -moz-transform: scale(1.2); /* FireFox */
-   -o-transform: scale(1.2); /* Opera */
-   transform: scale(1.2);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
 }
-.navbar{
-   border-right : 3px solid #ffe6e6;
-   border-bottom: 3px solid #ffe6e6;
-     border-top:none;
-   border-left:none;
-   background:white;
+li:hover, input[type=butotn]{
+	-webkit-transform: scale(1.2); /*  크롬 */
+	-moz-transform: scale(1.2); /* FireFox */
+	-o-transform: scale(1.2); /* Opera */
+	transform: scale(1.2);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
+		cursor: pointer;
 }
-.pagingArea button{
-		width:2%;
-		color: #ffb3b3;
-		background: white;
-		border-radius: 50px;
-	}
 
-.pagingArea button:hover{
-		color: white;
-		background: #ffb3b3;
-		border-radius: 10px;
-	}
-#pagingArea button{
-		width:2%;
-		color: #ffb3b3;
-		background: white;
-		border-radius: 50px;
-	}
+.navbar {
+	border-right: 3px solid #ffe6e6;
+	border-bottom: 3px solid #ffe6e6;
+}
 
-#pagingArea button:hover{
-		color: white;
-		background: #ffb3b3;
-		border-radius: 10px;
-	}
+.pagingArea button {
+	width: 2%;
+	color: black;
+	background: white;
+	border-radius: 50px;
+}
 
+.pagingArea button:hover {
+	color: white;
+	background: black;
+	border-radius: 10px;
+}
 </style>
 </head>
-<body>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
 <div align="center" id="logoDiv">
    <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.jpg" id="logoImg"/></a>
 </div>
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" style="color:black" href="<%=request.getContextPath()%>/index.jsp">중고 愛 민족</a>
@@ -246,7 +259,37 @@ li:hover{
 function myPage(){
    if(confirm("로그인 후 이용해주시기 바랍니다.")){
       location.href="<%=request.getContextPath()%>/views/user/login/login.jsp";
-   }
+	}
+}
+
+$(function() {
+	$.ajax({
+		url : "chatCount.ch",
+		type : "get",
+		success : function(data) {
+			var count = "대기중인 상담 문의 : " + data + "건";
+			$("#chatCount").append(count);
+			console.log(data);
+		}
+	});
+});
+$(document).ready(function() {
+	$(document).bind('keydown', function(e) {
+		if (e.keyCode == 123) {
+			e.preventDefault();
+			e.returnValue = false;
+			alert("개발자 도구는 사용하실 수 없습니다.");
+		}
+	});
+});
+document.onmousedown = disableclick;
+status = "마우스 오른쪽 버튼은 사용하실 수 없습니다.";
+
+function disableclick(event) {
+	if (event.button == 2) {
+		alert(status);
+		return false;
+	}
 }
 </script>
 </body>

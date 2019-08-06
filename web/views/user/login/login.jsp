@@ -152,32 +152,47 @@ label {
    </div>
 
    <script>
-      function login() {
-         $pwd = $("#loginPw").val();
+ function login() {
+    $pwd = $("#loginPw").val();
 
-         if($("#loginId").val() == ""){
-            alert("아이디를 입력해주세요");
-            $("#loginId").focus();
-            //history.go(-1);
-            return false;
-         }
-         else if($("#loginPw").val() == ""){
-            alert("비밀번호를 입력해주세요");
-            $("#loginPw").focus();
-            return false;
-         }
+    if($("#loginId").val() == ""){
+       alert("아이디를 입력해주세요");
+       $("#loginId").focus();
+       //history.go(-1);
+       return false;
+    }
+    else if($("#loginPw").val() == ""){
+       alert("비밀번호를 입력해주세요");
+       $("#loginPw").focus();
+       return false;
+    }
 
-         if ($("#loginId").val() !="" && $("#loginPwd").val() != ""){
-            $("#loginForm").submit();
-         }
+    if ($("#loginId").val() !="" && $("#loginPwd").val() != ""){
+       $("#loginForm").submit();
+    }
 
-      };
-      function enter(){
-	     if (window.event.keyCode == 13) {
-		     console.log("enter");
-	         login();
-	     }
-      };
-   </script>
+ };
+ $(document).ready(function() {
+	$(document).bind('keydown', function(e) {
+		if (e.keyCode == 13) {
+   			login();
+		}
+	});
+});
+$(document).ready(function(){
+	$(document).bind("contextmenu", function(e) {
+		return false;
+	});
+});
+$(document)[0].oncontextmenu = function() { return false; }
+$(document).mousedown(function(e) {
+	if( e.button == 2 ) {
+			alert('내용을 복사할 수 없습니다.');
+			return false;
+	} else {
+			return true;
+	}
+});
+</script>
 </body>
 </html>

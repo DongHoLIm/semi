@@ -23,9 +23,7 @@
 	font-size: 1.2em;
 }
 #chatListTable thead * {
-	color: white;
-	background: black;
-	border: 1px solid white;
+	border: 1px solid black;
 	height: 30px;
 }
 

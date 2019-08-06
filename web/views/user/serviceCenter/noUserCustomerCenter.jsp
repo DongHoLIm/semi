@@ -94,18 +94,8 @@
 
     }
 
-	dd {
-		background:	 -webkit-linear-gradient(#fff, #eee);
-		background:	 -moz-linear-gradient(#fff, #eee);
-		background:	 -o-linear-gradient(#fff, #eee);
-		background:	 -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
-		background:	 linear-gradient(#fff, #eee);
-
-		margin-bottom: 5px;
-		display: none;
-		-webkit-border-radius: 10px;
-		-moz-border-radius: 10px;
-		border-radius: 10px;
+	#findRoad:hover{
+		cursor: pointer;
 	 }
 	 #accordionArea{
 	 	padding-right:2%;

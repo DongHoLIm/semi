@@ -30,9 +30,10 @@
 .container {
 	min-height: 1000px;
 }
-.carousel-inner>.item>img {
-	top: 0;
-	left: 0;
+#myCarousel {
+	height: 350px;
+}
+.item {
 	width: 100%;
 }
 #powerLink td{
@@ -64,27 +65,17 @@
 
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="images/phinix.png" alt="ad1">
+					<img src="images/mainLogo.PNG" alt="ad1">
 				</div>
-
 				<div class="item">
 					<img src="images/coc.png" alt="ad2">
 				</div>
-
 				<div class="item">
-					<img src="images/flower2.PNG" alt="ad3">
+					<img src="images/phinix.png" alt="ad3">
 				</div>
 			</div>
-
-
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#myCarousel"
-				data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right"></span> <span
-				class="sr-only">Next</span>
-			</a>
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+			<a class="right carousel-control" href="#myCarousel"data-slide="next"></a>
 		</div>
 	<br>
 	<h3 align="center">최신상품</h3>
