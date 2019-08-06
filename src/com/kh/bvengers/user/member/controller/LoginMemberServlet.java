@@ -26,7 +26,6 @@ public class LoginMemberServlet extends HttpServlet {
 		String sessionId = (String) request.getSession().getAttribute("sessionId");
 		String memberId = request.getParameter("loginId");
 		String memberPwd = request.getParameter("password");
-		System.out.println("sessionID: "+sessionId);
 		String sessionPass = (String) request.getSession().getAttribute("pass");
 		System.out.println(sessionPass);
 		String sessionID="";
@@ -39,13 +38,11 @@ public class LoginMemberServlet extends HttpServlet {
 			
 		}else {
 			sessionID = request.getParameter("sessionId");
-			System.out.println("파라미터 sessionId"+sessionID);
 			loginUser = new MemberService().loginCheck(sessionID,memberPwd);
 			
 			
 			
 		}
-		System.out.println(loginUser);
 
 		if(loginUser.getMemberId().equals(sessionID) &&loginUser.getMemberPassword().equals(memberPwd) &&!loginUser.getMemberId().equals("admin")) {
 

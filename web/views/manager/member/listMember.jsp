@@ -152,7 +152,7 @@ $("#depotMain td").mouseenter(function(){
 
  	  $(".mbdetail").click(function(){
 			var mi = $(this).parent().siblings().eq(0).text();
-			var option = "width = 450px, height = 600px";
+			var option = "width = 600px, height = 600px";
 		 window.open('<%=request.getContextPath()%>/mbdetail.me?mi='+mi, "회원정보", option);
 		 });
 	$(".chk").on("click",function(){
