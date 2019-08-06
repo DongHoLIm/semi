@@ -1402,5 +1402,38 @@ public class DepotDao {
 		}
 		return list;
 	}
+	public Depot productDetail(Connection con, String productCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset  =null;
+		Depot d = null;
+		String query = prop.getProperty("productDetail");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, productCode);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				d = new Depot();
+				d.setProductCode(rset.getString("PRODUCT_CODE"));
+				d.setProductCate(rset.getString("PRODUCT_CATE"));
+				d.setProductName(rset.getString("PRODUCT_NAME"));
+				d.setLocationCode(rset.getString("LOCATION"));
+				d.setCheckDate(rset.getDate("CHECK_DATE"));
+				d.setCheckStatus(rset.getString("CHECK_STATUS"));
+				d.setFileName(rset.getString("NEW_FILE_NAME"));
+				d.setReleaseDate(rset.getDate("RELEASE_DATE"));
+				d.setCompletStatus(rset.getString("COMPLETE_STATUS"));
+				d.setCheckPassContent(rset.getString("REASON"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return d;
+	}
 
 }

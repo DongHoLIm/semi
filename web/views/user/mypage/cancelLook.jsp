@@ -219,9 +219,14 @@ $(document).ready(function() {
 	border:none;
 	color:#ffb3b3;
 	font-weight:bold;
-	width:20px;
-
+	width:2%;
 }
+.pagingArea button:hover{
+		color: white;
+		background: #ffb3b3;
+		border-radius: 10px;
+	}
+
 .td_select {
 	width:87%;
 }
@@ -361,7 +366,7 @@ input[type=button] {
 		<div id="paginArea">
 		<div class="pagingArea" align="center">
 			<button
-				onclick="location.href = '<%=request.getContextPath()%>/cancelLook.mp?currentPage=1'"><</button>
+				onclick="location.href = '<%=request.getContextPath()%>/cancelLook.mp?currentPage=1'"><<</button>
 			<% 
 
 				if (currentPage <= 1) {

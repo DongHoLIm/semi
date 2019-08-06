@@ -340,4 +340,10 @@ public class DepotService {
 		return list;
 	}
 
+	public Depot productDetail(String productCode) {
+		Connection con = getConnection();
+		Depot list = new DepotDao().productDetail(con,productCode);		
+		return list;
+	}
+
 }

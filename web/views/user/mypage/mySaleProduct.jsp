@@ -45,8 +45,13 @@
 	border:none;
 	color:#ffb3b3;
 	font-weight:bold;
-	width:20px;
+	width:2%;
 }
+.pagingArea button:hover{
+		color: white;
+		background: #ffb3b3;
+		border-radius: 10px;
+	}
 
 
 #sec1 {

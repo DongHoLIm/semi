@@ -22,6 +22,8 @@ public class MemberDetailServlet extends HttpServlet {
 		String memberId = request.getParameter("mi");
 		Member m = new MemberService().showDetail(memberId);
 		String page = "";
+		
+	
 		if(m!=null) {
 			page="views/manager/member/memberDetail.jsp";
 			request.setAttribute("m", m);

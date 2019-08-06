@@ -47,7 +47,7 @@
 		background: gray;	
 	}
 	#depotLocation{
-		width: 15%;
+		width: 10%;
 	  font-family: inherit;
 	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;  
 	  -webkit-appearance: none;
@@ -75,10 +75,7 @@
 <body>
 <%@ include file = "/views/manager/hfl/managerHeader.jsp" %>
 	<br />
-	<br />
 	<h3 align="center"><label for="">검수 상태변경</label></h3>
-	<br />
-	<hr />
 	<br />
 	<div id="checkInsert">
 		<form action="<%=request.getContextPath()%>/requestCheck.dp" method="post">
@@ -214,5 +211,7 @@
 			});
 		</script>
 	</div>
+	<br />
 </body>
+<footer><%@ include file ="/views/manager/hfl/footer.jsp" %> </footer>
 </html>

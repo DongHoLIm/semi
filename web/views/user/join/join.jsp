@@ -6,23 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <script>
-$(function(){
-	$("#password").keyup(function(){
-		$("#ckNotice").html('');
-		alert("빼액!!");
-	});
-	$("#password2").keyup(function(){
-		if($("#password").val()!=$("#password2").val()){
-			$("#ckNotice").html('비밀번호 일치하지 않음<br><br>');
-			$("#ckNotice").attr('color','#f82a2aa3');
-		}else{
-			$("#ckNotice").html('비밀번호 일치함<br><br>');
-			$("#ckNotice").attr('color','#199894b3');
-		}
-	});
-});
-</script> -->
 <script type="text/javascript">
 
 function checkjoin(index){
@@ -91,8 +74,6 @@ function checkjoin(index){
    if($("#password").val() != ($("#password2").val())){
       $("#password").val("");
       $("#password2").val("");
-      $("#ckNotice").html("비밀번호가 일치하지않음");
-      $("#ckNotice").attr('color','#f82a2aa3');
       $("#password").focus();
       return false;
    } 
@@ -114,7 +95,21 @@ if($("#password").val() == ($("#password2").val())){
 
 	}
 }
-
+$(function(){
+	$("#password").keyup(function(){
+		$("#ckNotice").html('');
+	});
+	$("#password2").keyup(function(){
+		if($("#password").val()!=$("#password2").val()){
+			$("#ckNotice").html('비밀번호 일치하지 않음<br><br>');
+			$("#ckNotice").attr('color','#f82a2aa3');
+			
+		}else{
+			$('#ckNotice').html('비밀번호 일치함 <br><br>');
+			$('#ckNotice').attr('color','#199894b3');
+		}
+	});
+});
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -191,9 +186,9 @@ boder-bottom:5px;
 
          <input type="text" name="hiddencard" value="2" id="hiddencard" style="display:none">
          <button type="button" class="btn_overlap" style="width:10%;">중복확인</button><br><br>
-         <input type="password" id="password" name="password" placeholder="  4~12자의 영문+숫자" style="width:40%;"><br><br>
+         <input type="password" id="password" name="password" placeholder="  password 4~12자의 영문+숫자" style="width:40%;"><br><br>
          <input type="password" id="password2" name="password2" placeholder="  Password 확인" style="width:40%;"><br><br>
-         <font id = "ckNotice" ></font>
+         <font id = "ckNotice" size="2"></font>
          
          <input type="text" id="memberName" name="memberName" placeholder="  이름" style="width:40%;"><br><br>
          <input type="text" id="peoplejb" name="peoplejb" placeholder=" 주민등록번호" maxlength="6" style="width:19.5%;">-
