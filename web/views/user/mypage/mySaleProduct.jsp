@@ -37,7 +37,8 @@
 #pagingArea {
 	width:100%;
 	margin-top:25px;
-	margin-left:60px;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .pagingArea > button {
@@ -135,7 +136,7 @@
 				</tbody>
 				<%}%>
 			</table>
-		</div>
+		
 <%-- 페이징처리 --%>
 <div id="pagingArea">
 		<div class="pagingArea" align="center">
@@ -164,7 +165,7 @@
 			<% } %>
 			<button class="btn_paging" onclick="location.href='<%=request.getContextPath()%>/mySaleProduct.mp?currentPage=<%=maxPage%>'">>></button>
 		</div>
-		</div>
+		</div></div>
 		
 	<footer><%@ include file="../hfl/footer.jsp" %></footer>
 	

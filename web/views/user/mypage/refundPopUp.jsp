@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap" rel="stylesheet">
+
 <style>
 .r1 {
 	width:100%;
@@ -57,7 +58,7 @@
 			안내 사항을 모두 확인하였으며, 이에 동의합니다.&nbsp;<input type="checkbox" name="return_check" class="return_check">
 		</div>
 		<div class="btn_refund2">
-			<button id="check" disabled class="btn_refund1">확인</button>
+			<button id="check_r" disabled class="btn_refund1">확인</button>
 			<button onclick="window.close();" class="btn_refund1">취소</button>
 		</div>
 		</div>
@@ -66,14 +67,13 @@
 				$(".return_check").change(function(){
 					if($(".return_check").is(":checked")){
 						
-					$("#check").prop("disabled", false);
+					$("#check_r").prop("disabled", false);
 				}else{
-					$("#check").attr("disabled", "disabled");
+					$("#check_r").attr("disabled", "disabled");
 				}
 				})
 			});
 					$("#check").click(function(){
-						/* window.opener.location.href="refundApply.mp"; */
 						var ono =  $("#hiddenvalue").val();
 						window.opener.location.href='<%=request.getContextPath()%>/refundApply.mp?ono='+ono;
 						window.close();

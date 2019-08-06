@@ -20,7 +20,7 @@
 <style>
 
 .pagingArea {
-	margin-top:50px;
+	margin-top:20px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -87,11 +87,21 @@
 	width: 80%;
 	text-align:center;
 	border-spacing: 10px;
+    line-height: 1.5;
 	}
 
-.th1 {
+.board th {
 	text-align:center;
-	border:1px solid black;
+	padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 2px solid #ffe6e6;
+    background: #FFF;
+}
+
+.board td {
+	padding: 2px;
+    vertical-align: top;
 }
 
 </style>
@@ -148,23 +158,6 @@
 				<%}%>
 			</table>
 		</div>
-
- 		<div id="div_deliReady" style="display:none;">
-			<br />
-			<h3 align="center">배송 준비중</h3>
-			<table id="tdeliReady" >
-			<thead>
-				<tr class="row0">
-					<th class="th1">주문번호</th>
-					<th class="th1">상품명</th>
-					<th class="th1">배송여부</th>
-					<th class="th1">주문날짜</th>
-				</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</div>
-
 
 <%-- 페이징처리 --%>
 		<div class="pagingArea" align="center">
