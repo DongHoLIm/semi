@@ -238,7 +238,7 @@
 			<option value="findName" >제목으로 조회</option>
 		</select>
 		<input type="search" name="searchValue" id = "inputSearch" >
-		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: black; color:white;">조회</button>
+		<button type="button" onclick = "search();" style="border-radius: 5px; background-color: #ffcccc; color:white; width:50px">조회</button>
 	</div>
 </div>
 
@@ -246,7 +246,7 @@
       $(function(){
          $("#listArea td").mouseenter(function(){
 
-            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+            $(this).parent().css({"background":"#eee6ff","cursor":"pointer"});
          }).mouseout(function(){
                $(this).parent().css({"background":"white"});
          }).click(function(){
@@ -257,7 +257,7 @@
 
       $(function(){
          $("#messageArea td").mouseenter(function(){
-            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+            $(this).parent().css({"background":"#eee6ff","cursor":"pointer"});
          }).mouseout(function(){
                $(this).parent().css({"background":"white"});
          }).click(function(){
@@ -297,7 +297,7 @@
 						$Tbody.append($tr);
 					}
 					$("#messageArea tbody td").mouseenter(function(){
-			            $(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			            $(this).parent().css({"background":"eee6ff","cursor":"pointer"});
 			         }).mouseout(function(){
 			               $(this).parent().css({"background":"white"});
 			         }).click(function(){

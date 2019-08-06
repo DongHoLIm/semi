@@ -144,7 +144,7 @@ int endPage = pi.getEndPage();
 	$(function(){
 		$("#listArea td").mouseenter(function(){
 
-			$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			$(this).parent().css({"background":"#ffe6e6","cursor":"pointer"});
 		}).mouseout(function(){
 				$(this).parent().css({"background":"white"});
 		}).click(function(){

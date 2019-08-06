@@ -80,7 +80,7 @@ td{
 	
 	<div >
 		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
-				<table align = "center">
+			<table align = "center"  style ="margin:0 auto" >
 				<tr>
 					<td><textarea rows = "3" cols = "80" id = "replyContent"></textarea></td>
 					<td>&nbsp;&nbsp;</td>
@@ -92,7 +92,7 @@ td{
 			</div>
 			</div>
 				<br>
-				
+		<div align = "center">		
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
@@ -115,6 +115,7 @@ td{
 			
 			</tfoot>
 		</table>
+		</div>
 		</div>
 			<br><br>
 		<div id = "buttonArea">

@@ -54,15 +54,16 @@
 }
 
 li:hover, button:hover {
-   -webkit-transform: scale(1.2); /*  크롬 */
-   -moz-transform: scale(1.2); /* FireFox */
-   -o-transform: scale(1.2); /* Opera */
-   transform: scale(1.2);
-   transition: transform .35s;
-   -o-transition: transform .35s;
-   -moz-transition: transform .35s;
-   -webkit-transition: transform .35s;
-   background:white;
+	-webkit-transform: scale(1.2); /*  크롬 */
+	-moz-transform: scale(1.2); /* FireFox */
+	-o-transform: scale(1.2); /* Opera */
+	transform: scale(1.2);
+	transition: transform .35s;
+	-o-transition: transform .35s;
+	-moz-transition: transform .35s;
+	-webkit-transition: transform .35s;
+	background:white;
+
 }
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
    .navbar-inverse .navbar-nav>.open>a:focus {
@@ -73,14 +74,12 @@ li:hover, button:hover {
       color: black;
       background: white;
       border-radius: 50px;
-
-   }
-   .pagingArea button:hover{
-      color: white;
-      background: black;
-      border-radius: 10px;
-   }
-
+	}
+	.pagingArea button:hover{
+		color: white;
+		background: black;
+		border-radius: 10px;
+	}
 
 .navbar{
    border-right : 3px solid #ffe6e6;
@@ -89,23 +88,6 @@ li:hover, button:hover {
    border-left:none;
    background:white;
 }
-
-#logoImg {
-  width: 25%;
-  animation-duration: 1s;
-  animation-name: slidein;
-}
-
-@keyframes slidein {
-  from {
-  	opacity: 0;
-  }
-
-  to {
-  	opacity: 100;
-  }
-}
-
 </style>
 </head>
 <body>
