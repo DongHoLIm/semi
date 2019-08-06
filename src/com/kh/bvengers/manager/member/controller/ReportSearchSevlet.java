@@ -44,7 +44,6 @@ public class ReportSearchSevlet extends HttpServlet {
 		MMemberPageInfo pi = new MMemberPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 		String howsearch[] = request.getParameterValues("selecthowsearch");
 		String select = howsearch[0];
-		//String searchValue = (String) request.getParameter("searchValue");
 		
 		ArrayList<Report> list = null;
 		

@@ -10,7 +10,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<title>Insert title here</title>
 <style>
 
 td{
@@ -25,11 +24,43 @@ td{
 #content{
 		height:230px;
 	}
-	
-#buttonArea{
-	padding-left:70%;
-}	
-
+button{
+  background:#f7e6ff;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color: #ffb3b3;
+}
+:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:  #ffb3b3;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+ 		
 </style>
 </head>
 <head><%@ include file="../hfl/managerHeader.jsp"%></head>
@@ -78,7 +109,7 @@ td{
 
 	<div class = "replyArea">
 	
-	<div >
+	<div style = "margin-left:20%" >
 		<div class = "replayWriterArea" style = " width:800px; height:100%; margin:0 auto;">
 				<table align = "center">
 				<tr>
@@ -91,8 +122,9 @@ td{
 				<h5>&nbsp;</h5>
 			</div>
 			</div>
+	</div>	
 				<br>
-				
+	<div style = "margin-left:5%">			
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tr>
 				<th colspan="7" style = "width:800px">댓글 리스트</th>
@@ -102,7 +134,7 @@ td{
 		<br>
 			
 		<br>
-		
+		<div style = "margin-left:20%">
 		<table id="replySelectTable" class="commentTables" align="center">
 			<tbody>
 			<tr>
@@ -116,6 +148,8 @@ td{
 			</tfoot>
 		</table>
 		</div>
+		</div>
+		</div>
 			<br><br>
 		<div id = "buttonArea">
 		<% if (loginUser != null && loginUser.getMemberId().equals("admin")){ %>
@@ -127,7 +161,7 @@ td{
 	<br>
 	<br>
  <footer><%@ include file="../hfl/footer.jsp" %></footer>
-	</div>
+	
 	<script>
 	$(function(){
 		$("#replySelectTable").on("click", function(){

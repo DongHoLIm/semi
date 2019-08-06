@@ -114,7 +114,23 @@ align:center;
 			<h2 align="center">구매내역 조회</h2>
 			<div class="contentsDiv">
 			<br /><br />
+			<div id="inOutButton" align="center">
+			
+				<form action="searchDeli.deli">
 				
+				<input type="hidden" value="<%=list.size()%>" name="rowCount" id="rowCount" />
+				<input type="hidden" value="<%=currentPage %>" name="curr" />
+				<select name="selOption" style="width:10%; ">
+					<option value="select">선택</option>
+					<option value="wait">주문완료</option>
+					<option value="success">배송중</option>
+					<option value="sellfail">구매확정</option>
+				</select>
+				<span> <input type="date" name="selectDate" id="selectDate"/>
+					<button type="submit" style="border-radius: 5px; background-color: black; color: white;">조회</button>
+				</span>
+				</form>
+			</div>	
 			<br />
 				<table class="board">
 					<tr class="row0">

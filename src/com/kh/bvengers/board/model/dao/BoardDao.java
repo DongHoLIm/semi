@@ -875,7 +875,7 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 
 			list = new ArrayList<Board>();
-
+			
 			while (rset.next()) {
 				Board b = new Board();
 
@@ -1089,7 +1089,7 @@ public class BoardDao {
 		int listCount = 0;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("selectDeliveryCount");
+		String query = prop.getProperty("selectDeliveryCount1");
 
 		try {
 			stmt = con.createStatement();
@@ -1893,6 +1893,145 @@ public class BoardDao {
 		}
 
 		return result;
+	}
+
+	public int getListCountall(Connection con, String selOption, String selectDate) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("deliverySearchCount1");	
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, selOption);
+			pstmt.setString(2, selectDate);
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public int getListCountSeachOp(Connection con, String selOption) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("deliverySearchCount2");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, selOption);
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public int getListCountSeachDt(Connection con, String selectDate) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("deliverySearchCount3");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, selectDate);
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Calculate> selectBoardSearch(Connection con, int currentPage, int limit, String selOption,
+			String selectDate) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Calculate> list = null;
+		
+		String query = prop.getProperty("selectBoardSearch");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, selOption);
+			pstmt.setString(4, selectDate);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Calculate>();
+			
+			while(rset.next()) {
+				Calculate c = new Calculate();
+				
+				c.setOrderNo(rset.getString("orderNo"));
+				c.setSellerNo(rset.getString("sellNo"));
+				c.setSellerId(rset.getString("seller"));
+				c.setPostsTitle(rset.getString("title"));
+				c.setBuyerNo(rset.getString("buyNo"));
+				c.setBuyerId(rset.getString("buyer"));
+				c.setOrderDate(rset.getString("orderDate"));
+				c.setCalculateDate(rset.getString("deliDate"));
+				c.setDeliveryStatus(rset.getString("deliStatus"));
+				c.setDeliveryNo(rset.getString("DNO"));
+				if (rset.getString("releaseDate") != null) {
+					c.setReleaseDate(rset.getString("releaseDate"));
+					c.setDateResult(rset.getString("dateResult"));
+				}
+
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
 	}
 }
 

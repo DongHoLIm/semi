@@ -14,7 +14,6 @@ int endPage = pi.getEndPage();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.9.0/d3.min.js"></script>
-<title>Insert title here</title>
 <style>
 #board {
 	text-align: center;
@@ -106,11 +105,11 @@ int endPage = pi.getEndPage();
 
 			<br><br><br><br>
 		  <div class = "pagingArea" align ="center" class="pagination" >
-		<button onclick = "location.href = '<%=request.getContextPath()%>/smqs.mq?currentPage=1'"><<</button>
+		<button onclick = "location.href = '<%=request.getContextPath()%>/smbs.mb?currentPage=1'"><<</button>
 		<%if(currentPage <= 1) {%>
-		<button disabled> <</button>
+		<button disabled><</button>
 		<%} else{%>
-	<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=currentPage-1%>'"><</button>
+	<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=currentPage-1%>'"><</button>
 		<%}
 		%>
 			<%for (int p = startPage; p <= endPage; p++) {
@@ -118,7 +117,7 @@ int endPage = pi.getEndPage();
 			%>
 				<button disabled><%= p %></button>
 			<%} else{ %>
-					<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=p%>'"><%= p %></button>
 			<% }
 			}
 			%>
@@ -127,9 +126,9 @@ int endPage = pi.getEndPage();
 			<%if(currentPage >= maxPage){ %>
 			<button disabled>></button>
 			<%}else{ %>
-			<button onclick ="location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick ="location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=currentPage + 1%>'">></button>
 			<%} %>
-			<button onclick = "location.href='<%=request.getContextPath()%>/smqs.mq?currentPage=<%=maxPage%>'">>></button>
+			<button onclick = "location.href='<%=request.getContextPath()%>/smbs.mb?currentPage=<%=maxPage%>'">>></button>
 
       </div>
 

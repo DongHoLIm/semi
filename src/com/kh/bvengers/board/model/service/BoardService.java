@@ -15,6 +15,7 @@ import com.kh.bvengers.board.model.vo.Board;
 import com.kh.bvengers.board.model.vo.Calculate;
 import com.kh.bvengers.board.model.vo.Comment;
 import com.kh.bvengers.board.model.vo.PowerLink;
+import com.kh.bvengers.product.model.dao.ProductDao;
 import com.kh.bvengers.product.model.vo.Calcul;
 
 public class BoardService {
@@ -181,13 +182,6 @@ public class BoardService {
 
 		ArrayList<Board>list = new BoardDao().selectQandAList(con,currentPage1,limit,num,uno);
 
-/*		ArrayList<Board>countlist = new BoardDao().selectCount(con,num);
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
-		map.put("list", list);
-		map.put("countlist", countlist);
-		*/
 
 		close(con);
 
@@ -555,6 +549,47 @@ public int updateNotice(Board b, ArrayList<Attachment> fileList) {
 		close(con);
 
 		return result;
+	}
+
+	public int getListCountall(String selOption, String selectDate) {
+		Connection con = getConnection();
+		
+		int result = new BoardDao().getListCountall(con, selOption, selectDate);
+		
+		close(con);
+
+		return result;
+	}
+
+	public int getListCountSeachOp(String selOption) {
+		Connection con = getConnection();
+		
+		int result = new BoardDao().getListCountSeachOp(con, selOption);
+		
+		close(con);
+
+		return result;
+	}
+
+	public int getListCountSeachDt(String selectDate) {
+		Connection con = getConnection();
+		
+		int result = new BoardDao().getListCountSeachDt(con, selectDate);
+		
+		close(con);
+
+		return result;
+
+	}
+
+	public ArrayList<Calculate> selectBoardSearch(int currentPage, int limit, String selOption, String selectDate) {
+		Connection con = getConnection();
+		
+		ArrayList<Calculate> list = new BoardDao().selectBoardSearch(con, currentPage, limit, selOption, selectDate);
+		
+		close(con);
+
+		return list;
 	}
 }
 

@@ -105,6 +105,18 @@ li:hover, button:hover {
 	background: black;
 	border-radius: 10px;
 }
+.pagingArea1 button{
+      width:5%;
+      color: black;
+      background: white;
+      border-radius: 50px;
+	}
+.pagingArea1 button:hover{
+		color: white;
+		background: black;
+		border-radius: 10px;
+	}
+
 
 .navbar {
 	border-right: 3px solid #ffe6e6;

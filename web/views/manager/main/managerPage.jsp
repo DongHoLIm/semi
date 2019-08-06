@@ -72,42 +72,7 @@ int endPage = pi.getEndPage();
 	stroke-dashoffset: 0;
 	stroke: #06D6A0;
 }
-button{
-  background:#ffe6e6;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:white;
-  color: #f0b3ff;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background:  #f0b3ff;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+
 </style>
 </head>
 <body>
@@ -145,7 +110,7 @@ button:hover:before,button:hover:after{
 		</table>
 
 			<br><br><br><br>
-		  <div class = "pageingArea" align ="center" class="pagination" >
+		  <div class = "pagingArea" align ="center" class="pagination" >
 		<button onclick = "location.href = '<%=request.getContextPath()%>/smnl.mm?currentPage=1'"><<</button>
 		<%if(currentPage <= 1) {%>
 		<button disabled> <</button>
@@ -173,7 +138,7 @@ button:hover:before,button:hover:after{
 
       </div>
       	<div align = "right">
-      <button onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
+      <button  class="btn btn-outline-danger" onclick="location.href='<%=request.getContextPath()%>/views/manager/board/frequentQuestionwrite.jsp'">작성하기</button>
       
       </div>
 
